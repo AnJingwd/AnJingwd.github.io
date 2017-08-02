@@ -259,6 +259,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/修改host文件-科学上网/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/修改host文件-科学上网/" itemprop="url">修改host文件-科学上网</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T22:21:51+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>Hosts文件是Windows系统中一个负责IP地址与域名快递解析的文件，以ASCLL格式保存。计算机在键入域名的时候，首先会去看看hosts文件汇总有没有关于此域名IP地址的记录。如果有，就直接登陆该网站；如果没有再查询DNS服务器。</p>
+<p><strong>那么，为什么修改HOSTS文件可以实现翻墙呢？</strong></p>
+<p>无论你上网打的什么网站地址, 实际上最终总归是要转换成一个IP地址才能访问的,平时这个转换工作是有网络上的DNS服务器来完成的。但是有些时候,有些网站, 处于某些原因, 网络上的DNS服务器无法给出正确的或可用IP地址(天朝特别多, 大家懂的)。</p>
+<p>这个时候hosts文件就可以代劳了, 你可以直接用记事本打开这文件看看就知道了, 里面一行就是一条记录, 一个IP地址接一个空格或tab, 再后面就是一个网址。它起到的作用就是直接在你本机上就把这些网址翻译成IP地址.</p>
+<p>从Windows 2000开始，Windows解析名称的顺序为：<br>DNS cache –&gt; hosts 文件 –&gt; DNS Server –&gt; NetBIOS cache –&gt; WINS Server –&gt; 广播 –&gt; LMHOSTS 文件<br>hosts 文件的优先级高于 DNS Server，因此修改hosts文件可以跳过被污染的dns服务器。</p>
+<p><strong>Hosts文件格式是咋样的？</strong></p>
+<p><img src="http://i.imgur.com/UxzTkR0.png" alt=""></p>
+<p>用记事本打开hosts文件，它的作用是包含IP地址和Host name(主机名)的映射关系，是一个映射IP地址和Hostname(主机名)的规定，规定要求每段只能包括一个映射关系，IP地址要放在每段的最前面，空格后再写上映射的Host name(主机名)。对于这段的映射说明用“#”分割后用文字说明。</p>
+<p><strong>为啥还需要及时更新Hosts文件？</strong></p>
+<p>Hosts文件配置的映射是静态的，如果网络上的计算机更改了请及时更新IP地址，否则将不能访问。</p>
+<p><strong>该Git项目持续更新可用的Hosts文件：</strong></p>
+<p><a href="https://github.com/racaljk/hosts" target="_blank" rel="external">https://github.com/racaljk/hosts</a></p>
+<p><strong>如何修改Hosts文件实现翻墙呢？</strong></p>
+<p>（1）. 从上述Git项目中复制hosts文件内容至txt文件，命名为HOSTS, 并去掉扩展名！！！</p>
+<p><img src="http://i.imgur.com/D5YBBUT.png" alt=""></p>
+<p>  Win7 系统HOSTS文件位于 C:\Windows\System32\drivers\etc\hosts，没有拓展名。</p>
+<p>（2）. 使之生效</p>
+<p>Windows</p>
+<p>开始 -&gt; 运行 -&gt; 输入cmd -&gt; 在CMD窗口输入</p>
+<pre><code>ipconfig /flushdns
+</code></pre><p>（3）使用谷歌浏览器随意登陆Google、Gmail、维基百科、Twitter、Facebook等，但必须使用https加密方式打开</p>
+<p>谷歌香港：<a href="https://www.google.com.hk" target="_blank" rel="external">https://www.google.com.hk</a></p>
+<p>谷歌：<a href="https://www.google.com/ncr" target="_blank" rel="external">https://www.google.com/ncr</a></p>
+<p><strong>PS: www.google.com/ncr中的”/ncr”是什么意思?起什么作用的?</strong></p>
+<p>ncr : no country redirect</p>
+<p>If google thinks you are from a foreign country or region,it likes to redirect you to your regional google page.For most people,this makes sense.However,if you prefer the generic,english,plain version,this would be very annoying.</p>
+<hr>
+<p><strong>参考：</strong></p>
+<p>老D博客（很多黑科技~）：<a href="https://laod.cn/hosts/2017-google-hosts.html" target="_blank" rel="external">https://laod.cn/hosts/2017-google-hosts.html</a></p>
+<p><a href="http://blog.sina.com.cn/s/blog_9caf88850102xnlb.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_9caf88850102xnlb.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/生命在于折腾之Github-HEXO搭建博客/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -462,7 +612,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
