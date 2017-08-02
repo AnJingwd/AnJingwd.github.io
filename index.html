@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,12 +94,16 @@
 
 
 
+<meta name="description" content="生信学习">
 <meta property="og:type" content="website">
 <meta property="og:title" content="安静-不安静的博客">
 <meta property="og:url" content="https:///AnJingwd.github.io/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
+<meta property="og:description" content="生信学习">
+<meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安静-不安静的博客">
+<meta name="twitter:description" content="生信学习">
 
 
 
@@ -107,7 +111,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -152,7 +156,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
 
   
   
@@ -198,7 +202,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/主页" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -207,8 +211,18 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/分类" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/归档" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -218,11 +232,21 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+          <a href="/标签" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
           </a>
         </li>
       
@@ -259,12 +283,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/03/python环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王冬">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/03/python环境搭建/" itemprop="url">python环境搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T00:53:42+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.miniconda的安装<br>官网：<a href="https://conda.io/miniconda.html" target="_blank" rel="external">https://conda.io/miniconda.html</a></p>
+<p>版本选择注意：There are two variants of the installer: Miniconda is Python 2 based and Miniconda3 is Python 3 based. Note that the choice of which Miniconda is installed only affects the root environment. Regardless of which version of Miniconda you install, you can still install both Python 2.x and Python 3.x environments.</p>
+<p>进入 Miniconda2-latest-Linux-x86_64.sh 所在目录，终端运行 </p>
+<pre><code>$ bash Miniconda2-latest-Linux-x86_64.sh
+</code></pre><p>根据安装向导可以设置安装路径和环境变量，一路yes即可</p>
+<p>激活环境：</p>
+<pre><code>source ~/miniconda2/bin/activate root
+</code></pre><p>退出当前环境：</p>
+<pre><code>source deactivate root
+</code></pre><p>使用清华的pip源安装包更快：</p>
+<pre><code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple bcbio-gff biopython cython nose numpy pandas shove sqlalchemy python-memcached pyvcf
+</code></pre><p>指定安装包的版本,例如：</p>
+<pre><code>pip install pysam==0.7.5
+</code></pre><p>卸载指定版本安装包，例如：</p>
+<pre><code>pip uninstall biopython==1.70
+</code></pre><p>把常用的包离线下载，然后使用pip离线安装包，例如：</p>
+<pre><code>/home/wangdong/softwares/Python/Python-2.7/bin/pip install pysam-0.7.5.tar.gz
+</code></pre><hr>
+<p>参考：</p>
+<p><strong>virtualenv介绍及使用</strong></p>
+<p>廖雪峰的官方网站之virtualenv：</p>
+<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000" target="_blank" rel="external">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000</a></p>
+<p><strong>oncotator的安装</strong></p>
+<p>（2）Lablueee’s web site：</p>
+<p><a href="http://wp.zxzyl.com/?p=273" target="_blank" rel="external">http://wp.zxzyl.com/?p=273</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/02/添加PATH环境变量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王冬">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -418,7 +586,7 @@ Esc
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王冬">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -568,7 +736,7 @@ Esc
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王冬">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -754,19 +922,19 @@ Esc
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/images/avatar.png"
                alt="王冬" />
           <p class="site-author-name" itemprop="name">王冬</p>
            
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">生信学习</p>
           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives/">
-                <span class="site-state-item-count">3</span>
+              <a href="/归档">
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
@@ -778,10 +946,10 @@ Esc
             
             
             <div class="site-state-item site-state-tags">
-              
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">Tags</span>
-              
+              </a>
             </div>
           
 
@@ -836,7 +1004,7 @@ Esc
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 
