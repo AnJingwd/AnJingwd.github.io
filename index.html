@@ -95,11 +95,11 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:title" content="安静-不安静的博客">
+<meta property="og:url" content="https:///AnJingwd.github.io/index.html">
+<meta property="og:site_name" content="安静-不安静的博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="安静-不安静的博客">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="https:///AnJingwd.github.io/"/>
 
 
 
 
 
-  <title>Hexo</title>
+  <title>安静-不安静的博客</title>
   
 
 
@@ -172,7 +172,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">安静-不安静的博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -259,16 +259,170 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/修改host文件-科学上网/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/02/添加PATH环境变量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="王冬">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/添加PATH环境变量/" itemprop="url">添加PATH环境变量</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T23:57:09+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="想让某个命令可以全局使用，可以有两种方法来实现："><a href="#想让某个命令可以全局使用，可以有两种方法来实现：" class="headerlink" title="想让某个命令可以全局使用，可以有两种方法来实现："></a>想让某个命令可以全局使用，可以有两种方法来实现：</h1><h2 id="方法一-在命令行将路径添加到-bashrc文件"><a href="#方法一-在命令行将路径添加到-bashrc文件" class="headerlink" title="方法一.在命令行将路径添加到 .bashrc文件"></a>方法一.在命令行将路径添加到 .bashrc文件</h2><pre><code>echo &apos;export PATH=~/home/biosoftwares/FastQC/bin/fastqc:$PATH&apos; &gt;&gt;~/.bashrc
+
+source ~/.bashrc
+</code></pre><p><strong>注意：</strong></p>
+<p>（1）注意添加的路径是可执行文件的绝对路径，一般在bin下，可执行文件为绿色</p>
+<p>（2）用echo命令输出加引号的字符串时，将字符串原样输出</p>
+<p>（3）export可新增，修改或删除环境变量，供后续执行的程序使用。export的效力仅及于该次登陆操作</p>
+<p>（4）&gt;&gt;以追加方式添加</p>
+<p>（5） ~/.bashrc表示家目录下的.bashrc文件，为隐藏文件，使用ls -a可以查看</p>
+<p>（6）使用source ~/.bashrc之前需要先回到家目录</p>
+<p>（7）Source命令也称为“点命令”，也就是一个点符号（.）。source命令通常用于重新执行刚修改的<br>  初始化文件，使之立即生效，而不必注销并重新登录。用法：source filename 或 . filename</p>
+<p><strong>也可以在用vim打开~/.bashrc文件直接添加</strong></p>
+<pre><code>vim ~/.bashrc
+i 
+PATH=~/home/biosoftwares/FastQC/bin/fastqc
+Esc
+:x
+</code></pre><p><strong>注意：</strong></p>
+<p>（1）i 进入vim编辑模式</p>
+<p>（2）Esc退出vim编辑模式</p>
+<p>（3）:x保存修改并退出（需要在英文输入法状态下）</p>
+<p>##方法二. 将目录添加到~/.bashrc 文件，比如~/bin，然后创建软连接（相当于win下的快捷方式）</p>
+<p>#创建~/bin目录</p>
+<pre><code>mkdir -p ~/bin
+</code></pre><p>#将~/bin目录添加到PATH</p>
+<pre><code>echo &apos;export PATH=~/bin:$PATH&apos;&gt;&gt;~/.bashrc
+</code></pre><p>#使修改生效<br>    source ~/.bashrc</p>
+<p>#在/bin下生成fastqc软连接</p>
+<pre><code>ln -s ~/src/fastQC/fastqc ~/bin/fastqc
+</code></pre><p><strong>注意：</strong></p>
+<p>（1）mkdir -p  表示创建多级目录</p>
+<p>（2）ln是link的缩写，-s选项创建软连接</p>
+<p>创建软连接格式： ln/link SOURCE [TARGET]</p>
+<p>创建软链接： ln/link -s SOURCE [TARGET]</p>
+<p>软连接不占用磁盘空间，硬链接相当于拷贝，占磁盘空间</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/02/修改host文件-科学上网/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王冬">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
     </span>
 
     
@@ -409,16 +563,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/生命在于折腾之Github-HEXO搭建博客/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/02/生命在于折腾之Github-HEXO搭建博客/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="王冬">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="安静-不安静的博客">
     </span>
 
     
@@ -601,8 +755,8 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
-               alt="John Doe" />
-          <p class="site-author-name" itemprop="name">John Doe</p>
+               alt="王冬" />
+          <p class="site-author-name" itemprop="name">王冬</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
           
@@ -612,7 +766,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
@@ -625,7 +779,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">Tags</span>
               
             </div>
@@ -671,7 +825,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">王冬</span>
 </div>
 
 
@@ -819,6 +973,12 @@
   
 
   
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+
 
 </body>
 </html>
