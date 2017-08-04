@@ -118,7 +118,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: 'Penulis'
     },
     algolia: {
       applicationID: '',
@@ -206,7 +206,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Beranda
           </a>
         </li>
       
@@ -216,7 +216,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Categories
+            Kategori
           </a>
         </li>
       
@@ -226,7 +226,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Arsip
           </a>
         </li>
       
@@ -283,6 +283,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/05/如何优雅的输出python字典/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王冬">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/05/如何优雅的输出python字典/" itemprop="url">如何优雅的输出python字典</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Diposting di</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-05T00:19:15+08:00">
+                2017-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="如何优雅的输出python字典"><a href="#如何优雅的输出python字典" class="headerlink" title="如何优雅的输出python字典"></a>如何优雅的输出python字典</h1><p>python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
+<h2 id="（1）一层字典"><a href="#（1）一层字典" class="headerlink" title="（1）一层字典"></a>（1）一层字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gene_symbol_ENGS=&#123;<span class="string">'PKHD1'</span>: <span class="string">'ENSG00000170927'</span>, <span class="string">'ATP6V0A4'</span>: <span class="string">'ENSG00000105929'</span>, <span class="string">'TSC2'</span>: <span class="string">'ENSG00000103197'</span>&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line">frame1 = Series(gene_symbol_ENGS)</div><div class="line">print(frame1)</div></pre></td></tr></table></figure>
+<pre><code>ATP6V0A4    ENSG00000105929
+PKHD1       ENSG00000170927
+TSC2        ENSG00000103197
+dtype: object
+</code></pre><h2 id="（2）嵌套字典"><a href="#（2）嵌套字典" class="headerlink" title="（2）嵌套字典"></a>（2）嵌套字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sample_mutation_count = &#123;<span class="string">'PDC668_vs_PDC668A2'</span>: &#123;<span class="string">'ncRNA_intronic'</span>: <span class="number">32</span>, <span class="string">'UTR5'</span>: <span class="number">6</span>, <span class="string">'ncRNA_splicing'</span>: <span class="number">0</span>, <span class="string">'exonic;splicing'</span>: <span class="number">0</span>, <span class="string">'UTR3'</span>: <span class="number">6</span>, <span class="string">'upstream;downstream'</span>: <span class="number">1</span>, <span class="string">'downstream'</span>: <span class="number">6</span>, <span class="string">'exonic'</span>: <span class="number">155</span>, <span class="string">'upstream'</span>: <span class="number">2</span>, <span class="string">'splicing'</span>: <span class="number">1</span>, <span class="string">'ncRNA_exonic'</span>: <span class="number">19</span>, <span class="string">'intergenic'</span>: <span class="number">162</span>, <span class="string">'intronic'</span>: <span class="number">162</span>&#125;, <span class="string">'PDC3748_vs_PDC3748B4'</span>: &#123;<span class="string">'ncRNA_intronic'</span>: <span class="number">21</span>, <span class="string">'UTR5'</span>: <span class="number">6</span>, <span class="string">'ncRNA_splicing'</span>: <span class="number">0</span>, <span class="string">'exonic;splicing'</span>: <span class="number">0</span>, <span class="string">'UTR3'</span>: <span class="number">2</span>, <span class="string">'upstream;downstream'</span>: <span class="number">0</span>, <span class="string">'downstream'</span>: <span class="number">2</span>, <span class="string">'exonic'</span>: <span class="number">123</span>, <span class="string">'upstream'</span>: <span class="number">8</span>, <span class="string">'splicing'</span>: <span class="number">2</span>, <span class="string">'ncRNA_exonic'</span>: <span class="number">15</span>, <span class="string">'intergenic'</span>: <span class="number">122</span>, <span class="string">'intronic'</span>: <span class="number">130</span>&#125;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> DataFrame</div><div class="line">frame2 = DataFrame(sample_mutation_count)</div><div class="line">print(frame2)</div></pre></td></tr></table></figure>
+<pre><code>                     PDC3748_vs_PDC3748B4  PDC668_vs_PDC668A2
+UTR3                                    2                   6
+UTR5                                    6                   6
+downstream                              2                   6
+exonic                                123                 155
+exonic;splicing                         0                   0
+intergenic                            122                 162
+intronic                              130                 162
+ncRNA_exonic                           15                  19
+ncRNA_intronic                         21                  32
+ncRNA_splicing                          0                   0
+splicing                                2                   1
+upstream                                8                   2
+upstream;downstream                     0                   1
+</code></pre><p>那么问题来了，当每个样本的行不完全一样时如何解决呢，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">len_exon = &#123;<span class="string">'ENSG00000008710'</span>: &#123;<span class="string">'ENST00000570193'</span>: <span class="number">591</span>, <span class="string">'ENST00000483558'</span>: <span class="number">573</span>&#125;,<span class="string">'ENSG00000089597'</span>: &#123;<span class="string">'ENST00000526210'</span>: <span class="number">529</span>, <span class="string">'ENST00000526392'</span>: <span class="number">255</span>, <span class="string">'ENST00000532402'</span>: <span class="number">3695</span>&#125;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> len_exon.items():</div><div class="line">    print(key)</div><div class="line">    print(Series(value))</div></pre></td></tr></table></figure>
+<pre><code>ENSG00000008710
+ENST00000483558    573
+ENST00000570193    591
+dtype: int64
+ENSG00000089597
+ENST00000526210     529
+ENST00000526392     255
+ENST00000532402    3695
+dtype: int64
+</code></pre><h2 id="当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图"><a href="#当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图" class="headerlink" title="当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图"></a>当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pprint</div><div class="line">resultFile = open(<span class="string">'result.py'</span>, <span class="string">'w'</span>)</div><div class="line">resultFile.write(pprint.pformat(len_exon))</div><div class="line">resultFile.close()</div></pre></td></tr></table></figure>
+<p>{‘ENSG00000008710’: {‘ENST00000483558’: 573, ‘ENST00000570193’: 591},<br> ‘ENSG00000089597’: {‘ENST00000526210’: 529,<br>                     ‘ENST00000526392’: 255,<br>                     ‘ENST00000532402’: 3695}}</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/03/picard/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -312,7 +468,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Diposting di</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T01:16:15+08:00">
                 2017-08-03
@@ -578,7 +734,7 @@ alias picard=&quot;java -jar $PICARD&quot;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Diposting di</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T00:53:42+08:00">
                 2017-08-03
@@ -722,7 +878,7 @@ alias picard=&quot;java -jar $PICARD&quot;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Diposting di</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T23:57:09+08:00">
                 2017-08-02
@@ -876,7 +1032,7 @@ Esc
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Diposting di</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T22:21:51+08:00">
                 2017-08-02
@@ -1026,7 +1182,7 @@ Esc
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Diposting di</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T22:13:15+08:00">
                 2017-08-02
@@ -1200,8 +1356,8 @@ Esc
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posting</span>
               </a>
             </div>
           
@@ -1213,7 +1369,7 @@ Esc
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1268,7 +1424,7 @@ Esc
 </div>
 
 <div class="theme-info">
-  Theme -
+  Tema -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
