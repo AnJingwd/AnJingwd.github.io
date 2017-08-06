@@ -206,7 +206,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Accueil
+            Startseite
           </a>
         </li>
       
@@ -216,7 +216,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Categories
+            Kategorien
           </a>
         </li>
       
@@ -226,7 +226,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -283,6 +283,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/06/Linux多线程下载工具axel编译安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王冬">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/06/Linux多线程下载工具axel编译安装/" itemprop="url">Linux多线程下载工具axel编译安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-06T10:57:31+08:00">
+                2017-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linux多线程下载工具axel编译安装"><a href="#Linux多线程下载工具axel编译安装" class="headerlink" title="Linux多线程下载工具axel编译安装"></a>Linux多线程下载工具axel编译安装</h1><p>&emsp;&emsp;axel插件是基于yum下的一个多线程下载插件。axel插件也可以当独立下载工具来使用。当成独立下载工具使用时，适用于所有Linux发行版。通过打开多个HTTP/FTP连接来将一个文件进行分段下载，从而达到加速下载的目的。对于下载大文件，该工具特别有用。同时支持断点续传，速度通常情况下是Wget的几倍。可用于CentOS、RHEL、Fedora等使用yum的Linux发行版。由于没有管理员权限，只能编译安装源码。使用Axel可以在低速网络环境里提高数倍的下载速度。</p>
+<p>官方主页:<a href="http://axel.alioth.debian.org/" target="_blank" rel="external">http://axel.alioth.debian.org/</a></p>
+<p>下载：</p>
+<pre><code>wget https://sourceforge.net/projects/axel2/files/axel-2.4/axel-2.4.tar.gz
+
+tar -xzf axel-2.4.tar.gz 
+
+cd axel-2.4
+</code></pre><p>编译安装：</p>
+<pre><code>./configure --prefix=/home/u641750/axel-2.4
+
+make &amp;&amp; make install 
+</code></pre><p>添加环境变量：</p>
+<pre><code>echo &apos;export PATH=&apos;/home/u641750/axel-2.4/bin：$PATH&apos;&gt;&gt;~/.bashrc
+
+source ~/.bashrc
+</code></pre><p>使用参数如下：</p>
+<ul>
+<li>–max-speed=x ,  -s x 最高速度x，指定每秒的最大比特数</li>
+<li>–num-connections=x , -n x 指定线程数</li>
+<li>–output=f , -o f 指定另存为目录f</li>
+<li>–search[=x] , -S [x] 搜索镜像 </li>
+<li>–header=x , -H x 添加头文件字符串x（指定 HTTP header）</li>
+<li>–user-agent=x , -U x 设置用户代理（指定 HTTP user agent</li>
+<li>–no-proxy ， -N 不使用代理服务器</li>
+<li>–quiet ， -q 静默模式</li>
+<li>–verbose ，-v 更多状态信息</li>
+<li>–alternate ， -a Alternate progress indicator</li>
+<li>–help ，-h 帮助</li>
+<li>–version ，-V 版本信息</li>
+</ul>
+<p>测试例如下载Python安装包：</p>
+<pre><code>time axel -n 10 http://mirrors.sohu.com/python/3.4.1/Python-3.4.1.tar.xz
+</code></pre><p><img src="http://i.imgur.com/46QnG4A.png" alt=""></p>
+<pre><code>time wget http://mirrors.sohu.com/python/3.4.1/Python-3.4.1.tar.xz
+</code></pre><p><img src="http://i.imgur.com/QKdKXCh.png" alt=""></p>
+<p><strong>如果下载过程中下载中断可以再执行下载命令即可恢复上次的下载进度</strong></p>
+<p><strong>当然，linux也还有其他的多线程下载工具，比如myget。有人测试，axel、myget支持多线程，且速度较快都在2M。断点续传对比，三个工具都支持，但wget需要增加-c参数，axel、myget再次执行命令即可。</strong></p>
+<p>例如： </p>
+<pre><code>wget -c http://url/iso/Centos/x86_64/CentOS-6.4-x86_64-bin-DVD1.iso
+</code></pre><p>参考：</p>
+<p>（1）<a href="http://www.ha97.com/621.html" target="_blank" rel="external">http://www.ha97.com/621.html</a></p>
+<p>（2）<a href="http://man.linuxde.net/axel" target="_blank" rel="external">http://man.linuxde.net/axel</a></p>
+<p>（3）Dreamway的运维点滴（推荐阅读）</p>
+<p><a href="http://dreamway.blog.51cto.com/1281816/1151886/" target="_blank" rel="external">http://dreamway.blog.51cto.com/1281816/1151886/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/06/SRA格式数据加速下载打包解决/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -312,7 +476,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-06T02:27:29+08:00">
                 2017-08-06
@@ -629,7 +793,7 @@ source ~/.bashrc
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-05T00:19:15+08:00">
                 2017-08-05
@@ -785,7 +949,7 @@ dtype: int64
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T01:16:15+08:00">
                 2017-08-03
@@ -1051,7 +1215,7 @@ alias picard=&quot;java -jar $PICARD&quot;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T00:53:42+08:00">
                 2017-08-03
@@ -1195,7 +1359,7 @@ alias picard=&quot;java -jar $PICARD&quot;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T23:57:09+08:00">
                 2017-08-02
@@ -1349,7 +1513,7 @@ Esc
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T22:21:51+08:00">
                 2017-08-02
@@ -1499,7 +1663,7 @@ Esc
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T22:13:15+08:00">
                 2017-08-02
@@ -1673,8 +1837,8 @@ Esc
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">articles</span>
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -1687,7 +1851,7 @@ Esc
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               </a>
             </div>
           
@@ -1737,11 +1901,11 @@ Esc
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  Thème -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
