@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="https:/AnJingwd.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="NGS软件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https:/AnJingwd.github.io/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结">
+<meta name="keywords" content="NGS软件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SRA数据加速下载打包解决">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/06/SRA格式数据加速下载打包解决/index.html">
+<meta property="og:site_name" content="安静-不安静的博客">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/OIH9xU7.png">
+<meta property="og:image" content="http://i.imgur.com/StRd8jT.png">
+<meta property="og:image" content="http://i.imgur.com/GkycANK.jpg">
+<meta property="og:image" content="http://i.imgur.com/5UijmT0.png">
+<meta property="og:image" content="http://i.imgur.com/HGizIwQ.png">
+<meta property="og:image" content="http://i.imgur.com/IMYaE6l.png">
+<meta property="og:updated_time" content="2017-08-06T11:16:11.825Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SRA数据加速下载打包解决">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结">
+<meta name="twitter:image" content="http://i.imgur.com/OIH9xU7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'https:///AnJingwd.github.io/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title>SRA数据加速下载打包解决 | 安静-不安静的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="https:///AnJingwd.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安静-不安静的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https:/AnJingwd.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https:/AnJingwd.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https:/AnJingwd.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https:/AnJingwd.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="https:/AnJingwd.github.io/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/06/SRA格式数据加速下载打包解决/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">SRA数据加速下载打包解决</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-06T02:27:29+08:00">
+                2017-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/NGS软件/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS软件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结合蛋白分析等。SRA数据库可以用于搜索和展示SRA项目数据，包括SRA主页和 Entrez system。</p>
+<a id="more"></a>
+<p>&emsp;&emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结合蛋白分析等。SRA数据库可以用于搜索和展示SRA项目数据，包括SRA主页和 Entrez system。</p>
+<p>SRA下载方式：<br>（1）Aspera<br>（2）sratoolkit<br>（3）FTP</p>
+<p>比较：通过sratoolkit，可以直接下载成fastq格式，速度比ftp快，比aspera慢。</p>
+<h2 id="Aspera"><a href="#Aspera" class="headerlink" title="Aspera"></a>Aspera</h2><p>关于速铂Aspera</p>
+<p>&emsp;&emsp;速铂Aspera是一套商业的高速文件传输解决方案，随着高通量数据的大量产生，从而对于大文件快速传输的需求，开始应用到生物领域，目前NCBI、EBI的SRA库都提供这样的服务。</p>
+<p>&emsp;&emsp;传统的FTP、HTTP等数据传输协议都是基于TCP的，TCP在远距离数据传输中存在一些先天的不足，文件越大、距离越远，其丢包、延时等问题对于传输速度的影响就越大。</p>
+<h3 id="Aspera使用的两种方式"><a href="#Aspera使用的两种方式" class="headerlink" title="Aspera使用的两种方式"></a>Aspera使用的两种方式</h3><p>（1）客户端的下载与安装</p>
+<p>&emsp;&emsp;即便Aspera是商业软件，但是作为客户应用方（相对于NCBI），我们使用其客户对进行数据的上传与下载是<strong>不用支付费用的</strong>。</p>
+<p>&emsp;&emsp;网页下载：速度很快，不过需要把数据再上传到服务器上，多费一道工序下载网页版AsperaConnectML-3.5.2.97180.msi安装，网页上下载SRA数据时点aspera下载链接就可以。</p>
+<ul>
+<li>客户端下载链接：</li>
+</ul>
+<p><a href="http://downloads.asperasoft.com/connect2/" target="_blank" rel="external">http://downloads.asperasoft.com/connect2/</a></p>
+<p><img src="http://i.imgur.com/OIH9xU7.png" alt=""></p>
+<ul>
+<li>设置下载目录及速度限制等：</li>
+</ul>
+<p><img src="http://i.imgur.com/StRd8jT.png" alt=""></p>
+<p>至此，客户端工具准备妥当了~</p>
+<p>（2）使用ascp下载SRA数据：ascp是Aspera Connect的命令行程序。</p>
+<p>下载与安装（<strong>不需要root或者sudo权限</strong>）：</p>
+<pre><code>curl -O http://download.asperasoft.com/download/sw/connect/3.6.1/aspera-connect-3.6.1.110647-linux-64.tar.gz  
+tar zxf asper-commect-3.6.1.110647-linux.tar.gz 
+sh aspera-connect-2.4.7.37118-linux-64.sh  
+</code></pre><p>添加环境变量：</p>
+<pre><code>export PATH=&quot;/home/u641750/.aspera/connect/bin:$PATH&quot;
+</code></pre><p><strong>可以将密钥备份到/home/的家目录下方便使用（后文将用到）</strong>:</p>
+<pre><code>$ cp ~/.aspera/connect/etc/asperaweb_id_dsa.openssh ~/
+</code></pre><p>至此，命令行工具准备妥当了~</p>
+<h4 id="那么如何找到我们要下载的SRA数据呢？"><a href="#那么如何找到我们要下载的SRA数据呢？" class="headerlink" title="那么如何找到我们要下载的SRA数据呢？"></a>那么如何找到我们要下载的SRA数据呢？</h4><p>首先我们需要了解下NSBI的SRA数据结构的层次关系：</p>
+<p>NCBI官网说明：<a href="https://www.ncbi.nlm.nih.gov/books/NBK7522/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/books/NBK7522/</a></p>
+<p>&emsp;&emsp;SRA数据库中的数据分为Studies, Experiments, Samples和相应的Runs四个层次。Studies有一个总体目标并可能包含数个Experiments。一个Experiments描述具体测了什么和使用的方法。它包括DNA来源信息，样本，测序平台，数据处理。每个Experiments由一个或者多个Runs组成。一个Run包含来自每个spot的reads结果。在未来，一些数据将具有相关分析。这些分析可能包括short reads组装为基因组或者转录组的contigs，现有基因组的比对，SRA数据的比对。每个水平的记录具有唯一的accession identifiers ，并且具有三个大写字母前缀：</p>
+<p>&emsp;&emsp;NCBI中SRA数据结构的层次关系：</p>
+<ul>
+<li>Studies:<ul>
+<li><strong>SRA Study accessions (prefixes SRP, DRP, ERP)</strong></li>
+<li>Examples: SRP000002, DRP000617, ERP002000</li>
+<li>BioProject accessions (prefixes PRJNA, PRJDB, PRJEB)</li>
+<li>Examples: PRJNA111397, PRJDB90, PRJEB1976</li>
+<li>dbGaP study accessions (prefix phs)</li>
+<li>Example: phs000159</li>
+<li>GEO Study (prefix GSE)</li>
+<li>Example: GSE12578</li>
+</ul>
+</li>
+<li>Samples:<ul>
+<li><strong>SRA Sample accessions (prefixes SRS, DRS, ERS)</strong></li>
+<li>Examples: SRS000013, DRS000020, ERS000016</li>
+<li>BioSample accessions (prefixes SAMN, SAME)</li>
+<li>Examples: SAMN00000013, SAMEA774460</li>
+<li>GEO Sample (prefix GSM)</li>
+<li>Example: GSM769008</li>
+</ul>
+</li>
+<li>SRA Experiment(s)<ul>
+<li><strong>SRA Experiment accessions (prefixes SRX, DRX, ERX)</strong></li>
+<li>Example: SRX000002,SRX000003,SRX000004 </li>
+</ul>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/GkycANK.jpg" alt=""></p>
+<p>Figure 2 shows Study (SRP000095, top panel), Experiment (SRX000113, middle panel, and SRX000114), and Run (SRR000416, bottom panel) records for the 454 sequencing of James Watson’s genome by Cold Spring Harbor Laboratory. Study and Run records are displayed in the SRA browser. The corresponding Experiment records are displayed in the NCBI Entrez system as described in the next section.</p>
+<p>在SRA浏览页面和Entrez可以搜索和查看SRA数据</p>
+<p>Studies, Runs和它们相关的Samples可以通过SRA主页浏览和查看：</p>
+<p>www.ncbi.nlm.nih.gov/Traces/sra</p>
+<p>Experiment记录可以通过搜索 Entrez SRA数据库获得：</p>
+<p>www.ncbi.nlm.nih.gov/sites/entrez?db=sra</p>
+<h3 id="接下来具体介绍："><a href="#接下来具体介绍：" class="headerlink" title="接下来具体介绍："></a>接下来具体介绍：</h3><p>搜索地址：<a href="https://www.ncbi.nlm.nih.gov/Traces/study/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/Traces/study/</a></p>
+<p>（1）通过以上网址，查询得到SRA数据的<strong>SRA Experiment accessions (prefixes SRX, DRX, ERX)</strong></p>
+<p>（2）在NCBI搜索SRA Experiment accessions，例如：SRX000004 </p>
+<p><img src="http://i.imgur.com/5UijmT0.png" alt=""></p>
+<p>点击Download data：</p>
+<p><img src="http://i.imgur.com/HGizIwQ.png" alt=""></p>
+<p>此时鼠标选中SRX实验或者任意一个SRR记录，通过Aspera client客户端下载。但这样需要等下载完再使用FTP上传到自己的服务器，前面提过，FTP速度很慢！！！</p>
+<h3 id="那么如何在服务器使用ascp命令行工具下载呢？"><a href="#那么如何在服务器使用ascp命令行工具下载呢？" class="headerlink" title="那么如何在服务器使用ascp命令行工具下载呢？"></a>那么如何在服务器使用ascp命令行工具下载呢？</h3><p>命令格式：</p>
+<pre><code>ascp -i &lt;path-to-asperaweb_id_dsa.openssh&gt; -k1 -QTr –l200m anonftp@ftp-private.ncbi.nlm.nih.gov:/&lt;files to transfer&gt; &lt;local destination&gt;
+</code></pre><p>相关的参数</p>
+<ul>
+<li>–Q (for adaptive flow control) – needed for disk throttling!</li>
+<li>–T to disable encryption</li>
+<li>–k1 enable resume of failed transfers</li>
+<li>–l (maximum bandwidth of request, try 200M and go up from there)</li>
+<li>–r recursive copy</li>
+<li>–i &lt;密钥文件&gt;</li>
+</ul>
+<p><local destination="">表明下载存放路径，一定要有，缺少会报错！！！<br><strong>关键是如何获取<files to="" transfer="">，也就是你要下载的SRR数据的地址，并且一定要保证其存在，否则会报错！！！</files></strong></local></p>
+<p>将鼠标选中上图任意一个SRR文件，例如SRR00006.sra,右键，复制链接地址：<br>fasp://anonftp@ftp.ncbi.nlm.nih.gov:22<strong>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000006/SRR000006.sra</strong>?auth=no&amp;port=33001&amp;bwcap=300000&amp;targetrate=100p&amp;policy=fair&amp;enc=none&amp;lockpolicy=no&amp;locktargetrate=no&amp;lockminrate=no&amp;v=2</p>
+<p>摘取/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000006/SRR000006.sra部分即为<files to="" transfer=""></files></p>
+<p><strong>网上有其他教程说<files to="" transfer="">遵循如/sra/sra-instant/reads/ByRun/sra/SRR/SRR689/SRR689250/SRR689250.sra固定的格式，但实际并非如此，比如上面的例子，所以并不能图省事硬套上述格式，还是要再win下如上述方法找到文件具体的地址，摘取<files to="" transfer="">部分，以确保文件存在，否则会报错：“ascp: no remote host specified, exiting”</files></files></strong></p>
+<p>举个栗子：</p>
+<p>（1）单个文件下载：</p>
+<pre><code>ascp -i ~/asperaweb_id_dsa.openssh -k1 -Tr -l100m anonftp@ftp-private.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000006/SRR000006.sra ~
+</code></pre><p>（2）批量下载：</p>
+<p>观察发现，一个SRX Experiment accessions下的<files to="" transfer="">是有规律的，如win下的目录结构所示,只是后两个字段不同：<br>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/<strong>SRR000006</strong>/<strong>SRR000006</strong></files></p>
+<p>因此可以整理为下面的格式黏贴在文本SRR_Download_List_file_list.txt 中：</p>
+<p>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000006/SRR000006.sra<br>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000009/SRR000009.sra<br>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000010/SRR000010.sra</p>
+<p>…….等</p>
+<pre><code>ascp  -i  ~/asperaweb_id_dsa.openssh --mode recv --host ftp-private.ncbi.nlm.nih.gov --user anonftp   --file-list  SRR_Download_List_file_list.txt ~
+</code></pre><p>如此可以实现批量下载！</p>
+<p>使用后会发现，从NCBI上下载SRA速度，一般的宽带的话，也可以达到100M/s，大大节约了下载的时间，非常给力</p>
+<p><strong>注意事项：</strong></p>
+<p>（1）如果报错：Error: Server aborted session: Client requests stronger encryption than server allows，那么可以参考：<a href="https://support.asperasoft.com/hc/en-us/articles/216126788-Error-Client-requests-stronger-encryption-than-server-allows" target="_blank" rel="external">https://support.asperasoft.com/hc/en-us/articles/216126788-Error-Client-requests-stronger-encryption-than-server-allows</a> 对客户端和命令行两种方式都给出了解决方案。在linux命令行下也就是加个-T参数，即：</p>
+<pre><code>ascp -T -i  ~/asperaweb_id_dsa.openssh --mode recv --host ftp-private.ncbi.nlm.nih.gov --user anonftp   --file-list  SRR_Download_List_file_list.txt ./
+</code></pre><p>（2）放入后台下载，这样不用担心关闭客户端，下载也停止了~</p>
+<pre><code>nohup ascp -T -i  ~/asperaweb_id_dsa.openssh --mode recv --host ftp-private.ncbi.nlm.nih.gov --user anonftp   --file-list  SRR_Download_List_file_list.txt ./ &amp;
+</code></pre><p>（3）aspera默认不支持断点续传，要支持这个功能添加参数：</p>
+<pre><code>ascp -k1 -T -i  ~/asperaweb_id_dsa.openssh --mode recv --host ftp-private.ncbi.nlm.nih.gov --user anonftp   --file-list  SRR_Download_List_file_list.txt ./
+</code></pre><p><strong>所以 ascp -i ~/asperaweb_id_dsa.openssh -k1 -Tr -l100m anonftp@ftp-private.ncbi.nlm.nih.gov:命令可以通用</strong></p>
+<p>（4）从EBI上下载也类似，给个例子：</p>
+<pre><code>ascp -i ~/asperaweb_id_dsa.putty era-fasp@fasp.sra.ebi.ac.uk:/vol1/ERA012/ERA012008/sff/library08_GJ6U61T06.sff
+</code></pre><p>提供Aspera的数据库：</p>
+<p>（1）NCBI的Sequence Read Archive (SRA), dbGaP.</p>
+<p>（2）1000genomes – EBI Aspera site, the NCBI Aspera site</p>
+<p>1000genomes – EBI Aspera site:</p>
+<p><a href="http://www.internationalgenome.org/aspera" target="_blank" rel="external">http://www.internationalgenome.org/aspera</a></p>
+<p>1000genomes – the NCBI Aspera site</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/projects/faspftp/1000genomes/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/projects/faspftp/1000genomes/</a></p>
+<h2 id="sra数据转为fastaq"><a href="#sra数据转为fastaq" class="headerlink" title="sra数据转为fastaq"></a>sra数据转为fastaq</h2><p>&emsp;&emsp;sra是NCBI 推出的存储高通量数据的格式，而平常我们工作用得多是fastq格式。如果需要把sra 转成fastq，则下载NCBI SRA Toolkit。</p>
+<p>下载地址：<br><a href="https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?cmd=show&amp;f=software&amp;m=software&amp;s=software" target="_blank" rel="external">https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?cmd=show&amp;f=software&amp;m=software&amp;s=software</a></p>
+<p>(1)下载安装（CentOS Linux 64 bit architecture）：</p>
+<pre><code>curl -O https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.8.2-1/sratoolkit.2.8.2-1-centos_linux64.tar.gz
+
+tar xzvf sratoolkit.2.8.2-1-centos_linux64.tar.gz
+
+cd  sratoolkit.2.8.2-1-centos_linux64
+</code></pre><p>程序都在bin目录下，来看看有什么：</p>
+<pre><code>cd bin
+</code></pre><p>SRA Toolkit Documentation, Frequently Used Tools:</p>
+<ul>
+<li><p>fastq-dump: Convert SRA data into fastq format</p>
+</li>
+<li><p>prefetch: Allows command-line downloading of SRA, dbGaP, and ADSP data</p>
+</li>
+<li><p>sam-dump: Convert SRA data to sam format</p>
+</li>
+<li><p>sra-pileup: Generate pileup statistics on aligned SRA data</p>
+</li>
+<li><p>vdb-config: Display and modify VDB configuration information</p>
+</li>
+<li><p>vdb-decrypt: Decrypt non-SRA dbGaP data (“phenotype data”)</p>
+</li>
+</ul>
+<p>(2)添加环境变量</p>
+<pre><code>echo &apos;export PATH=/home/wangdong/softwares/sratoolkit.2.8.2-centos_linux64/bin&apos;&gt;&gt;~/.bashrc
+
+source ~/.bashrc
+</code></pre><p>(3)使用：</p>
+<h3 id="使用prefetch下载SRA数据"><a href="#使用prefetch下载SRA数据" class="headerlink" title="使用prefetch下载SRA数据"></a>使用prefetch下载SRA数据</h3><p>下载文件:</p>
+<p>（1）单个下载</p>
+<pre><code>prefetch SRR1553610
+</code></pre><p>（2）批量下载</p>
+<pre><code>for i in $(seq 58 79);do prefetch -v SRR8287$i ;done
+</code></pre><p>这些文件区哪儿了？这些文件去哪里了？存在了你home目录下的一个默认文件夹里。</p>
+<pre><code>ls ~/ncbi
+</code></pre><p><strong>从NCBI下下来的数据，双端测序数据是放在一个文件里的，所以需要把它们重新拆解为两个文件。</strong><br>我们用程序fastq-dump来把文件拆包</p>
+<pre><code>fastq-dump --split-files SRR1553610
+</code></pre><p>那么我怎么知道哪些数据是双端测序的呢？上文的网址关于NSBI的SRA数据结构的Study层次对实验方法有具体介绍：网址再贴一遍：<a href="https://www.ncbi.nlm.nih.gov/Traces/study/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/Traces/study/</a></p>
+<p>小细节之拆包后文件的命名：</p>
+<table>
+<thead>
+<tr>
+<th>File name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRR030257_1.fastq</td>
+<td>Paired-end Illumina, First of pair, FASTQ format</td>
+</tr>
+<tr>
+<td>SRR030257_2.fastq</td>
+<td>Paired-end Illumina, Second of pair, FASTQ format</td>
+</tr>
+</tbody>
+</table>
+<p>因为在后续分析，mapping到RefSeq上时，单端测序和双端测序命令有些不同！需要注意下。</p>
+<p>更多的说明,请参见官方的SRA下载手册:<br>NCBI: <a href="https://www.ncbi.nlm.nih.gov/books/NBK242625/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/books/NBK242625/</a></p>
+<p>EBI: <a href="http://www.ebi.ac.uk/ena/about/sra_data_download" target="_blank" rel="external">http://www.ebi.ac.uk/ena/about/sra_data_download</a></p>
+<hr>
+<p>最后，附上FTP下载方式：</p>
+<p>三大数据库的FTP地址：</p>
+<p>ensembl : ftp://ftp.ensembl.org/pub<br>NCBI : ftp://ftp.ncbi.nih.gov/genomes/<br>UCSC：ftp://hgdownload.soe.ucsc.edu/goldenPath</p>
+<p>使用Xftp5 匿名登录FTP站点即可下载资源，慢点就慢点吧~有时需要下载的文件也就1-2M</p>
+<p><img src="http://i.imgur.com/IMYaE6l.png" alt=""></p>
+<hr>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>（1）博耘生物：</p>
+<p><a href="http://boyun.sh.cn/bio/?p=1933" target="_blank" rel="external">http://boyun.sh.cn/bio/?p=1933</a></p>
+<p>（2）Keep Learning的博客</p>
+<p><a href="http://blog.csdn.net/xubo245/article/details/50513201" target="_blank" rel="external">http://blog.csdn.net/xubo245/article/details/50513201</a></p>
+<p>（3）郑俊娟的博客：</p>
+<p><a href="http://blog.sciencenet.cn/blog-1271266-775638.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-1271266-775638.html</a></p>
+<p>（4）鳉鲈的博客：</p>
+<p><a href="http://blog.sina.com.cn/s/blog_71df25810102w2vf.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_71df25810102w2vf.html</a></p>
+<p>（5）生信笔记的博客：</p>
+<p><a href="http://www.bioinfo-scrounger.com/" target="_blank" rel="external">http://www.bioinfo-scrounger.com/</a></p>
+<p>（6）Rethink的博客</p>
+<p><a href="http://blog.leanote.com/post/hwoihann/how-to-download-series-of-sra-data-in-one-command" target="_blank" rel="external">http://blog.leanote.com/post/hwoihann/how-to-download-series-of-sra-data-in-one-command</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="https:/AnJingwd.github.io/tags/NGS软件/" rel="tag"># NGS软件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/08/05/如何优雅的输出python字典/" rel="next" title="如何优雅的输出python字典">
+                <i class="fa fa-chevron-left"></i> 如何优雅的输出python字典
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/08/06/Linux多线程下载工具axel编译安装/" rel="prev" title="Linux多线程下载工具axel编译安装">
+                Linux多线程下载工具axel编译安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https:/AnJingwd.github.io/images/avatar.png"
+               alt="AJ's blog" />
+          <p class="site-author-name" itemprop="name">AJ's blog</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="https:/AnJingwd.github.io/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="https:/AnJingwd.github.io/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="https:/AnJingwd.github.io/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Aspera"><span class="nav-number">1.</span> <span class="nav-text">Aspera</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Aspera使用的两种方式"><span class="nav-number">1.1.</span> <span class="nav-text">Aspera使用的两种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#那么如何找到我们要下载的SRA数据呢？"><span class="nav-number">1.1.1.</span> <span class="nav-text">那么如何找到我们要下载的SRA数据呢？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接下来具体介绍："><span class="nav-number">1.2.</span> <span class="nav-text">接下来具体介绍：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#那么如何在服务器使用ascp命令行工具下载呢？"><span class="nav-number">1.3.</span> <span class="nav-text">那么如何在服务器使用ascp命令行工具下载呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sra数据转为fastaq"><span class="nav-number">2.</span> <span class="nav-text">sra数据转为fastaq</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用prefetch下载SRA数据"><span class="nav-number">2.1.</span> <span class="nav-text">使用prefetch下载SRA数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">3.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AJ's blog</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共11.8k字</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
