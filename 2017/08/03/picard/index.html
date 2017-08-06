@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="https:/AnJingwd.github.io/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="https:/AnJingwd.github.io/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="https:/AnJingwd.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="NGS软件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https:/AnJingwd.github.io/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集">
+<meta name="keywords" content="NGS软件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="picard">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/03/picard/index.html">
+<meta property="og:site_name" content="安静-不安静的博客">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/j6MWTRq.png">
+<meta property="og:image" content="http://i.imgur.com/nBNGCE6.png">
+<meta property="og:updated_time" content="2017-08-06T10:46:25.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="picard">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集">
+<meta name="twitter:image" content="http://i.imgur.com/j6MWTRq.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'https:///AnJingwd.github.io/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title>picard | 安静-不安静的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="https:///AnJingwd.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安静-不安静的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https:/AnJingwd.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https:/AnJingwd.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https:/AnJingwd.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https:/AnJingwd.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="https:/AnJingwd.github.io/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/03/picard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">picard</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T01:16:15+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/NGS软件/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS软件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集</p>
+<a id="more"></a>
+<p>#Picard 高通量测序数据处理及格式转换工具大合集</p>
+<p><strong>picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集</strong></p>
+<p>其官网为：<br><a href="http://broadinstitute.github.io/picard/" target="_blank" rel="external">http://broadinstitute.github.io/picard/</a></p>
+<p>先看看picard都有哪些工具集：</p>
+<h2 id="Available-Programs"><a href="#Available-Programs" class="headerlink" title="Available Programs:"></a>Available Programs:</h2><p>Alpha Tools:                                     目前无支持，需要进一步测试完善的工具集</p>
+<pre><code>CollectIndependentReplicateMetrics           预测bam文件中reads的独立重复率
+CollectWgsMetricsWithNonZeroCoverage         收集关于全基因组（WGS）测序的覆盖度和测序质量信息 
+UmiAwareMarkDuplicatesWithMateCigar          利用read的位置和UMIs信息鉴定重复的reads
+</code></pre><hr>
+<p>Fasta:                                           操作FASTAor相关数据工具集</p>
+<pre><code>CreateSequenceDictionary                     创建参考序列的序列字典
+ExtractSequences                             从参考序列中创建子区间存为新的FASTA
+NonNFastaSize                                对fasta文件中non-N碱基计数
+NormalizeFasta                               规范FASTA文件中的序列行为相同长度
+</code></pre><hr>
+<p>Fingerprinting Tools:                            操作印迹图谱工具集</p>
+<pre><code>CheckFingerprint                             计算来自提供的(SAM/BAM or VCF) 文件的指纹图谱，并与提供的基因型比较
+ClusterCrosscheckMetrics                     通过LOD得分对CrosscheckFingerprints的结果进行聚类
+CrosscheckFingerprints                       检查是否所有的指纹图谱来自相同的个体
+CrosscheckReadGroupFingerprints              弃用：使用CrosscheckFingerprints.检查是否所有的指纹图谱来自相同的个体
+</code></pre><hr>
+<p>Illumina Tools:                                  操作具体Illumina测序数据工具集</p>
+<pre><code>CheckIlluminaDirectory                       维护具体的Illumina basecalling数据的有效性 
+CollectIlluminaBasecallingMetrics            从一次测序运行中收集Illumina Basecalling矩阵
+CollectIlluminaLaneMetrics                   对于每个给定的BaseCalling分析路径收集Illumina lane矩阵 
+ExtractIlluminaBarcodes                      确定Illumina lane中每个read的barcode
+IlluminaBasecallsToFastq                     从Illumina basecall read数据中产生ASTQ 文件 
+IlluminaBasecallsToSam                       转换原始的Illumina测序数据为unmapped 的SAM或者BAM 文件.
+MarkIlluminaAdapters                         读SAM或者BAM 文件并用新的接头修饰标签重写  
+</code></pre><hr>
+<p>Interval Tools:                                  操作Picard区间列表工具集</p>
+<pre><code>BedToIntervalList                            转换BED 文件为Picard区间列表  
+IntervalListToBed                            转换Picard的IntervalList文件为BED文件.
+IntervalListTools                            操作区间列表 
+LiftOverIntervalList                         从一个参考转为另一个时去除区间列表
+ScatterIntervalsByNs                         通过Ns分割参考，写入区间列表 
+</code></pre><hr>
+<p>Metrics:                                         各种不同数据类型报表矩阵工具集</p>
+<pre><code>AccumulateVariantCallingMetrics              组合多个变异Calling矩阵为单个文件
+CollectAlignmentSummaryMetrics               &lt;b&gt;从SAM或BAM文件产生比对矩阵总结 &lt;/b&gt;
+CollectBaseDistributionByCycle               对SAM或BAM文件中每个循环核苷酸分布制表
+CollectGcBiasMetrics                         收集关于GC bias的矩阵
+CollectHiSeqXPfFailMetrics                   将HiSeqX Illumina Basecalling directory下的PF-Failing reads归类为不同类别
+CollectHsMetrics                             从SAM或BAM文件收集杂交选择（HS）矩阵 
+CollectInsertSizeMetrics                     从配对末端文库中收集插入片段分布矩阵
+CollectJumpingLibraryMetrics                 收集跳跃文库矩阵 
+CollectMultipleMetrics                       收集多类矩阵 
+CollectOxoGMetrics                           收集矩阵评估氧化产物
+CollectQualityYieldMetrics                   收集关于通过质控阈值和 Illumina-specific过滤的reads矩阵  
+CollectRawWgsMetrics                         收集全基因组测序相关矩阵  
+CollectRnaSeqMetrics                         从SAM或BAM文件中产生RNA比对矩阵  
+CollectRrbsMetrics                           &lt;b&gt;从简化的亚硫酸氢盐测序(Rrbs)数据收集矩阵&lt;/b&gt;
+CollectSequencingArtifactMetrics             收集量化单末端测序产品的矩阵 
+CollectTargetedPcrMetrics                    从目标测序数据中收集PCR相关矩阵
+CollectVariantCallingMetrics                 从提供的VCF文件文件中收集每个样本和包含所有样本集合的矩阵
+CollectWgsMetrics                            收集关于全基因组测序（WGS）实验的覆盖度和质量矩阵
+CompareMetrics                               比较两个矩阵文件
+ConvertSequencingArtifactToOxoG              从广义的人工矩阵提取OxoG矩阵  
+EstimateLibraryComplexity                    预测测序文库中特异性分子数量  
+MeanQualityByCycle                           通过循环收集均值质量
+QualityScoreDistribution                     为质量得分的分布绘制表格 
+</code></pre><hr>
+<p>Miscellaneous Tools:                             混杂工具集  </p>
+<pre><code>BaitDesigner                                 为杂交选择反应设计寡核苷酸baits
+FifoBuffer                                   FIFO buffer 用来缓冲具有可定制缓冲大小的输入和输出流
+</code></pre><hr>
+<p>SAM/BAM:                                         操作SAM, BAMor者相关数据的工具集</p>
+<pre><code>AddCommentsToBam                             为headerBAM 文件的header增加评论
+AddOrReplaceReadGroups                       替代BAM 文件的read groups
+BamIndexStats                                从BAM 文件产生索引统计
+BamToBfq                                     通过maq aligner从BAM文件产生BFQ文件s from a 
+BuildBamIndex                                生成BAM索引，&quot;.bai&quot; 文件
+CalculateReadGroupChecksum                   基于read groups(RG)产生哈希码
+CheckTerminatorBlock                         维护提供的gzip 文件(e.g., BAM)最后一个区块格式正确; 否则RC 100 
+CleanSam                                     清除提供的SAM/BAM，soft-clipping beyond-end-of-reference alignments并且对于未比对上的reads设置MAPQ为0
+CompareSAMs                                  比较两个输入的&quot;.sam&quot; or &quot;.bam&quot; 文件 
+DownsampleSam                                对SAM或BAM文件缩小取样
+FastqToSam                                   转换FASTQ文件为unaligned的BAM或SAM文件
+FilterSamReads                               从SAM或BAM文件取read数据子集
+FixMateInformation                           如果需要，在mates和fix之间确认mate-pair信息
+GatherBamFiles                               尽可能高效的连接一个或多个BAM文件
+MarkDuplicates                               鉴定重复的reads 
+MarkDuplicatesWithMateCigar                  鉴定重复的reads,解释mate CIGAR.  
+MergeBamAlignment                            从SAM或者BAM文件中合并alignment数据到unmapped BAM文件
+MergeSamFiles                                合并多个SAM和/或BAM 文件为单个文件
+PositionBasedDownsampleSam                   缩小SAM或者BAM文件取样来维持reads子集，基于reads在每个flowcell的每个tile的位置
+ReorderSam                                   对SAM或者BAM文件中的reads重排序，来匹配参考文件中的顺序
+ReplaceSamHeader                             替代SAM或BAM文件的SAMFileHeader
+RevertOriginalBaseQualitiesAndAddMateCigar   转换原始碱基质量并增加mate cigar到read-group BAMs
+RevertSam                                    转换SAM或BAM 文件回到之前状态
+SamFormatConverter                           BAM文件与SAM 文件互相转换
+SamToFastq                                   转换SAM或者BAM文件为FASTQ文件
+SetNmAndUqTags                               弃用：使用SetNmMdAndUqTags代替
+SetNmMdAndUqTags                             修改SAM文件中NM,MD和UQ标签  
+SortSam                                      对一个SAM或BAM文件排序 
+SplitSamByLibrary                            通过文库分割SAM或BAM文件为独立文件
+ValidateSamFile                              确认SAM或BAM文件
+ViewSam                                      打印SAM或BAM文件到屏幕
+</code></pre><hr>
+<p>Unit Testing:                                    测试单元  </p>
+<pre><code>SimpleMarkDuplicatesWithMateCigar            测试提供的SAM或BAM文件中比对上的记录来定位重复分子
+</code></pre><hr>
+<p>VCF/BCF:                                         操作VCF, BCFor者相关数据的工具集</p>
+<pre><code>FilterVcf                                    严格过滤VCF
+FindMendelianViolations                      在VCF文件中寻找所有违反孟德尔法则的类型
+FixVcfHeader                                 代替或者修改VCF header
+GatherVcfs                                   文件从一个分散的多个VCF文件产生单个VCF文件
+GenotypeConcordance                          评估callsets之间的基因型一致性
+LiftoverVcf                                  从一个引用构建另一个引用时留下一个VCF文件 
+MakeSitesOnlyVcf                             从VCF或BCF文件创建没有基因型信息的VCF文件
+MergeVcfs                                    合并多个VCF或者BCF文件为一个VCF文件或者BCF文件
+RenameSampleInVcf                            对VCF或BCF中样本重命名  
+SortVcf                                      对一个活多个VCF 文件排序  
+SplitVcfs                                    分割SNPs和INDELs为独立的文件
+UpdateVcfSequenceDictionary                  对于VCF文件和包含有序列字典的文件，利用新的序列字典更新VCF文件
+VcfFormatConverter                           VCF与BCF互相转换
+VcfToIntervalList                            转换VCF or BCF 文件为Picard区间列表
+</code></pre><p><strong>（1）接下来看看如何安装：</strong></p>
+<p>#查看Java版本</p>
+<pre><code>java -version
+</code></pre><p>Java 1.8及以后版本即OK</p>
+<p>#从github拷贝库</p>
+<pre><code>git clone https://github.com/broadinstitute/picard.git
+</code></pre><p>#进入picard文件目录</p>
+<pre><code>cd picard/
+</code></pre><p><img src="http://i.imgur.com/j6MWTRq.png" alt=""></p>
+<p>#编译<br>    ./gradlew shadowJar</p>
+<p><img src="http://i.imgur.com/nBNGCE6.png" alt=""></p>
+<p>此时，在build/libs/文件夹下可见picard.jar程序</p>
+<p>#运行<br>    java -jar build/libs/picard.jar</p>
+<p><strong>（2）如何设置环境变量：</strong></p>
+<pre><code>vim ~/.bashrc
+i
+PICARD=&apos;/home/u631758/biosoftwares/picard/build/libs/picard.jar&apos;
+alias picard=&quot;java -jar $PICARD&quot;
+</code></pre><p>如此就可以用picard命名代替官网中的java -jar picard.jar命令了！！！</p>
+<p><strong>（3）查看有哪些可用的工具：</strong></p>
+<pre><code>picard 
+</code></pre><p><strong>（4）查看某个工具的具体用法：</strong></p>
+<p> 例如VcfFormatConverter工具：</p>
+<pre><code>picard VcfFormatConverter -h
+</code></pre><p>结果为：</p>
+<pre><code>java -jar picard.jar VcfFormatConverter \
+  I=input.vcf \
+  O=output.bcf \
+</code></pre><p>所以使用方式为：</p>
+<pre><code>picard VcfFormatConverter I=input.vcf O=output.bcf
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="https:/AnJingwd.github.io/tags/NGS软件/" rel="tag"><i class="fa fa-tag"></i> NGS软件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/" rel="next" title="linux中python2和python3环境搭建及共存">
+                <i class="fa fa-chevron-left"></i> linux中python2和python3环境搭建及共存
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/08/05/如何优雅的输出python字典/" rel="prev" title="如何优雅的输出python字典">
+                如何优雅的输出python字典 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https:/AnJingwd.github.io/images/avatar.png"
+               alt="AJ's blog" />
+          <p class="site-author-name" itemprop="name">AJ's blog</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="https:/AnJingwd.github.io/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="https:/AnJingwd.github.io/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="https:/AnJingwd.github.io/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Available-Programs"><span class="nav-number">1.</span> <span class="nav-text">Available Programs:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AJ's blog</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共11.8k字</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
