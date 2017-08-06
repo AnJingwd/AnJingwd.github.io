@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https:///AnJingwd.github.io/archives/index.html</loc>
+    
+    <lastmod>2017-08-06T04:12:58.096Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https:///AnJingwd.github.io/2017/08/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7axel%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2017-08-06T02:58:14.052Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
     
     <lastmod>2017-08-02T16:54:40.247Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.io/archives/index.html</loc>
-    
-    <lastmod>2017-08-02T16:52:44.173Z</lastmod>
     
   </url>
   
