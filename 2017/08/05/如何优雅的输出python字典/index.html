@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="如何优雅的输出python字典python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。 （1）一层字典1gene_symbol_ENGS=&amp;#123;&apos;PKHD1&apos;: &apos;ENSG00000170927&apos;, &apos;ATP6V0A4&apos;: &apos;E">
+<meta name="description" content="如何优雅的输出python字典&amp;emsp;&amp;emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何优雅的输出python字典">
 <meta property="og:url" content="https:///AnJingwd.github.io/2017/08/05/如何优雅的输出python字典/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="如何优雅的输出python字典python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。 （1）一层字典1gene_symbol_ENGS=&amp;#123;&apos;PKHD1&apos;: &apos;ENSG00000170927&apos;, &apos;ATP6V0A4&apos;: &apos;E">
+<meta property="og:description" content="如何优雅的输出python字典&amp;emsp;&amp;emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-06T10:21:24.384Z">
+<meta property="og:updated_time" content="2017-08-06T11:15:15.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅的输出python字典">
-<meta name="twitter:description" content="如何优雅的输出python字典python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。 （1）一层字典1gene_symbol_ENGS=&amp;#123;&apos;PKHD1&apos;: &apos;ENSG00000170927&apos;, &apos;ATP6V0A4&apos;: &apos;E">
+<meta name="twitter:description" content="如何优雅的输出python字典&amp;emsp;&amp;emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。">
 
 
 
@@ -370,7 +370,9 @@
       
 
       
-        <h1 id="如何优雅的输出python字典"><a href="#如何优雅的输出python字典" class="headerlink" title="如何优雅的输出python字典"></a>如何优雅的输出python字典</h1><p>python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
+        <h1 id="如何优雅的输出python字典"><a href="#如何优雅的输出python字典" class="headerlink" title="如何优雅的输出python字典"></a>如何优雅的输出python字典</h1><p>&emsp;&emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
+<a id="more"></a>
+<p>&emsp;&emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
 <h2 id="（1）一层字典"><a href="#（1）一层字典" class="headerlink" title="（1）一层字典"></a>（1）一层字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gene_symbol_ENGS=&#123;<span class="string">'PKHD1'</span>: <span class="string">'ENSG00000170927'</span>, <span class="string">'ATP6V0A4'</span>: <span class="string">'ENSG00000105929'</span>, <span class="string">'TSC2'</span>: <span class="string">'ENSG00000103197'</span>&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line">frame1 = Series(gene_symbol_ENGS)</div><div class="line">print(frame1)</div></pre></td></tr></table></figure>
 <pre><code>ATP6V0A4    ENSG00000105929
@@ -526,7 +528,7 @@ dtype: int64
           
             <div class="site-state-item site-state-posts">
               <a href="/archive">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

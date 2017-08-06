@@ -519,207 +519,14 @@
 
       
         
-          
-            <p>&emsp;&emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结合蛋白分析等。SRA数据库可以用于搜索和展示SRA项目数据，包括SRA主页和 Entrez system。</p>
-<p>SRA下载方式：<br>（1）Aspera<br>（2）sratoolkit<br>（3）FTP</p>
-<p>比较：通过sratoolkit，可以直接下载成fastq格式，速度比ftp快，比aspera慢。</p>
-<h2 id="Aspera"><a href="#Aspera" class="headerlink" title="Aspera"></a>Aspera</h2><p>关于速铂Aspera</p>
-<p>&emsp;&emsp;速铂Aspera是一套商业的高速文件传输解决方案，随着高通量数据的大量产生，从而对于大文件快速传输的需求，开始应用到生物领域，目前NCBI、EBI的SRA库都提供这样的服务。</p>
-<p>&emsp;&emsp;传统的FTP、HTTP等数据传输协议都是基于TCP的，TCP在远距离数据传输中存在一些先天的不足，文件越大、距离越远，其丢包、延时等问题对于传输速度的影响就越大。</p>
-<h3 id="Aspera使用的两种方式"><a href="#Aspera使用的两种方式" class="headerlink" title="Aspera使用的两种方式"></a>Aspera使用的两种方式</h3><p>（1）客户端的下载与安装</p>
-<p>&emsp;&emsp;即便Aspera是商业软件，但是作为客户应用方（相对于NCBI），我们使用其客户对进行数据的上传与下载是<strong>不用支付费用的</strong>。</p>
-<p>&emsp;&emsp;网页下载：速度很快，不过需要把数据再上传到服务器上，多费一道工序下载网页版AsperaConnectML-3.5.2.97180.msi安装，网页上下载SRA数据时点aspera下载链接就可以。</p>
-<ul>
-<li>客户端下载链接：</li>
-</ul>
-<p><a href="http://downloads.asperasoft.com/connect2/" target="_blank" rel="external">http://downloads.asperasoft.com/connect2/</a></p>
-<p><img src="http://i.imgur.com/OIH9xU7.png" alt=""></p>
-<ul>
-<li>设置下载目录及速度限制等：</li>
-</ul>
-<p><img src="http://i.imgur.com/StRd8jT.png" alt=""></p>
-<p>至此，客户端工具准备妥当了~</p>
-<p>（2）使用ascp下载SRA数据：ascp是Aspera Connect的命令行程序。</p>
-<p>下载与安装（<strong>不需要root或者sudo权限</strong>）：</p>
-<pre><code>curl -O http://download.asperasoft.com/download/sw/connect/3.6.1/aspera-connect-3.6.1.110647-linux-64.tar.gz  
-tar zxf asper-commect-3.6.1.110647-linux.tar.gz 
-sh aspera-connect-2.4.7.37118-linux-64.sh  
-</code></pre><p>添加环境变量：</p>
-<pre><code>export PATH=&quot;/home/u641750/.aspera/connect/bin:$PATH&quot;
-</code></pre><p><strong>可以将密钥备份到/home/的家目录下方便使用（后文将用到）</strong>:</p>
-<pre><code>$ cp ~/.aspera/connect/etc/asperaweb_id_dsa.openssh ~/
-</code></pre><p>至此，命令行工具准备妥当了~</p>
-<h4 id="那么如何找到我们要下载的SRA数据呢？"><a href="#那么如何找到我们要下载的SRA数据呢？" class="headerlink" title="那么如何找到我们要下载的SRA数据呢？"></a>那么如何找到我们要下载的SRA数据呢？</h4><p>首先我们需要了解下NSBI的SRA数据结构的层次关系：</p>
-<p>NCBI官网说明：<a href="https://www.ncbi.nlm.nih.gov/books/NBK7522/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/books/NBK7522/</a></p>
-<p>&emsp;&emsp;SRA数据库中的数据分为Studies, Experiments, Samples和相应的Runs四个层次。Studies有一个总体目标并可能包含数个Experiments。一个Experiments描述具体测了什么和使用的方法。它包括DNA来源信息，样本，测序平台，数据处理。每个Experiments由一个或者多个Runs组成。一个Run包含来自每个spot的reads结果。在未来，一些数据将具有相关分析。这些分析可能包括short reads组装为基因组或者转录组的contigs，现有基因组的比对，SRA数据的比对。每个水平的记录具有唯一的accession identifiers ，并且具有三个大写字母前缀：</p>
-<p>&emsp;&emsp;NCBI中SRA数据结构的层次关系：</p>
-<ul>
-<li>Studies:<ul>
-<li><strong>SRA Study accessions (prefixes SRP, DRP, ERP)</strong></li>
-<li>Examples: SRP000002, DRP000617, ERP002000</li>
-<li>BioProject accessions (prefixes PRJNA, PRJDB, PRJEB)</li>
-<li>Examples: PRJNA111397, PRJDB90, PRJEB1976</li>
-<li>dbGaP study accessions (prefix phs)</li>
-<li>Example: phs000159</li>
-<li>GEO Study (prefix GSE)</li>
-<li>Example: GSE12578</li>
-</ul>
-</li>
-<li>Samples:<ul>
-<li><strong>SRA Sample accessions (prefixes SRS, DRS, ERS)</strong></li>
-<li>Examples: SRS000013, DRS000020, ERS000016</li>
-<li>BioSample accessions (prefixes SAMN, SAME)</li>
-<li>Examples: SAMN00000013, SAMEA774460</li>
-<li>GEO Sample (prefix GSM)</li>
-<li>Example: GSM769008</li>
-</ul>
-</li>
-<li>SRA Experiment(s)<ul>
-<li><strong>SRA Experiment accessions (prefixes SRX, DRX, ERX)</strong></li>
-<li>Example: SRX000002,SRX000003,SRX000004 </li>
-</ul>
-</li>
-</ul>
-<p><img src="http://i.imgur.com/GkycANK.jpg" alt=""></p>
-<p>Figure 2 shows Study (SRP000095, top panel), Experiment (SRX000113, middle panel, and SRX000114), and Run (SRR000416, bottom panel) records for the 454 sequencing of James Watson’s genome by Cold Spring Harbor Laboratory. Study and Run records are displayed in the SRA browser. The corresponding Experiment records are displayed in the NCBI Entrez system as described in the next section.</p>
-<p>在SRA浏览页面和Entrez可以搜索和查看SRA数据</p>
-<p>Studies, Runs和它们相关的Samples可以通过SRA主页浏览和查看：</p>
-<p>www.ncbi.nlm.nih.gov/Traces/sra</p>
-<p>Experiment记录可以通过搜索 Entrez SRA数据库获得：</p>
-<p>www.ncbi.nlm.nih.gov/sites/entrez?db=sra</p>
-<h3 id="接下来具体介绍："><a href="#接下来具体介绍：" class="headerlink" title="接下来具体介绍："></a>接下来具体介绍：</h3><p>搜索地址：<a href="https://www.ncbi.nlm.nih.gov/Traces/study/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/Traces/study/</a></p>
-<p>（1）通过以上网址，查询得到SRA数据的<strong>SRA Experiment accessions (prefixes SRX, DRX, ERX)</strong></p>
-<p>（2）在NCBI搜索SRA Experiment accessions，例如：SRX000004 </p>
-<p><img src="http://i.imgur.com/5UijmT0.png" alt=""></p>
-<p>点击Download data：</p>
-<p><img src="http://i.imgur.com/HGizIwQ.png" alt=""></p>
-<p>此时鼠标选中SRX实验或者任意一个SRR记录，通过Aspera client客户端下载。但这样需要等下载完再使用FTP上传到自己的服务器，前面提过，FTP速度很慢！！！</p>
-<h3 id="那么如何在服务器使用ascp命令行工具下载呢？"><a href="#那么如何在服务器使用ascp命令行工具下载呢？" class="headerlink" title="那么如何在服务器使用ascp命令行工具下载呢？"></a>那么如何在服务器使用ascp命令行工具下载呢？</h3><p>命令格式：</p>
-<pre><code>ascp -i &lt;path-to-asperaweb_id_dsa.openssh&gt; -k1 -QTr –l200m anonftp@ftp-private.ncbi.nlm.nih.gov:/&lt;files to transfer&gt; &lt;local destination&gt;
-</code></pre><p>相关的参数</p>
-<ul>
-<li>–Q (for adaptive flow control) – needed for disk throttling!</li>
-<li>–T to disable encryption</li>
-<li>–k1 enable resume of failed transfers</li>
-<li>–l (maximum bandwidth of request, try 200M and go up from there)</li>
-<li>–r recursive copy</li>
-<li>–i &lt;密钥文件&gt;</li>
-</ul>
-<p><local destination="">表明下载存放路径，一定要有，缺少会报错！！！<br><strong>关键是如何获取<files to="" transfer="">，也就是你要下载的SRR数据的地址，并且一定要保证其存在，否则会报错！！！</files></strong></local></p>
-<p>将鼠标选中上图任意一个SRR文件，例如SRR00006.sra,右键，复制链接地址：<br>fasp://anonftp@ftp.ncbi.nlm.nih.gov:22<strong>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000006/SRR000006.sra</strong>?auth=no&amp;port=33001&amp;bwcap=300000&amp;targetrate=100p&amp;policy=fair&amp;enc=none&amp;lockpolicy=no&amp;locktargetrate=no&amp;lockminrate=no&amp;v=2</p>
-<p>摘取/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000006/SRR000006.sra部分即为<files to="" transfer=""></files></p>
-<p><strong>网上有其他教程说<files to="" transfer="">遵循如/sra/sra-instant/reads/ByRun/sra/SRR/SRR689/SRR689250/SRR689250.sra固定的格式，但实际并非如此，比如上面的例子，所以并不能图省事硬套上述格式，还是要再win下如上述方法找到文件具体的地址，摘取<files to="" transfer="">部分，以确保文件存在，否则会报错：“ascp: no remote host specified, exiting”</files></files></strong></p>
-<p>举个栗子：</p>
-<p>（1）单个文件下载：</p>
-<pre><code>ascp -i ~/asperaweb_id_dsa.openssh -k1 -Tr -l100m anonftp@ftp-private.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000006/SRR000006.sra ~
-</code></pre><p>（2）批量下载：</p>
-<p>观察发现，一个SRX Experiment accessions下的<files to="" transfer="">是有规律的，如win下的目录结构所示,只是后两个字段不同：<br>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/<strong>SRR000006</strong>/<strong>SRR000006</strong></files></p>
-<p>因此可以整理为下面的格式黏贴在文本SRR_Download_List_file_list.txt 中：</p>
-<p>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000006/SRR000006.sra<br>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000009/SRR000009.sra<br>/sra/sra-instant/reads/ByExp/sra/SRX/SRX000/SRX000004/SRR000010/SRR000010.sra</p>
-<p>…….等</p>
-<pre><code>ascp  -i  ~/asperaweb_id_dsa.openssh --mode recv --host ftp-private.ncbi.nlm.nih.gov --user anonftp   --file-list  SRR_Download_List_file_list.txt ~
-</code></pre><p>如此可以实现批量下载！</p>
-<p>使用后会发现，从NCBI上下载SRA速度，一般的宽带的话，也可以达到100M/s，大大节约了下载的时间，非常给力</p>
-<p><strong>注意事项：</strong></p>
-<p>（1）如果报错：Error: Server aborted session: Client requests stronger encryption than server allows，那么可以参考：<a href="https://support.asperasoft.com/hc/en-us/articles/216126788-Error-Client-requests-stronger-encryption-than-server-allows" target="_blank" rel="external">https://support.asperasoft.com/hc/en-us/articles/216126788-Error-Client-requests-stronger-encryption-than-server-allows</a> 对客户端和命令行两种方式都给出了解决方案。在linux命令行下也就是加个-T参数，即：</p>
-<pre><code>ascp -T -i  ~/asperaweb_id_dsa.openssh --mode recv --host ftp-private.ncbi.nlm.nih.gov --user anonftp   --file-list  SRR_Download_List_file_list.txt ./
-</code></pre><p>（2）放入后台下载，这样不用担心关闭客户端，下载也停止了~</p>
-<pre><code>nohup ascp -T -i  ~/asperaweb_id_dsa.openssh --mode recv --host ftp-private.ncbi.nlm.nih.gov --user anonftp   --file-list  SRR_Download_List_file_list.txt ./ &amp;
-</code></pre><p>（3）aspera默认不支持断点续传，要支持这个功能添加参数：</p>
-<pre><code>ascp -k1 -T -i  ~/asperaweb_id_dsa.openssh --mode recv --host ftp-private.ncbi.nlm.nih.gov --user anonftp   --file-list  SRR_Download_List_file_list.txt ./
-</code></pre><p><strong>所以 ascp -i ~/asperaweb_id_dsa.openssh -k1 -Tr -l100m anonftp@ftp-private.ncbi.nlm.nih.gov:命令可以通用</strong></p>
-<p>（4）从EBI上下载也类似，给个例子：</p>
-<pre><code>ascp -i ~/asperaweb_id_dsa.putty era-fasp@fasp.sra.ebi.ac.uk:/vol1/ERA012/ERA012008/sff/library08_GJ6U61T06.sff
-</code></pre><p>提供Aspera的数据库：</p>
-<p>（1）NCBI的Sequence Read Archive (SRA), dbGaP.</p>
-<p>（2）1000genomes – EBI Aspera site, the NCBI Aspera site</p>
-<p>1000genomes – EBI Aspera site:</p>
-<p><a href="http://www.internationalgenome.org/aspera" target="_blank" rel="external">http://www.internationalgenome.org/aspera</a></p>
-<p>1000genomes – the NCBI Aspera site</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/projects/faspftp/1000genomes/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/projects/faspftp/1000genomes/</a></p>
-<h2 id="sra数据转为fastaq"><a href="#sra数据转为fastaq" class="headerlink" title="sra数据转为fastaq"></a>sra数据转为fastaq</h2><p>&emsp;&emsp;sra是NCBI 推出的存储高通量数据的格式，而平常我们工作用得多是fastq格式。如果需要把sra 转成fastq，则下载NCBI SRA Toolkit。</p>
-<p>下载地址：<br><a href="https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?cmd=show&amp;f=software&amp;m=software&amp;s=software" target="_blank" rel="external">https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?cmd=show&amp;f=software&amp;m=software&amp;s=software</a></p>
-<p>(1)下载安装（CentOS Linux 64 bit architecture）：</p>
-<pre><code>curl -O https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.8.2-1/sratoolkit.2.8.2-1-centos_linux64.tar.gz
-
-tar xzvf sratoolkit.2.8.2-1-centos_linux64.tar.gz
-
-cd  sratoolkit.2.8.2-1-centos_linux64
-</code></pre><p>程序都在bin目录下，来看看有什么：</p>
-<pre><code>cd bin
-</code></pre><p>SRA Toolkit Documentation, Frequently Used Tools:</p>
-<ul>
-<li><p>fastq-dump: Convert SRA data into fastq format</p>
-</li>
-<li><p>prefetch: Allows command-line downloading of SRA, dbGaP, and ADSP data</p>
-</li>
-<li><p>sam-dump: Convert SRA data to sam format</p>
-</li>
-<li><p>sra-pileup: Generate pileup statistics on aligned SRA data</p>
-</li>
-<li><p>vdb-config: Display and modify VDB configuration information</p>
-</li>
-<li><p>vdb-decrypt: Decrypt non-SRA dbGaP data (“phenotype data”)</p>
-</li>
-</ul>
-<p>(2)添加环境变量</p>
-<pre><code>echo &apos;export PATH=/home/wangdong/softwares/sratoolkit.2.8.2-centos_linux64/bin&apos;&gt;&gt;~/.bashrc
-
-source ~/.bashrc
-</code></pre><p>(3)使用：</p>
-<h3 id="使用prefetch下载SRA数据"><a href="#使用prefetch下载SRA数据" class="headerlink" title="使用prefetch下载SRA数据"></a>使用prefetch下载SRA数据</h3><p>下载文件:</p>
-<p>（1）单个下载</p>
-<pre><code>prefetch SRR1553610
-</code></pre><p>（2）批量下载</p>
-<pre><code>for i in $(seq 58 79);do prefetch -v SRR8287$i ;done
-</code></pre><p>这些文件区哪儿了？这些文件去哪里了？存在了你home目录下的一个默认文件夹里。</p>
-<pre><code>ls ~/ncbi
-</code></pre><p><strong>从NCBI下下来的数据，双端测序数据是放在一个文件里的，所以需要把它们重新拆解为两个文件。</strong><br>我们用程序fastq-dump来把文件拆包</p>
-<pre><code>fastq-dump --split-files SRR1553610
-</code></pre><p>那么我怎么知道哪些数据是双端测序的呢？上文的网址关于NSBI的SRA数据结构的Study层次对实验方法有具体介绍：网址再贴一遍：<a href="https://www.ncbi.nlm.nih.gov/Traces/study/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/Traces/study/</a></p>
-<p>小细节之拆包后文件的命名：</p>
-<table>
-<thead>
-<tr>
-<th>File name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SRR030257_1.fastq</td>
-<td>Paired-end Illumina, First of pair, FASTQ format</td>
-</tr>
-<tr>
-<td>SRR030257_2.fastq</td>
-<td>Paired-end Illumina, Second of pair, FASTQ format</td>
-</tr>
-</tbody>
-</table>
-<p>因为在后续分析，mapping到RefSeq上时，单端测序和双端测序命令有些不同！需要注意下。</p>
-<p>更多的说明,请参见官方的SRA下载手册:<br>NCBI: <a href="https://www.ncbi.nlm.nih.gov/books/NBK242625/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/books/NBK242625/</a></p>
-<p>EBI: <a href="http://www.ebi.ac.uk/ena/about/sra_data_download" target="_blank" rel="external">http://www.ebi.ac.uk/ena/about/sra_data_download</a></p>
-<hr>
-<p>最后，附上FTP下载方式：</p>
-<p>三大数据库的FTP地址：</p>
-<p>ensembl : ftp://ftp.ensembl.org/pub<br>NCBI : ftp://ftp.ncbi.nih.gov/genomes/<br>UCSC：ftp://hgdownload.soe.ucsc.edu/goldenPath</p>
-<p>使用Xftp5 匿名登录FTP站点即可下载资源，慢点就慢点吧~有时需要下载的文件也就1-2M</p>
-<p><img src="http://i.imgur.com/IMYaE6l.png" alt=""></p>
-<hr>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>（1）博耘生物：</p>
-<p><a href="http://boyun.sh.cn/bio/?p=1933" target="_blank" rel="external">http://boyun.sh.cn/bio/?p=1933</a></p>
-<p>（2）Keep Learning的博客</p>
-<p><a href="http://blog.csdn.net/xubo245/article/details/50513201" target="_blank" rel="external">http://blog.csdn.net/xubo245/article/details/50513201</a></p>
-<p>（3）郑俊娟的博客：</p>
-<p><a href="http://blog.sciencenet.cn/blog-1271266-775638.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-1271266-775638.html</a></p>
-<p>（4）鳉鲈的博客：</p>
-<p><a href="http://blog.sina.com.cn/s/blog_71df25810102w2vf.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_71df25810102w2vf.html</a></p>
-<p>（5）生信笔记的博客：</p>
-<p><a href="http://www.bioinfo-scrounger.com/" target="_blank" rel="external">http://www.bioinfo-scrounger.com/</a></p>
-<p>（6）Rethink的博客</p>
-<p><a href="http://blog.leanote.com/post/hwoihann/how-to-download-series-of-sra-data-in-one-command" target="_blank" rel="external">http://blog.leanote.com/post/hwoihann/how-to-download-series-of-sra-data-in-one-command</a></p>
-
-          
+          <p>&emsp;&emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结合蛋白分析等。SRA数据库可以用于搜索和展示SRA项目数据，包括SRA主页和 Entrez system。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/06/SRA格式数据加速下载打包解决/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -858,46 +665,14 @@ source ~/.bashrc
 
       
         
-          
-            <h1 id="如何优雅的输出python字典"><a href="#如何优雅的输出python字典" class="headerlink" title="如何优雅的输出python字典"></a>如何优雅的输出python字典</h1><p>python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
-<h2 id="（1）一层字典"><a href="#（1）一层字典" class="headerlink" title="（1）一层字典"></a>（1）一层字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gene_symbol_ENGS=&#123;<span class="string">'PKHD1'</span>: <span class="string">'ENSG00000170927'</span>, <span class="string">'ATP6V0A4'</span>: <span class="string">'ENSG00000105929'</span>, <span class="string">'TSC2'</span>: <span class="string">'ENSG00000103197'</span>&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line">frame1 = Series(gene_symbol_ENGS)</div><div class="line">print(frame1)</div></pre></td></tr></table></figure>
-<pre><code>ATP6V0A4    ENSG00000105929
-PKHD1       ENSG00000170927
-TSC2        ENSG00000103197
-dtype: object
-</code></pre><h2 id="（2）嵌套字典"><a href="#（2）嵌套字典" class="headerlink" title="（2）嵌套字典"></a>（2）嵌套字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sample_mutation_count = &#123;<span class="string">'PDC668_vs_PDC668A2'</span>: &#123;<span class="string">'ncRNA_intronic'</span>: <span class="number">32</span>, <span class="string">'UTR5'</span>: <span class="number">6</span>, <span class="string">'ncRNA_splicing'</span>: <span class="number">0</span>, <span class="string">'exonic;splicing'</span>: <span class="number">0</span>, <span class="string">'UTR3'</span>: <span class="number">6</span>, <span class="string">'upstream;downstream'</span>: <span class="number">1</span>, <span class="string">'downstream'</span>: <span class="number">6</span>, <span class="string">'exonic'</span>: <span class="number">155</span>, <span class="string">'upstream'</span>: <span class="number">2</span>, <span class="string">'splicing'</span>: <span class="number">1</span>, <span class="string">'ncRNA_exonic'</span>: <span class="number">19</span>, <span class="string">'intergenic'</span>: <span class="number">162</span>, <span class="string">'intronic'</span>: <span class="number">162</span>&#125;, <span class="string">'PDC3748_vs_PDC3748B4'</span>: &#123;<span class="string">'ncRNA_intronic'</span>: <span class="number">21</span>, <span class="string">'UTR5'</span>: <span class="number">6</span>, <span class="string">'ncRNA_splicing'</span>: <span class="number">0</span>, <span class="string">'exonic;splicing'</span>: <span class="number">0</span>, <span class="string">'UTR3'</span>: <span class="number">2</span>, <span class="string">'upstream;downstream'</span>: <span class="number">0</span>, <span class="string">'downstream'</span>: <span class="number">2</span>, <span class="string">'exonic'</span>: <span class="number">123</span>, <span class="string">'upstream'</span>: <span class="number">8</span>, <span class="string">'splicing'</span>: <span class="number">2</span>, <span class="string">'ncRNA_exonic'</span>: <span class="number">15</span>, <span class="string">'intergenic'</span>: <span class="number">122</span>, <span class="string">'intronic'</span>: <span class="number">130</span>&#125;&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> DataFrame</div><div class="line">frame2 = DataFrame(sample_mutation_count)</div><div class="line">print(frame2)</div></pre></td></tr></table></figure>
-<pre><code>                     PDC3748_vs_PDC3748B4  PDC668_vs_PDC668A2
-UTR3                                    2                   6
-UTR5                                    6                   6
-downstream                              2                   6
-exonic                                123                 155
-exonic;splicing                         0                   0
-intergenic                            122                 162
-intronic                              130                 162
-ncRNA_exonic                           15                  19
-ncRNA_intronic                         21                  32
-ncRNA_splicing                          0                   0
-splicing                                2                   1
-upstream                                8                   2
-upstream;downstream                     0                   1
-</code></pre><p>那么问题来了，当每个样本的行不完全一样时如何解决呢，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">len_exon = &#123;<span class="string">'ENSG00000008710'</span>: &#123;<span class="string">'ENST00000570193'</span>: <span class="number">591</span>, <span class="string">'ENST00000483558'</span>: <span class="number">573</span>&#125;,<span class="string">'ENSG00000089597'</span>: &#123;<span class="string">'ENST00000526210'</span>: <span class="number">529</span>, <span class="string">'ENST00000526392'</span>: <span class="number">255</span>, <span class="string">'ENST00000532402'</span>: <span class="number">3695</span>&#125;&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> len_exon.items():</div><div class="line">    print(key)</div><div class="line">    print(Series(value))</div></pre></td></tr></table></figure>
-<pre><code>ENSG00000008710
-ENST00000483558    573
-ENST00000570193    591
-dtype: int64
-ENSG00000089597
-ENST00000526210     529
-ENST00000526392     255
-ENST00000532402    3695
-dtype: int64
-</code></pre><h2 id="当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图"><a href="#当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图" class="headerlink" title="当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图"></a>当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pprint</div><div class="line">resultFile = open(<span class="string">'result.py'</span>, <span class="string">'w'</span>)</div><div class="line">resultFile.write(pprint.pformat(len_exon))</div><div class="line">resultFile.close()</div></pre></td></tr></table></figure>
-<p>{‘ENSG00000008710’: {‘ENST00000483558’: 573, ‘ENST00000570193’: 591},<br> ‘ENSG00000089597’: {‘ENST00000526210’: 529,<br>                     ‘ENST00000526392’: 255,<br>                     ‘ENST00000532402’: 3695}}</p>
-
-          
+          <h1 id="如何优雅的输出python字典"><a href="#如何优雅的输出python字典" class="headerlink" title="如何优雅的输出python字典"></a>如何优雅的输出python字典</h1><p>&emsp;&emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/05/如何优雅的输出python字典/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1036,156 +811,14 @@ dtype: int64
 
       
         
-          
-            <p>#Picard 高通量测序数据处理及格式转换工具大合集</p>
-<p><strong>picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集</strong></p>
-<p>其官网为：<br><a href="http://broadinstitute.github.io/picard/" target="_blank" rel="external">http://broadinstitute.github.io/picard/</a></p>
-<p>先看看picard都有哪些工具集：</p>
-<h2 id="Available-Programs"><a href="#Available-Programs" class="headerlink" title="Available Programs:"></a>Available Programs:</h2><p>Alpha Tools:                                     目前无支持，需要进一步测试完善的工具集</p>
-<pre><code>CollectIndependentReplicateMetrics           预测bam文件中reads的独立重复率
-CollectWgsMetricsWithNonZeroCoverage         收集关于全基因组（WGS）测序的覆盖度和测序质量信息 
-UmiAwareMarkDuplicatesWithMateCigar          利用read的位置和UMIs信息鉴定重复的reads
-</code></pre><hr>
-<p>Fasta:                                           操作FASTAor相关数据工具集</p>
-<pre><code>CreateSequenceDictionary                     创建参考序列的序列字典
-ExtractSequences                             从参考序列中创建子区间存为新的FASTA
-NonNFastaSize                                对fasta文件中non-N碱基计数
-NormalizeFasta                               规范FASTA文件中的序列行为相同长度
-</code></pre><hr>
-<p>Fingerprinting Tools:                            操作印迹图谱工具集</p>
-<pre><code>CheckFingerprint                             计算来自提供的(SAM/BAM or VCF) 文件的指纹图谱，并与提供的基因型比较
-ClusterCrosscheckMetrics                     通过LOD得分对CrosscheckFingerprints的结果进行聚类
-CrosscheckFingerprints                       检查是否所有的指纹图谱来自相同的个体
-CrosscheckReadGroupFingerprints              弃用：使用CrosscheckFingerprints.检查是否所有的指纹图谱来自相同的个体
-</code></pre><hr>
-<p>Illumina Tools:                                  操作具体Illumina测序数据工具集</p>
-<pre><code>CheckIlluminaDirectory                       维护具体的Illumina basecalling数据的有效性 
-CollectIlluminaBasecallingMetrics            从一次测序运行中收集Illumina Basecalling矩阵
-CollectIlluminaLaneMetrics                   对于每个给定的BaseCalling分析路径收集Illumina lane矩阵 
-ExtractIlluminaBarcodes                      确定Illumina lane中每个read的barcode
-IlluminaBasecallsToFastq                     从Illumina basecall read数据中产生ASTQ 文件 
-IlluminaBasecallsToSam                       转换原始的Illumina测序数据为unmapped 的SAM或者BAM 文件.
-MarkIlluminaAdapters                         读SAM或者BAM 文件并用新的接头修饰标签重写  
-</code></pre><hr>
-<p>Interval Tools:                                  操作Picard区间列表工具集</p>
-<pre><code>BedToIntervalList                            转换BED 文件为Picard区间列表  
-IntervalListToBed                            转换Picard的IntervalList文件为BED文件.
-IntervalListTools                            操作区间列表 
-LiftOverIntervalList                         从一个参考转为另一个时去除区间列表
-ScatterIntervalsByNs                         通过Ns分割参考，写入区间列表 
-</code></pre><hr>
-<p>Metrics:                                         各种不同数据类型报表矩阵工具集</p>
-<pre><code>AccumulateVariantCallingMetrics              组合多个变异Calling矩阵为单个文件
-CollectAlignmentSummaryMetrics               &lt;b&gt;从SAM或BAM文件产生比对矩阵总结 &lt;/b&gt;
-CollectBaseDistributionByCycle               对SAM或BAM文件中每个循环核苷酸分布制表
-CollectGcBiasMetrics                         收集关于GC bias的矩阵
-CollectHiSeqXPfFailMetrics                   将HiSeqX Illumina Basecalling directory下的PF-Failing reads归类为不同类别
-CollectHsMetrics                             从SAM或BAM文件收集杂交选择（HS）矩阵 
-CollectInsertSizeMetrics                     从配对末端文库中收集插入片段分布矩阵
-CollectJumpingLibraryMetrics                 收集跳跃文库矩阵 
-CollectMultipleMetrics                       收集多类矩阵 
-CollectOxoGMetrics                           收集矩阵评估氧化产物
-CollectQualityYieldMetrics                   收集关于通过质控阈值和 Illumina-specific过滤的reads矩阵  
-CollectRawWgsMetrics                         收集全基因组测序相关矩阵  
-CollectRnaSeqMetrics                         从SAM或BAM文件中产生RNA比对矩阵  
-CollectRrbsMetrics                           &lt;b&gt;从简化的亚硫酸氢盐测序(Rrbs)数据收集矩阵&lt;/b&gt;
-CollectSequencingArtifactMetrics             收集量化单末端测序产品的矩阵 
-CollectTargetedPcrMetrics                    从目标测序数据中收集PCR相关矩阵
-CollectVariantCallingMetrics                 从提供的VCF文件文件中收集每个样本和包含所有样本集合的矩阵
-CollectWgsMetrics                            收集关于全基因组测序（WGS）实验的覆盖度和质量矩阵
-CompareMetrics                               比较两个矩阵文件
-ConvertSequencingArtifactToOxoG              从广义的人工矩阵提取OxoG矩阵  
-EstimateLibraryComplexity                    预测测序文库中特异性分子数量  
-MeanQualityByCycle                           通过循环收集均值质量
-QualityScoreDistribution                     为质量得分的分布绘制表格 
-</code></pre><hr>
-<p>Miscellaneous Tools:                             混杂工具集  </p>
-<pre><code>BaitDesigner                                 为杂交选择反应设计寡核苷酸baits
-FifoBuffer                                   FIFO buffer 用来缓冲具有可定制缓冲大小的输入和输出流
-</code></pre><hr>
-<p>SAM/BAM:                                         操作SAM, BAMor者相关数据的工具集</p>
-<pre><code>AddCommentsToBam                             为headerBAM 文件的header增加评论
-AddOrReplaceReadGroups                       替代BAM 文件的read groups
-BamIndexStats                                从BAM 文件产生索引统计
-BamToBfq                                     通过maq aligner从BAM文件产生BFQ文件s from a 
-BuildBamIndex                                生成BAM索引，&quot;.bai&quot; 文件
-CalculateReadGroupChecksum                   基于read groups(RG)产生哈希码
-CheckTerminatorBlock                         维护提供的gzip 文件(e.g., BAM)最后一个区块格式正确; 否则RC 100 
-CleanSam                                     清除提供的SAM/BAM，soft-clipping beyond-end-of-reference alignments并且对于未比对上的reads设置MAPQ为0
-CompareSAMs                                  比较两个输入的&quot;.sam&quot; or &quot;.bam&quot; 文件 
-DownsampleSam                                对SAM或BAM文件缩小取样
-FastqToSam                                   转换FASTQ文件为unaligned的BAM或SAM文件
-FilterSamReads                               从SAM或BAM文件取read数据子集
-FixMateInformation                           如果需要，在mates和fix之间确认mate-pair信息
-GatherBamFiles                               尽可能高效的连接一个或多个BAM文件
-MarkDuplicates                               鉴定重复的reads 
-MarkDuplicatesWithMateCigar                  鉴定重复的reads,解释mate CIGAR.  
-MergeBamAlignment                            从SAM或者BAM文件中合并alignment数据到unmapped BAM文件
-MergeSamFiles                                合并多个SAM和/或BAM 文件为单个文件
-PositionBasedDownsampleSam                   缩小SAM或者BAM文件取样来维持reads子集，基于reads在每个flowcell的每个tile的位置
-ReorderSam                                   对SAM或者BAM文件中的reads重排序，来匹配参考文件中的顺序
-ReplaceSamHeader                             替代SAM或BAM文件的SAMFileHeader
-RevertOriginalBaseQualitiesAndAddMateCigar   转换原始碱基质量并增加mate cigar到read-group BAMs
-RevertSam                                    转换SAM或BAM 文件回到之前状态
-SamFormatConverter                           BAM文件与SAM 文件互相转换
-SamToFastq                                   转换SAM或者BAM文件为FASTQ文件
-SetNmAndUqTags                               弃用：使用SetNmMdAndUqTags代替
-SetNmMdAndUqTags                             修改SAM文件中NM,MD和UQ标签  
-SortSam                                      对一个SAM或BAM文件排序 
-SplitSamByLibrary                            通过文库分割SAM或BAM文件为独立文件
-ValidateSamFile                              确认SAM或BAM文件
-ViewSam                                      打印SAM或BAM文件到屏幕
-</code></pre><hr>
-<p>Unit Testing:                                    测试单元  </p>
-<pre><code>SimpleMarkDuplicatesWithMateCigar            测试提供的SAM或BAM文件中比对上的记录来定位重复分子
-</code></pre><hr>
-<p>VCF/BCF:                                         操作VCF, BCFor者相关数据的工具集</p>
-<pre><code>FilterVcf                                    严格过滤VCF
-FindMendelianViolations                      在VCF文件中寻找所有违反孟德尔法则的类型
-FixVcfHeader                                 代替或者修改VCF header
-GatherVcfs                                   文件从一个分散的多个VCF文件产生单个VCF文件
-GenotypeConcordance                          评估callsets之间的基因型一致性
-LiftoverVcf                                  从一个引用构建另一个引用时留下一个VCF文件 
-MakeSitesOnlyVcf                             从VCF或BCF文件创建没有基因型信息的VCF文件
-MergeVcfs                                    合并多个VCF或者BCF文件为一个VCF文件或者BCF文件
-RenameSampleInVcf                            对VCF或BCF中样本重命名  
-SortVcf                                      对一个活多个VCF 文件排序  
-SplitVcfs                                    分割SNPs和INDELs为独立的文件
-UpdateVcfSequenceDictionary                  对于VCF文件和包含有序列字典的文件，利用新的序列字典更新VCF文件
-VcfFormatConverter                           VCF与BCF互相转换
-VcfToIntervalList                            转换VCF or BCF 文件为Picard区间列表
-</code></pre><p><strong>（1）接下来看看如何安装：</strong></p>
-<p>#查看Java版本</p>
-<pre><code>java -version
-</code></pre><p>Java 1.8及以后版本即OK</p>
-<p>#从github拷贝库</p>
-<pre><code>git clone https://github.com/broadinstitute/picard.git
-</code></pre><p>#进入picard文件目录</p>
-<pre><code>cd picard/
-</code></pre><p><img src="http://i.imgur.com/j6MWTRq.png" alt=""></p>
-<p>#编译<br>    ./gradlew shadowJar</p>
-<p><img src="http://i.imgur.com/nBNGCE6.png" alt=""></p>
-<p>此时，在build/libs/文件夹下可见picard.jar程序</p>
-<p>#运行<br>    java -jar build/libs/picard.jar</p>
-<p><strong>（2）如何设置环境变量：</strong></p>
-<pre><code>vim ~/.bashrc
-i
-PICARD=&apos;/home/u631758/biosoftwares/picard/build/libs/picard.jar&apos;
-alias picard=&quot;java -jar $PICARD&quot;
-</code></pre><p>如此就可以用picard命名代替官网中的java -jar picard.jar命令了！！！</p>
-<p><strong>（3）查看有哪些可用的工具：</strong></p>
-<pre><code>picard 
-</code></pre><p><strong>（4）查看某个工具的具体用法：</strong></p>
-<p> 例如VcfFormatConverter工具：</p>
-<pre><code>picard VcfFormatConverter -h
-</code></pre><p>结果为：</p>
-<pre><code>java -jar picard.jar VcfFormatConverter \
-  I=input.vcf \
-  O=output.bcf \
-</code></pre><p>所以使用方式为：</p>
-<pre><code>picard VcfFormatConverter I=input.vcf O=output.bcf
-</code></pre>
-          
+          <p>&emsp;&emsp;picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/03/picard/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1232,7 +865,7 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/03/python环境搭建/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -1251,7 +884,7 @@ alias picard=&quot;java -jar $PICARD&quot;
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/03/python环境搭建/" itemprop="url">python环境搭建</a></h2>
+                <a class="post-title-link" href="/2017/08/03/linux中python2和python3环境搭建及共存/" itemprop="url">linux中python2和python3环境搭建及共存</a></h2>
         
 
         <div class="post-meta">
@@ -1324,34 +957,160 @@ alias picard=&quot;java -jar $PICARD&quot;
 
       
         
-          
-            <p>1.miniconda的安装<br>官网：<a href="https://conda.io/miniconda.html" target="_blank" rel="external">https://conda.io/miniconda.html</a></p>
-<p>版本选择注意：There are two variants of the installer: Miniconda is Python 2 based and Miniconda3 is Python 3 based. Note that the choice of which Miniconda is installed only affects the root environment. Regardless of which version of Miniconda you install, you can still install both Python 2.x and Python 3.x environments.</p>
-<p>进入 Miniconda2-latest-Linux-x86_64.sh 所在目录，终端运行 </p>
-<pre><code>$ bash Miniconda2-latest-Linux-x86_64.sh
-</code></pre><p>根据安装向导可以设置安装路径和环境变量，一路yes即可</p>
-<p>激活环境：</p>
-<pre><code>source ~/miniconda2/bin/activate root
-</code></pre><p>退出当前环境：</p>
-<pre><code>source deactivate root
-</code></pre><p>使用清华的pip源安装包更快：</p>
-<pre><code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple bcbio-gff biopython cython nose numpy pandas shove sqlalchemy python-memcached pyvcf
-</code></pre><p>指定安装包的版本,例如：</p>
-<pre><code>pip install pysam==0.7.5
-</code></pre><p>卸载指定版本安装包，例如：</p>
-<pre><code>pip uninstall biopython==1.70
-</code></pre><p>把常用的包离线下载，然后使用pip离线安装包，例如：</p>
-<pre><code>/home/wangdong/softwares/Python/Python-2.7/bin/pip install pysam-0.7.5.tar.gz
-</code></pre><hr>
-<p>参考：</p>
-<p><strong>virtualenv介绍及使用</strong></p>
-<p>廖雪峰的官方网站之virtualenv：</p>
-<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000" target="_blank" rel="external">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000</a></p>
-<p><strong>oncotator的安装</strong></p>
-<p>（2）Lablueee’s web site：</p>
-<p><a href="http://wp.zxzyl.com/?p=273" target="_blank" rel="external">http://wp.zxzyl.com/?p=273</a></p>
+          <p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/03/linux中python2和python3环境搭建及共存/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.io/2017/08/03/python环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/03/python环境搭建/" itemprop="url">linux中python2和python3环境搭建及共存</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T00:53:42+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/03/python环境搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1490,44 +1249,14 @@ alias picard=&quot;java -jar $PICARD&quot;
 
       
         
-          
-            <h1 id="想让某个命令可以全局使用，可以有两种方法来实现："><a href="#想让某个命令可以全局使用，可以有两种方法来实现：" class="headerlink" title="想让某个命令可以全局使用，可以有两种方法来实现："></a>想让某个命令可以全局使用，可以有两种方法来实现：</h1><h2 id="方法一-在命令行将路径添加到-bashrc文件"><a href="#方法一-在命令行将路径添加到-bashrc文件" class="headerlink" title="方法一.在命令行将路径添加到 .bashrc文件"></a>方法一.在命令行将路径添加到 .bashrc文件</h2><pre><code>echo &apos;export PATH=~/home/biosoftwares/FastQC/bin/fastqc:$PATH&apos; &gt;&gt;~/.bashrc
-
-source ~/.bashrc
-</code></pre><p><strong>注意：</strong></p>
-<p>（1）注意添加的路径是可执行文件的绝对路径，一般在bin下，可执行文件为绿色</p>
-<p>（2）用echo命令输出加引号的字符串时，将字符串原样输出</p>
-<p>（3）export可新增，修改或删除环境变量，供后续执行的程序使用。export的效力仅及于该次登陆操作</p>
-<p>（4）&gt;&gt;以追加方式添加</p>
-<p>（5） ~/.bashrc表示家目录下的.bashrc文件，为隐藏文件，使用ls -a可以查看</p>
-<p>（6）使用source ~/.bashrc之前需要先回到家目录</p>
-<p>（7）Source命令也称为“点命令”，也就是一个点符号（.）。source命令通常用于重新执行刚修改的<br>  初始化文件，使之立即生效，而不必注销并重新登录。用法：source filename 或 . filename</p>
-<p><strong>也可以在用vim打开~/.bashrc文件直接添加</strong></p>
-<pre><code>vim ~/.bashrc
-i 
-PATH=~/home/biosoftwares/FastQC/bin/fastqc
-Esc
-:x
-</code></pre><p><strong>注意：</strong></p>
-<p>（1）i 进入vim编辑模式</p>
-<p>（2）Esc退出vim编辑模式</p>
-<p>（3）:x保存修改并退出（需要在英文输入法状态下）</p>
-<p>##方法二. 将目录添加到~/.bashrc 文件，比如~/bin，然后创建软连接（相当于win下的快捷方式）</p>
-<p>#创建~/bin目录</p>
-<pre><code>mkdir -p ~/bin
-</code></pre><p>#将~/bin目录添加到PATH</p>
-<pre><code>echo &apos;export PATH=~/bin:$PATH&apos;&gt;&gt;~/.bashrc
-</code></pre><p>#使修改生效<br>    source ~/.bashrc</p>
-<p>#在/bin下生成fastqc软连接</p>
-<pre><code>ln -s ~/src/fastQC/fastqc ~/bin/fastqc
-</code></pre><p><strong>注意：</strong></p>
-<p>（1）mkdir -p  表示创建多级目录</p>
-<p>（2）ln是link的缩写，-s选项创建软连接</p>
-<p>创建软连接格式： ln/link SOURCE [TARGET]</p>
-<p>创建软链接： ln/link -s SOURCE [TARGET]</p>
-<p>软连接不占用磁盘空间，硬链接相当于拷贝，占磁盘空间</p>
-
-          
+          <p>&emsp;&emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/添加PATH环境变量/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1666,40 +1395,14 @@ Esc
 
       
         
-          
-            <hr>
-<p>Hosts文件是Windows系统中一个负责IP地址与域名快递解析的文件，以ASCLL格式保存。计算机在键入域名的时候，首先会去看看hosts文件汇总有没有关于此域名IP地址的记录。如果有，就直接登陆该网站；如果没有再查询DNS服务器。</p>
-<p><strong>那么，为什么修改HOSTS文件可以实现翻墙呢？</strong></p>
-<p>无论你上网打的什么网站地址, 实际上最终总归是要转换成一个IP地址才能访问的,平时这个转换工作是有网络上的DNS服务器来完成的。但是有些时候,有些网站, 处于某些原因, 网络上的DNS服务器无法给出正确的或可用IP地址(天朝特别多, 大家懂的)。</p>
-<p>这个时候hosts文件就可以代劳了, 你可以直接用记事本打开这文件看看就知道了, 里面一行就是一条记录, 一个IP地址接一个空格或tab, 再后面就是一个网址。它起到的作用就是直接在你本机上就把这些网址翻译成IP地址.</p>
-<p>从Windows 2000开始，Windows解析名称的顺序为：<br>DNS cache –&gt; hosts 文件 –&gt; DNS Server –&gt; NetBIOS cache –&gt; WINS Server –&gt; 广播 –&gt; LMHOSTS 文件<br>hosts 文件的优先级高于 DNS Server，因此修改hosts文件可以跳过被污染的dns服务器。</p>
-<p><strong>Hosts文件格式是咋样的？</strong></p>
-<p><img src="http://i.imgur.com/UxzTkR0.png" alt=""></p>
-<p>用记事本打开hosts文件，它的作用是包含IP地址和Host name(主机名)的映射关系，是一个映射IP地址和Hostname(主机名)的规定，规定要求每段只能包括一个映射关系，IP地址要放在每段的最前面，空格后再写上映射的Host name(主机名)。对于这段的映射说明用“#”分割后用文字说明。</p>
-<p><strong>为啥还需要及时更新Hosts文件？</strong></p>
-<p>Hosts文件配置的映射是静态的，如果网络上的计算机更改了请及时更新IP地址，否则将不能访问。</p>
-<p><strong>该Git项目持续更新可用的Hosts文件：</strong></p>
-<p><a href="https://github.com/racaljk/hosts" target="_blank" rel="external">https://github.com/racaljk/hosts</a></p>
-<p><strong>如何修改Hosts文件实现翻墙呢？</strong></p>
-<p>（1）. 从上述Git项目中复制hosts文件内容至txt文件，命名为HOSTS, 并去掉扩展名！！！</p>
-<p><img src="http://i.imgur.com/D5YBBUT.png" alt=""></p>
-<p>  Win7 系统HOSTS文件位于 C:\Windows\System32\drivers\etc\hosts，没有拓展名。</p>
-<p>（2）. 使之生效</p>
-<p>Windows</p>
-<p>开始 -&gt; 运行 -&gt; 输入cmd -&gt; 在CMD窗口输入</p>
-<pre><code>ipconfig /flushdns
-</code></pre><p>（3）使用谷歌浏览器随意登陆Google、Gmail、维基百科、Twitter、Facebook等，但必须使用https加密方式打开</p>
-<p>谷歌香港：<a href="https://www.google.com.hk" target="_blank" rel="external">https://www.google.com.hk</a></p>
-<p>谷歌：<a href="https://www.google.com/ncr" target="_blank" rel="external">https://www.google.com/ncr</a></p>
-<p><strong>PS: www.google.com/ncr中的”/ncr”是什么意思?起什么作用的?</strong></p>
-<p>ncr : no country redirect</p>
-<p>If google thinks you are from a foreign country or region,it likes to redirect you to your regional google page.For most people,this makes sense.However,if you prefer the generic,english,plain version,this would be very annoying.</p>
-<hr>
-<p><strong>参考：</strong></p>
-<p>老D博客（很多黑科技~）：<a href="https://laod.cn/hosts/2017-google-hosts.html" target="_blank" rel="external">https://laod.cn/hosts/2017-google-hosts.html</a></p>
-<p><a href="http://blog.sina.com.cn/s/blog_9caf88850102xnlb.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_9caf88850102xnlb.html</a></p>
-
-          
+          <p>&emsp;&emsp;Hosts文件是Windows系统中一个负责IP地址与域名快递解析的文件，以ASCLL格式保存。计算机在键入域名的时候，首先会去看看hosts文件汇总有没有关于此域名IP地址的记录。如果有，就直接登陆该网站；如果没有再查询DNS服务器。那么，为什么修改HOSTS文件可以实现翻墙呢？请看下文~</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/修改host文件-科学上网/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1838,60 +1541,14 @@ Esc
 
       
         
-          
-            <p>&emsp;&emsp;花了近四个小时，总算还是成功了~现在的心情是这样的：</p>
-<p>  <img src="http://i.imgur.com/jZzGAPR.jpg" alt=""></p>
-<h2 id="开心之余，将我的经验和踩过的坑分享给大家-首先推荐下参考的博客，基本是对的，实在大赞。"><a href="#开心之余，将我的经验和踩过的坑分享给大家-首先推荐下参考的博客，基本是对的，实在大赞。" class="headerlink" title="开心之余，将我的经验和踩过的坑分享给大家~ 首先推荐下参考的博客，基本是对的，实在大赞。"></a>开心之余，将我的经验和踩过的坑分享给大家~ 首先推荐下参考的博客，基本是对的，实在大赞。</h2><p>（1）Never_yu’s的博客：</p>
-<p><a href="https://neveryu.github.io/2016/09/03/hexo-next-one/" target="_blank" rel="external">https://neveryu.github.io/2016/09/03/hexo-next-one/</a></p>
-<p>（2）金石开的博客</p>
-<p><a href="http://www.cnblogs.com/zhcncn/p/4097881.html" target="_blank" rel="external">http://www.cnblogs.com/zhcncn/p/4097881.html</a></p>
-<h2 id="建议主要根据上面两个博客的方法搭建，遇到问题看看这些填坑博客"><a href="#建议主要根据上面两个博客的方法搭建，遇到问题看看这些填坑博客" class="headerlink" title="建议主要根据上面两个博客的方法搭建，遇到问题看看这些填坑博客~"></a>建议主要根据上面两个博客的方法搭建，遇到问题看看这些填坑博客~</h2><p>（1）文青程序猿的博客：</p>
-<p><a href="http://www.jianshu.com/p/31eb84182156" target="_blank" rel="external">http://www.jianshu.com/p/31eb84182156</a></p>
-<p>（2）WebEnh的博客</p>
-<p><a href="http://www.cnblogs.com/webenh/p/5792632.html" target="_blank" rel="external">http://www.cnblogs.com/webenh/p/5792632.html</a></p>
-<h2 id="我的安装过程还算顺利，遇到的问题："><a href="#我的安装过程还算顺利，遇到的问题：" class="headerlink" title="我的安装过程还算顺利，遇到的问题："></a>我的安装过程还算顺利，遇到的问题：</h2><p>(1)安装nvm后node -v报错，表明环境变量问题：<br>解决：</p>
-<ul>
-<li>ivanyb的简书文章</li>
-</ul>
-<p><a href="http://www.jianshu.com/p/07c3456e875a" target="_blank" rel="external">http://www.jianshu.com/p/07c3456e875a</a></p>
-<ul>
-<li>孙群的博客</li>
-</ul>
-<p><a href="http://blog.csdn.net/iispring/article/details/8023319/" target="_blank" rel="external">http://blog.csdn.net/iispring/article/details/8023319/</a></p>
-<p>（2）使用npm install -g hexo-cli命令安装Hexo，很卡，最后还报错，查了查，说因为npm被墙了。</p>
-<ul>
-<li><p>所以首先更改了淘宝的源：<br>  nvm node_mirror <a href="https://npm.taobao.org/mirrors/node/" target="_blank" rel="external">https://npm.taobao.org/mirrors/node/</a></p>
-<p>  nvm npm_mirror <a href="https://npm.taobao.org/mirrors/npm/" target="_blank" rel="external">https://npm.taobao.org/mirrors/npm/</a></p>
-</li>
-</ul>
-<p>参考：<a href="https://github.com/coreybutler/nvm-windows" target="_blank" rel="external">https://github.com/coreybutler/nvm-windows</a></p>
-<p>问题依旧！！！</p>
-<ul>
-<li>查了下报错：npm ERR!</li>
-</ul>
-<p>参考：<a href="http://blog.csdn.net/weng423811758/article/details/51537594" target="_blank" rel="external">http://blog.csdn.net/weng423811758/article/details/51537594</a></p>
-<p>因为我开了全局VPN,但依然没解决。</p>
-<ul>
-<li>淘宝说用cnpm代替npm：</li>
-</ul>
-<p>参考：<a href="https://npm.taobao.org/" target="_blank" rel="external">https://npm.taobao.org/</a></p>
-<p>然并卵！！</p>
-<p><strong>最后，查看node官网，后来看看其官网，推荐使用v6.11.2LTS，改为v6.11.2LTS之后就解决了（ps:开始是使用的node的最新的v8.2.1版本）</strong></p>
-<p>（3）部署时报错error deployer not found:git </p>
-<ul>
-<li>解决：<a href="http://www.jianshu.com/p/4d2c07a330da" target="_blank" rel="external">http://www.jianshu.com/p/4d2c07a330da</a></li>
-</ul>
-<p>我的deploy配置</p>
-<blockquote>
-<p>deploy:</p>
-<p>type: git</p>
-<p>repository: <a href="https://github.com/AnJingwd/AnJingwd.github.io.git" target="_blank" rel="external">https://github.com/AnJingwd/AnJingwd.github.io.git</a></p>
-<p>branch: master</p>
-</blockquote>
-<p>然后就成功了！！！</p>
-<h1 id="我的博客："><a href="#我的博客：" class="headerlink" title="我的博客："></a>我的博客：</h1><p><a href="https://anjingwd.github.io/" target="_blank" rel="external">https://anjingwd.github.io/</a></p>
-<h1 id="未完待续-博客将继续完善"><a href="#未完待续-博客将继续完善" class="headerlink" title="未完待续~ 博客将继续完善"></a>未完待续~ 博客将继续完善</h1>
-          
+          <p>&emsp;&emsp;生命在于折腾之Github+HEXO搭建博客</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/生命在于折腾之Github-HEXO搭建博客/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1971,7 +1628,7 @@ Esc
           
             <div class="site-state-item site-state-posts">
               <a href="/archive">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
