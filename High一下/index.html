@@ -78,10 +78,12 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
+
+  
 
 
   <link rel="alternate" href="https:/AnJingwd.github.io/atom.xml" title="安静-不安静的博客" type="application/atom+xml" />
@@ -96,18 +98,17 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！">
-<meta name="keywords" content="linux">
-<meta property="og:type" content="article">
-<meta property="og:title" content="添加PATH环境变量">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/02/添加PATH环境变量/index.html">
+<meta name="description" content="生命在于折腾~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="High一下">
+<meta property="og:url" content="https:///AnJingwd.github.io/High一下/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！">
+<meta property="og:description" content="生命在于折腾~">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-06T11:14:17.552Z">
+<meta property="og:updated_time" content="2017-08-07T13:41:30.253Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="添加PATH环境变量">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！">
+<meta name="twitter:title" content="High一下">
+<meta name="twitter:description" content="生命在于折腾~">
 
 
 
@@ -140,7 +141,7 @@
 
 
 
-  <title>添加PATH环境变量 | 安静-不安静的博客</title>
+  <title>High一下 | 安静-不安静的博客</title>
   
 
 
@@ -281,214 +282,33 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/02/添加PATH环境变量/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="AJ's blog">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="安静-不安静的博客">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h2 class="post-title" itemprop="name headline">添加PATH环境变量</h2>
-        
+	<h2 class="post-title" itemprop="name headline">High一下</h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T23:57:09+08:00">
-                2017-08-02
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <p>&emsp;&emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！</p>
-<a id="more"></a>
-<h1 id="想让某个命令可以全局使用，可以有两种方法来实现："><a href="#想让某个命令可以全局使用，可以有两种方法来实现：" class="headerlink" title="想让某个命令可以全局使用，可以有两种方法来实现："></a>想让某个命令可以全局使用，可以有两种方法来实现：</h1><h2 id="方法一-在命令行将路径添加到-bashrc文件"><a href="#方法一-在命令行将路径添加到-bashrc文件" class="headerlink" title="方法一.在命令行将路径添加到 .bashrc文件"></a>方法一.在命令行将路径添加到 .bashrc文件</h2><pre><code>echo &apos;export PATH=~/home/biosoftwares/FastQC/bin/fastqc:$PATH&apos; &gt;&gt;~/.bashrc
-
-source ~/.bashrc
-</code></pre><p><strong>注意：</strong></p>
-<p>（1）注意添加的路径是可执行文件的绝对路径，一般在bin下，可执行文件为绿色</p>
-<p>（2）用echo命令输出加引号的字符串时，将字符串原样输出</p>
-<p>（3）export可新增，修改或删除环境变量，供后续执行的程序使用。export的效力仅及于该次登陆操作</p>
-<p>（4）&gt;&gt;以追加方式添加</p>
-<p>（5） ~/.bashrc表示家目录下的.bashrc文件，为隐藏文件，使用ls -a可以查看</p>
-<p>（6）使用source ~/.bashrc之前需要先回到家目录</p>
-<p>（7）Source命令也称为“点命令”，也就是一个点符号（.）。source命令通常用于重新执行刚修改的<br>  初始化文件，使之立即生效，而不必注销并重新登录。用法：source filename 或 . filename</p>
-<p><strong>也可以在用vim打开~/.bashrc文件直接添加</strong></p>
-<pre><code>vim ~/.bashrc
-i 
-PATH=~/home/biosoftwares/FastQC/bin/fastqc
-Esc
-:x
-</code></pre><p><strong>注意：</strong></p>
-<p>（1）i 进入vim编辑模式</p>
-<p>（2）Esc退出vim编辑模式</p>
-<p>（3）:x保存修改并退出（需要在英文输入法状态下）</p>
-<p>##方法二. 将目录添加到~/.bashrc 文件，比如~/bin，然后创建软连接（相当于win下的快捷方式）</p>
-<p>#创建~/bin目录</p>
-<pre><code>mkdir -p ~/bin
-</code></pre><p>#将~/bin目录添加到PATH</p>
-<pre><code>echo &apos;export PATH=~/bin:$PATH&apos;&gt;&gt;~/.bashrc
-</code></pre><p>#使修改生效<br>    source ~/.bashrc</p>
-<p>#在/bin下生成fastqc软连接</p>
-<pre><code>ln -s ~/src/fastQC/fastqc ~/bin/fastqc
-</code></pre><p><strong>注意：</strong></p>
-<p>（1）mkdir -p  表示创建多级目录</p>
-<p>（2）ln是link的缩写，-s选项创建软连接</p>
-<p>创建软连接格式： ln/link SOURCE [TARGET]</p>
-<p>创建软链接： ln/link -s SOURCE [TARGET]</p>
-<p>软连接不占用磁盘空间，硬链接相当于拷贝，占磁盘空间</p>
-
+      <div class="post-body">
+        
+        
+          
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-
-    
-	<div>
-	
-		<div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
-</div>
-	
-	</div>
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="https:/AnJingwd.github.io/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="https:/AnJingwd.github.io/2017/08/02/修改host文件-科学上网/" rel="next" title="修改host文件-科学上网">
-                <i class="fa fa-chevron-left"></i> 修改host文件-科学上网
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="https:/AnJingwd.github.io/2017/08/03/python环境搭建/" rel="prev" title="linux中python2和python3环境搭建及共存">
-                linux中python2和python3环境搭建及共存 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
@@ -521,17 +341,8 @@ Esc
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https:/AnJingwd.github.io/images/avatar.png"
@@ -637,22 +448,6 @@ Esc
 	outchain/player?type=2&id=471682981&auto=1&height=66"></iframe>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#想让某个命令可以全局使用，可以有两种方法来实现："><span class="nav-number">1.</span> <span class="nav-text">想让某个命令可以全局使用，可以有两种方法来实现：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一-在命令行将路径添加到-bashrc文件"><span class="nav-number">1.1.</span> <span class="nav-text">方法一.在命令行将路径添加到 .bashrc文件</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -796,10 +591,10 @@ Esc
 
 
   
-  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+    <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
 
-
+  
 
   
 
