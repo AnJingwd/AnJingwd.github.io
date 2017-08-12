@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-12T09:42:17.573Z</updated>
+  <updated>2017-08-12T09:47:18.329Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="https:///AnJingwd.github.io/2017/08/12/%E5%8F%82%E8%80%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/"/>
     <id>https:///AnJingwd.github.io/2017/08/12/参考基因组数据下载/</id>
     <published>2017-08-12T09:15:06.000Z</published>
-    <updated>2017-08-12T09:42:17.573Z</updated>
+    <updated>2017-08-12T09:47:18.329Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;&emsp;&emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器</p>
 <a id="more"></a>
 <p>&emsp;&emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器</p>
 <h2 id="（1）通过Ensembl基因组注释数据库下载"><a href="#（1）通过Ensembl基因组注释数据库下载" class="headerlink" title="（1）通过Ensembl基因组注释数据库下载"></a>（1）通过Ensembl基因组注释数据库下载</h2><p>网址：<a href="http://www.ensembl.org/info/data/ftp/index.html" target="_blank" rel="external">http://www.ensembl.org/info/data/ftp/index.html</a></p>
 <p><strong>下载数据前一定要仔细查看相应目录下的README文件</strong></p>
-<h3 id="例如Human-Homo-sapiens-的DNA（FASTA）"><a href="#例如Human-Homo-sapiens-的DNA（FASTA）" class="headerlink" title="例如Human(Homo sapiens)的DNA（FASTA）:"></a>例如Human(Homo sapiens)的DNA（FASTA）:</h3><p>(1)文件命名规则： <species>.<assembly>.<sequence type="">.<id type="">.<id>.fa.gz</id></id></sequence></assembly></species></p>
+<h3 id="例如Human-Homo-sapiens-的DNA（FASTA）"><a href="#例如Human-Homo-sapiens-的DNA（FASTA）" class="headerlink" title="例如Human(Homo sapiens)的DNA（FASTA）:"></a>例如Human(Homo sapiens)的DNA（FASTA）:</h3><p>(1)文件命名规则： species.assembly.sequence type.id type.id.fa.gz</p>
 <p>species:物种的名称</p>
 <p>assembly:基因组的版本</p>
 <p>sequence type（主要有三类）:</p>
@@ -90,15 +90,15 @@ gatttagggACTTGGGCCTTCTGTCTTTGGGATCTACTCTCTATGGGCCACACAGATATG
 <li>‘chunk’:当contigs序列能被组装成大的实体时，有时候必须认为的将其打断为更小的实体，称之为’chunks’。这是由于注释管道的限制并且受存储序列和注释信息的MySQL数据库的记录限制。</li>
 <li>‘clone’ ：通常这是最小的序列实体。它经常与一个BAC clone或者部分区域的序列是一样的。</li>
 </ul>
-<p>id:实际序列的标示符，和\<id type="">对应</id></p>
+<p>id:实际序列的标示符，和id type对应</p>
 <p>fa:表示文件格式为FASTA</p>
 <p>gz:文件压缩方式为GUN Zip</p>
 <p>toplevel文件中包含了所有的在ensembl数据库schema中被定义为toplevel的序列，包括染色体，未能组装到染色体上的区域以及含有N的haplotype/patch区域。 </p>
 <p>primary_assembly文件相比于toplevel文件，减去了含有N的haplotype/patch区域。这类文件比较适合用来比对。</p>
 <h3 id="除了基因组序列外，另一个常用到的就是基因组注释文件（GTF或者GFF）"><a href="#除了基因组序列外，另一个常用到的就是基因组注释文件（GTF或者GFF）" class="headerlink" title="除了基因组序列外，另一个常用到的就是基因组注释文件（GTF或者GFF）"></a>除了基因组序列外，另一个常用到的就是基因组注释文件（GTF或者GFF）</h3><p>例如在RNA-seq分析流程中，参考基因组序列用于reads的比对，而GTF或者GFF用于确定比对上的reads是否落在基因内，由此来相对定量基因的表达量，鉴定差异表达基因。</p>
-<p>(1)文件命名规则：\<species>.\<assembly>.\<version>.gtf.gz</version></assembly></species></p>
+<p>(1)文件命名规则：species.assembly.version.gtf.gz</p>
 <p>注释基因生物证据的比对（例如蛋白，cdna，RNA-seq）来组装基因组</p>
-<p>对于预测的基因集：\<species>.\<assembly>.\<version>.abinitio.gtf.gz</version></assembly></species></p>
+<p>对于预测的基因集：species.assembly.version.abinitio.gtf.gz</p>
 <p>这里的预测是指通过GenScan和其他的从头预测工具分析产生的基因。</p>
 <h2 id="确定了需要下载什么后，那如何下载呢？"><a href="#确定了需要下载什么后，那如何下载呢？" class="headerlink" title="确定了需要下载什么后，那如何下载呢？"></a>确定了需要下载什么后，那如何下载呢？</h2><p>可以通过浏览器下载，但需要再上传到服务器；也可以通过之前介绍的多线程下载工具axel下载，速度很快。当然还可以使用ensembl提供的rsync工具下载。</p>
 <h2 id="（2）通过UCSC下载基因组注释数据"><a href="#（2）通过UCSC下载基因组注释数据" class="headerlink" title="（2）通过UCSC下载基因组注释数据"></a>（2）通过UCSC下载基因组注释数据</h2><ul>
