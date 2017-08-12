@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-12T13:45:34.712Z</updated>
+  <updated>2017-08-12T13:48:36.802Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,10 +20,9 @@
     <link href="https:///AnJingwd.github.io/2017/08/12/%E8%AE%BE%E8%AE%A1sanger%E6%B5%8B%E5%BA%8F%E5%BC%95%E7%89%A9%EF%BC%8C%E9%AA%8C%E8%AF%81%E7%AA%81%E5%8F%98%E4%BD%8D%E7%82%B9/"/>
     <id>https:///AnJingwd.github.io/2017/08/12/设计sanger测序引物，验证突变位点/</id>
     <published>2017-08-12T12:10:28.000Z</published>
-    <updated>2017-08-12T13:45:34.712Z</updated>
+    <updated>2017-08-12T13:48:36.802Z</updated>
     
-    <content type="html"><![CDATA[<p>在进行Variation calling 分析之后的故事</p>
-<a id="more"></a>
+    <content type="html"><![CDATA[<h1 id="在进行Variation-calling-分析之后的故事"><a href="#在进行Variation-calling-分析之后的故事" class="headerlink" title="在进行Variation calling 分析之后的故事"></a>在进行Variation calling 分析之后的故事</h1><a id="more"></a>
 <p>&emsp;&emsp;在进行Variation calling 分析之后。首先需要进行过滤，一般基于frequency和function两方面进行突变的过滤。</p>
 <ul>
 <li>frequency过滤：根据千人基因组测序项目的等位基因频率预测的0.5%作为阈值，小于这一值的认为是突变，因为千人基因组对于我们检测到的变异属于健康对照，若该变异在健康对照的频率过高，则是致病突变的可能性就比较低了。</li>
@@ -65,7 +64,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;在进行Variation calling 分析之后的故事&lt;/p&gt;
+      &lt;h1 id=&quot;在进行Variation-calling-分析之后的故事&quot;&gt;&lt;a href=&quot;#在进行Variation-calling-分析之后的故事&quot; class=&quot;headerlink&quot; title=&quot;在进行Variation calling 分析之后的故事&quot;&gt;&lt;/a&gt;在进行Variation calling 分析之后的故事&lt;/h1&gt;
     
     </summary>
     
@@ -814,10 +813,10 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:10:28.346Z</updated>
+    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
@@ -981,10 +980,10 @@ pip3.6 install numpy
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
+    <updated>2017-08-06T11:10:28.346Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
