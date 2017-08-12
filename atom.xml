@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-12T09:16:54.551Z</updated>
+  <updated>2017-08-12T09:42:17.573Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="https:///AnJingwd.github.io/2017/08/12/%E5%8F%82%E8%80%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/"/>
     <id>https:///AnJingwd.github.io/2017/08/12/参考基因组数据下载/</id>
     <published>2017-08-12T09:15:06.000Z</published>
-    <updated>2017-08-12T09:16:54.551Z</updated>
+    <updated>2017-08-12T09:42:17.573Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;&emsp;&emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器</p>
 <a id="more"></a>
 <p>&emsp;&emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器</p>
 <h2 id="（1）通过Ensembl基因组注释数据库下载"><a href="#（1）通过Ensembl基因组注释数据库下载" class="headerlink" title="（1）通过Ensembl基因组注释数据库下载"></a>（1）通过Ensembl基因组注释数据库下载</h2><p>网址：<a href="http://www.ensembl.org/info/data/ftp/index.html" target="_blank" rel="external">http://www.ensembl.org/info/data/ftp/index.html</a></p>
 <p><strong>下载数据前一定要仔细查看相应目录下的README文件</strong></p>
-<h3 id="例如Human-Homo-sapiens-的DNA（FASTA）"><a href="#例如Human-Homo-sapiens-的DNA（FASTA）" class="headerlink" title="例如Human(Homo sapiens)的DNA（FASTA）:"></a>例如Human(Homo sapiens)的DNA（FASTA）:</h3><p>(1)文件命名规则： \<species>.\<assembly>.\<sequence type="">.\<id type="">.\<id>.fa.gz</id></id></sequence></assembly></species></p>
+<h3 id="例如Human-Homo-sapiens-的DNA（FASTA）"><a href="#例如Human-Homo-sapiens-的DNA（FASTA）" class="headerlink" title="例如Human(Homo sapiens)的DNA（FASTA）:"></a>例如Human(Homo sapiens)的DNA（FASTA）:</h3><p>(1)文件命名规则： <species>.<assembly>.<sequence type="">.<id type="">.<id>.fa.gz</id></id></sequence></assembly></species></p>
 <p>species:物种的名称</p>
 <p>assembly:基因组的版本</p>
 <p>sequence type（主要有三类）:</p>
@@ -754,10 +754,10 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
+    <updated>2017-08-06T11:10:28.346Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
@@ -921,10 +921,10 @@ pip3.6 install numpy
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:10:28.346Z</updated>
+    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
