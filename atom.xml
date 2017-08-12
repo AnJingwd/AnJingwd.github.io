@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-12T09:51:41.716Z</updated>
+  <updated>2017-08-12T11:14:00.256Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="https:///AnJingwd.github.io/2017/08/12/%E5%8F%82%E8%80%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/"/>
     <id>https:///AnJingwd.github.io/2017/08/12/参考基因组数据下载/</id>
     <published>2017-08-12T09:15:06.000Z</published>
-    <updated>2017-08-12T09:51:41.716Z</updated>
+    <updated>2017-08-12T11:14:00.256Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;&emsp;&emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器</p>
 <a id="more"></a>
 <p>&emsp;&emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器</p>
 <h2 id="（1）通过Ensembl基因组注释数据库下载"><a href="#（1）通过Ensembl基因组注释数据库下载" class="headerlink" title="（1）通过Ensembl基因组注释数据库下载"></a>（1）通过Ensembl基因组注释数据库下载</h2><p>网址：<a href="http://www.ensembl.org/info/data/ftp/index.html" target="_blank" rel="external">http://www.ensembl.org/info/data/ftp/index.html</a></p>
 <p><strong>下载数据前一定要仔细查看相应目录下的README文件</strong></p>
-<h3 id="例如Human-Homo-sapiens-的DNA（FASTA）"><a href="#例如Human-Homo-sapiens-的DNA（FASTA）" class="headerlink" title="例如Human(Homo sapiens)的DNA（FASTA）:"></a>例如Human(Homo sapiens)的DNA（FASTA）:</h3><p>(1)文件命名规则： species.assembly.sequence type.id type.id.fa.gz</p>
+<h3 id="Human-Homo-sapiens-的DNA（FASTA）"><a href="#Human-Homo-sapiens-的DNA（FASTA）" class="headerlink" title="Human(Homo sapiens)的DNA（FASTA）:"></a>Human(Homo sapiens)的DNA（FASTA）:</h3><p>(1)文件命名规则： species.assembly.sequence type.id type.id.fa.gz</p>
 <p>species:物种的名称</p>
 <p>assembly:基因组的版本</p>
 <p>sequence type（主要有三类）:</p>
@@ -36,7 +36,7 @@
 <li>‘dna_rm’ - masked genomic DNA.通过RepeatMasker软件 检测弥散的重复序列和低复杂度的区域，并将重复序列使用N替代。</li>
 <li>‘dna_sm’ - soft-masked genomic DNA. 指Soft-masked的DNA序列，其中的重复序列和低复杂度的区域会用其相应碱基的小写字母来表示</li>
 </ul>
-<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><p>（1）连续的N</p>
+<h4 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h4><p>（1）连续的N</p>
 <pre><code>&gt;Homo_sapiens.GRCh38.dna_rm.chromosome.15.fa
 NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTTAGAGACCTTGAGA
@@ -49,7 +49,7 @@ gacaacCCCTAGAAGAGCACCTGGTTGAtaacccagttcccatctgggatttaggggacc
 aggggccctgggacagccctgtacatgagctcctggtctgtaacacagttcccctgtggg
 gatttagggACTTGGGCCTTCTGTCTTTGGGATCTACTCTCTATGGGCCACACAGATATG
 </code></pre><p>&emsp;&emsp;<strong>所以，使用RepeatMasker和Tandem Repeats Finder (with period of 12 or less)识别的重复在dna_rm中用大写的N表示，而在dna_sm中用小写字母表示，而非重复序列用大写字母表示。至于序列的开头和结尾，无论是dna_rm还是dna_sm，N/n表示（A,C,G,T）任意一种，也叫做Gaps，它意味着真实具体是哪一种碱基，测序平台不能确定，N/n的数目可能是不确定碱基数,都被一并maked掉了，在序列分析的时候并不会分析。</strong></p>
-<h3 id="为什么要这样做呢？"><a href="#为什么要这样做呢？" class="headerlink" title="为什么要这样做呢？"></a>为什么要这样做呢？</h3><p>&emsp;&emsp;RepeatMasker是一款基于Library-based，通过相似性比对来识别重复序列，可以屏蔽序列中转座子重复序列和低复杂度序列（默认将其替换成N），几乎用于所有物种，是做基因组、非编码RNA的必备软件。<strong>在人类基因组分析当中，大约 56% 的序列会被mask；</strong> RepeatMasker在进行序列比对时可以选用常见的几种算法，包括nhmmer、cross_match、ABBlast/WUBlast、RMBlast 、Decypher（可以安装多个比对引擎，但每次只能使用其中一个）。</p>
+<h4 id="为什么要这样做呢？"><a href="#为什么要这样做呢？" class="headerlink" title="为什么要这样做呢？"></a>为什么要这样做呢？</h4><p>&emsp;&emsp;RepeatMasker是一款基于Library-based，通过相似性比对来识别重复序列，可以屏蔽序列中转座子重复序列和低复杂度序列（默认将其替换成N），几乎用于所有物种，是做基因组、非编码RNA的必备软件。<strong>在人类基因组分析当中，大约 56% 的序列会被mask；</strong> RepeatMasker在进行序列比对时可以选用常见的几种算法，包括nhmmer、cross_match、ABBlast/WUBlast、RMBlast 、Decypher（可以安装多个比对引擎，但每次只能使用其中一个）。</p>
 <p>&emsp;&emsp;RepeatMasker应该是做已知repeat和TE的。基本原理是用已知repeats去blast。所以潜在的未知重复序列应该是无法用repeatmasker找到的，而在mRNA中的repeat序列也不应该用RepeatMasker找。<strong>repeatmasker的实际意义，就象这个软件的名字一样，是为了mask掉repeat。从而在查找基因，鉴定有功能的ncRNA，或者设计引物等提供一个精简的序列。毕竟用带有大量TE和repeat的序列做引物设计或者基因和蛋白功能分析，最后验证的时候只是得到了一批repeat</strong></p>
 <p><strong>重复序列的种类：</strong></p>
 <ul>
@@ -100,7 +100,7 @@ gatttagggACTTGGGCCTTCTGTCTTTGGGATCTACTCTCTATGGGCCACACAGATATG
 <p>注释基因生物证据的比对（例如蛋白，cdna，RNA-seq）来组装基因组</p>
 <p>对于预测的基因集：species.assembly.version.abinitio.gtf.gz</p>
 <p>这里的预测是指通过GenScan和其他的从头预测工具分析产生的基因。</p>
-<h3 id="确定了需要下载什么后，那如何下载呢？"><a href="#确定了需要下载什么后，那如何下载呢？" class="headerlink" title="确定了需要下载什么后，那如何下载呢？"></a>确定了需要下载什么后，那如何下载呢？</h3><p>可以通过浏览器下载，但需要再上传到服务器；也可以通过之前介绍的多线程下载工具axel下载，速度很快。当然还可以使用ensembl提供的rsync工具下载。</p>
+<h4 id="确定了需要下载什么后，那如何下载呢？"><a href="#确定了需要下载什么后，那如何下载呢？" class="headerlink" title="确定了需要下载什么后，那如何下载呢？"></a>确定了需要下载什么后，那如何下载呢？</h4><p>可以通过浏览器下载，但需要再上传到服务器；也可以通过之前介绍的多线程下载工具axel下载，速度很快。当然还可以使用ensembl提供的rsync工具下载。</p>
 <h2 id="（2）通过UCSC下载基因组注释数据"><a href="#（2）通过UCSC下载基因组注释数据" class="headerlink" title="（2）通过UCSC下载基因组注释数据"></a>（2）通过UCSC下载基因组注释数据</h2><ul>
 <li>Genome Browser’s “Table Browser”：</li>
 </ul>
