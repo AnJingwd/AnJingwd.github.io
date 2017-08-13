@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-12T14:17:11.611Z</updated>
+  <updated>2017-08-13T02:10:26.002Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https:///AnJingwd.github.io/2017/08/12/%E8%AE%BE%E8%AE%A1sanger%E6%B5%8B%E5%BA%8F%E5%BC%95%E7%89%A9%EF%BC%8C%E9%AA%8C%E8%AF%81%E7%AA%81%E5%8F%98%E4%BD%8D%E7%82%B9/"/>
     <id>https:///AnJingwd.github.io/2017/08/12/设计sanger测序引物，验证突变位点/</id>
     <published>2017-08-12T12:10:28.000Z</published>
-    <updated>2017-08-12T14:17:11.611Z</updated>
+    <updated>2017-08-13T02:10:26.002Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">在进行Variation calling 分析之后的故事</blockquote>
 
@@ -49,12 +49,14 @@
 <h2 id="Primer-BLAST-设计引物"><a href="#Primer-BLAST-设计引物" class="headerlink" title="Primer-BLAST 设计引物"></a>Primer-BLAST 设计引物</h2><p>网址：</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/tools/primer-blast/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/tools/primer-blast/</a></p>
 <p><img src="http://i.imgur.com/OTC1AUe.png" alt=""></p>
+<p>PCR product size 取300-500之间主要因为节省测序成本，同时，如果设计的引物没有中点在500附近的，主要可以通过调整PCR product size的上限，这样获得的产物长点就长点吧！</p>
 <p><img src="http://i.imgur.com/ykhvdoP.png" alt=""></p>
 <p>Get primers</p>
+<p>NCBI的Primer Blast 中这里选择的Genome(reference assembly from selected organisms)实际上是GRCh38版本。细心的可能注意到了，第一步获取序列用的是hg19版本的，但没关系，还有第三步UCSC In-Silico PCR验证呢！这一步选择的是hg19版本，这一步会进行blast!所以primer blast 和另两步的版本不同对结果不会有影响。</p>
 <p><img src="http://i.imgur.com/SaLCekW.png" alt=""></p>
-<p>点击submit，之后比较慢，等等吧</p>
+<p>点击submit，之后比较慢，等等吧！（同时完成引物的设计和blast，主要是blast比较耗时！）</p>
 <p><img src="http://i.imgur.com/z8c8Jey.png" alt=""></p>
-<p>一般第一条结果比较好，但是如果给出的若干个引物中有一条的中心更趋近与500处，则最好选择这一条，翻查下面对应的引物的正反向序列。</p>
+<p>一般第一条结果比较好，但是如果给出的若干个引物中有一条的中心更趋近与500处（待检测位点位于中间有利于测序，因为一般测序结果两端50bp会出现杂峰），则最好选择这一条，翻查下面对应的引物的正反向序列。</p>
 <h2 id="UCSC-In-Silico-PCR验证引物"><a href="#UCSC-In-Silico-PCR验证引物" class="headerlink" title="UCSC In-Silico PCR验证引物"></a>UCSC In-Silico PCR验证引物</h2><p>网址：</p>
 <p><a href="https://genome.ucsc.edu/cgi-bin/hgPcr?hgsid=603243225_C0DlViEzt0mvZEqK0DLtJx4pfsRN" target="_blank" rel="external">https://genome.ucsc.edu/cgi-bin/hgPcr?hgsid=603243225_C0DlViEzt0mvZEqK0DLtJx4pfsRN</a></p>
 <p>&emsp;&emsp;UCSC的PCR选项为电子PCR，输入引物（&gt;15bp），即可得到两引物间序列。UCSC是基于基因组而非转录组，如果两引物间隔很大，则先调节Max Product Size。UCSC自动预测的TM值是基于primer3的，跟我们用的DNAman算出来的值也比较接近，PCR时可直接使用其退火温度。</p>
