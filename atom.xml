@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-13T02:10:26.002Z</updated>
+  <updated>2017-08-14T13:09:12.603Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,188 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何写shell脚本</title>
+    <link href="https:///AnJingwd.github.io/2017/08/13/%E5%A6%82%E4%BD%95%E5%86%99shell%E8%84%9A%E6%9C%AC/"/>
+    <id>https:///AnJingwd.github.io/2017/08/13/如何写shell脚本/</id>
+    <published>2017-08-13T13:14:52.000Z</published>
+    <updated>2017-08-14T13:09:12.603Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">shell代码风格规范及技巧</blockquote>
+
+
+<a id="more"></a>
+<h1 id="shell代码风格规范及技巧"><a href="#shell代码风格规范及技巧" class="headerlink" title="shell代码风格规范及技巧"></a>shell代码风格规范及技巧</h1><h2 id="命名有标准"><a href="#命名有标准" class="headerlink" title="命名有标准"></a>命名有标准</h2><p>文件名规范，以.sh结尾，方便识别</p>
+<h2 id="编码要统一"><a href="#编码要统一" class="headerlink" title="编码要统一"></a>编码要统一</h2><p>在写脚本的时候尽量使用UTF-8编码，能够支持中文等一些奇奇怪怪的字符。不过虽然能写中文，但是在写注释以及打log的时候还是尽量英文，毕竟很多机器还是没有直接支持中文的，打出来可能会有乱码。</p>
+<p>这里还尤其需要注意一点，就是当我们是在windows下用utf-8编码来写shell脚本的时候，一定要注意这个utf-8是否是有BOM的。默认情况下windows判断utf-8格式是通过在文件开头加上三个EF BB BF字节来判断的，但是在Linux中默认是无BOM的。因此如果我们是在windows下写脚本的时候，一定要注意将编码改成Utf-8无BOM，一般用notepad++之类的编辑器都能改。否则，在Linux下运行的时候就会识别到开头的三个字符，从而报一些无法识别命令的错。</p>
+<h2 id="开头有shebang"><a href="#开头有shebang" class="headerlink" title="开头有shebang"></a>开头有shebang</h2><p>所谓shebang其实就是在很多脚本的第一行出现的以”#!”开头的注释，他指明了当我们没有指定解释器的时候默认的解释器，一般可能是下面这样：</p>
+<pre><code>#!/bin/bash
+</code></pre><h2 id="写出健壮Bash-Shell脚本技巧"><a href="#写出健壮Bash-Shell脚本技巧" class="headerlink" title="写出健壮Bash Shell脚本技巧"></a>写出健壮Bash Shell脚本技巧</h2><pre><code>set -e
+set -u
+set -o pipeline
+</code></pre><p>（1）在”set -e”之后出现的代码，一旦出现了返回值非零，整个脚本就会立即退出。<br>（2）set -u，当你使用未初始化的变量时，让bash自动退出<br>（3）set -o pipefail 设置了这个选项以后，包含管道命令的语句的返回值，会变成最后一个返回非零的管道命令的返回值。听起来比较绕，其实也很简单：</p>
+<p>例如test.sh</p>
+<pre><code>set -o pipefail
+ls ./a.txt |echo &quot;hi&quot; &gt;/dev/null
+echo $?
+</code></pre><p>运行test.sh，因为当前目录并不存在a.txt文件，输出：<br>ls: ./a.txt: No such file or directory<br>1  # 设置了set -o pipefail，返回从右往左第一个非零返回值，即ls的返回值1</p>
+<p>注释掉set -o pipefail 这一行，再次运行，输出：<br>ls: ./a.txt: No such file or directory<br>0  # 没有set -o pipefail，默认返回最后一个管道命令的返回值</p>
+<h2 id="工作路径"><a href="#工作路径" class="headerlink" title="工作路径"></a>工作路径</h2><p>我们会先获取当前脚本的路径，然后一这个路径为基准，去找其他的路径。</p>
+<pre><code>work_dir=$1
+reference=${work_dir}/data/reference/TAIR10_chr_all.fas
+</code></pre><h2 id="环境变量PATH"><a href="#环境变量PATH" class="headerlink" title="环境变量PATH"></a>环境变量PATH</h2><p>一般情况下我们会将一些重要的环境变量定义在开头，确保脚本中使用的命令能被bash搜索到。</p>
+<pre><code>PATH=/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+</code></pre><h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><pre><code>chmod +x ./test.sh  #给脚本权限
+./test.sh  #执行脚本
+</code></pre><h2 id="Shell中的变量"><a href="#Shell中的变量" class="headerlink" title="Shell中的变量"></a>Shell中的变量</h2><ul>
+<li>“=”前后不能有空格</li>
+<li>定义时不用$,使用时需要$,且推荐给所有变量加上花括号{}</li>
+</ul>
+<h2 id="脚本的参数"><a href="#脚本的参数" class="headerlink" title="脚本的参数"></a>脚本的参数</h2><ul>
+<li><p>先定义具体含义，后使用</p>
+<p>  gene_file=$1</p>
+<p>  ${gene_file}</p>
+</li>
+</ul>
+<h2 id="代码有注释"><a href="#代码有注释" class="headerlink" title="代码有注释"></a>代码有注释</h2><ul>
+<li>简述某一代码段的功能</li>
+<li>各个函数前的说明注释</li>
+</ul>
+<h2 id="太长要分行"><a href="#太长要分行" class="headerlink" title="太长要分行"></a>太长要分行</h2><p>在调用某些程序的时候，参数可能会很长，这时候为了保证较好的阅读体验，我们可以用反斜杠来分行：</p>
+<pre><code>./configure \
+–prefix=/usr \
+–sbin-path=/usr/sbin/nginx \
+–conf-path=/etc/nginx/nginx.conf \
+</code></pre><h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>例如：</p>
+<pre><code>./sub_gtf.shell gene.txt Homo_sapiens.GRCh38.89.chr.gtf &gt;logfile 2&gt;&amp;1
+</code></pre><p>1  ：表示stdout标准输出，系统默认值是1，所以”&gt;logfile”等同于”1&gt;logfile”<br>2  ：表示stderr标准错误<br>&amp;  ：表示等同于的意思，2&gt;&amp;1，表示2的输出重定向等同于1</p>
+<h2 id="回显"><a href="#回显" class="headerlink" title="回显"></a>回显</h2><p>例如</p>
+<pre><code>if [[ $# != 2 ]];then
+    echo &quot;Parameter incorrect.&quot;
+    exit 1
+fi
+</code></pre><p>当执行：</p>
+<pre><code>./sub_gtf.shell gene.txt
+</code></pre><p>因为参数数目不对，输出Parameter incorrect.至屏幕</p>
+<p>当执行：</p>
+<pre><code>./sub_gtf.shell gene.txt &gt;logfile 2&gt;&amp;1
+</code></pre><p>同样参数数目不对，但输出Parameter incorrect.至日志</p>
+<h2 id="函数相关"><a href="#函数相关" class="headerlink" title="函数相关"></a>函数相关</h2><h3 id="巧用main函数-使得代码可读性更强"><a href="#巧用main函数-使得代码可读性更强" class="headerlink" title="巧用main函数,使得代码可读性更强"></a>巧用main函数,使得代码可读性更强</h3><pre><code>#!/bin/bash
+
+func1(){
+    #do sth
+}
+
+func2(){
+#do sth
+}
+
+main(){
+    func1
+    func2
+}
+main &quot;$@&quot;
+</code></pre><h3 id="考虑作用域"><a href="#考虑作用域" class="headerlink" title="考虑作用域"></a>考虑作用域</h3><p>shell中默认的变量作用域都是全局的，比如下面的脚本：</p>
+<pre><code>#!/usr/bin/env bash
+
+var=1
+func(){
+    var=2
+}
+func
+echo $var
+</code></pre><p>他的输出结果就是2而不是1，这样显然不符合我们的编码习惯，很容易造成一些问题。</p>
+<p>因此，相比直接使用全局变量，我们最好使用local, readonly这类的命令，其次我们可以使用declare来声明变量。这些方式都比使用全局方式定义要好。</p>
+<h4 id="local一般用于局部变量声明，多在在函数内部使用。"><a href="#local一般用于局部变量声明，多在在函数内部使用。" class="headerlink" title="local一般用于局部变量声明，多在在函数内部使用。"></a>local一般用于局部变量声明，多在在函数内部使用。</h4><p>（1）shell脚本中定义的变量是global的，其作用域从被定义的地方开始，到shell结束或被显示删除的地方为止。</p>
+<p>（2）shell函数定义的变量默认是global的，其作用域从“函数被调用时执行变量定义的地方”开始，到shell结束或被显示删除处为止。函数定义的变量可以被显示定义成local的，其作用域局限于函数内。但请注意，函数的参数是local的。</p>
+<p><strong>（3）如果同名，Shell函数定义的local变量会屏蔽脚本定义的global变量。</strong></p>
+<p>使用举例：</p>
+<pre><code>#!/bin/bash  
+
+function Hello()  
+{  
+        local text=&quot;Hello World!!!&quot; #局部变量  
+        echo $text  
+}  
+
+Hello 
+</code></pre><h4 id="只读变量"><a href="#只读变量" class="headerlink" title="只读变量"></a>只读变量</h4><p>使用 readonly 命令可以将变量定义为只读变量，只读变量的值不能被改变。</p>
+<p>例如：</p>
+<pre><code>readonly myUrl
+myUrl=&quot;http://www.runoob.com&quot;
+</code></pre><h4 id="declare"><a href="#declare" class="headerlink" title="declare"></a>declare</h4><ul>
+<li><p>-r 只读 (declare -r var1与readonly var1作用相同)</p>
+<p>  declare -r var1</p>
+</li>
+<li><p>-i 整数  </p>
+<p>  declare -i number  </p>
+</li>
+<li><p>-a 数组</p>
+<p>  declare -a indices</p>
+</li>
+<li><p>-f 函数</p>
+<p>  declare -f</p>
+</li>
+</ul>
+<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>在使用函数的时候一定要注意，shell中函数的返回值只能是整数，估计是因为一般情况下一个函数的返回值通常表示这个函数的运行状态，所以一般都是0或者是１就够了，因此就设计成了这样。不过，如果非得想传递字符串，也可以通过下面变通的方法:</p>
+<pre><code>func(){
+    echo &quot;2333&quot;
+}
+res=$(func)
+echo &quot;This is from $res.&quot;
+</code></pre><p>这样，通过echo或者print之类的就可以做到传一些额外参数的目的。</p>
+<h2 id="使用新写法"><a href="#使用新写法" class="headerlink" title="使用新写法"></a>使用新写法</h2><p>这里的新写法不是指有多厉害，而是指我们可能更希望使用较新引入的一些语法，更多是偏向代码风格的，比如</p>
+<ul>
+<li>尽量使用func(){}来定义函数，而不是func{}</li>
+<li>尽量使用[[]]来代替[]</li>
+<li>尽量使用$()将命令的结果赋给变量，而不是反引号</li>
+<li>在复杂的场 下尽量使用printf代替echo进行回显</li>
+</ul>
+<p>事实上，这些新写法很多功能都比旧的写法要强大，用的时候就知道了。</p>
+<h2 id="其他小tip"><a href="#其他小tip" class="headerlink" title="其他小tip"></a>其他小tip</h2><ul>
+<li>读取文件时不要使用for loop而要使用while read</li>
+<li>简单的if尽量使用&amp;&amp; ||，写成单行。比如[[ x &gt; 2]] &amp;&amp; echo x</li>
+<li>利用/dev/null过滤不友好或者无用的输出信息</li>
+</ul>
+<p>例如<br>    if grep ‘pattern1’ some.file &gt; /dev/null &amp;&amp;<br>        grep ‘pattern2’ some.file &gt; dev/null<br>    then<br>        echo “found ‘pattern1’ and ‘pattern2’ in some.file”<br>    fi</p>
+<p>/dev/null ：代表空设备文件</p>
+<h2 id="安装shellcheck"><a href="#安装shellcheck" class="headerlink" title="安装shellcheck"></a>安装shellcheck</h2><p>ShellCheck, a static analysis tool for shell scripts</p>
+<ul>
+<li>使用方式（１）网页版：</li>
+</ul>
+<p><a href="http://www.shellcheck.net" target="_blank" rel="external">http://www.shellcheck.net</a></p>
+<p>github仓库：</p>
+<p><a href="https://github.com/koalaman/shellcheck" target="_blank" rel="external">https://github.com/koalaman/shellcheck</a></p>
+<p>下载安装：<br>    wget -q <a href="https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz" target="_blank" rel="external">https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz</a><br>    xz -d shellcheck-latest.linux.x86_64.tar.xz<br>    tar -xvf shellcheck-latest.linux.x86_64.tar<br>    echo ‘export PATH=/home/wangdong/softwares/shellcheck:$PATH’&gt;&gt;~/.bashrc<br>    source ~/.bashrc</p>
+<ul>
+<li><p>使用方式（2）终端：</p>
+<p>  shellcheck yourscipts</p>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/HREX4bE.png" alt=""></p>
+<h2 id="Shell不能做什么"><a href="#Shell不能做什么" class="headerlink" title="Shell不能做什么"></a>Shell不能做什么</h2><ul>
+<li>需要精密的运算的时候</li>
+<li>需要语言效率很高的时候</li>
+<li>需要一些网络操作的时候</li>
+<li>总之Shell就是可以快速开发一个脚本简化开发流程，并不可以用来替代高级语言</li>
+</ul>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="https://blog.mythsman.com/2017/07/23/1/" target="_blank" rel="external">https://blog.mythsman.com/2017/07/23/1/</a></p>
+<p>（2）<a href="https://github.com/koalaman/shellcheck" target="_blank" rel="external">https://github.com/koalaman/shellcheck</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;shell代码风格规范及技巧&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="shell脚本" scheme="https:///AnJingwd.github.io/categories/shell%E8%84%9A%E6%9C%AC/"/>
+    
+    
+      <category term="shell脚本" scheme="https:///AnJingwd.github.io/tags/shell%E8%84%9A%E6%9C%AC/"/>
+    
+  </entry>
   
   <entry>
     <title>设计sanger测序引物，验证突变位点</title>
@@ -302,7 +484,7 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
     <link href="https:///AnJingwd.github.io/2017/08/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7axel%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
     <id>https:///AnJingwd.github.io/2017/08/06/Linux多线程下载工具axel编译安装/</id>
     <published>2017-08-06T02:57:31.000Z</published>
-    <updated>2017-08-06T10:37:32.558Z</updated>
+    <updated>2017-08-14T10:23:02.113Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;Axel插件是基于yum下的一个多线程下载插件。axel插件也可以当独立下载工具来使用。当成独立下载工具使用时，适用于所有Linux发行版。通过打开多个HTTP/FTP连接来将一个文件进行分段下载，从而达到加速下载的目的。对于下载大文件，该工具特别有用。同时支持断点续传，速度通常情况下是Wget的几倍。可用于CentOS、RHEL、Fedora等使用yum的Linux发行版。由于没有管理员权限，只能编译安装源码。使用Axel可以在低速网络环境里提高数倍的下载速度。</p>
 <a id="more"></a>
@@ -319,7 +501,7 @@ cd axel-2.4
 
 make &amp;&amp; make install 
 </code></pre><p>添加环境变量：</p>
-<pre><code>echo &apos;export PATH=&apos;/home/u641750/axel-2.4/bin：$PATH&apos;&gt;&gt;~/.bashrc
+<pre><code>echo &apos;export PATH=/home/u641750/axel-2.4/bin:$PATH&apos;&gt;&gt;~/.bashrc
 
 source ~/.bashrc
 </code></pre><h2 id="使用参数如下："><a href="#使用参数如下：" class="headerlink" title="使用参数如下："></a>使用参数如下：</h2><ul>
@@ -819,10 +1001,10 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
+    <updated>2017-08-06T11:10:28.346Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
@@ -986,10 +1168,10 @@ pip3.6 install numpy
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:10:28.346Z</updated>
+    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
