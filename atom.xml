@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-14T13:09:12.603Z</updated>
+  <updated>2017-08-14T14:57:11.957Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,170 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux神器之grep,awk操作gtf文件</title>
+    <link href="https:///AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/"/>
+    <id>https:///AnJingwd.github.io/2017/08/14/Linux神器之grep,awk操作gtf文件/</id>
+    <published>2017-08-14T02:21:26.000Z</published>
+    <updated>2017-08-14T14:57:11.957Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">Linux神器之grep,awk操作gtf文件</blockquote>
+
+<a id="more"></a>
+<h2 id="过滤-开头注释行"><a href="#过滤-开头注释行" class="headerlink" title="过滤#开头注释行"></a>过滤#开头注释行</h2><pre><code>grep -v ^# Homo_sapiens.GRCh38.89.chr.gtf |head -5
+</code></pre><p>补充：</p>
+<ul>
+<li><p>-v:反向选择</p>
+</li>
+<li><p>过滤空行：grep -v ‘^$’  filename</p>
+</li>
+<li><p>过滤空行和以#开头的行:  grep -vE ‘^#|^$’ filename</p>
+</li>
+<li><p>-E表示“或”的关系。</p>
+</li>
+</ul>
+<h2 id="提取并计数有多少类feature"><a href="#提取并计数有多少类feature" class="headerlink" title="提取并计数有多少类feature"></a>提取并计数有多少类feature</h2><pre><code>grep -v ^# Homo_sapiens.GRCh38.89.chr.gtf |awk &apos;{print $3}&apos;| sort | uniq -c
+</code></pre><p>结果：</p>
+<pre><code>710166 CDS
+1193694 exon
+143497 five_prime_utr
+58174 gene
+119 Selenocysteine
+83231 start_codon
+74952 stop_codon
+136436 three_prime_utr
+199167 transcript
+</code></pre><p>（第一列为数目，第二列为features）</p>
+<h2 id="筛选出特定行"><a href="#筛选出特定行" class="headerlink" title="筛选出特定行"></a>筛选出特定行</h2><p>第一列为染色体1-22加X,Y的行</p>
+<pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/&apos; Homo_sapiens.GRCh38.89.chr.gtf | tail -5
+</code></pre><p>第三列为”gene”的行</p>
+<pre><code>awk &apos;$3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38.89.chr.gtf |head -5
+</code></pre><p>查看每条染色体多少个基因</p>
+<pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/&apos; Homo_sapiens.GRCh38.89.chr.gtf | awk &apos;$3==&quot;gene&quot;&apos;| awk &apos;{print $1}&apos;| sort | uniq -c
+</code></pre><p>结果：</p>
+<pre><code>5224 1
+2208 10
+3248 11
+2952 12
+1312 13
+2214 14
+2155 15
+2509 16
+3018 17
+1174 18
+2951 19
+3971 2
+1391 20
+837 21
+1339 22
+3019 3
+2504 4
+2869 5
+2860 6
+2884 7
+2367 8
+2246 9
+2366 X
+519 Y
+</code></pre><p>（第一列为数目，第二列为染色体号）</p>
+<h2 id="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"><a href="#先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序" class="headerlink" title="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"></a>先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序</h2><pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos;Homo_sapiens.GRCh38.89.chr.gtf|sort -t &apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
+</code></pre><p>(因为根据asc码排序，所以X,Y会排在1-22之前)</p>
+<pre><code>awk &apos;$1 ~ /[0-9]/ &amp;&amp; $3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38.89.chr.gtf | sort -t $&apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
+
+awk &apos;$1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38.89.chr.gtf |sort -t $&apos;\t&apos; -k1,1 -k4,4n &gt;&gt;result_gene_sort.txt
+</code></pre><p>sort 参数：</p>
+<ul>
+<li>-k  选择以哪个区间进行排序</li>
+<li>-n   依照数值的大小排序</li>
+</ul>
+<p>sort多字段的排序:</p>
+<ul>
+<li>-t $’\t’ 指定使用tab键分列</li>
+<li>-k1,1n   指定以第一列按照数字（asc码）从大到小排序</li>
+<li>-k4,4n   指定以第一列按照数字（asc码）从大到小排序</li>
+</ul>
+<h2 id="计算所有CDS的累积长度，其他类似"><a href="#计算所有CDS的累积长度，其他类似" class="headerlink" title="计算所有CDS的累积长度，其他类似"></a>计算所有CDS的累积长度，其他类似</h2><pre><code>cat Homo_sapiens.GRCh38.89.chr.gtf | awk &apos;$3 ==&quot;CDS&quot; { len=$5-$4 + 1; size += len; print &quot;Size:&quot;, size } &apos;
+</code></pre><p>（结果输出刷屏了！！加上个 |tail -1）</p>
+<h2 id="计算1号染色体cds的平均长度"><a href="#计算1号染色体cds的平均长度" class="headerlink" title="计算1号染色体cds的平均长度"></a>计算1号染色体cds的平均长度</h2><pre><code>awk &apos;BEGIN  {s = 0;line = 0 } ;$3 ==&quot;CDS&quot; &amp;&amp; $1 ==&quot;1&quot; { s += ($5 - $4);line += 1}; END {print &quot;mean=&quot; s/line}&apos; Homo_sapiens.GRCh38.89.chr.gtf
+</code></pre><p>补充：</p>
+<p>awk的BEGIN和END</p>
+<p>通常使用BEGIN来显示变量和预置（初始化）变量，使用END来输出最终结果。</p>
+<p>总结一下awk基本结构为 : </p>
+<ul>
+<li><p>BEGIN{BEGIN操作,在输入文件之前执行} ;</p>
+</li>
+<li><p>{文件行处理块,对来自输入文件datafile的每一行都要执行一遍} ;</p>
+</li>
+<li><p>END{END操作,输入文件关闭后awk退出之前执行}</p>
+</li>
+</ul>
+<h2 id="从gtf文件中分离提取基因名字"><a href="#从gtf文件中分离提取基因名字" class="headerlink" title="从gtf文件中分离提取基因名字"></a>从gtf文件中分离提取基因名字</h2><pre><code>$3 == &quot;gene&quot; {
+# 通过 ; 分离提取第9列
+
+split($9, x, &quot;;&quot;)
+# 基因名字是第一个元素。
+
+# 去除基因名字旁边的双引号
+
+name = x[1]
+
+# 由于 &quot; 是一个特殊字符，我们必须写成 \&quot;;*反斜杠\表示转义符。
+
+gsub(&quot;\&quot;&quot;, &quot;&quot;, name)
+
+# 打印特征类型、基因名字以及大小。
+
+print name, $5 - $4 + 1}
+</code></pre><p>最后，我们可以写成下边这条命令:</p>
+<pre><code>cat result_gene_sort.txt |awk &apos;$3 == &quot;gene&quot;{split($10,x,&quot;;&quot;);name = x[1];gsub(&quot;\&quot;&quot;, &quot;&quot;, name);print name,$5-$4+1}&apos;|head -5
+</code></pre><h2 id="根据基因名列表提取gtf文件"><a href="#根据基因名列表提取gtf文件" class="headerlink" title="根据基因名列表提取gtf文件"></a>根据基因名列表提取gtf文件</h2><p>（1）shell脚本</p>
+<pre><code>./sub_gtf.sh gene.txt Homo_sapiens.GRCh38.89.chr.gtf &gt;logfile 2&gt;&amp;1
+
+#!/bin/bash
+
+set -u
+set -e
+set -o pipefail
+
+if [[ $# != 2 ]];then
+     echo &quot;Parameter incorrect.&quot;
+    exit 1
+fi
+
+gene_file=$1
+gtf_file=$2
+
+
+gene=($(cat ${gene_file}))
+for gene in ${gene[@]}; do
+   grep &quot;\&quot;${gene}\&quot;&quot; ${gtf_file} &gt;&gt;result.txt
+done
+</code></pre><p>（2）单行命令</p>
+<pre><code>gene=($(cat gene.txt));for gene in ${gene[@]}; do grep &quot;\&quot;${gene}\&quot;&quot; Homo_sapiens.GRCh38.89.chr.gtf &gt;&gt;result.txt;done
+</code></pre><h1 id="补充基本语法："><a href="#补充基本语法：" class="headerlink" title="补充基本语法："></a>补充基本语法：</h1><p>&emsp;&emsp;awk擅长处理表格形式的数据。它逐行从文本中读取数据，将整行数据（record)定义为$0,然后根据指定的分隔符，将各列数据（record)分别定义为$1,$2,$3，然后使用如下结构处理数据：</p>
+<pre><code>pattern1 {action1};pattern2 {action2};....
+</code></pre><p>注意：</p>
+<ul>
+<li>如果没有定义pattern,则直接执行action；</li>
+<li>如果没有提供action,则直接输出满足pattern的内容</li>
+</ul>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="http://www.jianshu.com/p/7af624409dcd" target="_blank" rel="external">http://www.jianshu.com/p/7af624409dcd</a></p>
+<p>（2）<a href="https://mp.weixin.qq.com/s/NZCt2SR3WmCnqpb2FGcbsQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/NZCt2SR3WmCnqpb2FGcbsQ</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;Linux神器之grep,awk操作gtf文件&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="https:///AnJingwd.github.io/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>如何写shell脚本</title>
@@ -1001,10 +1165,10 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:10:28.346Z</updated>
+    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
@@ -1168,10 +1332,10 @@ pip3.6 install numpy
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
+    <updated>2017-08-06T11:10:28.346Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
