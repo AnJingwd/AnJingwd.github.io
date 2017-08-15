@@ -655,6 +655,303 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
   </entry>
   
   <entry>
+    <title>NGS数据格式BED/GFF/GTF之介绍，比较，转换</title>
+    <link href="https:///AnJingwd.github.io/2017/08/11/NGS%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8FBEDGFFGTF%E4%B9%8B%E4%BB%8B%E7%BB%8D%EF%BC%8C%E6%AF%94%E8%BE%83%EF%BC%8C%E8%BD%AC%E6%8D%A2/"/>
+    <id>https:///AnJingwd.github.io/2017/08/11/NGS数据格式BEDGFFGTF之介绍，比较，转换/</id>
+    <published>2017-08-11T08:10:31.000Z</published>
+    <updated>2017-08-15T10:54:36.975Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;NGS数据格式BED/GFF/GTF之介绍，比较，转换</p>
+<a id="more"></a>
+<h1 id="Ensemble与UCSC各种格式说明"><a href="#Ensemble与UCSC各种格式说明" class="headerlink" title="Ensemble与UCSC各种格式说明"></a>Ensemble与UCSC各种格式说明</h1><p>Ensemble各种格式说明：</p>
+<p><a href="http://www.ensembl.org/info/website/upload/bed.html" target="_blank" rel="external">http://www.ensembl.org/info/website/upload/bed.html</a></p>
+<p>UCSC各种格式说明：</p>
+<p><a href="http://genome.ucsc.edu/FAQ/FAQformat.html#format1" target="_blank" rel="external">http://genome.ucsc.edu/FAQ/FAQformat.html#format1</a></p>
+<hr>
+<h1 id="基因组坐标系统"><a href="#基因组坐标系统" class="headerlink" title="基因组坐标系统"></a>基因组坐标系统</h1><p>&emsp;&emsp;计算机和现实世界有一个差别，即计算机的计数是从0开始的（即0-based），而现实生活中，我们的计数是从1开始的（即1-based）。在生物学领域的不同场合，这两种计数交杂出现</p>
+<p>两套不同理念的坐标系统——base coordinate system(BCS)和interbase coordinate system（ICS）</p>
+<p><img src="http://i.imgur.com/fDzHOmo.jpg" alt=""></p>
+<p>我们先来分析一下这样的两套系统在表述序列位置时的差别</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>1-based</th>
+<th>0-based</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单个核苷酸</td>
+<td>4-4: T</td>
+<td>3-4: T</td>
+</tr>
+<tr>
+<td>一组核苷酸</td>
+<td>4-6: TAA</td>
+<td>3-6: TAA</td>
+</tr>
+<tr>
+<td>deletion</td>
+<td>4-4: T/-</td>
+<td>3-4: T/-</td>
+</tr>
+<tr>
+<td>insertion（表示AGGTCGAAGT）</td>
+<td>4-5: -/CG</td>
+<td>4-4: -/CG</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;如果说我们不管0-based和1-based这两种计数方式对应的坐标系统，都将其视为对序列第一个核苷酸的描述（即第一个核苷酸是算0还是算1），那么0-based的系统，其区间其实是一个左闭右开的区间，而1-based的系统则是一个闭区间。</p>
+<p><img src="http://i.imgur.com/zNrQ5gc.jpg" alt=""></p>
+<p>1-based，正如前述，就是为了符合人的计数习惯。那UCSC为什么要采用0-based的interbase coordinate system系统？ICS主要的好处体现在下面的几个方面：</p>
+<ul>
+<li>对于splicing sites等涉及两个核苷酸之间位置的情况，ICS提供了一个更好的呈现方案；</li>
+<li>对于site的计算更加方便，如length=end-start;</li>
+<li>对于坐标的转换，尤其是正负链坐标间的转换更加方便。（revStart = chromSize – oneEnd，revEnd = chromeSize – zeroStart）。</li>
+</ul>
+<p>NCBI等组织采用的是和人日常习惯一致的1-based计数系统，即用数字指代核苷酸位置。但是UCSC发现使用0-based计数系统（用数字指代核苷酸间的位置）</p>
+<p>&emsp;&emsp;应用范畴：对于直接给所有用户提供直观访问服务的data portal（比如说NCBI、Ensembl、UCSC Genome Browser、mirBase）、常用的生物信息学软件（如BLAST）以及某些格式的文件（如GFF、SAM、VCF），采用的是1-based的计数方法。与之相反，UCSC的Table Browser以及它在数据库中存储的数据、BED/BAM等格式的文件，以及Chado、DAS2、dbSNP这样的data portal则采用的是0-based的计数方法。</p>
+<h1 id="单个格式介绍"><a href="#单个格式介绍" class="headerlink" title="单个格式介绍"></a>单个格式介绍</h1><h2 id="BED格式"><a href="#BED格式" class="headerlink" title="BED格式"></a>BED格式</h2><p><img src="http://i.imgur.com/ImVRGpB.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>chromStart起始坐标第一个碱基为0</li>
+<li>BED行名会展示在基因组浏览器中的bed行的左侧</li>
+</ul>
+<p>UCSC中展示效果：</p>
+<p><img src="http://i.imgur.com/1tweu6f.png" alt=""></p>
+<hr>
+<p><strong>其实，你可以通过UCSC Genome Browser展示你的注释 tracks数据,并以可视化的方式与其他注释数据进行比较！！！</strong></p>
+<p>UCSC官方说明—-Displaying Your Own Annotations in the Genome Browser：</p>
+<p><a href="http://genome.ucsc.edu/goldenPath/help/customTrack.html#EXAMPLE1" target="_blank" rel="external">http://genome.ucsc.edu/goldenPath/help/customTrack.html#EXAMPLE1</a></p>
+<h3 id="具体介绍"><a href="#具体介绍" class="headerlink" title="具体介绍"></a>具体介绍</h3><p>&emsp;&emsp;个人的注释数据再上传48小时后将失效，除非你登陆并创建会话。</p>
+<p>如何登陆Genome Browser并创建会话：</p>
+<p><a href="http://genome.ucsc.edu/goldenPath/help/hgSessionHelp.html#CTs" target="_blank" rel="external">http://genome.ucsc.edu/goldenPath/help/hgSessionHelp.html#CTs</a></p>
+<p>当然，你也可以查看别人的定制注释tracks数据：</p>
+<p><a href="http://genome.ucsc.edu/goldenPath/customTracks/custTracks.html" target="_blank" rel="external">http://genome.ucsc.edu/goldenPath/customTracks/custTracks.html</a></p>
+<p>Genome Browser annotation tracks是基于面向行格式的文件的，文件中每行展示一个track特征，注释文件包含三种类型的行：browser lines, track lines, and data lines。空行和其他以#开头的行将被忽略。</p>
+<ol>
+<li>如何构建注释文件呢？</li>
+</ol>
+<ul>
+<li>（1）数据格式</li>
+</ul>
+<p>目前支持标准的GFF格式，以及为Human Genome Project 和 UCSC Genome Browser定制的数据格式，常见的如BED,BAM,VCF,MAF等。注意GFF和GTF文件必须以tab键分割，而不是以空格分隔。参考染色体必须以chrN的形式（区分大小写）。</p>
+<ul>
+<li>（2）定义 Genome Browser展示特征的区间</li>
+</ul>
+<p>例如：browser position chr22:20100000-20100900</p>
+<p>没有的话，展示的tracks在基因组的位置可能不对</p>
+<ul>
+<li>（3）定义注释track的一些属性</li>
+</ul>
+<p>例如track的name, description, colors, initial display mode, use score等等</p>
+<ol>
+<li>如何展示呢？</li>
+</ol>
+<p>例如注释数据如下：</p>
+<p>browser position chr22:1000-10000<br>browser hide all<br>track name=”BED track” description=”BED format custom track example” visibility=2 color=0,128,0 useScore=1<br>chr22 1000 5000 itemA 960 + 1100 4700 0 2 1567,1488, 0,2512<br>chr22 2000 7000 itemB 200 - 2200 6950 0 4 433,100,550,1500 0,500,2000,3500</p>
+<p>网址：</p>
+<p><a href="http://genome.ucsc.edu/cgi-bin/hgCustom" target="_blank" rel="external">http://genome.ucsc.edu/cgi-bin/hgCustom</a></p>
+<p><img src="http://i.imgur.com/31EJFSz.jpg" alt=""></p>
+<p><img src="http://i.imgur.com/FCQA4pM.png" alt=""></p>
+<p><img src="http://i.imgur.com/V3tPNzp.png" alt=""></p>
+<p>&emsp;&emsp;当然，可视化展示并不是真正的目的，主要目的是与其他注释数据进行比较，从而发现某些科学问题。最上面是你的track(Custom Tracks),下面就是按照不同数据类型划分的注释数据，默认都是隐藏的（hide），你可以勾选相应你感兴趣的数据，选择（hide,dense,squish,pack,full）不同展现形式显示其他注释数据，然后refresh，进行可视化比较。</p>
+<hr>
+<h2 id="GFF格式"><a href="#GFF格式" class="headerlink" title="GFF格式"></a>GFF格式</h2><p>参考：</p>
+<p><a href="http://www.bbioo.com/lifesciences/40-112835-1.html" target="_blank" rel="external">http://www.bbioo.com/lifesciences/40-112835-1.html</a></p>
+<p>GFF格式（General Feature Format）是一种简单的以tab键分割的，用于描述基因组特征的格式文件。有GFF1, GFF2，GFF3和GTF2四种版本。</p>
+<h3 id="GFF1"><a href="#GFF1" class="headerlink" title="GFF1"></a>GFF1</h3><p><img src="http://i.imgur.com/M5NdmeO.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>start第一个碱基是从1开始计数的</li>
+<li>frame：在feature是coding exon时，frame可以取值0-2，表示读码框的第一个碱基；如果不是coding exon,则用.表示</li>
+<li>GFF1与其他GFF格式的最大区别在于所有相同的feature的行是聚集在一起的</li>
+<li>扩展名为.gff1而不是gff</li>
+</ul>
+<h3 id="GFF2"><a href="#GFF2" class="headerlink" title="GFF2"></a>GFF2</h3><p><a href="http://gmod.org/wiki/GFF2" target="_blank" rel="external">http://gmod.org/wiki/GFF2</a></p>
+<p><img src="http://i.imgur.com/1XNehY5.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>start第一个碱基是从1开始计数的</li>
+<li>frame：在feature是coding exon时，frame可以取值0-2，表示读码框的第一个碱基；如果不是coding exon,则用.表示</li>
+<li>attribute：用;分隔键值对（tag-value），为每个feature提供额外的信息。同时attribute包含identifiers，可以用于联系各个特征。</li>
+<li>扩展名为.gff2而不是gff</li>
+</ul>
+<p><strong>GFF2格式的不足</strong></p>
+<p>&emsp;&emsp;GFF2的一个问题是它只能表现一个层次的嵌套功能。 当处理具有多个交替剪接的转录物的基因时存在问题。 GFF2无法处理基因→转录本→外显子的三级体系。 大多数人给出一系列的转录本，并给出类似的名称来表明它们来自相同的基因。 第二个限制是，虽然GFF2允许您创建两级层次结构，如转录本→外显子，但它没有层次结构方向的任何概念。 所以它不知道外显子是否是转录本的subfeature，反之亦然。 这意味着你必须使用“aggregators”来整理关系。  因此，GFF2格式已被弃用，转而支持GFF3格式。</p>
+<p><strong>但是，目前Genome Browser是不支持GFF3的，所有的GFF track都是基于Sanger’s GFF2 specification</strong></p>
+<h3 id="GFF3"><a href="#GFF3" class="headerlink" title="GFF3"></a>GFF3</h3><p><a href="http://gmod.org/wiki/GFF3" target="_blank" rel="external">http://gmod.org/wiki/GFF3</a></p>
+<p><img src="http://i.imgur.com/bz4xuEw.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>start第一个碱基是从1开始计数的</li>
+<li>phase：在feature是coding exon时，phase可以取值0-2，表示读码框的第一个碱基；如果不是coding exon,则用.表示</li>
+<li>attribute：用 “=” 分隔键值对（tag-value），为每个feature提供额外的信息。同时attribute包含identifiers，可以用于联系各个特征。</li>
+<li>扩展名为.gff3而不是gff</li>
+</ul>
+<p><strong>与其他GFF版本格式最大区别在于：</strong></p>
+<ul>
+<li>第一行表明版本：##gff-version 3</li>
+<li>第9列attributes关联了转录本，之前的GFF版本限制于低层次的feature(exon)</li>
+<li>key=value具有特殊的含义<ul>
+<li>ID - unique idenfifier for this feature.</li>
+<li>Parent - idenfier of parent feature.</li>
+<li>Name - used as the feature label in the feature map.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="GTF"><a href="#GTF" class="headerlink" title="GTF"></a>GTF</h2><p>GTF是另外一种与GFF2十分相似的数据格式，有时称之为GFF2.5。GTF的前8列与GFF2完全一样，group列（attribute列）被扩展了，每个属性包含了一个 type/value pair，属性以;结束，初次之外，属性之间还有一个空格。</p>
+<p>属性列（第9列）：</p>
+<ul>
+<li>gene_id value - A globally unique identifier for the genomic source of the sequence.</li>
+<li>transcript_id value - A globally unique identifier for the predicted transcript.</li>
+</ul>
+<p>属性列例子(UCSC)：</p>
+<pre><code>gene_id &quot;Em:U62317.C22.6.mRNA&quot;; transcript_id &quot;Em:U62317.C22.6.mRNA&quot;; exon_number 1
+</code></pre><p>属性列例子(Ensemble)：</p>
+<pre><code>gene_id &quot;ENSG00000223972&quot;; transcript_id &quot;ENST00000456328&quot;; gene_name &quot;DDX11L1&quot;; gene_sourc e &quot;havana&quot;; gene_biotype &quot;transcribed_unprocessed_pseudogene&quot;; transcript_name &quot;DDX11L1-002&quot;; transcript_source &quot;havana&quot;;
+</code></pre><p>GTF是不被 GMOD支持的，如果使用，可以将其转换为GFF3格式。</p>
+<hr>
+<h1 id="不同格式比较"><a href="#不同格式比较" class="headerlink" title="不同格式比较"></a>不同格式比较</h1><h2 id="BED和GFF-GTF"><a href="#BED和GFF-GTF" class="headerlink" title="BED和GFF/GTF"></a>BED和GFF/GTF</h2><ol>
+<li>BED文件中起始坐标为0，结束坐标至少是1,； GFF中起始坐标是1而结束坐标至少是1</li>
+<li>两者都是基因注释文件，gtf的一行表示一个exon，多行表示一个基因。而bed的一行表示一个基因。</li>
+</ol>
+<h2 id="GTF与GFF区别"><a href="#GTF与GFF区别" class="headerlink" title="GTF与GFF区别"></a>GTF与GFF区别</h2><ol>
+<li><p>简单来说：GFF 2 -&gt; GTF -&gt; GFF 3</p>
+</li>
+<li><p>G的定义不同</p>
+</li>
+</ol>
+<p>GFF全称为general feature format，这种格式主要是用来注释基因组。</p>
+<p>GTF全称为gene transfer format，主要是用来对基因进行注释。</p>
+<ol>
+<li>GTF是在GFF（GFF2）的基础上的一个改良，GTF的前8列信息与GFF是一样的，主要区别在第九列，GTF扩充很多GFF不具备的其他的信息</li>
+</ol>
+<hr>
+<h1 id="数据格式转换"><a href="#数据格式转换" class="headerlink" title="数据格式转换"></a>数据格式转换</h1><table>
+<thead>
+<tr>
+<th>file conversion</th>
+<th>script</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GTF to GFF3</td>
+<td><a href="http://song.cvs.sourceforge.net/song/software/scripts/gtf2gff3/" target="_blank" rel="external">gft2gff3</a></td>
+</tr>
+<tr>
+<td>GTF to BED</td>
+<td><a href="http://blog.sciencenet.cn/home.php?mod=attachment&amp;filename=gtf2Bed.pl&amp;id=62831" target="_blank" rel="external">gtf2Bed.pl</a></td>
+</tr>
+<tr>
+<td>BED to GTF</td>
+<td><a href="http://blog.sciencenet.cn/home.php?mod=attachment&amp;filename=bedToGtf.sh&amp;id=62832" target="_blank" rel="external">bedToGtf.sh</a></td>
+</tr>
+</tbody>
+</table>
+<p>汇总，将各种格式转换为GFF格式的脚本。这些脚本分散在不同的软件包中，可以根据需要下载使用。</p>
+<p>bioPerl</p>
+<table>
+<thead>
+<tr>
+<th>script</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search2gff</td>
+<td>This script will turn a protein Search report (BLASTP, FASTP, SSEARCH, AXT, WABA) into a GFF File.</td>
+</tr>
+<tr>
+<td>genbank2gff3.pl</td>
+<td>Genbank to gbrowse-friendly GFF3</td>
+</tr>
+<tr>
+<td>gff2ps</td>
+<td>This script provides GFF to postscript handling.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>如果你在win下安装了perl及bioperl直接在文件夹下搜索便可以找到上述脚本，可以直接使用</strong></p>
+<p>gbrowse</p>
+<table>
+<thead>
+<tr>
+<th>script</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://search.cpan.org/~lds/GBrowse-2.39/bin/bed2gff3.pl" target="_blank" rel="external">ucsc_genes2gff</a></td>
+<td>Convert UCSC Genome Browser-format gene files into GFF files suitable for loading into gbrowse</td>
+</tr>
+<tr>
+<td><a href="http://eugenes.org:7072/gmod/genogrid/scripts/" target="_blank" rel="external">blast92gff3.pl</a></td>
+<td>BLAST tabular output (-m 9 or 8) conversion to GFF version 3 format,</td>
+</tr>
+</tbody>
+</table>
+<p>DAWGPAWS</p>
+<table>
+<thead>
+<tr>
+<th>script</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://dawgpaws.sourceforge.net/man/cnv_blast2gff.html" target="_blank" rel="external">cnv_blast2gff.pl</a></td>
+<td>This program will translate a blast report for a single query sequence into the GFF format.</td>
+</tr>
+</tbody>
+</table>
+<p>Tandy software</p>
+<table>
+<thead>
+<tr>
+<th>script</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://eugenes.org/gmod/tandy/" target="_blank" rel="external">gff2aplot</a></td>
+<td>a program to visualize the alignment of two genomic sequences together with their annotations. From GFF-format input files it produces PostScript figures for that alignment.</td>
+</tr>
+<tr>
+<td><a href="http://iubio.bio.indiana.edu:7122/gmod/tandy/" target="_blank" rel="external">blat2gff</a></td>
+<td>Converts BLAT output files to GFF formatted files</td>
+</tr>
+</tbody>
+</table>
+<p><strong>BioWiki中还有一篇，总结更多GFF工具的文章，请参看下面链接：</strong></p>
+<p><a href="http://biowiki.org/GffTools" target="_blank" rel="external">http://biowiki.org/GffTools</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sciencenet.cn/blog-981687-726831.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-981687-726831.html</a></p>
+<p>（2）<a href="http://blog.sciencenet.cn/blog-1509670-847310.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-1509670-847310.html</a></p>
+<p>（3）<a href="https://www.yaolibio.com/2016/08/15/gene-coordinate-system/" target="_blank" rel="external">https://www.yaolibio.com/2016/08/15/gene-coordinate-system/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;NGS数据格式BED/GFF/GTF之介绍，比较，转换&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
+    
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux多线程下载工具axel编译安装</title>
     <link href="https:///AnJingwd.github.io/2017/08/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7axel%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
     <id>https:///AnJingwd.github.io/2017/08/06/Linux多线程下载工具axel编译安装/</id>

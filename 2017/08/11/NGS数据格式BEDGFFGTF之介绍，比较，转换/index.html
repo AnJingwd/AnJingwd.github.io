@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="https:/AnJingwd.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="NGS," />
+
+
+
+
+
+  <link rel="alternate" href="https:/AnJingwd.github.io/atom.xml" title="安静-不安静的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https:/AnJingwd.github.io/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;NGS数据格式BED/GFF/GTF之介绍，比较，转换">
+<meta name="keywords" content="NGS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NGS数据格式BED&#x2F;GFF&#x2F;GTF之介绍，比较，转换">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/11/NGS数据格式BEDGFFGTF之介绍，比较，转换/index.html">
+<meta property="og:site_name" content="安静-不安静的博客">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;NGS数据格式BED/GFF/GTF之介绍，比较，转换">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/fDzHOmo.jpg">
+<meta property="og:image" content="http://i.imgur.com/zNrQ5gc.jpg">
+<meta property="og:image" content="http://i.imgur.com/ImVRGpB.jpg">
+<meta property="og:image" content="http://i.imgur.com/1tweu6f.png">
+<meta property="og:image" content="http://i.imgur.com/31EJFSz.jpg">
+<meta property="og:image" content="http://i.imgur.com/FCQA4pM.png">
+<meta property="og:image" content="http://i.imgur.com/V3tPNzp.png">
+<meta property="og:image" content="http://i.imgur.com/M5NdmeO.jpg">
+<meta property="og:image" content="http://i.imgur.com/1XNehY5.jpg">
+<meta property="og:image" content="http://i.imgur.com/bz4xuEw.jpg">
+<meta property="og:updated_time" content="2017-08-15T10:54:36.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NGS数据格式BED&#x2F;GFF&#x2F;GTF之介绍，比较，转换">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;NGS数据格式BED/GFF/GTF之介绍，比较，转换">
+<meta name="twitter:image" content="http://i.imgur.com/fDzHOmo.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'https:///AnJingwd.github.io/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title>NGS数据格式BED/GFF/GTF之介绍，比较，转换 | 安静-不安静的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="https:///AnJingwd.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安静-不安静的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https:/AnJingwd.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https:/AnJingwd.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https:/AnJingwd.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https:/AnJingwd.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https:/AnJingwd.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="https:/AnJingwd.github.io/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/11/NGS数据格式BEDGFFGTF之介绍，比较，转换/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">NGS数据格式BED/GFF/GTF之介绍，比较，转换</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T16:10:31+08:00">
+                2017-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/NGS/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;NGS数据格式BED/GFF/GTF之介绍，比较，转换</p>
+<a id="more"></a>
+<h1 id="Ensemble与UCSC各种格式说明"><a href="#Ensemble与UCSC各种格式说明" class="headerlink" title="Ensemble与UCSC各种格式说明"></a>Ensemble与UCSC各种格式说明</h1><p>Ensemble各种格式说明：</p>
+<p><a href="http://www.ensembl.org/info/website/upload/bed.html" target="_blank" rel="external">http://www.ensembl.org/info/website/upload/bed.html</a></p>
+<p>UCSC各种格式说明：</p>
+<p><a href="http://genome.ucsc.edu/FAQ/FAQformat.html#format1" target="_blank" rel="external">http://genome.ucsc.edu/FAQ/FAQformat.html#format1</a></p>
+<hr>
+<h1 id="基因组坐标系统"><a href="#基因组坐标系统" class="headerlink" title="基因组坐标系统"></a>基因组坐标系统</h1><p>&emsp;&emsp;计算机和现实世界有一个差别，即计算机的计数是从0开始的（即0-based），而现实生活中，我们的计数是从1开始的（即1-based）。在生物学领域的不同场合，这两种计数交杂出现</p>
+<p>两套不同理念的坐标系统——base coordinate system(BCS)和interbase coordinate system（ICS）</p>
+<p><img src="http://i.imgur.com/fDzHOmo.jpg" alt=""></p>
+<p>我们先来分析一下这样的两套系统在表述序列位置时的差别</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>1-based</th>
+<th>0-based</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单个核苷酸</td>
+<td>4-4: T</td>
+<td>3-4: T</td>
+</tr>
+<tr>
+<td>一组核苷酸</td>
+<td>4-6: TAA</td>
+<td>3-6: TAA</td>
+</tr>
+<tr>
+<td>deletion</td>
+<td>4-4: T/-</td>
+<td>3-4: T/-</td>
+</tr>
+<tr>
+<td>insertion（表示AGGTCGAAGT）</td>
+<td>4-5: -/CG</td>
+<td>4-4: -/CG</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;如果说我们不管0-based和1-based这两种计数方式对应的坐标系统，都将其视为对序列第一个核苷酸的描述（即第一个核苷酸是算0还是算1），那么0-based的系统，其区间其实是一个左闭右开的区间，而1-based的系统则是一个闭区间。</p>
+<p><img src="http://i.imgur.com/zNrQ5gc.jpg" alt=""></p>
+<p>1-based，正如前述，就是为了符合人的计数习惯。那UCSC为什么要采用0-based的interbase coordinate system系统？ICS主要的好处体现在下面的几个方面：</p>
+<ul>
+<li>对于splicing sites等涉及两个核苷酸之间位置的情况，ICS提供了一个更好的呈现方案；</li>
+<li>对于site的计算更加方便，如length=end-start;</li>
+<li>对于坐标的转换，尤其是正负链坐标间的转换更加方便。（revStart = chromSize – oneEnd，revEnd = chromeSize – zeroStart）。</li>
+</ul>
+<p>NCBI等组织采用的是和人日常习惯一致的1-based计数系统，即用数字指代核苷酸位置。但是UCSC发现使用0-based计数系统（用数字指代核苷酸间的位置）</p>
+<p>&emsp;&emsp;应用范畴：对于直接给所有用户提供直观访问服务的data portal（比如说NCBI、Ensembl、UCSC Genome Browser、mirBase）、常用的生物信息学软件（如BLAST）以及某些格式的文件（如GFF、SAM、VCF），采用的是1-based的计数方法。与之相反，UCSC的Table Browser以及它在数据库中存储的数据、BED/BAM等格式的文件，以及Chado、DAS2、dbSNP这样的data portal则采用的是0-based的计数方法。</p>
+<h1 id="单个格式介绍"><a href="#单个格式介绍" class="headerlink" title="单个格式介绍"></a>单个格式介绍</h1><h2 id="BED格式"><a href="#BED格式" class="headerlink" title="BED格式"></a>BED格式</h2><p><img src="http://i.imgur.com/ImVRGpB.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>chromStart起始坐标第一个碱基为0</li>
+<li>BED行名会展示在基因组浏览器中的bed行的左侧</li>
+</ul>
+<p>UCSC中展示效果：</p>
+<p><img src="http://i.imgur.com/1tweu6f.png" alt=""></p>
+<hr>
+<p><strong>其实，你可以通过UCSC Genome Browser展示你的注释 tracks数据,并以可视化的方式与其他注释数据进行比较！！！</strong></p>
+<p>UCSC官方说明—-Displaying Your Own Annotations in the Genome Browser：</p>
+<p><a href="http://genome.ucsc.edu/goldenPath/help/customTrack.html#EXAMPLE1" target="_blank" rel="external">http://genome.ucsc.edu/goldenPath/help/customTrack.html#EXAMPLE1</a></p>
+<h3 id="具体介绍"><a href="#具体介绍" class="headerlink" title="具体介绍"></a>具体介绍</h3><p>&emsp;&emsp;个人的注释数据再上传48小时后将失效，除非你登陆并创建会话。</p>
+<p>如何登陆Genome Browser并创建会话：</p>
+<p><a href="http://genome.ucsc.edu/goldenPath/help/hgSessionHelp.html#CTs" target="_blank" rel="external">http://genome.ucsc.edu/goldenPath/help/hgSessionHelp.html#CTs</a></p>
+<p>当然，你也可以查看别人的定制注释tracks数据：</p>
+<p><a href="http://genome.ucsc.edu/goldenPath/customTracks/custTracks.html" target="_blank" rel="external">http://genome.ucsc.edu/goldenPath/customTracks/custTracks.html</a></p>
+<p>Genome Browser annotation tracks是基于面向行格式的文件的，文件中每行展示一个track特征，注释文件包含三种类型的行：browser lines, track lines, and data lines。空行和其他以#开头的行将被忽略。</p>
+<ol>
+<li>如何构建注释文件呢？</li>
+</ol>
+<ul>
+<li>（1）数据格式</li>
+</ul>
+<p>目前支持标准的GFF格式，以及为Human Genome Project 和 UCSC Genome Browser定制的数据格式，常见的如BED,BAM,VCF,MAF等。注意GFF和GTF文件必须以tab键分割，而不是以空格分隔。参考染色体必须以chrN的形式（区分大小写）。</p>
+<ul>
+<li>（2）定义 Genome Browser展示特征的区间</li>
+</ul>
+<p>例如：browser position chr22:20100000-20100900</p>
+<p>没有的话，展示的tracks在基因组的位置可能不对</p>
+<ul>
+<li>（3）定义注释track的一些属性</li>
+</ul>
+<p>例如track的name, description, colors, initial display mode, use score等等</p>
+<ol>
+<li>如何展示呢？</li>
+</ol>
+<p>例如注释数据如下：</p>
+<p>browser position chr22:1000-10000<br>browser hide all<br>track name=”BED track” description=”BED format custom track example” visibility=2 color=0,128,0 useScore=1<br>chr22 1000 5000 itemA 960 + 1100 4700 0 2 1567,1488, 0,2512<br>chr22 2000 7000 itemB 200 - 2200 6950 0 4 433,100,550,1500 0,500,2000,3500</p>
+<p>网址：</p>
+<p><a href="http://genome.ucsc.edu/cgi-bin/hgCustom" target="_blank" rel="external">http://genome.ucsc.edu/cgi-bin/hgCustom</a></p>
+<p><img src="http://i.imgur.com/31EJFSz.jpg" alt=""></p>
+<p><img src="http://i.imgur.com/FCQA4pM.png" alt=""></p>
+<p><img src="http://i.imgur.com/V3tPNzp.png" alt=""></p>
+<p>&emsp;&emsp;当然，可视化展示并不是真正的目的，主要目的是与其他注释数据进行比较，从而发现某些科学问题。最上面是你的track(Custom Tracks),下面就是按照不同数据类型划分的注释数据，默认都是隐藏的（hide），你可以勾选相应你感兴趣的数据，选择（hide,dense,squish,pack,full）不同展现形式显示其他注释数据，然后refresh，进行可视化比较。</p>
+<hr>
+<h2 id="GFF格式"><a href="#GFF格式" class="headerlink" title="GFF格式"></a>GFF格式</h2><p>参考：</p>
+<p><a href="http://www.bbioo.com/lifesciences/40-112835-1.html" target="_blank" rel="external">http://www.bbioo.com/lifesciences/40-112835-1.html</a></p>
+<p>GFF格式（General Feature Format）是一种简单的以tab键分割的，用于描述基因组特征的格式文件。有GFF1, GFF2，GFF3和GTF2四种版本。</p>
+<h3 id="GFF1"><a href="#GFF1" class="headerlink" title="GFF1"></a>GFF1</h3><p><img src="http://i.imgur.com/M5NdmeO.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>start第一个碱基是从1开始计数的</li>
+<li>frame：在feature是coding exon时，frame可以取值0-2，表示读码框的第一个碱基；如果不是coding exon,则用.表示</li>
+<li>GFF1与其他GFF格式的最大区别在于所有相同的feature的行是聚集在一起的</li>
+<li>扩展名为.gff1而不是gff</li>
+</ul>
+<h3 id="GFF2"><a href="#GFF2" class="headerlink" title="GFF2"></a>GFF2</h3><p><a href="http://gmod.org/wiki/GFF2" target="_blank" rel="external">http://gmod.org/wiki/GFF2</a></p>
+<p><img src="http://i.imgur.com/1XNehY5.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>start第一个碱基是从1开始计数的</li>
+<li>frame：在feature是coding exon时，frame可以取值0-2，表示读码框的第一个碱基；如果不是coding exon,则用.表示</li>
+<li>attribute：用;分隔键值对（tag-value），为每个feature提供额外的信息。同时attribute包含identifiers，可以用于联系各个特征。</li>
+<li>扩展名为.gff2而不是gff</li>
+</ul>
+<p><strong>GFF2格式的不足</strong></p>
+<p>&emsp;&emsp;GFF2的一个问题是它只能表现一个层次的嵌套功能。 当处理具有多个交替剪接的转录物的基因时存在问题。 GFF2无法处理基因→转录本→外显子的三级体系。 大多数人给出一系列的转录本，并给出类似的名称来表明它们来自相同的基因。 第二个限制是，虽然GFF2允许您创建两级层次结构，如转录本→外显子，但它没有层次结构方向的任何概念。 所以它不知道外显子是否是转录本的subfeature，反之亦然。 这意味着你必须使用“aggregators”来整理关系。  因此，GFF2格式已被弃用，转而支持GFF3格式。</p>
+<p><strong>但是，目前Genome Browser是不支持GFF3的，所有的GFF track都是基于Sanger’s GFF2 specification</strong></p>
+<h3 id="GFF3"><a href="#GFF3" class="headerlink" title="GFF3"></a>GFF3</h3><p><a href="http://gmod.org/wiki/GFF3" target="_blank" rel="external">http://gmod.org/wiki/GFF3</a></p>
+<p><img src="http://i.imgur.com/bz4xuEw.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>start第一个碱基是从1开始计数的</li>
+<li>phase：在feature是coding exon时，phase可以取值0-2，表示读码框的第一个碱基；如果不是coding exon,则用.表示</li>
+<li>attribute：用 “=” 分隔键值对（tag-value），为每个feature提供额外的信息。同时attribute包含identifiers，可以用于联系各个特征。</li>
+<li>扩展名为.gff3而不是gff</li>
+</ul>
+<p><strong>与其他GFF版本格式最大区别在于：</strong></p>
+<ul>
+<li>第一行表明版本：##gff-version 3</li>
+<li>第9列attributes关联了转录本，之前的GFF版本限制于低层次的feature(exon)</li>
+<li>key=value具有特殊的含义<ul>
+<li>ID - unique idenfifier for this feature.</li>
+<li>Parent - idenfier of parent feature.</li>
+<li>Name - used as the feature label in the feature map.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="GTF"><a href="#GTF" class="headerlink" title="GTF"></a>GTF</h2><p>GTF是另外一种与GFF2十分相似的数据格式，有时称之为GFF2.5。GTF的前8列与GFF2完全一样，group列（attribute列）被扩展了，每个属性包含了一个 type/value pair，属性以;结束，初次之外，属性之间还有一个空格。</p>
+<p>属性列（第9列）：</p>
+<ul>
+<li>gene_id value - A globally unique identifier for the genomic source of the sequence.</li>
+<li>transcript_id value - A globally unique identifier for the predicted transcript.</li>
+</ul>
+<p>属性列例子(UCSC)：</p>
+<pre><code>gene_id &quot;Em:U62317.C22.6.mRNA&quot;; transcript_id &quot;Em:U62317.C22.6.mRNA&quot;; exon_number 1
+</code></pre><p>属性列例子(Ensemble)：</p>
+<pre><code>gene_id &quot;ENSG00000223972&quot;; transcript_id &quot;ENST00000456328&quot;; gene_name &quot;DDX11L1&quot;; gene_sourc e &quot;havana&quot;; gene_biotype &quot;transcribed_unprocessed_pseudogene&quot;; transcript_name &quot;DDX11L1-002&quot;; transcript_source &quot;havana&quot;;
+</code></pre><p>GTF是不被 GMOD支持的，如果使用，可以将其转换为GFF3格式。</p>
+<hr>
+<h1 id="不同格式比较"><a href="#不同格式比较" class="headerlink" title="不同格式比较"></a>不同格式比较</h1><h2 id="BED和GFF-GTF"><a href="#BED和GFF-GTF" class="headerlink" title="BED和GFF/GTF"></a>BED和GFF/GTF</h2><ol>
+<li>BED文件中起始坐标为0，结束坐标至少是1,； GFF中起始坐标是1而结束坐标至少是1</li>
+<li>两者都是基因注释文件，gtf的一行表示一个exon，多行表示一个基因。而bed的一行表示一个基因。</li>
+</ol>
+<h2 id="GTF与GFF区别"><a href="#GTF与GFF区别" class="headerlink" title="GTF与GFF区别"></a>GTF与GFF区别</h2><ol>
+<li><p>简单来说：GFF 2 -&gt; GTF -&gt; GFF 3</p>
+</li>
+<li><p>G的定义不同</p>
+</li>
+</ol>
+<p>GFF全称为general feature format，这种格式主要是用来注释基因组。</p>
+<p>GTF全称为gene transfer format，主要是用来对基因进行注释。</p>
+<ol>
+<li>GTF是在GFF（GFF2）的基础上的一个改良，GTF的前8列信息与GFF是一样的，主要区别在第九列，GTF扩充很多GFF不具备的其他的信息</li>
+</ol>
+<hr>
+<h1 id="数据格式转换"><a href="#数据格式转换" class="headerlink" title="数据格式转换"></a>数据格式转换</h1><table>
+<thead>
+<tr>
+<th>file conversion</th>
+<th>script</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GTF to GFF3</td>
+<td><a href="http://song.cvs.sourceforge.net/song/software/scripts/gtf2gff3/" target="_blank" rel="external">gft2gff3</a></td>
+</tr>
+<tr>
+<td>GTF to BED</td>
+<td><a href="http://blog.sciencenet.cn/home.php?mod=attachment&amp;filename=gtf2Bed.pl&amp;id=62831" target="_blank" rel="external">gtf2Bed.pl</a></td>
+</tr>
+<tr>
+<td>BED to GTF</td>
+<td><a href="http://blog.sciencenet.cn/home.php?mod=attachment&amp;filename=bedToGtf.sh&amp;id=62832" target="_blank" rel="external">bedToGtf.sh</a></td>
+</tr>
+</tbody>
+</table>
+<p>汇总，将各种格式转换为GFF格式的脚本。这些脚本分散在不同的软件包中，可以根据需要下载使用。</p>
+<p>bioPerl</p>
+<table>
+<thead>
+<tr>
+<th>script</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search2gff</td>
+<td>This script will turn a protein Search report (BLASTP, FASTP, SSEARCH, AXT, WABA) into a GFF File.</td>
+</tr>
+<tr>
+<td>genbank2gff3.pl</td>
+<td>Genbank to gbrowse-friendly GFF3</td>
+</tr>
+<tr>
+<td>gff2ps</td>
+<td>This script provides GFF to postscript handling.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>如果你在win下安装了perl及bioperl直接在文件夹下搜索便可以找到上述脚本，可以直接使用</strong></p>
+<p>gbrowse</p>
+<table>
+<thead>
+<tr>
+<th>script</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://search.cpan.org/~lds/GBrowse-2.39/bin/bed2gff3.pl" target="_blank" rel="external">ucsc_genes2gff</a></td>
+<td>Convert UCSC Genome Browser-format gene files into GFF files suitable for loading into gbrowse</td>
+</tr>
+<tr>
+<td><a href="http://eugenes.org:7072/gmod/genogrid/scripts/" target="_blank" rel="external">blast92gff3.pl</a></td>
+<td>BLAST tabular output (-m 9 or 8) conversion to GFF version 3 format,</td>
+</tr>
+</tbody>
+</table>
+<p>DAWGPAWS</p>
+<table>
+<thead>
+<tr>
+<th>script</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://dawgpaws.sourceforge.net/man/cnv_blast2gff.html" target="_blank" rel="external">cnv_blast2gff.pl</a></td>
+<td>This program will translate a blast report for a single query sequence into the GFF format.</td>
+</tr>
+</tbody>
+</table>
+<p>Tandy software</p>
+<table>
+<thead>
+<tr>
+<th>script</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://eugenes.org/gmod/tandy/" target="_blank" rel="external">gff2aplot</a></td>
+<td>a program to visualize the alignment of two genomic sequences together with their annotations. From GFF-format input files it produces PostScript figures for that alignment.</td>
+</tr>
+<tr>
+<td><a href="http://iubio.bio.indiana.edu:7122/gmod/tandy/" target="_blank" rel="external">blat2gff</a></td>
+<td>Converts BLAT output files to GFF formatted files</td>
+</tr>
+</tbody>
+</table>
+<p><strong>BioWiki中还有一篇，总结更多GFF工具的文章，请参看下面链接：</strong></p>
+<p><a href="http://biowiki.org/GffTools" target="_blank" rel="external">http://biowiki.org/GffTools</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sciencenet.cn/blog-981687-726831.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-981687-726831.html</a></p>
+<p>（2）<a href="http://blog.sciencenet.cn/blog-1509670-847310.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-1509670-847310.html</a></p>
+<p>（3）<a href="https://www.yaolibio.com/2016/08/15/gene-coordinate-system/" target="_blank" rel="external">https://www.yaolibio.com/2016/08/15/gene-coordinate-system/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="https:/AnJingwd.github.io/tags/NGS/" rel="tag"><i class="fa fa-tag"></i> NGS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/08/06/Linux多线程下载工具axel编译安装/" rel="next" title="Linux多线程下载工具axel编译安装">
+                <i class="fa fa-chevron-left"></i> Linux多线程下载工具axel编译安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/08/12/参考基因组数据下载/" rel="prev" title="基因组数据下载">
+                基因组数据下载 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https:/AnJingwd.github.io/images/avatar.png"
+               alt="AJ's blog" />
+          <p class="site-author-name" itemprop="name">AJ's blog</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="https:/AnJingwd.github.io/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="https:/AnJingwd.github.io/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="https:/AnJingwd.github.io/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https:/AnJingwd.github.io/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+			 <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(function() {
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+ 
+    function S() {
+        var e = document.createElement("audio");
+        e.setAttribute("class", l);
+        e.src = i;
+        e.loop = false;
+        e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h()
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+ 
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+})()'><i class="fa fa-music"></i> High</a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sina.com.cn/u/1253988497" title="种田农民的博客" target="_blank">种田农民的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.biostars.org/t/Tools/" title="Biostars" target="_blank">Biostars</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://segmentfault.com/" title="SegmentFault" target="_blank">SegmentFault</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.alloyteam.com/nav/" title="Web前端导航" target="_blank">Web前端导航</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.36zhen.com/t?id=3448" title="前端书籍资料" target="_blank">前端书籍资料</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+		
+<div id="music163player">		
+	<iframe frameborder="no" border="0" 
+	marginwidth="0" marginheight="0" width=330 height=86 
+src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
+	</iframe>
+</div>	
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ensemble与UCSC各种格式说明"><span class="nav-number">1.</span> <span class="nav-text">Ensemble与UCSC各种格式说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基因组坐标系统"><span class="nav-number">2.</span> <span class="nav-text">基因组坐标系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单个格式介绍"><span class="nav-number">3.</span> <span class="nav-text">单个格式介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BED格式"><span class="nav-number">3.1.</span> <span class="nav-text">BED格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#具体介绍"><span class="nav-number">3.1.1.</span> <span class="nav-text">具体介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GFF格式"><span class="nav-number">3.2.</span> <span class="nav-text">GFF格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GFF1"><span class="nav-number">3.2.1.</span> <span class="nav-text">GFF1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GFF2"><span class="nav-number">3.2.2.</span> <span class="nav-text">GFF2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GFF3"><span class="nav-number">3.2.3.</span> <span class="nav-text">GFF3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GTF"><span class="nav-number">3.3.</span> <span class="nav-text">GTF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不同格式比较"><span class="nav-number">4.</span> <span class="nav-text">不同格式比较</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BED和GFF-GTF"><span class="nav-number">4.1.</span> <span class="nav-text">BED和GFF/GTF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GTF与GFF区别"><span class="nav-number">4.2.</span> <span class="nav-text">GTF与GFF区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据格式转换"><span class="nav-number">5.</span> <span class="nav-text">数据格式转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AJ's blog</span>
+</div>
+
+
+<!--<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共21.2k字</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
