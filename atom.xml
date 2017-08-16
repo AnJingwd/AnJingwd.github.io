@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-15T11:09:28.033Z</updated>
+  <updated>2017-08-16T07:58:00.273Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux解压缩</title>
+    <link href="https:///AnJingwd.github.io/2017/08/16/linux%E8%A7%A3%E5%8E%8B%E7%BC%A9/"/>
+    <id>https:///AnJingwd.github.io/2017/08/16/linux解压缩/</id>
+    <published>2017-08-16T02:48:41.000Z</published>
+    <updated>2017-08-16T07:58:00.273Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">总结下linux下各种压缩文件的解压方法及批量解压</blockquote>
+
+<a id="more"></a>
+<p>首先要弄清两个概念：打包 和 压缩：</p>
+<ul>
+<li>打包 是指将一大堆文件或目录变成一个总的文件； </li>
+<li>压缩 则是将一个大的文件通过一些压缩算法变成一个小文件。</li>
+</ul>
+<p>&emsp;&emsp;Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
+<h1 id="单个解压"><a href="#单个解压" class="headerlink" title="单个解压"></a>单个解压</h1><ol>
+<li>*.tar 用 tar -xvf 解压</li>
+<li>*.gz 用 gzip -d或者gunzip 解压</li>
+<li><em>.tar.gz和</em>.tgz 用 tar -xzf 解压</li>
+<li>*.bz2 用 bzip2 -d或者用bunzip2 解压</li>
+<li>*.tar.bz2用tar -xjf 解压</li>
+<li>*.Z 用 uncompress 解压</li>
+<li>*.tar.Z 用tar -xZf 解压</li>
+<li>*.rar 用 unrar e解压</li>
+<li>*.zip 用 unzip 解压</li>
+<li><p>*.tar.xz 用</p>
+<p>$xz -d <em>*</em>.tar.xz</p>
+<p>$tar -xvf  <em>*</em>.tar</p>
+</li>
+</ol>
+<h1 id="批量解压"><a href="#批量解压" class="headerlink" title="批量解压"></a>批量解压</h1><ol>
+<li><p>方法一：</p>
+<p>  for i in $(ls *.tar.gz);do tar xvf $i;done</p>
+</li>
+</ol>
+<ol>
+<li><p>方法二:</p>
+<p> for tarfile in *.tar.gz;  do tar -xvf $tarfile; done</p>
+</li>
+<li><p>方法三:</p>
+<p>  ls *.tar.gz|xargs -n1 tar xzvf</p>
+</li>
+</ol>
+<p>&emsp;&emsp;xargs 是一条 Unix 和类 Unix 操作系统的常用命令；它的作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题。</p>
+<p>例如：</p>
+<p>echo “1 2 3 4”|xargs -n1<br>1<br>2<br>3<br>4<br>echo “1 2 3 4”|xargs -n2<br>1 2<br>3 4</p>
+<p>所以，加n1参数，则*.tar.gz会拆成每个tar.gz文件后，一个一个传给tar xzvf命令</p>
+<ol>
+<li><p>方法四：</p>
+<p> find -maxdepth 1 -name “*.tar.gz”|xargs -i tar xvzf {}</p>
+</li>
+</ol>
+<p>&emsp;&emsp;这条命令可解压当前目录下的所有gz文件，maxdepth表示搜索深度，1代表只搜索当前目录</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>使用tar -xvf *.tar.gz会出错，提示“Not found in archive”？</p>
+<p>通配符是shell解决的问题,如</p>
+<pre><code>tar -xvf *.tar.gz
+</code></pre><p>实际上执行tar时，tar接收到的是</p>
+<pre><code>tar -xvf a.tar.gz  b.tar.gz  c.tar.gz ...
+</code></pre><p>如果当前目录跟本没有tar的东西，那么tar就收到’*.tar.gz’这个参数</p>
+<p>与win不同，linux所有字符都可以作文件名，也即目录中不存在着 *.tar.gz这个文件</p>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>同样可以利用for循环遍历操作某一类文件，比如批量建索引。</p>
+<p>for i in <code>ls</code><br>do<br>        samtools faidx $i<br>done</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;总结下linux下各种压缩文件的解压方法及批量解压&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="https:///AnJingwd.github.io/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>NGS数据格式BED/GFF/GTF之介绍，比较，转换</title>
@@ -1473,10 +1551,10 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
+    <updated>2017-08-06T11:10:28.346Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
@@ -1640,10 +1718,10 @@ pip3.6 install numpy
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:10:28.346Z</updated>
+    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
