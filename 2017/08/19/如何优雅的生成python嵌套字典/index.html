@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="如何优雅的生成及遍历python嵌套字典">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-19T10:53:35.682Z">
+<meta property="og:updated_time" content="2017-08-19T10:56:56.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅的生成及遍历python嵌套字典">
 <meta name="twitter:description" content="如何优雅的生成及遍历python嵌套字典">
@@ -391,25 +391,17 @@
 <ul>
 <li>第一行：class后面紧接着是类名，即Vividict，类名通常是大写开头的单词，紧接着是(dict)，表示该类是dict类继承下来的。</li>
 </ul>
-<p>我们可以使用dir(dict）查看dict的方法</p>
-<pre><code>In[22]: print(dir(dict))
-[&apos;__class__&apos;, &apos;__contains__&apos;, &apos;__delattr__&apos;, &apos;__delitem__&apos;, &apos;__dir__&apos;, &apos;__doc__&apos;, &apos;__eq__&apos;, &apos;__format__&apos;, &apos;__ge__&apos;, &apos;__getattribute__&apos;, &apos;__getitem__&apos;, &apos;__gt__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__iter__&apos;, &apos;__le__&apos;, &apos;__len__&apos;, &apos;__lt__&apos;, &apos;__ne__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__setitem__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;clear&apos;, &apos;copy&apos;, &apos;fromkeys&apos;, &apos;get&apos;, &apos;items&apos;, &apos;keys&apos;, &apos;pop&apos;, &apos;popitem&apos;, &apos;setdefault&apos;, &apos;update&apos;, &apos;values&apos;]
-</code></pre><p>同理，可以查看Vividict的方法</p>
-<pre><code>In[23]: print(dir(Vividict))
-[&apos;__class__&apos;, &apos;__contains__&apos;, &apos;__delattr__&apos;, &apos;__delitem__&apos;, &apos;__dict__&apos;, &apos;__dir__&apos;, &apos;__doc__&apos;, &apos;__eq__&apos;, &apos;__format__&apos;, &apos;__ge__&apos;, &apos;__getattribute__&apos;, &apos;__getitem__&apos;, &apos;__gt__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__iter__&apos;, &apos;__le__&apos;, &apos;__len__&apos;, &apos;__lt__&apos;, &apos;__missing__&apos;, &apos;__module__&apos;, &apos;__ne__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__setitem__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;__weakref__&apos;, &apos;clear&apos;, &apos;copy&apos;, &apos;fromkeys&apos;, &apos;get&apos;, &apos;items&apos;, &apos;keys&apos;, &apos;pop&apos;, &apos;popitem&apos;, &apos;setdefault&apos;, &apos;update&apos;, &apos;values&apos;]
-</code></pre><p>比较两者可以发现，Vividict的方法比dict的方法多了一个<strong>missing</strong>方法，也就是我们添加的方法。所以这就是继承，继承最大的好处是子类获得了父类的全部功能，而不必重新造轮子。</p>
+<p>我们可以使用dir(dict）查看dict的方法<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">In[<span class="number">22</span>]: print(dir(dict))</div><div class="line">[<span class="string">'__class__'</span>, <span class="string">'__contains__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__delitem__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__getitem__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__iter__'</span>, <span class="string">'__le__'</span>, <span class="string">'__len__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__setitem__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'clear'</span>, <span class="string">'copy'</span>, <span class="string">'fromkeys'</span>, <span class="string">'get'</span>, <span class="string">'items'</span>, <span class="string">'keys'</span>, <span class="string">'pop'</span>, <span class="string">'popitem'</span>, <span class="string">'setdefault'</span>, <span class="string">'update'</span>, <span class="string">'values'</span>]</div></pre></td></tr></table></figure></p>
+<p>同理，可以查看Vividict的方法<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">In[<span class="number">23</span>]: print(dir(Vividict))</div><div class="line">[<span class="string">'__class__'</span>, <span class="string">'__contains__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__delitem__'</span>, <span class="string">'__dict__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__getitem__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__iter__'</span>, <span class="string">'__le__'</span>, <span class="string">'__len__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__missing__'</span>, <span class="string">'__module__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__setitem__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'__weakref__'</span>, <span class="string">'clear'</span>, <span class="string">'copy'</span>, <span class="string">'fromkeys'</span>, <span class="string">'get'</span>, <span class="string">'items'</span>, <span class="string">'keys'</span>, <span class="string">'pop'</span>, <span class="string">'popitem'</span>, <span class="string">'setdefault'</span>, <span class="string">'update'</span>, <span class="string">'values'</span>]</div></pre></td></tr></table></figure></p>
+<p>比较两者可以发现，Vividict的方法比dict的方法多了一个<strong>missing</strong>方法，也就是我们添加的方法。所以这就是继承，继承最大的好处是子类获得了父类的全部功能，而不必重新造轮子。</p>
 <ul>
 <li><p>第二行：python魔法方法中的自定义序列，类似于定义一个函数。<strong>missing</strong> 在字典的子类中使用，它定义了当试图访问一个字典中不存在的键时的行为（目前为止是指字典的实例，例如我有一个字典 d ， “george” 不是字典中的一个键，当试图访问 d[‘george’] 时就会调用 d.<strong>missing</strong>(“george”)，结果为{} ）。</p>
 </li>
 <li><p>第三行，第四行：访问字典中不存在的键(key)时，返回空字典作为其返回值（value）</p>
 </li>
 </ul>
-<p>例如：</p>
-<pre><code>In[17]: a = dict()
-In[18]: type(a)()
-Out[18]: 
-{}
-</code></pre><p>注意：</p>
+<p>例如：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">In[<span class="number">17</span>]: a = dict()</div><div class="line">In[<span class="number">18</span>]: type(a)()</div><div class="line">Out[<span class="number">18</span>]: </div><div class="line">&#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>注意：</p>
 <ul>
 <li>特殊方法“missing”前后有两个下划线！！！</li>
 <li>和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。</li>
