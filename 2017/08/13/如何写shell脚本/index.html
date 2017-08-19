@@ -105,7 +105,7 @@
 <meta property="og:description" content="shell代码风格规范及技巧">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/HREX4bE.png">
-<meta property="og:updated_time" content="2017-08-14T13:09:12.603Z">
+<meta property="og:updated_time" content="2017-08-17T03:12:46.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何写shell脚本">
 <meta name="twitter:description" content="shell代码风格规范及技巧">
@@ -390,14 +390,25 @@
 
 <a id="more"></a>
 <h1 id="shell代码风格规范及技巧"><a href="#shell代码风格规范及技巧" class="headerlink" title="shell代码风格规范及技巧"></a>shell代码风格规范及技巧</h1><h2 id="命名有标准"><a href="#命名有标准" class="headerlink" title="命名有标准"></a>命名有标准</h2><p>文件名规范，以.sh结尾，方便识别</p>
-<h2 id="编码要统一"><a href="#编码要统一" class="headerlink" title="编码要统一"></a>编码要统一</h2><p>在写脚本的时候尽量使用UTF-8编码，能够支持中文等一些奇奇怪怪的字符。不过虽然能写中文，但是在写注释以及打log的时候还是尽量英文，毕竟很多机器还是没有直接支持中文的，打出来可能会有乱码。</p>
-<p>这里还尤其需要注意一点，就是当我们是在windows下用utf-8编码来写shell脚本的时候，一定要注意这个utf-8是否是有BOM的。默认情况下windows判断utf-8格式是通过在文件开头加上三个EF BB BF字节来判断的，但是在Linux中默认是无BOM的。因此如果我们是在windows下写脚本的时候，一定要注意将编码改成Utf-8无BOM，一般用notepad++之类的编辑器都能改。否则，在Linux下运行的时候就会识别到开头的三个字符，从而报一些无法识别命令的错。</p>
-<h2 id="开头有shebang"><a href="#开头有shebang" class="headerlink" title="开头有shebang"></a>开头有shebang</h2><p>所谓shebang其实就是在很多脚本的第一行出现的以”#!”开头的注释，他指明了当我们没有指定解释器的时候默认的解释器，一般可能是下面这样：</p>
+<h2 id="编码要统一"><a href="#编码要统一" class="headerlink" title="编码要统一"></a>编码要统一</h2><p>&emsp;&emsp;在写脚本的时候尽量使用UTF-8编码，能够支持中文等一些奇奇怪怪的字符。不过虽然能写中文，但是在写注释以及打log的时候还是尽量英文，毕竟很多机器还是没有直接支持中文的，打出来可能会有乱码。</p>
+<p>&emsp;&emsp;这里还尤其需要注意一点，就是当我们是在windows下用utf-8编码来写shell脚本的时候，一定要注意这个utf-8是否是有BOM的。默认情况下windows判断utf-8格式是通过在文件开头加上三个EF BB BF字节来判断的，但是在Linux中默认是无BOM的。因此如果我们是在windows下写脚本的时候，一定要注意将编码改成Utf-8无BOM，一般用notepad++之类的编辑器都能改。否则，在Linux下运行的时候就会识别到开头的三个字符，从而报一些无法识别命令的错。</p>
+<h2 id="开头有shebang"><a href="#开头有shebang" class="headerlink" title="开头有shebang"></a>开头有shebang</h2><p>&emsp;&emsp;所谓shebang其实就是在很多脚本的第一行出现的以”#!”开头的注释，他指明了当我们没有指定解释器的时候默认的解释器，一般可能是下面这样：</p>
 <pre><code>#!/bin/bash
-</code></pre><h2 id="写出健壮Bash-Shell脚本技巧"><a href="#写出健壮Bash-Shell脚本技巧" class="headerlink" title="写出健壮Bash Shell脚本技巧"></a>写出健壮Bash Shell脚本技巧</h2><pre><code>set -e
+</code></pre><h2 id="写出健壮Bash-Shell脚本技巧"><a href="#写出健壮Bash-Shell脚本技巧" class="headerlink" title="写出健壮Bash Shell脚本技巧"></a>写出健壮Bash Shell脚本技巧</h2><pre><code>set -x
+set -e
 set -u
 set -o pipeline
-</code></pre><p>（1）在”set -e”之后出现的代码，一旦出现了返回值非零，整个脚本就会立即退出。<br>（2）set -u，当你使用未初始化的变量时，让bash自动退出<br>（3）set -o pipefail 设置了这个选项以后，包含管道命令的语句的返回值，会变成最后一个返回非零的管道命令的返回值。听起来比较绕，其实也很简单：</p>
+</code></pre><p>（1）set -x会在执行每一行 shell 脚本时，把执行的内容输出来。它可以让你看到当前执行的情况，里面涉及的变量也会被替换成实际的值。</p>
+<p>（2）在”set -e”之后出现的代码，一旦出现了返回值非零，整个脚本就会立即退出。</p>
+<p>&emsp;&emsp;set -e结束程序的条件比较复杂，在man bash里面，足足用了一段话描述各种情景。大多数执行都会在出错时退出，除非 shell 命令位于以下情况：</p>
+<ul>
+<li>一个 pipeline 的非结尾部分，比如 error | ok</li>
+<li>一个组合语句的非结尾部分，比如 ok &amp;&amp; error || other</li>
+<li>一连串语句的非结尾部分，比如 error; ok</li>
+<li>位于判断语句内，包括test、if、while等等。</li>
+</ul>
+<p>（3）set -u，当你使用未初始化的变量时，让bash自动退出</p>
+<p>（4）set -o pipefail 设置了这个选项以后，包含管道命令的语句的返回值，会变成最后一个返回非零的管道命令的返回值。听起来比较绕，其实也很简单：</p>
 <p>例如test.sh</p>
 <pre><code>set -o pipefail
 ls ./a.txt |echo &quot;hi&quot; &gt;/dev/null
@@ -469,10 +480,10 @@ func(){
 func
 echo $var
 </code></pre><p>他的输出结果就是2而不是1，这样显然不符合我们的编码习惯，很容易造成一些问题。</p>
-<p>因此，相比直接使用全局变量，我们最好使用local, readonly这类的命令，其次我们可以使用declare来声明变量。这些方式都比使用全局方式定义要好。</p>
+<p>&emsp;&emsp;因此，相比直接使用全局变量，我们最好使用local, readonly这类的命令，其次我们可以使用declare来声明变量。这些方式都比使用全局方式定义要好。</p>
 <h4 id="local一般用于局部变量声明，多在在函数内部使用。"><a href="#local一般用于局部变量声明，多在在函数内部使用。" class="headerlink" title="local一般用于局部变量声明，多在在函数内部使用。"></a>local一般用于局部变量声明，多在在函数内部使用。</h4><p>（1）shell脚本中定义的变量是global的，其作用域从被定义的地方开始，到shell结束或被显示删除的地方为止。</p>
 <p>（2）shell函数定义的变量默认是global的，其作用域从“函数被调用时执行变量定义的地方”开始，到shell结束或被显示删除处为止。函数定义的变量可以被显示定义成local的，其作用域局限于函数内。但请注意，函数的参数是local的。</p>
-<p><strong>（3）如果同名，Shell函数定义的local变量会屏蔽脚本定义的global变量。</strong></p>
+<p><strong>（3）如果同名，Shell函数定义的local变量会屏蔽脚本定义的global变量。所以在函数内声明的变量，请务必记得加上 local 限定词</strong></p>
 <p>使用举例：</p>
 <pre><code>#!/bin/bash  
 
@@ -501,14 +512,14 @@ myUrl=&quot;http://www.runoob.com&quot;
 <p>  declare -f</p>
 </li>
 </ul>
-<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>在使用函数的时候一定要注意，shell中函数的返回值只能是整数，估计是因为一般情况下一个函数的返回值通常表示这个函数的运行状态，所以一般都是0或者是１就够了，因此就设计成了这样。不过，如果非得想传递字符串，也可以通过下面变通的方法:</p>
+<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>&emsp;&emsp;在使用函数的时候一定要注意，shell中函数的返回值只能是整数，估计是因为一般情况下一个函数的返回值通常表示这个函数的运行状态，所以一般都是0或者是１就够了，因此就设计成了这样。不过，如果非得想传递字符串，也可以通过下面变通的方法:</p>
 <pre><code>func(){
     echo &quot;2333&quot;
 }
 res=$(func)
 echo &quot;This is from $res.&quot;
 </code></pre><p>这样，通过echo或者print之类的就可以做到传一些额外参数的目的。</p>
-<h2 id="使用新写法"><a href="#使用新写法" class="headerlink" title="使用新写法"></a>使用新写法</h2><p>这里的新写法不是指有多厉害，而是指我们可能更希望使用较新引入的一些语法，更多是偏向代码风格的，比如</p>
+<h2 id="使用新写法"><a href="#使用新写法" class="headerlink" title="使用新写法"></a>使用新写法</h2><p>&emsp;&emsp;这里的新写法不是指有多厉害，而是指我们可能更希望使用较新引入的一些语法，更多是偏向代码风格的，比如</p>
 <ul>
 <li>尽量使用func(){}来定义函数，而不是func{}</li>
 <li>尽量使用[[]]来代替[]</li>
@@ -524,6 +535,7 @@ echo &quot;This is from $res.&quot;
 <p>例如<br>    if grep ‘pattern1’ some.file &gt; /dev/null &amp;&amp;<br>        grep ‘pattern2’ some.file &gt; dev/null<br>    then<br>        echo “found ‘pattern1’ and ‘pattern2’ in some.file”<br>    fi</p>
 <p>/dev/null ：代表空设备文件</p>
 <h2 id="安装shellcheck"><a href="#安装shellcheck" class="headerlink" title="安装shellcheck"></a>安装shellcheck</h2><p>ShellCheck, a static analysis tool for shell scripts</p>
+<p>shellcheck 除了可以提醒语法问题以外，还能检查出 shell 脚本编写常见的 bad code。</p>
 <ul>
 <li>使用方式（１）网页版：</li>
 </ul>
@@ -543,8 +555,10 @@ echo &quot;This is from $res.&quot;
 <li>需要一些网络操作的时候</li>
 <li>总之Shell就是可以快速开发一个脚本简化开发流程，并不可以用来替代高级语言</li>
 </ul>
+<p>&emsp;&emsp;解决特定的问题要用合适的工具。知道什么时候用 shell，什么时候切换到另外一门更通用的脚本语言（比如ruby/python/perl），这也是编写可靠 shell 脚本的诀窍。如果你的任务可以组合常见的命令来完成，而且只涉及简单的数据，那么 shell 脚本就是适合的锤子。如果你的任务包含较为复杂的逻辑，而且数据结构复杂，那么你需要用ruby/python之类的语言编写脚本。</p>
 <h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="https://blog.mythsman.com/2017/07/23/1/" target="_blank" rel="external">https://blog.mythsman.com/2017/07/23/1/</a></p>
 <p>（2）<a href="https://github.com/koalaman/shellcheck" target="_blank" rel="external">https://github.com/koalaman/shellcheck</a></p>
+<p>（3）<a href="https://segmentfault.com/a/1190000006900083" target="_blank" rel="external">https://segmentfault.com/a/1190000006900083</a></p>
 
       
     </div>
@@ -695,7 +709,7 @@ echo &quot;This is from $res.&quot;
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -996,7 +1010,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共21.8k字</span>
+  <span class="post-count">博客全站共25.1k字</span>
 </div>
 
 <div class="powered-by">

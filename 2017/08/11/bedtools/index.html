@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="https:/AnJingwd.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="NGS软件," />
+
+
+
+
+
+  <link rel="alternate" href="https:/AnJingwd.github.io/atom.xml" title="安静-不安静的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https:/AnJingwd.github.io/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。 &amp;emsp;&amp;emsp;例如,bedtoo">
+<meta name="keywords" content="NGS软件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bedtools使用教程">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/11/bedtools/index.html">
+<meta property="og:site_name" content="安静-不安静的博客">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。 &amp;emsp;&amp;emsp;例如,bedtoo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/IkrWjCV.jpg">
+<meta property="og:image" content="http://i.imgur.com/Ufi6ll1.jpg">
+<meta property="og:image" content="http://i.imgur.com/6RXlcnP.jpg">
+<meta property="og:image" content="http://i.imgur.com/CLbhHg9.jpg">
+<meta property="og:image" content="http://i.imgur.com/k26Ar7F.jpg">
+<meta property="og:image" content="http://i.imgur.com/5kHXyrU.jpg">
+<meta property="og:updated_time" content="2017-08-19T06:33:28.531Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bedtools使用教程">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。 &amp;emsp;&amp;emsp;例如,bedtoo">
+<meta name="twitter:image" content="http://i.imgur.com/IkrWjCV.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'https:///AnJingwd.github.io/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title>bedtools使用教程 | 安静-不安静的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="https:///AnJingwd.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安静-不安静的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https:/AnJingwd.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https:/AnJingwd.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https:/AnJingwd.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https:/AnJingwd.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https:/AnJingwd.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="https:/AnJingwd.github.io/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/11/bedtools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">bedtools使用教程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T15:14:31+08:00">
+                2017-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/NGS软件/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS软件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。</p>
+<p>&emsp;&emsp;例如,bedtools可以进行取intersect（交集）, merge（并集）, count（计数）, complement（补集），以及用来对广泛使用的基因组文件格式，例如BAM, BED, GFF/GTF, VCF等进行基因组区间的转换。单个的工具设计的目的是应对简单的任务，复杂的分析能通过组合多个bedtools工具操作实现。同时，该工具允许控制输出结果的呈现形式。最初的bedtools版本支持单独的6列BED文件。但是，如今增加了对序列比对BAM文件的支持。以及GFF文件的特征，BED文件。以及VCF文件。这些工具是相当快速的，并且即使是大的数据集也可以在数秒内完成任务。</p>
+<a id="more"></a>
+<h1 id="我们用bedtools都可以做些啥"><a href="#我们用bedtools都可以做些啥" class="headerlink" title="我们用bedtools都可以做些啥?"></a>我们用bedtools都可以做些啥?</h1><p>&emsp;&emsp;bedtools总共有二三十个工具/命令来处理基因组数据。比较典型而且常用的功能举例如下：格式转换，bam转bed（bamToBed），bed转其他格式（bedToBam，bedToIgv）；对基因组坐标的逻辑运算，包括：交集（intersectBed，windowBed），”邻集“（closestBed），补集（complementBed），并集（mergeBed），差集（subtractBed）;计算覆盖度（coverage）（coverageBed，genomeCoverageBed）；<br>此外，还有一些强大而实用的工具（shuffleBed，groupBy，annotateBed，……）</p>
+<table>
+<thead>
+<tr>
+<th>Utility</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>annotate</td>
+<td>Annotate coverage of features from multiple files.</td>
+</tr>
+<tr>
+<td>bamtobed</td>
+<td>Convert BAM alignments to BED (&amp; other) formats.</td>
+</tr>
+<tr>
+<td>bamtofastq</td>
+<td>Convert BAM records to FASTQ records.</td>
+</tr>
+<tr>
+<td>bed12tobed6</td>
+<td>Breaks BED12 intervals into discrete BED6 intervals.</td>
+</tr>
+<tr>
+<td>bedpetobam</td>
+<td>Convert BEDPE intervals to BAM records.</td>
+</tr>
+<tr>
+<td>bedtobam</td>
+<td>Convert intervals to BAM records.</td>
+</tr>
+<tr>
+<td>closest</td>
+<td>Find the closest, potentially non-overlapping interval.</td>
+</tr>
+<tr>
+<td>cluster</td>
+<td>Cluster (but don’t merge) overlapping/nearby intervals.</td>
+</tr>
+<tr>
+<td>complement</td>
+<td>Extract intervals <em>not</em> represented by an interval file.</td>
+</tr>
+<tr>
+<td>coverage</td>
+<td>Compute the coverage over defined intervals.</td>
+</tr>
+<tr>
+<td>expand</td>
+<td>Replicate lines based on lists of values in columns.</td>
+</tr>
+<tr>
+<td>flank</td>
+<td>Create new intervals from the flanks of existing intervals.</td>
+</tr>
+<tr>
+<td>genomecov</td>
+<td>Compute the coverage over an entire genome.</td>
+</tr>
+<tr>
+<td>getfasta</td>
+<td>Use intervals to extract sequences from a FASTA file.</td>
+</tr>
+<tr>
+<td>groupby</td>
+<td>Group by common cols. &amp; summarize oth. cols. (~ SQL “groupBy”)</td>
+</tr>
+<tr>
+<td>igv</td>
+<td>Create an IGV snapshot batch script.</td>
+</tr>
+<tr>
+<td>intersect</td>
+<td>Find overlapping intervals in various ways.</td>
+</tr>
+<tr>
+<td>jaccard</td>
+<td>Calculate the Jaccard statistic b/w two sets of intervals.</td>
+</tr>
+<tr>
+<td>links</td>
+<td>Create a HTML page of links to UCSC locations.</td>
+</tr>
+<tr>
+<td>makewindows</td>
+<td>Make interval “windows” across a genome.</td>
+</tr>
+<tr>
+<td>map</td>
+<td>Apply a function to a column for each overlapping interval.</td>
+</tr>
+<tr>
+<td>maskfasta</td>
+<td>Use intervals to mask sequences from a FASTA file.</td>
+</tr>
+<tr>
+<td>merge</td>
+<td>Combine overlapping/nearby intervals into a single interval.</td>
+</tr>
+<tr>
+<td>multicov</td>
+<td>Counts coverage from multiple BAMs at specific intervals.</td>
+</tr>
+<tr>
+<td>multiinter</td>
+<td>Identifies common intervals among multiple interval files.</td>
+</tr>
+<tr>
+<td>nuc</td>
+<td>Profile the nucleotide content of intervals in a FASTA file.</td>
+</tr>
+<tr>
+<td>overlap</td>
+<td>Computes the amount of overlap from two intervals.</td>
+</tr>
+<tr>
+<td>pairtobed</td>
+<td>Find pairs that overlap intervals in various ways.</td>
+</tr>
+<tr>
+<td>pairtopair</td>
+<td>Find pairs that overlap other pairs in various ways.</td>
+</tr>
+<tr>
+<td>random</td>
+<td>Generate random intervals in a genome.</td>
+</tr>
+<tr>
+<td>reldist</td>
+<td>Calculate the distribution of relative distances b/w two files.</td>
+</tr>
+<tr>
+<td>shift</td>
+<td>Adjust the position of intervals.</td>
+</tr>
+<tr>
+<td>shuffle</td>
+<td>Randomly redistribute intervals in a genome.</td>
+</tr>
+<tr>
+<td>slop</td>
+<td>Adjust the size of intervals.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>Order the intervals in a file.</td>
+</tr>
+<tr>
+<td>subtract</td>
+<td>Remove intervals based on overlaps b/w two files.</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>Tag BAM alignments based on overlaps with interval files.</td>
+</tr>
+<tr>
+<td>unionbedg</td>
+<td>Combines coverage intervals from multiple BEDGRAPH files.</td>
+</tr>
+<tr>
+<td>window</td>
+<td>Find overlapping intervals within a window around an interval.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="BEDTools-suite使用详细"><a href="#BEDTools-suite使用详细" class="headerlink" title="BEDTools suite使用详细"></a>BEDTools suite使用详细</h1><p>bedtools官网：</p>
+<p><a href="http://bedtools.readthedocs.io/en/latest/" target="_blank" rel="external">http://bedtools.readthedocs.io/en/latest/</a></p>
+<p>bedtools使用说明：</p>
+<p><a href="http://quinlanlab.org/tutorials/bedtools/bedtools.html#bedtools-merge" target="_blank" rel="external">http://quinlanlab.org/tutorials/bedtools/bedtools.html#bedtools-merge</a></p>
+<p>BEDTools主要使用BED格式的前三列,即：</p>
+<ul>
+<li>chrom: 染色体信息</li>
+<li>start: genome feature的起始位点，从0开始</li>
+<li>end: genome feature的终止位点，至少为1</li>
+</ul>
+<p>一般常用物种的genome file在BEDTools安装目录的/genome里面</p>
+<p>BEDPE格式是其自定义的一种新的格式，为了简洁的描述不连续的genome features，例如结构变异和双端测序比对</p>
+<p><img src="http://i.imgur.com/IkrWjCV.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>start1和start2起始坐标第一个碱基都为0，所以start=9, end=20表示碱基跨度是从第10位到第20位</li>
+<li>chrom1或者chrom2用.表示unknown;start1，end1,start2,end2用-1表示unknown</li>
+</ul>
+<h2 id="（1）intersect"><a href="#（1）intersect" class="headerlink" title="（1）intersect"></a>（1）intersect</h2><p>&emsp;&emsp;可以计算两个或者多个BED/BAM/VCF/GFF文件中基因组坐标位置的交集(overlap)，根据参数不同，可以得到不同的结果。</p>
+<h3 id="两个BED文件比较图示"><a href="#两个BED文件比较图示" class="headerlink" title="两个BED文件比较图示"></a>两个BED文件比较图示</h3><p><img src="http://i.imgur.com/Ufi6ll1.jpg" alt=""></p>
+<h3 id="一对多比较图示"><a href="#一对多比较图示" class="headerlink" title="一对多比较图示"></a>一对多比较图示</h3><p><img src="http://i.imgur.com/6RXlcnP.jpg" alt=""></p>
+<h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><pre><code>bedtools intersect  -a &lt;bed/gff/vcf/bam&gt; -b &lt;bed/gff/vcf/bam&gt; [OPTIONS]
+</code></pre><ul>
+<li>-wa参数可以报告出原始的在A文件中的feature</li>
+<li>-wb参数可以报告出原始的在B文件中的feature</li>
+<li>-c参数可以报告出两个文件中的overlap的feature的数量</li>
+<li>-wo 返回overlap碱基数</li>
+<li>-v 返回非overlap区间</li>
+<li>-s 相同链上的feature</li>
+</ul>
+<p><strong>当用bedtools intersect 处理大文件时比较耗内存，有效的方法是对A和B文件按照染色体名字(chromosome)和位置(position)排序(sort -k1,1 -k2,2n),然后用-sorted参数重新intersect</strong></p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p><strong>注意，自己生成测试bed文件，都必须用tab键分割，否则会报错！！</strong></p>
+<ol>
+<li><p>案例一：包含着染色体位置的两个文件，分别记为A文件和B文件。分别来自于不同文件的染色体位置的交集是什么？</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed </p>
+<p> chr1 15 20 </p>
+</li>
+<li><p>案例二：包含着染色体位置的两个文件，分别记为A文件和B文件。求A文件中哪些染色体位置是与文件B中的染色体位置有overlap.</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -wa</p>
+<p> chr1 10 20 </p>
+</li>
+<li><p>案例三：包含着染色体位置的两个文件，分别记为A文件和B文件。求A文件中染色体位置与文件B中染色体位置的交集，以及对应的文件B中的染色体位置.</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -wb</p>
+<p> chr1 15 20 chr1 15 25</p>
+</li>
+<li><p>案例四（经用）： 包含着染色体位置的两个文件，分别记为A文件和B文件。求对于A文件的染色体位置是否与文件B中的染色体位置有交集。如果有交集，分别输入A文件的染色体位置和B文件的染色体位置；如果没有交集，输入A文件的染色体位置并以’. -1 -1’补齐文件。</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -loj</p>
+<p> chr1 10 20 chr1 15 25</p>
+<p> chr1 30 40 . -1 -1</p>
+</li>
+<li><p>案例五：  包含着染色体位置的两个文件，分别记为A文件和B文件。对于A文件中染色体位置，如果和B文件中染色体位置有overlap,则输出在A文件中染色体位置和在B文件中染色体位置，以及overlap的长度.</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 20</p>
+<p> chr1 18 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -wo</p>
+<p> chr1 10 20 chr1 15 20 5</p>
+<p> chr1 10 20 chr1 18 25 2 </p>
+</li>
+<li><p>案例六：  包含着染色体位置的两个文件，分别记为A文件和B文件。对于A文件中染色体位置，如果和B文件中染色体位置有overlap,则输出在A文件中染色体位置和在B文件中染色体位置，以及overlap的长度；如果和B文件中染色体位置都没有overlap,则用’. -1-1’补齐文件</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 20</p>
+<p> chr1 18 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -wao</p>
+<p> chr1 10 20 chr1 15 20 5</p>
+<p> chr1 10 20 chr1 18 25 2 </p>
+<p> chr1 30 40 . -1 -1</p>
+</li>
+<li><p>案例七：  包含着染色体位置的两个文件，分别记为A文件和B文件。对于A文件中染色体位置，输出在A文件中染色体位置和有多少B文件染色体位置与之有overlap.</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 20</p>
+<p> chr1 18 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -c</p>
+<p> chr1 10 20 2</p>
+<p> chr1 30 40 0 </p>
+</li>
+<li><p>案例八(常用)：  包含着染色体位置的两个文件，分别记为A文件和B文件。对于A文件中染色体位置，输出在A文件中染色体位置和与B文件染色体位置至少有X%的overlap的记录。</p>
+<p> $ cat A.bed</p>
+<p> chr1 100 200</p>
+<p> $ cat B.bed</p>
+<p> chr1 130 201</p>
+<p> chr1 180 220</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -f 0.50 -wa -wb  </p>
+<p> chr1 100 200 chr1 130 201 </p>
+</li>
+</ol>
+<h2 id="2-merge"><a href="#2-merge" class="headerlink" title="(2)merge"></a>(2)merge</h2><p>&emsp;&emsp;用于合并位于同一个bed/gff/vcf 文件中有overlap或者距离在一定范围内的相邻区间，距离可由参数(-d)定义。需要注意的是，做合并之前需要先对bed文件做根据染色体排序，可以用bedtoolssort命令实现。</p>
+<h3 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h3><p><img src="http://i.imgur.com/CLbhHg9.jpg" alt=""></p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools merge [OPTIONS] -i &lt;bed/gff/vcf&gt;
+</code></pre><h3 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h3><pre><code>$ cat A.bed
+
+chr2 10 20
+
+chr1 30 40
+
+chr1 15 20
+
+chr1 18 25
+</code></pre><p>排序：</p>
+<pre><code>sort -k1,1 -k2,2n A.bed &gt; A.sort.bed
+
+$ cat A.sort.bed 
+
+chr1 15 20
+
+chr1 18 25
+
+chr1 30 40
+
+chr2 10 20
+</code></pre><ol>
+<li><p>案例一：取并集</p>
+<p> bedtools merge -i A.sort.bed</p>
+<p> chr1    15    25</p>
+<p> chr1    30    40</p>
+<p> chr2    10    20</p>
+</li>
+<li><p>案例二：计算重叠区间的个数,-i 指定统计的列，-o指定操作5</p>
+<p> bedtools merge -i exons.bed -c 1 -o count</p>
+<p> chr1    15    25    2</p>
+<p> chr1    30    40    1</p>
+<p> chr2    10    20    1</p>
+</li>
+<li><p>案例三：-d 两个独立区域间距小于（等于）该值时将被合并为一个区域；-o collapse显示合并了哪些标签</p>
+<p> $ bedtools merge -i A.sort.bed -d 5 -c 1 -o count，collapse</p>
+<p> chr1    15    40    3    chr1,chr1,chr1</p>
+<p> chr2    10    20    1    chr2</p>
+</li>
+</ol>
+<h2 id="3-complement：返回基因组非覆盖区（用途，比如多轮设计panel"><a href="#3-complement：返回基因组非覆盖区（用途，比如多轮设计panel" class="headerlink" title="(3)complement：返回基因组非覆盖区（用途，比如多轮设计panel)"></a>(3)complement：返回基因组非覆盖区（用途，比如多轮设计panel)</h2><h3 id="图示-1"><a href="#图示-1" class="headerlink" title="图示"></a>图示</h3><p><img src="http://i.imgur.com/k26Ar7F.jpg" alt=""></p>
+<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools complement -i &lt;BED/GFF/VCF&gt; -g &lt;genome files&gt;
+</code></pre><h2 id="4-genomecov：染色体和全基因组覆盖度计算"><a href="#4-genomecov：染色体和全基因组覆盖度计算" class="headerlink" title="(4)genomecov：染色体和全基因组覆盖度计算"></a>(4)genomecov：染色体和全基因组覆盖度计算</h2><p>要求：单个输入bed文件（-i指定）和genome files；如果输入为bam(-ibam指定)文件，则不需要genome files</p>
+<h3 id="图示-2"><a href="#图示-2" class="headerlink" title="图示"></a>图示</h3><p><img src="http://i.imgur.com/5kHXyrU.jpg" alt=""></p>
+<h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools genomecov [OPTIONS] -i &lt;bed/gff/vcf&gt; -g &lt;genome&gt;
+</code></pre><h3 id="案例-2"><a href="#案例-2" class="headerlink" title="案例"></a>案例</h3><pre><code>$ cat ranges-cov-sorted.bed
+chr1    4       9
+chr1    1       6
+chr1    8       19
+chr1    25      30
+chr2    0       20
+
+$ cat cov.txt  （染色体及每条染色体总碱基数）
+chr1    30
+chr2    20
+
+bedtools genomecov -i ranges-cov-sorted.bed -g cov.txt
+chr1    0       7       30      0.233333 1
+chr1    1       20      30      0.666667
+chr1    2       3       30      0.1
+chr2    1       20      20      1 2
+genome  0       7       50      0.14 3
+genome  1       40      50      0.8
+genome  2       3       50      0.06
+#name 覆盖次数 覆盖碱基数 总碱基数   覆盖度
+#同时计算单染色体和全基因组覆盖度
+</code></pre><ul>
+<li>ranges-cov.bed文件需提前排序sort -k1,1 ranges-cov.bed &gt; ranges-cov-sorted.bed</li>
+<li>-bg参数可得到每个碱基的覆盖度。</li>
+</ul>
+<h2 id="5-coverage-计算染色体给定区间覆盖度，输入可以是-BAM-文件"><a href="#5-coverage-计算染色体给定区间覆盖度，输入可以是-BAM-文件" class="headerlink" title="(5)coverage 计算染色体给定区间覆盖度，输入可以是 BAM 文件"></a>(5)coverage 计算染色体给定区间覆盖度，输入可以是 BAM 文件</h2><pre><code>$ cat A.bed
+chr1  0   100
+chr1  100 200
+chr2  0   100
+
+$ cat B.bed
+chr1  10  20
+chr1  20  30
+chr1  30  40
+chr1  100 200
+
+$ bedtools coverage -a A.bed -b B.bed
+chr1  0   100  3  30  100 0.3000000
+chr1  100 200  1  100 100 1.0000000
+chr2  0   100  0  0   100 0.0000000
+#name 覆盖次数 覆盖碱基数 总碱基数   覆盖度
+</code></pre><h2 id="（6）getfasta：提取序列"><a href="#（6）getfasta：提取序列" class="headerlink" title="（6）getfasta：提取序列"></a>（6）getfasta：提取序列</h2><p>提取指定位置的 DNA 序列，也是很好用的一个功能，反向互补链也可以提，不用自己写脚本提了</p>
+<h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools getfasta [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt; -fo &lt;fasta&gt; 
+</code></pre><h3 id="案例-3"><a href="#案例-3" class="headerlink" title="案例"></a>案例</h3><p>要求：基因组fasta文件（-fi指定）,提取区间BED/GTF/GFF/VCF文件(-bed指定),输出文件FASTA（-fo 指定）</p>
+<pre><code>bedtools getfasta -fi Mus_musculus.GRCm38.75.dna_rm.toplevel_chr1.fa -bed mm_GRCm38_3kb_promoters.gtf -fo mm_GRCm38_3kb_promoters.fasta
+</code></pre><p>扩展：</p>
+<p>提取序列之samtools（速度较快）</p>
+<pre><code>#首先建立fai索引文件（第一列为染色体名字，第二列为序列碱基数）
+
+samtools faidx Mus_musculus.GRCm38.75.dna.chromosome.8.fa
+
+#序列提取，多提取区间空格隔开
+
+samtools faidx Mus_musculus.GRCm38.75.dna.chromosome.8.fa \
+ 8:123407082-123410744 8:123518835-123536649
+
+&gt;8:123407082-123410744
+GAGAAAAGCTCCCTTCTTCTCCAGAGTCCCGTCTACCCTGGCTTGGCGAGGGAAAGGAAC
+CAGACATATATCAGAGGCAAGTAACCAAGAAGTCTGGAGGTGTTGAGTTTAGGCATGTCT
+[...]
+
+&gt;8:123518835-123536649
+TCTCGCGAGGATTTGAGAACCAGCACGGGATCTAGTCGGAGTTGCCAGGAGACCGCGCAG
+CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
+[...]
+</code></pre><h2 id="nuc-计算GC含量即各碱基数"><a href="#nuc-计算GC含量即各碱基数" class="headerlink" title="nuc: 计算GC含量即各碱基数"></a>nuc: 计算GC含量即各碱基数</h2><h3 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools nuc [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt;
+</code></pre><p>Options: </p>
+<pre><code>-fi     输入FASTA文件
+
+-bed     提取区间BED/GTF/GFF/VCF文件(-bed指定)
+</code></pre><h3 id="案例-4"><a href="#案例-4" class="headerlink" title="案例"></a>案例</h3><pre><code>bedtools nuc -fi hg19.fa -bed CDS.bed
+</code></pre><p>输出结果解释：在原bed文件每行结尾增加以下几列</p>
+<p>Output format:<br>The following information will be reported after each BED entry:</p>
+<pre><code>1) %AT content
+2) %GC content
+3) Number of As observed
+4) Number of Cs observed
+5) Number of Gs observed
+6) Number of Ts observed
+7) Number of Ns observed
+8) Number of other bases observed
+9) The length of the explored sequence/interval.
+10) The seq. extracted from the FASTA file. (opt., if -seq is used)
+11) The number of times a user&apos;s pattern was observed.
+    (opt., if -pattern is used.)
+</code></pre><h1 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h1><p><a href="http://gettinggeneticsdone.blogspot.com/2014/03/visualize-coverage-exome-targeted-ngs-bedtools.html" target="_blank" rel="external">Coverage analysis for targeted DNA capture</a></p>
+<p><a href="http://www.cureffi.org/2013/11/18/an-mrna-seq-pipeline-using-gsnap-samtools-cufflinks-and-bedtools/" target="_blank" rel="external">RNA-seq coverage analysis</a></p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）王球爸的博客：</p>
+<p><a href="http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html</a></p>
+<p>（2）生信人</p>
+<p><a href="https://www.wxzhi.com/archives/871/gk4yd3ujan57e0ft/" target="_blank" rel="external">https://www.wxzhi.com/archives/871/gk4yd3ujan57e0ft/</a></p>
+<p>（3）hope</p>
+<p><a href="http://tiramisutes.github.io/2016/03/18/bedtools.html" target="_blank" rel="external">http://tiramisutes.github.io/2016/03/18/bedtools.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="https:/AnJingwd.github.io/tags/NGS软件/" rel="tag"><i class="fa fa-tag"></i> NGS软件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/08/06/Linux多线程下载工具axel编译安装/" rel="next" title="Linux多线程下载工具axel编译安装">
+                <i class="fa fa-chevron-left"></i> Linux多线程下载工具axel编译安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/08/12/参考基因组数据下载/" rel="prev" title="基因组数据下载">
+                基因组数据下载 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https:/AnJingwd.github.io/images/avatar.png"
+               alt="AJ's blog" />
+          <p class="site-author-name" itemprop="name">AJ's blog</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="https:/AnJingwd.github.io/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="https:/AnJingwd.github.io/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="https:/AnJingwd.github.io/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https:/AnJingwd.github.io/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+			 <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(function() {
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+ 
+    function S() {
+        var e = document.createElement("audio");
+        e.setAttribute("class", l);
+        e.src = i;
+        e.loop = false;
+        e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h()
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+ 
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+})()'><i class="fa fa-music"></i> High</a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sina.com.cn/u/1253988497" title="种田农民的博客" target="_blank">种田农民的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.biostars.org/t/Tools/" title="Biostars" target="_blank">Biostars</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://segmentfault.com/" title="SegmentFault" target="_blank">SegmentFault</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.alloyteam.com/nav/" title="Web前端导航" target="_blank">Web前端导航</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.36zhen.com/t?id=3448" title="前端书籍资料" target="_blank">前端书籍资料</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+		
+<div id="music163player">		
+	<iframe frameborder="no" border="0" 
+	marginwidth="0" marginheight="0" width=330 height=86 
+src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
+	</iframe>
+</div>	
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我们用bedtools都可以做些啥"><span class="nav-number">1.</span> <span class="nav-text">我们用bedtools都可以做些啥?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BEDTools-suite使用详细"><span class="nav-number">2.</span> <span class="nav-text">BEDTools suite使用详细</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）intersect"><span class="nav-number">2.1.</span> <span class="nav-text">（1）intersect</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两个BED文件比较图示"><span class="nav-number">2.1.1.</span> <span class="nav-text">两个BED文件比较图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对多比较图示"><span class="nav-number">2.1.2.</span> <span class="nav-text">一对多比较图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法："><span class="nav-number">2.1.3.</span> <span class="nav-text">语法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例"><span class="nav-number">2.1.4.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-merge"><span class="nav-number">2.2.</span> <span class="nav-text">(2)merge</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图示"><span class="nav-number">2.2.1.</span> <span class="nav-text">图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.2.2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-complement：返回基因组非覆盖区（用途，比如多轮设计panel"><span class="nav-number">2.3.</span> <span class="nav-text">(3)complement：返回基因组非覆盖区（用途，比如多轮设计panel)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图示-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-genomecov：染色体和全基因组覆盖度计算"><span class="nav-number">2.4.</span> <span class="nav-text">(4)genomecov：染色体和全基因组覆盖度计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图示-2"><span class="nav-number">2.4.1.</span> <span class="nav-text">图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-2"><span class="nav-number">2.4.2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-2"><span class="nav-number">2.4.3.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-coverage-计算染色体给定区间覆盖度，输入可以是-BAM-文件"><span class="nav-number">2.5.</span> <span class="nav-text">(5)coverage 计算染色体给定区间覆盖度，输入可以是 BAM 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（6）getfasta：提取序列"><span class="nav-number">2.6.</span> <span class="nav-text">（6）getfasta：提取序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-3"><span class="nav-number">2.6.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-3"><span class="nav-number">2.6.2.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nuc-计算GC含量即各碱基数"><span class="nav-number">2.7.</span> <span class="nav-text">nuc: 计算GC含量即各碱基数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-4"><span class="nav-number">2.7.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-4"><span class="nav-number">2.7.2.</span> <span class="nav-text">案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级用法"><span class="nav-number">3.</span> <span class="nav-text">高级用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">4.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AJ's blog</span>
+</div>
+
+
+<!--<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共25.1k字</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

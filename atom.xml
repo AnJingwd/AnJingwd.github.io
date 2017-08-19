@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-16T07:58:00.273Z</updated>
+  <updated>2017-08-16T08:07:13.065Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https:///AnJingwd.github.io/2017/08/16/linux%E8%A7%A3%E5%8E%8B%E7%BC%A9/"/>
     <id>https:///AnJingwd.github.io/2017/08/16/linux解压缩/</id>
     <published>2017-08-16T02:48:41.000Z</published>
-    <updated>2017-08-16T07:58:00.273Z</updated>
+    <updated>2017-08-16T08:07:13.065Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">总结下linux下各种压缩文件的解压方法及批量解压</blockquote>
 
@@ -71,14 +71,21 @@
 <p>&emsp;&emsp;这条命令可解压当前目录下的所有gz文件，maxdepth表示搜索深度，1代表只搜索当前目录</p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>使用tar -xvf *.tar.gz会出错，提示“Not found in archive”？</p>
 <p>通配符是shell解决的问题,如</p>
-<pre><code>tar -xvf *.tar.gz
-</code></pre><p>实际上执行tar时，tar接收到的是</p>
-<pre><code>tar -xvf a.tar.gz  b.tar.gz  c.tar.gz ...
-</code></pre><p>如果当前目录跟本没有tar的东西，那么tar就收到’*.tar.gz’这个参数</p>
+<blockquote>
+<p>tar -xvf *.tar.gz</p>
+</blockquote>
+<p>实际上执行tar时，tar接收到的是</p>
+<blockquote>
+<p>tar -xvf a.tar.gz  b.tar.gz  c.tar.gz …</p>
+</blockquote>
+<p>如果当前目录跟本没有tar的东西，那么tar就收到’*.tar.gz’这个参数</p>
 <p>与win不同，linux所有字符都可以作文件名，也即目录中不存在着 *.tar.gz这个文件</p>
 <h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>同样可以利用for循环遍历操作某一类文件，比如批量建索引。</p>
-<p>for i in <code>ls</code><br>do<br>        samtools faidx $i<br>done</p>
-]]></content>
+<pre><code>for i in `ls`
+do
+        samtools faidx $i
+done
+</code></pre>]]></content>
     
     <summary type="html">
     
@@ -559,21 +566,32 @@ done
     <link href="https:///AnJingwd.github.io/2017/08/13/%E5%A6%82%E4%BD%95%E5%86%99shell%E8%84%9A%E6%9C%AC/"/>
     <id>https:///AnJingwd.github.io/2017/08/13/如何写shell脚本/</id>
     <published>2017-08-13T13:14:52.000Z</published>
-    <updated>2017-08-14T13:09:12.603Z</updated>
+    <updated>2017-08-17T03:12:46.731Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">shell代码风格规范及技巧</blockquote>
 
 
 <a id="more"></a>
 <h1 id="shell代码风格规范及技巧"><a href="#shell代码风格规范及技巧" class="headerlink" title="shell代码风格规范及技巧"></a>shell代码风格规范及技巧</h1><h2 id="命名有标准"><a href="#命名有标准" class="headerlink" title="命名有标准"></a>命名有标准</h2><p>文件名规范，以.sh结尾，方便识别</p>
-<h2 id="编码要统一"><a href="#编码要统一" class="headerlink" title="编码要统一"></a>编码要统一</h2><p>在写脚本的时候尽量使用UTF-8编码，能够支持中文等一些奇奇怪怪的字符。不过虽然能写中文，但是在写注释以及打log的时候还是尽量英文，毕竟很多机器还是没有直接支持中文的，打出来可能会有乱码。</p>
-<p>这里还尤其需要注意一点，就是当我们是在windows下用utf-8编码来写shell脚本的时候，一定要注意这个utf-8是否是有BOM的。默认情况下windows判断utf-8格式是通过在文件开头加上三个EF BB BF字节来判断的，但是在Linux中默认是无BOM的。因此如果我们是在windows下写脚本的时候，一定要注意将编码改成Utf-8无BOM，一般用notepad++之类的编辑器都能改。否则，在Linux下运行的时候就会识别到开头的三个字符，从而报一些无法识别命令的错。</p>
-<h2 id="开头有shebang"><a href="#开头有shebang" class="headerlink" title="开头有shebang"></a>开头有shebang</h2><p>所谓shebang其实就是在很多脚本的第一行出现的以”#!”开头的注释，他指明了当我们没有指定解释器的时候默认的解释器，一般可能是下面这样：</p>
+<h2 id="编码要统一"><a href="#编码要统一" class="headerlink" title="编码要统一"></a>编码要统一</h2><p>&emsp;&emsp;在写脚本的时候尽量使用UTF-8编码，能够支持中文等一些奇奇怪怪的字符。不过虽然能写中文，但是在写注释以及打log的时候还是尽量英文，毕竟很多机器还是没有直接支持中文的，打出来可能会有乱码。</p>
+<p>&emsp;&emsp;这里还尤其需要注意一点，就是当我们是在windows下用utf-8编码来写shell脚本的时候，一定要注意这个utf-8是否是有BOM的。默认情况下windows判断utf-8格式是通过在文件开头加上三个EF BB BF字节来判断的，但是在Linux中默认是无BOM的。因此如果我们是在windows下写脚本的时候，一定要注意将编码改成Utf-8无BOM，一般用notepad++之类的编辑器都能改。否则，在Linux下运行的时候就会识别到开头的三个字符，从而报一些无法识别命令的错。</p>
+<h2 id="开头有shebang"><a href="#开头有shebang" class="headerlink" title="开头有shebang"></a>开头有shebang</h2><p>&emsp;&emsp;所谓shebang其实就是在很多脚本的第一行出现的以”#!”开头的注释，他指明了当我们没有指定解释器的时候默认的解释器，一般可能是下面这样：</p>
 <pre><code>#!/bin/bash
-</code></pre><h2 id="写出健壮Bash-Shell脚本技巧"><a href="#写出健壮Bash-Shell脚本技巧" class="headerlink" title="写出健壮Bash Shell脚本技巧"></a>写出健壮Bash Shell脚本技巧</h2><pre><code>set -e
+</code></pre><h2 id="写出健壮Bash-Shell脚本技巧"><a href="#写出健壮Bash-Shell脚本技巧" class="headerlink" title="写出健壮Bash Shell脚本技巧"></a>写出健壮Bash Shell脚本技巧</h2><pre><code>set -x
+set -e
 set -u
 set -o pipeline
-</code></pre><p>（1）在”set -e”之后出现的代码，一旦出现了返回值非零，整个脚本就会立即退出。<br>（2）set -u，当你使用未初始化的变量时，让bash自动退出<br>（3）set -o pipefail 设置了这个选项以后，包含管道命令的语句的返回值，会变成最后一个返回非零的管道命令的返回值。听起来比较绕，其实也很简单：</p>
+</code></pre><p>（1）set -x会在执行每一行 shell 脚本时，把执行的内容输出来。它可以让你看到当前执行的情况，里面涉及的变量也会被替换成实际的值。</p>
+<p>（2）在”set -e”之后出现的代码，一旦出现了返回值非零，整个脚本就会立即退出。</p>
+<p>&emsp;&emsp;set -e结束程序的条件比较复杂，在man bash里面，足足用了一段话描述各种情景。大多数执行都会在出错时退出，除非 shell 命令位于以下情况：</p>
+<ul>
+<li>一个 pipeline 的非结尾部分，比如 error | ok</li>
+<li>一个组合语句的非结尾部分，比如 ok &amp;&amp; error || other</li>
+<li>一连串语句的非结尾部分，比如 error; ok</li>
+<li>位于判断语句内，包括test、if、while等等。</li>
+</ul>
+<p>（3）set -u，当你使用未初始化的变量时，让bash自动退出</p>
+<p>（4）set -o pipefail 设置了这个选项以后，包含管道命令的语句的返回值，会变成最后一个返回非零的管道命令的返回值。听起来比较绕，其实也很简单：</p>
 <p>例如test.sh</p>
 <pre><code>set -o pipefail
 ls ./a.txt |echo &quot;hi&quot; &gt;/dev/null
@@ -645,10 +663,10 @@ func(){
 func
 echo $var
 </code></pre><p>他的输出结果就是2而不是1，这样显然不符合我们的编码习惯，很容易造成一些问题。</p>
-<p>因此，相比直接使用全局变量，我们最好使用local, readonly这类的命令，其次我们可以使用declare来声明变量。这些方式都比使用全局方式定义要好。</p>
+<p>&emsp;&emsp;因此，相比直接使用全局变量，我们最好使用local, readonly这类的命令，其次我们可以使用declare来声明变量。这些方式都比使用全局方式定义要好。</p>
 <h4 id="local一般用于局部变量声明，多在在函数内部使用。"><a href="#local一般用于局部变量声明，多在在函数内部使用。" class="headerlink" title="local一般用于局部变量声明，多在在函数内部使用。"></a>local一般用于局部变量声明，多在在函数内部使用。</h4><p>（1）shell脚本中定义的变量是global的，其作用域从被定义的地方开始，到shell结束或被显示删除的地方为止。</p>
 <p>（2）shell函数定义的变量默认是global的，其作用域从“函数被调用时执行变量定义的地方”开始，到shell结束或被显示删除处为止。函数定义的变量可以被显示定义成local的，其作用域局限于函数内。但请注意，函数的参数是local的。</p>
-<p><strong>（3）如果同名，Shell函数定义的local变量会屏蔽脚本定义的global变量。</strong></p>
+<p><strong>（3）如果同名，Shell函数定义的local变量会屏蔽脚本定义的global变量。所以在函数内声明的变量，请务必记得加上 local 限定词</strong></p>
 <p>使用举例：</p>
 <pre><code>#!/bin/bash  
 
@@ -677,14 +695,14 @@ myUrl=&quot;http://www.runoob.com&quot;
 <p>  declare -f</p>
 </li>
 </ul>
-<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>在使用函数的时候一定要注意，shell中函数的返回值只能是整数，估计是因为一般情况下一个函数的返回值通常表示这个函数的运行状态，所以一般都是0或者是１就够了，因此就设计成了这样。不过，如果非得想传递字符串，也可以通过下面变通的方法:</p>
+<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>&emsp;&emsp;在使用函数的时候一定要注意，shell中函数的返回值只能是整数，估计是因为一般情况下一个函数的返回值通常表示这个函数的运行状态，所以一般都是0或者是１就够了，因此就设计成了这样。不过，如果非得想传递字符串，也可以通过下面变通的方法:</p>
 <pre><code>func(){
     echo &quot;2333&quot;
 }
 res=$(func)
 echo &quot;This is from $res.&quot;
 </code></pre><p>这样，通过echo或者print之类的就可以做到传一些额外参数的目的。</p>
-<h2 id="使用新写法"><a href="#使用新写法" class="headerlink" title="使用新写法"></a>使用新写法</h2><p>这里的新写法不是指有多厉害，而是指我们可能更希望使用较新引入的一些语法，更多是偏向代码风格的，比如</p>
+<h2 id="使用新写法"><a href="#使用新写法" class="headerlink" title="使用新写法"></a>使用新写法</h2><p>&emsp;&emsp;这里的新写法不是指有多厉害，而是指我们可能更希望使用较新引入的一些语法，更多是偏向代码风格的，比如</p>
 <ul>
 <li>尽量使用func(){}来定义函数，而不是func{}</li>
 <li>尽量使用[[]]来代替[]</li>
@@ -700,6 +718,7 @@ echo &quot;This is from $res.&quot;
 <p>例如<br>    if grep ‘pattern1’ some.file &gt; /dev/null &amp;&amp;<br>        grep ‘pattern2’ some.file &gt; dev/null<br>    then<br>        echo “found ‘pattern1’ and ‘pattern2’ in some.file”<br>    fi</p>
 <p>/dev/null ：代表空设备文件</p>
 <h2 id="安装shellcheck"><a href="#安装shellcheck" class="headerlink" title="安装shellcheck"></a>安装shellcheck</h2><p>ShellCheck, a static analysis tool for shell scripts</p>
+<p>shellcheck 除了可以提醒语法问题以外，还能检查出 shell 脚本编写常见的 bad code。</p>
 <ul>
 <li>使用方式（１）网页版：</li>
 </ul>
@@ -719,8 +738,10 @@ echo &quot;This is from $res.&quot;
 <li>需要一些网络操作的时候</li>
 <li>总之Shell就是可以快速开发一个脚本简化开发流程，并不可以用来替代高级语言</li>
 </ul>
+<p>&emsp;&emsp;解决特定的问题要用合适的工具。知道什么时候用 shell，什么时候切换到另外一门更通用的脚本语言（比如ruby/python/perl），这也是编写可靠 shell 脚本的诀窍。如果你的任务可以组合常见的命令来完成，而且只涉及简单的数据，那么 shell 脚本就是适合的锤子。如果你的任务包含较为复杂的逻辑，而且数据结构复杂，那么你需要用ruby/python之类的语言编写脚本。</p>
 <h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="https://blog.mythsman.com/2017/07/23/1/" target="_blank" rel="external">https://blog.mythsman.com/2017/07/23/1/</a></p>
 <p>（2）<a href="https://github.com/koalaman/shellcheck" target="_blank" rel="external">https://github.com/koalaman/shellcheck</a></p>
+<p>（3）<a href="https://segmentfault.com/a/1190000006900083" target="_blank" rel="external">https://segmentfault.com/a/1190000006900083</a></p>
 ]]></content>
     
     <summary type="html">
@@ -1026,6 +1047,454 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>bedtools使用教程</title>
+    <link href="https:///AnJingwd.github.io/2017/08/11/bedtools/"/>
+    <id>https:///AnJingwd.github.io/2017/08/11/bedtools/</id>
+    <published>2017-08-11T07:14:31.000Z</published>
+    <updated>2017-08-19T06:33:28.531Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。</p>
+<p>&emsp;&emsp;例如,bedtools可以进行取intersect（交集）, merge（并集）, count（计数）, complement（补集），以及用来对广泛使用的基因组文件格式，例如BAM, BED, GFF/GTF, VCF等进行基因组区间的转换。单个的工具设计的目的是应对简单的任务，复杂的分析能通过组合多个bedtools工具操作实现。同时，该工具允许控制输出结果的呈现形式。最初的bedtools版本支持单独的6列BED文件。但是，如今增加了对序列比对BAM文件的支持。以及GFF文件的特征，BED文件。以及VCF文件。这些工具是相当快速的，并且即使是大的数据集也可以在数秒内完成任务。</p>
+<a id="more"></a>
+<h1 id="我们用bedtools都可以做些啥"><a href="#我们用bedtools都可以做些啥" class="headerlink" title="我们用bedtools都可以做些啥?"></a>我们用bedtools都可以做些啥?</h1><p>&emsp;&emsp;bedtools总共有二三十个工具/命令来处理基因组数据。比较典型而且常用的功能举例如下：格式转换，bam转bed（bamToBed），bed转其他格式（bedToBam，bedToIgv）；对基因组坐标的逻辑运算，包括：交集（intersectBed，windowBed），”邻集“（closestBed），补集（complementBed），并集（mergeBed），差集（subtractBed）;计算覆盖度（coverage）（coverageBed，genomeCoverageBed）；<br>此外，还有一些强大而实用的工具（shuffleBed，groupBy，annotateBed，……）</p>
+<table>
+<thead>
+<tr>
+<th>Utility</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>annotate</td>
+<td>Annotate coverage of features from multiple files.</td>
+</tr>
+<tr>
+<td>bamtobed</td>
+<td>Convert BAM alignments to BED (&amp; other) formats.</td>
+</tr>
+<tr>
+<td>bamtofastq</td>
+<td>Convert BAM records to FASTQ records.</td>
+</tr>
+<tr>
+<td>bed12tobed6</td>
+<td>Breaks BED12 intervals into discrete BED6 intervals.</td>
+</tr>
+<tr>
+<td>bedpetobam</td>
+<td>Convert BEDPE intervals to BAM records.</td>
+</tr>
+<tr>
+<td>bedtobam</td>
+<td>Convert intervals to BAM records.</td>
+</tr>
+<tr>
+<td>closest</td>
+<td>Find the closest, potentially non-overlapping interval.</td>
+</tr>
+<tr>
+<td>cluster</td>
+<td>Cluster (but don’t merge) overlapping/nearby intervals.</td>
+</tr>
+<tr>
+<td>complement</td>
+<td>Extract intervals <em>not</em> represented by an interval file.</td>
+</tr>
+<tr>
+<td>coverage</td>
+<td>Compute the coverage over defined intervals.</td>
+</tr>
+<tr>
+<td>expand</td>
+<td>Replicate lines based on lists of values in columns.</td>
+</tr>
+<tr>
+<td>flank</td>
+<td>Create new intervals from the flanks of existing intervals.</td>
+</tr>
+<tr>
+<td>genomecov</td>
+<td>Compute the coverage over an entire genome.</td>
+</tr>
+<tr>
+<td>getfasta</td>
+<td>Use intervals to extract sequences from a FASTA file.</td>
+</tr>
+<tr>
+<td>groupby</td>
+<td>Group by common cols. &amp; summarize oth. cols. (~ SQL “groupBy”)</td>
+</tr>
+<tr>
+<td>igv</td>
+<td>Create an IGV snapshot batch script.</td>
+</tr>
+<tr>
+<td>intersect</td>
+<td>Find overlapping intervals in various ways.</td>
+</tr>
+<tr>
+<td>jaccard</td>
+<td>Calculate the Jaccard statistic b/w two sets of intervals.</td>
+</tr>
+<tr>
+<td>links</td>
+<td>Create a HTML page of links to UCSC locations.</td>
+</tr>
+<tr>
+<td>makewindows</td>
+<td>Make interval “windows” across a genome.</td>
+</tr>
+<tr>
+<td>map</td>
+<td>Apply a function to a column for each overlapping interval.</td>
+</tr>
+<tr>
+<td>maskfasta</td>
+<td>Use intervals to mask sequences from a FASTA file.</td>
+</tr>
+<tr>
+<td>merge</td>
+<td>Combine overlapping/nearby intervals into a single interval.</td>
+</tr>
+<tr>
+<td>multicov</td>
+<td>Counts coverage from multiple BAMs at specific intervals.</td>
+</tr>
+<tr>
+<td>multiinter</td>
+<td>Identifies common intervals among multiple interval files.</td>
+</tr>
+<tr>
+<td>nuc</td>
+<td>Profile the nucleotide content of intervals in a FASTA file.</td>
+</tr>
+<tr>
+<td>overlap</td>
+<td>Computes the amount of overlap from two intervals.</td>
+</tr>
+<tr>
+<td>pairtobed</td>
+<td>Find pairs that overlap intervals in various ways.</td>
+</tr>
+<tr>
+<td>pairtopair</td>
+<td>Find pairs that overlap other pairs in various ways.</td>
+</tr>
+<tr>
+<td>random</td>
+<td>Generate random intervals in a genome.</td>
+</tr>
+<tr>
+<td>reldist</td>
+<td>Calculate the distribution of relative distances b/w two files.</td>
+</tr>
+<tr>
+<td>shift</td>
+<td>Adjust the position of intervals.</td>
+</tr>
+<tr>
+<td>shuffle</td>
+<td>Randomly redistribute intervals in a genome.</td>
+</tr>
+<tr>
+<td>slop</td>
+<td>Adjust the size of intervals.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>Order the intervals in a file.</td>
+</tr>
+<tr>
+<td>subtract</td>
+<td>Remove intervals based on overlaps b/w two files.</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>Tag BAM alignments based on overlaps with interval files.</td>
+</tr>
+<tr>
+<td>unionbedg</td>
+<td>Combines coverage intervals from multiple BEDGRAPH files.</td>
+</tr>
+<tr>
+<td>window</td>
+<td>Find overlapping intervals within a window around an interval.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="BEDTools-suite使用详细"><a href="#BEDTools-suite使用详细" class="headerlink" title="BEDTools suite使用详细"></a>BEDTools suite使用详细</h1><p>bedtools官网：</p>
+<p><a href="http://bedtools.readthedocs.io/en/latest/" target="_blank" rel="external">http://bedtools.readthedocs.io/en/latest/</a></p>
+<p>bedtools使用说明：</p>
+<p><a href="http://quinlanlab.org/tutorials/bedtools/bedtools.html#bedtools-merge" target="_blank" rel="external">http://quinlanlab.org/tutorials/bedtools/bedtools.html#bedtools-merge</a></p>
+<p>BEDTools主要使用BED格式的前三列,即：</p>
+<ul>
+<li>chrom: 染色体信息</li>
+<li>start: genome feature的起始位点，从0开始</li>
+<li>end: genome feature的终止位点，至少为1</li>
+</ul>
+<p>一般常用物种的genome file在BEDTools安装目录的/genome里面</p>
+<p>BEDPE格式是其自定义的一种新的格式，为了简洁的描述不连续的genome features，例如结构变异和双端测序比对</p>
+<p><img src="http://i.imgur.com/IkrWjCV.jpg" alt=""></p>
+<p>注意：</p>
+<ul>
+<li>start1和start2起始坐标第一个碱基都为0，所以start=9, end=20表示碱基跨度是从第10位到第20位</li>
+<li>chrom1或者chrom2用.表示unknown;start1，end1,start2,end2用-1表示unknown</li>
+</ul>
+<h2 id="（1）intersect"><a href="#（1）intersect" class="headerlink" title="（1）intersect"></a>（1）intersect</h2><p>&emsp;&emsp;可以计算两个或者多个BED/BAM/VCF/GFF文件中基因组坐标位置的交集(overlap)，根据参数不同，可以得到不同的结果。</p>
+<h3 id="两个BED文件比较图示"><a href="#两个BED文件比较图示" class="headerlink" title="两个BED文件比较图示"></a>两个BED文件比较图示</h3><p><img src="http://i.imgur.com/Ufi6ll1.jpg" alt=""></p>
+<h3 id="一对多比较图示"><a href="#一对多比较图示" class="headerlink" title="一对多比较图示"></a>一对多比较图示</h3><p><img src="http://i.imgur.com/6RXlcnP.jpg" alt=""></p>
+<h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><pre><code>bedtools intersect  -a &lt;bed/gff/vcf/bam&gt; -b &lt;bed/gff/vcf/bam&gt; [OPTIONS]
+</code></pre><ul>
+<li>-wa参数可以报告出原始的在A文件中的feature</li>
+<li>-wb参数可以报告出原始的在B文件中的feature</li>
+<li>-c参数可以报告出两个文件中的overlap的feature的数量</li>
+<li>-wo 返回overlap碱基数</li>
+<li>-v 返回非overlap区间</li>
+<li>-s 相同链上的feature</li>
+</ul>
+<p><strong>当用bedtools intersect 处理大文件时比较耗内存，有效的方法是对A和B文件按照染色体名字(chromosome)和位置(position)排序(sort -k1,1 -k2,2n),然后用-sorted参数重新intersect</strong></p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p><strong>注意，自己生成测试bed文件，都必须用tab键分割，否则会报错！！</strong></p>
+<ol>
+<li><p>案例一：包含着染色体位置的两个文件，分别记为A文件和B文件。分别来自于不同文件的染色体位置的交集是什么？</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed </p>
+<p> chr1 15 20 </p>
+</li>
+<li><p>案例二：包含着染色体位置的两个文件，分别记为A文件和B文件。求A文件中哪些染色体位置是与文件B中的染色体位置有overlap.</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -wa</p>
+<p> chr1 10 20 </p>
+</li>
+<li><p>案例三：包含着染色体位置的两个文件，分别记为A文件和B文件。求A文件中染色体位置与文件B中染色体位置的交集，以及对应的文件B中的染色体位置.</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -wb</p>
+<p> chr1 15 20 chr1 15 25</p>
+</li>
+<li><p>案例四（经用）： 包含着染色体位置的两个文件，分别记为A文件和B文件。求对于A文件的染色体位置是否与文件B中的染色体位置有交集。如果有交集，分别输入A文件的染色体位置和B文件的染色体位置；如果没有交集，输入A文件的染色体位置并以’. -1 -1’补齐文件。</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -loj</p>
+<p> chr1 10 20 chr1 15 25</p>
+<p> chr1 30 40 . -1 -1</p>
+</li>
+<li><p>案例五：  包含着染色体位置的两个文件，分别记为A文件和B文件。对于A文件中染色体位置，如果和B文件中染色体位置有overlap,则输出在A文件中染色体位置和在B文件中染色体位置，以及overlap的长度.</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 20</p>
+<p> chr1 18 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -wo</p>
+<p> chr1 10 20 chr1 15 20 5</p>
+<p> chr1 10 20 chr1 18 25 2 </p>
+</li>
+<li><p>案例六：  包含着染色体位置的两个文件，分别记为A文件和B文件。对于A文件中染色体位置，如果和B文件中染色体位置有overlap,则输出在A文件中染色体位置和在B文件中染色体位置，以及overlap的长度；如果和B文件中染色体位置都没有overlap,则用’. -1-1’补齐文件</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 20</p>
+<p> chr1 18 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -wao</p>
+<p> chr1 10 20 chr1 15 20 5</p>
+<p> chr1 10 20 chr1 18 25 2 </p>
+<p> chr1 30 40 . -1 -1</p>
+</li>
+<li><p>案例七：  包含着染色体位置的两个文件，分别记为A文件和B文件。对于A文件中染色体位置，输出在A文件中染色体位置和有多少B文件染色体位置与之有overlap.</p>
+<p> $ cat A.bed</p>
+<p> chr1 10 20</p>
+<p> chr1 30 40</p>
+<p> $ cat B.bed</p>
+<p> chr1 15 20</p>
+<p> chr1 18 25</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -c</p>
+<p> chr1 10 20 2</p>
+<p> chr1 30 40 0 </p>
+</li>
+<li><p>案例八(常用)：  包含着染色体位置的两个文件，分别记为A文件和B文件。对于A文件中染色体位置，输出在A文件中染色体位置和与B文件染色体位置至少有X%的overlap的记录。</p>
+<p> $ cat A.bed</p>
+<p> chr1 100 200</p>
+<p> $ cat B.bed</p>
+<p> chr1 130 201</p>
+<p> chr1 180 220</p>
+<p> $ bedtools intersect -a A.bed -b B.bed -f 0.50 -wa -wb  </p>
+<p> chr1 100 200 chr1 130 201 </p>
+</li>
+</ol>
+<h2 id="2-merge"><a href="#2-merge" class="headerlink" title="(2)merge"></a>(2)merge</h2><p>&emsp;&emsp;用于合并位于同一个bed/gff/vcf 文件中有overlap或者距离在一定范围内的相邻区间，距离可由参数(-d)定义。需要注意的是，做合并之前需要先对bed文件做根据染色体排序，可以用bedtoolssort命令实现。</p>
+<h3 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h3><p><img src="http://i.imgur.com/CLbhHg9.jpg" alt=""></p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools merge [OPTIONS] -i &lt;bed/gff/vcf&gt;
+</code></pre><h3 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h3><pre><code>$ cat A.bed
+
+chr2 10 20
+
+chr1 30 40
+
+chr1 15 20
+
+chr1 18 25
+</code></pre><p>排序：</p>
+<pre><code>sort -k1,1 -k2,2n A.bed &gt; A.sort.bed
+
+$ cat A.sort.bed 
+
+chr1 15 20
+
+chr1 18 25
+
+chr1 30 40
+
+chr2 10 20
+</code></pre><ol>
+<li><p>案例一：取并集</p>
+<p> bedtools merge -i A.sort.bed</p>
+<p> chr1    15    25</p>
+<p> chr1    30    40</p>
+<p> chr2    10    20</p>
+</li>
+<li><p>案例二：计算重叠区间的个数,-i 指定统计的列，-o指定操作5</p>
+<p> bedtools merge -i exons.bed -c 1 -o count</p>
+<p> chr1    15    25    2</p>
+<p> chr1    30    40    1</p>
+<p> chr2    10    20    1</p>
+</li>
+<li><p>案例三：-d 两个独立区域间距小于（等于）该值时将被合并为一个区域；-o collapse显示合并了哪些标签</p>
+<p> $ bedtools merge -i A.sort.bed -d 5 -c 1 -o count，collapse</p>
+<p> chr1    15    40    3    chr1,chr1,chr1</p>
+<p> chr2    10    20    1    chr2</p>
+</li>
+</ol>
+<h2 id="3-complement：返回基因组非覆盖区（用途，比如多轮设计panel"><a href="#3-complement：返回基因组非覆盖区（用途，比如多轮设计panel" class="headerlink" title="(3)complement：返回基因组非覆盖区（用途，比如多轮设计panel)"></a>(3)complement：返回基因组非覆盖区（用途，比如多轮设计panel)</h2><h3 id="图示-1"><a href="#图示-1" class="headerlink" title="图示"></a>图示</h3><p><img src="http://i.imgur.com/k26Ar7F.jpg" alt=""></p>
+<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools complement -i &lt;BED/GFF/VCF&gt; -g &lt;genome files&gt;
+</code></pre><h2 id="4-genomecov：染色体和全基因组覆盖度计算"><a href="#4-genomecov：染色体和全基因组覆盖度计算" class="headerlink" title="(4)genomecov：染色体和全基因组覆盖度计算"></a>(4)genomecov：染色体和全基因组覆盖度计算</h2><p>要求：单个输入bed文件（-i指定）和genome files；如果输入为bam(-ibam指定)文件，则不需要genome files</p>
+<h3 id="图示-2"><a href="#图示-2" class="headerlink" title="图示"></a>图示</h3><p><img src="http://i.imgur.com/5kHXyrU.jpg" alt=""></p>
+<h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools genomecov [OPTIONS] -i &lt;bed/gff/vcf&gt; -g &lt;genome&gt;
+</code></pre><h3 id="案例-2"><a href="#案例-2" class="headerlink" title="案例"></a>案例</h3><pre><code>$ cat ranges-cov-sorted.bed
+chr1    4       9
+chr1    1       6
+chr1    8       19
+chr1    25      30
+chr2    0       20
+
+$ cat cov.txt  （染色体及每条染色体总碱基数）
+chr1    30
+chr2    20
+
+bedtools genomecov -i ranges-cov-sorted.bed -g cov.txt
+chr1    0       7       30      0.233333 1
+chr1    1       20      30      0.666667
+chr1    2       3       30      0.1
+chr2    1       20      20      1 2
+genome  0       7       50      0.14 3
+genome  1       40      50      0.8
+genome  2       3       50      0.06
+#name 覆盖次数 覆盖碱基数 总碱基数   覆盖度
+#同时计算单染色体和全基因组覆盖度
+</code></pre><ul>
+<li>ranges-cov.bed文件需提前排序sort -k1,1 ranges-cov.bed &gt; ranges-cov-sorted.bed</li>
+<li>-bg参数可得到每个碱基的覆盖度。</li>
+</ul>
+<h2 id="5-coverage-计算染色体给定区间覆盖度，输入可以是-BAM-文件"><a href="#5-coverage-计算染色体给定区间覆盖度，输入可以是-BAM-文件" class="headerlink" title="(5)coverage 计算染色体给定区间覆盖度，输入可以是 BAM 文件"></a>(5)coverage 计算染色体给定区间覆盖度，输入可以是 BAM 文件</h2><pre><code>$ cat A.bed
+chr1  0   100
+chr1  100 200
+chr2  0   100
+
+$ cat B.bed
+chr1  10  20
+chr1  20  30
+chr1  30  40
+chr1  100 200
+
+$ bedtools coverage -a A.bed -b B.bed
+chr1  0   100  3  30  100 0.3000000
+chr1  100 200  1  100 100 1.0000000
+chr2  0   100  0  0   100 0.0000000
+#name 覆盖次数 覆盖碱基数 总碱基数   覆盖度
+</code></pre><h2 id="（6）getfasta：提取序列"><a href="#（6）getfasta：提取序列" class="headerlink" title="（6）getfasta：提取序列"></a>（6）getfasta：提取序列</h2><p>提取指定位置的 DNA 序列，也是很好用的一个功能，反向互补链也可以提，不用自己写脚本提了</p>
+<h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools getfasta [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt; -fo &lt;fasta&gt; 
+</code></pre><h3 id="案例-3"><a href="#案例-3" class="headerlink" title="案例"></a>案例</h3><p>要求：基因组fasta文件（-fi指定）,提取区间BED/GTF/GFF/VCF文件(-bed指定),输出文件FASTA（-fo 指定）</p>
+<pre><code>bedtools getfasta -fi Mus_musculus.GRCm38.75.dna_rm.toplevel_chr1.fa -bed mm_GRCm38_3kb_promoters.gtf -fo mm_GRCm38_3kb_promoters.fasta
+</code></pre><p>扩展：</p>
+<p>提取序列之samtools（速度较快）</p>
+<pre><code>#首先建立fai索引文件（第一列为染色体名字，第二列为序列碱基数）
+
+samtools faidx Mus_musculus.GRCm38.75.dna.chromosome.8.fa
+
+#序列提取，多提取区间空格隔开
+
+samtools faidx Mus_musculus.GRCm38.75.dna.chromosome.8.fa \
+ 8:123407082-123410744 8:123518835-123536649
+
+&gt;8:123407082-123410744
+GAGAAAAGCTCCCTTCTTCTCCAGAGTCCCGTCTACCCTGGCTTGGCGAGGGAAAGGAAC
+CAGACATATATCAGAGGCAAGTAACCAAGAAGTCTGGAGGTGTTGAGTTTAGGCATGTCT
+[...]
+
+&gt;8:123518835-123536649
+TCTCGCGAGGATTTGAGAACCAGCACGGGATCTAGTCGGAGTTGCCAGGAGACCGCGCAG
+CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
+[...]
+</code></pre><h2 id="nuc-计算GC含量即各碱基数"><a href="#nuc-计算GC含量即各碱基数" class="headerlink" title="nuc: 计算GC含量即各碱基数"></a>nuc: 计算GC含量即各碱基数</h2><h3 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools nuc [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt;
+</code></pre><p>Options: </p>
+<pre><code>-fi     输入FASTA文件
+
+-bed     提取区间BED/GTF/GFF/VCF文件(-bed指定)
+</code></pre><h3 id="案例-4"><a href="#案例-4" class="headerlink" title="案例"></a>案例</h3><pre><code>bedtools nuc -fi hg19.fa -bed CDS.bed
+</code></pre><p>输出结果解释：在原bed文件每行结尾增加以下几列</p>
+<p>Output format:<br>The following information will be reported after each BED entry:</p>
+<pre><code>1) %AT content
+2) %GC content
+3) Number of As observed
+4) Number of Cs observed
+5) Number of Gs observed
+6) Number of Ts observed
+7) Number of Ns observed
+8) Number of other bases observed
+9) The length of the explored sequence/interval.
+10) The seq. extracted from the FASTA file. (opt., if -seq is used)
+11) The number of times a user&apos;s pattern was observed.
+    (opt., if -pattern is used.)
+</code></pre><h1 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h1><p><a href="http://gettinggeneticsdone.blogspot.com/2014/03/visualize-coverage-exome-targeted-ngs-bedtools.html" target="_blank" rel="external">Coverage analysis for targeted DNA capture</a></p>
+<p><a href="http://www.cureffi.org/2013/11/18/an-mrna-seq-pipeline-using-gsnap-samtools-cufflinks-and-bedtools/" target="_blank" rel="external">RNA-seq coverage analysis</a></p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）王球爸的博客：</p>
+<p><a href="http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html</a></p>
+<p>（2）生信人</p>
+<p><a href="https://www.wxzhi.com/archives/871/gk4yd3ujan57e0ft/" target="_blank" rel="external">https://www.wxzhi.com/archives/871/gk4yd3ujan57e0ft/</a></p>
+<p>（3）hope</p>
+<p><a href="http://tiramisutes.github.io/2016/03/18/bedtools.html" target="_blank" rel="external">http://tiramisutes.github.io/2016/03/18/bedtools.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。&lt;/p&gt;
+&lt;p&gt;&amp;emsp;&amp;emsp;例如,bedtools可以进行取intersect（交集）, merge（并集）, count（计数）, complement（补集），以及用来对广泛使用的基因组文件格式，例如BAM, BED, GFF/GTF, VCF等进行基因组区间的转换。单个的工具设计的目的是应对简单的任务，复杂的分析能通过组合多个bedtools工具操作实现。同时，该工具允许控制输出结果的呈现形式。最初的bedtools版本支持单独的6列BED文件。但是，如今增加了对序列比对BAM文件的支持。以及GFF文件的特征，BED文件。以及VCF文件。这些工具是相当快速的，并且即使是大的数据集也可以在数秒内完成任务。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="NGS软件" scheme="https:///AnJingwd.github.io/categories/NGS%E8%BD%AF%E4%BB%B6/"/>
+    
+    
+      <category term="NGS软件" scheme="https:///AnJingwd.github.io/tags/NGS%E8%BD%AF%E4%BB%B6/"/>
     
   </entry>
   
@@ -1551,10 +2020,10 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:10:28.346Z</updated>
+    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
@@ -1718,10 +2187,10 @@ pip3.6 install numpy
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
+    <updated>2017-08-06T11:10:28.346Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>

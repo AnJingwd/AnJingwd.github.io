@@ -4,8 +4,48 @@
 
     
   <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/11/bedtools/</loc>
+    <lastmod>2017-08-19T06:33:28.531Z</lastmod>
+    <data>
+        <display>
+        <title>bedtools使用教程</title>
+        <pubTime>2017-08-11T07:14:31.000Z</pubTime>
+        
+        <tag>NGS软件</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS软件" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS%E8%BD%AF%E4%BB%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/13/%E5%A6%82%E4%BD%95%E5%86%99shell%E8%84%9A%E6%9C%AC/</loc>
+    <lastmod>2017-08-17T03:12:46.731Z</lastmod>
+    <data>
+        <display>
+        <title>如何写shell脚本</title>
+        <pubTime>2017-08-13T13:14:52.000Z</pubTime>
+        
+        <tag>shell脚本</tag>
+         
+         
+           
+             
+              <breadCrumb title="shell脚本" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/shell%E8%84%9A%E6%9C%AC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/16/linux%E8%A7%A3%E5%8E%8B%E7%BC%A9/</loc>
-    <lastmod>2017-08-16T07:58:00.273Z</lastmod>
+    <lastmod>2017-08-16T08:07:13.065Z</lastmod>
     <data>
         <display>
         <title>linux解压缩</title>
@@ -77,26 +117,6 @@
            
              
               <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/13/%E5%A6%82%E4%BD%95%E5%86%99shell%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2017-08-14T13:09:12.603Z</lastmod>
-    <data>
-        <display>
-        <title>如何写shell脚本</title>
-        <pubTime>2017-08-13T13:14:52.000Z</pubTime>
-        
-        <tag>shell脚本</tag>
-         
-         
-           
-             
-              <breadCrumb title="shell脚本" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/shell%E8%84%9A%E6%9C%AC/"/>
           
         </display>
     </data>
