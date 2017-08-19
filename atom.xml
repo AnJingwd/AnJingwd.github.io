@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-19T06:41:26.660Z</updated>
+  <updated>2017-08-19T06:51:51.763Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -16,11 +16,237 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>常用链接</title>
+    <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
+    <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
+    <published>2017-08-19T06:51:52.000Z</published>
+    <updated>2017-08-19T06:51:51.763Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="网络课程"><a href="#网络课程" class="headerlink" title="网络课程"></a>网络课程</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.coursera.org/" target="_blank" rel="external">coursera</a></td>
+<td>在网上学习全世界最好的课程</td>
+</tr>
+<tr>
+<td><a href="http://kasperdanielhansen.github.io/genbioconductor/" target="_blank" rel="external">Bioconductor for Genomic Data Science</a></td>
+<td>关于Bioconductor的网络课程，有视频，有材料</td>
+</tr>
+</tbody>
+</table>
+<h1 id="文献"><a href="#文献" class="headerlink" title="文献"></a>文献</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://apps.webofknowledge.com/UA_GeneralSearch_input.do?product=UA&amp;SID=Z249gIMNTCPIcZBS93N&amp;search_mode=GeneralSearch" target="_blank" rel="external">Web of Science</a></td>
+<td>大型综合性、多学科、核心期刊引文索引数据库</td>
+</tr>
+<tr>
+<td><a href="https://www.ncbi.nlm.nih.gov/pubmed/" target="_blank" rel="external">PubMed</a></td>
+<td>免费海量英文文献</td>
+</tr>
+<tr>
+<td><a href="http://www.cnki.net/" target="_blank" rel="external">中国知网</a></td>
+<td>中文期刊</td>
+</tr>
+<tr>
+<td><a href="http://sci-hub.cc/" target="_blank" rel="external">SCI-HUB</a></td>
+<td>收费文献免费下载</td>
+</tr>
+<tr>
+<td><a href="http://www.howsci.com/" target="_blank" rel="external">科研动力</a></td>
+<td>专注EndNote, 关注科研论文写作</td>
+</tr>
+<tr>
+<td><a href="https://www.gcbi.com.cn/gclib/html/index" target="_blank" rel="external">GCBI</a></td>
+<td>与PubMed同步并课显示影响因子</td>
+</tr>
+<tr>
+<td><a href="https://pubmedplus.com/#/index" target="_blank" rel="external">pubmedplus</a></td>
+<td>文献摘要自动翻译（翻译得比较好）</td>
+</tr>
+<tr>
+<td><a href="http://www.chinapubmed.net/" target="_blank" rel="external">China PubMed</a></td>
+<td>英文文献摘要翻译（更新不够快）</td>
+</tr>
+</tbody>
+</table>
+<h1 id="论坛"><a href="#论坛" class="headerlink" title="论坛"></a>论坛</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.cmt.com.cn/" target="_blank" rel="external">医学论坛网</a></td>
+<td>医学资讯及文献导读</td>
+</tr>
+</tbody>
+</table>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.jove.com/" target="_blank" rel="external">Journal of Visualized Experiments ( JoVE)</a></td>
+<td>JoVE是一份展示可视化实验的期刊，是世界上第一个同行评议的科技视频期刊</td>
+</tr>
+</tbody>
+</table>
+<h1 id="开发社区"><a href="#开发社区" class="headerlink" title="开发社区"></a>开发社区</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.biostars.org/" target="_blank" rel="external">Biostars</a></td>
+<td>专注于生物信息学，计算基因组学和生物数据分析的问答社区</td>
+</tr>
+<tr>
+<td><a href="https://segmentfault.com/" target="_blank" rel="external">Segmentfault</a></td>
+<td>一个专注于解决编程问题，提高开发技能的社区</td>
+</tr>
+<tr>
+<td><a href="https://stackoverflow.com/" target="_blank" rel="external">Stackoverflow</a></td>
+<td>编程相关的IT技术问答网站</td>
+</tr>
+<tr>
+<td><a href="https://github.com/" target="_blank" rel="external">GitHub</a></td>
+<td>面向开源及私有软件项目的git托管平台</td>
+</tr>
+</tbody>
+</table>
+<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://man.linuxde.net/" target="_blank" rel="external">Linux命令大全</a></td>
+<td>linux命令搜索，查看帮助</td>
+</tr>
+</tbody>
+</table>
+<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://pymotw.com/2/py-modindex.html" target="_blank" rel="external">PYMOTW</a></td>
+<td>Python2标准库的使用</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jorvis/biocode" target="_blank" rel="external">Bioinformatics code libraries and scripts</a></td>
+<td>常遇到的问题都有脚本（py/pl）</td>
+</tr>
+</tbody>
+</table>
+<h1 id="在线小工具"><a href="#在线小工具" class="headerlink" title="在线小工具"></a>在线小工具</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://tool.oschina.net/" target="_blank" rel="external">在线工具</a></td>
+<td>开源中国开发的，主要面向码农</td>
+</tr>
+<tr>
+<td><a href="http://tool.oschina.net/regex/" target="_blank" rel="external">正则表达式在线测试</a></td>
+<td>检查脚本中使用的正则表达式是否正确，提前发现问题</td>
+</tr>
+<tr>
+<td><a href="http://tool.oschina.net/commons?type=3" target="_blank" rel="external">RGB颜色对照表</a></td>
+<td>绘图配色必备</td>
+</tr>
+<tr>
+<td><a href="http://tool.oschina.net/highlight" target="_blank" rel="external">在线代码着色</a></td>
+<td>看看就好</td>
+</tr>
+<tr>
+<td><a href="http://tool.oschina.net/markdown" target="_blank" rel="external">在线 Markdown 编译器</a></td>
+<td>用着不错</td>
+</tr>
+<tr>
+<td><a href="http://tool.oschina.net/commons?type=4" target="_blank" rel="external">ASCII码对照表</a></td>
+<td>速查</td>
+</tr>
+<tr>
+<td><a href="http://tool.oschina.net/qr" target="_blank" rel="external">在线生成二维码</a></td>
+<td>比较好玩儿</td>
+</tr>
+</tbody>
+</table>
+<h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.pdfdrive.net/" target="_blank" rel="external">PDFDRIVE</a></td>
+<td>搜索下载免费的pdf电子书</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;网络课程&quot;&gt;&lt;a href=&quot;#网络课程&quot; class=&quot;headerlink&quot; title=&quot;网络课程&quot;&gt;&lt;/a&gt;网络课程&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/t
+    
+    </summary>
+    
+      <category term="常用链接" scheme="https:///AnJingwd.github.io/categories/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
+    
+    
+      <category term="常用链接" scheme="https:///AnJingwd.github.io/tags/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>bedtools使用教程详解</title>
     <link href="https:///AnJingwd.github.io/2017/08/19/bedtools%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E8%AF%A6%E8%A7%A3/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/bedtools使用教程详解/</id>
     <published>2017-08-19T06:40:56.000Z</published>
-    <updated>2017-08-19T06:41:26.660Z</updated>
+    <updated>2017-08-19T06:44:00.546Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。</p>
 <p>&emsp;&emsp;例如,bedtools可以进行取intersect（交集）, merge（并集）, count（计数）, complement（补集），以及用来对广泛使用的基因组文件格式，例如BAM, BED, GFF/GTF, VCF等进行基因组区间的转换。单个的工具设计的目的是应对简单的任务，复杂的分析能通过组合多个bedtools工具操作实现。同时，该工具允许控制输出结果的呈现形式。最初的bedtools版本支持单独的6列BED文件。但是，如今增加了对序列比对BAM文件的支持。以及GFF文件的特征，BED文件。以及VCF文件。这些工具是相当快速的，并且即使是大的数据集也可以在数秒内完成任务。</p>
@@ -210,7 +436,7 @@
 <li>start1和start2起始坐标第一个碱基都为0，所以start=9, end=20表示碱基跨度是从第10位到第20位</li>
 <li>chrom1或者chrom2用.表示unknown;start1，end1,start2,end2用-1表示unknown</li>
 </ul>
-<h2 id="（1）intersect"><a href="#（1）intersect" class="headerlink" title="（1）intersect"></a>（1）intersect</h2><p>&emsp;&emsp;可以计算两个或者多个BED/BAM/VCF/GFF文件中基因组坐标位置的交集(overlap)，根据参数不同，可以得到不同的结果。</p>
+<h2 id="1-intersect"><a href="#1-intersect" class="headerlink" title="(1)intersect"></a>(1)intersect</h2><p>&emsp;&emsp;可以计算两个或者多个BED/BAM/VCF/GFF文件中基因组坐标位置的交集(overlap)，根据参数不同，可以得到不同的结果。</p>
 <h3 id="两个BED文件比较图示"><a href="#两个BED文件比较图示" class="headerlink" title="两个BED文件比较图示"></a>两个BED文件比较图示</h3><p><img src="http://i.imgur.com/Ufi6ll1.jpg" alt=""></p>
 <h3 id="一对多比较图示"><a href="#一对多比较图示" class="headerlink" title="一对多比较图示"></a>一对多比较图示</h3><p><img src="http://i.imgur.com/6RXlcnP.jpg" alt=""></p>
 <h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><pre><code>bedtools intersect  -a &lt;bed/gff/vcf/bam&gt; -b &lt;bed/gff/vcf/bam&gt; [OPTIONS]
@@ -395,7 +621,7 @@ chr1  0   100  3  30  100 0.3000000
 chr1  100 200  1  100 100 1.0000000
 chr2  0   100  0  0   100 0.0000000
 #name 覆盖次数 覆盖碱基数 总碱基数   覆盖度
-</code></pre><h2 id="（6）getfasta：提取序列"><a href="#（6）getfasta：提取序列" class="headerlink" title="（6）getfasta：提取序列"></a>（6）getfasta：提取序列</h2><p>提取指定位置的 DNA 序列，也是很好用的一个功能，反向互补链也可以提，不用自己写脚本提了</p>
+</code></pre><h2 id="6-getfasta：提取序列"><a href="#6-getfasta：提取序列" class="headerlink" title="(6)getfasta：提取序列"></a>(6)getfasta：提取序列</h2><p>提取指定位置的 DNA 序列，也是很好用的一个功能，反向互补链也可以提，不用自己写脚本提了</p>
 <h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools getfasta [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt; -fo &lt;fasta&gt; 
 </code></pre><h3 id="案例-3"><a href="#案例-3" class="headerlink" title="案例"></a>案例</h3><p>要求：基因组fasta文件（-fi指定）,提取区间BED/GTF/GFF/VCF文件(-bed指定),输出文件FASTA（-fo 指定）</p>
 <pre><code>bedtools getfasta -fi Mus_musculus.GRCm38.75.dna_rm.toplevel_chr1.fa -bed mm_GRCm38_3kb_promoters.gtf -fo mm_GRCm38_3kb_promoters.fasta
@@ -419,7 +645,7 @@ CAGACATATATCAGAGGCAAGTAACCAAGAAGTCTGGAGGTGTTGAGTTTAGGCATGTCT
 TCTCGCGAGGATTTGAGAACCAGCACGGGATCTAGTCGGAGTTGCCAGGAGACCGCGCAG
 CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
 [...]
-</code></pre><h2 id="nuc-计算GC含量即各碱基数"><a href="#nuc-计算GC含量即各碱基数" class="headerlink" title="nuc: 计算GC含量即各碱基数"></a>nuc: 计算GC含量即各碱基数</h2><h3 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools nuc [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt;
+</code></pre><h2 id="7-nuc-计算GC含量即各碱基数"><a href="#7-nuc-计算GC含量即各碱基数" class="headerlink" title="(7)nuc: 计算GC含量即各碱基数"></a>(7)nuc: 计算GC含量即各碱基数</h2><h3 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools nuc [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt;
 </code></pre><p>Options: </p>
 <pre><code>-fi     输入FASTA文件
 
@@ -2020,10 +2246,10 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
+    <updated>2017-08-06T11:10:28.346Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
@@ -2187,10 +2413,10 @@ pip3.6 install numpy
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:10:28.346Z</updated>
+    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>

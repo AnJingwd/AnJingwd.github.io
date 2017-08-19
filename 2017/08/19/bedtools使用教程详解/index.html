@@ -110,7 +110,7 @@
 <meta property="og:image" content="http://i.imgur.com/CLbhHg9.jpg">
 <meta property="og:image" content="http://i.imgur.com/k26Ar7F.jpg">
 <meta property="og:image" content="http://i.imgur.com/5kHXyrU.jpg">
-<meta property="og:updated_time" content="2017-08-19T06:41:26.660Z">
+<meta property="og:updated_time" content="2017-08-19T06:44:00.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bedtools使用教程详解">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。 &amp;emsp;&amp;emsp;例如,bedtoo">
@@ -578,7 +578,7 @@
 <li>start1和start2起始坐标第一个碱基都为0，所以start=9, end=20表示碱基跨度是从第10位到第20位</li>
 <li>chrom1或者chrom2用.表示unknown;start1，end1,start2,end2用-1表示unknown</li>
 </ul>
-<h2 id="（1）intersect"><a href="#（1）intersect" class="headerlink" title="（1）intersect"></a>（1）intersect</h2><p>&emsp;&emsp;可以计算两个或者多个BED/BAM/VCF/GFF文件中基因组坐标位置的交集(overlap)，根据参数不同，可以得到不同的结果。</p>
+<h2 id="1-intersect"><a href="#1-intersect" class="headerlink" title="(1)intersect"></a>(1)intersect</h2><p>&emsp;&emsp;可以计算两个或者多个BED/BAM/VCF/GFF文件中基因组坐标位置的交集(overlap)，根据参数不同，可以得到不同的结果。</p>
 <h3 id="两个BED文件比较图示"><a href="#两个BED文件比较图示" class="headerlink" title="两个BED文件比较图示"></a>两个BED文件比较图示</h3><p><img src="http://i.imgur.com/Ufi6ll1.jpg" alt=""></p>
 <h3 id="一对多比较图示"><a href="#一对多比较图示" class="headerlink" title="一对多比较图示"></a>一对多比较图示</h3><p><img src="http://i.imgur.com/6RXlcnP.jpg" alt=""></p>
 <h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><pre><code>bedtools intersect  -a &lt;bed/gff/vcf/bam&gt; -b &lt;bed/gff/vcf/bam&gt; [OPTIONS]
@@ -763,7 +763,7 @@ chr1  0   100  3  30  100 0.3000000
 chr1  100 200  1  100 100 1.0000000
 chr2  0   100  0  0   100 0.0000000
 #name 覆盖次数 覆盖碱基数 总碱基数   覆盖度
-</code></pre><h2 id="（6）getfasta：提取序列"><a href="#（6）getfasta：提取序列" class="headerlink" title="（6）getfasta：提取序列"></a>（6）getfasta：提取序列</h2><p>提取指定位置的 DNA 序列，也是很好用的一个功能，反向互补链也可以提，不用自己写脚本提了</p>
+</code></pre><h2 id="6-getfasta：提取序列"><a href="#6-getfasta：提取序列" class="headerlink" title="(6)getfasta：提取序列"></a>(6)getfasta：提取序列</h2><p>提取指定位置的 DNA 序列，也是很好用的一个功能，反向互补链也可以提，不用自己写脚本提了</p>
 <h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools getfasta [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt; -fo &lt;fasta&gt; 
 </code></pre><h3 id="案例-3"><a href="#案例-3" class="headerlink" title="案例"></a>案例</h3><p>要求：基因组fasta文件（-fi指定）,提取区间BED/GTF/GFF/VCF文件(-bed指定),输出文件FASTA（-fo 指定）</p>
 <pre><code>bedtools getfasta -fi Mus_musculus.GRCm38.75.dna_rm.toplevel_chr1.fa -bed mm_GRCm38_3kb_promoters.gtf -fo mm_GRCm38_3kb_promoters.fasta
@@ -787,7 +787,7 @@ CAGACATATATCAGAGGCAAGTAACCAAGAAGTCTGGAGGTGTTGAGTTTAGGCATGTCT
 TCTCGCGAGGATTTGAGAACCAGCACGGGATCTAGTCGGAGTTGCCAGGAGACCGCGCAG
 CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
 [...]
-</code></pre><h2 id="nuc-计算GC含量即各碱基数"><a href="#nuc-计算GC含量即各碱基数" class="headerlink" title="nuc: 计算GC含量即各碱基数"></a>nuc: 计算GC含量即各碱基数</h2><h3 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools nuc [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt;
+</code></pre><h2 id="7-nuc-计算GC含量即各碱基数"><a href="#7-nuc-计算GC含量即各碱基数" class="headerlink" title="(7)nuc: 计算GC含量即各碱基数"></a>(7)nuc: 计算GC含量即各碱基数</h2><h3 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools nuc [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt;
 </code></pre><p>Options: </p>
 <pre><code>-fi     输入FASTA文件
 
@@ -862,6 +862,10 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/08/19/常用链接（持续更新）/" rel="prev" title="常用链接">
+                常用链接 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -961,7 +965,7 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -972,7 +976,7 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -983,7 +987,7 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1214,7 +1218,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我们用bedtools都可以做些啥"><span class="nav-number">1.</span> <span class="nav-text">我们用bedtools都可以做些啥?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BEDTools-suite使用详细"><span class="nav-number">2.</span> <span class="nav-text">BEDTools suite使用详细</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）intersect"><span class="nav-number">2.1.</span> <span class="nav-text">（1）intersect</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两个BED文件比较图示"><span class="nav-number">2.1.1.</span> <span class="nav-text">两个BED文件比较图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对多比较图示"><span class="nav-number">2.1.2.</span> <span class="nav-text">一对多比较图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法："><span class="nav-number">2.1.3.</span> <span class="nav-text">语法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例"><span class="nav-number">2.1.4.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-merge"><span class="nav-number">2.2.</span> <span class="nav-text">(2)merge</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图示"><span class="nav-number">2.2.1.</span> <span class="nav-text">图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.2.2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-complement：返回基因组非覆盖区（用途，比如多轮设计panel"><span class="nav-number">2.3.</span> <span class="nav-text">(3)complement：返回基因组非覆盖区（用途，比如多轮设计panel)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图示-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-genomecov：染色体和全基因组覆盖度计算"><span class="nav-number">2.4.</span> <span class="nav-text">(4)genomecov：染色体和全基因组覆盖度计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图示-2"><span class="nav-number">2.4.1.</span> <span class="nav-text">图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-2"><span class="nav-number">2.4.2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-2"><span class="nav-number">2.4.3.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-coverage-计算染色体给定区间覆盖度，输入可以是-BAM-文件"><span class="nav-number">2.5.</span> <span class="nav-text">(5)coverage 计算染色体给定区间覆盖度，输入可以是 BAM 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（6）getfasta：提取序列"><span class="nav-number">2.6.</span> <span class="nav-text">（6）getfasta：提取序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-3"><span class="nav-number">2.6.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-3"><span class="nav-number">2.6.2.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nuc-计算GC含量即各碱基数"><span class="nav-number">2.7.</span> <span class="nav-text">nuc: 计算GC含量即各碱基数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-4"><span class="nav-number">2.7.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-4"><span class="nav-number">2.7.2.</span> <span class="nav-text">案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级用法"><span class="nav-number">3.</span> <span class="nav-text">高级用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">4.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我们用bedtools都可以做些啥"><span class="nav-number">1.</span> <span class="nav-text">我们用bedtools都可以做些啥?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BEDTools-suite使用详细"><span class="nav-number">2.</span> <span class="nav-text">BEDTools suite使用详细</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-intersect"><span class="nav-number">2.1.</span> <span class="nav-text">(1)intersect</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两个BED文件比较图示"><span class="nav-number">2.1.1.</span> <span class="nav-text">两个BED文件比较图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对多比较图示"><span class="nav-number">2.1.2.</span> <span class="nav-text">一对多比较图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法："><span class="nav-number">2.1.3.</span> <span class="nav-text">语法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例"><span class="nav-number">2.1.4.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-merge"><span class="nav-number">2.2.</span> <span class="nav-text">(2)merge</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图示"><span class="nav-number">2.2.1.</span> <span class="nav-text">图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.2.2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-complement：返回基因组非覆盖区（用途，比如多轮设计panel"><span class="nav-number">2.3.</span> <span class="nav-text">(3)complement：返回基因组非覆盖区（用途，比如多轮设计panel)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图示-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-genomecov：染色体和全基因组覆盖度计算"><span class="nav-number">2.4.</span> <span class="nav-text">(4)genomecov：染色体和全基因组覆盖度计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图示-2"><span class="nav-number">2.4.1.</span> <span class="nav-text">图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-2"><span class="nav-number">2.4.2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-2"><span class="nav-number">2.4.3.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-coverage-计算染色体给定区间覆盖度，输入可以是-BAM-文件"><span class="nav-number">2.5.</span> <span class="nav-text">(5)coverage 计算染色体给定区间覆盖度，输入可以是 BAM 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-getfasta：提取序列"><span class="nav-number">2.6.</span> <span class="nav-text">(6)getfasta：提取序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-3"><span class="nav-number">2.6.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-3"><span class="nav-number">2.6.2.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-nuc-计算GC含量即各碱基数"><span class="nav-number">2.7.</span> <span class="nav-text">(7)nuc: 计算GC含量即各碱基数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-4"><span class="nav-number">2.7.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-4"><span class="nav-number">2.7.2.</span> <span class="nav-text">案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级用法"><span class="nav-number">3.</span> <span class="nav-text">高级用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">4.</span> <span class="nav-text">参考：</span></a></li></ol></div>
             
 
           </div>
@@ -1262,7 +1266,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共25.1k字</span>
+  <span class="post-count">博客全站共25.5k字</span>
 </div>
 
 <div class="powered-by">
