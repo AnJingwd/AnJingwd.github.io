@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-19T06:54:54.068Z</updated>
+  <updated>2017-08-19T10:25:59.308Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,93 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何优雅的生成及遍历python嵌套字典</title>
+    <link href="https:///AnJingwd.github.io/2017/08/19/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%94%9F%E6%88%90python%E5%B5%8C%E5%A5%97%E5%AD%97%E5%85%B8/"/>
+    <id>https:///AnJingwd.github.io/2017/08/19/如何优雅的生成python嵌套字典/</id>
+    <published>2017-08-19T07:41:32.000Z</published>
+    <updated>2017-08-19T10:25:59.308Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">如何优雅的生成及遍历python嵌套字典</blockquote>
+
+<a id="more"></a>
+<h1 id="嵌套字典生成"><a href="#嵌套字典生成" class="headerlink" title="嵌套字典生成"></a>嵌套字典生成</h1><h2 id="方法一-定义类"><a href="#方法一-定义类" class="headerlink" title="方法一:定义类"></a>方法一:定义类</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vividict</span><span class="params">(dict)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__missing__</span><span class="params">(self, key)</span>:</span></div><div class="line">		value = self[key] = type(self)()</div><div class="line">		<span class="keyword">return</span> value</div></pre></td></tr></table></figure>
+<p>解释：</p>
+<ul>
+<li>第一行：class后面紧接着是类名，即Vividict，类名通常是大写开头的单词，紧接着是(dict)，表示该类是dict类继承下来的。</li>
+</ul>
+<p>我们可以使用dir(dict）查看dict的方法</p>
+<pre><code>In[22]: print(dir(dict))
+[&apos;__class__&apos;, &apos;__contains__&apos;, &apos;__delattr__&apos;, &apos;__delitem__&apos;, &apos;__dir__&apos;, &apos;__doc__&apos;, &apos;__eq__&apos;, &apos;__format__&apos;, &apos;__ge__&apos;, &apos;__getattribute__&apos;, &apos;__getitem__&apos;, &apos;__gt__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__iter__&apos;, &apos;__le__&apos;, &apos;__len__&apos;, &apos;__lt__&apos;, &apos;__ne__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__setitem__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;clear&apos;, &apos;copy&apos;, &apos;fromkeys&apos;, &apos;get&apos;, &apos;items&apos;, &apos;keys&apos;, &apos;pop&apos;, &apos;popitem&apos;, &apos;setdefault&apos;, &apos;update&apos;, &apos;values&apos;]
+</code></pre><p>同理，可以查看Vividict的方法</p>
+<pre><code>In[23]: print(dir(Vividict))
+[&apos;__class__&apos;, &apos;__contains__&apos;, &apos;__delattr__&apos;, &apos;__delitem__&apos;, &apos;__dict__&apos;, &apos;__dir__&apos;, &apos;__doc__&apos;, &apos;__eq__&apos;, &apos;__format__&apos;, &apos;__ge__&apos;, &apos;__getattribute__&apos;, &apos;__getitem__&apos;, &apos;__gt__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__iter__&apos;, &apos;__le__&apos;, &apos;__len__&apos;, &apos;__lt__&apos;, &apos;__missing__&apos;, &apos;__module__&apos;, &apos;__ne__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__setitem__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;__weakref__&apos;, &apos;clear&apos;, &apos;copy&apos;, &apos;fromkeys&apos;, &apos;get&apos;, &apos;items&apos;, &apos;keys&apos;, &apos;pop&apos;, &apos;popitem&apos;, &apos;setdefault&apos;, &apos;update&apos;, &apos;values&apos;]
+</code></pre><p>比较两者可以发现，Vividict的方法比dict的方法多了一个<strong>missing</strong>方法，也就是我们添加的方法。所以这就是继承，继承最大的好处是子类获得了父类的全部功能，而不必重新造轮子。</p>
+<ul>
+<li><p>第二行：python魔法方法中的自定义序列，类似于定义一个函数。<strong>missing</strong> 在字典的子类中使用，它定义了当试图访问一个字典中不存在的键时的行为（目前为止是指字典的实例，例如我有一个字典 d ， “george” 不是字典中的一个键，当试图访问 d[‘george’] 时就会调用 d.<strong>missing</strong>(“george”)，结果为{} ）。</p>
+</li>
+<li><p>第三行，第四行：访问字典中不存在的键(key)时，返回空字典作为其返回值（value）</p>
+</li>
+</ul>
+<p>例如：</p>
+<pre><code>In[17]: a = dict()
+In[18]: type(a)()
+Out[18]: 
+{}
+</code></pre><p>注意：</p>
+<ul>
+<li>特殊方法“missing”前后有两个下划线！！！</li>
+<li>和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。</li>
+</ul>
+<p>使用：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="comment">#导入模块</span></div><div class="line"><span class="keyword">import</span> os, openpyxl</div><div class="line"><span class="keyword">import</span> pprint</div><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> DataFrame</div><div class="line"></div><div class="line"><span class="comment">#pprint模块可以输出漂亮的字典结构，但是不利于后期利用R作图</span></div><div class="line"><span class="comment">#DataFrame可以将字典结构转为数据框输出，方便后期利用R作图</span></div><div class="line"></div><div class="line"><span class="comment">#切换工作路径</span></div><div class="line">os.chdir(<span class="string">r'F:\pycharm_project\mutation_count'</span>)</div><div class="line"></div><div class="line"><span class="comment">#读取excel表格</span></div><div class="line">wb = openpyxl.load_workbook(<span class="string">'东方肝胆数据综合.xlsx'</span>)</div><div class="line">sheet = wb.active</div><div class="line"></div><div class="line"><span class="comment">#定义类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vividict</span><span class="params">(dict)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__missing__</span><span class="params">(self, key)</span>:</span></div><div class="line">		value = self[key] = type(self)()</div><div class="line">		<span class="keyword">return</span> value</div><div class="line"></div><div class="line"><span class="comment">#实例化</span></div><div class="line">d = Vividict()</div><div class="line"></div><div class="line"><span class="comment">#字典初始化，赋初值0</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,sheet.max_row+<span class="number">1</span>):</div><div class="line">	d[sheet.cell(row=i, column=<span class="number">1</span>).value][sheet.cell(row=i, column=<span class="number">15</span>).value] = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="comment">#累加统计各个样本各种突变类型的数目</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,sheet.max_row+<span class="number">1</span>):</div><div class="line">	d[sheet.cell(row=i, column=<span class="number">1</span>).value][sheet.cell(row=i, column=<span class="number">15</span>).value] +=<span class="number">1</span></div><div class="line"></div><div class="line">pprint.pprint(d)</div><div class="line"></div><div class="line"><span class="comment">#输出字典结构</span></div><div class="line"></div><div class="line">pprint.pprint(d)</div><div class="line"></div><div class="line">&#123;<span class="string">'PDC1279A_vs_PDC1279'</span>: &#123;<span class="string">'UTR3'</span>: <span class="number">9</span>,</div><div class="line">                         <span class="string">'UTR5'</span>: <span class="number">4</span>,</div><div class="line">                         <span class="string">'downstream'</span>: <span class="number">5</span>,</div><div class="line">                         <span class="string">'exonic'</span>: <span class="number">149</span>,</div><div class="line">                         <span class="string">'intergenic'</span>: <span class="number">170</span>,</div><div class="line">                         <span class="string">'intronic'</span>: <span class="number">163</span>,</div><div class="line">                         <span class="string">'ncRNA_exonic'</span>: <span class="number">17</span>,</div><div class="line">                         <span class="string">'ncRNA_intronic'</span>: <span class="number">23</span>,</div><div class="line">                         <span class="string">'splicing'</span>: <span class="number">2</span>,</div><div class="line">                         <span class="string">'upstream;downstream'</span>: <span class="number">2</span>&#125;,</div><div class="line"> <span class="string">'PDC1279C_vs_PDC1279'</span>: &#123;<span class="string">'UTR3'</span>: <span class="number">11</span>,</div><div class="line">                         <span class="string">'UTR5'</span>: <span class="number">13</span>,</div><div class="line">                         <span class="string">'downstream'</span>: <span class="number">1</span>,</div><div class="line">                         <span class="string">'exonic'</span>: <span class="number">174</span>,</div><div class="line">                         <span class="string">'intergenic'</span>: <span class="number">189</span>,</div><div class="line">                         <span class="string">'intronic'</span>: <span class="number">172</span>,</div><div class="line">                         <span class="string">'ncRNA_exonic'</span>: <span class="number">24</span>,</div><div class="line">                         <span class="string">'ncRNA_intronic'</span>: <span class="number">36</span>,</div><div class="line">                         <span class="string">'splicing'</span>: <span class="number">4</span>,</div><div class="line">                         <span class="string">'upstream'</span>: <span class="number">2</span>,</div><div class="line">                         <span class="string">'upstream;downstream'</span>: <span class="number">2</span>&#125;&#125;</div><div class="line"></div><div class="line"><span class="comment">#输出数据框结构，缺损的元素用 NaN补齐</span></div><div class="line"></div><div class="line">frame = DataFrame(d)</div><div class="line">print(frame)</div><div class="line"></div><div class="line">                     PDC1279A_vs_PDC1279  PDC1279C_vs_PDC1279  \</div><div class="line">UTR3                                 <span class="number">9.0</span>                 <span class="number">11.0</span>   </div><div class="line">UTR5                                 <span class="number">4.0</span>                 <span class="number">13.0</span>   </div><div class="line">downstream                           <span class="number">5.0</span>                  <span class="number">1.0</span>   </div><div class="line">exonic                             <span class="number">149.0</span>                <span class="number">174.0</span>   </div><div class="line">exonic;splicing                      NaN                  NaN   </div><div class="line">intergenic                         <span class="number">170.0</span>                <span class="number">189.0</span>   </div><div class="line">intronic                           <span class="number">163.0</span>                <span class="number">172.0</span>   </div><div class="line">ncRNA_exonic                        <span class="number">17.0</span>                 <span class="number">24.0</span>   </div><div class="line">ncRNA_intronic                      <span class="number">23.0</span>                 <span class="number">36.0</span>   </div><div class="line">ncRNA_splicing                       NaN                  NaN   </div><div class="line">splicing                             <span class="number">2.0</span>                  <span class="number">4.0</span>   </div><div class="line">upstream                             NaN                  <span class="number">2.0</span>   </div><div class="line">upstream;downstream                  <span class="number">2.0</span>                  <span class="number">2.0</span></div></pre></td></tr></table></figure>
+<h2 id="方法二：使用defaultdict"><a href="#方法二：使用defaultdict" class="headerlink" title="方法二：使用defaultdict()"></a>方法二：使用defaultdict()</h2><p>两个维度字典：</p>
+<pre><code>from collections import defaultdict
+
+d = defaultdict(defaultdict)
+d[1][2] = 3
+</code></pre><p>等价于：</p>
+<pre><code>from collections import defaultdict
+
+def nested_dict_factory(): 
+    return defaultdict(int)
+def nested_dict_factory2(): 
+    return defaultdict(nested_dict_factory)
+
+db = defaultdict(nested_dict_factory2)
+</code></pre><p>当然，第一种方法简洁的多！</p>
+<p>要获得更多维度，你可以（三维）：</p>
+<pre><code>from collections import defaultdict
+d = defaultdict(lambda :defaultdict(defaultdict))
+d[1][2][3] = 4
+</code></pre><p>使用defaultdict任何未定义的key都会默认返回一个根据method_factory参数不同的默认值, 而相同情况下dict()会返回KeyError.</p>
+<p>python中lambda存在意义就是对简单函数的简洁表示</p>
+<p>实际上 defaultdict也是通过<strong>missing</strong>方法实现的。defaultdict在dict的基础上添加了一个missing(key)方法, 在调用一个不存的key的时候, defaultdict会调用<strong>missing</strong>, 返回一个根据default_factory参数的默认值, 所以不会返回Keyerror.</p>
+<pre><code>In[35]: print(dir(defaultdict))
+[&apos;__class__&apos;, &apos;__contains__&apos;, &apos;__copy__&apos;, &apos;__delattr__&apos;, &apos;__delitem__&apos;, &apos;__dir__&apos;, &apos;__doc__&apos;, &apos;__eq__&apos;, &apos;__format__&apos;, &apos;__ge__&apos;, &apos;__getattribute__&apos;, &apos;__getitem__&apos;, &apos;__gt__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__iter__&apos;, &apos;__le__&apos;, &apos;__len__&apos;, &apos;__lt__&apos;, &apos;__missing__&apos;, &apos;__ne__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__setitem__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;clear&apos;, &apos;copy&apos;, &apos;default_factory&apos;, &apos;fromkeys&apos;, &apos;get&apos;, &apos;items&apos;, &apos;keys&apos;, &apos;pop&apos;, &apos;popitem&apos;, &apos;setdefault&apos;, &apos;update&apos;, &apos;values&apos;]
+</code></pre><h1 id="嵌套字典的遍历"><a href="#嵌套字典的遍历" class="headerlink" title="嵌套字典的遍历"></a>嵌套字典的遍历</h1><h2 id="方法一：一层一层的嵌套迭代-从而实现遍历"><a href="#方法一：一层一层的嵌套迭代-从而实现遍历" class="headerlink" title="方法一：一层一层的嵌套迭代,从而实现遍历"></a>方法一：一层一层的嵌套迭代,从而实现遍历</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> d.items():</div><div class="line">    <span class="keyword">for</span> key2, val2 <span class="keyword">in</span> value.items():</div><div class="line">        <span class="keyword">print</span> (key2, val2)</div></pre></td></tr></table></figure>
+<h1 id="在类中定义walk方法实现嵌套字典的遍历"><a href="#在类中定义walk方法实现嵌套字典的遍历" class="headerlink" title="在类中定义walk方法实现嵌套字典的遍历"></a>在类中定义walk方法实现嵌套字典的遍历</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vividict</span><span class="params">(dict)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__missing__</span><span class="params">(self, key)</span>:</span></div><div class="line">		value = self[key] = type(self)()</div><div class="line">		<span class="keyword">return</span> value</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">walk</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">for</span> key, value <span class="keyword">in</span> self.items():</div><div class="line">			<span class="keyword">if</span> isinstance(value, Vividict):</div><div class="line">				<span class="keyword">for</span> tup <span class="keyword">in</span> value.walk():</div><div class="line">					<span class="keyword">yield</span> (key,) + tup</div><div class="line">			<span class="keyword">else</span>:</div><div class="line">				<span class="keyword">yield</span> key, value</div></pre></td></tr></table></figure>
+<p>解释:<br>第1-4行：上面已经解释过了<br>第5-11行：定义一个walk函数，并对字典items对象的key和value进行遍历，isinstance用于判断对象类型，如果value是一个字典，那么对value调用walk（）方法继续进行遍历，一层一层将key,value存储在元祖中（）。当最里面一层，即else情况，输出key,value。整个过程即<strong>将字典数据结构扁平化为元祖</strong></p>
+<p>此时，我们可以这样来遍历字典（输出元祖）</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#打印整个元祖</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> tup <span class="keyword">in</span> d.walk():</div><div class="line">	print(tup)</div><div class="line"></div><div class="line">(<span class="string">'PDC1279_vs_PDC1279C6'</span>, <span class="string">'downstream'</span>, <span class="number">3</span>)</div><div class="line">(<span class="string">'PDC1279_vs_PDC1279C6'</span>, <span class="string">'UTR3'</span>, <span class="number">11</span>)</div><div class="line">(<span class="string">'PDC1279_vs_PDC1279C6'</span>, <span class="string">'intronic'</span>, <span class="number">164</span>)</div><div class="line">(<span class="string">'PDC1279_vs_PDC1279C6'</span>, <span class="string">'splicing'</span>, <span class="number">4</span>)</div><div class="line"></div><div class="line">**这就是扁平化的字典**</div><div class="line"></div><div class="line"><span class="comment">#打印元祖的第3列</span></div><div class="line"><span class="keyword">for</span> tup <span class="keyword">in</span> d.walk():</div><div class="line">	print(tup[<span class="number">2</span>])</div></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://ask.helplib.com/229754" target="_blank" rel="external">https://ask.helplib.com/229754</a></p>
+<p>（2）Python魔法方法指南（推荐阅读）</p>
+<p><a href="http://pyzh.readthedocs.io/en/latest/python-magic-methods-guide.html" target="_blank" rel="external">http://pyzh.readthedocs.io/en/latest/python-magic-methods-guide.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;如何优雅的生成及遍历python嵌套字典&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="https:///AnJingwd.github.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>常用链接（持续更新）</title>
@@ -2243,10 +2330,10 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
+    <updated>2017-08-06T11:10:28.346Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
@@ -2410,10 +2497,10 @@ pip3.6 install numpy
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:10:28.346Z</updated>
+    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
