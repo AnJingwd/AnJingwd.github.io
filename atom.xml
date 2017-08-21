@@ -85,7 +85,7 @@
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-08-19T06:54:54.068Z</updated>
+    <updated>2017-08-20T01:49:48.041Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -247,6 +247,10 @@
 <tr>
 <td><a href="http://tool.oschina.net/" target="_blank" rel="external">在线工具</a></td>
 <td>开源中国开发的，主要面向码农</td>
+</tr>
+<tr>
+<td><a href="https://smallpdf.com/" target="_blank" rel="external">smallpdf</a></td>
+<td>pdf转word等，在线工具</td>
 </tr>
 <tr>
 <td><a href="http://tool.oschina.net/regex/" target="_blank" rel="external">正则表达式在线测试</a></td>
@@ -2277,10 +2281,10 @@ alias picard=&quot;java -jar $PICARD&quot;
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:10:28.346Z</updated>
+    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
@@ -2444,10 +2448,10 @@ pip3.6 install numpy
   
   <entry>
     <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
+    <link href="https:///AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
+    <updated>2017-08-06T11:10:28.346Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
