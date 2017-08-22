@@ -85,7 +85,7 @@
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-08-20T01:49:48.041Z</updated>
+    <updated>2017-08-22T06:00:11.998Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -105,6 +105,20 @@
 <tr>
 <td><a href="http://kasperdanielhansen.github.io/genbioconductor/" target="_blank" rel="external">Bioconductor for Genomic Data Science</a></td>
 <td>关于Bioconductor的网络课程，有视频，有材料</td>
+</tr>
+</tbody>
+</table>
+<h1 id="生信数据库"><a href="#生信数据库" class="headerlink" title="生信数据库"></a>生信数据库</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.snpedia.com" target="_blank" rel="external">SNPedia</a></td>
+<td>SNP与人类疾病，人群频率，文献报道</td>
 </tr>
 </tbody>
 </table>
@@ -161,6 +175,18 @@
 <tr>
 <td><a href="http://www.cmt.com.cn/" target="_blank" rel="external">医学论坛网</a></td>
 <td>医学资讯及文献导读</td>
+</tr>
+<tr>
+<td><a href="http://www.seqanswers.com/" target="_blank" rel="external">seqanswer</a></td>
+<td>关于测序的一个论坛</td>
+</tr>
+<tr>
+<td><a href="https://www.plob.org/" target="_blank" rel="external">PLoB</a></td>
+<td>Public Library of Bioinformatics (中文博客)</td>
+</tr>
+<tr>
+<td><a href="http://www.rna-seqblog.com/" target="_blank" rel="external">rna-seqblog</a></td>
+<td>RNA-seq英文博客</td>
 </tr>
 </tbody>
 </table>
