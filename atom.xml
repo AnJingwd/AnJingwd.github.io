@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-25T12:43:47.480Z</updated>
+  <updated>2017-08-25T12:21:17.069Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -17,12 +17,26 @@
   
   <entry>
     <title>使用bash脚本下载和处理基因表达数据</title>
+    <link href="https:///AnJingwd.github.io/2017/08/25/%E4%BD%BF%E7%94%A8bash%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%A4%84%E7%90%86%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E6%95%B0%E6%8D%AE/"/>
+    <id>https:///AnJingwd.github.io/2017/08/25/使用bash脚本下载和处理基因表达数据/</id>
+    <published>2017-08-25T12:21:17.000Z</published>
+    <updated>2017-08-25T12:21:17.069Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>使用bash脚本下载和处理基因表达数据</title>
     <link href="https:///AnJingwd.github.io/2017/08/25/%E4%BD%BF%E7%94%A8bash%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%A4%84%E7%90%86NGS%E6%95%B0%E6%8D%AE/"/>
     <id>https:///AnJingwd.github.io/2017/08/25/使用bash脚本下载和处理NGS数据/</id>
     <published>2017-08-25T12:21:17.000Z</published>
-    <updated>2017-08-25T12:43:47.480Z</updated>
+    <updated>2017-08-25T12:46:14.238Z</updated>
     
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">使用bash脚本从ArrayExpress下载和处理基因表达数据（去接头和质控）</blockquote>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">使用bash脚本从ArrayExpress下载和处理基因表达数据（去接头和质控），也就是练习写生信分析pipline</blockquote>
 
 <a id="more"></a>
 <h1 id="ArrayExpress数据库简介"><a href="#ArrayExpress数据库简介" class="headerlink" title="ArrayExpress数据库简介"></a>ArrayExpress数据库简介</h1><p>&emsp;&emsp;<strong>ArrayExpress是EBI的微阵列实验和基因表达谱的公共数据库</strong>，它是一个一般的基因表达数据库，设计用来保存来自所有微阵列平台的数据。ArrayExpress使用MIAME(Minimum Information About a Microarray Experiment，有关微阵列实验的最小化信息)注释标准及相关的XML数据交换格式MAGE-ML(Microarray Gene Expression Markup Language，微阵列基因表达标记语言)，它被设计成以结构化的方式来存储良好注释的数据。ArrayExpress基础结构由数据库本身，以MAGE-ML格式的数据提交或通过在线的提交工具MIAMExpress，在线数据库查询接口，Expression Profiler在线分析工具组成。<strong>ArrayExpress提供三种类型的提交，阵列，实验和实验方案，它们中的每一个都分配一个登录号。</strong>数据提交和注释的帮助由监管小组提供。<strong>数据库可以用诸如作者，实验室，物种，试验或阵列类型等参数进行查询。</strong> 随着越来越多的(an increasing number of)组织采用MAGE-ML标准，提交到ArrayExpress的量在快速增长着。</p>
@@ -90,7 +104,7 @@
     
     <summary type="html">
     
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;使用bash脚本从ArrayExpress下载和处理基因表达数据（去接头和质控）&lt;/blockquote&gt;
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;使用bash脚本从ArrayExpress下载和处理基因表达数据（去接头和质控），也就是练习写生信分析pipline&lt;/blockquote&gt;
     
     </summary>
     
@@ -98,20 +112,6 @@
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用bash脚本下载和处理基因表达数据</title>
-    <link href="https:///AnJingwd.github.io/2017/08/25/%E4%BD%BF%E7%94%A8bash%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%A4%84%E7%90%86%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E6%95%B0%E6%8D%AE/"/>
-    <id>https:///AnJingwd.github.io/2017/08/25/使用bash脚本下载和处理基因表达数据/</id>
-    <published>2017-08-25T12:21:17.000Z</published>
-    <updated>2017-08-25T12:21:17.069Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
     
   </entry>
   
