@@ -224,7 +224,7 @@
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-08-25T13:07:34.005Z</updated>
+    <updated>2017-08-25T14:40:38.352Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -260,6 +260,10 @@
 <tr>
 <td><a href="https://cbsu.tc.cornell.edu/workshops.aspx" target="_blank" rel="external">Workshops</a></td>
 <td>康奈尔大学生信课件（2010-2017）</td>
+</tr>
+<tr>
+<td><a href="https://webext.pasteur.fr/tekaia/BGA_courses.html" target="_blank" rel="external">Bioinformatics and Genome Analyses Courses</a></td>
+<td>巴斯德研究所2005-2017生信课程全集</td>
 </tr>
 <tr>
 <td><a href="http://petang.cgu.edu.tw/Bioinfomatics/" target="_blank" rel="external">CGU-GIBMS</a></td>
@@ -558,6 +562,20 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="http://espript.ibcp.fr/ESPript/cgi-bin/ESPript.cgi" target="_blank" rel="external">ESPript</a></td>
+<td>美得令人心动的序列显示工具</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td><a href="http://tool.oschina.net/" target="_blank" rel="external">在线工具</a></td>
 <td>开源中国开发的，主要面向码农</td>
 </tr>
@@ -624,6 +642,40 @@
 <tr>
 <td>[新媒体管家]（<a href="https://xmt.cn/plugin/install?from=install）" target="_blank" rel="external">https://xmt.cn/plugin/install?from=install）</a></td>
 <td>微信公众号排版及扩展功能</td>
+</tr>
+</tbody>
+</table>
+<h1 id="生信软件"><a href="#生信软件" class="headerlink" title="生信软件"></a>生信软件</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://tiramisutes.github.io/2015/08/05/bio-online.html#%E8%B7%A8%E8%86%9C%E7%BB%93%E6%9E%84%E5%9F%9F" target="_blank" rel="external">hope的博客总结</a></td>
+<td>常用生物信息在线工具</td>
+</tr>
+<tr>
+<td><a href="http://www.bio-info-club.com/?p=95" target="_blank" rel="external">生信客部落总结</a></td>
+<td>生物信息工具整合(包含在线工具与离线工具)</td>
+</tr>
+<tr>
+<td><a href="http://www.uzzf.com/soft/186393.html" target="_blank" rel="external">Pathway Builder Tool</a></td>
+<td>零基础也能画出超酷信号通路图</td>
+</tr>
+<tr>
+<td><a href="http://cytoscape.org/" target="_blank" rel="external">cytoscape</a></td>
+<td>相互作用网络绘图</td>
+</tr>
+<tr>
+<td><a href="http://itol.embl.de/help.cgi" target="_blank" rel="external">ITOL</a></td>
+<td>进化树后期编辑神器</td>
+</tr>
+<tr>
+<td><a href="http://www.evolgenius.info/evolview/#login" target="_blank" rel="external">EVOLVIEW</a></td>
+<td>进化树编辑，编程加多层注释圈儿 </td>
 </tr>
 </tbody>
 </table>
