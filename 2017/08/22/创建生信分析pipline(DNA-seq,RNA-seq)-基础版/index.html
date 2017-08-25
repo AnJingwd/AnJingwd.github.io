@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="创建生信分析pipline（dna-seq/rna-seq）-基础版">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-25T13:30:08.096Z">
+<meta property="og:updated_time" content="2017-08-25T13:40:40.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建生信分析pipline（dna-seq&#x2F;rna-seq）-基础版">
 <meta name="twitter:description" content="创建生信分析pipline（dna-seq/rna-seq）-基础版">
@@ -405,7 +405,7 @@
 <p>  source step1-prep_mkdir_cp.sh</p>
 </li>
 </ul>
-<p>（用source而不用sh是因为step1-prep_mkdir_cp.sh有添加环境变量的步骤，sh 对添加环境变量没用）</p>
+<p><strong>（用source而不用sh是因为step1-prep_mkdir_cp.sh有添加环境变量的步骤，sh 对添加环境变量没用）</strong></p>
 <ol>
 <li>安装相关的分析工具</li>
 </ol>
@@ -425,8 +425,6 @@
 <ul>
 <li>上述命令是软件最初版本用法，软件版本更新用法会变化</li>
 </ul>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）Bioinformatics Data Skills (2015)</p>
-<p><a href="http://apprize.info/data/bioinformatics/12.html" target="_blank" rel="external">http://apprize.info/data/bioinformatics/12.html</a></p>
 
       
     </div>
@@ -577,7 +575,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -830,7 +828,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dna-seq"><span class="nav-number">1.</span> <span class="nav-text">dna-seq</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立项目文件系统-step1-prep-mkdir-cp-sh"><span class="nav-number">1.1.</span> <span class="nav-text">建立项目文件系统(step1-prep_mkdir_cp.sh)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装软件（step2-install-software-sh）"><span class="nav-number">1.2.</span> <span class="nav-text">安装软件（step2-install_software.sh）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step3-snp-calling-sh"><span class="nav-number">1.3.</span> <span class="nav-text">step3-snp_calling.sh</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rna-seq"><span class="nav-number">2.</span> <span class="nav-text">rna-seq</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立项目文件系统及软件安装（step1-prep-install-sh）"><span class="nav-number">2.1.</span> <span class="nav-text">建立项目文件系统及软件安装（step1-prep_install.sh）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测序数据质量评估-step2-quality-control-sh"><span class="nav-number">2.2.</span> <span class="nav-text">测序数据质量评估(step2-quality_control.sh)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step3-tophat-cuffdiff-sh"><span class="nav-number">2.3.</span> <span class="nav-text">(step3-tophat_cuffdiff.sh)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">3.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dna-seq"><span class="nav-number">1.</span> <span class="nav-text">dna-seq</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立项目文件系统-step1-prep-mkdir-cp-sh"><span class="nav-number">1.1.</span> <span class="nav-text">建立项目文件系统(step1-prep_mkdir_cp.sh)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装软件（step2-install-software-sh）"><span class="nav-number">1.2.</span> <span class="nav-text">安装软件（step2-install_software.sh）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step3-snp-calling-sh"><span class="nav-number">1.3.</span> <span class="nav-text">step3-snp_calling.sh</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rna-seq"><span class="nav-number">2.</span> <span class="nav-text">rna-seq</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立项目文件系统及软件安装（step1-prep-install-sh）"><span class="nav-number">2.1.</span> <span class="nav-text">建立项目文件系统及软件安装（step1-prep_install.sh）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测序数据质量评估-step2-quality-control-sh"><span class="nav-number">2.2.</span> <span class="nav-text">测序数据质量评估(step2-quality_control.sh)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step3-tophat-cuffdiff-sh"><span class="nav-number">2.3.</span> <span class="nav-text">(step3-tophat_cuffdiff.sh)</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -878,7 +876,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共29.7k字</span>
+  <span class="post-count">博客全站共27.7k字</span>
 </div>
 
 <div class="powered-by">

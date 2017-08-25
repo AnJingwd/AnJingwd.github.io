@@ -95,7 +95,7 @@
     <link href="https:///AnJingwd.github.io/2017/08/22/%E5%88%9B%E5%BB%BA%E7%94%9F%E4%BF%A1%E5%88%86%E6%9E%90pipline(DNA-seq,RNA-seq)-%E5%9F%BA%E7%A1%80%E7%89%88/"/>
     <id>https:///AnJingwd.github.io/2017/08/22/创建生信分析pipline(DNA-seq,RNA-seq)-基础版/</id>
     <published>2017-08-22T02:04:43.000Z</published>
-    <updated>2017-08-25T13:30:08.096Z</updated>
+    <updated>2017-08-25T13:40:40.419Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">创建生信分析pipline（dna-seq/rna-seq）-基础版</blockquote>
 
@@ -119,7 +119,7 @@
 <p>  source step1-prep_mkdir_cp.sh</p>
 </li>
 </ul>
-<p>（用source而不用sh是因为step1-prep_mkdir_cp.sh有添加环境变量的步骤，sh 对添加环境变量没用）</p>
+<p><strong>（用source而不用sh是因为step1-prep_mkdir_cp.sh有添加环境变量的步骤，sh 对添加环境变量没用）</strong></p>
 <ol>
 <li>安装相关的分析工具</li>
 </ol>
@@ -139,8 +139,6 @@
 <ul>
 <li>上述命令是软件最初版本用法，软件版本更新用法会变化</li>
 </ul>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）Bioinformatics Data Skills (2015)</p>
-<p><a href="http://apprize.info/data/bioinformatics/12.html" target="_blank" rel="external">http://apprize.info/data/bioinformatics/12.html</a></p>
 ]]></content>
     
     <summary type="html">
@@ -2622,173 +2620,6 @@ alias picard=&quot;java -jar $PICARD&quot;
     <id>https:///AnJingwd.github.io/2017/08/03/python环境搭建/</id>
     <published>2017-08-02T16:53:42.000Z</published>
     <updated>2017-08-06T11:10:28.346Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
-<a id="more"></a>
-<h1 id="linux中python2和python3环境搭建及共存"><a href="#linux中python2和python3环境搭建及共存" class="headerlink" title="linux中python2和python3环境搭建及共存"></a>linux中python2和python3环境搭建及共存</h1><p>&emsp;&emsp;如果你使用的是CentOS 6，你可以使用本教程安装 Python 2.7.x and Python 3.6.x。对于CentOS 7 只有Python 3.6.x的安装方法是适用的。警告！不要在CentOS 7上使用本教程安装Python 2.7.13。这样你的系统将有两个不同的python2.7二进制文件，每个具有自己的安装包路径。这将可能造成不能区分的问题！</p>
-<h2 id="查看linux系统版本信息："><a href="#查看linux系统版本信息：" class="headerlink" title="查看linux系统版本信息："></a>查看linux系统版本信息：</h2><pre><code>lsb_release -a
-</code></pre><p><strong>注: 这个命令适用于所有的linux，包括Redhat、SuSE、Debian等发行版</strong></p>
-<h2 id="问题所在？"><a href="#问题所在？" class="headerlink" title="问题所在？"></a>问题所在？</h2><p>&emsp;&emsp;CentOS携带Python作为基础系统的一个重要部分。因为其十分重要，所以未及时更新，或者为了避免安全漏洞。缺少更新，意味着CentOS 6用户无法摆脱2010年8月发布的Python 2.6.6，CentOS 7用户无法摆脱2013年发布的Python 2.7.5。</p>
-<p>通常/usr/bin下面的都是系统预装的可执行程序，会随着系统升级而改变</p>
-<pre><code>cd /usr/bin
-ls |grep ^p
-</code></pre><p><strong>只安装了python2.6</strong></p>
-<h2 id="YUM"><a href="#YUM" class="headerlink" title="YUM"></a>YUM</h2><p>&emsp;&emsp;YUM（全称为 Yellow dog Updater, Modified）是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。基于RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，避免了手动安装的麻烦(寻找资源、下载；放到指定目录安装；处理依赖关系并下载依赖关系的包进行安装)。所以用yum安装，实质上是用RPM安装，所以RPM查询信息的指令都可用。</p>
-<p>如果使用RPM安装了一些包，一般来说，RPM默认安装路径如下：</p>
-<p>Directory    Contents of Directory</p>
-<ul>
-<li>/usr/bin    一些可执行文件</li>
-<li>/usr/lib    一些程序使用的动态函数库</li>
-<li>/usr/share/doc    一些基本的软件使用手册与帮助文档</li>
-<li>/usr/share/man    一些man page文件<br>所以没有root权限，是没有办法通过yum进行软件安装的</li>
-</ul>
-<p>需要考虑的事项：使用 “make altinstall” 来避免麻烦</p>
-<p>&emsp;&emsp;当安装定制版的Python时使用make altinstall时十分重要的。如果使用常规的make install的结局是安装不同的python版本，但出现在文件系统中却出现同为python的程序,这将导致很难辨别的麻烦。</p>
-<p>&emsp;&emsp;编译安装的准备 为了编译Python之前最好先安装一系列的开发工具和一些拓展库，但不是必须的，但这样Python才能依赖这些工具和拓展库展示它强悍的功能。</p>
-<h3 id="1-下载并编译安装python"><a href="#1-下载并编译安装python" class="headerlink" title="(1)下载并编译安装python"></a>(1)下载并编译安装python</h3><p><strong>Python 2.7.13:</strong></p>
-<pre><code>wget http://python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz
-tar xf Python-2.7.13.tar.xz
-cd Python-2.7.13
-./configure --prefix=/home/wangdong/python/python27
-make &amp;&amp; make altinstall
-</code></pre><p><strong>Python 3.6.2:</strong></p>
-<pre><code>wget http://python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz
-tar xf Python-3.6.2.tar.xz
-cd Python-3.6.2
-./configure --prefix=/home/wangdong/python/python36
-make &amp;&amp; make altinstall
-</code></pre><h3 id="2-设置环境变量"><a href="#2-设置环境变量" class="headerlink" title="(2)设置环境变量"></a>(2)设置环境变量</h3><pre><code>echo &apos;export PATH=/home/wangdong/python/python36/bin:$PATH&apos;&gt;&gt;~/.bashrc
-echo &apos;export PATH=/home/wangdong/python/python27/bin:$PATH&apos;&gt;&gt;~/.bashrc
-</code></pre><p>&emsp;&emsp;注意使用python3.6, 使用python仍旧为系统预装的python版本，以后使用Python解释器时,同样需要注意使用python和python3.6调用的Python解释器是不同的！！</p>
-<p><strong>linux添加环境环境变量注意事项：</strong></p>
-<p>（1）=号左右两边没有空格</p>
-<p>（2）路径之间用：分隔</p>
-<p>（3）$PATH 表示原先设定的路径仍然有效，注意不要漏掉</p>
-<p>（4）需要引号,因为用echo命令输出加引号的字符串时，将字符串原样输出</p>
-<p>(3) 安装/升级pip,setuotools和wheel</p>
-<h3 id="安装pip-setuotools和wheel"><a href="#安装pip-setuotools和wheel" class="headerlink" title="安装pip,setuotools和wheel"></a>安装pip,setuotools和wheel</h3><p>系统中的每个Python解释器都需要自己的pip,setuotools和wheel,安装和升级这些包最简单的方式是使用get-pip.py脚本。</p>
-<p>First get the script:</p>
-<pre><code>wget https://bootstrap.pypa.io/get-pip.py
-</code></pre><p>Then execute it using Python 2.7 and/or Python 3.6:</p>
-<pre><code>python2.7 get-pip.py
-
-python3.6 get-pip.py
-</code></pre><p><strong>PYTHONPATH是Python搜索路径，默认我们import的模块都会从PYTHONPATH里面寻找</strong></p>
-<pre><code>echo &apos;export PYTHONPATH=/home/wangdong/python/python36/lib/python3.6/site-packages&apos;&gt;&gt;~/.bashrc
-
-echo &apos;export PYTHONPATH=/home/wangdong/python/python27/lib/python2.7/site-packages&apos;&gt;&gt;~/.bashrc
-
-source ~/.bashrc
-</code></pre><p>With pip installed you can now do things like this:</p>
-<ul>
-<li>pip2.7 install [packagename]</li>
-<li>pip2.7 install –upgrade [packagename]</li>
-<li><p>pip2.7 uninstall [packagename]</p>
-</li>
-<li><p>pip3.6 install [packagename]</p>
-</li>
-<li>pip3.6 install –upgrade [packagename]</li>
-<li>pip3.6 uninstall [packagename]</li>
-</ul>
-<p>&emsp;&emsp;注意使用pip2.7和pip3.6安装软件不同点在于，安装文件的路径不同。pip2.7的安装路径是/home/wangdong/python/python27/lib/python2.7/site-packages，而pip3.6的安装路径是/home/wangdong/python/python36/lib/python3.6/site-packages</p>
-<p>###（4）虚拟环境的使用</p>
-<p>&emsp;&emsp;如果你使用Python2.7，则强烈推荐使用安装virtualenv并且学习使用它。virtualenv可以创建独立的Python环境。如果你使用Python3.3+，那么你没有必要安装virtualenv，因为其功能已经内建了。 每个独立的Python环境（又叫sandbox）能具有自己的Python版本和包。这对于多项目或者相同项目需要不同的版本的场合是十分重要的。</p>
-<p>先看看virtualenv中文教程：</p>
-<p><a href="http://virtualenv-chinese-docs.readthedocs.io/en/latest/#id29" target="_blank" rel="external">http://virtualenv-chinese-docs.readthedocs.io/en/latest/#id29</a></p>
-<p>Install virtualenv for Python 2.7 and create a sandbox called my27project:</p>
-<pre><code>pip2.7 install virtualenv
-virtualenv my27project
-</code></pre><p>Use the built-in functionality in Python 3.6 to create a sandbox called my36project:</p>
-<pre><code>python3.6 -m venv my36project
-</code></pre><p>(1)Check the system Python interpreter version:</p>
-<pre><code>python --version
-</code></pre><blockquote>
-<p>This will show Python 2.6.6</p>
-</blockquote>
-<p>Activate the my27project sandbox:</p>
-<pre><code>source my27project/bin/activate
-</code></pre><p>(2)Check the Python version in the sandbox (it should be Python 2.7.13):</p>
-<pre><code>python --version
-</code></pre><blockquote>
-<p>This will show Python 2.7.13</p>
-</blockquote>
-<p>Deactivate the sandbox:</p>
-<pre><code>deactivate
-</code></pre><p>Activate the my36project sandbox:</p>
-<pre><code>source my36project/bin/activate
-</code></pre><p>(3)Check the Python version in the sandbox (it should be Python 3.6.2): </p>
-<pre><code>python --version
-</code></pre><blockquote>
-<p>This will show Python 3.6.2</p>
-</blockquote>
-<p>Deactivate the sandbox: </p>
-<pre><code>deactivate
-</code></pre><h3 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h3><h4 id="1-从（1）和（2）或者（1）和（3）的对比看出："><a href="#1-从（1）和（2）或者（1）和（3）的对比看出：" class="headerlink" title="(1) 从（1）和（2）或者（1）和（3）的对比看出："></a>(1) 从（1）和（2）或者（1）和（3）的对比看出：</h4><p>创建虚拟环境并激活后，虚拟环境的环境变量和系统的环境变量是隔离的，互不影响。</p>
-<h4 id="2-创建的虚拟环境的Python解释器版本是如何指定的呢？"><a href="#2-创建的虚拟环境的Python解释器版本是如何指定的呢？" class="headerlink" title="(2) 创建的虚拟环境的Python解释器版本是如何指定的呢？"></a>(2) 创建的虚拟环境的Python解释器版本是如何指定的呢？</h4><p>先看看virtualenv用法:</p>
-<p>$ virtualenv [OPTIONS] DEST_DIR<br>其中一个选项-p PYTHON_EXE, –python=PYTHON_EXE</p>
-<p>&emsp;&emsp;指定所用的python解析器的版本，比如 –python=python2.5 就使用2.5版本的解析器创建新的隔离环境。 默认使用的是当前目录下安装(/home/wangdong/python/python36/bin/python3.6或者/home/wangdong/python/python27/bin/python2.7)的python解析器</p>
-<p>所以可以在python27下使用-p指定python3.6解释器创建虚拟环境：</p>
-<p>反过来，对于Python3.3+ 通过venv模块创建指定python2.7虚拟环境则不行了！</p>
-<p>首先看看venv模块官方文档：</p>
-<p><a href="https://docs.python.org/3/library/venv.html" target="_blank" rel="external">https://docs.python.org/3/library/venv.html</a></p>
-<p>需要注意的是，在Python3.3中使用”venv”命令创建的环境不包含”pip”，你需要进行手动安装。在Python3.4中改进了这一个缺陷。</p>
-<p>并没有相关参数！！</p>
-<p>所以类似的可以使用virtualenv解决：</p>
-<p>在python36目录下：</p>
-<pre><code>virtualenv my27project_test
-source my27project_test/bin/activate
-python 
-</code></pre><blockquote>
-<p>This will show Python 2.7.13</p>
-</blockquote>
-<p>在python36目录下：</p>
-<pre><code>virtualenv -p /home/wangdong/python/python36/bin/python3.6 my36proje_test
-source my36project_test/bin/activate
-python 
-</code></pre><blockquote>
-<p>This will show Python 3.6.2</p>
-</blockquote>
-<h4 id="（3）在对应虚拟环境下使用对应pip安装软件："><a href="#（3）在对应虚拟环境下使用对应pip安装软件：" class="headerlink" title="（3）在对应虚拟环境下使用对应pip安装软件："></a>（3）在对应虚拟环境下使用对应pip安装软件：</h4><p>例如：</p>
-<pre><code>source my36project/bin/activate
-
-pip3.6 install numpy
-</code></pre><p>&emsp;&emsp;安装路径为： ./my36project/lib/python3.6/site-packages **所以安装包也和系统是完全隔离的，二者互不影响。因此虚拟环境不再使用时，直接删除该虚拟环境即可。</p>
-<pre><code>rm -rf my36project
-</code></pre><p>在my27project下则使用pip2.7,其他类似。</p>
-<p>####（4）接下来讲讲pip使用</p>
-<p>使用清华的pip源安装包更快：</p>
-<pre><code>pip3.6 install -i https://pypi.tuna.tsinghua.edu.cn/simple bcbio-gff biopython cython nose numpy pandas shove sqlalchemy python-memcached pyvcf
-</code></pre><p>(不同安装包之间使用空格即可)</p>
-<p>指定安装包的版本,例如：</p>
-<pre><code>pip3.6 install pysam==0.7.5
-</code></pre><p>卸载指定版本安装包，例如：</p>
-<pre><code>pip3.6 uninstall biopython==1.70
-</code></pre><p>把常用的包离线下载，然后使用pip离线安装包，例如：</p>
-<pre><code>pip3.6 install pysam-0.7.5.tar.gz
-</code></pre><p>查看当前环境pip已安装包列表： </p>
-<pre><code>pip3.6 list
-</code></pre><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p> <a href="https://danieleriksson.net/2017/02/08/how-to-install-latest-python-on-centos/" target="_blank" rel="external">https://danieleriksson.net/2017/02/08/how-to-install-latest-python-on-centos/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux中python2和python3环境搭建及共存</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/linux%E4%B8%ADpython2%E5%92%8Cpython3%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%85%B1%E5%AD%98/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/linux中python2和python3环境搭建及共存/</id>
-    <published>2017-08-02T16:53:42.000Z</published>
-    <updated>2017-08-06T11:06:08.151Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。</p>
 <a id="more"></a>
