@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-25T13:12:28.046Z</updated>
+  <updated>2017-08-28T04:15:04.508Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>修复Chrome浏览器崩溃</title>
+    <link href="https:///AnJingwd.github.io/2017/08/28/%E4%BF%AE%E5%A4%8DChrome%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B4%A9%E6%BA%83/"/>
+    <id>https:///AnJingwd.github.io/2017/08/28/修复Chrome浏览器崩溃/</id>
+    <published>2017-08-28T03:18:41.000Z</published>
+    <updated>2017-08-28T04:15:04.508Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">Chrome浏览器一进入就全面崩溃，包括设置页面！</blockquote>
+
+<a id="more"></a>
+<p>解决办法：</p>
+<p>原因就是 C:\Windows\System32\drivers\bd0001.sys 这个文件</p>
+<ul>
+<li>首先可以把这个文件利用360杀毒工具强力删除。</li>
+<li>因为书签路径是 C:\Users\Administrator\AppData\Local\Google\Chrome\User Data,所以然后将原Google删除（C:\Program Files (x86)\Google）并不会删除书签。</li>
+<li>重新安装Chrome稳定版<a href="https://www.baidu.com/link?url=MkVpzj1gf1_OJ3mxcnzzssfMv7eMA0dXfUgyoqlNDFcZZ1kUW9XJCbRwHqpRSrhcS3HVGx4Wm78JNaYFHj6qaqlM7iSxJyjH_PE7s99egGy&amp;wd=&amp;eqid=a1e33f840000f6e30000000359a38cae" target="_blank" rel="external">ChromeStandalone_60.0.3112.101_Setup.exe</a></li>
+<li>重启电脑即可！</li>
+</ul>
+<p>&emsp;&emsp;win7不能删除文件提示(您需要来自administrators的权限才能对此文件夹进行更改）该如何解决呢？</p>
+<p>可以使用360杀毒–功能大全-文件粉碎机</p>
+<p><img src="http://i.imgur.com/qfrctqm.png" alt=""></p>
+<p><img src="http://i.imgur.com/h6Ub9xV.png" alt=""></p>
+<p><img src="http://i.imgur.com/ceKPi1J.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;Chrome浏览器一进入就全面崩溃，包括设置页面！&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="https:///AnJingwd.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="技术" scheme="https:///AnJingwd.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>使用bash脚本下载和处理基因表达数据</title>
@@ -224,7 +262,7 @@
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-08-26T08:04:31.620Z</updated>
+    <updated>2017-08-26T12:46:49.901Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -453,6 +491,10 @@
 <td><a href="http://www.chinapubmed.net/" target="_blank" rel="external">China PubMed</a></td>
 <td>英文文献摘要翻译（更新不够快）</td>
 </tr>
+<tr>
+<td><a href="http://pubmed.ict.griffith.edu.au/" target="_blank" rel="external">Article-based PubMed Search Engine</a></td>
+<td>快速搜寻到与你的PubMed索引论文所相关的文章</td>
+</tr>
 </tbody>
 </table>
 <h1 id="论坛"><a href="#论坛" class="headerlink" title="论坛"></a>论坛</h1><table>
@@ -643,6 +685,10 @@
 <td><a href="http://hippter.com/" target="_blank" rel="external">Hi,PPTer</a></td>
 <td>PPT资源导航</td>
 </tr>
+<tr>
+<td> <a href="http://gen.lib.rus.ec/" target="_blank" rel="external">Library Genesis</a></td>
+<td>外文书籍的超级好用网址,免费下载</td>
+</tr>
 </tbody>
 </table>
 <h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><table>
@@ -718,6 +764,10 @@
 <tr>
 <td><a href="http://www.bioconductor.org/packages/stats/data-annotation.html" target="_blank" rel="external"> Bioconductor annotation packages</a></td>
 <td>Bioconductor注释文件合集 </td>
+</tr>
+<tr>
+<td><a href="http://bbs.sciencenet.cn/thread-1251889-1-1.html" target="_blank" rel="external">DNAMAN</a></td>
+<td>DNAMAN 8 全功能英文版，免序列号（By Raindy）</td>
 </tr>
 </tbody>
 </table>
