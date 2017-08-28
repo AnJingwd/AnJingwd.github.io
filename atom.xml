@@ -262,7 +262,7 @@
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-08-26T12:46:49.901Z</updated>
+    <updated>2017-08-28T04:24:38.588Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -708,10 +708,6 @@
 <td>专业绘制流程图</td>
 </tr>
 <tr>
-<td><a href="https://xmt.cn/plugin/install?from=install" target="_blank" rel="external">新媒体管家</a></td>
-<td>微信公众号排版及扩展功能</td>
-</tr>
-<tr>
 <td><a href="http://www.ggfwzs.com/" target="_blank" rel="external">谷歌访问助手</a></td>
 <td>“google/gmail/google scholar”一网打尽</td>
 </tr>
@@ -722,6 +718,36 @@
 <tr>
 <td><a href="http://www.flvcd.com/" target="_blank" rel="external">硕鼠网络视频下载器</a></td>
 <td>爬取网络视频</td>
+</tr>
+</tbody>
+</table>
+<h1 id="谷歌插件"><a href="#谷歌插件" class="headerlink" title="谷歌插件"></a>谷歌插件</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://chrome.google.com/webstore/detail/sci-hub-links/olcgjijbclchlliaffaghajlbfppkbkl?hl=zh-CN" target="_blank" rel="external">Sci-Hub Links</a></td>
+<td>转换 DOI 和 Pubmed 位址为 sci-hub 连结</td>
+</tr>
+<tr>
+<td><a href="https://chrome.google.com/webstore/detail/the-paper-link-for-pubmed/kgdcooicefdfjcplcnehfpbngjccncko?hl=zh-CN" target="_blank" rel="external">医学文献助手(有限版) </a></td>
+<td>在 PubMed 搜索结果页面，添加 PDF 链接、影响因子、F1000评论、作者发表记录 等</td>
+</tr>
+<tr>
+<td><a href="https://chrome.google.com/webstore/detail/dream-afar-new-tab/henmfoppjjkcencpbjaigfahdjlgpegn?hl=zh-CN" target="_blank" rel="external">远方 New Tab</a></td>
+<td>每天打开新页面都是一段不期而遇的旅行</td>
+</tr>
+<tr>
+<td><a href="https://chrome.google.com/webstore/detail/search-by-image-by-google/dajedkncpodkggklbegccjpmnglmnflm" target="_blank" rel="external">Search by Image (by Google) </a></td>
+<td>用图片搜索</td>
+</tr>
+<tr>
+<td><a href="https://xmt.cn/plugin/install?from=install" target="_blank" rel="external">新媒体管家</a></td>
+<td>微信公众号排版及扩展功能</td>
 </tr>
 </tbody>
 </table>
