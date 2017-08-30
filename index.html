@@ -294,6 +294,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/30/批量fastqc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="https:/AnJingwd.github.io/2017/08/30/批量fastqc/" itemprop="url">批量fastqc</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T09:26:21+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/NGS/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="方法一：循环与命令并行"><a href="#方法一：循环与命令并行" class="headerlink" title="方法一：循环与命令并行"></a>方法一：循环与命令并行</h1><p>问：</p>
+<p>我当前文件夹下面有100个fastq测序文件，我要批量对他们运行fastqc软件（软件安装目录：~/biosoft/fastqc ）来处理，所以写了脚本<br>    ls *fastq | while read id ; do ~/biosoft/fastqc $id;done</p>
+<p>但是这样有一个弊端，就是这100个fastq测序文件是一个个被运行，这样耗时太长！<br>所以我稍作修改：</p>
+<pre><code>ls *fastq | while read id ; do nohup ~/biosoft/fastqc $id &amp; ;done
+</code></pre><p>这样又一下子把100个fastqc任务提交了，我的服务器根本受不了。</p>
+<p>所以需要修改修改脚本，让它一下子并行提交10个任务，因为我服务器限制。</p>
+<p>该如何最简单的完成呢？</p>
+<p>答：加个参数-p</p>
+<pre><code>ls *fastq | xargs -n 1 -p 10 -i FQ ~/biosoft/fastqc FQ
+</code></pre><p>每次最多提交10个文件，加-p就可以并行计算啦</p>
+<h1 id="方法二：MultiQC"><a href="#方法二：MultiQC" class="headerlink" title="方法二：MultiQC"></a>方法二：MultiQC</h1><p>homepage: <a href="http://multiqc.info" target="_blank" rel="external">http://multiqc.info</a></p>
+<p>功能：把多个测序结果的qc结果整合成一个报告。支持fastqc、trimmomatic、bowtie、STAR等多种软件结果的整合。</p>
+<h2 id="Installation-安装"><a href="#Installation-安装" class="headerlink" title="Installation 安装"></a>Installation 安装</h2><pre><code>conda install -c bioconda multiqc
+</code></pre><h2 id="Run-MultiQC-运行"><a href="#Run-MultiQC-运行" class="headerlink" title="Run MultiQC 运行"></a>Run MultiQC 运行</h2><p>安装好后，进入你要分析的测序文件所在的文件夹，直接输入multiqc加要扫描的目录即可运行，如果要扫描当前文件夹，直接输入”multiqc .”即可</p>
+<pre><code>multiqc .
+multiqc /data/mydir/
+multiqc /data/*fastqc.zip
+multiqc /data/sanple_1*
+</code></pre><h2 id="相关参数"><a href="#相关参数" class="headerlink" title="相关参数"></a>相关参数</h2><h3 id="使用“–ignore”参数忽略某些文件"><a href="#使用“–ignore”参数忽略某些文件" class="headerlink" title="使用“–ignore”参数忽略某些文件"></a>使用“–ignore”参数忽略某些文件</h3><pre><code>multiqc . --ingore *_R2*
+multiqc . --ignore run_two/
+multiqc . --ignore */run_three/*/fastqc/*.zip
+</code></pre><h3 id="使用文本指定要分析的文件的路径"><a href="#使用文本指定要分析的文件的路径" class="headerlink" title="使用文本指定要分析的文件的路径"></a>使用文本指定要分析的文件的路径</h3><pre><code>multiqc --file-list_my_file_list.txt
+</code></pre><h3 id="重命名输出结果"><a href="#重命名输出结果" class="headerlink" title="重命名输出结果"></a>重命名输出结果</h3><p>分析结果默认命名为“multiqc_report.html”，相关的以tab风格的data file保存在“multiqc_data”文件夹下。可以用“-n”参数改变结果文件的名字，用“-o”改变输出文件的位置。</p>
+<h3 id="覆盖已存在的结果"><a href="#覆盖已存在的结果" class="headerlink" title="覆盖已存在的结果"></a>覆盖已存在的结果</h3><p>添加参数“-f”，输出结果时会自动覆盖同名文件。</p>
+<h3 id="更换报告模板"><a href="#更换报告模板" class="headerlink" title="更换报告模板"></a>更换报告模板</h3><p>添加参数“-t”或者“–template”可以选择不同风格的报告模板，具体内容请查看帮助文档“multiqc –help”。同时，MultiQC也支持自行创作结果文件的模板。</p>
+<h3 id="输出图片Exporting-plot"><a href="#输出图片Exporting-plot" class="headerlink" title="输出图片Exporting plot"></a>输出图片Exporting plot</h3><p>除了直接输出html文件外，Multiqc还可以直接保存图片文件。用以下参数进行保存：</p>
+<pre><code>multiqc -p/--export
+</code></pre><p>默认设置下，图片会保存在“multiqc_plots”文件夹中，以.png/.svg或者pdf格式保存。</p>
+<p>同时，也可以直接在html文件中使用“toolbox”中的Export 保存图片。</p>
+<h2 id="报告正文"><a href="#报告正文" class="headerlink" title="报告正文"></a>报告正文</h2><p>报告页面分为三部分，左边是导航页面，中间是报告正文，右边是toolbox</p>
+<p><img src="http://i.imgur.com/VCs7xMz.png" alt=""></p>
+<ol>
+<li>General Statistics</li>
+</ol>
+<p>（Configure Conlumns）可选择需要展示的列名</p>
+<p><img src="http://i.imgur.com/r6rkXjl.png" alt=""></p>
+<p>点击列名可进行排序</p>
+<p><img src="http://i.imgur.com/LPpyikL.png" alt=""></p>
+<p>(plot)可选择任意两列进行plot</p>
+<p>Toolbox</p>
+<p>工具栏主要有Hightlight Samples、Rename Samples、Show/Hide Samples、Export Plots、Saving Setting以及帮助等功能。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA" target="_blank" rel="external">https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA</a><br>（2）<a href="http://www.cnblogs.com/leezx/p/7360668.html" target="_blank" rel="external">http://www.cnblogs.com/leezx/p/7360668.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+	</div>
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/28/修复Chrome浏览器崩溃/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1614,159 +1799,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/13/如何写shell脚本/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="AJ's blog">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="安静-不安静的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="https:/AnJingwd.github.io/2017/08/13/如何写shell脚本/" itemprop="url">如何写shell脚本</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-13T21:14:52+08:00">
-                2017-08-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/shell脚本/" itemprop="url" rel="index">
-                    <span itemprop="name">shell脚本</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote class="blockquote-center">shell代码风格规范及技巧</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="https:/AnJingwd.github.io/2017/08/13/如何写shell脚本/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	<div>
-	
-	</div>
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="https:/AnJingwd.github.io/page/2/">2</a><a class="extend next" rel="next" href="https:/AnJingwd.github.io/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="https:/AnJingwd.github.io/page/2/">2</a><a class="page-number" href="https:/AnJingwd.github.io/page/3/">3</a><a class="extend next" rel="next" href="https:/AnJingwd.github.io/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1812,7 +1849,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2097,7 +2134,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共28.3k字</span>
+  <span class="post-count">博客全站共29.1k字</span>
 </div>
 
 <div class="powered-by">

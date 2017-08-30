@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="shell脚本," />
+  <meta name="keywords" content="NGS," />
 
 
 
@@ -96,20 +96,22 @@
 
 
 
-<meta name="description" content="shell代码风格规范及技巧">
-<meta name="keywords" content="shell脚本">
+<meta name="description" content="方法一：循环与命令并行问： 我当前文件夹下面有100个fastq测序文件，我要批量对他们运行fastqc软件（软件安装目录：~/biosoft/fastqc ）来处理，所以写了脚本    ls *fastq | while read id ; do ~/biosoft/fastqc $id;done 但是这样有一个弊端，就是这100个fastq测序文件是一个个被运行，这样耗时太长！所以我稍作修改：">
+<meta name="keywords" content="NGS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何写shell脚本">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/13/如何写shell脚本/index.html">
+<meta property="og:title" content="批量fastqc">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/30/批量fastqc/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="shell代码风格规范及技巧">
+<meta property="og:description" content="方法一：循环与命令并行问： 我当前文件夹下面有100个fastq测序文件，我要批量对他们运行fastqc软件（软件安装目录：~/biosoft/fastqc ）来处理，所以写了脚本    ls *fastq | while read id ; do ~/biosoft/fastqc $id;done 但是这样有一个弊端，就是这100个fastq测序文件是一个个被运行，这样耗时太长！所以我稍作修改：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/HREX4bE.png">
-<meta property="og:updated_time" content="2017-08-17T03:12:46.731Z">
+<meta property="og:image" content="http://i.imgur.com/VCs7xMz.png">
+<meta property="og:image" content="http://i.imgur.com/r6rkXjl.png">
+<meta property="og:image" content="http://i.imgur.com/LPpyikL.png">
+<meta property="og:updated_time" content="2017-08-30T01:51:44.512Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何写shell脚本">
-<meta name="twitter:description" content="shell代码风格规范及技巧">
-<meta name="twitter:image" content="http://i.imgur.com/HREX4bE.png">
+<meta name="twitter:title" content="批量fastqc">
+<meta name="twitter:description" content="方法一：循环与命令并行问： 我当前文件夹下面有100个fastq测序文件，我要批量对他们运行fastqc软件（软件安装目录：~/biosoft/fastqc ）来处理，所以写了脚本    ls *fastq | while read id ; do ~/biosoft/fastqc $id;done 但是这样有一个弊端，就是这100个fastq测序文件是一个个被运行，这样耗时太长！所以我稍作修改：">
+<meta name="twitter:image" content="http://i.imgur.com/VCs7xMz.png">
 
 
 
@@ -142,7 +144,7 @@
 
 
 
-  <title>如何写shell脚本 | 安静-不安静的博客</title>
+  <title>批量fastqc | 安静-不安静的博客</title>
   
 
 
@@ -296,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/13/如何写shell脚本/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/30/批量fastqc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -313,7 +315,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">如何写shell脚本</h2>
+          <h2 class="post-title" itemprop="name headline">批量fastqc</h2>
         
 
         <div class="post-meta">
@@ -325,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-13T21:14:52+08:00">
-                2017-08-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T09:26:21+08:00">
+                2017-08-30
               </time>
             
 
@@ -348,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/shell脚本/" itemprop="url" rel="index">
-                    <span itemprop="name">shell脚本</span>
+                  <a href="https:/AnJingwd.github.io/categories/NGS/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS</span>
                   </a>
                 </span>
 
@@ -385,180 +387,48 @@
       
 
       
-        <blockquote class="blockquote-center">shell代码风格规范及技巧</blockquote>
-
-
-<a id="more"></a>
-<h1 id="shell代码风格规范及技巧"><a href="#shell代码风格规范及技巧" class="headerlink" title="shell代码风格规范及技巧"></a>shell代码风格规范及技巧</h1><h2 id="命名有标准"><a href="#命名有标准" class="headerlink" title="命名有标准"></a>命名有标准</h2><p>文件名规范，以.sh结尾，方便识别</p>
-<h2 id="编码要统一"><a href="#编码要统一" class="headerlink" title="编码要统一"></a>编码要统一</h2><p>&emsp;&emsp;在写脚本的时候尽量使用UTF-8编码，能够支持中文等一些奇奇怪怪的字符。不过虽然能写中文，但是在写注释以及打log的时候还是尽量英文，毕竟很多机器还是没有直接支持中文的，打出来可能会有乱码。</p>
-<p>&emsp;&emsp;这里还尤其需要注意一点，就是当我们是在windows下用utf-8编码来写shell脚本的时候，一定要注意这个utf-8是否是有BOM的。默认情况下windows判断utf-8格式是通过在文件开头加上三个EF BB BF字节来判断的，但是在Linux中默认是无BOM的。因此如果我们是在windows下写脚本的时候，一定要注意将编码改成Utf-8无BOM，一般用notepad++之类的编辑器都能改。否则，在Linux下运行的时候就会识别到开头的三个字符，从而报一些无法识别命令的错。</p>
-<h2 id="开头有shebang"><a href="#开头有shebang" class="headerlink" title="开头有shebang"></a>开头有shebang</h2><p>&emsp;&emsp;所谓shebang其实就是在很多脚本的第一行出现的以”#!”开头的注释，他指明了当我们没有指定解释器的时候默认的解释器，一般可能是下面这样：</p>
-<pre><code>#!/bin/bash
-</code></pre><h2 id="写出健壮Bash-Shell脚本技巧"><a href="#写出健壮Bash-Shell脚本技巧" class="headerlink" title="写出健壮Bash Shell脚本技巧"></a>写出健壮Bash Shell脚本技巧</h2><pre><code>set -x
-set -e
-set -u
-set -o pipeline
-</code></pre><p>（1）set -x会在执行每一行 shell 脚本时，把执行的内容输出来。它可以让你看到当前执行的情况，里面涉及的变量也会被替换成实际的值。</p>
-<p>（2）在”set -e”之后出现的代码，一旦出现了返回值非零，整个脚本就会立即退出。</p>
-<p>&emsp;&emsp;set -e结束程序的条件比较复杂，在man bash里面，足足用了一段话描述各种情景。大多数执行都会在出错时退出，除非 shell 命令位于以下情况：</p>
-<ul>
-<li>一个 pipeline 的非结尾部分，比如 error | ok</li>
-<li>一个组合语句的非结尾部分，比如 ok &amp;&amp; error || other</li>
-<li>一连串语句的非结尾部分，比如 error; ok</li>
-<li>位于判断语句内，包括test、if、while等等。</li>
-</ul>
-<p>（3）set -u，当你使用未初始化的变量时，让bash自动退出</p>
-<p>（4）set -o pipefail 设置了这个选项以后，包含管道命令的语句的返回值，会变成最后一个返回非零的管道命令的返回值。听起来比较绕，其实也很简单：</p>
-<p>例如test.sh</p>
-<pre><code>set -o pipefail
-ls ./a.txt |echo &quot;hi&quot; &gt;/dev/null
-echo $?
-</code></pre><p>运行test.sh，因为当前目录并不存在a.txt文件，输出：<br>ls: ./a.txt: No such file or directory<br>1  # 设置了set -o pipefail，返回从右往左第一个非零返回值，即ls的返回值1</p>
-<p>注释掉set -o pipefail 这一行，再次运行，输出：<br>ls: ./a.txt: No such file or directory<br>0  # 没有set -o pipefail，默认返回最后一个管道命令的返回值</p>
-<h2 id="工作路径"><a href="#工作路径" class="headerlink" title="工作路径"></a>工作路径</h2><p>我们会先获取当前脚本的路径，然后一这个路径为基准，去找其他的路径。</p>
-<pre><code>work_dir=$1
-reference=${work_dir}/data/reference/TAIR10_chr_all.fas
-</code></pre><h2 id="环境变量PATH"><a href="#环境变量PATH" class="headerlink" title="环境变量PATH"></a>环境变量PATH</h2><p>一般情况下我们会将一些重要的环境变量定义在开头，确保脚本中使用的命令能被bash搜索到。</p>
-<pre><code>PATH=/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
-</code></pre><h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><pre><code>chmod +x ./test.sh  #给脚本权限
-./test.sh  #执行脚本
-</code></pre><h2 id="Shell中的变量"><a href="#Shell中的变量" class="headerlink" title="Shell中的变量"></a>Shell中的变量</h2><ul>
-<li>“=”前后不能有空格</li>
-<li>定义时不用$,使用时需要$,且推荐给所有变量加上花括号{}</li>
-</ul>
-<h2 id="脚本的参数"><a href="#脚本的参数" class="headerlink" title="脚本的参数"></a>脚本的参数</h2><ul>
-<li><p>先定义具体含义，后使用</p>
-<p>  gene_file=$1</p>
-<p>  ${gene_file}</p>
-</li>
-</ul>
-<h2 id="代码有注释"><a href="#代码有注释" class="headerlink" title="代码有注释"></a>代码有注释</h2><ul>
-<li>简述某一代码段的功能</li>
-<li>各个函数前的说明注释</li>
-</ul>
-<h2 id="太长要分行"><a href="#太长要分行" class="headerlink" title="太长要分行"></a>太长要分行</h2><p>在调用某些程序的时候，参数可能会很长，这时候为了保证较好的阅读体验，我们可以用反斜杠来分行：</p>
-<pre><code>./configure \
-–prefix=/usr \
-–sbin-path=/usr/sbin/nginx \
-–conf-path=/etc/nginx/nginx.conf \
-</code></pre><h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>例如：</p>
-<pre><code>./sub_gtf.shell gene.txt Homo_sapiens.GRCh38.89.chr.gtf &gt;logfile 2&gt;&amp;1
-</code></pre><p>1  ：表示stdout标准输出，系统默认值是1，所以”&gt;logfile”等同于”1&gt;logfile”<br>2  ：表示stderr标准错误<br>&amp;  ：表示等同于的意思，2&gt;&amp;1，表示2的输出重定向等同于1</p>
-<h2 id="回显"><a href="#回显" class="headerlink" title="回显"></a>回显</h2><p>例如</p>
-<pre><code>if [[ $# != 2 ]];then
-    echo &quot;Parameter incorrect.&quot;
-    exit 1
-fi
-</code></pre><p>当执行：</p>
-<pre><code>./sub_gtf.shell gene.txt
-</code></pre><p>因为参数数目不对，输出Parameter incorrect.至屏幕</p>
-<p>当执行：</p>
-<pre><code>./sub_gtf.shell gene.txt &gt;logfile 2&gt;&amp;1
-</code></pre><p>同样参数数目不对，但输出Parameter incorrect.至日志</p>
-<h2 id="函数相关"><a href="#函数相关" class="headerlink" title="函数相关"></a>函数相关</h2><h3 id="巧用main函数-使得代码可读性更强"><a href="#巧用main函数-使得代码可读性更强" class="headerlink" title="巧用main函数,使得代码可读性更强"></a>巧用main函数,使得代码可读性更强</h3><pre><code>#!/bin/bash
-
-func1(){
-    #do sth
-}
-
-func2(){
-#do sth
-}
-
-main(){
-    func1
-    func2
-}
-main &quot;$@&quot;
-</code></pre><h3 id="考虑作用域"><a href="#考虑作用域" class="headerlink" title="考虑作用域"></a>考虑作用域</h3><p>shell中默认的变量作用域都是全局的，比如下面的脚本：</p>
-<pre><code>#!/usr/bin/env bash
-
-var=1
-func(){
-    var=2
-}
-func
-echo $var
-</code></pre><p>他的输出结果就是2而不是1，这样显然不符合我们的编码习惯，很容易造成一些问题。</p>
-<p>&emsp;&emsp;因此，相比直接使用全局变量，我们最好使用local, readonly这类的命令，其次我们可以使用declare来声明变量。这些方式都比使用全局方式定义要好。</p>
-<h4 id="local一般用于局部变量声明，多在在函数内部使用。"><a href="#local一般用于局部变量声明，多在在函数内部使用。" class="headerlink" title="local一般用于局部变量声明，多在在函数内部使用。"></a>local一般用于局部变量声明，多在在函数内部使用。</h4><p>（1）shell脚本中定义的变量是global的，其作用域从被定义的地方开始，到shell结束或被显示删除的地方为止。</p>
-<p>（2）shell函数定义的变量默认是global的，其作用域从“函数被调用时执行变量定义的地方”开始，到shell结束或被显示删除处为止。函数定义的变量可以被显示定义成local的，其作用域局限于函数内。但请注意，函数的参数是local的。</p>
-<p><strong>（3）如果同名，Shell函数定义的local变量会屏蔽脚本定义的global变量。所以在函数内声明的变量，请务必记得加上 local 限定词</strong></p>
-<p>使用举例：</p>
-<pre><code>#!/bin/bash  
-
-function Hello()  
-{  
-        local text=&quot;Hello World!!!&quot; #局部变量  
-        echo $text  
-}  
-
-Hello 
-</code></pre><h4 id="只读变量"><a href="#只读变量" class="headerlink" title="只读变量"></a>只读变量</h4><p>使用 readonly 命令可以将变量定义为只读变量，只读变量的值不能被改变。</p>
-<p>例如：</p>
-<pre><code>readonly myUrl
-myUrl=&quot;http://www.runoob.com&quot;
-</code></pre><h4 id="declare"><a href="#declare" class="headerlink" title="declare"></a>declare</h4><ul>
-<li><p>-r 只读 (declare -r var1与readonly var1作用相同)</p>
-<p>  declare -r var1</p>
-</li>
-<li><p>-i 整数  </p>
-<p>  declare -i number  </p>
-</li>
-<li><p>-a 数组</p>
-<p>  declare -a indices</p>
-</li>
-<li><p>-f 函数</p>
-<p>  declare -f</p>
-</li>
-</ul>
-<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>&emsp;&emsp;在使用函数的时候一定要注意，shell中函数的返回值只能是整数，估计是因为一般情况下一个函数的返回值通常表示这个函数的运行状态，所以一般都是0或者是１就够了，因此就设计成了这样。不过，如果非得想传递字符串，也可以通过下面变通的方法:</p>
-<pre><code>func(){
-    echo &quot;2333&quot;
-}
-res=$(func)
-echo &quot;This is from $res.&quot;
-</code></pre><p>这样，通过echo或者print之类的就可以做到传一些额外参数的目的。</p>
-<h2 id="使用新写法"><a href="#使用新写法" class="headerlink" title="使用新写法"></a>使用新写法</h2><p>&emsp;&emsp;这里的新写法不是指有多厉害，而是指我们可能更希望使用较新引入的一些语法，更多是偏向代码风格的，比如</p>
-<ul>
-<li>尽量使用func(){}来定义函数，而不是func{}</li>
-<li>尽量使用[[]]来代替[]</li>
-<li>尽量使用$()将命令的结果赋给变量，而不是反引号</li>
-<li>在复杂的场 下尽量使用printf代替echo进行回显</li>
-</ul>
-<p>事实上，这些新写法很多功能都比旧的写法要强大，用的时候就知道了。</p>
-<h2 id="其他小tip"><a href="#其他小tip" class="headerlink" title="其他小tip"></a>其他小tip</h2><ul>
-<li>读取文件时不要使用for loop而要使用while read</li>
-<li>简单的if尽量使用&amp;&amp; ||，写成单行。比如[[ x &gt; 2]] &amp;&amp; echo x</li>
-<li>利用/dev/null过滤不友好或者无用的输出信息</li>
-</ul>
-<p>例如<br>    if grep ‘pattern1’ some.file &gt; /dev/null &amp;&amp;<br>        grep ‘pattern2’ some.file &gt; dev/null<br>    then<br>        echo “found ‘pattern1’ and ‘pattern2’ in some.file”<br>    fi</p>
-<p>/dev/null ：代表空设备文件</p>
-<h2 id="安装shellcheck"><a href="#安装shellcheck" class="headerlink" title="安装shellcheck"></a>安装shellcheck</h2><p>ShellCheck, a static analysis tool for shell scripts</p>
-<p>shellcheck 除了可以提醒语法问题以外，还能检查出 shell 脚本编写常见的 bad code。</p>
-<ul>
-<li>使用方式（１）网页版：</li>
-</ul>
-<p><a href="http://www.shellcheck.net" target="_blank" rel="external">http://www.shellcheck.net</a></p>
-<p>github仓库：</p>
-<p><a href="https://github.com/koalaman/shellcheck" target="_blank" rel="external">https://github.com/koalaman/shellcheck</a></p>
-<p>下载安装：<br>    wget -q <a href="https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz" target="_blank" rel="external">https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz</a><br>    xz -d shellcheck-latest.linux.x86_64.tar.xz<br>    tar -xvf shellcheck-latest.linux.x86_64.tar<br>    echo ‘export PATH=/home/wangdong/softwares/shellcheck:$PATH’&gt;&gt;~/.bashrc<br>    source ~/.bashrc</p>
-<ul>
-<li><p>使用方式（2）终端：</p>
-<p>  shellcheck yourscipts</p>
-</li>
-</ul>
-<p><img src="http://i.imgur.com/HREX4bE.png" alt=""></p>
-<h2 id="Shell不能做什么"><a href="#Shell不能做什么" class="headerlink" title="Shell不能做什么"></a>Shell不能做什么</h2><ul>
-<li>需要精密的运算的时候</li>
-<li>需要语言效率很高的时候</li>
-<li>需要一些网络操作的时候</li>
-<li>总之Shell就是可以快速开发一个脚本简化开发流程，并不可以用来替代高级语言</li>
-</ul>
-<p>&emsp;&emsp;解决特定的问题要用合适的工具。知道什么时候用 shell，什么时候切换到另外一门更通用的脚本语言（比如ruby/python/perl），这也是编写可靠 shell 脚本的诀窍。如果你的任务可以组合常见的命令来完成，而且只涉及简单的数据，那么 shell 脚本就是适合的锤子。如果你的任务包含较为复杂的逻辑，而且数据结构复杂，那么你需要用ruby/python之类的语言编写脚本。</p>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="https://blog.mythsman.com/2017/07/23/1/" target="_blank" rel="external">https://blog.mythsman.com/2017/07/23/1/</a></p>
-<p>（2）<a href="https://github.com/koalaman/shellcheck" target="_blank" rel="external">https://github.com/koalaman/shellcheck</a></p>
-<p>（3）<a href="https://segmentfault.com/a/1190000006900083" target="_blank" rel="external">https://segmentfault.com/a/1190000006900083</a></p>
+        <h1 id="方法一：循环与命令并行"><a href="#方法一：循环与命令并行" class="headerlink" title="方法一：循环与命令并行"></a>方法一：循环与命令并行</h1><p>问：</p>
+<p>我当前文件夹下面有100个fastq测序文件，我要批量对他们运行fastqc软件（软件安装目录：~/biosoft/fastqc ）来处理，所以写了脚本<br>    ls *fastq | while read id ; do ~/biosoft/fastqc $id;done</p>
+<p>但是这样有一个弊端，就是这100个fastq测序文件是一个个被运行，这样耗时太长！<br>所以我稍作修改：</p>
+<pre><code>ls *fastq | while read id ; do nohup ~/biosoft/fastqc $id &amp; ;done
+</code></pre><p>这样又一下子把100个fastqc任务提交了，我的服务器根本受不了。</p>
+<p>所以需要修改修改脚本，让它一下子并行提交10个任务，因为我服务器限制。</p>
+<p>该如何最简单的完成呢？</p>
+<p>答：加个参数-p</p>
+<pre><code>ls *fastq | xargs -n 1 -p 10 -i FQ ~/biosoft/fastqc FQ
+</code></pre><p>每次最多提交10个文件，加-p就可以并行计算啦</p>
+<h1 id="方法二：MultiQC"><a href="#方法二：MultiQC" class="headerlink" title="方法二：MultiQC"></a>方法二：MultiQC</h1><p>homepage: <a href="http://multiqc.info" target="_blank" rel="external">http://multiqc.info</a></p>
+<p>功能：把多个测序结果的qc结果整合成一个报告。支持fastqc、trimmomatic、bowtie、STAR等多种软件结果的整合。</p>
+<h2 id="Installation-安装"><a href="#Installation-安装" class="headerlink" title="Installation 安装"></a>Installation 安装</h2><pre><code>conda install -c bioconda multiqc
+</code></pre><h2 id="Run-MultiQC-运行"><a href="#Run-MultiQC-运行" class="headerlink" title="Run MultiQC 运行"></a>Run MultiQC 运行</h2><p>安装好后，进入你要分析的测序文件所在的文件夹，直接输入multiqc加要扫描的目录即可运行，如果要扫描当前文件夹，直接输入”multiqc .”即可</p>
+<pre><code>multiqc .
+multiqc /data/mydir/
+multiqc /data/*fastqc.zip
+multiqc /data/sanple_1*
+</code></pre><h2 id="相关参数"><a href="#相关参数" class="headerlink" title="相关参数"></a>相关参数</h2><h3 id="使用“–ignore”参数忽略某些文件"><a href="#使用“–ignore”参数忽略某些文件" class="headerlink" title="使用“–ignore”参数忽略某些文件"></a>使用“–ignore”参数忽略某些文件</h3><pre><code>multiqc . --ingore *_R2*
+multiqc . --ignore run_two/
+multiqc . --ignore */run_three/*/fastqc/*.zip
+</code></pre><h3 id="使用文本指定要分析的文件的路径"><a href="#使用文本指定要分析的文件的路径" class="headerlink" title="使用文本指定要分析的文件的路径"></a>使用文本指定要分析的文件的路径</h3><pre><code>multiqc --file-list_my_file_list.txt
+</code></pre><h3 id="重命名输出结果"><a href="#重命名输出结果" class="headerlink" title="重命名输出结果"></a>重命名输出结果</h3><p>分析结果默认命名为“multiqc_report.html”，相关的以tab风格的data file保存在“multiqc_data”文件夹下。可以用“-n”参数改变结果文件的名字，用“-o”改变输出文件的位置。</p>
+<h3 id="覆盖已存在的结果"><a href="#覆盖已存在的结果" class="headerlink" title="覆盖已存在的结果"></a>覆盖已存在的结果</h3><p>添加参数“-f”，输出结果时会自动覆盖同名文件。</p>
+<h3 id="更换报告模板"><a href="#更换报告模板" class="headerlink" title="更换报告模板"></a>更换报告模板</h3><p>添加参数“-t”或者“–template”可以选择不同风格的报告模板，具体内容请查看帮助文档“multiqc –help”。同时，MultiQC也支持自行创作结果文件的模板。</p>
+<h3 id="输出图片Exporting-plot"><a href="#输出图片Exporting-plot" class="headerlink" title="输出图片Exporting plot"></a>输出图片Exporting plot</h3><p>除了直接输出html文件外，Multiqc还可以直接保存图片文件。用以下参数进行保存：</p>
+<pre><code>multiqc -p/--export
+</code></pre><p>默认设置下，图片会保存在“multiqc_plots”文件夹中，以.png/.svg或者pdf格式保存。</p>
+<p>同时，也可以直接在html文件中使用“toolbox”中的Export 保存图片。</p>
+<h2 id="报告正文"><a href="#报告正文" class="headerlink" title="报告正文"></a>报告正文</h2><p>报告页面分为三部分，左边是导航页面，中间是报告正文，右边是toolbox</p>
+<p><img src="http://i.imgur.com/VCs7xMz.png" alt=""></p>
+<ol>
+<li>General Statistics</li>
+</ol>
+<p>（Configure Conlumns）可选择需要展示的列名</p>
+<p><img src="http://i.imgur.com/r6rkXjl.png" alt=""></p>
+<p>点击列名可进行排序</p>
+<p><img src="http://i.imgur.com/LPpyikL.png" alt=""></p>
+<p>(plot)可选择任意两列进行plot</p>
+<p>Toolbox</p>
+<p>工具栏主要有Hightlight Samples、Rename Samples、Show/Hide Samples、Export Plots、Saving Setting以及帮助等功能。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA" target="_blank" rel="external">https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA</a><br>（2）<a href="http://www.cnblogs.com/leezx/p/7360668.html" target="_blank" rel="external">http://www.cnblogs.com/leezx/p/7360668.html</a></p>
 
       
     </div>
@@ -584,7 +454,7 @@ echo &quot;This is from $res.&quot;
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/shell脚本/" rel="tag"><i class="fa fa-tag"></i> shell脚本</a>
+            <a href="https:/AnJingwd.github.io/tags/NGS/" rel="tag"><i class="fa fa-tag"></i> NGS</a>
           
         </div>
       
@@ -597,8 +467,8 @@ echo &quot;This is from $res.&quot;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/08/12/设计sanger测序引物，验证突变位点/" rel="next" title="设计sanger测序引物，验证突变位点">
-                <i class="fa fa-chevron-left"></i> 设计sanger测序引物，验证突变位点
+              <a href="https:/AnJingwd.github.io/2017/08/28/修复Chrome浏览器崩溃/" rel="next" title="修复Chrome浏览器崩溃">
+                <i class="fa fa-chevron-left"></i> 修复Chrome浏览器崩溃
               </a>
             
           </div>
@@ -606,10 +476,6 @@ echo &quot;This is from $res.&quot;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="https:/AnJingwd.github.io/2017/08/14/Linux神器之grep,awk操作gtf文件/" rel="prev" title="Linux神器之grep,awk操作gtf文件">
-                Linux神器之grep,awk操作gtf文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -962,7 +828,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shell代码风格规范及技巧"><span class="nav-number">1.</span> <span class="nav-text">shell代码风格规范及技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名有标准"><span class="nav-number">1.1.</span> <span class="nav-text">命名有标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编码要统一"><span class="nav-number">1.2.</span> <span class="nav-text">编码要统一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开头有shebang"><span class="nav-number">1.3.</span> <span class="nav-text">开头有shebang</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写出健壮Bash-Shell脚本技巧"><span class="nav-number">1.4.</span> <span class="nav-text">写出健壮Bash Shell脚本技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作路径"><span class="nav-number">1.5.</span> <span class="nav-text">工作路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量PATH"><span class="nav-number">1.6.</span> <span class="nav-text">环境变量PATH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行脚本"><span class="nav-number">1.7.</span> <span class="nav-text">运行脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell中的变量"><span class="nav-number">1.8.</span> <span class="nav-text">Shell中的变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本的参数"><span class="nav-number">1.9.</span> <span class="nav-text">脚本的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码有注释"><span class="nav-number">1.10.</span> <span class="nav-text">代码有注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#太长要分行"><span class="nav-number">1.11.</span> <span class="nav-text">太长要分行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志"><span class="nav-number">1.12.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回显"><span class="nav-number">1.13.</span> <span class="nav-text">回显</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数相关"><span class="nav-number">1.14.</span> <span class="nav-text">函数相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#巧用main函数-使得代码可读性更强"><span class="nav-number">1.14.1.</span> <span class="nav-text">巧用main函数,使得代码可读性更强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#考虑作用域"><span class="nav-number">1.14.2.</span> <span class="nav-text">考虑作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#local一般用于局部变量声明，多在在函数内部使用。"><span class="nav-number">1.14.2.1.</span> <span class="nav-text">local一般用于局部变量声明，多在在函数内部使用。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#只读变量"><span class="nav-number">1.14.2.2.</span> <span class="nav-text">只读变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#declare"><span class="nav-number">1.14.2.3.</span> <span class="nav-text">declare</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数返回值"><span class="nav-number">1.14.3.</span> <span class="nav-text">函数返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用新写法"><span class="nav-number">1.15.</span> <span class="nav-text">使用新写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他小tip"><span class="nav-number">1.16.</span> <span class="nav-text">其他小tip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装shellcheck"><span class="nav-number">1.17.</span> <span class="nav-text">安装shellcheck</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell不能做什么"><span class="nav-number">1.18.</span> <span class="nav-text">Shell不能做什么</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">2.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法一：循环与命令并行"><span class="nav-number">1.</span> <span class="nav-text">方法一：循环与命令并行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法二：MultiQC"><span class="nav-number">2.</span> <span class="nav-text">方法二：MultiQC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation-安装"><span class="nav-number">2.1.</span> <span class="nav-text">Installation 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-MultiQC-运行"><span class="nav-number">2.2.</span> <span class="nav-text">Run MultiQC 运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关参数"><span class="nav-number">2.3.</span> <span class="nav-text">相关参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用“–ignore”参数忽略某些文件"><span class="nav-number">2.3.1.</span> <span class="nav-text">使用“–ignore”参数忽略某些文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用文本指定要分析的文件的路径"><span class="nav-number">2.3.2.</span> <span class="nav-text">使用文本指定要分析的文件的路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重命名输出结果"><span class="nav-number">2.3.3.</span> <span class="nav-text">重命名输出结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖已存在的结果"><span class="nav-number">2.3.4.</span> <span class="nav-text">覆盖已存在的结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换报告模板"><span class="nav-number">2.3.5.</span> <span class="nav-text">更换报告模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出图片Exporting-plot"><span class="nav-number">2.3.6.</span> <span class="nav-text">输出图片Exporting plot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报告正文"><span class="nav-number">2.4.</span> <span class="nav-text">报告正文</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
