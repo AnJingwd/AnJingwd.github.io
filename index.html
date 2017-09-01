@@ -386,51 +386,14 @@
 
       
         
-          
-            <h1 id="方法一：循环与命令并行"><a href="#方法一：循环与命令并行" class="headerlink" title="方法一：循环与命令并行"></a>方法一：循环与命令并行</h1><p>问：</p>
-<p>我当前文件夹下面有100个fastq测序文件，我要批量对他们运行fastqc软件（软件安装目录：~/biosoft/fastqc ）来处理，所以写了脚本<br>    ls *fastq | while read id ; do ~/biosoft/fastqc $id;done</p>
-<p>但是这样有一个弊端，就是这100个fastq测序文件是一个个被运行，这样耗时太长！<br>所以我稍作修改：</p>
-<pre><code>ls *fastq | while read id ; do nohup ~/biosoft/fastqc $id &amp; ;done
-</code></pre><p>这样又一下子把100个fastqc任务提交了，我的服务器根本受不了。</p>
-<p>所以需要修改修改脚本，让它一下子并行提交10个任务，因为我服务器限制。</p>
-<p>该如何最简单的完成呢？</p>
-<p>答：加个参数-p</p>
-<pre><code>ls *fastq | xargs -n 1 -p 10 -i FQ ~/biosoft/fastqc FQ
-</code></pre><p>每次最多提交10个文件，加-p就可以并行计算啦</p>
-<h1 id="方法二：MultiQC"><a href="#方法二：MultiQC" class="headerlink" title="方法二：MultiQC"></a>方法二：MultiQC</h1><p>homepage: <a href="http://multiqc.info" target="_blank" rel="external">http://multiqc.info</a></p>
-<p>功能：把多个测序结果的qc结果整合成一个报告。支持fastqc、trimmomatic、bowtie、STAR等多种软件结果的整合。</p>
-<h2 id="Installation-安装"><a href="#Installation-安装" class="headerlink" title="Installation 安装"></a>Installation 安装</h2><pre><code>conda install -c bioconda multiqc
-</code></pre><h2 id="Run-MultiQC-运行"><a href="#Run-MultiQC-运行" class="headerlink" title="Run MultiQC 运行"></a>Run MultiQC 运行</h2><p>安装好后，进入你要分析的测序文件所在的文件夹，直接输入multiqc加要扫描的目录即可运行，如果要扫描当前文件夹，直接输入”multiqc .”即可</p>
-<pre><code>multiqc .
-multiqc /data/mydir/
-multiqc /data/*fastqc.zip
-multiqc /data/sanple_1*
-</code></pre><h2 id="相关参数"><a href="#相关参数" class="headerlink" title="相关参数"></a>相关参数</h2><h3 id="使用“–ignore”参数忽略某些文件"><a href="#使用“–ignore”参数忽略某些文件" class="headerlink" title="使用“–ignore”参数忽略某些文件"></a>使用“–ignore”参数忽略某些文件</h3><pre><code>multiqc . --ingore *_R2*
-multiqc . --ignore run_two/
-multiqc . --ignore */run_three/*/fastqc/*.zip
-</code></pre><h3 id="使用文本指定要分析的文件的路径"><a href="#使用文本指定要分析的文件的路径" class="headerlink" title="使用文本指定要分析的文件的路径"></a>使用文本指定要分析的文件的路径</h3><pre><code>multiqc --file-list_my_file_list.txt
-</code></pre><h3 id="重命名输出结果"><a href="#重命名输出结果" class="headerlink" title="重命名输出结果"></a>重命名输出结果</h3><p>分析结果默认命名为“multiqc_report.html”，相关的以tab风格的data file保存在“multiqc_data”文件夹下。可以用“-n”参数改变结果文件的名字，用“-o”改变输出文件的位置。</p>
-<h3 id="覆盖已存在的结果"><a href="#覆盖已存在的结果" class="headerlink" title="覆盖已存在的结果"></a>覆盖已存在的结果</h3><p>添加参数“-f”，输出结果时会自动覆盖同名文件。</p>
-<h3 id="更换报告模板"><a href="#更换报告模板" class="headerlink" title="更换报告模板"></a>更换报告模板</h3><p>添加参数“-t”或者“–template”可以选择不同风格的报告模板，具体内容请查看帮助文档“multiqc –help”。同时，MultiQC也支持自行创作结果文件的模板。</p>
-<h3 id="输出图片Exporting-plot"><a href="#输出图片Exporting-plot" class="headerlink" title="输出图片Exporting plot"></a>输出图片Exporting plot</h3><p>除了直接输出html文件外，Multiqc还可以直接保存图片文件。用以下参数进行保存：</p>
-<pre><code>multiqc -p/--export
-</code></pre><p>默认设置下，图片会保存在“multiqc_plots”文件夹中，以.png/.svg或者pdf格式保存。</p>
-<p>同时，也可以直接在html文件中使用“toolbox”中的Export 保存图片。</p>
-<h2 id="报告正文"><a href="#报告正文" class="headerlink" title="报告正文"></a>报告正文</h2><p>报告页面分为三部分，左边是导航页面，中间是报告正文，右边是toolbox</p>
-<p><img src="http://i.imgur.com/VCs7xMz.png" alt=""></p>
-<ol>
-<li>General Statistics</li>
-</ol>
-<p>（Configure Conlumns）可选择需要展示的列名</p>
-<p><img src="http://i.imgur.com/r6rkXjl.png" alt=""></p>
-<p>点击列名可进行排序</p>
-<p><img src="http://i.imgur.com/LPpyikL.png" alt=""></p>
-<p>(plot)可选择任意两列进行plot</p>
-<p>Toolbox</p>
-<p>工具栏主要有Hightlight Samples、Rename Samples、Show/Hide Samples、Export Plots、Saving Setting以及帮助等功能。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA" target="_blank" rel="external">https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA</a><br>（2）<a href="http://www.cnblogs.com/leezx/p/7360668.html" target="_blank" rel="external">http://www.cnblogs.com/leezx/p/7360668.html</a></p>
-
-          
+          <blockquote class="blockquote-center">分别介绍使用循环和MultiQC软件两种方式批量进行fastqc</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="https:/AnJingwd.github.io/2017/08/30/批量fastqc/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -867,66 +830,14 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
 
       
         
-          
-            <a id="more"></a>
-<h1 id="nohup命令参考"><a href="#nohup命令参考" class="headerlink" title="nohup命令参考"></a>nohup命令参考</h1><p>用途：该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。nohup就是不挂起的意思( no hang up)</p>
-<ul>
-<li>语法：nohup Command [ Arg … ] [　&amp; ]</li>
-<li>描述：nohup 命令运行由 Command 参数和任何相关的 Arg 参数指定的命令，忽略所有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 nohup 命令，<strong>添加 &amp; （ 表示”and”的符号）到命令的尾部</strong></li>
-</ul>
-<h1 id="将任务移至后台"><a href="#将任务移至后台" class="headerlink" title="将任务移至后台"></a>将任务移至后台</h1><p>在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp; 在程序结尾来让程序自动运行。比如我们要在后台运行一个aaa.sh的脚本：</p>
-<pre><code>./test2.sh &amp;                                                             
-</code></pre><p><strong>可是当我们注销或者屏保后，这个脚本就会自动停止，这时我们就需要nohup命令，</strong> 怎样使用nohup命令呢？请看:</p>
-<pre><code>[wangdong@frontend ~]$ nohup ./test2.sh &amp;
-[1] 18569    
-[wangdong@frontend ~]$ nohup: ignoring input and appending output to `nohup.out&apos;
-</code></pre><h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><ul>
-<li><strong>只有当虚拟终端是 $ 或者 # 时候（如下图所示），才可关闭此终端，否则可能导致已经启动的进程被关闭</strong>（如果程序持续输出信息而没有出现 $ 或 #，按一下enter即可）</li>
-</ul>
-<p><img src="http://i.imgur.com/Rw7hIG7.png" alt=""></p>
-<ul>
-<li><p>后台执行脚本（<strong>有多个脚本，每个窗口最好只执行一个</strong>），如果在同一个窗口执行，下个执行命令需要等待前面一个执行完成才能执行，这种效率不是我们要的。</p>
-</li>
-<li><p>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中，起到了log的作用。</p>
-</li>
-<li><strong>如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。除非另外指定了输出文件：nohup command &gt; myout.file 2&gt;&amp;1 &amp;</strong> </li>
-<li>/dev/null 是黑洞路径， 可用于用于丢弃输出，例如nohup COMMAND &gt; /dev/null &amp;</li>
-</ul>
-<h1 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h1><h2 id="用-jobs-命令可以查看当前Screen中的后台任务。"><a href="#用-jobs-命令可以查看当前Screen中的后台任务。" class="headerlink" title="用 jobs 命令可以查看当前Screen中的后台任务。"></a>用 jobs 命令可以查看当前Screen中的后台任务。</h2><pre><code>jobs
-[1]+  Done                    nohup ./test2.sh
-</code></pre><p>（1）jobs命令执行的结果，＋表示是一个当前的作业，减号表是是一个当前作业之后的一个作业。</p>
-<p>（2）jobs -l 选项可显示所有任务的PID,</p>
-<p>（3）jobs的状态可以是running, stopped, Terminated</p>
-<p><strong>但当关闭该窗口在打开查看，这时候jobs已经不能使用，只能通过以下方式查看后台执行的脚本是否正在执行</strong></p>
-<pre><code>ps -ef | grep conda 
-</code></pre><p>#grep conda用于过滤命令</p>
-<p><img src="http://i.imgur.com/P1zghVP.png" alt=""></p>
-<h2 id="用-fg-JOBID-命令可以将后台的任务调入前台继续运行（Foreground）。"><a href="#用-fg-JOBID-命令可以将后台的任务调入前台继续运行（Foreground）。" class="headerlink" title="用 fg JOBID 命令可以将后台的任务调入前台继续运行（Foreground）。"></a>用 fg JOBID 命令可以将后台的任务调入前台继续运行（Foreground）。</h2><p>&emsp;&emsp;如果执行完后台脚本命令，当前窗口没有关闭，可以执行jobs查看当前窗口运行的后台进程的进程号，再通过fg n，将此后台进程调到前台执行。</p>
-<p><img src="http://i.imgur.com/n78JTfz.png" alt=""></p>
-<h2 id="命令在前台执行一半了，想转入后台执行"><a href="#命令在前台执行一半了，想转入后台执行" class="headerlink" title="命令在前台执行一半了，想转入后台执行"></a>命令在前台执行一半了，想转入后台执行</h2><ul>
-<li>首先用 ctrl + z 快捷键可以将一个正在前台执行的命令放到后台，并且暂停  </li>
-<li>接着用 bg JOBID 命令可以将一个在后台暂停的命令，变成继续执行（Background）。 </li>
-</ul>
-<h2 id="进程的终止"><a href="#进程的终止" class="headerlink" title="进程的终止"></a>进程的终止</h2><p>前台进程的终止：ctrl+c</p>
-<p>后台进程的终止：</p>
-<p>方法一：通过jobs命令查看job号（假设为num），然后执行kill num</p>
-<p>方法二：通过ps命令查看job的进程号（PID，假设为pid），然后执行kill pid
-　　</p>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="概念：当前任务"><a href="#概念：当前任务" class="headerlink" title="概念：当前任务"></a>概念：当前任务</h2><p>&emsp;&emsp;如果后台的任务号有2个，[1],[2]；如果当第一个后台任务顺利执行完毕，第二个后台任务还在执行中时，当前任务便会自动变成后台任务号码“[2]”的后台任务。所以可以得出一点，<strong>即当前任务是会变动的。当用户输入“fg”、“bg”和“stop”等命令时，如果未指定jobsid，则所变动的均是当前任务。</strong></p>
-<h2 id="ps-ef-是用标准的格式显示进程的"><a href="#ps-ef-是用标准的格式显示进程的" class="headerlink" title="ps -ef 是用标准的格式显示进程的"></a>ps -ef 是用标准的格式显示进程的</h2><p><img src="http://i.imgur.com/QfGAegr.png" alt=""></p>
-<p>其中各列的内容意思如下</p>
-<pre><code>UID    //用户ID、但输出的是用户名 
-PID    //进程的ID 
-PPID    //父进程ID 
-C      //进程占用CPU的百分比 
-STIME  //进程启动到现在的时间 
-TTY    //该进程在那个终端上运行，若与终端无关，则显示? 若为pts/0等，则表示由网络连接主机进程。 
-CMD    //命令的名称和参数
-</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://rajaruan.blog.51cto.com/2771737/822199" target="_blank" rel="external">http://rajaruan.blog.51cto.com/2771737/822199</a></p>
-<p>（2）<a href="https://wenku.baidu.com/view/28863c79581b6bd97f19ead8.html" target="_blank" rel="external">https://wenku.baidu.com/view/28863c79581b6bd97f19ead8.html</a></p>
-<p>（3）<a href="http://blog.sina.com.cn/s/blog_673ee2b50100iywr.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_673ee2b50100iywr.html</a></p>
-
-          
+          <blockquote class="blockquote-center">命令后台运行及相关操作</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="https:/AnJingwd.github.io/2017/08/25/linux命令之nohup/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2186,7 +2097,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共30.2k字</span>
+  <span class="post-count">博客全站共30.3k字</span>
 </div>
 
 <div class="powered-by">

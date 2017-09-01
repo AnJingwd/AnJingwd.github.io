@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-08-30T01:51:44.512Z</updated>
+  <updated>2017-09-01T03:16:09.393Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,9 +20,12 @@
     <link href="https:///AnJingwd.github.io/2017/08/30/%E6%89%B9%E9%87%8Ffastqc/"/>
     <id>https:///AnJingwd.github.io/2017/08/30/批量fastqc/</id>
     <published>2017-08-30T01:26:21.000Z</published>
-    <updated>2017-08-30T01:51:44.512Z</updated>
+    <updated>2017-09-01T03:16:09.393Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="方法一：循环与命令并行"><a href="#方法一：循环与命令并行" class="headerlink" title="方法一：循环与命令并行"></a>方法一：循环与命令并行</h1><p>问：</p>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">分别介绍使用循环和MultiQC软件两种方式批量进行fastqc</blockquote>
+
+<a id="more"></a>
+<h1 id="方法一：循环与命令并行"><a href="#方法一：循环与命令并行" class="headerlink" title="方法一：循环与命令并行"></a>方法一：循环与命令并行</h1><p>问：</p>
 <p>我当前文件夹下面有100个fastq测序文件，我要批量对他们运行fastqc软件（软件安装目录：~/biosoft/fastqc ）来处理，所以写了脚本<br>    ls *fastq | while read id ; do ~/biosoft/fastqc $id;done</p>
 <p>但是这样有一个弊端，就是这100个fastq测序文件是一个个被运行，这样耗时太长！<br>所以我稍作修改：</p>
 <pre><code>ls *fastq | while read id ; do nohup ~/biosoft/fastqc $id &amp; ;done
@@ -68,8 +71,7 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
     
     <summary type="html">
     
-      &lt;h1 id=&quot;方法一：循环与命令并行&quot;&gt;&lt;a href=&quot;#方法一：循环与命令并行&quot; class=&quot;headerlink&quot; title=&quot;方法一：循环与命令并行&quot;&gt;&lt;/a&gt;方法一：循环与命令并行&lt;/h1&gt;&lt;p&gt;问：&lt;/p&gt;
-&lt;p&gt;我当前文件夹下面有100个fastq测序文件，我
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;分别介绍使用循环和MultiQC软件两种方式批量进行fastqc&lt;/blockquote&gt;
     
     </summary>
     
@@ -198,9 +200,11 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
     <link href="https:///AnJingwd.github.io/2017/08/25/linux%E5%91%BD%E4%BB%A4%E4%B9%8Bnohup/"/>
     <id>https:///AnJingwd.github.io/2017/08/25/linux命令之nohup/</id>
     <published>2017-08-25T08:49:13.000Z</published>
-    <updated>2017-09-01T03:09:14.381Z</updated>
+    <updated>2017-09-01T03:17:00.417Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">命令后台运行及相关操作</blockquote>
+
+<a id="more"></a>
 <h1 id="nohup命令参考"><a href="#nohup命令参考" class="headerlink" title="nohup命令参考"></a>nohup命令参考</h1><p>用途：该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。nohup就是不挂起的意思( no hang up)</p>
 <ul>
 <li>语法：nohup Command [ Arg … ] [　&amp; ]</li>
@@ -261,8 +265,7 @@ CMD    //命令的名称和参数
     
     <summary type="html">
     
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;nohup命令参考&quot;&gt;&lt;a href=&quot;#nohup命令参考&quot; class=&quot;headerlink&quot; title=&quot;nohup命令参考&quot;&gt;&lt;/a&gt;nohup命令参考&lt;/h1&gt;&lt;p&gt;用途：该命令可以在你退出帐户/关闭终端之后继续运
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;命令后台运行及相关操作&lt;/blockquote&gt;
     
     </summary>
     
