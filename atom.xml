@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-09-01T03:16:09.393Z</updated>
+  <updated>2017-09-01T04:54:22.189Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决ggplot 作图x轴和y轴不重合问题</title>
+    <link href="https:///AnJingwd.github.io/2017/09/01/%E8%A7%A3%E5%86%B3ggplot-%E4%BD%9C%E5%9B%BEx%E8%BD%B4%E5%92%8Cy%E8%BD%B4%E4%B8%8D%E9%87%8D%E5%90%88%E9%97%AE%E9%A2%98/"/>
+    <id>https:///AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/</id>
+    <published>2017-09-01T04:43:03.000Z</published>
+    <updated>2017-09-01T04:54:22.189Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">解决ggplot 作图x轴和y轴不重合问题</blockquote>
+
+<a id="more"></a>
+<p>只需要在作图时加上加上一下代码，即可即可让x轴和y轴在坐标原点重合：</p>
+<pre><code>scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
+</code></pre><p>现在用测试代码看看前后变化：</p>
+<pre><code>library(ggplot2)
+df &lt;- data.frame(x = 1:5, y = 1:5)
+p1 &lt;- ggplot(df, aes(x, y)) + geom_point()
+p1 &lt;- p1 + expand_limits(x = 0, y = 0)
+p1
+</code></pre><p><img src="http://i.imgur.com/c0EnfOi.png" alt=""></p>
+<pre><code>library(ggplot2)
+df &lt;- data.frame(x = 1:5, y = 1:5)
+p2 &lt;- ggplot(df, aes(x, y)) + geom_point()
+p2 &lt;- p2 + expand_limits(x = 0, y = 0)+ scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
+p2
+</code></pre><p><img src="http://i.imgur.com/2GNk480.png" alt=""></p>
+<p>参考：</p>
+<p>（1）<a href="http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot" target="_blank" rel="external">http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot</a></p>
+<p>（2）<a href="http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r" target="_blank" rel="external">http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r</a></p>
+<p>（3）<a href="http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap" target="_blank" rel="external">http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;解决ggplot 作图x轴和y轴不重合问题&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="R-绘图" scheme="https:///AnJingwd.github.io/categories/R-%E7%BB%98%E5%9B%BE/"/>
+    
+    
+      <category term="R-绘图" scheme="https:///AnJingwd.github.io/tags/R-%E7%BB%98%E5%9B%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>批量fastqc</title>
@@ -3122,65 +3166,6 @@ pip3.6 install numpy
     <summary type="html">
     
       &lt;p&gt;&amp;emsp;&amp;emsp;本教程将展示如何在CentOS上通过源码编辑安装最新的Python 2 和 Python 3。以下例子使用Python 2.7.13 and Python 3.6.2，但是操作流程对于其他新版python都是相同的。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>添加PATH环境变量</title>
-    <link href="https:///AnJingwd.github.io/2017/08/02/%E6%B7%BB%E5%8A%A0PATH%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"/>
-    <id>https:///AnJingwd.github.io/2017/08/02/添加PATH环境变量/</id>
-    <published>2017-08-02T15:57:09.000Z</published>
-    <updated>2017-08-06T11:14:17.552Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！</p>
-<a id="more"></a>
-<h1 id="想让某个命令可以全局使用，可以有两种方法来实现："><a href="#想让某个命令可以全局使用，可以有两种方法来实现：" class="headerlink" title="想让某个命令可以全局使用，可以有两种方法来实现："></a>想让某个命令可以全局使用，可以有两种方法来实现：</h1><h2 id="方法一-在命令行将路径添加到-bashrc文件"><a href="#方法一-在命令行将路径添加到-bashrc文件" class="headerlink" title="方法一.在命令行将路径添加到 .bashrc文件"></a>方法一.在命令行将路径添加到 .bashrc文件</h2><pre><code>echo &apos;export PATH=~/home/biosoftwares/FastQC/bin/fastqc:$PATH&apos; &gt;&gt;~/.bashrc
-
-source ~/.bashrc
-</code></pre><p><strong>注意：</strong></p>
-<p>（1）注意添加的路径是可执行文件的绝对路径，一般在bin下，可执行文件为绿色</p>
-<p>（2）用echo命令输出加引号的字符串时，将字符串原样输出</p>
-<p>（3）export可新增，修改或删除环境变量，供后续执行的程序使用。export的效力仅及于该次登陆操作</p>
-<p>（4）&gt;&gt;以追加方式添加</p>
-<p>（5） ~/.bashrc表示家目录下的.bashrc文件，为隐藏文件，使用ls -a可以查看</p>
-<p>（6）使用source ~/.bashrc之前需要先回到家目录</p>
-<p>（7）Source命令也称为“点命令”，也就是一个点符号（.）。source命令通常用于重新执行刚修改的<br>  初始化文件，使之立即生效，而不必注销并重新登录。用法：source filename 或 . filename</p>
-<p><strong>也可以在用vim打开~/.bashrc文件直接添加</strong></p>
-<pre><code>vim ~/.bashrc
-i 
-PATH=~/home/biosoftwares/FastQC/bin/fastqc
-Esc
-:x
-</code></pre><p><strong>注意：</strong></p>
-<p>（1）i 进入vim编辑模式</p>
-<p>（2）Esc退出vim编辑模式</p>
-<p>（3）:x保存修改并退出（需要在英文输入法状态下）</p>
-<p>##方法二. 将目录添加到~/.bashrc 文件，比如~/bin，然后创建软连接（相当于win下的快捷方式）</p>
-<p>#创建~/bin目录</p>
-<pre><code>mkdir -p ~/bin
-</code></pre><p>#将~/bin目录添加到PATH</p>
-<pre><code>echo &apos;export PATH=~/bin:$PATH&apos;&gt;&gt;~/.bashrc
-</code></pre><p>#使修改生效<br>    source ~/.bashrc</p>
-<p>#在/bin下生成fastqc软连接</p>
-<pre><code>ln -s ~/src/fastQC/fastqc ~/bin/fastqc
-</code></pre><p><strong>注意：</strong></p>
-<p>（1）mkdir -p  表示创建多级目录</p>
-<p>（2）ln是link的缩写，-s选项创建软连接</p>
-<p>创建软连接格式： ln/link SOURCE [TARGET]</p>
-<p>创建软链接： ln/link -s SOURCE [TARGET]</p>
-<p>软连接不占用磁盘空间，硬链接相当于拷贝，占磁盘空间</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！&lt;/p&gt;
     
     </summary>
     
