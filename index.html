@@ -775,6 +775,206 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/25/linux命令之nohup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="https:/AnJingwd.github.io/2017/08/25/linux命令之nohup/" itemprop="url">linux命令之nohup</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T16:49:13+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="nohup命令参考"><a href="#nohup命令参考" class="headerlink" title="nohup命令参考"></a>nohup命令参考</h1><p>用途：该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。nohup就是不挂起的意思( no hang up)</p>
+<ul>
+<li>语法：nohup Command [ Arg … ] [　&amp; ]</li>
+<li>描述：nohup 命令运行由 Command 参数和任何相关的 Arg 参数指定的命令，忽略所有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 nohup 命令，<strong>添加 &amp; （ 表示”and”的符号）到命令的尾部</strong></li>
+</ul>
+<h1 id="将任务移至后台"><a href="#将任务移至后台" class="headerlink" title="将任务移至后台"></a>将任务移至后台</h1><p>在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp; 在程序结尾来让程序自动运行。比如我们要在后台运行一个aaa.sh的脚本：</p>
+<pre><code>./test2.sh &amp;                                                             
+</code></pre><p><strong>可是当我们注销或者屏保后，这个脚本就会自动停止，这时我们就需要nohup命令，</strong> 怎样使用nohup命令呢？请看:</p>
+<pre><code>[wangdong@frontend ~]$ nohup ./test2.sh &amp;
+[1] 18569    
+[wangdong@frontend ~]$ nohup: ignoring input and appending output to `nohup.out&apos;
+</code></pre><h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><ul>
+<li><strong>只有当虚拟终端是 $ 或者 # 时候（如下图所示），才可关闭此终端，否则可能导致已经启动的进程被关闭</strong>（如果程序持续输出信息而没有出现 $ 或 #，按一下enter即可）</li>
+</ul>
+<p><img src="http://i.imgur.com/Rw7hIG7.png" alt=""></p>
+<ul>
+<li><p>后台执行脚本（<strong>有多个脚本，每个窗口最好只执行一个</strong>），如果在同一个窗口执行，下个执行命令需要等待前面一个执行完成才能执行，这种效率不是我们要的。</p>
+</li>
+<li><p>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中，起到了log的作用。</p>
+</li>
+<li><strong>如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。除非另外指定了输出文件：nohup command &gt; myout.file 2&gt;&amp;1 &amp;</strong> </li>
+<li>/dev/null 是黑洞路径， 可用于用于丢弃输出，例如nohup COMMAND &gt; /dev/null &amp;</li>
+</ul>
+<h1 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h1><h2 id="用-jobs-命令可以查看当前Screen中的后台任务。"><a href="#用-jobs-命令可以查看当前Screen中的后台任务。" class="headerlink" title="用 jobs 命令可以查看当前Screen中的后台任务。"></a>用 jobs 命令可以查看当前Screen中的后台任务。</h2><pre><code>jobs
+[1]+  Done                    nohup ./test2.sh
+</code></pre><p>（1）jobs命令执行的结果，＋表示是一个当前的作业，减号表是是一个当前作业之后的一个作业。</p>
+<p>（2）jobs -l 选项可显示所有任务的PID,</p>
+<p>（3）jobs的状态可以是running, stopped, Terminated</p>
+<p><strong>但当关闭该窗口在打开查看，这时候jobs已经不能使用，只能通过以下方式查看后台执行的脚本是否正在执行</strong></p>
+<pre><code>ps -ef | grep conda 
+</code></pre><p>#grep conda用于过滤命令</p>
+<p><img src="http://i.imgur.com/P1zghVP.png" alt=""></p>
+<h2 id="用-fg-JOBID-命令可以将后台的任务调入前台继续运行（Foreground）。"><a href="#用-fg-JOBID-命令可以将后台的任务调入前台继续运行（Foreground）。" class="headerlink" title="用 fg JOBID 命令可以将后台的任务调入前台继续运行（Foreground）。"></a>用 fg JOBID 命令可以将后台的任务调入前台继续运行（Foreground）。</h2><p>&emsp;&emsp;如果执行完后台脚本命令，当前窗口没有关闭，可以执行jobs查看当前窗口运行的后台进程的进程号，再通过fg n，将此后台进程调到前台执行。</p>
+<p><img src="http://i.imgur.com/n78JTfz.png" alt=""></p>
+<h2 id="命令在前台执行一半了，想转入后台执行"><a href="#命令在前台执行一半了，想转入后台执行" class="headerlink" title="命令在前台执行一半了，想转入后台执行"></a>命令在前台执行一半了，想转入后台执行</h2><ul>
+<li>首先用 ctrl + z 快捷键可以将一个正在前台执行的命令放到后台，并且暂停  </li>
+<li>接着用 bg JOBID 命令可以将一个在后台暂停的命令，变成继续执行（Background）。 </li>
+</ul>
+<h2 id="进程的终止"><a href="#进程的终止" class="headerlink" title="进程的终止"></a>进程的终止</h2><p>前台进程的终止：ctrl+c</p>
+<p>后台进程的终止：</p>
+<p>方法一：通过jobs命令查看job号（假设为num），然后执行kill num</p>
+<p>方法二：通过ps命令查看job的进程号（PID，假设为pid），然后执行kill pid
+　　</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="概念：当前任务"><a href="#概念：当前任务" class="headerlink" title="概念：当前任务"></a>概念：当前任务</h2><p>&emsp;&emsp;如果后台的任务号有2个，[1],[2]；如果当第一个后台任务顺利执行完毕，第二个后台任务还在执行中时，当前任务便会自动变成后台任务号码“[2]”的后台任务。所以可以得出一点，<strong>即当前任务是会变动的。当用户输入“fg”、“bg”和“stop”等命令时，如果未指定jobsid，则所变动的均是当前任务。</strong></p>
+<h2 id="ps-ef-是用标准的格式显示进程的"><a href="#ps-ef-是用标准的格式显示进程的" class="headerlink" title="ps -ef 是用标准的格式显示进程的"></a>ps -ef 是用标准的格式显示进程的</h2><p><img src="http://i.imgur.com/QfGAegr.png" alt=""></p>
+<p>其中各列的内容意思如下</p>
+<pre><code>UID    //用户ID、但输出的是用户名 
+PID    //进程的ID 
+PPID    //父进程ID 
+C      //进程占用CPU的百分比 
+STIME  //进程启动到现在的时间 
+TTY    //该进程在那个终端上运行，若与终端无关，则显示? 若为pts/0等，则表示由网络连接主机进程。 
+CMD    //命令的名称和参数
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://rajaruan.blog.51cto.com/2771737/822199" target="_blank" rel="external">http://rajaruan.blog.51cto.com/2771737/822199</a></p>
+<p>（2）<a href="https://wenku.baidu.com/view/28863c79581b6bd97f19ead8.html" target="_blank" rel="external">https://wenku.baidu.com/view/28863c79581b6bd97f19ead8.html</a></p>
+<p>（3）<a href="http://blog.sina.com.cn/s/blog_673ee2b50100iywr.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_673ee2b50100iywr.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+	</div>
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/22/创建生信分析pipline(DNA-seq,RNA-seq)-基础版/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1651,154 +1851,6 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/14/Linux神器之grep,awk操作gtf文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="AJ's blog">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="安静-不安静的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="https:/AnJingwd.github.io/2017/08/14/Linux神器之grep,awk操作gtf文件/" itemprop="url">Linux神器之grep,awk操作gtf文件</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-14T10:21:26+08:00">
-                2017-08-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote class="blockquote-center">Linux神器之grep,awk操作gtf文件</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="https:/AnJingwd.github.io/2017/08/14/Linux神器之grep,awk操作gtf文件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	<div>
-	
-	</div>
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1849,7 +1901,7 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2134,7 +2186,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共29.1k字</span>
+  <span class="post-count">博客全站共30.2k字</span>
 </div>
 
 <div class="powered-by">
