@@ -489,7 +489,7 @@ CMD    //命令的名称和参数
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-08-29T08:26:12.282Z</updated>
+    <updated>2017-09-02T13:54:18.853Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -601,6 +601,10 @@ CMD    //命令的名称和参数
 <tr>
 <td><a href="https://ocw.mit.edu/courses/biology/7-91j-foundations-of-computational-and-systems-biology-spring-2014/video-lectures/" target="_blank" rel="external">Computational and Systems Biology” Video Lectures</a></td>
 <td>MIT计算与系统生物学课程 </td>
+</tr>
+<tr>
+<td><a href="http://manuals.bioinformatics.ucr.edu/home" target="_blank" rel="external">UCR(Institute for In tegrative Genome Biology)</a></td>
+<td>Manuals 包括R Basics Manual， BioConductor Manual， NGS Analysis with R/Bioconductor， NGS Analysis with Galaxy and IGV ，Programming in R， Vim-R-Tmux: Command-Line IDE for R ，ChemmineR ， EMBOSS， Linux Essentials， IIGB’s Linux Cluster Manual，十分全面。</td>
 </tr>
 </tbody>
 </table>
@@ -752,6 +756,14 @@ CMD    //命令的名称和参数
 <td><a href="http://www.biotrainee.com/forum.php" target="_blank" rel="external"> biotrainee</a></td>
 <td>生信技能树</td>
 </tr>
+<tr>
+<td><a href="http://www.oschina.net/" target="_blank" rel="external">oschina</a></td>
+<td>开源中国</td>
+</tr>
+<tr>
+<td><a href="https://d.cosx.org/" target="_blank" rel="external">Capital of Statistics, COS</a></td>
+<td>统计之都</td>
+</tr>
 </tbody>
 </table>
 <h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><table>
@@ -762,6 +774,14 @@ CMD    //命令的名称和参数
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="http://mp.aiweibang.com/m/u/299005/a?cid=0" target="_blank" rel="external">实验小白</a></td>
+<td>基础实验介绍</td>
+</tr>
+<tr>
+<td><a href="http://www.swwy.com/shengmingkexue.html" target="_blank" rel="external">生物无忧</a></td>
+<td>中文实验视频教程</td>
+</tr>
 <tr>
 <td><a href="https://www.jove.com/" target="_blank" rel="external">Journal of Visualized Experiments ( JoVE)</a></td>
 <td>JoVE是一份展示可视化实验的期刊，是世界上第一个同行评议的科技视频期刊</td>
@@ -849,12 +869,76 @@ CMD    //命令的名称和参数
 <td>R包中文介绍【全】</td>
 </tr>
 <tr>
+<td><a href="https://www.bioconductor.org/about/mirrors/" target="_blank" rel="external">Bioconductor - Mirrors</a></td>
+<td>Bioconductor镜像汇总</td>
+</tr>
+<tr>
+<td><a href="https://blog.rstudio.com/" target="_blank" rel="external">RStudio Blog</a> &emsp;<a href="https://www.r-bloggers.com/the-r-graphical-manual/" target="_blank" rel="external">R-bloggers</a> &emsp;<a href="https://www.nceas.ucsb.edu/scicomp/software/r" target="_blank" rel="external">R Programming Resource Center</a>&emsp; <a href="http://www.r-china.net/portal.php" target="_blank" rel="external">R China</a></td>
+<td>RStudio 博客, R博客,R 编程资源中心（链接），R语言中文网</td>
+</tr>
+<tr>
+<td><a href="http://www.statmethods.net/index.html" target="_blank" rel="external">Quick-R</a> &emsp; <a href="http://cyclismo.org/tutorial/R/input.html" target="_blank" rel="external">R Tutorial</a> &emsp; <a href="https://www.programiz.com/r-programming/if-else-statement" target="_blank" rel="external">R</a> &emsp;</td>
+<td>R基础资料</td>
+</tr>
+<tr>
+<td><a href="https://bookdown.org/yihui/r-ninja/" target="_blank" rel="external">R语言忍者秘笈</a> &emsp;</td>
+<td>R语言在线电子书</td>
+</tr>
+<tr>
+<td><a href="http://libguides.library.kent.edu/SPSS/home" target="_blank" rel="external">KENT STATE</a></td>
+<td>SPSS 教程</td>
+</tr>
+<tr>
+<td><a href="http://libguides.princeton.edu/dss/SPSS" target="_blank" rel="external">PUL</a></td>
+<td>Getting Started in Data Analysis: Stata, R, SPSS, Excel: SPSS</td>
+</tr>
+<tr>
+<td><a href="http://cn.mathworks.com/examples/product-group/matlab-computational-biology" target="_blank" rel="external">MATLAB Bioinformatics Toolbox</a></td>
+<td>MATLAB生信分析示例</td>
+</tr>
+<tr>
+<td><a href="http://rcourse.iop.kcl.ac.uk/2011/" target="_blank" rel="external">Kings college london</a></td>
+<td>R语言课件—伦敦国王大学</td>
+</tr>
+<tr>
 <td><a href="https://togaware.com/onepager/" target="_blank" rel="external">OnePageR</a></td>
 <td>A Survival Guide to Data Science with R</td>
 </tr>
 <tr>
+<td><a href="http://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/" target="_blank" rel="external"> R for Bioinformatics</a>  &emsp;<a href="http://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/" target="_blank" rel="external">R for Biomedical Statistics</a>  &emsp; <a href="http://a-little-book-of-r-for-time-series.readthedocs.io/en/latest/" target="_blank" rel="external">R for Time Series</a></td>
+<td>R语言英文小书</td>
+</tr>
+<tr>
+<td><a href="http://zoonek2.free.fr/UNIX/48_R/all.html?qqdrsign=01768" target="_blank" rel="external">Statistics with R</a> &emsp; <a href="http://www.gardenersown.co.uk/Education/Lectures/R/correl.htm" target="_blank" rel="external">Using R for statistical analyses</a></td>
+<td>R统计</td>
+</tr>
+<tr>
+<td><a href="http://www.statsblogs.com/about/" target="_blank" rel="external">StatsBlogs</a></td>
+<td>统计相关博客R,SAS等</td>
+</tr>
+<tr>
 <td><a href="http://kasperdanielhansen.github.io/genbioconductor/" target="_blank" rel="external">Bioconductor for Genomic Data Science</a></td>
 <td>关于Bioconductor的网络课程，有视频，有材料</td>
+</tr>
+<tr>
+<td><a href="http://blog.fens.me" target="_blank" rel="external">张丹博客</a></td>
+<td>原创了大量R语言技术实战文章，包括R的极客理想系列文章，RHadoop实战系列文章，R离间NoSQL系列文章，并写作”R的极客理想”系列图书</td>
+</tr>
+<tr>
+<td><a href="https://yihui.name/cn/" target="_blank" rel="external">谢益辉的个人博客</a></td>
+<td>博客主要包括各种有趣的技术和吐槽文章。谢益辉是统计之都的创始人，现任RStudio公司程序员</td>
+</tr>
+<tr>
+<td><a href="http://www.bjt.name/" target="_blank" rel="external">刘思喆的个人博客</a></td>
+<td>博客中主要包括R语言企业级应用的文章。刘思喆现任京东推荐算法经历</td>
+</tr>
+<tr>
+<td><a href="http://ww7.jliblog.com/" target="_blank" rel="external">李舰的个人博客</a></td>
+<td>博客中主要包括R语言建模的文章。李舰现任Mango Solutions中国区数据总监</td>
+</tr>
+<tr>
+<td><a href="http://www.wentrue.net/blog" target="_blank" rel="external">阿稳的个人博客——不周山</a></td>
+<td>博客中主要包括R语言并行技术的文章。</td>
 </tr>
 </tbody>
 </table>
