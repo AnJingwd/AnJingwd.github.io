@@ -489,7 +489,7 @@ CMD    //命令的名称和参数
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-09-02T14:13:33.343Z</updated>
+    <updated>2017-09-02T14:15:28.684Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -532,7 +532,7 @@ CMD    //命令的名称和参数
 </tr>
 </tbody>
 </table>
-<h1 id="网络学编程及数据分析"><a href="#网络学编程及数据分析" class="headerlink" title="网络学编程及数据分析"></a>网络学编程及数据分析</h1><table>
+<h1 id="linux及数据分析"><a href="#linux及数据分析" class="headerlink" title="linux及数据分析"></a>linux及数据分析</h1><table>
 <thead>
 <tr>
 <th>Name</th>
@@ -540,6 +540,10 @@ CMD    //命令的名称和参数
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="http://man.linuxde.net/" target="_blank" rel="external">Linux命令大全</a></td>
+<td>linux命令搜索，查看帮助</td>
+</tr>
 <tr>
 <td><a href="http://userweb.eng.gla.ac.uk/umer.ijaz/bioinformatics/linux.html" target="_blank" rel="external">Linux command line exercises for NGS data processing</a></td>
 <td>NGS数据处理实践过程中的linux命令行知识点</td>
@@ -565,20 +569,6 @@ CMD    //命令的名称和参数
 <tr>
 <td><a href="http://www.jianshu.com/p/938d362fc48d" target="_blank" rel="external">bio简书</a></td>
 <td>bwa+samtools+picardtools+GATK call SNP 流程</td>
-</tr>
-</tbody>
-</table>
-<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://man.linuxde.net/" target="_blank" rel="external">Linux命令大全</a></td>
-<td>linux命令搜索，查看帮助</td>
 </tr>
 </tbody>
 </table>
