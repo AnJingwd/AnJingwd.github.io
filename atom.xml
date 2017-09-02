@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-09-02T04:20:20.202Z</updated>
+  <updated>2017-09-02T04:45:33.389Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https:///AnJingwd.github.io/2017/09/02/python%E5%AE%9E%E7%8E%B0excel%E4%BA%8C%E7%BB%B4%E8%A1%A8%E6%A0%BC%E6%A0%BC%E5%BC%8F%E5%8C%96/"/>
     <id>https:///AnJingwd.github.io/2017/09/02/python实现excel二维表格格式化/</id>
     <published>2017-09-02T03:40:51.000Z</published>
-    <updated>2017-09-02T04:20:20.202Z</updated>
+    <updated>2017-09-02T04:45:33.389Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;Excel 是 Windows 环境下流行的、强大的电子表格应用。openpyxl 模块让 Python 程序能读取和修改 Excel 电子表格文<br>件。例如，可能有一个无聊的任务，需要从一个电子表格拷贝一些数据，粘贴到另一个电子表格中。或者可能需要从几千行中挑选几行，根据某种条件稍作修改。或者需要查看几百份部门预算电子表格，寻找其中的赤字。正是这种无聊无脑的电子表格任务，可以通过 Python 来完成。</p>
 <p>&emsp;&emsp;同时，发现之前写了很多小脚本，但代码的复用率极低。因此，今后的代码得更加注意用函数进行代码的封装。EXCEL中行的排序及筛选比较容易，但对于列比较麻烦。在此，通过一个对EXCEL列排序及筛选（取子列）的例子进行演示。</p>
@@ -30,11 +30,9 @@
 <p><img src="https://i.imgur.com/fm8rjs8.png" alt=""></p>
 <p>Sheet2</p>
 <p><img src="https://i.imgur.com/tme2ia3.png" alt=""></p>
-<p>result_sorted</p>
-<p><img src="https://i.imgur.com/XPvoDEc.png" alt=""></p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>在cmd下进入脚本sort_column.py和测试数据new1.xlsx所在目录，运行：</p>
 <pre><code>python sort_column.py F:\pycharm_project\excel_format\new1.xlsx 1 B S
-</code></pre><h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p><img src="https://i.imgur.com/wlUd4Ky.png" alt=""></p>
+</code></pre><h1 id="结果result-sorted"><a href="#结果result-sorted" class="headerlink" title="结果result_sorted"></a>结果result_sorted</h1><p><img src="https://i.imgur.com/wlUd4Ky.png" alt=""></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）书籍-Python编程快速上手让繁琐工作自动化–第12章处理 Excel 电子表格</p>
 ]]></content>
     
