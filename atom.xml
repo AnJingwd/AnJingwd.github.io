@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-09-02T04:45:33.389Z</updated>
+  <updated>2017-09-04T07:19:35.807Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>R语言之批量导入csv文件，并以文件名作为变量名</title>
+    <link href="https:///AnJingwd.github.io/2017/09/04/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%B9%E9%87%8F%E5%AF%BC%E5%85%A5csv%E6%96%87%E4%BB%B6%EF%BC%8C%E5%B9%B6%E4%BB%A5%E6%96%87%E4%BB%B6%E5%90%8D%E4%BD%9C%E4%B8%BA%E5%8F%98%E9%87%8F%E5%90%8D/"/>
+    <id>https:///AnJingwd.github.io/2017/09/04/R语言之批量导入csv文件，并以文件名作为变量名/</id>
+    <published>2017-09-04T05:29:34.000Z</published>
+    <updated>2017-09-04T07:19:35.807Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;当要处理一批csv文件时，一个一个读入就太麻烦而且太low了。那么如何一次将工作路径的csv文件读入当前环境空间（Environment），并且使用文件名作为变量名，使用时直接调用即可呢??</p>
+<a id="more"></a>
+<h1 id="批量读入csv文件"><a href="#批量读入csv文件" class="headerlink" title="批量读入csv文件"></a>批量读入csv文件</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#将列表中文件读入环境空间，并以文件名作为变量名</span></div><div class="line">mycsvfile = list.files(pattern=<span class="string">"*.csv"</span>)   <span class="comment">#生成.csv文件的列表</span></div><div class="line">list2env(</div><div class="line">  lapply(setNames(mycsvfile, make.names(gsub(<span class="string">"*.csv$"</span>, <span class="string">""</span>, mycsvfile))),</div><div class="line">         read.csv,header=<span class="literal">TRUE</span>,check.names=<span class="literal">FALSE</span>), envir = .GlobalEnv)</div></pre></td></tr></table></figure>
+<h1 id="当然，上述语句也可以用于批量读入txt文件"><a href="#当然，上述语句也可以用于批量读入txt文件" class="headerlink" title="当然，上述语句也可以用于批量读入txt文件"></a>当然，上述语句也可以用于批量读入txt文件</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mytxtfile = list.files(pattern=<span class="string">"*.txt"</span>)</div><div class="line">list2env(</div><div class="line">  lapply(setNames(mytxtfile, make.names(gsub(<span class="string">"*.txt$"</span>, <span class="string">""</span>, mytxtfile))),</div><div class="line">         read.table,header=<span class="literal">TRUE</span>,sep=<span class="string">"\t"</span>), envir = .GlobalEnv)</div></pre></td></tr></table></figure>
+<h1 id="批量读入自定义函数"><a href="#批量读入自定义函数" class="headerlink" title="批量读入自定义函数"></a>批量读入自定义函数</h1><p>对于自定义的函数，可以通过source函数导入环境空间，然后才能调用，当然也可以写个函数，调用此函数批量导入罗！！！</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sourceDir &lt;- <span class="keyword">function</span>(path, trace = <span class="literal">TRUE</span>, <span class="keyword">...</span>) &#123;</div><div class="line">  <span class="keyword">for</span> (nm <span class="keyword">in</span> list.files(path, pattern = <span class="string">"[.][RrSsQq]$"</span>)) &#123;</div><div class="line">    <span class="keyword">if</span>(trace) cat(nm,<span class="string">":"</span>)</div><div class="line">    <span class="keyword">source</span>(file.path(path, nm), <span class="keyword">...</span>)</div><div class="line">    <span class="keyword">if</span>(trace) cat(<span class="string">"\n"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">sourceDir(<span class="string">"自定义函数所在文件夹的完整路径"</span>)</div></pre></td></tr></table></figure>
+<h1 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h1><p>涉及到的语法，包括R语言的环境空间，正则表达式。</p>
+<p>1.R语言的环境空间</p>
+<p>在R语言中，不管是变量，对象，或者函数，都存在于R的环境空间中，R程序在运行时都有自己的运行空间。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 当前环境空间</span></div><div class="line">&gt; .GlobalEnv</div><div class="line"></div><div class="line"><span class="comment"># 列出当前环境中的变量 </span></div><div class="line">&gt; ls()</div><div class="line"><span class="comment"># 查看环境空间加载的包</span></div><div class="line">&gt; search()</div></pre></td></tr></table></figure>
+<p>2.正则表达式</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pattern=<span class="string">"*.csv"</span>  <span class="comment">#list.files函数中用正则表达式匹配文件名的一个选项</span></div><div class="line">gsub(<span class="string">"*.txt$"</span>, <span class="string">""</span>, mytxtfile)  <span class="comment">#匹配以.txt结尾的文件名，将其替换为空，也就是去掉.txt，只留文件名作为变量名</span></div></pre></td></tr></table></figure>
+<p>3.lapply函数用于对mytxtfile列表中的文件，都应用read.csv函数，从而实现批量读取文件</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;当要处理一批csv文件时，一个一个读入就太麻烦而且太low了。那么如何一次将工作路径的csv文件读入当前环境空间（Environment），并且使用文件名作为变量名，使用时直接调用即可呢??&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="R" scheme="https:///AnJingwd.github.io/categories/R/"/>
+    
+    
+      <category term="R" scheme="https:///AnJingwd.github.io/tags/R/"/>
+    
+  </entry>
   
   <entry>
     <title>python实现excel二维表格格式化</title>
@@ -489,7 +524,7 @@ CMD    //命令的名称和参数
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-09-02T15:57:06.804Z</updated>
+    <updated>2017-09-07T07:52:50.091Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -637,6 +672,14 @@ CMD    //命令的名称和参数
 <tr>
 <td><a href="http://timetree.org/" target="_blank" rel="external">TimeTree</a></td>
 <td>进化树的时间尺度。</td>
+</tr>
+<tr>
+<td><a href="http://pdgenetics.org/" target="_blank" rel="external">IPDGC</a></td>
+<td>International Parkinson Disease Genomics Consortium</td>
+</tr>
+<tr>
+<td><a href="http://portals.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium" target="_blank" rel="external">GIANT</a></td>
+<td>Genetic Investigation of Anthropometric Traits)</td>
 </tr>
 </tbody>
 </table>
@@ -796,6 +839,22 @@ CMD    //命令的名称和参数
 <td><a href="http://www.flvcd.com/" target="_blank" rel="external">硕鼠网络视频下载器</a></td>
 <td>爬取网络视频</td>
 </tr>
+<tr>
+<td><a href="https://www.teamviewer.com/zhCN/" target="_blank" rel="external">TeamViewer 12</a></td>
+<td>远程控制</td>
+</tr>
+<tr>
+<td><a href="http://www.ddooo.com/softdown/69975.htm" target="_blank" rel="external">iMindMap 8</a></td>
+<td>思维导图</td>
+</tr>
+<tr>
+<td><a href="http://portal.rapidbbs.cn/thread-258839-1-1.html" target="_blank" rel="external"> OK</a>  &emsp; <a href="https://www.baidu.com/link?url=hUT9QV7X--KXNTJvmhoEYPeGscqZXjrf4kZ59gTFnbCzPhxhi0MXYMsmj8CcAZf8XFLCtqigWOWlyQONq5fmmxb8EJiyTG9J0oYodIdjP1O&amp;wd=&amp;eqid=a432813800016bba0000000359acf878" target="_blank" rel="external">美化大师</a></td>
+<td>PPT特效，模板插件</td>
+</tr>
+<tr>
+<td><a href="https://prezi.com/" target="_blank" rel="external">prize</a> &emsp; <a href="http://www.prezicn.com/portal.php" target="_blank" rel="external">prize中国</a></td>
+<td>prezi是一款在线的演讲文稿生成软件,“动态”PPT</td>
+</tr>
 </tbody>
 </table>
 <h1 id="谷歌插件"><a href="#谷歌插件" class="headerlink" title="谷歌插件"></a>谷歌插件</h1><table>
@@ -836,6 +895,10 @@ CMD    //命令的名称和参数
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="https://www.researchgate.net/home" target="_blank" rel="external">Researchgate</a> &emsp; <a href="http://www.360doc.com/content/16/1029/00/6943848_602219154.shtml" target="_blank" rel="external">文献鸟</a></td>
+<td>文献推送，文献跟踪与速读小工具</td>
+</tr>
 <tr>
 <td><a href="https://apps.webofknowledge.com/UA_GeneralSearch_input.do?product=UA&amp;SID=Z249gIMNTCPIcZBS93N&amp;search_mode=GeneralSearch" target="_blank" rel="external">Web of Science</a></td>
 <td>大型综合性、多学科、核心期刊引文索引数据库</td>
@@ -1784,6 +1847,80 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
   </entry>
   
   <entry>
+    <title>全基因组关联分析(GWAS)简介</title>
+    <link href="https:///AnJingwd.github.io/2017/08/18/GWAS-%E7%AE%80%E4%BB%8B/"/>
+    <id>https:///AnJingwd.github.io/2017/08/18/GWAS-简介/</id>
+    <published>2017-08-18T08:12:07.000Z</published>
+    <updated>2017-08-29T01:21:06.034Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="GWAS介绍"><a href="#GWAS介绍" class="headerlink" title="GWAS介绍"></a>GWAS介绍</h1><p>&emsp;&emsp;全基因组关联分析是对多个个体在全基因组范围的遗传变异多态性进行检测，获得基因型，进而将基因型与可观测的性状，即表型，进行群体水平的统计学分析，根据统计量或P值筛选出最有可能影响该性状的遗传变异。</p>
+<p><img src="http://i.imgur.com/tG0jxKr.png" alt=""></p>
+<h1 id="分析流程"><a href="#分析流程" class="headerlink" title="分析流程"></a>分析流程</h1><p><strong>材料选择，性状调查，基因分型，模型选择，关联结果，数据深度挖掘</strong></p>
+<p><strong>GWAS分析选材原则</strong></p>
+<ul>
+<li>保证选取的样本具有足够的代表性；</li>
+<li>样本中不能有明显的亚群分化（例如生殖隔离等），因为明显分化的群体会使得遗传背景的噪音较大；</li>
+<li>建议选择几个比较重要且遗传力较高的表型性状作为研究的重点；</li>
+<li>质量性状尽量为0、1二值性状，并且两类性状的样本数应当尽量相近；</li>
+<li>数量性状尽量精确量化记录（如抗病性可以量化为发病率、死亡率、存活率、病斑数、病斑面积等，而不是简单的多级衡量），并使表型总体呈近似正态分布；</li>
+<li>栽培植物可以进行多年多点多重复记录，多年多点的观测结果可以分别进行关联分析，多重复可以取平均值进行关联分析；</li>
+<li>表型变异丰富、性状有明显的主效位点控制时样本量可以适当减小，推荐200个以上；表型差异较小，多基因控制时样本量应当增大，推荐500个以上。</li>
+</ul>
+<p>自然群体GWAS的研究对象<br>非严格遗传群体：</p>
+<ol>
+<li>种质资源</li>
+<li>半同胞家系，混合家系</li>
+<li>MAGIC/NAM家系</li>
+<li>多个F2/RIL/全同胞家系</li>
+<li>高杂合类物种：F1群体</li>
+</ol>
+<p>师兄你好！<br>打扰百忙之中的你，学弟我甚感抱歉。我是南农的在读研究生，正在试图运用关联分析方法进行大豆各性状的QTL分析研究，很荣幸拜读了你发表在《TAG》和《作物学报》上的几篇文章，受益匪浅。</p>
+<p>由于底子浅薄，我对关联分析方面的一些问题不能很透彻地理解。比如在群体材料方面，<strong>关联分析要求材料应为相互间无直接亲缘关系。请问这一要求是为了能获得更多更广泛的等位基因数目、获得更好的多态吗？</strong> 这一要求是不是也与群体LD的强弱有关？然而即使材料间没有直接亲缘关系，但是当取材时如果这些材料出现产地位置的结构特征，而会使分析结果产生假阳性。为避免产生假阳性得用STRUCTURE对群体结构进行校正，请问这里所用的软件（STRUCTURE）和方法，与SA方法中对群体分层进行校正所用的相同吗？</p>
+<p>期待你的回信与帮助，谢谢！</p>
+<p>你好，感谢你对我研究的关注。</p>
+<p><strong>材料选择所要求的无直接亲缘关系，主要是为了避免等位变异在家族的传递不平衡，以及由于亲缘关系造成的群体的亚分等群体结构问题，因此获得更多更广泛的等位基因数目及多态不是问题的核心。</strong></p>
+<p><strong>材料不管怎么选都会有假阴、假阳这样那样的问题</strong>，因此你所说的“产地位置的结构特征，而会使分析结果产生假阳性”不无可能，这 才使得人们考虑用<strong>统计方法做矫正</strong>；structure软件分析原理我的论文里有所涉及，如要深究可参考论文后给出的参考文献 Pritchard J K, Stephens M, Donnelly P. Inference of population structure using multilocus genotype data. Genetics, 2000, 155:945-959<br>， 可以肯定的说它与SA方法中对群体分层进行校正所用的不相同。</p>
+<p><strong>模型选择</strong></p>
+<p><img src="http://i.imgur.com/AYIEPHG.png" alt=""></p>
+<p>&emsp;&emsp;目前的 GWAS 多采用两个阶段的设计：首先采用覆盖整个基因组的高通量 SNP 分型芯片（如affy6.0）对一批样本进行扫描，然后筛选出最显著的 SNP（如 P&lt;10-7）供第二阶段进行扩大样本验证,<strong>第一步选的snp大多是tag snp</strong>。GWAS 两阶段研究设计减少了基因分型的工作量和花费，同时通过重复实验降低了研究的假阳性率。GWAS 的整体过程比较复杂，其大致流程如下：</p>
+<ol>
+<li>经过处理的 DNA 样品与高通量的 SNP 分型芯片进行杂交；</li>
+<li>通过特定的扫描仪对芯片进行扫描，将每个样品所有的 SNP 分型信息以数字形式储存于计算机中</li>
+<li>对原始数据进行质控，检测分型样本和位点的得率（call rate） 、病例对照的匹配程度、人群结构的分层情况等；</li>
+<li>对经过各种严格质控的数据进行关联分析；</li>
+<li>根据关联分析结果，综合考虑基因功能多方面因素后，筛选出最有意义的一批 SNP 位点；</li>
+<li>根据需要验证 SNP 的数量选择合适通量的基因分型技术在独立样本中进行验证；</li>
+<li>合并分析 GWAS 两阶段数据。</li>
+</ol>
+<h1 id="关联分析的优点"><a href="#关联分析的优点" class="headerlink" title="关联分析的优点"></a>关联分析的优点</h1><p>（1）不需要专门构建作图群体，自然群体或种质资源都可作为研究材料；<br>（2）广泛的遗传材料可同时考察多个性状大多数QTL关联位点及其等位变异，不受传统的FBL的“两亲本范围”的限制；<br>（3）自然群体经历了许多轮重组后，LD衰减，存在于很短的距离内，保证了定位的更高精确性</p>
+<h1 id="生物信息学中的连锁分析与关联分析有哪些区别和联系？"><a href="#生物信息学中的连锁分析与关联分析有哪些区别和联系？" class="headerlink" title="生物信息学中的连锁分析与关联分析有哪些区别和联系？"></a>生物信息学中的连锁分析与关联分析有哪些区别和联系？</h1><ol>
+<li>连锁分析的定位依赖于家族中标记基因型与表现性的共分离，从而探知影响疾病风险的遗传位点</li>
+<li>关联分析的定位方法则是通过探测在种群水平上，哪个基因型或等位基因位点与表现性有关，并且这种相关能够在家系样本或者随机个体间实现（GWAS）</li>
+</ol>
+<h1 id="关联分析与-QTL定位的区别"><a href="#关联分析与-QTL定位的区别" class="headerlink" title="关联分析与 QTL定位的区别"></a>关联分析与 QTL定位的区别</h1><p><img src="http://i.imgur.com/3vB61sp.png" alt=""></p>
+<h1 id="全基因组关联研究-GWAS-后的新热点？"><a href="#全基因组关联研究-GWAS-后的新热点？" class="headerlink" title="全基因组关联研究(GWAS)后的新热点？"></a>全基因组关联研究(GWAS)后的新热点？</h1><p>&emsp;&emsp;<strong>GWAS的目的是从常见基因突变(common variant，&gt;5％的人口所具有的突变)中来找到至病的变异。现在越来越多的人开始还疑这个昂贵方法的普适性。</strong> 因为到目前为止，没有一个真正成功地用这个方法找到至病的变异，只能找到一些似是而非的、有统计意义但没有什么用的突变。</p>
+<p><strong>现在，有些人认为应该找罕见基因突变（rare variant，0.1-1％的人口所具有的突变）中来找到至病的变异。对于这样的变异，GWAS的方法就无效了。这个提议的假定是常见基因突变致病可能性不大，只有罕见基因突变才能致病。</strong>Hall的文中提到普林斯顿大学教授David Botstein认为1.4亿美金的HapMap(人类基因组单体型图计划)是巨大的失败(magnificent failure)。</p>
+<p>所以在可见的将来，随着下一代测序技术(Next generation sequencing)的普及，寻找常见基因突变的GWAS的死亡将催生寻找罕见基因突变的方法及其应用。一个新的热点即将涌现。</p>
+<p>&emsp;&emsp;我不认为GWAS是一个完全的失败，对于有些疾病还是发现了一些治病基因的。Nature Genetics上有很多的例子。另外，HapMap我也不认为是一个彻底的失败。毕竟，很多信息具有重大的参考价值，比如Allele frequency，不做怎么知道呢？第三，rare variants究竟有多大的作用还是一个比较不明朗的命题。如果真的是只有rare variants才能导致疾病，那每个人的治病基因就都不一样了。我同意你的结论，next generation sequencing是技术发展的根本，<strong>但是我觉得除了rare variants之外，通过NGS找到novel variation，进而找到causal variation也会是一个重要的研究方向。</strong> 在这里面，bioinformatics（而不是statistician）的作用就会更为明显。</p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="http://blog.sciencenet.cn/blog-472757-376473.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-472757-376473.html</a></p>
+<p>（2）<a href="http://blog.sina.com.cn/s/blog_4b55f4130100us1m.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4b55f4130100us1m.html</a></p>
+<p>（3）<a href="http://blog.sina.com.cn/s/blog_4b55f4130100ibtg.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4b55f4130100ibtg.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;GWAS介绍&quot;&gt;&lt;a href=&quot;#GWAS介绍&quot; class=&quot;headerlink&quot; title=&quot;GWAS介绍&quot;&gt;&lt;/a&gt;GWAS介绍&lt;/h1&gt;&lt;p&gt;&amp;emsp;&amp;emsp;全基因组关联分析是对多个个体在全基因组范围的遗传变异多态性进行检测，获得基因型，进而
+    
+    </summary>
+    
+      <category term="GWAS" scheme="https:///AnJingwd.github.io/categories/GWAS/"/>
+    
+    
+      <category term="GWAS" scheme="https:///AnJingwd.github.io/tags/GWAS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>linux解压缩</title>
     <link href="https:///AnJingwd.github.io/2017/08/16/linux%E8%A7%A3%E5%8E%8B%E7%BC%A9/"/>
     <id>https:///AnJingwd.github.io/2017/08/16/linux解压缩/</id>
@@ -2170,7 +2307,7 @@ done
     <link href="https:///AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/"/>
     <id>https:///AnJingwd.github.io/2017/08/14/Linux神器之grep,awk操作gtf文件/</id>
     <published>2017-08-14T02:21:26.000Z</published>
-    <updated>2017-08-14T15:05:39.320Z</updated>
+    <updated>2017-09-15T03:28:19.724Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">Linux神器之grep,awk操作gtf文件</blockquote>
 
@@ -2231,7 +2368,7 @@ done
 2366 X
 519 Y
 </code></pre><p>（第一列为数目，第二列为染色体号）</p>
-<h2 id="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"><a href="#先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序" class="headerlink" title="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"></a>先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序</h2><pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos;Homo_sapiens.GRCh38.89.chr.gtf|sort -t &apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
+<h2 id="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"><a href="#先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序" class="headerlink" title="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"></a>先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序</h2><pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos;Homo_sapiens.GRCh38.89.chr.gtf|sort -t $&apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
 </code></pre><p>(因为根据asc码排序，所以X,Y会排在1-22之前)</p>
 <pre><code>awk &apos;$1 ~ /[0-9]/ &amp;&amp; $3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38.89.chr.gtf | sort -t $&apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
 
@@ -2247,6 +2384,13 @@ awk &apos;$1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38
 <li>-k1,1n   指定以第一列按照数字（asc码）从大到小排序</li>
 <li>-k4,4n   指定以第一列按照数字（asc码）从大到小排序</li>
 </ul>
+<p><strong>注意：</strong></p>
+<p>（1）对于tab分隔符，还是得稍微注意一下。比如下面的命令：</p>
+<pre><code>$sort -t &apos;\t&apos; -k3,3n a.txt &gt;a.sort
+</code></pre><p>sort: multi-character tab `\t’  (出错）</p>
+<p>这个不能按照tab分隔符进行字段排序，换成如下方式就可以了</p>
+<pre><code>$ sort  -t $&apos;\t&apos; -k3,3n a.txt&gt;a.sort
+</code></pre><p><strong>（2）linux sort 命令能不能识别 科学计数法？例如 9.98E-9。使用-n得不到想要的结果，但可以使用-g 替代，它会将数字还原成一版格式再进行比较。</strong></p>
 <h2 id="计算所有CDS的累积长度，其他类似"><a href="#计算所有CDS的累积长度，其他类似" class="headerlink" title="计算所有CDS的累积长度，其他类似"></a>计算所有CDS的累积长度，其他类似</h2><pre><code>cat Homo_sapiens.GRCh38.89.chr.gtf | awk &apos;$3 ==&quot;CDS&quot; { len=$5-$4 + 1; size += len; print &quot;Size:&quot;, size } &apos;
 </code></pre><p>（结果输出刷屏了！！加上个 |tail -1）</p>
 <h2 id="计算1号染色体cds的平均长度"><a href="#计算1号染色体cds的平均长度" class="headerlink" title="计算1号染色体cds的平均长度"></a>计算1号染色体cds的平均长度</h2><pre><code>awk &apos;BEGIN  {s = 0;line = 0 } ;$3 ==&quot;CDS&quot; &amp;&amp; $1 ==&quot;1&quot; { s += ($5 - $4);line += 1}; END {print &quot;mean=&quot; s/line}&apos; Homo_sapiens.GRCh38.89.chr.gtf
@@ -3099,207 +3243,6 @@ source ~/.bashrc
     <summary type="html">
     
       &lt;p&gt;&amp;emsp;&amp;emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结合蛋白分析等。SRA数据库可以用于搜索和展示SRA项目数据，包括SRA主页和 Entrez system。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="NGS软件" scheme="https:///AnJingwd.github.io/categories/NGS%E8%BD%AF%E4%BB%B6/"/>
-    
-    
-      <category term="NGS软件" scheme="https:///AnJingwd.github.io/tags/NGS%E8%BD%AF%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何优雅的输出python字典</title>
-    <link href="https:///AnJingwd.github.io/2017/08/05/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%BE%93%E5%87%BApython%E5%AD%97%E5%85%B8/"/>
-    <id>https:///AnJingwd.github.io/2017/08/05/如何优雅的输出python字典/</id>
-    <published>2017-08-04T16:19:15.000Z</published>
-    <updated>2017-08-19T11:10:45.364Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="如何优雅的输出python字典"><a href="#如何优雅的输出python字典" class="headerlink" title="如何优雅的输出python字典"></a>如何优雅的输出python字典</h1><p>&emsp;&emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
-<a id="more"></a>
-<p>&emsp;&emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
-<h2 id="（1）一层字典"><a href="#（1）一层字典" class="headerlink" title="（1）一层字典"></a>（1）一层字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gene_symbol_ENGS=&#123;<span class="string">'PKHD1'</span>: <span class="string">'ENSG00000170927'</span>, <span class="string">'ATP6V0A4'</span>: <span class="string">'ENSG00000105929'</span>, <span class="string">'TSC2'</span>: <span class="string">'ENSG00000103197'</span>&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line">frame1 = Series(gene_symbol_ENGS)</div><div class="line">print(frame1)</div><div class="line"></div><div class="line"></div><div class="line">    ATP6V0A4    ENSG00000105929</div><div class="line">    PKHD1       ENSG00000170927</div><div class="line">    TSC2        ENSG00000103197</div><div class="line">    dtype: object</div></pre></td></tr></table></figure>
-<h2 id="（2）嵌套字典"><a href="#（2）嵌套字典" class="headerlink" title="（2）嵌套字典"></a>（2）嵌套字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sample_mutation_count = &#123;<span class="string">'PDC668_vs_PDC668A2'</span>: &#123;<span class="string">'ncRNA_intronic'</span>: <span class="number">32</span>, <span class="string">'UTR5'</span>: <span class="number">6</span>, <span class="string">'ncRNA_splicing'</span>: <span class="number">0</span>, <span class="string">'exonic;splicing'</span>: <span class="number">0</span>, <span class="string">'UTR3'</span>: <span class="number">6</span>, <span class="string">'upstream;downstream'</span>: <span class="number">1</span>, <span class="string">'downstream'</span>: <span class="number">6</span>, <span class="string">'exonic'</span>: <span class="number">155</span>, <span class="string">'upstream'</span>: <span class="number">2</span>, <span class="string">'splicing'</span>: <span class="number">1</span>, <span class="string">'ncRNA_exonic'</span>: <span class="number">19</span>, <span class="string">'intergenic'</span>: <span class="number">162</span>, <span class="string">'intronic'</span>: <span class="number">162</span>&#125;, <span class="string">'PDC3748_vs_PDC3748B4'</span>: &#123;<span class="string">'ncRNA_intronic'</span>: <span class="number">21</span>, <span class="string">'UTR5'</span>: <span class="number">6</span>, <span class="string">'ncRNA_splicing'</span>: <span class="number">0</span>, <span class="string">'exonic;splicing'</span>: <span class="number">0</span>, <span class="string">'UTR3'</span>: <span class="number">2</span>, <span class="string">'upstream;downstream'</span>: <span class="number">0</span>, <span class="string">'downstream'</span>: <span class="number">2</span>, <span class="string">'exonic'</span>: <span class="number">123</span>, <span class="string">'upstream'</span>: <span class="number">8</span>, <span class="string">'splicing'</span>: <span class="number">2</span>, <span class="string">'ncRNA_exonic'</span>: <span class="number">15</span>, <span class="string">'intergenic'</span>: <span class="number">122</span>, <span class="string">'intronic'</span>: <span class="number">130</span>&#125;&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> DataFrame</div><div class="line">frame2 = DataFrame(sample_mutation_count)</div><div class="line">print(frame2)</div><div class="line"></div><div class="line"></div><div class="line">                         PDC3748_vs_PDC3748B4  PDC668_vs_PDC668A2</div><div class="line">    UTR3                                    <span class="number">2</span>                   <span class="number">6</span></div><div class="line">    UTR5                                    <span class="number">6</span>                   <span class="number">6</span></div><div class="line">    downstream                              <span class="number">2</span>                   <span class="number">6</span></div><div class="line">    exonic                                <span class="number">123</span>                 <span class="number">155</span></div><div class="line">    exonic;splicing                         <span class="number">0</span>                   <span class="number">0</span></div><div class="line">    intergenic                            <span class="number">122</span>                 <span class="number">162</span></div><div class="line">    intronic                              <span class="number">130</span>                 <span class="number">162</span></div><div class="line">    ncRNA_exonic                           <span class="number">15</span>                  <span class="number">19</span></div><div class="line">    ncRNA_intronic                         <span class="number">21</span>                  <span class="number">32</span></div><div class="line">    ncRNA_splicing                          <span class="number">0</span>                   <span class="number">0</span></div><div class="line">    splicing                                <span class="number">2</span>                   <span class="number">1</span></div><div class="line">    upstream                                <span class="number">8</span>                   <span class="number">2</span></div><div class="line">    upstream;downstream                     <span class="number">0</span>                   <span class="number">1</span></div><div class="line">```    </div><div class="line"></div><div class="line">那么问题来了，当每个样本的行不完全一样时如何解决呢，</div><div class="line"></div><div class="line"></div><div class="line">```python</div><div class="line">len_exon = &#123;<span class="string">'ENSG00000008710'</span>: &#123;<span class="string">'ENST00000570193'</span>: <span class="number">591</span>, <span class="string">'ENST00000483558'</span>: <span class="number">573</span>&#125;,<span class="string">'ENSG00000089597'</span>: &#123;<span class="string">'ENST00000526210'</span>: <span class="number">529</span>, <span class="string">'ENST00000526392'</span>: <span class="number">255</span>, <span class="string">'ENST00000532402'</span>: <span class="number">3695</span>&#125;&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> len_exon.items():</div><div class="line">    print(key)</div><div class="line">    print(Series(value))</div><div class="line">    </div><div class="line"></div><div class="line">    ENSG00000008710</div><div class="line">    ENST00000483558    <span class="number">573</span></div><div class="line">    ENST00000570193    <span class="number">591</span></div><div class="line">    dtype: int64</div><div class="line">    ENSG00000089597</div><div class="line">    ENST00000526210     <span class="number">529</span></div><div class="line">    ENST00000526392     <span class="number">255</span></div><div class="line">    ENST00000532402    <span class="number">3695</span></div><div class="line">    dtype: int64</div><div class="line">```    </div><div class="line"></div><div class="line"><span class="comment">## 当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图</span></div><div class="line"></div><div class="line"></div><div class="line">```python</div><div class="line"><span class="keyword">import</span> pprint</div><div class="line">resultFile = open(<span class="string">'result.py'</span>, <span class="string">'w'</span>)</div><div class="line">resultFile.write(pprint.pformat(len_exon))</div><div class="line">resultFile.close()</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="string">'ENSG00000008710'</span>: &#123;<span class="string">'ENST00000483558'</span>: <span class="number">573</span>, <span class="string">'ENST00000570193'</span>: <span class="number">591</span>&#125;,</div><div class="line"> <span class="string">'ENSG00000089597'</span>: &#123;<span class="string">'ENST00000526210'</span>: <span class="number">529</span>,</div><div class="line">                     <span class="string">'ENST00000526392'</span>: <span class="number">255</span>,</div><div class="line">                     <span class="string">'ENST00000532402'</span>: <span class="number">3695</span>&#125;&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;如何优雅的输出python字典&quot;&gt;&lt;a href=&quot;#如何优雅的输出python字典&quot; class=&quot;headerlink&quot; title=&quot;如何优雅的输出python字典&quot;&gt;&lt;/a&gt;如何优雅的输出python字典&lt;/h1&gt;&lt;p&gt;&amp;emsp;&amp;emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/categories/python/"/>
-    
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>picard</title>
-    <link href="https:///AnJingwd.github.io/2017/08/03/picard/"/>
-    <id>https:///AnJingwd.github.io/2017/08/03/picard/</id>
-    <published>2017-08-02T17:16:15.000Z</published>
-    <updated>2017-08-06T10:46:25.925Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集</p>
-<a id="more"></a>
-<p>#Picard 高通量测序数据处理及格式转换工具大合集</p>
-<p><strong>picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集</strong></p>
-<p>其官网为：<br><a href="http://broadinstitute.github.io/picard/" target="_blank" rel="external">http://broadinstitute.github.io/picard/</a></p>
-<p>先看看picard都有哪些工具集：</p>
-<h2 id="Available-Programs"><a href="#Available-Programs" class="headerlink" title="Available Programs:"></a>Available Programs:</h2><p>Alpha Tools:                                     目前无支持，需要进一步测试完善的工具集</p>
-<pre><code>CollectIndependentReplicateMetrics           预测bam文件中reads的独立重复率
-CollectWgsMetricsWithNonZeroCoverage         收集关于全基因组（WGS）测序的覆盖度和测序质量信息 
-UmiAwareMarkDuplicatesWithMateCigar          利用read的位置和UMIs信息鉴定重复的reads
-</code></pre><hr>
-<p>Fasta:                                           操作FASTAor相关数据工具集</p>
-<pre><code>CreateSequenceDictionary                     创建参考序列的序列字典
-ExtractSequences                             从参考序列中创建子区间存为新的FASTA
-NonNFastaSize                                对fasta文件中non-N碱基计数
-NormalizeFasta                               规范FASTA文件中的序列行为相同长度
-</code></pre><hr>
-<p>Fingerprinting Tools:                            操作印迹图谱工具集</p>
-<pre><code>CheckFingerprint                             计算来自提供的(SAM/BAM or VCF) 文件的指纹图谱，并与提供的基因型比较
-ClusterCrosscheckMetrics                     通过LOD得分对CrosscheckFingerprints的结果进行聚类
-CrosscheckFingerprints                       检查是否所有的指纹图谱来自相同的个体
-CrosscheckReadGroupFingerprints              弃用：使用CrosscheckFingerprints.检查是否所有的指纹图谱来自相同的个体
-</code></pre><hr>
-<p>Illumina Tools:                                  操作具体Illumina测序数据工具集</p>
-<pre><code>CheckIlluminaDirectory                       维护具体的Illumina basecalling数据的有效性 
-CollectIlluminaBasecallingMetrics            从一次测序运行中收集Illumina Basecalling矩阵
-CollectIlluminaLaneMetrics                   对于每个给定的BaseCalling分析路径收集Illumina lane矩阵 
-ExtractIlluminaBarcodes                      确定Illumina lane中每个read的barcode
-IlluminaBasecallsToFastq                     从Illumina basecall read数据中产生ASTQ 文件 
-IlluminaBasecallsToSam                       转换原始的Illumina测序数据为unmapped 的SAM或者BAM 文件.
-MarkIlluminaAdapters                         读SAM或者BAM 文件并用新的接头修饰标签重写  
-</code></pre><hr>
-<p>Interval Tools:                                  操作Picard区间列表工具集</p>
-<pre><code>BedToIntervalList                            转换BED 文件为Picard区间列表  
-IntervalListToBed                            转换Picard的IntervalList文件为BED文件.
-IntervalListTools                            操作区间列表 
-LiftOverIntervalList                         从一个参考转为另一个时去除区间列表
-ScatterIntervalsByNs                         通过Ns分割参考，写入区间列表 
-</code></pre><hr>
-<p>Metrics:                                         各种不同数据类型报表矩阵工具集</p>
-<pre><code>AccumulateVariantCallingMetrics              组合多个变异Calling矩阵为单个文件
-CollectAlignmentSummaryMetrics               &lt;b&gt;从SAM或BAM文件产生比对矩阵总结 &lt;/b&gt;
-CollectBaseDistributionByCycle               对SAM或BAM文件中每个循环核苷酸分布制表
-CollectGcBiasMetrics                         收集关于GC bias的矩阵
-CollectHiSeqXPfFailMetrics                   将HiSeqX Illumina Basecalling directory下的PF-Failing reads归类为不同类别
-CollectHsMetrics                             从SAM或BAM文件收集杂交选择（HS）矩阵 
-CollectInsertSizeMetrics                     从配对末端文库中收集插入片段分布矩阵
-CollectJumpingLibraryMetrics                 收集跳跃文库矩阵 
-CollectMultipleMetrics                       收集多类矩阵 
-CollectOxoGMetrics                           收集矩阵评估氧化产物
-CollectQualityYieldMetrics                   收集关于通过质控阈值和 Illumina-specific过滤的reads矩阵  
-CollectRawWgsMetrics                         收集全基因组测序相关矩阵  
-CollectRnaSeqMetrics                         从SAM或BAM文件中产生RNA比对矩阵  
-CollectRrbsMetrics                           &lt;b&gt;从简化的亚硫酸氢盐测序(Rrbs)数据收集矩阵&lt;/b&gt;
-CollectSequencingArtifactMetrics             收集量化单末端测序产品的矩阵 
-CollectTargetedPcrMetrics                    从目标测序数据中收集PCR相关矩阵
-CollectVariantCallingMetrics                 从提供的VCF文件文件中收集每个样本和包含所有样本集合的矩阵
-CollectWgsMetrics                            收集关于全基因组测序（WGS）实验的覆盖度和质量矩阵
-CompareMetrics                               比较两个矩阵文件
-ConvertSequencingArtifactToOxoG              从广义的人工矩阵提取OxoG矩阵  
-EstimateLibraryComplexity                    预测测序文库中特异性分子数量  
-MeanQualityByCycle                           通过循环收集均值质量
-QualityScoreDistribution                     为质量得分的分布绘制表格 
-</code></pre><hr>
-<p>Miscellaneous Tools:                             混杂工具集  </p>
-<pre><code>BaitDesigner                                 为杂交选择反应设计寡核苷酸baits
-FifoBuffer                                   FIFO buffer 用来缓冲具有可定制缓冲大小的输入和输出流
-</code></pre><hr>
-<p>SAM/BAM:                                         操作SAM, BAMor者相关数据的工具集</p>
-<pre><code>AddCommentsToBam                             为headerBAM 文件的header增加评论
-AddOrReplaceReadGroups                       替代BAM 文件的read groups
-BamIndexStats                                从BAM 文件产生索引统计
-BamToBfq                                     通过maq aligner从BAM文件产生BFQ文件s from a 
-BuildBamIndex                                生成BAM索引，&quot;.bai&quot; 文件
-CalculateReadGroupChecksum                   基于read groups(RG)产生哈希码
-CheckTerminatorBlock                         维护提供的gzip 文件(e.g., BAM)最后一个区块格式正确; 否则RC 100 
-CleanSam                                     清除提供的SAM/BAM，soft-clipping beyond-end-of-reference alignments并且对于未比对上的reads设置MAPQ为0
-CompareSAMs                                  比较两个输入的&quot;.sam&quot; or &quot;.bam&quot; 文件 
-DownsampleSam                                对SAM或BAM文件缩小取样
-FastqToSam                                   转换FASTQ文件为unaligned的BAM或SAM文件
-FilterSamReads                               从SAM或BAM文件取read数据子集
-FixMateInformation                           如果需要，在mates和fix之间确认mate-pair信息
-GatherBamFiles                               尽可能高效的连接一个或多个BAM文件
-MarkDuplicates                               鉴定重复的reads 
-MarkDuplicatesWithMateCigar                  鉴定重复的reads,解释mate CIGAR.  
-MergeBamAlignment                            从SAM或者BAM文件中合并alignment数据到unmapped BAM文件
-MergeSamFiles                                合并多个SAM和/或BAM 文件为单个文件
-PositionBasedDownsampleSam                   缩小SAM或者BAM文件取样来维持reads子集，基于reads在每个flowcell的每个tile的位置
-ReorderSam                                   对SAM或者BAM文件中的reads重排序，来匹配参考文件中的顺序
-ReplaceSamHeader                             替代SAM或BAM文件的SAMFileHeader
-RevertOriginalBaseQualitiesAndAddMateCigar   转换原始碱基质量并增加mate cigar到read-group BAMs
-RevertSam                                    转换SAM或BAM 文件回到之前状态
-SamFormatConverter                           BAM文件与SAM 文件互相转换
-SamToFastq                                   转换SAM或者BAM文件为FASTQ文件
-SetNmAndUqTags                               弃用：使用SetNmMdAndUqTags代替
-SetNmMdAndUqTags                             修改SAM文件中NM,MD和UQ标签  
-SortSam                                      对一个SAM或BAM文件排序 
-SplitSamByLibrary                            通过文库分割SAM或BAM文件为独立文件
-ValidateSamFile                              确认SAM或BAM文件
-ViewSam                                      打印SAM或BAM文件到屏幕
-</code></pre><hr>
-<p>Unit Testing:                                    测试单元  </p>
-<pre><code>SimpleMarkDuplicatesWithMateCigar            测试提供的SAM或BAM文件中比对上的记录来定位重复分子
-</code></pre><hr>
-<p>VCF/BCF:                                         操作VCF, BCFor者相关数据的工具集</p>
-<pre><code>FilterVcf                                    严格过滤VCF
-FindMendelianViolations                      在VCF文件中寻找所有违反孟德尔法则的类型
-FixVcfHeader                                 代替或者修改VCF header
-GatherVcfs                                   文件从一个分散的多个VCF文件产生单个VCF文件
-GenotypeConcordance                          评估callsets之间的基因型一致性
-LiftoverVcf                                  从一个引用构建另一个引用时留下一个VCF文件 
-MakeSitesOnlyVcf                             从VCF或BCF文件创建没有基因型信息的VCF文件
-MergeVcfs                                    合并多个VCF或者BCF文件为一个VCF文件或者BCF文件
-RenameSampleInVcf                            对VCF或BCF中样本重命名  
-SortVcf                                      对一个活多个VCF 文件排序  
-SplitVcfs                                    分割SNPs和INDELs为独立的文件
-UpdateVcfSequenceDictionary                  对于VCF文件和包含有序列字典的文件，利用新的序列字典更新VCF文件
-VcfFormatConverter                           VCF与BCF互相转换
-VcfToIntervalList                            转换VCF or BCF 文件为Picard区间列表
-</code></pre><p><strong>（1）接下来看看如何安装：</strong></p>
-<p>#查看Java版本</p>
-<pre><code>java -version
-</code></pre><p>Java 1.8及以后版本即OK</p>
-<p>#从github拷贝库</p>
-<pre><code>git clone https://github.com/broadinstitute/picard.git
-</code></pre><p>#进入picard文件目录</p>
-<pre><code>cd picard/
-</code></pre><p><img src="http://i.imgur.com/j6MWTRq.png" alt=""></p>
-<p>#编译<br>    ./gradlew shadowJar</p>
-<p><img src="http://i.imgur.com/nBNGCE6.png" alt=""></p>
-<p>此时，在build/libs/文件夹下可见picard.jar程序</p>
-<p>#运行<br>    java -jar build/libs/picard.jar</p>
-<p><strong>（2）如何设置环境变量：</strong></p>
-<pre><code>vim ~/.bashrc
-i
-PICARD=&apos;/home/u631758/biosoftwares/picard/build/libs/picard.jar&apos;
-alias picard=&quot;java -jar $PICARD&quot;
-</code></pre><p>如此就可以用picard命名代替官网中的java -jar picard.jar命令了！！！</p>
-<p><strong>（3）查看有哪些可用的工具：</strong></p>
-<pre><code>picard 
-</code></pre><p><strong>（4）查看某个工具的具体用法：</strong></p>
-<p> 例如VcfFormatConverter工具：</p>
-<pre><code>picard VcfFormatConverter -h
-</code></pre><p>结果为：</p>
-<pre><code>java -jar picard.jar VcfFormatConverter \
-  I=input.vcf \
-  O=output.bcf \
-</code></pre><p>所以使用方式为：</p>
-<pre><code>picard VcfFormatConverter I=input.vcf O=output.bcf
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;picard 是用java开发的用于处理高通量测序数据和格式转换（SAM/BAM/CRAM和VCF）的命令行工具集&lt;/p&gt;
     
     </summary>
     

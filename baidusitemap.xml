@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2017-09-15T03:28:19.724Z</lastmod>
+    <data>
+        <display>
+        <title>Linux神器之grep,awk操作gtf文件</title>
+        <pubTime>2017-08-14T02:21:26.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    <lastmod>2017-09-02T15:57:06.804Z</lastmod>
+    <lastmod>2017-09-07T07:52:50.091Z</lastmod>
     <data>
         <display>
         <title>常用链接（持续更新）</title>
@@ -17,6 +37,26 @@
            
              
               <breadCrumb title="常用链接" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/09/04/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%B9%E9%87%8F%E5%AF%BC%E5%85%A5csv%E6%96%87%E4%BB%B6%EF%BC%8C%E5%B9%B6%E4%BB%A5%E6%96%87%E4%BB%B6%E5%90%8D%E4%BD%9C%E4%B8%BA%E5%8F%98%E9%87%8F%E5%90%8D/</loc>
+    <lastmod>2017-09-04T07:19:35.807Z</lastmod>
+    <data>
+        <display>
+        <title>R语言之批量导入csv文件，并以文件名作为变量名</title>
+        <pubTime>2017-09-04T05:29:34.000Z</pubTime>
+        
+        <tag>R</tag>
+         
+         
+           
+             
+              <breadCrumb title="R" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/R/"/>
           
         </display>
     </data>
@@ -97,6 +137,26 @@
            
              
               <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/18/GWAS-%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2017-08-29T01:21:06.034Z</lastmod>
+    <data>
+        <display>
+        <title>全基因组关联分析(GWAS)简介</title>
+        <pubTime>2017-08-18T08:12:07.000Z</pubTime>
+        
+        <tag>GWAS</tag>
+         
+         
+           
+             
+              <breadCrumb title="GWAS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/GWAS/"/>
           
         </display>
     </data>
@@ -317,26 +377,6 @@
            
              
               <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/</loc>
-    <lastmod>2017-08-14T15:05:39.320Z</lastmod>
-    <data>
-        <display>
-        <title>Linux神器之grep,awk操作gtf文件</title>
-        <pubTime>2017-08-14T02:21:26.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
           
         </display>
     </data>

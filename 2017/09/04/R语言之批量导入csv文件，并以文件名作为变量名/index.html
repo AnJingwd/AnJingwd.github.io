@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="R," />
 
 
 
@@ -96,16 +96,18 @@
 
 
 
-<meta name="description" content="生命在于折腾~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="安静-不安静的博客">
-<meta property="og:url" content="https:///AnJingwd.github.io/categories/技术/index.html">
+<meta name="description" content="&amp;emsp;&amp;emsp;当要处理一批csv文件时，一个一个读入就太麻烦而且太low了。那么如何一次将工作路径的csv文件读入当前环境空间（Environment），并且使用文件名作为变量名，使用时直接调用即可呢??">
+<meta name="keywords" content="R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言之批量导入csv文件，并以文件名作为变量名">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/09/04/R语言之批量导入csv文件，并以文件名作为变量名/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="生命在于折腾~">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;当要处理一批csv文件时，一个一个读入就太麻烦而且太low了。那么如何一次将工作路径的csv文件读入当前环境空间（Environment），并且使用文件名作为变量名，使用时直接调用即可呢??">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-04T07:19:35.807Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安静-不安静的博客">
-<meta name="twitter:description" content="生命在于折腾~">
+<meta name="twitter:title" content="R语言之批量导入csv文件，并以文件名作为变量名">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;当要处理一批csv文件时，一个一个读入就太麻烦而且太low了。那么如何一次将工作路径的csv文件读入当前环境空间（Environment），并且使用文件名作为变量名，使用时直接调用即可呢??">
 
 
 
@@ -138,7 +140,7 @@
 
 
 
-  <title>分类: 技术 | 安静-不安静的博客</title>
+  <title>R语言之批量导入csv文件，并以文件名作为变量名 | 安静-不安静的博客</title>
   
 
 
@@ -163,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,111 +280,212 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>技术<small>分类</small>
-        </h2>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/09/04/R语言之批量导入csv文件，并以文件名作为变量名/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="https:/AnJingwd.github.io/2017/08/28/修复Chrome浏览器崩溃/" itemprop="url">
-              
-                <span itemprop="name">修复Chrome浏览器崩溃</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">R语言之批量导入csv文件，并以文件名作为变量名</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-28T11:18:41+08:00"
-              content="2017-08-28" >
-          08-28
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T13:29:34+08:00">
+                2017-09-04
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="https:/AnJingwd.github.io/2017/08/02/修改host文件-科学上网/" itemprop="url">
-              
-                <span itemprop="name">修改host文件-科学上网</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T22:21:51+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="https:/AnJingwd.github.io/2017/08/02/生命在于折腾之Github-HEXO搭建博客/" itemprop="url">
-              
-                <span itemprop="name">生命在于折腾之Github+HEXO搭建博客</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T22:13:15+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>&emsp;&emsp;当要处理一批csv文件时，一个一个读入就太麻烦而且太low了。那么如何一次将工作路径的csv文件读入当前环境空间（Environment），并且使用文件名作为变量名，使用时直接调用即可呢??</p>
+<a id="more"></a>
+<h1 id="批量读入csv文件"><a href="#批量读入csv文件" class="headerlink" title="批量读入csv文件"></a>批量读入csv文件</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#将列表中文件读入环境空间，并以文件名作为变量名</span></div><div class="line">mycsvfile = list.files(pattern=<span class="string">"*.csv"</span>)   <span class="comment">#生成.csv文件的列表</span></div><div class="line">list2env(</div><div class="line">  lapply(setNames(mycsvfile, make.names(gsub(<span class="string">"*.csv$"</span>, <span class="string">""</span>, mycsvfile))),</div><div class="line">         read.csv,header=<span class="literal">TRUE</span>,check.names=<span class="literal">FALSE</span>), envir = .GlobalEnv)</div></pre></td></tr></table></figure>
+<h1 id="当然，上述语句也可以用于批量读入txt文件"><a href="#当然，上述语句也可以用于批量读入txt文件" class="headerlink" title="当然，上述语句也可以用于批量读入txt文件"></a>当然，上述语句也可以用于批量读入txt文件</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mytxtfile = list.files(pattern=<span class="string">"*.txt"</span>)</div><div class="line">list2env(</div><div class="line">  lapply(setNames(mytxtfile, make.names(gsub(<span class="string">"*.txt$"</span>, <span class="string">""</span>, mytxtfile))),</div><div class="line">         read.table,header=<span class="literal">TRUE</span>,sep=<span class="string">"\t"</span>), envir = .GlobalEnv)</div></pre></td></tr></table></figure>
+<h1 id="批量读入自定义函数"><a href="#批量读入自定义函数" class="headerlink" title="批量读入自定义函数"></a>批量读入自定义函数</h1><p>对于自定义的函数，可以通过source函数导入环境空间，然后才能调用，当然也可以写个函数，调用此函数批量导入罗！！！</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sourceDir &lt;- <span class="keyword">function</span>(path, trace = <span class="literal">TRUE</span>, <span class="keyword">...</span>) &#123;</div><div class="line">  <span class="keyword">for</span> (nm <span class="keyword">in</span> list.files(path, pattern = <span class="string">"[.][RrSsQq]$"</span>)) &#123;</div><div class="line">    <span class="keyword">if</span>(trace) cat(nm,<span class="string">":"</span>)</div><div class="line">    <span class="keyword">source</span>(file.path(path, nm), <span class="keyword">...</span>)</div><div class="line">    <span class="keyword">if</span>(trace) cat(<span class="string">"\n"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">sourceDir(<span class="string">"自定义函数所在文件夹的完整路径"</span>)</div></pre></td></tr></table></figure>
+<h1 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h1><p>涉及到的语法，包括R语言的环境空间，正则表达式。</p>
+<p>1.R语言的环境空间</p>
+<p>在R语言中，不管是变量，对象，或者函数，都存在于R的环境空间中，R程序在运行时都有自己的运行空间。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 当前环境空间</span></div><div class="line">&gt; .GlobalEnv</div><div class="line"></div><div class="line"><span class="comment"># 列出当前环境中的变量 </span></div><div class="line">&gt; ls()</div><div class="line"><span class="comment"># 查看环境空间加载的包</span></div><div class="line">&gt; search()</div></pre></td></tr></table></figure>
+<p>2.正则表达式</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pattern=<span class="string">"*.csv"</span>  <span class="comment">#list.files函数中用正则表达式匹配文件名的一个选项</span></div><div class="line">gsub(<span class="string">"*.txt$"</span>, <span class="string">""</span>, mytxtfile)  <span class="comment">#匹配以.txt结尾的文件名，将其替换为空，也就是去掉.txt，只留文件名作为变量名</span></div></pre></td></tr></table></figure>
+<p>3.lapply函数用于对mytxtfile列表中的文件，都应用read.csv函数，从而实现批量读取文件</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="https:/AnJingwd.github.io/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2017/09/02/python实现excel二维表格格式化/" rel="next" title="python实现excel二维表格格式化">
+                <i class="fa fa-chevron-left"></i> python实现excel二维表格格式化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -390,6 +493,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -410,8 +517,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https:/AnJingwd.github.io/images/avatar.png"
@@ -670,6 +786,22 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#批量读入csv文件"><span class="nav-number">1.</span> <span class="nav-text">批量读入csv文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#当然，上述语句也可以用于批量读入txt文件"><span class="nav-number">2.</span> <span class="nav-text">当然，上述语句也可以用于批量读入txt文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量读入自定义函数"><span class="nav-number">3.</span> <span class="nav-text">批量读入自定义函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充："><span class="nav-number">4.</span> <span class="nav-text">补充：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -812,10 +944,10 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 
   
-    <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 

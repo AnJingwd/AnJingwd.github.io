@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="Linux神器之grep,awk操作gtf文件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-14T15:05:39.320Z">
+<meta property="og:updated_time" content="2017-09-15T03:28:19.724Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux神器之grep,awk操作gtf文件">
 <meta name="twitter:description" content="Linux神器之grep,awk操作gtf文件">
@@ -442,7 +442,7 @@
 2366 X
 519 Y
 </code></pre><p>（第一列为数目，第二列为染色体号）</p>
-<h2 id="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"><a href="#先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序" class="headerlink" title="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"></a>先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序</h2><pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos;Homo_sapiens.GRCh38.89.chr.gtf|sort -t &apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
+<h2 id="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"><a href="#先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序" class="headerlink" title="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"></a>先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序</h2><pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos;Homo_sapiens.GRCh38.89.chr.gtf|sort -t $&apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
 </code></pre><p>(因为根据asc码排序，所以X,Y会排在1-22之前)</p>
 <pre><code>awk &apos;$1 ~ /[0-9]/ &amp;&amp; $3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38.89.chr.gtf | sort -t $&apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
 
@@ -458,6 +458,13 @@ awk &apos;$1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38
 <li>-k1,1n   指定以第一列按照数字（asc码）从大到小排序</li>
 <li>-k4,4n   指定以第一列按照数字（asc码）从大到小排序</li>
 </ul>
+<p><strong>注意：</strong></p>
+<p>（1）对于tab分隔符，还是得稍微注意一下。比如下面的命令：</p>
+<pre><code>$sort -t &apos;\t&apos; -k3,3n a.txt &gt;a.sort
+</code></pre><p>sort: multi-character tab `\t’  (出错）</p>
+<p>这个不能按照tab分隔符进行字段排序，换成如下方式就可以了</p>
+<pre><code>$ sort  -t $&apos;\t&apos; -k3,3n a.txt&gt;a.sort
+</code></pre><p><strong>（2）linux sort 命令能不能识别 科学计数法？例如 9.98E-9。使用-n得不到想要的结果，但可以使用-g 替代，它会将数字还原成一版格式再进行比较。</strong></p>
 <h2 id="计算所有CDS的累积长度，其他类似"><a href="#计算所有CDS的累积长度，其他类似" class="headerlink" title="计算所有CDS的累积长度，其他类似"></a>计算所有CDS的累积长度，其他类似</h2><pre><code>cat Homo_sapiens.GRCh38.89.chr.gtf | awk &apos;$3 ==&quot;CDS&quot; { len=$5-$4 + 1; size += len; print &quot;Size:&quot;, size } &apos;
 </code></pre><p>（结果输出刷屏了！！加上个 |tail -1）</p>
 <h2 id="计算1号染色体cds的平均长度"><a href="#计算1号染色体cds的平均长度" class="headerlink" title="计算1号染色体cds的平均长度"></a>计算1号染色体cds的平均长度</h2><pre><code>awk &apos;BEGIN  {s = 0;line = 0 } ;$3 ==&quot;CDS&quot; &amp;&amp; $1 ==&quot;1&quot; { s += ($5 - $4);line += 1}; END {print &quot;mean=&quot; s/line}&apos; Homo_sapiens.GRCh38.89.chr.gtf
@@ -675,7 +682,7 @@ done
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -686,7 +693,7 @@ done
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -697,7 +704,7 @@ done
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -976,7 +983,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共32.1k字</span>
+  <span class="post-count">博客全站共34.9k字</span>
 </div>
 
 <div class="powered-by">
