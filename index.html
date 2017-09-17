@@ -386,97 +386,16 @@
 
       
         
-          
-            <p>登陆节点frontend：</p>
-<pre><code>[wangdong@frontend ~]$
-</code></pre><p><img src="https://i.imgur.com/UAY0Lsw.jpg" alt=""></p>
-<h1 id="查看某一节点cpu使用情况"><a href="#查看某一节点cpu使用情况" class="headerlink" title="查看某一节点cpu使用情况"></a>查看某一节点cpu使用情况</h1><p>例如第6节点：</p>
-<pre><code>ssh node6 &apos;top -n 1 -b&apos;| head
-</code></pre><p><img src="https://i.imgur.com/2iByJW3.jpg" alt=""></p>
-<h1 id="批量查看节点cpu使用情况"><a href="#批量查看节点cpu使用情况" class="headerlink" title="批量查看节点cpu使用情况"></a>批量查看节点cpu使用情况</h1><pre><code>for((i=2;i&lt;=8;i++));do ssh node${i} &apos;top -n 1 -b&apos;| head ;done
-</code></pre><h1 id="更换节点"><a href="#更换节点" class="headerlink" title="更换节点"></a>更换节点</h1><p>例如更换至6节点：</p>
-<pre><code>ssh node6
-</code></pre><p>[wangdong@node6 ~]$</p>
-<p><img src="https://i.imgur.com/bQQnZuf.jpg" alt=""></p>
-<p>具体含义：<a href="http://jingyan.baidu.com/article/4d58d5412917cb9dd4e9c0ed.html" target="_blank" rel="external">参考</a></p>
-<h1 id="不切换当前节点，在其他节点运行命令"><a href="#不切换当前节点，在其他节点运行命令" class="headerlink" title="不切换当前节点，在其他节点运行命令"></a>不切换当前节点，在其他节点运行命令</h1><p>直接把命令写在ssh nodeX后面，然后是我习惯于加引号</p>
-<pre><code>ssh nodeX &apos;command&apos;
-</code></pre><p>注意：</p>
-<ul>
-<li>登录节点主要用于日常操作，如提交作业、查看作业运行情况、编辑、编译、压缩/解压缩等</li>
-<li>不要在登录节点不通过作业调度系统直接运行作业，以免影响其余用户的正常使用</li>
-</ul>
-<p>&emsp;&emsp;一般跑小程序不用考虑这些，但大程序消耗内存很大，所以尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了。</p>
-<hr>
-<h1 id="补充命令"><a href="#补充命令" class="headerlink" title="补充命令"></a>补充命令</h1><h2 id="top查看当前运行的任务情况"><a href="#top查看当前运行的任务情况" class="headerlink" title="top查看当前运行的任务情况"></a>top查看当前运行的任务情况</h2><p>&emsp;&emsp;<strong>linux下用top命令查看cpu利用率超过100%。这里显示的所有的cpu加起来的使用率，说明你的CPU是多核，你运行top后按大键盘1看看，可以显示每个cpu的使用率，top里显示的是把所有使用率加起来。</strong></p>
-<p><img src="https://i.imgur.com/eGIFLwf.png" alt=""></p>
-<p>注意：</p>
-<ul>
-<li><p>按下1后可以看到我的机器的CPU是16核的。%Cpu0,,,,,,%Cpu15。</p>
-</li>
-<li><p><strong>若是 0 代表目前该核心空闲， 可以运算作业。 100代表 cpu核心满负荷运算。<br>若某个节点 16 个 CPU 负荷已很高， 换至其余空闲节点运算作业。 建议一个计算<br>节点核心数最多使用 15 核。</strong></p>
-</li>
-</ul>
-<h2 id="查看-CPU-Topology（拓扑结构）："><a href="#查看-CPU-Topology（拓扑结构）：" class="headerlink" title="查看 CPU Topology（拓扑结构）："></a>查看 CPU Topology（拓扑结构）：</h2><pre><code>cat /proc/cpuinfo 
-</code></pre><p><img src="https://i.imgur.com/nmPkqRq.jpg" alt=""></p>
-<p>具体含义：<a href="http://blog.sina.com.cn/s/blog_4a6151550100iowl.html" target="_blank" rel="external">参考</a></p>
-<ul>
-<li><p>逻辑CPU个数：</p>
-<p>  cat /proc/cpuinfo | grep ‘processor’ | wc -l</p>
-</li>
-<li><p>物理CPU个数：</p>
-<p>  cat /proc/cpuinfo | grep ‘physical id’ | sort | uniq | wc -l</p>
-</li>
-<li><p>每个物理CPU中Core的个数：</p>
-<p>  cat /proc/cpuinfo | grep ‘cpu cores’ | wc -l</p>
-</li>
-</ul>
-<p><img src="https://i.imgur.com/xACj6do.jpg" alt=""></p>
-<h2 id="查看内存的总量及消耗"><a href="#查看内存的总量及消耗" class="headerlink" title="查看内存的总量及消耗"></a>查看内存的总量及消耗</h2><pre><code>free -g 
-</code></pre><p><img src="https://i.imgur.com/wAobMtr.jpg" alt=""></p>
-<p>具体含义  <a href="http://blog.csdn.net/gxl0805/article/details/39393709" target="_blank" rel="external">参考</a></p>
-<h1 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h1><h2 id="NUNA与SMP"><a href="#NUNA与SMP" class="headerlink" title="NUNA与SMP"></a>NUNA与SMP</h2><p>&emsp;&emsp;NUMA(Non-Uniform Memory Access，非一致性内存访问)和SMP(Symmetric Multi-Processor，对称多处理器系统)是两种不同的CPU硬件体系架构。</p>
-<p>&emsp;&emsp;SMP的主要特征是共享，所有的CPU共享使用全部资源，例如内存、总线和I/O，多个CPU对称工作，彼此之间没有主次之分，平等地访问共享的资源，这样势必引入资源的竞争问题，从而导致它的扩展内力非常有限。</p>
-<p>&emsp;&emsp;NUMA技术将CPU划分成不同的组（Node)，每个Node由多个CPU组成，并且有独立的本地内存、I/O等资源。Node之间通过互联模块连接和沟通，因此除了本地内存外，每个CPU仍可以访问远端Node的内存，只不过效率会比访问本地内存差一些，我们用Node之间的距离（Distance，抽象的概念）来定义各个Node之间互访资源的开销。</p>
-<p>&emsp;&emsp;如果你只知道CPU这么一个概念，那么是无法理解CPU的拓扑的。<strong>事实上，在NUMA架构下，CPU的概念从大到小依次是：Node、Socket、Core、Processor（Node-&gt;Socket-&gt;Core-&gt;Processor）</strong></p>
-<p>&emsp;&emsp;<strong>随着多核技术的发展，我们将多个CPU封装在一起，这个封装一般被称为Socket（插槽的意思，也有人称之为Packet，不知到哪个更加准确？），而Socket中的每个核心被称为Core。为了进一步提升CPU的处理能力，Intel又引入了HT（Hyper-Threading，超线程)的技术，一个Core打开HT之后，在OS看来就是两个核，当然这个核是逻辑上的概念，所以也被称为Logical Processor，本文简称为Processor。</strong></p>
-<p>&emsp;&emsp;综上所述，<strong>一个NUMA Node可以有一个或者多个Socket，一个多核Socket显然包含多个Core，一个Core如果打开HT则变成两个Logical Processor。</strong> Logical processor只是OS内部看到的，实际上两个Processor还是位于同一个Core上，所以频繁的调度仍可能导致资源竞争，影响性能。</p>
-<h2 id="查看Numa-Node"><a href="#查看Numa-Node" class="headerlink" title="查看Numa Node"></a>查看Numa Node</h2><p>numactl是设定进程NUMA策略的命令行工具，也可以用来查看当前的Nuwa node:</p>
-<pre><code>numactl --hardware
-</code></pre><p><img src="https://i.imgur.com/TCYq3bu.jpg" alt=""></p>
-<p>从上面可以看出本机有两个Numa node，如果要进一步知道一个Node包含哪几个CPU，该怎么办？</p>
-<p>一种方法是通过查看ls /sys/devices/system/node/目录下的信息，例如：</p>
-<p><img src="https://i.imgur.com/3pOcus6.jpg" alt=""></p>
-<p>cpu0  cpu1  cpu10  cpu11  cpu2  cpu3  cpu8  cpu9  cpumap  distance  meminfo  numastat</p>
-<p><strong>可见, node0包含4/5/6/7/12/13/14/15八个Processor（刚好是一个Socket）。</strong></p>
-<h2 id="查看Socket"><a href="#查看Socket" class="headerlink" title="查看Socket"></a>查看Socket</h2><p>&emsp;&emsp;<strong>一个Socket对应主板上的一个插槽，在本文中是指一个CPU封装。在/proc/cpuinfo中的physical id就是Socket的ID，可以从中找到本机到底有多少个Socket，并且每个Socket有那几个Processor。</strong></p>
-<p>1) 查看有几个Socket</p>
-<pre><code>$ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;sort -un&quot;}&apos;
-0
-1
-$ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;sort -un&quot;}&apos; | wc -l
-2
-</code></pre><p>2) 查看每个Socket有几个Processor</p>
-<pre><code>$ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2}&apos; | sort | uniq -c
-8  0
-8  1
-</code></pre><p>3) 查看Socket对应那几个Processor</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">awk -F: <span class="string">'&#123; </span></div><div class="line"><span class="string">    if ($1 ~ /processor/) &#123;</span></div><div class="line"><span class="string">        gsub(/ /,"",$2);</span></div><div class="line"><span class="string">        p_id=$2;</span></div><div class="line"><span class="string">    &#125; else if ($1 ~ /physical id/)&#123;</span></div><div class="line"><span class="string">        gsub(/ /,"",$2);</span></div><div class="line"><span class="string">        s_id=$2;</span></div><div class="line"><span class="string">        arr[s_id]=arr[s_id] " " p_id</span></div><div class="line"><span class="string">    &#125;</span></div><div class="line"><span class="string">&#125; </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">END&#123;</span></div><div class="line"><span class="string">    for (i in arr) </span></div><div class="line"><span class="string">        print arr[i];</span></div><div class="line"><span class="string">&#125;'</span> /proc/cpuinfo | cut -c2-</div></pre></td></tr></table></figure>
-<p>0 1 2 3 8 9 10 11<br>4 5 6 7 12 13 14 15</p>
-<h2 id="查看Core"><a href="#查看Core" class="headerlink" title="查看Core"></a>查看Core</h2><p><strong>/proc/cpuinfo文件中的cpu cores表明一个socket中有几个cores，</strong>例如：</p>
-<pre><code>cat /proc/cpuinfo | grep &apos;core&apos;  | sort -u
-</code></pre><p><img src="https://i.imgur.com/acrKbul.jpg" alt=""></p>
-<p><strong>上面的结果说明一个socket有4个cores，它们的id分别为0/1/9/10，根据之前查到的我们的机器有2个socket，所以总共有8个core。</strong></p>
-<h2 id="查看Processor"><a href="#查看Processor" class="headerlink" title="查看Processor"></a>查看Processor</h2><p>&emsp;&emsp;查看Processors的个数就比较简单了，从上面的统计结果中我们已经可以知道有16个Logical processor，不过也可以直接从/proc/cpuinfo文件中获取：</p>
-<pre><code>$ grep &apos;processor&apos; /proc/cpuinfo | wc -l
-16
-</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.bio-info-trainee.com/1028.html" target="_blank" rel="external">http://www.bio-info-trainee.com/1028.html</a></p>
-<p>（2）<a href="http://www.iwhgao.com/2-5-%E9%9B%86%E7%BE%A4%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%AE%A1%E7%90%86%E7%AE%80%E4%BB%8B/" target="_blank" rel="external">rabbit gao’s blog</a></p>
-<p>（3）<a href="http://blog.csdn.net/huangshanchun/article/details/44397581" target="_blank" rel="external">http://blog.csdn.net/huangshanchun/article/details/44397581</a></p>
-<p>（4）<a href="http://kodango.com/cpu-topology" target="_blank" rel="external">团子的小窝</a> （推荐）</p>
-<p>（5）<a href="http://tieba.baidu.com/p/1285719732?red_tag=s0690960116" target="_blank" rel="external">http://tieba.baidu.com/p/1285719732?red_tag=s0690960116</a></p>
+          <blockquote class="blockquote-center">由一次教训驱动的学习</blockquote>
 
-          
+<p>&emsp;&emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="https:/AnJingwd.github.io/2017/09/17/linux的CPU拓扑结构（Topology）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -96,13 +96,13 @@
 
 
 
-<meta name="description" content="登陆节点frontend： [wangdong@frontend ~]$  查看某一节点cpu使用情况例如第6节点： ssh node6 &amp;apos;top -n 1 -b&amp;apos;| head  批量查看节点cpu使用情况for((i=2;i&amp;lt;=8;i++));do ssh node${i} &amp;apos;top -n 1 -b&amp;apos;| head ;done 更换节点例如更换至6节点">
+<meta name="description" content="由一次教训驱动的学习  &amp;emsp;&amp;emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux的CPU拓扑结构（Topology）">
 <meta property="og:url" content="https:///AnJingwd.github.io/2017/09/17/linux的CPU拓扑结构（Topology）/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="登陆节点frontend： [wangdong@frontend ~]$  查看某一节点cpu使用情况例如第6节点： ssh node6 &amp;apos;top -n 1 -b&amp;apos;| head  批量查看节点cpu使用情况for((i=2;i&amp;lt;=8;i++));do ssh node${i} &amp;apos;top -n 1 -b&amp;apos;| head ;done 更换节点例如更换至6节点">
+<meta property="og:description" content="由一次教训驱动的学习  &amp;emsp;&amp;emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/UAY0Lsw.jpg">
 <meta property="og:image" content="https://i.imgur.com/2iByJW3.jpg">
@@ -114,10 +114,10 @@
 <meta property="og:image" content="https://i.imgur.com/TCYq3bu.jpg">
 <meta property="og:image" content="https://i.imgur.com/3pOcus6.jpg">
 <meta property="og:image" content="https://i.imgur.com/acrKbul.jpg">
-<meta property="og:updated_time" content="2017-09-17T09:59:07.292Z">
+<meta property="og:updated_time" content="2017-09-17T10:06:21.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux的CPU拓扑结构（Topology）">
-<meta name="twitter:description" content="登陆节点frontend： [wangdong@frontend ~]$  查看某一节点cpu使用情况例如第6节点： ssh node6 &amp;apos;top -n 1 -b&amp;apos;| head  批量查看节点cpu使用情况for((i=2;i&amp;lt;=8;i++));do ssh node${i} &amp;apos;top -n 1 -b&amp;apos;| head ;done 更换节点例如更换至6节点">
+<meta name="twitter:description" content="由一次教训驱动的学习  &amp;emsp;&amp;emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”">
 <meta name="twitter:image" content="https://i.imgur.com/UAY0Lsw.jpg">
 
 
@@ -394,7 +394,11 @@
       
 
       
-        <p>登陆节点frontend：</p>
+        <blockquote class="blockquote-center">由一次教训驱动的学习</blockquote>
+
+<p>&emsp;&emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”</p>
+<a id="more"></a>
+<p>登陆节点frontend：</p>
 <pre><code>[wangdong@frontend ~]$
 </code></pre><p><img src="https://i.imgur.com/UAY0Lsw.jpg" alt=""></p>
 <h1 id="查看某一节点cpu使用情况"><a href="#查看某一节点cpu使用情况" class="headerlink" title="查看某一节点cpu使用情况"></a>查看某一节点cpu使用情况</h1><p>例如第6节点：</p>

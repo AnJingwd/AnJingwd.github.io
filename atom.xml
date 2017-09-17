@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-09-17T09:59:07.292Z</updated>
+  <updated>2017-09-17T10:06:21.094Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,9 +20,13 @@
     <link href="https:///AnJingwd.github.io/2017/09/17/linux%E7%9A%84CPU%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84%EF%BC%88Topology%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/09/17/linux的CPU拓扑结构（Topology）/</id>
     <published>2017-09-17T07:46:01.000Z</published>
-    <updated>2017-09-17T09:59:07.292Z</updated>
+    <updated>2017-09-17T10:06:21.094Z</updated>
     
-    <content type="html"><![CDATA[<p>登陆节点frontend：</p>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">由一次教训驱动的学习</blockquote>
+
+<p>&emsp;&emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”</p>
+<a id="more"></a>
+<p>登陆节点frontend：</p>
 <pre><code>[wangdong@frontend ~]$
 </code></pre><p><img src="https://i.imgur.com/UAY0Lsw.jpg" alt=""></p>
 <h1 id="查看某一节点cpu使用情况"><a href="#查看某一节点cpu使用情况" class="headerlink" title="查看某一节点cpu使用情况"></a>查看某一节点cpu使用情况</h1><p>例如第6节点：</p>
@@ -114,10 +118,9 @@ $ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;s
     
     <summary type="html">
     
-      &lt;p&gt;登陆节点frontend：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[wangdong@frontend ~]$
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/UAY0Lsw.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;查看某一节点
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;由一次教训驱动的学习&lt;/blockquote&gt;
+
+&lt;p&gt;&amp;emsp;&amp;emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”&lt;/p&gt;
     
     </summary>
     
