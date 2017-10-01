@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R-绘图," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -96,21 +96,24 @@
 
 
 
-<meta name="description" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta name="keywords" content="R-绘图">
+<meta name="description" content="文本挖掘与展示之文献关键词">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/index.html">
+<meta property="og:title" content="文本挖掘与展示之文献关键词">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/10/01/文本挖掘与展示之文献关键词/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="解决ggplot 作图x轴和y轴不重合问题">
+<meta property="og:description" content="文本挖掘与展示之文献关键词">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/c0EnfOi.png">
-<meta property="og:image" content="http://i.imgur.com/2GNk480.png">
-<meta property="og:updated_time" content="2017-09-01T04:54:22.189Z">
+<meta property="og:image" content="https://i.imgur.com/4H6vt8n.png">
+<meta property="og:image" content="https://i.imgur.com/1WLX7Cd.png">
+<meta property="og:image" content="https://i.imgur.com/y03jEpN.png">
+<meta property="og:image" content="https://i.imgur.com/hHs8QWY.jpg">
+<meta property="og:image" content="https://i.imgur.com/gDAHtyk.jpg">
+<meta property="og:updated_time" content="2017-10-01T13:37:22.588Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta name="twitter:description" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta name="twitter:image" content="http://i.imgur.com/c0EnfOi.png">
+<meta name="twitter:title" content="文本挖掘与展示之文献关键词">
+<meta name="twitter:description" content="文本挖掘与展示之文献关键词">
+<meta name="twitter:image" content="https://i.imgur.com/4H6vt8n.png">
 
 
 
@@ -143,7 +146,7 @@
 
 
 
-  <title>解决ggplot 作图x轴和y轴不重合问题 | 安静-不安静的博客</title>
+  <title>文本挖掘与展示之文献关键词 | 安静-不安静的博客</title>
   
 
 
@@ -297,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/01/文本挖掘与展示之文献关键词/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -314,7 +317,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">解决ggplot 作图x轴和y轴不重合问题</h2>
+          <h2 class="post-title" itemprop="name headline">文本挖掘与展示之文献关键词</h2>
         
 
         <div class="post-meta">
@@ -326,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T12:43:03+08:00">
-                2017-09-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-01T20:35:02+08:00">
+                2017-10-01
               </time>
             
 
@@ -349,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/R-绘图/" itemprop="url" rel="index">
-                    <span itemprop="name">R-绘图</span>
+                  <a href="https:/AnJingwd.github.io/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -386,28 +389,21 @@
       
 
       
-        <blockquote class="blockquote-center">解决ggplot 作图x轴和y轴不重合问题</blockquote>
+        <blockquote class="blockquote-center">文本挖掘与展示之文献关键词</blockquote>
 
 <a id="more"></a>
-<p>只需要在作图时加上加上一下代码，即可即可让x轴和y轴在坐标原点重合：</p>
-<pre><code>scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
-</code></pre><p>现在用测试代码看看前后变化：</p>
-<pre><code>library(ggplot2)
-df &lt;- data.frame(x = 1:5, y = 1:5)
-p1 &lt;- ggplot(df, aes(x, y)) + geom_point()
-p1 &lt;- p1 + expand_limits(x = 0, y = 0)
-p1
-</code></pre><p><img src="http://i.imgur.com/c0EnfOi.png" alt=""></p>
-<pre><code>library(ggplot2)
-df &lt;- data.frame(x = 1:5, y = 1:5)
-p2 &lt;- ggplot(df, aes(x, y)) + geom_point()
-p2 &lt;- p2 + expand_limits(x = 0, y = 0)+ scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
-p2
-</code></pre><p><img src="http://i.imgur.com/2GNk480.png" alt=""></p>
-<p>参考：</p>
-<p>（1）<a href="http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot" target="_blank" rel="external">http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot</a></p>
-<p>（2）<a href="http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r" target="_blank" rel="external">http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r</a></p>
-<p>（3）<a href="http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap" target="_blank" rel="external">http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap</a></p>
+<p>&emsp;&emsp;想看看Biotechnology and bioengineering杂志上最新的研究方向及研究热点，通过对文献的keywords进行统计分析，然后用词云进行可视化展示，似乎可行。</p>
+<h1 id="文献检索"><a href="#文献检索" class="headerlink" title="文献检索"></a>文献检索</h1><p><img src="https://i.imgur.com/4H6vt8n.png" alt=""></p>
+<p><img src="https://i.imgur.com/1WLX7Cd.png" alt=""></p>
+<p><strong>可以看到我们需要的keywords在\<div>标签下的\<p>段落内，可以通过class = “keywords”进行定位。</p></div></strong></p>
+<p><strong>火狐浏览器另存页面为PubMed-NCBI.html</strong></p>
+<h1 id="利用python的bs4模块解析html文件"><a href="#利用python的bs4模块解析html文件" class="headerlink" title="利用python的bs4模块解析html文件"></a>利用python的bs4模块解析html文件</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"></div><div class="line">os.chdir(<span class="string">r'F:\pycharm_project\bs4'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 读取html文件并生成Soup对象</span></div><div class="line">File = open(<span class="string">'PubMed-NCBI.html'</span>,encoding=<span class="string">'UTF-8'</span>)</div><div class="line">Soup = BeautifulSoup(File,<span class="string">"lxml"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 使用finfAll方法定位class属性为keywords的div块，存入列表</span></div><div class="line">divs = Soup.findAll(<span class="string">'div'</span>, &#123;<span class="string">'class'</span>:<span class="string">'keywords'</span>&#125;)</div><div class="line"></div><div class="line">resultFile = open(<span class="string">r'.\keywords_result.txt'</span>, <span class="string">'w'</span>,encoding=<span class="string">'UTF-8'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 遍历列表divs，将结果keywords写入文件</span></div><div class="line"><span class="keyword">for</span> div <span class="keyword">in</span> divs:</div><div class="line">	resultFile.write(div.p.string + <span class="string">'\n'</span>)</div><div class="line">resultFile.close()</div></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/y03jEpN.png" alt=""></p>
+<h1 id="利用R绘制词云进行展示"><a href="#利用R绘制词云进行展示" class="headerlink" title="利用R绘制词云进行展示"></a>利用R绘制词云进行展示</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#第一步：读取</span></div><div class="line">setwd(<span class="string">"F:/R working directory/wordcloud"</span>)</div><div class="line">text&lt;-scan(<span class="string">"keywords_result.txt"</span>,what=<span class="string">''</span>)</div><div class="line"></div><div class="line"><span class="comment">#第二步：分词</span></div><div class="line"><span class="keyword">library</span>(jiebaR) <span class="comment">##加载包</span></div><div class="line">engine_s&lt;-worker() <span class="comment">##初始化分词器</span></div><div class="line"></div><div class="line">seg&lt;-segment(text,engine_s)   <span class="comment">##分词</span></div><div class="line">head(seg)</div><div class="line"></div><div class="line">f1&lt;-freq(seg)   <span class="comment">##统计词频</span></div><div class="line">head(f1)</div><div class="line"></div><div class="line">f2&lt;-f1[order((f1)[<span class="number">2</span>],decreasing=<span class="literal">TRUE</span>),]</div><div class="line"><span class="comment">##根据词频降序排列</span></div><div class="line">head(f2) </div><div class="line"></div><div class="line"><span class="comment"># 第三步：绘图</span></div><div class="line"><span class="keyword">library</span>(wordcloud2)<span class="comment">#加载wordcloud2包</span></div><div class="line">wordcloud2(f2, size = <span class="number">0.8</span> ,shape=<span class="string">'star'</span>)<span class="comment">#绘制成五角形状词云</span></div><div class="line"></div><div class="line">letterCloud(f2, size=<span class="number">1</span>, word=<span class="string">"生信学习"</span>) <span class="comment">#绘制成字符</span></div></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/hHs8QWY.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/gDAHtyk.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）python网络数据采集.pdf</p>
+<p>（2）<a href="https://mp.weixin.qq.com/s/Zhq7ysZ5wAvWNhPEauhRsQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/Zhq7ysZ5wAvWNhPEauhRsQ</a></p>
 
       
     </div>
@@ -433,7 +429,7 @@ p2
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/R-绘图/" rel="tag"><i class="fa fa-tag"></i> R-绘图</a>
+            <a href="https:/AnJingwd.github.io/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
         </div>
       
@@ -446,8 +442,8 @@ p2
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/08/30/批量fastqc/" rel="next" title="批量fastqc">
-                <i class="fa fa-chevron-left"></i> 批量fastqc
+              <a href="https:/AnJingwd.github.io/2017/10/01/pandas使用入门/" rel="next" title="pandas使用入门">
+                <i class="fa fa-chevron-left"></i> pandas使用入门
               </a>
             
           </div>
@@ -455,10 +451,6 @@ p2
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="https:/AnJingwd.github.io/2017/09/02/python实现excel二维表格格式化/" rel="prev" title="python实现excel二维表格格式化">
-                python实现excel二维表格格式化 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -533,8 +525,17 @@ p2
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https:/AnJingwd.github.io/images/avatar.png"
@@ -792,6 +793,22 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文献检索"><span class="nav-number">1.</span> <span class="nav-text">文献检索</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用python的bs4模块解析html文件"><span class="nav-number">2.</span> <span class="nav-text">利用python的bs4模块解析html文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用R绘制词云进行展示"><span class="nav-number">3.</span> <span class="nav-text">利用R绘制词云进行展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
