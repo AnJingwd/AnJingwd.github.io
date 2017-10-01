@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-09-17T10:06:21.094Z</updated>
+  <updated>2017-10-01T05:03:08.897Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -16,11 +16,88 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>pandas使用入门</title>
+    <link href="https:///AnJingwd.github.io/2017/10/01/pandas%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/"/>
+    <id>https:///AnJingwd.github.io/2017/10/01/pandas使用入门/</id>
+    <published>2017-09-30T16:26:24.000Z</published>
+    <updated>2017-10-01T05:03:08.897Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="pandas从文件读写数据"><a href="#pandas从文件读写数据" class="headerlink" title="pandas从文件读写数据"></a>pandas从文件读写数据</h2><h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><ul>
+<li><p>读取txt数据</p>
+<p>  Exp_matrix = pd.read_table(r’.\data\game_of_thrones_geneExp.txt’,sep =’\t’)</p>
+</li>
+<li><p>读取csv数据</p>
+<p>  Exp_matrix = pd.read_csv(r’.\data\game_of_thrones_geneExp.csv’)</p>
+</li>
+</ul>
+<h3 id="读数据时关于行列名选项"><a href="#读数据时关于行列名选项" class="headerlink" title="读数据时关于行列名选项"></a>读数据时关于行列名选项</h3><ul>
+<li>header=None  &emsp;&emsp; #指定列名从0开始增长的数</li>
+<li>names=list(‘abcde’)    &emsp;&emsp; #用names参数指定列名</li>
+<li>index_col=’e’   &emsp;&emsp; #用指定的列作为行名（index）</li>
+</ul>
+<h3 id="写数据至文件"><a href="#写数据至文件" class="headerlink" title="写数据至文件"></a>写数据至文件</h3><ul>
+<li>写入csv文件</li>
+<li>  result.to_csv(‘D:\data\out1.csv’)</li>
+</ul>
+<h3 id="写数据时关于行列名选项"><a href="#写数据时关于行列名选项" class="headerlink" title="写数据时关于行列名选项"></a>写数据时关于行列名选项</h3><ul>
+<li>index=False  &emsp;&emsp; #舍弃行名</li>
+<li>header=False  &emsp;&emsp; #舍弃列名</li>
+</ul>
+<h2 id="pandas访问元素"><a href="#pandas访问元素" class="headerlink" title="pandas访问元素"></a>pandas访问元素</h2><ul>
+<li><p>取行</p>
+<p>  Exp_matrix_class_3 = Exp_matrix[0:8]</p>
+</li>
+<li><p>取列</p>
+<p>  Exp_matrix_class_3 = Exp_matrix[Exp_matrix.columns[0:8]]</p>
+</li>
+<li><p>取行列</p>
+<p>  Exp_matrix_class_3 = Exp_matrix.iloc[0:8,1:4]</p>
+</li>
+<li><p>根据条件筛选行</p>
+<p>  Exp_matrix[Exp_matrix[‘Class’] == 3]</p>
+</li>
+<li><p>数据框转置</p>
+<p>  Exp_matrix_class_3_T = Exp_matrix_class_3.T</p>
+</li>
+</ul>
+<p>注意：</p>
+<p>(1)行列最小从0开始</p>
+<p>(2)取值区间左闭右开</p>
+<h2 id="Dataframe-排序"><a href="#Dataframe-排序" class="headerlink" title="Dataframe 排序"></a>Dataframe 排序</h2><ul>
+<li>逆序<br>   Exp_matrix_T.sort_values([‘abs_dif_3_5’], ascending=False)</li>
+</ul>
+<h1 id="数据合并"><a href="#数据合并" class="headerlink" title="数据合并"></a>数据合并</h1><ul>
+<li><p>行合并</p>
+<p>  result = pd.concat([Exp_matrix_T[1:2],result_gene])</p>
+</li>
+<li><p>增加一列</p>
+<p>  Exp_matrix_T[‘abs_dif_3_5’] = abs_dif_3_5</p>
+</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.csdn.net/stevenkwong/article/details/52528616" target="_blank" rel="external">PANDAS 数据合并与重塑（concat篇）</a></p>
+<p>（2）<a href="http://www.cnblogs.com/pengsixiong/p/5050833.html" target="_blank" rel="external">pandas数据的导入与导出</a></p>
+<p>（3）<a href="http://bluewhale.cc/2016-08-06/use-pandas-filter-and-sort.html" target="_blank" rel="external">使用Pandas对数据进行筛选和排序</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;pandas从文件读写数据&quot;&gt;&lt;a href=&quot;#pandas从文件读写数据&quot; class=&quot;headerlink&quot; title=&quot;pandas从文件读写数据&quot;&gt;&lt;/a&gt;pandas从文件读写数据&lt;/h2&gt;&lt;h3 id=&quot;读取数据&quot;&gt;&lt;a href=&quot;#读取数据&quot;
+    
+    </summary>
+    
+      <category term="python" scheme="https:///AnJingwd.github.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>linux的CPU拓扑结构（Topology）</title>
     <link href="https:///AnJingwd.github.io/2017/09/17/linux%E7%9A%84CPU%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84%EF%BC%88Topology%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/09/17/linux的CPU拓扑结构（Topology）/</id>
     <published>2017-09-17T07:46:01.000Z</published>
-    <updated>2017-09-17T10:06:21.094Z</updated>
+    <updated>2017-09-17T10:11:19.431Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">由一次教训驱动的学习</blockquote>
 
@@ -53,7 +130,7 @@
 <ul>
 <li><p>按下1后可以看到我的机器的CPU是16核的。%Cpu0,,,,,,%Cpu15。</p>
 </li>
-<li><p><strong>若是 0 代表目前该核心空闲， 可以运算作业。 100代表 cpu核心满负荷运算。<br>若某个节点 16 个 CPU 负荷已很高， 换至其余空闲节点运算作业。 建议一个计算<br>节点核心数最多使用 15 核。</strong></p>
+<li><p><strong>若是 0 代表目前该核心空闲， 可以运算作业。 100代表 cpu核心满负荷运算。若某个节点 16 个 CPU 负荷已很高， 换至其余空闲节点运算作业。 建议一个计算节点核心数最多使用 15 核。</strong></p>
 </li>
 </ul>
 <h2 id="查看-CPU-Topology（拓扑结构）："><a href="#查看-CPU-Topology（拓扑结构）：" class="headerlink" title="查看 CPU Topology（拓扑结构）："></a>查看 CPU Topology（拓扑结构）：</h2><pre><code>cat /proc/cpuinfo 
@@ -640,7 +717,7 @@ CMD    //命令的名称和参数
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-09-17T05:11:08.360Z</updated>
+    <updated>2017-09-28T02:02:30.160Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -899,6 +976,10 @@ CMD    //命令的名称和参数
 <td><a href="http://tool.oschina.net/qr" target="_blank" rel="external">在线生成二维码</a></td>
 <td>比较好玩儿</td>
 </tr>
+<tr>
+<td><a href="http://www.tagxedo.com/" target="_blank" rel="external">Tagxedo</a></td>
+<td>词云（不是所有浏览器都可以）</td>
+</tr>
 </tbody>
 </table>
 <h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><table>
@@ -1066,6 +1147,10 @@ CMD    //命令的名称和参数
 <tr>
 <td><a href="http://www.lib.sjtu.edu.cn/index.php?m=content&amp;c=index&amp;a=show&amp;catid=283&amp;id=1046" target="_blank" rel="external">SJTU</a></td>
 <td>上海交通大学学位论文数据库</td>
+</tr>
+<tr>
+<td><a href="http://www.ozdic.com/" target="_blank" rel="external">ozdic</a></td>
+<td>英语搭配词典（推荐）</td>
 </tr>
 </tbody>
 </table>
@@ -3079,72 +3164,6 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux多线程下载工具axel编译安装</title>
-    <link href="https:///AnJingwd.github.io/2017/08/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7axel%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
-    <id>https:///AnJingwd.github.io/2017/08/06/Linux多线程下载工具axel编译安装/</id>
-    <published>2017-08-06T02:57:31.000Z</published>
-    <updated>2017-08-14T10:23:02.113Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;Axel插件是基于yum下的一个多线程下载插件。axel插件也可以当独立下载工具来使用。当成独立下载工具使用时，适用于所有Linux发行版。通过打开多个HTTP/FTP连接来将一个文件进行分段下载，从而达到加速下载的目的。对于下载大文件，该工具特别有用。同时支持断点续传，速度通常情况下是Wget的几倍。可用于CentOS、RHEL、Fedora等使用yum的Linux发行版。由于没有管理员权限，只能编译安装源码。使用Axel可以在低速网络环境里提高数倍的下载速度。</p>
-<a id="more"></a>
-<h1 id="Linux多线程下载工具axel编译安装"><a href="#Linux多线程下载工具axel编译安装" class="headerlink" title="Linux多线程下载工具axel编译安装"></a>Linux多线程下载工具axel编译安装</h1><p>&emsp;&emsp;Axel插件是基于yum下的一个多线程下载插件。axel插件也可以当独立下载工具来使用。当成独立下载工具使用时，适用于所有Linux发行版。通过打开多个HTTP/FTP连接来将一个文件进行分段下载，从而达到加速下载的目的。对于下载大文件，该工具特别有用。同时支持断点续传，速度通常情况下是Wget的几倍。可用于CentOS、RHEL、Fedora等使用yum的Linux发行版。由于没有管理员权限，只能编译安装源码。使用Axel可以在低速网络环境里提高数倍的下载速度。</p>
-<p>官方主页:<a href="http://axel.alioth.debian.org/" target="_blank" rel="external">http://axel.alioth.debian.org/</a></p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>下载：</p>
-<pre><code>wget https://sourceforge.net/projects/axel2/files/axel-2.4/axel-2.4.tar.gz
-
-tar -xzf axel-2.4.tar.gz 
-
-cd axel-2.4
-</code></pre><p>编译安装：</p>
-<pre><code>./configure --prefix=/home/u641750/axel-2.4
-
-make &amp;&amp; make install 
-</code></pre><p>添加环境变量：</p>
-<pre><code>echo &apos;export PATH=/home/u641750/axel-2.4/bin:$PATH&apos;&gt;&gt;~/.bashrc
-
-source ~/.bashrc
-</code></pre><h2 id="使用参数如下："><a href="#使用参数如下：" class="headerlink" title="使用参数如下："></a>使用参数如下：</h2><ul>
-<li>–max-speed=x ,  -s x 最高速度x，指定每秒的最大比特数</li>
-<li>–num-connections=x , -n x 指定线程数</li>
-<li>–output=f , -o f 指定另存为目录f</li>
-<li>–search[=x] , -S [x] 搜索镜像 </li>
-<li>–header=x , -H x 添加头文件字符串x（指定 HTTP header）</li>
-<li>–user-agent=x , -U x 设置用户代理（指定 HTTP user agent</li>
-<li>–no-proxy ， -N 不使用代理服务器</li>
-<li>–quiet ， -q 静默模式</li>
-<li>–verbose ，-v 更多状态信息</li>
-<li>–alternate ， -a Alternate progress indicator</li>
-<li>–help ，-h 帮助</li>
-<li>–version ，-V 版本信息</li>
-</ul>
-<h2 id="测试例如下载Python安装包："><a href="#测试例如下载Python安装包：" class="headerlink" title="测试例如下载Python安装包："></a>测试例如下载Python安装包：</h2><pre><code>time axel -n 10 http://mirrors.sohu.com/python/3.4.1/Python-3.4.1.tar.xz
-</code></pre><p><img src="http://i.imgur.com/46QnG4A.png" alt=""></p>
-<pre><code>time wget http://mirrors.sohu.com/python/3.4.1/Python-3.4.1.tar.xz
-</code></pre><p><img src="http://i.imgur.com/QKdKXCh.png" alt=""></p>
-<p><strong>如果下载过程中下载中断可以再执行下载命令即可恢复上次的下载进度</strong></p>
-<p><strong>当然，linux也还有其他的多线程下载工具，比如myget。有人测试，axel、myget支持多线程，且速度较快都在2M。断点续传对比，三个工具都支持，但wget需要增加-c参数，axel、myget再次执行命令即可。</strong></p>
-<p>例如： </p>
-<pre><code>wget -c http://url/iso/Centos/x86_64/CentOS-6.4-x86_64-bin-DVD1.iso
-</code></pre><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>（1）<a href="http://www.ha97.com/621.html" target="_blank" rel="external">http://www.ha97.com/621.html</a></p>
-<p>（2）<a href="http://man.linuxde.net/axel" target="_blank" rel="external">http://man.linuxde.net/axel</a></p>
-<p>（3）Dreamway的运维点滴（推荐阅读）</p>
-<p><a href="http://dreamway.blog.51cto.com/1281816/1151886/" target="_blank" rel="external">http://dreamway.blog.51cto.com/1281816/1151886/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;Axel插件是基于yum下的一个多线程下载插件。axel插件也可以当独立下载工具来使用。当成独立下载工具使用时，适用于所有Linux发行版。通过打开多个HTTP/FTP连接来将一个文件进行分段下载，从而达到加速下载的目的。对于下载大文件，该工具特别有用。同时支持断点续传，速度通常情况下是Wget的几倍。可用于CentOS、RHEL、Fedora等使用yum的Linux发行版。由于没有管理员权限，只能编译安装源码。使用Axel可以在低速网络环境里提高数倍的下载速度。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
     
   </entry>
   

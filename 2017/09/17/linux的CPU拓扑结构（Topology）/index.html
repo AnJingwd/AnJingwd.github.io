@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://i.imgur.com/TCYq3bu.jpg">
 <meta property="og:image" content="https://i.imgur.com/3pOcus6.jpg">
 <meta property="og:image" content="https://i.imgur.com/acrKbul.jpg">
-<meta property="og:updated_time" content="2017-09-17T10:06:21.094Z">
+<meta property="og:updated_time" content="2017-09-17T10:11:19.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux的CPU拓扑结构（Topology）">
 <meta name="twitter:description" content="由一次教训驱动的学习  &amp;emsp;&amp;emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”">
@@ -425,7 +425,7 @@
 <ul>
 <li><p>按下1后可以看到我的机器的CPU是16核的。%Cpu0,,,,,,%Cpu15。</p>
 </li>
-<li><p><strong>若是 0 代表目前该核心空闲， 可以运算作业。 100代表 cpu核心满负荷运算。<br>若某个节点 16 个 CPU 负荷已很高， 换至其余空闲节点运算作业。 建议一个计算<br>节点核心数最多使用 15 核。</strong></p>
+<li><p><strong>若是 0 代表目前该核心空闲， 可以运算作业。 100代表 cpu核心满负荷运算。若某个节点 16 个 CPU 负荷已很高， 换至其余空闲节点运算作业。 建议一个计算节点核心数最多使用 15 核。</strong></p>
 </li>
 </ul>
 <h2 id="查看-CPU-Topology（拓扑结构）："><a href="#查看-CPU-Topology（拓扑结构）：" class="headerlink" title="查看 CPU Topology（拓扑结构）："></a>查看 CPU Topology（拓扑结构）：</h2><pre><code>cat /proc/cpuinfo 
@@ -534,6 +534,10 @@ $ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;s
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="https:/AnJingwd.github.io/2017/10/01/pandas使用入门/" rel="prev" title="pandas使用入门">
+                pandas使用入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -632,7 +636,7 @@ $ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;s
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -933,7 +937,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共36.5k字</span>
+  <span class="post-count">博客全站共36.8k字</span>
 </div>
 
 <div class="powered-by">
