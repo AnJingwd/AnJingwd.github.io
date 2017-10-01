@@ -386,64 +386,14 @@
 
       
         
-          
-            <h2 id="pandas从文件读写数据"><a href="#pandas从文件读写数据" class="headerlink" title="pandas从文件读写数据"></a>pandas从文件读写数据</h2><h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><ul>
-<li><p>读取txt数据</p>
-<p>  Exp_matrix = pd.read_table(r’.\data\game_of_thrones_geneExp.txt’,sep =’\t’)</p>
-</li>
-<li><p>读取csv数据</p>
-<p>  Exp_matrix = pd.read_csv(r’.\data\game_of_thrones_geneExp.csv’)</p>
-</li>
-</ul>
-<h3 id="读数据时关于行列名选项"><a href="#读数据时关于行列名选项" class="headerlink" title="读数据时关于行列名选项"></a>读数据时关于行列名选项</h3><ul>
-<li>header=None  &emsp;&emsp; #指定列名从0开始增长的数</li>
-<li>names=list(‘abcde’)    &emsp;&emsp; #用names参数指定列名</li>
-<li>index_col=’e’   &emsp;&emsp; #用指定的列作为行名（index）</li>
-</ul>
-<h3 id="写数据至文件"><a href="#写数据至文件" class="headerlink" title="写数据至文件"></a>写数据至文件</h3><ul>
-<li>写入csv文件</li>
-<li>  result.to_csv(‘D:\data\out1.csv’)</li>
-</ul>
-<h3 id="写数据时关于行列名选项"><a href="#写数据时关于行列名选项" class="headerlink" title="写数据时关于行列名选项"></a>写数据时关于行列名选项</h3><ul>
-<li>index=False  &emsp;&emsp; #舍弃行名</li>
-<li>header=False  &emsp;&emsp; #舍弃列名</li>
-</ul>
-<h2 id="pandas访问元素"><a href="#pandas访问元素" class="headerlink" title="pandas访问元素"></a>pandas访问元素</h2><ul>
-<li><p>取行</p>
-<p>  Exp_matrix_class_3 = Exp_matrix[0:8]</p>
-</li>
-<li><p>取列</p>
-<p>  Exp_matrix_class_3 = Exp_matrix[Exp_matrix.columns[0:8]]</p>
-</li>
-<li><p>取行列</p>
-<p>  Exp_matrix_class_3 = Exp_matrix.iloc[0:8,1:4]</p>
-</li>
-<li><p>根据条件筛选行</p>
-<p>  Exp_matrix[Exp_matrix[‘Class’] == 3]</p>
-</li>
-<li><p>数据框转置</p>
-<p>  Exp_matrix_class_3_T = Exp_matrix_class_3.T</p>
-</li>
-</ul>
-<p>注意：</p>
-<p>(1)行列最小从0开始</p>
-<p>(2)取值区间左闭右开</p>
-<h2 id="Dataframe-排序"><a href="#Dataframe-排序" class="headerlink" title="Dataframe 排序"></a>Dataframe 排序</h2><ul>
-<li>逆序<br>   Exp_matrix_T.sort_values([‘abs_dif_3_5’], ascending=False)</li>
-</ul>
-<h1 id="数据合并"><a href="#数据合并" class="headerlink" title="数据合并"></a>数据合并</h1><ul>
-<li><p>行合并</p>
-<p>  result = pd.concat([Exp_matrix_T[1:2],result_gene])</p>
-</li>
-<li><p>增加一列</p>
-<p>  Exp_matrix_T[‘abs_dif_3_5’] = abs_dif_3_5</p>
-</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.csdn.net/stevenkwong/article/details/52528616" target="_blank" rel="external">PANDAS 数据合并与重塑（concat篇）</a></p>
-<p>（2）<a href="http://www.cnblogs.com/pengsixiong/p/5050833.html" target="_blank" rel="external">pandas数据的导入与导出</a></p>
-<p>（3）<a href="http://bluewhale.cc/2016-08-06/use-pandas-filter-and-sort.html" target="_blank" rel="external">使用Pandas对数据进行筛选和排序</a></p>
-
-          
+          <blockquote class="blockquote-center">pandas使用入门</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="https:/AnJingwd.github.io/2017/10/01/pandas使用入门/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

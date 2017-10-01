@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-10-01T05:03:08.897Z</updated>
+  <updated>2017-10-01T05:18:13.185Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,9 +20,12 @@
     <link href="https:///AnJingwd.github.io/2017/10/01/pandas%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/"/>
     <id>https:///AnJingwd.github.io/2017/10/01/pandas使用入门/</id>
     <published>2017-09-30T16:26:24.000Z</published>
-    <updated>2017-10-01T05:03:08.897Z</updated>
+    <updated>2017-10-01T05:18:13.185Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="pandas从文件读写数据"><a href="#pandas从文件读写数据" class="headerlink" title="pandas从文件读写数据"></a>pandas从文件读写数据</h2><h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><ul>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">pandas使用入门</blockquote>
+
+<a id="more"></a>
+<h2 id="pandas从文件读写数据"><a href="#pandas从文件读写数据" class="headerlink" title="pandas从文件读写数据"></a>pandas从文件读写数据</h2><h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><ul>
 <li><p>读取txt数据</p>
 <p>  Exp_matrix = pd.read_table(r’.\data\game_of_thrones_geneExp.txt’,sep =’\t’)</p>
 </li>
@@ -81,7 +84,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;pandas从文件读写数据&quot;&gt;&lt;a href=&quot;#pandas从文件读写数据&quot; class=&quot;headerlink&quot; title=&quot;pandas从文件读写数据&quot;&gt;&lt;/a&gt;pandas从文件读写数据&lt;/h2&gt;&lt;h3 id=&quot;读取数据&quot;&gt;&lt;a href=&quot;#读取数据&quot;
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;pandas使用入门&lt;/blockquote&gt;
     
     </summary>
     
