@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-10-06T13:28:58.719Z</updated>
+  <updated>2017-10-06T13:43:23.014Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,10 +20,9 @@
     <link href="https:///AnJingwd.github.io/2017/10/06/R%E4%B8%80%E9%A1%B5%E5%A4%9A%E5%9B%BE/"/>
     <id>https:///AnJingwd.github.io/2017/10/06/R一页多图/</id>
     <published>2017-10-06T13:25:47.000Z</published>
-    <updated>2017-10-06T13:28:58.719Z</updated>
+    <updated>2017-10-06T13:43:23.014Z</updated>
     
-    <content type="html"><![CDATA[<p>&emsp;&emsp;发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！</p>
-<blockquote class="blockquote-center">R一页多图</blockquote>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！</blockquote>
 
 <a id="more"></a>
 <h1 id="cowplot：基于ggplot的可视化系统"><a href="#cowplot：基于ggplot的可视化系统" class="headerlink" title="cowplot：基于ggplot的可视化系统"></a>cowplot：基于ggplot的可视化系统</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>&emsp;&emsp;cowplot是一个ggplot2包的简单补充，意味着其可以为ggplot2提供出版物级的主题等。更重要的是，这个包可以组合多个”ggplot2”绘制的图为一个图，并且<strong>为每个图加上例如A,B,C等标签，</strong> 这在具体的出版物上通常是要求的。</p>
@@ -68,8 +67,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&amp;emsp;&amp;emsp;发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！&lt;/p&gt;
-&lt;blockquote class=&quot;blockquote-center&quot;&gt;R一页多图&lt;/blockquote&gt;
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！&lt;/blockquote&gt;
     
     </summary>
     
