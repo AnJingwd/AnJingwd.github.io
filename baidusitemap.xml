@@ -4,6 +4,126 @@
 
     
   <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2017-10-21T10:16:08.339Z</lastmod>
+    <data>
+        <display>
+        <title>MySQL数据库安装及入门</title>
+        <pubTime>2017-10-21T10:06:15.000Z</pubTime>
+        
+        <tag>MySQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
+    <lastmod>2017-10-19T12:26:06.359Z</lastmod>
+    <data>
+        <display>
+        <title>常用链接（持续更新）</title>
+        <pubTime>2017-08-19T06:51:52.000Z</pubTime>
+        
+        <tag>常用链接</tag>
+         
+         
+           
+             
+              <breadCrumb title="常用链接" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/13/%E5%A6%82%E4%BD%95%E5%86%99shell%E8%84%9A%E6%9C%AC/</loc>
+    <lastmod>2017-10-13T01:18:38.957Z</lastmod>
+    <data>
+        <display>
+        <title>如何写shell脚本</title>
+        <pubTime>2017-08-13T13:14:52.000Z</pubTime>
+        
+        <tag>shell脚本</tag>
+         
+         
+           
+             
+              <breadCrumb title="shell脚本" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/shell%E8%84%9A%E6%9C%AC/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/16/linux%E8%A7%A3%E5%8E%8B%E7%BC%A9/</loc>
+    <lastmod>2017-10-13T01:02:47.602Z</lastmod>
+    <data>
+        <display>
+        <title>linux解压缩</title>
+        <pubTime>2017-08-16T02:48:41.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/15/NGS%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8FBED-GFF-GTF%E4%B9%8B%E4%BB%8B%E7%BB%8D-%E6%AF%94%E8%BE%83-%E8%BD%AC%E6%8D%A2/</loc>
+    <lastmod>2017-10-11T05:18:58.289Z</lastmod>
+    <data>
+        <display>
+        <title>NGS数据格式BED/GFF/GTF之介绍，比较，转换</title>
+        <pubTime>2017-08-15T11:09:02.000Z</pubTime>
+        
+        <tag>NGS</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/02/%E4%BF%AE%E6%94%B9host%E6%96%87%E4%BB%B6-%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
+    <lastmod>2017-10-07T15:29:20.325Z</lastmod>
+    <data>
+        <display>
+        <title>修改host文件-科学上网</title>
+        <pubTime>2017-08-02T14:21:51.000Z</pubTime>
+        
+        <tag>技术</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/10/06/R%E4%B8%80%E9%A1%B5%E5%A4%9A%E5%9B%BE/</loc>
     <lastmod>2017-10-06T13:43:23.014Z</lastmod>
     <data>
@@ -17,26 +137,6 @@
            
              
               <breadCrumb title="R绘图" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/R%E7%BB%98%E5%9B%BE/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    <lastmod>2017-10-03T10:15:48.156Z</lastmod>
-    <data>
-        <display>
-        <title>常用链接（持续更新）</title>
-        <pubTime>2017-08-19T06:51:52.000Z</pubTime>
-        
-        <tag>常用链接</tag>
-         
-         
-           
-             
-              <breadCrumb title="常用链接" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
           
         </display>
     </data>
@@ -384,66 +484,6 @@
 
     
   <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/13/%E5%A6%82%E4%BD%95%E5%86%99shell%E8%84%9A%E6%9C%AC/</loc>
-    <lastmod>2017-08-17T03:12:46.731Z</lastmod>
-    <data>
-        <display>
-        <title>如何写shell脚本</title>
-        <pubTime>2017-08-13T13:14:52.000Z</pubTime>
-        
-        <tag>shell脚本</tag>
-         
-         
-           
-             
-              <breadCrumb title="shell脚本" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/shell%E8%84%9A%E6%9C%AC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/16/linux%E8%A7%A3%E5%8E%8B%E7%BC%A9/</loc>
-    <lastmod>2017-08-16T08:07:13.065Z</lastmod>
-    <data>
-        <display>
-        <title>linux解压缩</title>
-        <pubTime>2017-08-16T02:48:41.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/15/NGS%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8FBED-GFF-GTF%E4%B9%8B%E4%BB%8B%E7%BB%8D-%E6%AF%94%E8%BE%83-%E8%BD%AC%E6%8D%A2/</loc>
-    <lastmod>2017-08-15T11:09:28.033Z</lastmod>
-    <data>
-        <display>
-        <title>NGS数据格式BED/GFF/GTF之介绍，比较，转换</title>
-        <pubTime>2017-08-15T11:09:02.000Z</pubTime>
-        
-        <tag>NGS</tag>
-         
-         
-           
-             
-              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/12/%E5%8F%82%E8%80%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/</loc>
     <lastmod>2017-08-14T15:11:18.191Z</lastmod>
     <data>
@@ -519,26 +559,6 @@
            
              
               <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/02/%E4%BF%AE%E6%94%B9host%E6%96%87%E4%BB%B6-%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
-    <lastmod>2017-08-06T11:13:16.792Z</lastmod>
-    <data>
-        <display>
-        <title>修改host文件-科学上网</title>
-        <pubTime>2017-08-02T14:21:51.000Z</pubTime>
-        
-        <tag>技术</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>

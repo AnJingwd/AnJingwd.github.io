@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-10-06T13:43:23.014Z</updated>
+  <updated>2017-10-21T10:16:08.339Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,154 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL数据库安装及入门</title>
+    <link href="https:///AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/"/>
+    <id>https:///AnJingwd.github.io/2017/10/21/MySQL数据库安装及入门/</id>
+    <published>2017-10-21T10:06:15.000Z</published>
+    <updated>2017-10-21T10:16:08.339Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">无root权限，从源码编译安装MySQL数据库，及其简单使用</blockquote>
+
+<a id="more"></a>
+<h1 id="科德十二定律"><a href="#科德十二定律" class="headerlink" title="科德十二定律"></a>科德十二定律</h1><p><a href="https://en.wikipedia.org/wiki/Codd%27s_12_rules" target="_blank" rel="external">科德十二定律（Codd’s 12 rules）</a>是由数据库的关系模型的先驱埃德加·科德（EdgarF. Codd）提出的，使数据库管理系统关系化需满足的十三条（从0至12）准则。又称为“黄金十二定律”。</p>
+<ul>
+<li>准则0:&emsp;一个关系形的关系数据库系统必须能完全通过它的关系能力来管理数据库。</li>
+<li>准则1 信息准则: &emsp;关系数据库系统的所有信息都应该在逻辑一级上用表中的值这一种方法显式的表示。</li>
+<li>准则2 保证访问准则: &emsp; 依靠表名、主码和列名的组合，保证能以逻辑方式访问关系数据库中的每个数据项。</li>
+<li>准则3 空值的系统化处理: &emsp;全关系的关系数据库系统支持空值的概念，并用系统化的方法处理空值。</li>
+<li>准则4 基于关系模型的动态的联机数据字典: &emsp;数据库的描述在逻辑级上和普通数据采用同样的表述方式。</li>
+<li>准则5 统一的数据子语言: &emsp;一个关系数据库系统可以具有几种语言和多种终端访问方式，但必须有一种语言，它的语句可以表示为严格语法规定的字符串，并能全面的支持各种规则。</li>
+<li>准则6 视图更新准则: &emsp;所有理论上可更新的视图也应该允许由系统更新。</li>
+<li>准则7 高级的插入、修改和删除操作: &emsp;系统应该对各种操作进行查询优化。</li>
+<li>准则8 数据的物理独立性: &emsp;无论数据库的数据在存储表示或存取方法上作任何变化，应用程序和终端活动都保持逻辑上的不变性。</li>
+<li>准则9 数据逻辑独立性: &emsp;当对基本关系进行理论上信息不受损害的任何改变时，应用程序和终端活动都保持逻辑上的不变性。</li>
+<li>准则10 数据完整的独立性: &emsp;关系数据库的完整性约束条件必须是用数据库语言定义并存储在数据字典中的。</li>
+<li>准则11 分布独立性: &emsp;关系数据库系统在引入分布数据或数据重新分布时保持逻辑不变。</li>
+<li>准则12 无破坏准则: &emsp;如果一个关系数据库系统具有一个低级语言，那么这个低级语言不能违背或绕过完整性准则。</li>
+</ul>
+<h1 id="Relational-Database-Management-Systems-RDBMS"><a href="#Relational-Database-Management-Systems-RDBMS" class="headerlink" title="Relational Database Management Systems (RDBMS)"></a>Relational Database Management Systems (RDBMS)</h1><table>
+<thead>
+<tr>
+<th>Commercial products</th>
+<th>Open-source offerings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Oracle</td>
+<td>MySQL (Oracle)</td>
+</tr>
+<tr>
+<td>DB2 (IBM)</td>
+<td>PostgreSQL</td>
+</tr>
+<tr>
+<td>MS SQL Server (Microsoft)</td>
+<td>SQLite</td>
+</tr>
+</tbody>
+</table>
+<h1 id="下载MySQL"><a href="#下载MySQL" class="headerlink" title="下载MySQL"></a>下载MySQL</h1><p><a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">下载MySQL源代码</a> </p>
+<p><img src="https://i.imgur.com/jm0LLv7.png" alt=""></p>
+<p><img src="https://i.imgur.com/1N13zGe.png" alt=""></p>
+<h2 id="下载选项："><a href="#下载选项：" class="headerlink" title="下载选项："></a>下载选项：</h2><ul>
+<li>Source Code -&gt; 源代码</li>
+<li>Generic Linux (Architecture Independent) -&gt; 通用的Linux（独立结构）</li>
+<li><p>Compressed TAR Archive，Includes Boost Headers -&gt; 选择带有Boost头的压缩包（MySQL需要Boost C++库构建）</p>
+<p>  wget <a href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.20.tar.gz" target="_blank" rel="external">https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.20.tar.gz</a></p>
+</li>
+</ul>
+<h1 id="从源安装MySQL，需要安装CMake"><a href="#从源安装MySQL，需要安装CMake" class="headerlink" title="从源安装MySQL，需要安装CMake"></a>从源安装MySQL，需要安装CMake</h1><p>cmake，一个跨平台的编译自动配置工具（作用生成makefile 文件）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!bin/sh</span></div><div class="line">HOME=/home/wangdong</div><div class="line">install_path=<span class="variable">$HOME</span>/<span class="built_in">local</span>/cmake</div><div class="line">mkdir -p <span class="variable">$install_path</span>/.src</div><div class="line"><span class="built_in">cd</span> <span class="variable">$install_path</span>/.src</div><div class="line">wget http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz</div><div class="line">tar zxvf cmake-2.8.12.2.tar.gz</div><div class="line"><span class="built_in">cd</span> cmake-2.8.12.2</div><div class="line">./configure --prefix=<span class="variable">$install_path</span></div></pre></td></tr></table></figure>
+<p>输出 CMake has bootstrapped.  Now run gmake.</p>
+<p>#确保cmake没有错误发生</p>
+<p>echo $?</p>
+<p>0</p>
+<p>#下面运行gmake命令</p>
+<pre><code>gmake
+gmake install
+</code></pre><h1 id="编译安装MySQL"><a href="#编译安装MySQL" class="headerlink" title="编译安装MySQL"></a>编译安装MySQL</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#（1）下载MySQL-5.6及创建相应目录结构</span></div><div class="line">HOME=/home/wangdong</div><div class="line">install_path=<span class="variable">$HOME</span>/<span class="built_in">local</span>/mysql</div><div class="line">mkdir -p /home/wangdong/<span class="built_in">local</span>/mysql</div><div class="line"></div><div class="line">wget https://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.35.tar.gz</div><div class="line">tar zxvf mysql-5.6.35.tar.gz</div><div class="line"><span class="built_in">cd</span> mysql-5.6.35</div><div class="line">mkdir <span class="variable">$install_path</span>/data</div><div class="line"></div><div class="line"><span class="comment">#（2）编译(系统已经安装cmake,此处徐使用上述自己安装的cmake)</span></div><div class="line">/home/wangdong/<span class="built_in">local</span>/cmake/.src/cmake-2.8.12.2/bin/cmake -DCMAKE_INSTALL_PREFIX=<span class="variable">$install_path</span>  \</div><div class="line">-DMYSQL_DATADIR=<span class="variable">$install_path</span>/data  \</div><div class="line">-DMYSQL_UNIX_ADDR=<span class="variable">$install_path</span>/mysql.sock  \</div><div class="line">-DDEFAULT_CHARSET=utf8  \</div><div class="line">-DDEFAULT_COLLATION=utf8_general_ci  \</div><div class="line">-DMYSQL_TCP_PORT=8701  \ </div><div class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1  \ </div><div class="line">-DENABLED_LOCAL_INFILE=1</div><div class="line"></div><div class="line"><span class="comment">#（3)安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">#(4)配置（找到support-files/my-default.cnf，该文件是一个配置模板，在此基础上自己修改配置）</span></div><div class="line">cp support-files/my-default.cnf my.cnf</div><div class="line"></div><div class="line"><span class="comment">#(5)使用启动my.cnf配置文件中的设置启动mysqld_safe服务和启动mysql</span></div><div class="line"></div><div class="line">bin/mysqld_safe --defaults-file=my.cnf &amp;     <span class="comment">#&amp;表示后台运行</span></div><div class="line">support-files/mysql.server start|stop|restart   <span class="comment">#开始|停止|重启</span></div></pre></td></tr></table></figure>
+<h2 id="如果执行成功，会提示如下内容："><a href="#如果执行成功，会提示如下内容：" class="headerlink" title="如果执行成功，会提示如下内容："></a>如果执行成功，会提示如下内容：</h2><p><img src="https://i.imgur.com/ueBDeEE.jpg" alt=""></p>
+<p>同时，生成mysql.pid和mysql.sock文件，正常！</p>
+<p><img src="https://i.imgur.com/xCmA0K1.jpg" alt=""></p>
+<p>以及查看13306端口，正常！</p>
+<p><img src="https://i.imgur.com/lQo2XsV.jpg" alt=""></p>
+<h2 id="关于配置的注意事项"><a href="#关于配置的注意事项" class="headerlink" title="关于配置的注意事项"></a>关于配置的注意事项</h2><p>（1）最基本的需要修改以下7项（关于my.cnf配置文件的具体解释可以看这里（<a href="http://blog.csdn.net/l1028386804/article/details/50635169" target="_blank" rel="external">MySQL之——MySQL5.6 my.cnf 参数说明(附上自己服务器上真实配置文件</a>)））</p>
+<ul>
+<li>在[mysqld]里修改port=13306</li>
+<li>在[mysqld]里修改sock文件位置（socket）</li>
+<li>在[mysqld]里添加MySQL基础目录（basedir）</li>
+<li>在[mysqld]里添加MySQL数据存储目录（datadir）</li>
+<li>在[mysqld]里添加MySQL日志文件（log-error）</li>
+<li>在[mysqld]里添加MySQL进程文件（pid-file）</li>
+<li>在[mysqld]里添加指定MySQL数据库所属用户（user -这里填写你所用的linux用户）</li>
+</ul>
+<p>（2）检查MySQL默认端口3306是否被占用，执行命令：netstat -apn | grep 3306如下图表明3306已经被占用，那么换一个端口，建议端口号在10000以上，比如改成13306，所以可以设置port=13306</p>
+<p><img src="https://i.imgur.com/KcpubsU.jpg" alt=""></p>
+<p>如下图为my-default.cnf原始文件（模板）</p>
+<p><img src="https://i.imgur.com/MVbfLC9.jpg" alt=""></p>
+<p>如下图为修改配置后的my.cnf文件</p>
+<p><img src="https://i.imgur.com/ZDz01xX.jpg" alt=""></p>
+<p><strong>注意：修改好my.cnf文件后，记得创建/home/wangdong/local/mysql/data和/home/wangdong/local/mysql/logs文件目录，否则在第（4）步会报错</strong></p>
+<h1 id="启动MySQL"><a href="#启动MySQL" class="headerlink" title="启动MySQL"></a>启动MySQL</h1><h2 id="每次启动MySQL都需要"><a href="#每次启动MySQL都需要" class="headerlink" title="每次启动MySQL都需要"></a>每次启动MySQL都需要</h2><pre><code>bin/mysqld_safe --defaults-file=my.cnf &amp;     #&amp;表示后台运行
+support-files/mysql.server start   #开始
+support-files/mysql.server stop   #关闭
+</code></pre><p><img src="https://i.imgur.com/QQPY7WV.jpg" alt=""></p>
+<p>可以看到MySQL正常启动了，但是写入日志时不具有/var/log/mysqld.log的权限，问题是我们之前不是设置了log-error   = /home/wangdong/local/mysql/logs/mysql_error.log吗？原因在于在linux系统中mysql配置文件的读取顺序为:/etc/my.cnf;/etc/mysql/my.cnf;/usr/local/mysql/etc/my.cnf ;~/.my.cnf </p>
+<p>我们可以使用locate查找系统已有的my.cnf配置文件，如下图，</p>
+<p><img src="https://i.imgur.com/BpkeoHW.jpg" alt=""></p>
+<p>网上搜了一下解决办法，删除系统上/etc目录下的my.cnf配置文件，但无root权限做不到的，但还好，写入日志文件无权限并不影响MySQL的正常启动和使用！</p>
+<h3 id="MySQL数据库使用"><a href="#MySQL数据库使用" class="headerlink" title="MySQL数据库使用"></a>MySQL数据库使用</h3><h4 id="大致步骤包括："><a href="#大致步骤包括：" class="headerlink" title="大致步骤包括："></a>大致步骤包括：</h4><ol>
+<li>第一次访问MySQL数据库的时候要以root进去（及-u root），且没有密码。 </li>
+<li>然后使用mysql数据库，修改root密码。 </li>
+<li>创建新的用户，以及授权 </li>
+<li>正常使用、登录mysql,root进去，且需要密码。</li>
+</ol>
+<h5 id="第一次访问MySQL数据库"><a href="#第一次访问MySQL数据库" class="headerlink" title="第一次访问MySQL数据库"></a>第一次访问MySQL数据库</h5><p>执行命令格式：bin/mysql –socket=mysql.sock -u root </p>
+<p><strong>一定要加上–socket=mysql.sock（mysql安装目录中的mysql.sock，否则提示ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var/lib/mysql/mysql.sock’ (2)）</strong></p>
+<h5 id="查看已有数据库，删除内置的test数据库"><a href="#查看已有数据库，删除内置的test数据库" class="headerlink" title="查看已有数据库，删除内置的test数据库"></a>查看已有数据库，删除内置的test数据库</h5><p>执行命令（注意命令末尾的分号不可少）：</p>
+<pre><code>show databases;
+drop database test;
+</code></pre><p><img src="https://i.imgur.com/7Bl2Jm8.jpg" alt=""></p>
+<h5 id="查看内置MySQL用户，删除匿名用户"><a href="#查看内置MySQL用户，删除匿名用户" class="headerlink" title="查看内置MySQL用户，删除匿名用户"></a>查看内置MySQL用户，删除匿名用户</h5><p>执行命令：</p>
+<pre><code>use mysql;  #选择mysql数据库
+select host, user, password from user; #从mysql数据库中的user表格中选择host, user, password三个字段
+delete from user where user = &apos;&apos;;  
+</code></pre><p><img src="https://i.imgur.com/XDLMMLx.jpg" alt=""></p>
+<h5 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h5><p>执行命令：</p>
+<pre><code>update user set password = password(&apos;rootab&apos;);
+</code></pre><p><strong>修改密码后需要先关闭mysql服务，然后重新启动my.cnf配置文件中的设置启动mysqld_safe服务和启动mysql，使新密码生效！！</strong></p>
+<p>执行命令：</p>
+<pre><code>support-files/mysql.server stop
+bin/mysqld_safe --defaults-file=my.cnf &amp;         
+support-files/mysql.server start     
+</code></pre><p><img src="https://i.imgur.com/Dn5ZSW9.jpg" alt=""></p>
+<h5 id="正常使用，使用root登陆，并且需要密码登陆"><a href="#正常使用，使用root登陆，并且需要密码登陆" class="headerlink" title="正常使用，使用root登陆，并且需要密码登陆"></a>正常使用，使用root登陆，并且需要密码登陆</h5><p>mysql -u 用户名 -h host_name -P  端口号  -p密码  (<strong>‘-P 端口号’的P大写  ‘-p密码’的p小写，且密码(password)和p之间没有空格</strong>)</p>
+<p>如bin/mysql –socket=mysql.sock -u root -h localhost -P 13306 -prootab </p>
+<p>也可以这样写：</p>
+<pre><code>bin/mysql --socket=mysql.sock -u root -h localhost -P 13306 -p 
+</code></pre><p>然后在窗口弹出Enter password:时输入密码即可</p>
+<p>（查看mysql命令的帮助: bin/mysql -I）</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://segmentfault.com/a/1190000004026950" target="_blank" rel="external">CentOS 6.4编译安装mysql 5.7</a></p>
+<p>（2）<a href="https://segmentfault.com/a/1190000010806192" target="_blank" rel="external">从源编译MySQL</a></p>
+<p>（3）<a href="http://jingyan.baidu.com/article/ad310e80cf9ce81849f49ea2.html" target="_blank" rel="external">Linux MySQL免安装及配置</a></p>
+<p>（3）<a href="https://nsaunders.wordpress.com/2011/05/18/how-to-create-a-partial-ucsc-genome-mysql-database/" target="_blank" rel="external">How to: create a partial UCSC genome MySQL database</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;无root权限，从源码编译安装MySQL数据库，及其简单使用&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="https:///AnJingwd.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https:///AnJingwd.github.io/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>R一页多图</title>
@@ -929,7 +1077,7 @@ CMD    //命令的名称和参数
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-10-03T10:15:48.156Z</updated>
+    <updated>2017-10-19T12:26:06.359Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -1112,6 +1260,10 @@ CMD    //命令的名称和参数
 <td><a href="https://github.com/" target="_blank" rel="external">GitHub</a></td>
 <td>面向开源及私有软件项目的git托管平台</td>
 </tr>
+<tr>
+<td><a href="https://www.gitbook.com/explore" target="_blank" rel="external">Gitbook</a></td>
+<td>电子书搜索下载与diy</td>
+</tr>
 </tbody>
 </table>
 <h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><table>
@@ -1207,6 +1359,10 @@ CMD    //命令的名称和参数
 <td>搜索下载免费的pdf电子书</td>
 </tr>
 <tr>
+<td><a href="https://www.slideshare.net/" target="_blank" rel="external">slideshare</a></td>
+<td>免费且高质量英文ppt下载与分享</td>
+</tr>
+<tr>
 <td><a href="http://hippter.com/" target="_blank" rel="external">Hi,PPTer</a></td>
 <td>PPT资源导航</td>
 </tr>
@@ -1217,6 +1373,18 @@ CMD    //命令的名称和参数
 <tr>
 <td><a href="http://www.freebookcentre.net/" target="_blank" rel="external">FreeBookCentre.net</a></td>
 <td>英文版电子书分类免费下载</td>
+</tr>
+<tr>
+<td><a href="https://www.gitbook.com/explore" target="_blank" rel="external">Explore · GitBook</a></td>
+<td>GitBook开源电子书搜索</td>
+</tr>
+<tr>
+<td><a href="https://www.pipipan.com/dir/1738248-7093330-60a297/" target="_blank" rel="external">PDF电子书基地</a></td>
+<td>免费下载，比较全</td>
+</tr>
+<tr>
+<td><a href="https://www.youtube.com/" target="_blank" rel="external">youtube</a></td>
+<td>可以搜索很多视频教程（可以设置加字幕和自动翻译）</td>
 </tr>
 </tbody>
 </table>
@@ -1688,6 +1856,10 @@ CMD    //命令的名称和参数
 <td><a href="http://www.wentrue.net/blog" target="_blank" rel="external">阿稳的个人博客——不周山</a></td>
 <td>博客中主要包括R语言并行技术的文章。</td>
 </tr>
+<tr>
+<td><a href="https://nsaunders.wordpress.com/" target="_blank" rel="external">WHAT YOU’RE DOING IS RATHER DESPERATE-（推荐）</a></td>
+<td>作者为澳大利亚悉尼大学的生物信息学家</td>
+</tr>
 </tbody>
 </table>
 <h1 id="网络生信课程"><a href="#网络生信课程" class="headerlink" title="网络生信课程"></a>网络生信课程</h1><table>
@@ -1805,6 +1977,10 @@ CMD    //命令的名称和参数
 <tr>
 <td><a href="http://manuals.bioinformatics.ucr.edu/home" target="_blank" rel="external">UCR(Institute for In tegrative Genome Biology)</a></td>
 <td>Manuals 包括NGS with R/Bioconductor，NGS Analysis with Galaxy and IGV， EMBOSS，Linux 等十分全面。</td>
+</tr>
+<tr>
+<td><a href="https://www.bits.vib.be/training" target="_blank" rel="external">VIB Bioinformatics Core</a></td>
+<td>从基础到实践，非常全面</td>
 </tr>
 </tbody>
 </table>
@@ -2350,7 +2526,7 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
     <link href="https:///AnJingwd.github.io/2017/08/16/linux%E8%A7%A3%E5%8E%8B%E7%BC%A9/"/>
     <id>https:///AnJingwd.github.io/2017/08/16/linux解压缩/</id>
     <published>2017-08-16T02:48:41.000Z</published>
-    <updated>2017-08-16T08:07:13.065Z</updated>
+    <updated>2017-10-13T01:02:47.602Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">总结下linux下各种压缩文件的解压方法及批量解压</blockquote>
 
@@ -2371,7 +2547,8 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
 <li>*.tar.Z 用tar -xZf 解压</li>
 <li>*.rar 用 unrar e解压</li>
 <li>*.zip 用 unzip 解压</li>
-<li><p>*.tar.xz 用</p>
+<li>*.tar.xz 用</li>
+<li><p>*.tgz 用tar zxvf 解压 </p>
 <p>$xz -d <em>*</em>.tar.xz</p>
 <p>$tar -xvf  <em>*</em>.tar</p>
 </li>
@@ -2435,7 +2612,7 @@ done
     <link href="https:///AnJingwd.github.io/2017/08/15/NGS%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8FBED-GFF-GTF%E4%B9%8B%E4%BB%8B%E7%BB%8D-%E6%AF%94%E8%BE%83-%E8%BD%AC%E6%8D%A2/"/>
     <id>https:///AnJingwd.github.io/2017/08/15/NGS数据格式BED-GFF-GTF之介绍-比较-转换/</id>
     <published>2017-08-15T11:09:02.000Z</published>
-    <updated>2017-08-15T11:09:28.033Z</updated>
+    <updated>2017-10-11T05:18:58.289Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;NGS数据格式BED/GFF/GTF之介绍，比较，转换</p>
 <a id="more"></a>
@@ -2488,7 +2665,7 @@ done
 <li>对于坐标的转换，尤其是正负链坐标间的转换更加方便。（revStart = chromSize – oneEnd，revEnd = chromeSize – zeroStart）。</li>
 </ul>
 <p>NCBI等组织采用的是和人日常习惯一致的1-based计数系统，即用数字指代核苷酸位置。但是UCSC发现使用0-based计数系统（用数字指代核苷酸间的位置）</p>
-<p>&emsp;&emsp;应用范畴：对于直接给所有用户提供直观访问服务的data portal（比如说NCBI、Ensembl、UCSC Genome Browser、mirBase）、常用的生物信息学软件（如BLAST）以及某些格式的文件（如GFF、SAM、VCF），采用的是1-based的计数方法。与之相反，UCSC的Table Browser以及它在数据库中存储的数据、BED/BAM等格式的文件，以及Chado、DAS2、dbSNP这样的data portal则采用的是0-based的计数方法。</p>
+<p>&emsp;&emsp;<strong>应用范畴：对于直接给所有用户提供直观访问服务的data portal（比如说NCBI、Ensembl、UCSC Genome Browser、mirBase）、常用的生物信息学软件（如BLAST）以及某些格式的文件（如GFF、SAM、VCF），采用的是1-based的计数方法。与之相反，UCSC的Table Browser以及它在数据库中存储的数据、BED/BAM等格式的文件，以及Chado、DAS2、dbSNP这样的data portal则采用的是0-based的计数方法。</strong></p>
 <h1 id="单个格式介绍"><a href="#单个格式介绍" class="headerlink" title="单个格式介绍"></a>单个格式介绍</h1><h2 id="BED格式"><a href="#BED格式" class="headerlink" title="BED格式"></a>BED格式</h2><p><img src="http://i.imgur.com/ImVRGpB.jpg" alt=""></p>
 <p>注意：</p>
 <ul>
@@ -2895,202 +3072,6 @@ done
     
     
       <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何写shell脚本</title>
-    <link href="https:///AnJingwd.github.io/2017/08/13/%E5%A6%82%E4%BD%95%E5%86%99shell%E8%84%9A%E6%9C%AC/"/>
-    <id>https:///AnJingwd.github.io/2017/08/13/如何写shell脚本/</id>
-    <published>2017-08-13T13:14:52.000Z</published>
-    <updated>2017-08-17T03:12:46.731Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">shell代码风格规范及技巧</blockquote>
-
-
-<a id="more"></a>
-<h1 id="shell代码风格规范及技巧"><a href="#shell代码风格规范及技巧" class="headerlink" title="shell代码风格规范及技巧"></a>shell代码风格规范及技巧</h1><h2 id="命名有标准"><a href="#命名有标准" class="headerlink" title="命名有标准"></a>命名有标准</h2><p>文件名规范，以.sh结尾，方便识别</p>
-<h2 id="编码要统一"><a href="#编码要统一" class="headerlink" title="编码要统一"></a>编码要统一</h2><p>&emsp;&emsp;在写脚本的时候尽量使用UTF-8编码，能够支持中文等一些奇奇怪怪的字符。不过虽然能写中文，但是在写注释以及打log的时候还是尽量英文，毕竟很多机器还是没有直接支持中文的，打出来可能会有乱码。</p>
-<p>&emsp;&emsp;这里还尤其需要注意一点，就是当我们是在windows下用utf-8编码来写shell脚本的时候，一定要注意这个utf-8是否是有BOM的。默认情况下windows判断utf-8格式是通过在文件开头加上三个EF BB BF字节来判断的，但是在Linux中默认是无BOM的。因此如果我们是在windows下写脚本的时候，一定要注意将编码改成Utf-8无BOM，一般用notepad++之类的编辑器都能改。否则，在Linux下运行的时候就会识别到开头的三个字符，从而报一些无法识别命令的错。</p>
-<h2 id="开头有shebang"><a href="#开头有shebang" class="headerlink" title="开头有shebang"></a>开头有shebang</h2><p>&emsp;&emsp;所谓shebang其实就是在很多脚本的第一行出现的以”#!”开头的注释，他指明了当我们没有指定解释器的时候默认的解释器，一般可能是下面这样：</p>
-<pre><code>#!/bin/bash
-</code></pre><h2 id="写出健壮Bash-Shell脚本技巧"><a href="#写出健壮Bash-Shell脚本技巧" class="headerlink" title="写出健壮Bash Shell脚本技巧"></a>写出健壮Bash Shell脚本技巧</h2><pre><code>set -x
-set -e
-set -u
-set -o pipeline
-</code></pre><p>（1）set -x会在执行每一行 shell 脚本时，把执行的内容输出来。它可以让你看到当前执行的情况，里面涉及的变量也会被替换成实际的值。</p>
-<p>（2）在”set -e”之后出现的代码，一旦出现了返回值非零，整个脚本就会立即退出。</p>
-<p>&emsp;&emsp;set -e结束程序的条件比较复杂，在man bash里面，足足用了一段话描述各种情景。大多数执行都会在出错时退出，除非 shell 命令位于以下情况：</p>
-<ul>
-<li>一个 pipeline 的非结尾部分，比如 error | ok</li>
-<li>一个组合语句的非结尾部分，比如 ok &amp;&amp; error || other</li>
-<li>一连串语句的非结尾部分，比如 error; ok</li>
-<li>位于判断语句内，包括test、if、while等等。</li>
-</ul>
-<p>（3）set -u，当你使用未初始化的变量时，让bash自动退出</p>
-<p>（4）set -o pipefail 设置了这个选项以后，包含管道命令的语句的返回值，会变成最后一个返回非零的管道命令的返回值。听起来比较绕，其实也很简单：</p>
-<p>例如test.sh</p>
-<pre><code>set -o pipefail
-ls ./a.txt |echo &quot;hi&quot; &gt;/dev/null
-echo $?
-</code></pre><p>运行test.sh，因为当前目录并不存在a.txt文件，输出：<br>ls: ./a.txt: No such file or directory<br>1  # 设置了set -o pipefail，返回从右往左第一个非零返回值，即ls的返回值1</p>
-<p>注释掉set -o pipefail 这一行，再次运行，输出：<br>ls: ./a.txt: No such file or directory<br>0  # 没有set -o pipefail，默认返回最后一个管道命令的返回值</p>
-<h2 id="工作路径"><a href="#工作路径" class="headerlink" title="工作路径"></a>工作路径</h2><p>我们会先获取当前脚本的路径，然后一这个路径为基准，去找其他的路径。</p>
-<pre><code>work_dir=$1
-reference=${work_dir}/data/reference/TAIR10_chr_all.fas
-</code></pre><h2 id="环境变量PATH"><a href="#环境变量PATH" class="headerlink" title="环境变量PATH"></a>环境变量PATH</h2><p>一般情况下我们会将一些重要的环境变量定义在开头，确保脚本中使用的命令能被bash搜索到。</p>
-<pre><code>PATH=/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
-</code></pre><h2 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h2><pre><code>chmod +x ./test.sh  #给脚本权限
-./test.sh  #执行脚本
-</code></pre><h2 id="Shell中的变量"><a href="#Shell中的变量" class="headerlink" title="Shell中的变量"></a>Shell中的变量</h2><ul>
-<li>“=”前后不能有空格</li>
-<li>定义时不用$,使用时需要$,且推荐给所有变量加上花括号{}</li>
-</ul>
-<h2 id="脚本的参数"><a href="#脚本的参数" class="headerlink" title="脚本的参数"></a>脚本的参数</h2><ul>
-<li><p>先定义具体含义，后使用</p>
-<p>  gene_file=$1</p>
-<p>  ${gene_file}</p>
-</li>
-</ul>
-<h2 id="代码有注释"><a href="#代码有注释" class="headerlink" title="代码有注释"></a>代码有注释</h2><ul>
-<li>简述某一代码段的功能</li>
-<li>各个函数前的说明注释</li>
-</ul>
-<h2 id="太长要分行"><a href="#太长要分行" class="headerlink" title="太长要分行"></a>太长要分行</h2><p>在调用某些程序的时候，参数可能会很长，这时候为了保证较好的阅读体验，我们可以用反斜杠来分行：</p>
-<pre><code>./configure \
-–prefix=/usr \
-–sbin-path=/usr/sbin/nginx \
-–conf-path=/etc/nginx/nginx.conf \
-</code></pre><h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>例如：</p>
-<pre><code>./sub_gtf.shell gene.txt Homo_sapiens.GRCh38.89.chr.gtf &gt;logfile 2&gt;&amp;1
-</code></pre><p>1  ：表示stdout标准输出，系统默认值是1，所以”&gt;logfile”等同于”1&gt;logfile”<br>2  ：表示stderr标准错误<br>&amp;  ：表示等同于的意思，2&gt;&amp;1，表示2的输出重定向等同于1</p>
-<h2 id="回显"><a href="#回显" class="headerlink" title="回显"></a>回显</h2><p>例如</p>
-<pre><code>if [[ $# != 2 ]];then
-    echo &quot;Parameter incorrect.&quot;
-    exit 1
-fi
-</code></pre><p>当执行：</p>
-<pre><code>./sub_gtf.shell gene.txt
-</code></pre><p>因为参数数目不对，输出Parameter incorrect.至屏幕</p>
-<p>当执行：</p>
-<pre><code>./sub_gtf.shell gene.txt &gt;logfile 2&gt;&amp;1
-</code></pre><p>同样参数数目不对，但输出Parameter incorrect.至日志</p>
-<h2 id="函数相关"><a href="#函数相关" class="headerlink" title="函数相关"></a>函数相关</h2><h3 id="巧用main函数-使得代码可读性更强"><a href="#巧用main函数-使得代码可读性更强" class="headerlink" title="巧用main函数,使得代码可读性更强"></a>巧用main函数,使得代码可读性更强</h3><pre><code>#!/bin/bash
-
-func1(){
-    #do sth
-}
-
-func2(){
-#do sth
-}
-
-main(){
-    func1
-    func2
-}
-main &quot;$@&quot;
-</code></pre><h3 id="考虑作用域"><a href="#考虑作用域" class="headerlink" title="考虑作用域"></a>考虑作用域</h3><p>shell中默认的变量作用域都是全局的，比如下面的脚本：</p>
-<pre><code>#!/usr/bin/env bash
-
-var=1
-func(){
-    var=2
-}
-func
-echo $var
-</code></pre><p>他的输出结果就是2而不是1，这样显然不符合我们的编码习惯，很容易造成一些问题。</p>
-<p>&emsp;&emsp;因此，相比直接使用全局变量，我们最好使用local, readonly这类的命令，其次我们可以使用declare来声明变量。这些方式都比使用全局方式定义要好。</p>
-<h4 id="local一般用于局部变量声明，多在在函数内部使用。"><a href="#local一般用于局部变量声明，多在在函数内部使用。" class="headerlink" title="local一般用于局部变量声明，多在在函数内部使用。"></a>local一般用于局部变量声明，多在在函数内部使用。</h4><p>（1）shell脚本中定义的变量是global的，其作用域从被定义的地方开始，到shell结束或被显示删除的地方为止。</p>
-<p>（2）shell函数定义的变量默认是global的，其作用域从“函数被调用时执行变量定义的地方”开始，到shell结束或被显示删除处为止。函数定义的变量可以被显示定义成local的，其作用域局限于函数内。但请注意，函数的参数是local的。</p>
-<p><strong>（3）如果同名，Shell函数定义的local变量会屏蔽脚本定义的global变量。所以在函数内声明的变量，请务必记得加上 local 限定词</strong></p>
-<p>使用举例：</p>
-<pre><code>#!/bin/bash  
-
-function Hello()  
-{  
-        local text=&quot;Hello World!!!&quot; #局部变量  
-        echo $text  
-}  
-
-Hello 
-</code></pre><h4 id="只读变量"><a href="#只读变量" class="headerlink" title="只读变量"></a>只读变量</h4><p>使用 readonly 命令可以将变量定义为只读变量，只读变量的值不能被改变。</p>
-<p>例如：</p>
-<pre><code>readonly myUrl
-myUrl=&quot;http://www.runoob.com&quot;
-</code></pre><h4 id="declare"><a href="#declare" class="headerlink" title="declare"></a>declare</h4><ul>
-<li><p>-r 只读 (declare -r var1与readonly var1作用相同)</p>
-<p>  declare -r var1</p>
-</li>
-<li><p>-i 整数  </p>
-<p>  declare -i number  </p>
-</li>
-<li><p>-a 数组</p>
-<p>  declare -a indices</p>
-</li>
-<li><p>-f 函数</p>
-<p>  declare -f</p>
-</li>
-</ul>
-<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>&emsp;&emsp;在使用函数的时候一定要注意，shell中函数的返回值只能是整数，估计是因为一般情况下一个函数的返回值通常表示这个函数的运行状态，所以一般都是0或者是１就够了，因此就设计成了这样。不过，如果非得想传递字符串，也可以通过下面变通的方法:</p>
-<pre><code>func(){
-    echo &quot;2333&quot;
-}
-res=$(func)
-echo &quot;This is from $res.&quot;
-</code></pre><p>这样，通过echo或者print之类的就可以做到传一些额外参数的目的。</p>
-<h2 id="使用新写法"><a href="#使用新写法" class="headerlink" title="使用新写法"></a>使用新写法</h2><p>&emsp;&emsp;这里的新写法不是指有多厉害，而是指我们可能更希望使用较新引入的一些语法，更多是偏向代码风格的，比如</p>
-<ul>
-<li>尽量使用func(){}来定义函数，而不是func{}</li>
-<li>尽量使用[[]]来代替[]</li>
-<li>尽量使用$()将命令的结果赋给变量，而不是反引号</li>
-<li>在复杂的场 下尽量使用printf代替echo进行回显</li>
-</ul>
-<p>事实上，这些新写法很多功能都比旧的写法要强大，用的时候就知道了。</p>
-<h2 id="其他小tip"><a href="#其他小tip" class="headerlink" title="其他小tip"></a>其他小tip</h2><ul>
-<li>读取文件时不要使用for loop而要使用while read</li>
-<li>简单的if尽量使用&amp;&amp; ||，写成单行。比如[[ x &gt; 2]] &amp;&amp; echo x</li>
-<li>利用/dev/null过滤不友好或者无用的输出信息</li>
-</ul>
-<p>例如<br>    if grep ‘pattern1’ some.file &gt; /dev/null &amp;&amp;<br>        grep ‘pattern2’ some.file &gt; dev/null<br>    then<br>        echo “found ‘pattern1’ and ‘pattern2’ in some.file”<br>    fi</p>
-<p>/dev/null ：代表空设备文件</p>
-<h2 id="安装shellcheck"><a href="#安装shellcheck" class="headerlink" title="安装shellcheck"></a>安装shellcheck</h2><p>ShellCheck, a static analysis tool for shell scripts</p>
-<p>shellcheck 除了可以提醒语法问题以外，还能检查出 shell 脚本编写常见的 bad code。</p>
-<ul>
-<li>使用方式（１）网页版：</li>
-</ul>
-<p><a href="http://www.shellcheck.net" target="_blank" rel="external">http://www.shellcheck.net</a></p>
-<p>github仓库：</p>
-<p><a href="https://github.com/koalaman/shellcheck" target="_blank" rel="external">https://github.com/koalaman/shellcheck</a></p>
-<p>下载安装：<br>    wget -q <a href="https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz" target="_blank" rel="external">https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz</a><br>    xz -d shellcheck-latest.linux.x86_64.tar.xz<br>    tar -xvf shellcheck-latest.linux.x86_64.tar<br>    echo ‘export PATH=/home/wangdong/softwares/shellcheck:$PATH’&gt;&gt;~/.bashrc<br>    source ~/.bashrc</p>
-<ul>
-<li><p>使用方式（2）终端：</p>
-<p>  shellcheck yourscipts</p>
-</li>
-</ul>
-<p><img src="http://i.imgur.com/HREX4bE.png" alt=""></p>
-<h2 id="Shell不能做什么"><a href="#Shell不能做什么" class="headerlink" title="Shell不能做什么"></a>Shell不能做什么</h2><ul>
-<li>需要精密的运算的时候</li>
-<li>需要语言效率很高的时候</li>
-<li>需要一些网络操作的时候</li>
-<li>总之Shell就是可以快速开发一个脚本简化开发流程，并不可以用来替代高级语言</li>
-</ul>
-<p>&emsp;&emsp;解决特定的问题要用合适的工具。知道什么时候用 shell，什么时候切换到另外一门更通用的脚本语言（比如ruby/python/perl），这也是编写可靠 shell 脚本的诀窍。如果你的任务可以组合常见的命令来完成，而且只涉及简单的数据，那么 shell 脚本就是适合的锤子。如果你的任务包含较为复杂的逻辑，而且数据结构复杂，那么你需要用ruby/python之类的语言编写脚本。</p>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="https://blog.mythsman.com/2017/07/23/1/" target="_blank" rel="external">https://blog.mythsman.com/2017/07/23/1/</a></p>
-<p>（2）<a href="https://github.com/koalaman/shellcheck" target="_blank" rel="external">https://github.com/koalaman/shellcheck</a></p>
-<p>（3）<a href="https://segmentfault.com/a/1190000006900083" target="_blank" rel="external">https://segmentfault.com/a/1190000006900083</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;shell代码风格规范及技巧&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="shell脚本" scheme="https:///AnJingwd.github.io/categories/shell%E8%84%9A%E6%9C%AC/"/>
-    
-    
-      <category term="shell脚本" scheme="https:///AnJingwd.github.io/tags/shell%E8%84%9A%E6%9C%AC/"/>
     
   </entry>
   
