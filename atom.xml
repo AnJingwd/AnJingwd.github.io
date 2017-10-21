@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-10-21T10:16:08.339Z</updated>
+  <updated>2017-10-21T11:56:16.571Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https:///AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/"/>
     <id>https:///AnJingwd.github.io/2017/10/21/MySQL数据库安装及入门/</id>
     <published>2017-10-21T10:06:15.000Z</published>
-    <updated>2017-10-21T10:16:08.339Z</updated>
+    <updated>2017-10-21T11:56:16.571Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">无root权限，从源码编译安装MySQL数据库，及其简单使用</blockquote>
 
@@ -144,10 +144,23 @@ support-files/mysql.server start
 <pre><code>bin/mysql --socket=mysql.sock -u root -h localhost -P 13306 -p 
 </code></pre><p>然后在窗口弹出Enter password:时输入密码即可</p>
 <p>（查看mysql命令的帮助: bin/mysql -I）</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://segmentfault.com/a/1190000004026950" target="_blank" rel="external">CentOS 6.4编译安装mysql 5.7</a></p>
+<h5 id="将bin-mysql加入环境变量"><a href="#将bin-mysql加入环境变量" class="headerlink" title="将bin/mysql加入环境变量"></a>将bin/mysql加入环境变量</h5><pre><code>echo &apos;export PATH=/home/wangdong/local/mysql/bin:$PATH&apos;&gt;&gt;~/.bashrc  
+
+source ~/.bashrc
+</code></pre><p>以后登陆直接：</p>
+<pre><code>WORKDIR=/home/wangdong/local/mysql/
+mysqld_safe --defaults-file=$WORKDIR/my.cnf &amp;
+$WORKDIR/support-files/mysql.server start
+mysql --socket=$WORKDIR/mysql.sock -u root -h localhost -P 13306 -p 
+
+Do somethings
+
+$WORKDIR/support-files/mysql.server stop
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://segmentfault.com/a/1190000004026950" target="_blank" rel="external">CentOS 6.4编译安装mysql 5.7</a></p>
 <p>（2）<a href="https://segmentfault.com/a/1190000010806192" target="_blank" rel="external">从源编译MySQL</a></p>
 <p>（3）<a href="http://jingyan.baidu.com/article/ad310e80cf9ce81849f49ea2.html" target="_blank" rel="external">Linux MySQL免安装及配置</a></p>
-<p>（3）<a href="https://nsaunders.wordpress.com/2011/05/18/how-to-create-a-partial-ucsc-genome-mysql-database/" target="_blank" rel="external">How to: create a partial UCSC genome MySQL database</a></p>
+<p>（4） <a href="http://blog.csdn.net/f229338596/article/details/72575403" target="_blank" rel="external">linux中无root权限，装mysql 于用户目录步骤</a></p>
+<p>（5）<a href="https://nsaunders.wordpress.com/2011/05/18/how-to-create-a-partial-ucsc-genome-mysql-database/" target="_blank" rel="external">How to: create a partial UCSC genome MySQL database</a></p>
 ]]></content>
     
     <summary type="html">

@@ -117,7 +117,7 @@
 <meta property="og:image" content="https://i.imgur.com/7Bl2Jm8.jpg">
 <meta property="og:image" content="https://i.imgur.com/XDLMMLx.jpg">
 <meta property="og:image" content="https://i.imgur.com/Dn5ZSW9.jpg">
-<meta property="og:updated_time" content="2017-10-21T10:16:08.339Z">
+<meta property="og:updated_time" content="2017-10-21T11:56:16.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库安装及入门">
 <meta name="twitter:description" content="无root权限，从源码编译安装MySQL数据库，及其简单使用">
@@ -519,10 +519,23 @@ support-files/mysql.server start
 <pre><code>bin/mysql --socket=mysql.sock -u root -h localhost -P 13306 -p 
 </code></pre><p>然后在窗口弹出Enter password:时输入密码即可</p>
 <p>（查看mysql命令的帮助: bin/mysql -I）</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://segmentfault.com/a/1190000004026950" target="_blank" rel="external">CentOS 6.4编译安装mysql 5.7</a></p>
+<h5 id="将bin-mysql加入环境变量"><a href="#将bin-mysql加入环境变量" class="headerlink" title="将bin/mysql加入环境变量"></a>将bin/mysql加入环境变量</h5><pre><code>echo &apos;export PATH=/home/wangdong/local/mysql/bin:$PATH&apos;&gt;&gt;~/.bashrc  
+
+source ~/.bashrc
+</code></pre><p>以后登陆直接：</p>
+<pre><code>WORKDIR=/home/wangdong/local/mysql/
+mysqld_safe --defaults-file=$WORKDIR/my.cnf &amp;
+$WORKDIR/support-files/mysql.server start
+mysql --socket=$WORKDIR/mysql.sock -u root -h localhost -P 13306 -p 
+
+Do somethings
+
+$WORKDIR/support-files/mysql.server stop
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://segmentfault.com/a/1190000004026950" target="_blank" rel="external">CentOS 6.4编译安装mysql 5.7</a></p>
 <p>（2）<a href="https://segmentfault.com/a/1190000010806192" target="_blank" rel="external">从源编译MySQL</a></p>
 <p>（3）<a href="http://jingyan.baidu.com/article/ad310e80cf9ce81849f49ea2.html" target="_blank" rel="external">Linux MySQL免安装及配置</a></p>
-<p>（3）<a href="https://nsaunders.wordpress.com/2011/05/18/how-to-create-a-partial-ucsc-genome-mysql-database/" target="_blank" rel="external">How to: create a partial UCSC genome MySQL database</a></p>
+<p>（4） <a href="http://blog.csdn.net/f229338596/article/details/72575403" target="_blank" rel="external">linux中无root权限，装mysql 于用户目录步骤</a></p>
+<p>（5）<a href="https://nsaunders.wordpress.com/2011/05/18/how-to-create-a-partial-ucsc-genome-mysql-database/" target="_blank" rel="external">How to: create a partial UCSC genome MySQL database</a></p>
 
       
     </div>
@@ -922,7 +935,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#科德十二定律"><span class="nav-number">1.</span> <span class="nav-text">科德十二定律</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Relational-Database-Management-Systems-RDBMS"><span class="nav-number">2.</span> <span class="nav-text">Relational Database Management Systems (RDBMS)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载MySQL"><span class="nav-number">3.</span> <span class="nav-text">下载MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载选项："><span class="nav-number">3.1.</span> <span class="nav-text">下载选项：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从源安装MySQL，需要安装CMake"><span class="nav-number">4.</span> <span class="nav-text">从源安装MySQL，需要安装CMake</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译安装MySQL"><span class="nav-number">5.</span> <span class="nav-text">编译安装MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如果执行成功，会提示如下内容："><span class="nav-number">5.1.</span> <span class="nav-text">如果执行成功，会提示如下内容：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于配置的注意事项"><span class="nav-number">5.2.</span> <span class="nav-text">关于配置的注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动MySQL"><span class="nav-number">6.</span> <span class="nav-text">启动MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#每次启动MySQL都需要"><span class="nav-number">6.1.</span> <span class="nav-text">每次启动MySQL都需要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL数据库使用"><span class="nav-number">6.1.1.</span> <span class="nav-text">MySQL数据库使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#大致步骤包括："><span class="nav-number">6.1.1.1.</span> <span class="nav-text">大致步骤包括：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一次访问MySQL数据库"><span class="nav-number">6.1.1.1.1.</span> <span class="nav-text">第一次访问MySQL数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看已有数据库，删除内置的test数据库"><span class="nav-number">6.1.1.1.2.</span> <span class="nav-text">查看已有数据库，删除内置的test数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看内置MySQL用户，删除匿名用户"><span class="nav-number">6.1.1.1.3.</span> <span class="nav-text">查看内置MySQL用户，删除匿名用户</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改密码"><span class="nav-number">6.1.1.1.4.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正常使用，使用root登陆，并且需要密码登陆"><span class="nav-number">6.1.1.1.5.</span> <span class="nav-text">正常使用，使用root登陆，并且需要密码登陆</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#科德十二定律"><span class="nav-number">1.</span> <span class="nav-text">科德十二定律</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Relational-Database-Management-Systems-RDBMS"><span class="nav-number">2.</span> <span class="nav-text">Relational Database Management Systems (RDBMS)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载MySQL"><span class="nav-number">3.</span> <span class="nav-text">下载MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载选项："><span class="nav-number">3.1.</span> <span class="nav-text">下载选项：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从源安装MySQL，需要安装CMake"><span class="nav-number">4.</span> <span class="nav-text">从源安装MySQL，需要安装CMake</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译安装MySQL"><span class="nav-number">5.</span> <span class="nav-text">编译安装MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如果执行成功，会提示如下内容："><span class="nav-number">5.1.</span> <span class="nav-text">如果执行成功，会提示如下内容：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于配置的注意事项"><span class="nav-number">5.2.</span> <span class="nav-text">关于配置的注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动MySQL"><span class="nav-number">6.</span> <span class="nav-text">启动MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#每次启动MySQL都需要"><span class="nav-number">6.1.</span> <span class="nav-text">每次启动MySQL都需要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL数据库使用"><span class="nav-number">6.1.1.</span> <span class="nav-text">MySQL数据库使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#大致步骤包括："><span class="nav-number">6.1.1.1.</span> <span class="nav-text">大致步骤包括：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一次访问MySQL数据库"><span class="nav-number">6.1.1.1.1.</span> <span class="nav-text">第一次访问MySQL数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看已有数据库，删除内置的test数据库"><span class="nav-number">6.1.1.1.2.</span> <span class="nav-text">查看已有数据库，删除内置的test数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看内置MySQL用户，删除匿名用户"><span class="nav-number">6.1.1.1.3.</span> <span class="nav-text">查看内置MySQL用户，删除匿名用户</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改密码"><span class="nav-number">6.1.1.1.4.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正常使用，使用root登陆，并且需要密码登陆"><span class="nav-number">6.1.1.1.5.</span> <span class="nav-text">正常使用，使用root登陆，并且需要密码登陆</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#将bin-mysql加入环境变量"><span class="nav-number">6.1.1.1.6.</span> <span class="nav-text">将bin/mysql加入环境变量</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -970,7 +983,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共42.1k字</span>
+  <span class="post-count">博客全站共42.2k字</span>
 </div>
 
 <div class="powered-by">
