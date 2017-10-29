@@ -105,7 +105,7 @@
 <meta property="og:description" content="&amp;emsp;&amp;emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/dAYlW8e.png">
-<meta property="og:updated_time" content="2017-08-14T15:11:18.191Z">
+<meta property="og:updated_time" content="2017-10-29T10:12:46.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基因组数据下载">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器">
@@ -390,13 +390,46 @@
 <p>&emsp;&emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器</p>
 <h2 id="（1）通过Ensembl基因组注释数据库下载"><a href="#（1）通过Ensembl基因组注释数据库下载" class="headerlink" title="（1）通过Ensembl基因组注释数据库下载"></a>（1）通过Ensembl基因组注释数据库下载</h2><p>网址：<a href="http://www.ensembl.org/info/data/ftp/index.html" target="_blank" rel="external">http://www.ensembl.org/info/data/ftp/index.html</a></p>
 <p><strong>下载数据前一定要仔细查看相应目录下的README文件</strong></p>
+<p>上述网页链接都是最新版的，并且会随着基因组版本的更新而更新，历史版本可以在以下网址查询并下载：<a href="http://www.gencodegenes.org/releases/" target="_blank" rel="external">http://www.gencodegenes.org/releases/</a></p>
+<p><strong>可以找到Ensembl来源的各个版本的基因注释GTF或者GFF3文件</strong></p>
+<p> 其FTP site地址为：ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human</p>
+<table>
+<thead>
+<tr>
+<th>Freeze date</th>
+<th>GENCODE release</th>
+<th>Ensembl release</th>
+<th>Release date</th>
+<th>Genome assembly version    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01.2017</td>
+<td><a href="http://www.gencodegenes.org/releases/27.html" target="_blank" rel="external">27</a></td>
+<td><a href="http://aug2017.archive.ensembl.org/" target="_blank" rel="external">90</a></td>
+<td>08.2017</td>
+<td>GRCh38.p10</td>
+</tr>
+<tr>
+<td>03.2016</td>
+<td><a href="http://www.gencodegenes.org/releases/25.html" target="_blank" rel="external">25</a></td>
+<td><a href="http://jul2016.archive.ensembl.org/" target="_blank" rel="external">85</a>, <a href="http://oct2016.archive.ensembl.org/" target="_blank" rel="external">86</a>, <a href="http://dec2016.archive.ensembl.org/" target="_blank" rel="external">87</a></td>
+<td>07.2016</td>
+<td>GRCh38.p7</td>
+</tr>
+</tbody>
+</table>
 <h3 id="基因组序列下载"><a href="#基因组序列下载" class="headerlink" title="基因组序列下载:"></a>基因组序列下载:</h3><p>&emsp;&emsp;Ensembl提供的参考基因组有2种组装形式和3种重复序列处理方式, 分别是primary, toplevel和unmasked (dna)、soft-masked (dna_sm)和masked (dna_rm)。一般选择dna.primary或dna_sm.primary。</p>
 <ul>
-<li><p>为什么选择Primary<br>Primary assembly contains all toplevel sequence regions excluding haplotypes and patches. This file is best used for performing sequence similarity searcheswhere patch and haplotype sequences would confuse analysis.</p>
-</li>
-<li><p>为什么不选择masked<br>&emsp;&emsp;Masked基因组是指所有重复区和低复杂区被N代替的基因组序列，比对时就不会有reads比对到这些区域。一般不推荐用masked的基因组，因为它造成了信息的丢失，由此带来的一个问题是uniquely比对到masked基因组上的reads实际上可能不是unique的。而且masked基因组还会带来比对错误，使得在允许错配的情况下，本来来自重复区的reads比对到基因组的其它位置。 另外检测重复区和低复杂区的软件不可能是完美的，这就造成遮盖住的重复序列和低复杂区并不一定是100%准确和敏感的。</p>
-</li>
+<li>为什么选择Primary</li>
 </ul>
+<p>Primary assembly contains all toplevel sequence regions excluding haplotypes and patches. This file is best used for performing sequence similarity searcheswhere patch and haplotype sequences would confuse analysis.</p>
+<p><strong>网页版的也为Primary Assembly版本的，例如Homo sapiens chromosome 7, GRCh38.p7 Primary Assembly</strong></p>
+<ul>
+<li>为什么不选择masked</li>
+</ul>
+<p>&emsp;&emsp;Masked基因组是指所有重复区和低复杂区被N代替的基因组序列，比对时就不会有reads比对到这些区域。一般不推荐用masked的基因组，因为它造成了信息的丢失，由此带来的一个问题是uniquely比对到masked基因组上的reads实际上可能不是unique的。而且masked基因组还会带来比对错误，使得在允许错配的情况下，本来来自重复区的reads比对到基因组的其它位置。 另外检测重复区和低复杂区的软件不可能是完美的，这就造成遮盖住的重复序列和低复杂区并不一定是100%准确和敏感的。</p>
 <p>&emsp;&emsp;soft-masked基因组是指把所有重复区和低复杂区的序列用小写字母标出的基因组，由于主要的比对软件，比如BWA、bowtie2等都忽略这些soft-mask，直接把小写字母当做大写字母比对，所以使用soft-masked基因组的比对效果和使用unmasked基因组的比对效果是相同的。</p>
 <p>(1)文件命名规则： \<species>.\<assembly>.\<sequence type="">.\<id type="">.\<id>.fa.gz</id></id></sequence></assembly></species></p>
 <p>species:物种的名称</p>
@@ -740,7 +773,7 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -751,7 +784,7 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -762,7 +795,7 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1041,7 +1074,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共42.2k字</span>
+  <span class="post-count">博客全站共43.9k字</span>
 </div>
 
 <div class="powered-by">

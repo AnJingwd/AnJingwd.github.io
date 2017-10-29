@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="NGS实验," />
 
 
 
@@ -96,18 +96,26 @@
 
 
 
-<meta name="description" content="如何优雅的输出python字典&amp;emsp;&amp;emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。">
-<meta name="keywords" content="python">
+<meta name="description" content="使用bedtools进行捕获测序引物的筛选并计算覆盖度">
+<meta name="keywords" content="NGS实验">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何优雅的输出python字典">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/05/如何优雅的输出python字典/index.html">
+<meta property="og:title" content="设计及挑选捕获测序探针，并计算覆盖度">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/10/29/设计及挑选捕获测序探针，并计算覆盖度/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="如何优雅的输出python字典&amp;emsp;&amp;emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。">
+<meta property="og:description" content="使用bedtools进行捕获测序引物的筛选并计算覆盖度">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-19T11:10:45.364Z">
+<meta property="og:image" content="https://i.imgur.com/K0bANVd.jpg">
+<meta property="og:image" content="https://i.imgur.com/XmfwHoG.jpg">
+<meta property="og:image" content="https://i.imgur.com/QQnWpwO.jpg">
+<meta property="og:image" content="https://i.imgur.com/flbem5B.jpg">
+<meta property="og:image" content="https://i.imgur.com/pjVTs2f.jpg">
+<meta property="og:image" content="https://i.imgur.com/6C2Lk1p.jpg">
+<meta property="og:image" content="https://i.imgur.com/kAcaOMe.jpg">
+<meta property="og:updated_time" content="2017-10-29T12:16:46.472Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何优雅的输出python字典">
-<meta name="twitter:description" content="如何优雅的输出python字典&amp;emsp;&amp;emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。">
+<meta name="twitter:title" content="设计及挑选捕获测序探针，并计算覆盖度">
+<meta name="twitter:description" content="使用bedtools进行捕获测序引物的筛选并计算覆盖度">
+<meta name="twitter:image" content="https://i.imgur.com/K0bANVd.jpg">
 
 
 
@@ -140,7 +148,7 @@
 
 
 
-  <title>如何优雅的输出python字典 | 安静-不安静的博客</title>
+  <title>设计及挑选捕获测序探针，并计算覆盖度 | 安静-不安静的博客</title>
   
 
 
@@ -294,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/05/如何优雅的输出python字典/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/29/设计及挑选捕获测序探针，并计算覆盖度/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -311,7 +319,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">如何优雅的输出python字典</h2>
+          <h2 class="post-title" itemprop="name headline">设计及挑选捕获测序探针，并计算覆盖度</h2>
         
 
         <div class="post-meta">
@@ -323,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-05T00:19:15+08:00">
-                2017-08-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T12:17:18+08:00">
+                2017-10-29
               </time>
             
 
@@ -346,8 +354,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="https:/AnJingwd.github.io/categories/NGS实验/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS实验</span>
                   </a>
                 </span>
 
@@ -383,15 +391,62 @@
       
 
       
-        <h1 id="如何优雅的输出python字典"><a href="#如何优雅的输出python字典" class="headerlink" title="如何优雅的输出python字典"></a>如何优雅的输出python字典</h1><p>&emsp;&emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
+        <blockquote class="blockquote-center">使用bedtools进行捕获测序引物的筛选并计算覆盖度</blockquote>
+
 <a id="more"></a>
-<p>&emsp;&emsp;python中的字典是一种清晰的数据结构，生信学习过程中有很多统计的事儿。比如有10个样本，Variant calling 分析后需要根据每个样本，统计每种变异类型并绘图。此时就可以用到python的嵌套字典或者嵌套列表。</p>
-<h2 id="（1）一层字典"><a href="#（1）一层字典" class="headerlink" title="（1）一层字典"></a>（1）一层字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gene_symbol_ENGS=&#123;<span class="string">'PKHD1'</span>: <span class="string">'ENSG00000170927'</span>, <span class="string">'ATP6V0A4'</span>: <span class="string">'ENSG00000105929'</span>, <span class="string">'TSC2'</span>: <span class="string">'ENSG00000103197'</span>&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line">frame1 = Series(gene_symbol_ENGS)</div><div class="line">print(frame1)</div><div class="line"></div><div class="line"></div><div class="line">    ATP6V0A4    ENSG00000105929</div><div class="line">    PKHD1       ENSG00000170927</div><div class="line">    TSC2        ENSG00000103197</div><div class="line">    dtype: object</div></pre></td></tr></table></figure>
-<h2 id="（2）嵌套字典"><a href="#（2）嵌套字典" class="headerlink" title="（2）嵌套字典"></a>（2）嵌套字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sample_mutation_count = &#123;<span class="string">'PDC668_vs_PDC668A2'</span>: &#123;<span class="string">'ncRNA_intronic'</span>: <span class="number">32</span>, <span class="string">'UTR5'</span>: <span class="number">6</span>, <span class="string">'ncRNA_splicing'</span>: <span class="number">0</span>, <span class="string">'exonic;splicing'</span>: <span class="number">0</span>, <span class="string">'UTR3'</span>: <span class="number">6</span>, <span class="string">'upstream;downstream'</span>: <span class="number">1</span>, <span class="string">'downstream'</span>: <span class="number">6</span>, <span class="string">'exonic'</span>: <span class="number">155</span>, <span class="string">'upstream'</span>: <span class="number">2</span>, <span class="string">'splicing'</span>: <span class="number">1</span>, <span class="string">'ncRNA_exonic'</span>: <span class="number">19</span>, <span class="string">'intergenic'</span>: <span class="number">162</span>, <span class="string">'intronic'</span>: <span class="number">162</span>&#125;, <span class="string">'PDC3748_vs_PDC3748B4'</span>: &#123;<span class="string">'ncRNA_intronic'</span>: <span class="number">21</span>, <span class="string">'UTR5'</span>: <span class="number">6</span>, <span class="string">'ncRNA_splicing'</span>: <span class="number">0</span>, <span class="string">'exonic;splicing'</span>: <span class="number">0</span>, <span class="string">'UTR3'</span>: <span class="number">2</span>, <span class="string">'upstream;downstream'</span>: <span class="number">0</span>, <span class="string">'downstream'</span>: <span class="number">2</span>, <span class="string">'exonic'</span>: <span class="number">123</span>, <span class="string">'upstream'</span>: <span class="number">8</span>, <span class="string">'splicing'</span>: <span class="number">2</span>, <span class="string">'ncRNA_exonic'</span>: <span class="number">15</span>, <span class="string">'intergenic'</span>: <span class="number">122</span>, <span class="string">'intronic'</span>: <span class="number">130</span>&#125;&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> DataFrame</div><div class="line">frame2 = DataFrame(sample_mutation_count)</div><div class="line">print(frame2)</div><div class="line"></div><div class="line"></div><div class="line">                         PDC3748_vs_PDC3748B4  PDC668_vs_PDC668A2</div><div class="line">    UTR3                                    <span class="number">2</span>                   <span class="number">6</span></div><div class="line">    UTR5                                    <span class="number">6</span>                   <span class="number">6</span></div><div class="line">    downstream                              <span class="number">2</span>                   <span class="number">6</span></div><div class="line">    exonic                                <span class="number">123</span>                 <span class="number">155</span></div><div class="line">    exonic;splicing                         <span class="number">0</span>                   <span class="number">0</span></div><div class="line">    intergenic                            <span class="number">122</span>                 <span class="number">162</span></div><div class="line">    intronic                              <span class="number">130</span>                 <span class="number">162</span></div><div class="line">    ncRNA_exonic                           <span class="number">15</span>                  <span class="number">19</span></div><div class="line">    ncRNA_intronic                         <span class="number">21</span>                  <span class="number">32</span></div><div class="line">    ncRNA_splicing                          <span class="number">0</span>                   <span class="number">0</span></div><div class="line">    splicing                                <span class="number">2</span>                   <span class="number">1</span></div><div class="line">    upstream                                <span class="number">8</span>                   <span class="number">2</span></div><div class="line">    upstream;downstream                     <span class="number">0</span>                   <span class="number">1</span></div><div class="line">```    </div><div class="line"></div><div class="line">那么问题来了，当每个样本的行不完全一样时如何解决呢，</div><div class="line"></div><div class="line"></div><div class="line">```python</div><div class="line">len_exon = &#123;<span class="string">'ENSG00000008710'</span>: &#123;<span class="string">'ENST00000570193'</span>: <span class="number">591</span>, <span class="string">'ENST00000483558'</span>: <span class="number">573</span>&#125;,<span class="string">'ENSG00000089597'</span>: &#123;<span class="string">'ENST00000526210'</span>: <span class="number">529</span>, <span class="string">'ENST00000526392'</span>: <span class="number">255</span>, <span class="string">'ENST00000532402'</span>: <span class="number">3695</span>&#125;&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series</div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> len_exon.items():</div><div class="line">    print(key)</div><div class="line">    print(Series(value))</div><div class="line">    </div><div class="line"></div><div class="line">    ENSG00000008710</div><div class="line">    ENST00000483558    <span class="number">573</span></div><div class="line">    ENST00000570193    <span class="number">591</span></div><div class="line">    dtype: int64</div><div class="line">    ENSG00000089597</div><div class="line">    ENST00000526210     <span class="number">529</span></div><div class="line">    ENST00000526392     <span class="number">255</span></div><div class="line">    ENST00000532402    <span class="number">3695</span></div><div class="line">    dtype: int64</div><div class="line">```    </div><div class="line"></div><div class="line"><span class="comment">## 当然，也可以使用pprint输出字典结构，看着还行，但不利于后续R绘图</span></div><div class="line"></div><div class="line"></div><div class="line">```python</div><div class="line"><span class="keyword">import</span> pprint</div><div class="line">resultFile = open(<span class="string">'result.py'</span>, <span class="string">'w'</span>)</div><div class="line">resultFile.write(pprint.pformat(len_exon))</div><div class="line">resultFile.close()</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="string">'ENSG00000008710'</span>: &#123;<span class="string">'ENST00000483558'</span>: <span class="number">573</span>, <span class="string">'ENST00000570193'</span>: <span class="number">591</span>&#125;,</div><div class="line"> <span class="string">'ENSG00000089597'</span>: &#123;<span class="string">'ENST00000526210'</span>: <span class="number">529</span>,</div><div class="line">                     <span class="string">'ENST00000526392'</span>: <span class="number">255</span>,</div><div class="line">                     <span class="string">'ENST00000532402'</span>: <span class="number">3695</span>&#125;&#125;</div></pre></td></tr></table></figure>
+<h1 id="基因CDS区域捕获测序，引物设计"><a href="#基因CDS区域捕获测序，引物设计" class="headerlink" title="基因CDS区域捕获测序，引物设计"></a>基因CDS区域捕获测序，引物设计</h1><h2 id="确定目标基因的某一转录本的CDS区域坐标，整理成bed文件"><a href="#确定目标基因的某一转录本的CDS区域坐标，整理成bed文件" class="headerlink" title="确定目标基因的某一转录本的CDS区域坐标，整理成bed文件"></a>确定目标基因的某一转录本的CDS区域坐标，整理成bed文件</h2><p>最简单的方法是从gff文件中，根据转录本蛋白ID,直接grep抽取出CDS区间的chr, satrt, end</p>
+<pre><code>wget http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation/GRCh38_latest/refseq_identifiers/GRCh38_latest_genomic.gff.gz
+ungz GRCh38_latest_genomic.gff.gz
+mv GRCh38_latest_genomic.gff GRCh38.p10_ncbi.gff
+
+#get genes positions by gene symbol list in gene.txt
+gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; GRCh38.p10_ncbi.gff &gt;&gt;gene_result.txt;done
+</code></pre><p><img src="https://i.imgur.com/K0bANVd.jpg" alt=""></p>
+<pre><code>#get cds regions positions by proteins list in proteins_id.txt
+protein_id=($(cat protein_id.txt));for protein_id in ${protein_id[@]}; do grep &quot;${protein_id}&quot; GRCh38.p10_ncbi.gff &gt;&gt;cds_result.txt;done
+</code></pre><p><img src="https://i.imgur.com/XmfwHoG.jpg" alt=""></p>
+<pre><code>#get gene chrom locations or transfor gene symbol ID to essenble ID by gene symbol list in gene.txt
+wget http://ftp.ncbi.nih.gov/refseq/H_sapiens/Homo_sapiens.gene_info.gz
+head -n 1 Homo_sapiens.gene_info &gt; chr_result.txt
+gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; Homo_sapiens.gene_info &gt;&gt;chr_result.txt;done
+</code></pre><p><img src="https://i.imgur.com/QQnWpwO.jpg" alt=""></p>
+<p>整理成bed文件</p>
+<p><img src="https://i.imgur.com/flbem5B.jpg" alt=""></p>
+<p>安捷伦的<a href="http://www.genomics.agilent.com/zh/Custom-Design-Tools/eArray/?cid=AG-PT-122&amp;tabId=AG-PR-1047&amp;pageId=1456&amp;crumbAction=push&amp;navAction=pop" target="_blank" rel="external">eArray</a>可以涉及，输入只需要目标区域的bed文件即可！</p>
+<ul>
+<li><a href="https://earray.chem.agilent.com/cghanalytics/index.html" target="_blank" rel="external">Agilent Genomic Workbench Downloads</a> </li>
+<li><p><a href="https://earray.chem.agilent.com/cghanalytics/InstData/7.0/G3800-90046_Installation.pdf" target="_blank" rel="external">Installation Guide</a></p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>（1）NCBI 的FTP站点中GRCh37和GRCh38的最新版基因组注释数据在该路径下：<a href="http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation" target="_blank" rel="external">http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation</a></p>
+</li>
+<li><p>Last updated: April 19, 2017</p>
+</li>
+<li><strong>assembly name: GRCh38.p10</strong>（第十版）</li>
+</ul>
+<p>（2）对于做湿实验的同学可能通过浏览器的方式查询CDS区域坐标，但存在一个问题（<strong>首先浏览器上的版本是GRCh38.p7（第七版）</strong>）！</p>
+<p>NCBI —&gt;选择gene数据库—&gt;输入gene symbol —-&gt;点选gene symbol—-&gt;genebank—-&gt;找到目标转录本</p>
+<p><img src="https://i.imgur.com/pjVTs2f.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/6C2Lk1p.jpg" alt=""></p>
+<p>&emsp;&emsp;可以看到CDS由一段一段的区域join形成的，但这是相对坐标，如何转换成基因组的绝对坐标呢？或许你会用基因的起始和结束位置进行加减，但尝试比较了下，发现坐标偏差很大（0.2M）。首先是<strong>版本的问题？</strong>, 其次可能NCBI的坐标系统中CDS区域的位置，使用在基因区间的基础上加减的做法不对。将<a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000007.14?report=genbank&amp;from=140719331&amp;to=140924764&amp;strand=true" target="_blank" rel="external">上述链接</a>最下方的FASTA序列的第62-199区间摘取出来，在UCSC中<a href="http://genome.ucsc.edu/cgi-bin/hgBlat?command=start" target="_blank" rel="external">BLAT</a>发现其结果是与从GRCh38.p10_ncbi.gff文件摘取出来的坐标一致的，<strong>所以用基因的起始和结束位置进行加减的方法是不正确的。</strong></p>
+<h1 id="引物筛选"><a href="#引物筛选" class="headerlink" title="引物筛选"></a>引物筛选</h1><ul>
+<li><p>A组引物扩增区域（Amplicon_Stop-Amplicon_Start）长度范围为126-274nt，平均值为238nt</p>
+</li>
+<li><p>B组引物扩增区域（Amplicon_Stop-Amplicon_Start）长度范围为124-174nt,平均值为158nt</p>
+</li>
+<li><p>A,B两组引物都是针对同一目标区域设计的捕获探针，但是参数不同，导致扩增长度不同，覆盖度不同</p>
+</li>
+</ul>
+<p>&emsp;&emsp;所以A组引物（primer20）偏长，B组引物（primer24）偏短，现在需要将A组引物中扩增区域大于250nt的目标区域用 B组引物来扩增，实现长度互补和综合。</p>
+<p>方法：使用bedtools工具即可！</p>
+<ol>
+<li>将targeted.bed与primer20.bed查看覆盖情况，将没有引物覆盖的，或者覆盖的引物扩增长度大于250nt的<strong>目标区域的bed区间</strong>抽取出来整理为target_region_of_primer20_up250.bed</li>
+<li>将target_region_of_primer20_up250.bed与primer24.bed查看覆盖情况，将覆盖上的引物挑出，<strong>此时原则是目标区域即使有某条引物能全部覆盖，但为了测序数据更加准确，一个位置保证2-3个引物覆盖为好</strong></li>
+<li>将A组合B组引物保留的部分引物合并，同时整理出A,B两组引物都没有覆盖的目标区域。</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#step1</span></div><div class="line">bedtools intersect -a target.bed -b primer20.bed -wao &gt; primer20_result.txt </div><div class="line">awk <span class="string">'$6-$5&gt;250 &#123;print $1,$2,$3&#125;'</span> primer20_result.txt &gt; target_region_of_primer20_up250.bed</div><div class="line"></div><div class="line"><span class="comment">#step2</span></div><div class="line">bedtools intersect -a target_region_of_primer20_up250.bed -b primer24.bed -wao &gt; primer24_result.txt</div><div class="line"></div><div class="line"><span class="comment">#step3</span></div><div class="line">primer20=($(cat primer20_reserved.txt));<span class="keyword">for</span> primer20 <span class="keyword">in</span> <span class="variable">$&#123;primer20[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer20&#125;</span>"</span> primer20_original.txt &gt;&gt;primer20_reserved_result.txt;<span class="keyword">done</span></div><div class="line"></div><div class="line">primer24=($(cat primer24_reserved.txt));<span class="keyword">for</span> primer24 <span class="keyword">in</span> <span class="variable">$&#123;primer24[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer24&#125;</span>"</span> primer24_original.txt &gt;&gt;primer24_reserved_result.txt;<span class="keyword">done</span></div></pre></td></tr></table></figure>
+<h1 id="根据targete-bed和primer20-bed计算覆盖度"><a href="#根据targete-bed和primer20-bed计算覆盖度" class="headerlink" title="根据targete.bed和primer20.bed计算覆盖度"></a>根据targete.bed和primer20.bed计算覆盖度</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(1)检验bed区间是否有重叠</div><div class="line"></div><div class="line">length_sum1=`awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span> target.bed |tail -n 1`</div><div class="line">length_sum2=`sort -k1,1 -k2,2n target.bed |bedtools merge -i | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span>|tail -n 1·</div><div class="line"></div><div class="line"><span class="comment">#如果length_sum1 &gt;  length_sum2,有重叠；如果length_sum1 = length_sum2,五重叠</span></div><div class="line"><span class="comment">#所以target.bed无重叠，primer20和primer24有重叠</span></div><div class="line"></div><div class="line">(2)先用bedtools工具得到primer20的merge后的bed文件，然后与target.bed查看覆盖碱基数，并求和</div><div class="line">sort -k1,1 -k2,2n primer20.bed|bedtools merge -i &gt; primer20_merge.bed</div><div class="line">length_sum3=`bedtools intersect -a target.bed -b primer20_merge.bed -wao | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$7&#125;&#123;print x&#125;'</span> |tail -n 1`  </div><div class="line"></div><div class="line">coverage = length_sum2/length_sum1*100</div></pre></td></tr></table></figure>
+<h2 id="bedtools-merge功能图示（需要先排序，否则报错）"><a href="#bedtools-merge功能图示（需要先排序，否则报错）" class="headerlink" title="bedtools merge功能图示（需要先排序，否则报错）"></a>bedtools merge功能图示（需要先排序，否则报错）</h2><p><img src="https://i.imgur.com/kAcaOMe.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html" target="_blank" rel="external">染色体位置overlap的计算–bedtools应用</a></p>
+
       
     </div>
     
@@ -416,7 +471,7 @@
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+            <a href="https:/AnJingwd.github.io/tags/NGS实验/" rel="tag"><i class="fa fa-tag"></i> NGS实验</a>
           
         </div>
       
@@ -429,8 +484,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/08/03/picard/" rel="next" title="picard">
-                <i class="fa fa-chevron-left"></i> picard
+              <a href="https:/AnJingwd.github.io/2017/10/21/MySQL数据库安装及入门/" rel="next" title="MySQL数据库安装及入门">
+                <i class="fa fa-chevron-left"></i> MySQL数据库安装及入门
               </a>
             
           </div>
@@ -438,10 +493,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="https:/AnJingwd.github.io/2017/08/06/SRA格式数据加速下载打包解决/" rel="prev" title="SRA数据加速下载打包解决">
-                SRA数据加速下载打包解决 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -794,7 +845,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何优雅的输出python字典"><span class="nav-number">1.</span> <span class="nav-text">如何优雅的输出python字典</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）一层字典"><span class="nav-number">1.1.</span> <span class="nav-text">（1）一层字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）嵌套字典"><span class="nav-number">1.2.</span> <span class="nav-text">（2）嵌套字典</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基因CDS区域捕获测序，引物设计"><span class="nav-number">1.</span> <span class="nav-text">基因CDS区域捕获测序，引物设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#确定目标基因的某一转录本的CDS区域坐标，整理成bed文件"><span class="nav-number">1.1.</span> <span class="nav-text">确定目标基因的某一转录本的CDS区域坐标，整理成bed文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">1.2.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引物筛选"><span class="nav-number">2.</span> <span class="nav-text">引物筛选</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据targete-bed和primer20-bed计算覆盖度"><span class="nav-number">3.</span> <span class="nav-text">根据targete.bed和primer20.bed计算覆盖度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bedtools-merge功能图示（需要先排序，否则报错）"><span class="nav-number">3.1.</span> <span class="nav-text">bedtools merge功能图示（需要先排序，否则报错）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

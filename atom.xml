@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-10-21T11:56:16.571Z</updated>
+  <updated>2017-10-29T12:16:46.472Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -16,11 +16,88 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>设计及挑选捕获测序探针，并计算覆盖度</title>
+    <link href="https:///AnJingwd.github.io/2017/10/29/%E8%AE%BE%E8%AE%A1%E5%8F%8A%E6%8C%91%E9%80%89%E6%8D%95%E8%8E%B7%E6%B5%8B%E5%BA%8F%E6%8E%A2%E9%92%88%EF%BC%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E8%A6%86%E7%9B%96%E5%BA%A6/"/>
+    <id>https:///AnJingwd.github.io/2017/10/29/设计及挑选捕获测序探针，并计算覆盖度/</id>
+    <published>2017-10-29T04:17:18.000Z</published>
+    <updated>2017-10-29T12:16:46.472Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">使用bedtools进行捕获测序引物的筛选并计算覆盖度</blockquote>
+
+<a id="more"></a>
+<h1 id="基因CDS区域捕获测序，引物设计"><a href="#基因CDS区域捕获测序，引物设计" class="headerlink" title="基因CDS区域捕获测序，引物设计"></a>基因CDS区域捕获测序，引物设计</h1><h2 id="确定目标基因的某一转录本的CDS区域坐标，整理成bed文件"><a href="#确定目标基因的某一转录本的CDS区域坐标，整理成bed文件" class="headerlink" title="确定目标基因的某一转录本的CDS区域坐标，整理成bed文件"></a>确定目标基因的某一转录本的CDS区域坐标，整理成bed文件</h2><p>最简单的方法是从gff文件中，根据转录本蛋白ID,直接grep抽取出CDS区间的chr, satrt, end</p>
+<pre><code>wget http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation/GRCh38_latest/refseq_identifiers/GRCh38_latest_genomic.gff.gz
+ungz GRCh38_latest_genomic.gff.gz
+mv GRCh38_latest_genomic.gff GRCh38.p10_ncbi.gff
+
+#get genes positions by gene symbol list in gene.txt
+gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; GRCh38.p10_ncbi.gff &gt;&gt;gene_result.txt;done
+</code></pre><p><img src="https://i.imgur.com/K0bANVd.jpg" alt=""></p>
+<pre><code>#get cds regions positions by proteins list in proteins_id.txt
+protein_id=($(cat protein_id.txt));for protein_id in ${protein_id[@]}; do grep &quot;${protein_id}&quot; GRCh38.p10_ncbi.gff &gt;&gt;cds_result.txt;done
+</code></pre><p><img src="https://i.imgur.com/XmfwHoG.jpg" alt=""></p>
+<pre><code>#get gene chrom locations or transfor gene symbol ID to essenble ID by gene symbol list in gene.txt
+wget http://ftp.ncbi.nih.gov/refseq/H_sapiens/Homo_sapiens.gene_info.gz
+head -n 1 Homo_sapiens.gene_info &gt; chr_result.txt
+gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; Homo_sapiens.gene_info &gt;&gt;chr_result.txt;done
+</code></pre><p><img src="https://i.imgur.com/QQnWpwO.jpg" alt=""></p>
+<p>整理成bed文件</p>
+<p><img src="https://i.imgur.com/flbem5B.jpg" alt=""></p>
+<p>安捷伦的<a href="http://www.genomics.agilent.com/zh/Custom-Design-Tools/eArray/?cid=AG-PT-122&amp;tabId=AG-PR-1047&amp;pageId=1456&amp;crumbAction=push&amp;navAction=pop" target="_blank" rel="external">eArray</a>可以涉及，输入只需要目标区域的bed文件即可！</p>
+<ul>
+<li><a href="https://earray.chem.agilent.com/cghanalytics/index.html" target="_blank" rel="external">Agilent Genomic Workbench Downloads</a> </li>
+<li><p><a href="https://earray.chem.agilent.com/cghanalytics/InstData/7.0/G3800-90046_Installation.pdf" target="_blank" rel="external">Installation Guide</a></p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>（1）NCBI 的FTP站点中GRCh37和GRCh38的最新版基因组注释数据在该路径下：<a href="http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation" target="_blank" rel="external">http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation</a></p>
+</li>
+<li><p>Last updated: April 19, 2017</p>
+</li>
+<li><strong>assembly name: GRCh38.p10</strong>（第十版）</li>
+</ul>
+<p>（2）对于做湿实验的同学可能通过浏览器的方式查询CDS区域坐标，但存在一个问题（<strong>首先浏览器上的版本是GRCh38.p7（第七版）</strong>）！</p>
+<p>NCBI —&gt;选择gene数据库—&gt;输入gene symbol —-&gt;点选gene symbol—-&gt;genebank—-&gt;找到目标转录本</p>
+<p><img src="https://i.imgur.com/pjVTs2f.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/6C2Lk1p.jpg" alt=""></p>
+<p>&emsp;&emsp;可以看到CDS由一段一段的区域join形成的，但这是相对坐标，如何转换成基因组的绝对坐标呢？或许你会用基因的起始和结束位置进行加减，但尝试比较了下，发现坐标偏差很大（0.2M）。首先是<strong>版本的问题？</strong>, 其次可能NCBI的坐标系统中CDS区域的位置，使用在基因区间的基础上加减的做法不对。将<a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000007.14?report=genbank&amp;from=140719331&amp;to=140924764&amp;strand=true" target="_blank" rel="external">上述链接</a>最下方的FASTA序列的第62-199区间摘取出来，在UCSC中<a href="http://genome.ucsc.edu/cgi-bin/hgBlat?command=start" target="_blank" rel="external">BLAT</a>发现其结果是与从GRCh38.p10_ncbi.gff文件摘取出来的坐标一致的，<strong>所以用基因的起始和结束位置进行加减的方法是不正确的。</strong></p>
+<h1 id="引物筛选"><a href="#引物筛选" class="headerlink" title="引物筛选"></a>引物筛选</h1><ul>
+<li><p>A组引物扩增区域（Amplicon_Stop-Amplicon_Start）长度范围为126-274nt，平均值为238nt</p>
+</li>
+<li><p>B组引物扩增区域（Amplicon_Stop-Amplicon_Start）长度范围为124-174nt,平均值为158nt</p>
+</li>
+<li><p>A,B两组引物都是针对同一目标区域设计的捕获探针，但是参数不同，导致扩增长度不同，覆盖度不同</p>
+</li>
+</ul>
+<p>&emsp;&emsp;所以A组引物（primer20）偏长，B组引物（primer24）偏短，现在需要将A组引物中扩增区域大于250nt的目标区域用 B组引物来扩增，实现长度互补和综合。</p>
+<p>方法：使用bedtools工具即可！</p>
+<ol>
+<li>将targeted.bed与primer20.bed查看覆盖情况，将没有引物覆盖的，或者覆盖的引物扩增长度大于250nt的<strong>目标区域的bed区间</strong>抽取出来整理为target_region_of_primer20_up250.bed</li>
+<li>将target_region_of_primer20_up250.bed与primer24.bed查看覆盖情况，将覆盖上的引物挑出，<strong>此时原则是目标区域即使有某条引物能全部覆盖，但为了测序数据更加准确，一个位置保证2-3个引物覆盖为好</strong></li>
+<li>将A组合B组引物保留的部分引物合并，同时整理出A,B两组引物都没有覆盖的目标区域。</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#step1</span></div><div class="line">bedtools intersect -a target.bed -b primer20.bed -wao &gt; primer20_result.txt </div><div class="line">awk <span class="string">'$6-$5&gt;250 &#123;print $1,$2,$3&#125;'</span> primer20_result.txt &gt; target_region_of_primer20_up250.bed</div><div class="line"></div><div class="line"><span class="comment">#step2</span></div><div class="line">bedtools intersect -a target_region_of_primer20_up250.bed -b primer24.bed -wao &gt; primer24_result.txt</div><div class="line"></div><div class="line"><span class="comment">#step3</span></div><div class="line">primer20=($(cat primer20_reserved.txt));<span class="keyword">for</span> primer20 <span class="keyword">in</span> <span class="variable">$&#123;primer20[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer20&#125;</span>"</span> primer20_original.txt &gt;&gt;primer20_reserved_result.txt;<span class="keyword">done</span></div><div class="line"></div><div class="line">primer24=($(cat primer24_reserved.txt));<span class="keyword">for</span> primer24 <span class="keyword">in</span> <span class="variable">$&#123;primer24[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer24&#125;</span>"</span> primer24_original.txt &gt;&gt;primer24_reserved_result.txt;<span class="keyword">done</span></div></pre></td></tr></table></figure>
+<h1 id="根据targete-bed和primer20-bed计算覆盖度"><a href="#根据targete-bed和primer20-bed计算覆盖度" class="headerlink" title="根据targete.bed和primer20.bed计算覆盖度"></a>根据targete.bed和primer20.bed计算覆盖度</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(1)检验bed区间是否有重叠</div><div class="line"></div><div class="line">length_sum1=`awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span> target.bed |tail -n 1`</div><div class="line">length_sum2=`sort -k1,1 -k2,2n target.bed |bedtools merge -i | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span>|tail -n 1·</div><div class="line"></div><div class="line"><span class="comment">#如果length_sum1 &gt;  length_sum2,有重叠；如果length_sum1 = length_sum2,五重叠</span></div><div class="line"><span class="comment">#所以target.bed无重叠，primer20和primer24有重叠</span></div><div class="line"></div><div class="line">(2)先用bedtools工具得到primer20的merge后的bed文件，然后与target.bed查看覆盖碱基数，并求和</div><div class="line">sort -k1,1 -k2,2n primer20.bed|bedtools merge -i &gt; primer20_merge.bed</div><div class="line">length_sum3=`bedtools intersect -a target.bed -b primer20_merge.bed -wao | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$7&#125;&#123;print x&#125;'</span> |tail -n 1`  </div><div class="line"></div><div class="line">coverage = length_sum2/length_sum1*100</div></pre></td></tr></table></figure>
+<h2 id="bedtools-merge功能图示（需要先排序，否则报错）"><a href="#bedtools-merge功能图示（需要先排序，否则报错）" class="headerlink" title="bedtools merge功能图示（需要先排序，否则报错）"></a>bedtools merge功能图示（需要先排序，否则报错）</h2><p><img src="https://i.imgur.com/kAcaOMe.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html" target="_blank" rel="external">染色体位置overlap的计算–bedtools应用</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;使用bedtools进行捕获测序引物的筛选并计算覆盖度&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="NGS实验" scheme="https:///AnJingwd.github.io/categories/NGS%E5%AE%9E%E9%AA%8C/"/>
+    
+    
+      <category term="NGS实验" scheme="https:///AnJingwd.github.io/tags/NGS%E5%AE%9E%E9%AA%8C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MySQL数据库安装及入门</title>
     <link href="https:///AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/"/>
     <id>https:///AnJingwd.github.io/2017/10/21/MySQL数据库安装及入门/</id>
     <published>2017-10-21T10:06:15.000Z</published>
-    <updated>2017-10-21T11:56:16.571Z</updated>
+    <updated>2017-10-21T12:01:32.705Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">无root权限，从源码编译安装MySQL数据库，及其简单使用</blockquote>
 
@@ -104,7 +181,7 @@ gmake install
 <p><img src="https://i.imgur.com/MVbfLC9.jpg" alt=""></p>
 <p>如下图为修改配置后的my.cnf文件</p>
 <p><img src="https://i.imgur.com/ZDz01xX.jpg" alt=""></p>
-<p><strong>注意：修改好my.cnf文件后，记得创建/home/wangdong/local/mysql/data和/home/wangdong/local/mysql/logs文件目录，否则在第（4）步会报错</strong></p>
+<p><strong>注意：修改好my.cnf文件后，记得创建/home/wangdong/local/mysql/data和/home/wangdong/local/mysql/logs文件目录，否则在第（5）步会报错</strong></p>
 <h1 id="启动MySQL"><a href="#启动MySQL" class="headerlink" title="启动MySQL"></a>启动MySQL</h1><h2 id="每次启动MySQL都需要"><a href="#每次启动MySQL都需要" class="headerlink" title="每次启动MySQL都需要"></a>每次启动MySQL都需要</h2><pre><code>bin/mysqld_safe --defaults-file=my.cnf &amp;     #&amp;表示后台运行
 support-files/mysql.server start   #开始
 support-files/mysql.server stop   #关闭
@@ -1090,7 +1167,7 @@ CMD    //命令的名称和参数
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-10-19T12:26:06.359Z</updated>
+    <updated>2017-10-29T04:36:49.699Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -1357,6 +1434,10 @@ CMD    //命令的名称和参数
 <td><a href="http://www.tagxedo.com/" target="_blank" rel="external">Tagxedo</a></td>
 <td>词云（不是所有浏览器都可以）</td>
 </tr>
+<tr>
+<td><a href="http://www.pigai.org/" target="_blank" rel="external">批改网</a></td>
+<td>英语作文在线免费批改（还阔以）</td>
+</tr>
 </tbody>
 </table>
 <h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><table>
@@ -1448,6 +1529,10 @@ CMD    //命令的名称和参数
 <tr>
 <td><a href="http://www.duokan.com/" target="_blank" rel="external">多看</a></td>
 <td>自带取词及字典功能，并且笔记可以直接导入印象笔记（推荐）</td>
+</tr>
+<tr>
+<td><a href="https://laod.cn/tools/pan-download.html" target="_blank" rel="external">Pan Download</a></td>
+<td>百度网盘不限速下载软件</td>
 </tr>
 </tbody>
 </table>
@@ -2017,7 +2102,7 @@ CMD    //命令的名称和参数
     <link href="https:///AnJingwd.github.io/2017/08/19/bedtools%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E8%AF%A6%E8%A7%A3/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/bedtools使用教程详解/</id>
     <published>2017-08-19T06:40:56.000Z</published>
-    <updated>2017-08-19T06:44:00.546Z</updated>
+    <updated>2017-10-29T12:10:28.348Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。</p>
 <p>&emsp;&emsp;例如,bedtools可以进行取intersect（交集）, merge（并集）, count（计数）, complement（补集），以及用来对广泛使用的基因组文件格式，例如BAM, BED, GFF/GTF, VCF等进行基因组区间的转换。单个的工具设计的目的是应对简单的任务，复杂的分析能通过组合多个bedtools工具操作实现。同时，该工具允许控制输出结果的呈现形式。最初的bedtools版本支持单独的6列BED文件。但是，如今增加了对序列比对BAM文件的支持。以及GFF文件的特征，BED文件。以及VCF文件。这些工具是相当快速的，并且即使是大的数据集也可以在数秒内完成任务。</p>
@@ -2053,7 +2138,7 @@ CMD    //命令的名称和参数
 </tr>
 <tr>
 <td>bedtobam</td>
-<td>Convert intervals to BAM records.</td>
+<td>Convert intervals to BAM records.<em>**</em></td>
 </tr>
 <tr>
 <td>closest</td>
@@ -2539,7 +2624,7 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
     <link href="https:///AnJingwd.github.io/2017/08/16/linux%E8%A7%A3%E5%8E%8B%E7%BC%A9/"/>
     <id>https:///AnJingwd.github.io/2017/08/16/linux解压缩/</id>
     <published>2017-08-16T02:48:41.000Z</published>
-    <updated>2017-10-13T01:02:47.602Z</updated>
+    <updated>2017-10-22T08:58:34.607Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">总结下linux下各种压缩文件的解压方法及批量解压</blockquote>
 
@@ -2560,10 +2645,22 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
 <li>*.tar.Z 用tar -xZf 解压</li>
 <li>*.rar 用 unrar e解压</li>
 <li>*.zip 用 unzip 解压</li>
-<li>*.tar.xz 用</li>
-<li><p>*.tgz 用tar zxvf 解压 </p>
+<li><p>*.tar.xz 用</p>
 <p>$xz -d <em>*</em>.tar.xz</p>
 <p>$tar -xvf  <em>*</em>.tar</p>
+</li>
+<li><p>*.tgz 用tar zxvf 解压</p>
+</li>
+</ol>
+<h1 id="单个压缩文件"><a href="#单个压缩文件" class="headerlink" title="单个压缩文件"></a>单个压缩文件</h1><ol>
+<li>gzip File 压缩为.gz文件</li>
+<li>bzip2 File 压缩为.bz2文件</li>
+<li>zip [打包后的文件名] [打包的目录路径] 压缩为.zip文件</li>
+<li>压缩一个或多个文件/文件夹<br>格式：tar -options compressed_file files_to_be_compressed<ol>
+<li>tar –zcvf 运行 + gzip 产生 a .tar.gz 文件</li>
+<li>tar –jcvf 运行 tar + bzip2 产生 a .tbz2 文件</li>
+<li>tar –cvf p运行 tar 产生 a .tar 文件</li>
+</ol>
 </li>
 </ol>
 <h1 id="批量解压"><a href="#批量解压" class="headerlink" title="批量解压"></a>批量解压</h1><ol>
@@ -2914,177 +3011,6 @@ done
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux神器之grep,awk操作gtf文件</title>
-    <link href="https:///AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/"/>
-    <id>https:///AnJingwd.github.io/2017/08/14/Linux神器之grep,awk操作gtf文件/</id>
-    <published>2017-08-14T02:21:26.000Z</published>
-    <updated>2017-09-15T03:28:19.724Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">Linux神器之grep,awk操作gtf文件</blockquote>
-
-<a id="more"></a>
-<h1 id="Linux神器之grep-awk操作gtf文件"><a href="#Linux神器之grep-awk操作gtf文件" class="headerlink" title="Linux神器之grep,awk操作gtf文件"></a>Linux神器之grep,awk操作gtf文件</h1><h2 id="过滤-开头注释行"><a href="#过滤-开头注释行" class="headerlink" title="过滤#开头注释行"></a>过滤#开头注释行</h2><pre><code>grep -v ^# Homo_sapiens.GRCh38.89.chr.gtf |head -5
-</code></pre><p>补充：</p>
-<ul>
-<li><p>-v:反向选择</p>
-</li>
-<li><p>过滤空行：grep -v ‘^$’  filename</p>
-</li>
-<li><p>过滤空行和以#开头的行:  grep -vE ‘^#|^$’ filename</p>
-</li>
-<li><p>-E表示“或”的关系。</p>
-</li>
-</ul>
-<h2 id="提取并计数有多少类feature"><a href="#提取并计数有多少类feature" class="headerlink" title="提取并计数有多少类feature"></a>提取并计数有多少类feature</h2><pre><code>grep -v ^# Homo_sapiens.GRCh38.89.chr.gtf |awk &apos;{print $3}&apos;| sort | uniq -c
-</code></pre><p>结果：</p>
-<pre><code>710166 CDS
-1193694 exon
-143497 five_prime_utr
-58174 gene
-119 Selenocysteine
-83231 start_codon
-74952 stop_codon
-136436 three_prime_utr
-199167 transcript
-</code></pre><p>（第一列为数目，第二列为features）</p>
-<h2 id="筛选出特定行"><a href="#筛选出特定行" class="headerlink" title="筛选出特定行"></a>筛选出特定行</h2><p>第一列为染色体1-22加X,Y的行</p>
-<pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/&apos; Homo_sapiens.GRCh38.89.chr.gtf | tail -5
-</code></pre><p>第三列为”gene”的行</p>
-<pre><code>awk &apos;$3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38.89.chr.gtf |head -5
-</code></pre><p>查看每条染色体多少个基因</p>
-<pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/&apos; Homo_sapiens.GRCh38.89.chr.gtf | awk &apos;$3==&quot;gene&quot;&apos;| awk &apos;{print $1}&apos;| sort | uniq -c
-</code></pre><p>结果：</p>
-<pre><code>5224 1
-2208 10
-3248 11
-2952 12
-1312 13
-2214 14
-2155 15
-2509 16
-3018 17
-1174 18
-2951 19
-3971 2
-1391 20
-837 21
-1339 22
-3019 3
-2504 4
-2869 5
-2860 6
-2884 7
-2367 8
-2246 9
-2366 X
-519 Y
-</code></pre><p>（第一列为数目，第二列为染色体号）</p>
-<h2 id="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"><a href="#先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序" class="headerlink" title="先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"></a>先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序</h2><pre><code>awk &apos;$1 ~ /[0-9]/ || $1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos;Homo_sapiens.GRCh38.89.chr.gtf|sort -t $&apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
-</code></pre><p>(因为根据asc码排序，所以X,Y会排在1-22之前)</p>
-<pre><code>awk &apos;$1 ~ /[0-9]/ &amp;&amp; $3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38.89.chr.gtf | sort -t $&apos;\t&apos; -k1,1n -k4,4n &gt;result_gene_sort.txt
-
-awk &apos;$1 ~ /[X|Y]/ &amp;&amp; $3==&quot;gene&quot;&apos; Homo_sapiens.GRCh38.89.chr.gtf |sort -t $&apos;\t&apos; -k1,1 -k4,4n &gt;&gt;result_gene_sort.txt
-</code></pre><p>sort 参数：</p>
-<ul>
-<li>-k  选择以哪个区间进行排序</li>
-<li>-n   依照数值的大小排序</li>
-</ul>
-<p>sort多字段的排序:</p>
-<ul>
-<li>-t $’\t’ 指定使用tab键分列</li>
-<li>-k1,1n   指定以第一列按照数字（asc码）从大到小排序</li>
-<li>-k4,4n   指定以第一列按照数字（asc码）从大到小排序</li>
-</ul>
-<p><strong>注意：</strong></p>
-<p>（1）对于tab分隔符，还是得稍微注意一下。比如下面的命令：</p>
-<pre><code>$sort -t &apos;\t&apos; -k3,3n a.txt &gt;a.sort
-</code></pre><p>sort: multi-character tab `\t’  (出错）</p>
-<p>这个不能按照tab分隔符进行字段排序，换成如下方式就可以了</p>
-<pre><code>$ sort  -t $&apos;\t&apos; -k3,3n a.txt&gt;a.sort
-</code></pre><p><strong>（2）linux sort 命令能不能识别 科学计数法？例如 9.98E-9。使用-n得不到想要的结果，但可以使用-g 替代，它会将数字还原成一版格式再进行比较。</strong></p>
-<h2 id="计算所有CDS的累积长度，其他类似"><a href="#计算所有CDS的累积长度，其他类似" class="headerlink" title="计算所有CDS的累积长度，其他类似"></a>计算所有CDS的累积长度，其他类似</h2><pre><code>cat Homo_sapiens.GRCh38.89.chr.gtf | awk &apos;$3 ==&quot;CDS&quot; { len=$5-$4 + 1; size += len; print &quot;Size:&quot;, size } &apos;
-</code></pre><p>（结果输出刷屏了！！加上个 |tail -1）</p>
-<h2 id="计算1号染色体cds的平均长度"><a href="#计算1号染色体cds的平均长度" class="headerlink" title="计算1号染色体cds的平均长度"></a>计算1号染色体cds的平均长度</h2><pre><code>awk &apos;BEGIN  {s = 0;line = 0 } ;$3 ==&quot;CDS&quot; &amp;&amp; $1 ==&quot;1&quot; { s += ($5 - $4);line += 1}; END {print &quot;mean=&quot; s/line}&apos; Homo_sapiens.GRCh38.89.chr.gtf
-</code></pre><p>补充：</p>
-<p>awk的BEGIN和END</p>
-<p>通常使用BEGIN来显示变量和预置（初始化）变量，使用END来输出最终结果。</p>
-<p>总结一下awk基本结构为 : </p>
-<ul>
-<li><p>BEGIN{BEGIN操作,在输入文件之前执行} ;</p>
-</li>
-<li><p>{文件行处理块,对来自输入文件datafile的每一行都要执行一遍} ;</p>
-</li>
-<li><p>END{END操作,输入文件关闭后awk退出之前执行}</p>
-</li>
-</ul>
-<h2 id="从gtf文件中分离提取基因名字"><a href="#从gtf文件中分离提取基因名字" class="headerlink" title="从gtf文件中分离提取基因名字"></a>从gtf文件中分离提取基因名字</h2><pre><code>$3 == &quot;gene&quot; {
-# 通过 ; 分离提取第9列
-
-split($9, x, &quot;;&quot;)
-# 基因名字是第一个元素。
-
-# 去除基因名字旁边的双引号
-
-name = x[1]
-
-# 由于 &quot; 是一个特殊字符，我们必须写成 \&quot;;*反斜杠\表示转义符。
-
-gsub(&quot;\&quot;&quot;, &quot;&quot;, name)
-
-# 打印特征类型、基因名字以及大小。
-
-print name, $5 - $4 + 1}
-</code></pre><p>最后，我们可以写成下边这条命令:</p>
-<pre><code>cat result_gene_sort.txt |awk &apos;$3 == &quot;gene&quot;{split($10,x,&quot;;&quot;);name = x[1];gsub(&quot;\&quot;&quot;, &quot;&quot;, name);print name,$5-$4+1}&apos;|head -5
-</code></pre><h2 id="根据基因名列表提取gtf文件"><a href="#根据基因名列表提取gtf文件" class="headerlink" title="根据基因名列表提取gtf文件"></a>根据基因名列表提取gtf文件</h2><p>（1）shell脚本</p>
-<pre><code>./sub_gtf.sh gene.txt Homo_sapiens.GRCh38.89.chr.gtf &gt;logfile 2&gt;&amp;1
-
-#!/bin/bash
-
-set -u
-set -e
-set -o pipefail
-
-if [[ $# != 2 ]];then
-     echo &quot;Parameter incorrect.&quot;
-    exit 1
-fi
-
-gene_file=$1
-gtf_file=$2
-
-
-gene=($(cat ${gene_file}))
-for gene in ${gene[@]}; do
-   grep &quot;\&quot;${gene}\&quot;&quot; ${gtf_file} &gt;&gt;result.txt
-done
-</code></pre><p>（2）单行命令</p>
-<pre><code>gene=($(cat gene.txt));for gene in ${gene[@]}; do grep &quot;\&quot;${gene}\&quot;&quot; Homo_sapiens.GRCh38.89.chr.gtf &gt;&gt;result.txt;done
-</code></pre><h1 id="补充基本语法："><a href="#补充基本语法：" class="headerlink" title="补充基本语法："></a>补充基本语法：</h1><p>&emsp;&emsp;awk擅长处理表格形式的数据。它逐行从文本中读取数据，将整行数据（record)定义为$0,然后根据指定的分隔符，将各列数据（record)分别定义为$1,$2,$3，然后使用如下结构处理数据：</p>
-<pre><code>pattern1 {action1};pattern2 {action2};....
-</code></pre><p>注意：</p>
-<ul>
-<li>如果没有定义pattern,则直接执行action；</li>
-<li>如果没有提供action,则直接输出满足pattern的内容</li>
-</ul>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="http://www.jianshu.com/p/7af624409dcd" target="_blank" rel="external">http://www.jianshu.com/p/7af624409dcd</a></p>
-<p>（2）<a href="https://mp.weixin.qq.com/s/NZCt2SR3WmCnqpb2FGcbsQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/NZCt2SR3WmCnqpb2FGcbsQ</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;Linux神器之grep,awk操作gtf文件&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
     
   </entry>
   

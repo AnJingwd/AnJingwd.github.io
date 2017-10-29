@@ -99,15 +99,18 @@
 <meta name="description" content="&amp;emsp;&amp;emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="添加PATH环境变量">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/02/添加PATH环境变量/index.html">
+<meta property="og:title" content="添加PATH环境变量及设置别名">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/02/添加PATH环境变量及设置别名/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-06T11:14:17.552Z">
+<meta property="og:image" content="https://i.imgur.com/jwb4cGD.jpg">
+<meta property="og:image" content="https://i.imgur.com/4CwzTE8.jpg">
+<meta property="og:updated_time" content="2017-10-26T11:56:38.843Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="添加PATH环境变量">
+<meta name="twitter:title" content="添加PATH环境变量及设置别名">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;Linux下想让某个命令可以全局使用，可以有两种方法来实现，具体请看下文！">
+<meta name="twitter:image" content="https://i.imgur.com/jwb4cGD.jpg">
 
 
 
@@ -140,7 +143,7 @@
 
 
 
-  <title>添加PATH环境变量 | 安静-不安静的博客</title>
+  <title>添加PATH环境变量及设置别名 | 安静-不安静的博客</title>
   
 
 
@@ -294,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/02/添加PATH环境变量/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/02/添加PATH环境变量及设置别名/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -311,7 +314,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">添加PATH环境变量</h2>
+          <h2 class="post-title" itemprop="name headline">添加PATH环境变量及设置别名</h2>
         
 
         <div class="post-meta">
@@ -406,20 +409,51 @@ Esc
 <p>（1）i 进入vim编辑模式</p>
 <p>（2）Esc退出vim编辑模式</p>
 <p>（3）:x保存修改并退出（需要在英文输入法状态下）</p>
-<p>##方法二. 将目录添加到~/.bashrc 文件，比如~/bin，然后创建软连接（相当于win下的快捷方式）</p>
-<p>#创建~/bin目录</p>
+<h2 id="方法二-将目录添加到-bashrc-文件，比如-bin，然后创建软连接（相当于win下的快捷方式）"><a href="#方法二-将目录添加到-bashrc-文件，比如-bin，然后创建软连接（相当于win下的快捷方式）" class="headerlink" title="方法二. 将目录添加到~/.bashrc 文件，比如~/bin，然后创建软连接（相当于win下的快捷方式）"></a>方法二. 将目录添加到~/.bashrc 文件，比如~/bin，然后创建软连接（相当于win下的快捷方式）</h2><p>#创建~/bin目录</p>
 <pre><code>mkdir -p ~/bin
 </code></pre><p>#将~/bin目录添加到PATH</p>
 <pre><code>echo &apos;export PATH=~/bin:$PATH&apos;&gt;&gt;~/.bashrc
 </code></pre><p>#使修改生效<br>    source ~/.bashrc</p>
 <p>#在/bin下生成fastqc软连接</p>
 <pre><code>ln -s ~/src/fastQC/fastqc ~/bin/fastqc
-</code></pre><p><strong>注意：</strong></p>
+</code></pre><h1 id="设置命令别名"><a href="#设置命令别名" class="headerlink" title="设置命令别名"></a>设置命令别名</h1><p>alias ll=’ls -l’  #在当前的Shell生效</p>
+<p>echo “alias ll=’ls -l’” &gt;&gt;~/.bashrc #永久生效<br>source ~/.bashrc</p>
+<p>其他常用别名举例：</p>
+<p>（1）alias ll=’ls -l –color=tty’ #按系统预定义的颜色区分不同的文件类型</p>
+<p><img src="https://i.imgur.com/jwb4cGD.jpg" alt=""></p>
+<p>（2）alias la=’ls -a’  #显示隐藏文件</p>
+<p>（3）alias rmall=’rm -rf’  #显示隐藏文件</p>
+<p>（4）alias less=’less -S’  #根据屏幕大小显示,且列对齐</p>
+<p>（5）解压命令</p>
+<ol>
+<li>*.tar 用 tar -xvf 解压，echo “alias untar=’tar -xvf’” &gt;&gt;~/.bashrc</li>
+<li>*.gz 用 gzip -d或者gunzip 解压, echo “alias ungz=’gunzip’” &gt;&gt;~/.bashrc</li>
+<li><em>.tar.gz和</em>.tgz 用 tar -xzf 解压, echo “alias untargz=’tar -xzf’” &gt;&gt;~/.bashrc</li>
+<li>*.bz2 用 bzip2 -d或者用bunzip2 解压, echo “alias unbz2=’bunzip2’” &gt;&gt;~/.bashrc</li>
+<li>*.tar.bz2用tar -xjf 解压, echo “alias untarbz2z=’tar -xjf’” &gt;&gt;~/.bashrc</li>
+<li>*.Z 用 uncompress 解压, echo “alias unZ=’uncompress’” &gt;&gt;~/.bashrc</li>
+<li>*.tar.Z 用tar -xZf 解压, echo “alias untarZ=’tar -xZf’” &gt;&gt;~/.bashrc</li>
+<li>*.rar 用 unrar e解压, echo “alias unrar=’unrar e’” &gt;&gt;~/.bashrc</li>
+<li>*.zip 用 unzip 解压</li>
+<li><p>*.tar.xz 用   </p>
+<p>$xz -d <em>*</em>.tar.xz</p>
+<p>$tar -xvf  <em>*</em>.tar</p>
+</li>
+</ol>
+<ol>
+<li>*.tgz 用tar zxvf 解压, echo “alias untgz=’tar zxvf’” &gt;&gt;~/.bashrc</li>
+</ol>
+<p>(5)列出目前所有的别名设置。</p>
+<p>alias    或    alias -p</p>
+<p><strong>注意：</strong></p>
 <p>（1）mkdir -p  表示创建多级目录</p>
 <p>（2）ln是link的缩写，-s选项创建软连接</p>
 <p>创建软连接格式： ln/link SOURCE [TARGET]</p>
 <p>创建软链接： ln/link -s SOURCE [TARGET]</p>
 <p>软连接不占用磁盘空间，硬链接相当于拷贝，占磁盘空间</p>
+<p>如下图，-&gt;带有这个符号的则为软连接,initrd.img为软连接的文件名，而-&gt;后面跟着的boot/initrd.img-3.13.0-32-geberic则为这个软连接文件的真实路径</p>
+<p><img src="https://i.imgur.com/4CwzTE8.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://codingstandards.iteye.com/blog/1145318" target="_blank" rel="external">我使用过的Linux命令之alias - 设置命令的别名，让 Linux 命令更简练</a></p>
 
       
     </div>
@@ -570,7 +604,7 @@ Esc
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -581,7 +615,7 @@ Esc
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -592,7 +626,7 @@ Esc
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -823,7 +857,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#想让某个命令可以全局使用，可以有两种方法来实现："><span class="nav-number">1.</span> <span class="nav-text">想让某个命令可以全局使用，可以有两种方法来实现：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一-在命令行将路径添加到-bashrc文件"><span class="nav-number">1.1.</span> <span class="nav-text">方法一.在命令行将路径添加到 .bashrc文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#想让某个命令可以全局使用，可以有两种方法来实现："><span class="nav-number">1.</span> <span class="nav-text">想让某个命令可以全局使用，可以有两种方法来实现：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一-在命令行将路径添加到-bashrc文件"><span class="nav-number">1.1.</span> <span class="nav-text">方法一.在命令行将路径添加到 .bashrc文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二-将目录添加到-bashrc-文件，比如-bin，然后创建软连接（相当于win下的快捷方式）"><span class="nav-number">1.2.</span> <span class="nav-text">方法二. 将目录添加到~/.bashrc 文件，比如~/bin，然后创建软连接（相当于win下的快捷方式）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置命令别名"><span class="nav-number">2.</span> <span class="nav-text">设置命令别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -871,7 +905,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共42.2k字</span>
+  <span class="post-count">博客全站共43.9k字</span>
 </div>
 
 <div class="powered-by">
