@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-10-29T12:16:46.472Z</updated>
+  <updated>2017-11-24T01:57:49.784Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -16,11 +16,141 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>linux shell中读写mysql数据库</title>
+    <link href="https:///AnJingwd.github.io/2017/11/23/linux-shell%E4%B8%AD%E8%AF%BB%E5%86%99mysql%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>https:///AnJingwd.github.io/2017/11/23/linux-shell中读写mysql数据库/</id>
+    <published>2017-11-23T08:03:44.000Z</published>
+    <updated>2017-11-24T01:57:49.784Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;主要介绍win下和linux下连接重用生信数据库，操作数据库中表，以及根据自己的需要下载公共数据，创建mysql数据库。</p>
+<blockquote class="blockquote-center">linux shell中读写mysql数据库</blockquote>
+
+<a id="more"></a>
+<h1 id="mysql学习资料"><a href="#mysql学习资料" class="headerlink" title="mysql学习资料"></a>mysql学习资料</h1><p>（1）<a href="http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html" target="_blank" rel="external">21分钟 MySQL 入门教程</a></p>
+<p>（2）MySQL 5.7 Reference Manual: 具体技巧例如<a href="https://dev.mysql.com/doc/refman/5.7/en/counting-rows.html" target="_blank" rel="external"> Counting Rows</a>；<a href="https://dev.mysql.com/doc/refman/5.7/en/pattern-matching.html" target="_blank" rel="external">Pattern Matching</a></p>
+<h1 id="mysql连接生信主要公共数据库"><a href="#mysql连接生信主要公共数据库" class="headerlink" title="mysql连接生信主要公共数据库"></a>mysql连接生信主要公共数据库</h1><h2 id="linux下"><a href="#linux下" class="headerlink" title="linux下"></a>linux下</h2><h3 id="格式："><a href="#格式：" class="headerlink" title="格式："></a>格式：</h3><p>mysql -h[host] -u[user] -p[password] -P[port] [database-name]</p>
+<p>例如：</p>
+<table>
+<thead>
+<tr>
+<th>Server</th>
+<th>User</th>
+<th>Password</th>
+<th>Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mysql-db.1000genomes.org</td>
+<td>anonymous</td>
+<td>-</td>
+<td>4272</td>
+</tr>
+</tbody>
+</table>
+<p>（1）<a href="http://www.internationalgenome.org/public-ensembl-mysql-instance" target="_blank" rel="external">1000 Genomes: since June 16, 2011</a></p>
+<pre><code>mysql -h mysql-db.1000genomes.org -u anonymous -P 4272  -A
+</code></pre><p>（2）<a href="http://genome.ucsc.edu/goldenPath/help/mysql.html" target="_blank" rel="external">UCSC Downloading Data using MySQL</a></p>
+<pre><code>mysql -h genome-mysql.soe.ucsc.edu -u genome -P 3306 -A
+</code></pre><p>或者</p>
+<pre><code>mysql -h genome-euro-mysql.soe.ucsc.edu -u genome -P 3306 -A
+</code></pre><p>注意：必须加上端口号-P 3306，按照官网的方法会报错：</p>
+<p>ERROR 2003 (HY000): Can’t connect to MySQL server on ‘genome-mysql.soe.ucsc.edu’ (111)</p>
+<p>（3）<a href="http://uswest.ensembl.org/info/data/mysql.html" target="_blank" rel="external">The Ensembl public MySQL Servers</a></p>
+<pre><code>mysql -h ensembldb.ensembl.org -u anonymous -P  5306  -A
+</code></pre><p>（4）<a href="http://www.geneontology.org/GO.database.shtml#mirrors" target="_blank" rel="external">GO</a></p>
+<pre><code>mysql -h mysql-amigo.ebi.ac.uk -u go_select -P 4085 -pamigo -A
+</code></pre><p>The -A flag is optional but is recommended for speed.</p>
+<p>其他数据库：参见<a href="What Are The Public Sql Servers For Bioinformatics ?">网址</a></p>
+<h3 id="mysql直接读ucsc数据库数据"><a href="#mysql直接读ucsc数据库数据" class="headerlink" title="mysql直接读ucsc数据库数据"></a>mysql直接读ucsc数据库数据</h3><pre><code>mysql --user=genome --host=genome-mysql.cse.ucsc.edu -P 3306 -A -D hg19 -e &apos;select * from refGene where name=&quot;NM_000038&quot;&apos; | less 
+</code></pre><p>显示：</p>
+<pre><code>bin     name    chrom   strand  txStart txEnd   cdsStart        cdsEnd  exonCount       exonStarts      exonEnds        score   name2
+1440    NM_000038       chr5    +       112073555       112181936       112090587       112179823       16      112073555,112090569,112
+</code></pre><h2 id="windows下"><a href="#windows下" class="headerlink" title="windows下"></a>windows下</h2><p>使用Navicat，其好处在于更加方便直观</p>
+<p>如图：<br><img src="https://i.imgur.com/aBUXPU1.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/HSXg4DS.jpg" alt=""></p>
+<p>查询某一张表，查看具体内容，导出，筛选等等，很方便</p>
+<p><img src="https://i.imgur.com/AC1sYil.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/wRlokSh.jpg" alt=""></p>
+<p>mac下可以使用<a href="http://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/" target="_blank" rel="external">Sequel Pro</a></p>
+<h1 id="python连接mysql数据库"><a href="#python连接mysql数据库" class="headerlink" title="python连接mysql数据库"></a>python连接mysql数据库</h1><pre><code>pip2.7 install MySQL-python
+</code></pre><p><img src="https://i.imgur.com/dNbsWE5.jpg" alt=""></p>
+<p>解决：libmysqlclient.so.18库在mysql安装目录的lib下，设置LD_LIBRARY_PATH环境变量即可</p>
+<pre><code>export LD_LIBRARY_PATH=&quot;$DYLD_LIBRARY_PATH:/home/wangdong/local/mysql/lib&quot;
+</code></pre><p><img src="https://i.imgur.com/SNb5BTT.jpg" alt=""></p>
+<p>ps： 网上一般的做法是在mysql/lib目录下找到libmysqlclient.so.18，设置软链接到usr/lib或者usr/lib64，但这两个目录都需要管理员权限的。</p>
+<h2 id="应用例子"><a href="#应用例子" class="headerlink" title="应用例子"></a>应用例子</h2><p>利用mysql客户端查询UCSC数据库，获取geneSymbol名的bed信息</p>
+<p><a href="https://github.com/Wy2160640/py_scripts/blob/master/geneInfo.py" target="_blank" rel="external">脚本geneInfo.py</a></p>
+<p><img src="https://i.imgur.com/SjGGLYp.jpg" alt=""></p>
+<h1 id="根据需要创建UCSC-genome-MySQL-database"><a href="#根据需要创建UCSC-genome-MySQL-database" class="headerlink" title="根据需要创建UCSC genome MySQL database"></a>根据需要创建UCSC genome MySQL database</h1><p>数据来源：UCSC <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/" target="_blank" rel="external">hg19</a>  <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/" target="_blank" rel="external">hg38</a></p>
+<p><img src="https://i.imgur.com/sO4nvEc.jpg" alt=""></p>
+<p>需要两种文件：</p>
+<ul>
+<li>（1）*sql是一种数据库脚本语言，是一种对关系数据库中的数据进行定义和操作的句法，为大多数关系数据库管理系统所支持的工业标准。可以用文本编辑器打开并查看</li>
+<li>（2)数据文件。txt文件</li>
+</ul>
+<p>例子：.sql文件</p>
+<p><img src="https://i.imgur.com/nqtMqQV.jpg" alt=""></p>
+<p>使用shell脚本自动完成</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create database</span></div><div class="line">mysql -u root -prootab -e <span class="string">'create database hg19'</span></div><div class="line"><span class="comment"># obtain table schema</span></div><div class="line"><span class="built_in">cd</span> /home/wangdong/<span class="built_in">local</span>/mysql/data</div><div class="line">wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/ensGene.sql</div><div class="line"><span class="comment"># create table</span></div><div class="line">mysql -u root -prootab hg19 &lt; ensGene.sql</div><div class="line"><span class="comment"># obtain and import table data</span></div><div class="line">wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/ensGene.txt.gz</div><div class="line">gunzip ensGene.txt.gz</div><div class="line">mysqlimport -u root -prootab --<span class="built_in">local</span> hg19 ensGene.txt</div></pre></td></tr></table></figure>
+<p><strong>注意：数据需要下载到/home/wangdong/local/mysql/data，位置可以在配置文件(my.cnf)中修改</strong></p>
+<p><img src="https://i.imgur.com/ThdiQ2j.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/I809HBj.jpg" alt=""></p>
+<h2 id="补充LD-LIBRARY-PATH环境变量"><a href="#补充LD-LIBRARY-PATH环境变量" class="headerlink" title="补充LD_LIBRARY_PATH环境变量"></a>补充LD_LIBRARY_PATH环境变量</h2><p>LIBRARY_PATH和LD_LIBRARY_PATH是Linux下的两个环境变量，二者的含义和作用分别如下：</p>
+<p><strong>LIBRARY_PATH环境变量用于在程序编译期间查找动态链接库时指定查找共享库的路径，</strong> 例如，指定gcc编译需要用到的动态链接库的目录。设置方法如下（其中，LIBDIR1和LIBDIR2为两个库目录）：</p>
+<p>export LIBRARY_PATH=LIBDIR1:LIBDIR2:$LIBRARY_PATH</p>
+<p><strong>LD_LIBRARY_PATH环境变量用于在程序加载运行期间查找动态链接库时指定除了系统默认路径之外的其他路径，</strong> 注意，LD_LIBRARY_PATH中指定的路径会在系统默认路径之前进行查找。设置方法如下（其中，LIBDIR1和LIBDIR2为两个库目录）：</p>
+<p>export LD_LIBRARY_PATH=LIBDIR1:LIBDIR2:$LD_LIBRARY_PATH</p>
+<h3 id="区别与使用："><a href="#区别与使用：" class="headerlink" title="区别与使用："></a>区别与使用：</h3><p>开发时，设置LIBRARY_PATH，以便gcc能够找到编译时需要的动态链接库。</p>
+<p>发布时，设置LD_LIBRARY_PATH，以便程序加载运行时能够自动找到需要的动态链接库。</p>
+<h1 id="MySQL-Show命令总结"><a href="#MySQL-Show命令总结" class="headerlink" title="MySQL Show命令总结"></a>MySQL Show命令总结</h1><p>MySQL中有很多的基本命令，show命令也是其中之一，在很多使用者中对show命令的使用还容易产生混淆，本文汇集了show命令的众多用法。</p>
+<ul>
+<li>show tables或show tables from database_name; — 显示当前数据库中所有表的名称。</li>
+<li>show tables like ‘my<em>%’; — 显示当前数据库中以my</em>开头的表。</li>
+<li>show databases; — 显示mysql中所有数据库的名称。</li>
+<li>show [full] columns from table_name from database_name; 或show [full] columns from database_name.table_name; — 显示表中列名称。</li>
+<li>show grants for user_name; — 显示一个用户的权限，显示结果类似于grant 命令。</li>
+<li>show index from table_name; — 显示表的索引。</li>
+<li>show status;(show master status;show slave status) — 显示一些系统特定资源的信息，例如，正在运行的线程数量。</li>
+<li>show variables; — 显示系统变量的名称和值。</li>
+<li>show [full] processlist; — 显示系统中正在运行的所有进程，也就是当前正在执行的查询。大多数用户可以查看他们自己的进程，但是如果他们拥有process权限，就可以查看所有人的进程，包括密码。</li>
+<li>show table status; — 显示当前使用或者指定的database中的每个表的信息。信息包括表类型和表的最新更新时间。</li>
+<li>show privileges; — 显示服务器所支持的不同权限。</li>
+<li>show create database database_name; — 显示create database 语句是否能够创建指定的数据库。</li>
+<li>show create table table_name; — 显示create database 语句是否能够创建指定的数据库。</li>
+<li>show engies; — 显示安装以后可用的存储引擎和默认引擎。</li>
+<li>show innodb status; — 显示innoDB存储引擎的状态。</li>
+<li>show logs; — 显示BDB存储引擎的日志。</li>
+<li>show warnings; — 显示最后一个执行的语句所产生的错误、警告和通知。</li>
+<li>show errors; — 只显示最后一个执行语句所产生的错误。</li>
+<li>show [storage] engines; –显示安装后的可用存储引擎和默认引擎。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.bio-info-trainee.com/1045.html" target="_blank" rel="external">生物信息学学者学习mysql之路</a></p>
+<p>（2）<a href="http://dev.dafan.info/detail/194350?p=55" target="_blank" rel="external">Linux环境变量LD_LIBRARY_PATH</a></p>
+<p>（3）<a href="https://www.cnblogs.com/foreverycc/p/5491884.html" target="_blank" rel="external">使用MySQL制作SNP146数据库</a></p>
+<p>（5）<a href="https://nsaunders.wordpress.com/2011/05/18/how-to-create-a-partial-ucsc-genome-mysql-database/" target="_blank" rel="external">How to: create a partial UCSC genome MySQL database</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;主要介绍win下和linux下连接重用生信数据库，操作数据库中表，以及根据自己的需要下载公共数据，创建mysql数据库。&lt;/p&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;linux shell中读写mysql数据库&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="https:///AnJingwd.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https:///AnJingwd.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计及挑选捕获测序探针，并计算覆盖度</title>
     <link href="https:///AnJingwd.github.io/2017/10/29/%E8%AE%BE%E8%AE%A1%E5%8F%8A%E6%8C%91%E9%80%89%E6%8D%95%E8%8E%B7%E6%B5%8B%E5%BA%8F%E6%8E%A2%E9%92%88%EF%BC%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E8%A6%86%E7%9B%96%E5%BA%A6/"/>
     <id>https:///AnJingwd.github.io/2017/10/29/设计及挑选捕获测序探针，并计算覆盖度/</id>
     <published>2017-10-29T04:17:18.000Z</published>
-    <updated>2017-10-29T12:16:46.472Z</updated>
+    <updated>2017-10-30T11:53:19.208Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">使用bedtools进行捕获测序引物的筛选并计算覆盖度</blockquote>
 
@@ -43,14 +173,14 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
 </code></pre><p><img src="https://i.imgur.com/QQnWpwO.jpg" alt=""></p>
 <p>整理成bed文件</p>
 <p><img src="https://i.imgur.com/flbem5B.jpg" alt=""></p>
-<p>安捷伦的<a href="http://www.genomics.agilent.com/zh/Custom-Design-Tools/eArray/?cid=AG-PT-122&amp;tabId=AG-PR-1047&amp;pageId=1456&amp;crumbAction=push&amp;navAction=pop" target="_blank" rel="external">eArray</a>可以涉及，输入只需要目标区域的bed文件即可！</p>
+<p>安捷伦的<a href="http://www.genomics.agilent.com/zh/Custom-Design-Tools/eArray/?cid=AG-PT-122&amp;tabId=AG-PR-1047&amp;pageId=1456&amp;crumbAction=push&amp;navAction=pop" target="_blank" rel="external">eArray</a>可以设计，输入只需要目标区域的bed文件即可！</p>
 <ul>
 <li><a href="https://earray.chem.agilent.com/cghanalytics/index.html" target="_blank" rel="external">Agilent Genomic Workbench Downloads</a> </li>
-<li><p><a href="https://earray.chem.agilent.com/cghanalytics/InstData/7.0/G3800-90046_Installation.pdf" target="_blank" rel="external">Installation Guide</a></p>
+<li><a href="https://earray.chem.agilent.com/cghanalytics/InstData/7.0/G3800-90046_Installation.pdf" target="_blank" rel="external">Installation Guide</a></li>
+</ul>
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>（1）NCBI 的FTP站点中GRCh37和GRCh38的最新版基因组注释数据在该路径下：<a href="http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation" target="_blank" rel="external">http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation</a></p>
-</li>
-<li><p>Last updated: April 19, 2017</p>
-</li>
+<ul>
+<li>Last updated: April 19, 2017</li>
 <li><strong>assembly name: GRCh38.p10</strong>（第十版）</li>
 </ul>
 <p>（2）对于做湿实验的同学可能通过浏览器的方式查询CDS区域坐标，但存在一个问题（<strong>首先浏览器上的版本是GRCh38.p7（第七版）</strong>）！</p>
@@ -74,9 +204,10 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
 <li>将A组合B组引物保留的部分引物合并，同时整理出A,B两组引物都没有覆盖的目标区域。</li>
 </ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#step1</span></div><div class="line">bedtools intersect -a target.bed -b primer20.bed -wao &gt; primer20_result.txt </div><div class="line">awk <span class="string">'$6-$5&gt;250 &#123;print $1,$2,$3&#125;'</span> primer20_result.txt &gt; target_region_of_primer20_up250.bed</div><div class="line"></div><div class="line"><span class="comment">#step2</span></div><div class="line">bedtools intersect -a target_region_of_primer20_up250.bed -b primer24.bed -wao &gt; primer24_result.txt</div><div class="line"></div><div class="line"><span class="comment">#step3</span></div><div class="line">primer20=($(cat primer20_reserved.txt));<span class="keyword">for</span> primer20 <span class="keyword">in</span> <span class="variable">$&#123;primer20[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer20&#125;</span>"</span> primer20_original.txt &gt;&gt;primer20_reserved_result.txt;<span class="keyword">done</span></div><div class="line"></div><div class="line">primer24=($(cat primer24_reserved.txt));<span class="keyword">for</span> primer24 <span class="keyword">in</span> <span class="variable">$&#123;primer24[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer24&#125;</span>"</span> primer24_original.txt &gt;&gt;primer24_reserved_result.txt;<span class="keyword">done</span></div></pre></td></tr></table></figure>
-<h1 id="根据targete-bed和primer20-bed计算覆盖度"><a href="#根据targete-bed和primer20-bed计算覆盖度" class="headerlink" title="根据targete.bed和primer20.bed计算覆盖度"></a>根据targete.bed和primer20.bed计算覆盖度</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(1)检验bed区间是否有重叠</div><div class="line"></div><div class="line">length_sum1=`awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span> target.bed |tail -n 1`</div><div class="line">length_sum2=`sort -k1,1 -k2,2n target.bed |bedtools merge -i | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span>|tail -n 1·</div><div class="line"></div><div class="line"><span class="comment">#如果length_sum1 &gt;  length_sum2,有重叠；如果length_sum1 = length_sum2,五重叠</span></div><div class="line"><span class="comment">#所以target.bed无重叠，primer20和primer24有重叠</span></div><div class="line"></div><div class="line">(2)先用bedtools工具得到primer20的merge后的bed文件，然后与target.bed查看覆盖碱基数，并求和</div><div class="line">sort -k1,1 -k2,2n primer20.bed|bedtools merge -i &gt; primer20_merge.bed</div><div class="line">length_sum3=`bedtools intersect -a target.bed -b primer20_merge.bed -wao | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$7&#125;&#123;print x&#125;'</span> |tail -n 1`  </div><div class="line"></div><div class="line">coverage = length_sum2/length_sum1*100</div></pre></td></tr></table></figure>
+<h1 id="根据targete-bed和primer20-bed计算覆盖度"><a href="#根据targete-bed和primer20-bed计算覆盖度" class="headerlink" title="根据targete.bed和primer20.bed计算覆盖度"></a>根据targete.bed和primer20.bed计算覆盖度</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(1)检验bed区间是否有重叠</div><div class="line"></div><div class="line">length_sum1=`awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span> target.bed |tail -n 1`</div><div class="line">length_sum2=`sort -k1,1 -k2,2n target.bed |bedtools merge -i | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span>|tail -n 1`</div><div class="line"></div><div class="line"><span class="comment">#如果length_sum1 &gt;  length_sum2,有重叠；如果length_sum1 = length_sum2,五重叠</span></div><div class="line"><span class="comment">#所以target.bed无重叠，primer20和primer24有重叠</span></div><div class="line"></div><div class="line">(2)先用bedtools工具得到primer20的merge后的bed文件，然后与target.bed查看覆盖碱基数，并求和</div><div class="line">sort -k1,1 -k2,2n primer20.bed|bedtools merge -i &gt; primer20_merge.bed</div><div class="line">length_sum3=`bedtools intersect -a target.bed -b primer20_merge.bed -wao | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$7&#125;&#123;print x&#125;'</span> |tail -n 1`  </div><div class="line"></div><div class="line">coverage = length_sum3/length_sum1*100</div></pre></td></tr></table></figure>
 <h2 id="bedtools-merge功能图示（需要先排序，否则报错）"><a href="#bedtools-merge功能图示（需要先排序，否则报错）" class="headerlink" title="bedtools merge功能图示（需要先排序，否则报错）"></a>bedtools merge功能图示（需要先排序，否则报错）</h2><p><img src="https://i.imgur.com/kAcaOMe.jpg" alt=""></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html" target="_blank" rel="external">染色体位置overlap的计算–bedtools应用</a></p>
+<p>（2）<a href="https://www.biostars.org/p/65558/" target="_blank" rel="external">Tool: Converting Genome Coordinates From One Genome Version To Another (Ucsc Liftover, Ncbi Remap, Ensembl Api)</a></p>
 ]]></content>
     
     <summary type="html">
@@ -97,7 +228,7 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
     <link href="https:///AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/"/>
     <id>https:///AnJingwd.github.io/2017/10/21/MySQL数据库安装及入门/</id>
     <published>2017-10-21T10:06:15.000Z</published>
-    <updated>2017-10-21T12:01:32.705Z</updated>
+    <updated>2017-11-23T13:46:26.321Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">无root权限，从源码编译安装MySQL数据库，及其简单使用</blockquote>
 
@@ -231,13 +362,14 @@ $WORKDIR/support-files/mysql.server start
 mysql --socket=$WORKDIR/mysql.sock -u root -h localhost -P 13306 -p 
 
 Do somethings
-
+exit;
 $WORKDIR/support-files/mysql.server stop
-</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://segmentfault.com/a/1190000004026950" target="_blank" rel="external">CentOS 6.4编译安装mysql 5.7</a></p>
+</code></pre><p>(使用版本：Server version: 5.6.35 Source distribution)</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://segmentfault.com/a/1190000004026950" target="_blank" rel="external">CentOS 6.4编译安装mysql 5.7</a></p>
 <p>（2）<a href="https://segmentfault.com/a/1190000010806192" target="_blank" rel="external">从源编译MySQL</a></p>
 <p>（3）<a href="http://jingyan.baidu.com/article/ad310e80cf9ce81849f49ea2.html" target="_blank" rel="external">Linux MySQL免安装及配置</a></p>
 <p>（4） <a href="http://blog.csdn.net/f229338596/article/details/72575403" target="_blank" rel="external">linux中无root权限，装mysql 于用户目录步骤</a></p>
-<p>（5）<a href="https://nsaunders.wordpress.com/2011/05/18/how-to-create-a-partial-ucsc-genome-mysql-database/" target="_blank" rel="external">How to: create a partial UCSC genome MySQL database</a></p>
+<p>（5）<a href="https://jingyan.baidu.com/article/3c343ff7ca8eab0d37796317.html" target="_blank" rel="external">非root权限安装mysql</a></p>
 ]]></content>
     
     <summary type="html">
@@ -1167,7 +1299,7 @@ CMD    //命令的名称和参数
     <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
     <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-10-29T04:36:49.699Z</updated>
+    <updated>2017-11-23T17:01:28.930Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
 
@@ -1323,6 +1455,10 @@ CMD    //命令的名称和参数
 <tr>
 <td><a href="http://portals.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium" target="_blank" rel="external">GIANT</a></td>
 <td>Genetic Investigation of Anthropometric Traits)</td>
+</tr>
+<tr>
+<td><a href="https://wy2160640.github.io/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/2017/10/26/databases-and-webserver.html" target="_blank" rel="external">2017NAR发布的收录数据库和web应用网站</a></td>
+<td>十分全面（推荐）</td>
 </tr>
 </tbody>
 </table>
@@ -1630,9 +1766,35 @@ CMD    //命令的名称和参数
 <td><a href="http://www.lib.sjtu.edu.cn/index.php?m=content&amp;c=index&amp;a=show&amp;catid=283&amp;id=1046" target="_blank" rel="external">SJTU</a></td>
 <td>上海交通大学学位论文数据库</td>
 </tr>
+</tbody>
+</table>
+<h1 id="论文写作与投稿"><a href="#论文写作与投稿" class="headerlink" title="论文写作与投稿"></a>论文写作与投稿</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.nature.com/scitable/ebooks/english-communication-for-scientists-14053993/contents" target="_blank" rel="external">English Communication for Scientists</a></td>
+<td>一本小书（推荐）</td>
+</tr>
+<tr>
+<td><a href="https://www.internationalscienceediting.com/verb-tenses-scientific-manuscripts/" target="_blank" rel="external">International Science Editing</a></td>
+<td>文章润色服务，其中writing tips部分很实用</td>
+</tr>
 <tr>
 <td><a href="http://www.ozdic.com/" target="_blank" rel="external">ozdic</a></td>
 <td>英语搭配词典（推荐）</td>
+</tr>
+<tr>
+<td><a href="https://owl.english.purdue.edu/" target="_blank" rel="external">Purdue Online Writing Lab</a></td>
+<td>普渡大学学术英语写作资源</td>
+</tr>
+<tr>
+<td><a href="https://www.indiana.edu/~academy/firstPrinciples/" target="_blank" rel="external">Plagiarism Certification Tests for Master’s and Doctoral Students</a></td>
+<td>印第安纳大学鉴别论文剽窃小测试</td>
 </tr>
 </tbody>
 </table>
@@ -1870,7 +2032,7 @@ CMD    //命令的名称和参数
 </tr>
 </tbody>
 </table>
-<h1 id="R"><a href="#R" class="headerlink" title="R"></a>R</h1><table>
+<h1 id="R语言"><a href="#R语言" class="headerlink" title="R语言"></a>R语言</h1><table>
 <thead>
 <tr>
 <th>Name</th>
@@ -2714,303 +2876,6 @@ done
     
     
       <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NGS数据格式BED/GFF/GTF之介绍，比较，转换</title>
-    <link href="https:///AnJingwd.github.io/2017/08/15/NGS%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8FBED-GFF-GTF%E4%B9%8B%E4%BB%8B%E7%BB%8D-%E6%AF%94%E8%BE%83-%E8%BD%AC%E6%8D%A2/"/>
-    <id>https:///AnJingwd.github.io/2017/08/15/NGS数据格式BED-GFF-GTF之介绍-比较-转换/</id>
-    <published>2017-08-15T11:09:02.000Z</published>
-    <updated>2017-10-11T05:18:58.289Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;NGS数据格式BED/GFF/GTF之介绍，比较，转换</p>
-<a id="more"></a>
-<h1 id="Ensemble与UCSC各种格式说明"><a href="#Ensemble与UCSC各种格式说明" class="headerlink" title="Ensemble与UCSC各种格式说明"></a>Ensemble与UCSC各种格式说明</h1><p>Ensemble各种格式说明：</p>
-<p><a href="http://www.ensembl.org/info/website/upload/bed.html" target="_blank" rel="external">http://www.ensembl.org/info/website/upload/bed.html</a></p>
-<p>UCSC各种格式说明：</p>
-<p><a href="http://genome.ucsc.edu/FAQ/FAQformat.html#format1" target="_blank" rel="external">http://genome.ucsc.edu/FAQ/FAQformat.html#format1</a></p>
-<hr>
-<h1 id="基因组坐标系统"><a href="#基因组坐标系统" class="headerlink" title="基因组坐标系统"></a>基因组坐标系统</h1><p>&emsp;&emsp;计算机和现实世界有一个差别，即计算机的计数是从0开始的（即0-based），而现实生活中，我们的计数是从1开始的（即1-based）。在生物学领域的不同场合，这两种计数交杂出现</p>
-<p>两套不同理念的坐标系统——base coordinate system(BCS)和interbase coordinate system（ICS）</p>
-<p><img src="http://i.imgur.com/fDzHOmo.jpg" alt=""></p>
-<p>我们先来分析一下这样的两套系统在表述序列位置时的差别</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>1-based</th>
-<th>0-based</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>单个核苷酸</td>
-<td>4-4: T</td>
-<td>3-4: T</td>
-</tr>
-<tr>
-<td>一组核苷酸</td>
-<td>4-6: TAA</td>
-<td>3-6: TAA</td>
-</tr>
-<tr>
-<td>deletion</td>
-<td>4-4: T/-</td>
-<td>3-4: T/-</td>
-</tr>
-<tr>
-<td>insertion（表示AGGTCGAAGT）</td>
-<td>4-5: -/CG</td>
-<td>4-4: -/CG</td>
-</tr>
-</tbody>
-</table>
-<p>&emsp;&emsp;如果说我们不管0-based和1-based这两种计数方式对应的坐标系统，都将其视为对序列第一个核苷酸的描述（即第一个核苷酸是算0还是算1），那么0-based的系统，其区间其实是一个左闭右开的区间，而1-based的系统则是一个闭区间。</p>
-<p><img src="http://i.imgur.com/zNrQ5gc.jpg" alt=""></p>
-<p>1-based，正如前述，就是为了符合人的计数习惯。那UCSC为什么要采用0-based的interbase coordinate system系统？ICS主要的好处体现在下面的几个方面：</p>
-<ul>
-<li>对于splicing sites等涉及两个核苷酸之间位置的情况，ICS提供了一个更好的呈现方案；</li>
-<li>对于site的计算更加方便，如length=end-start;</li>
-<li>对于坐标的转换，尤其是正负链坐标间的转换更加方便。（revStart = chromSize – oneEnd，revEnd = chromeSize – zeroStart）。</li>
-</ul>
-<p>NCBI等组织采用的是和人日常习惯一致的1-based计数系统，即用数字指代核苷酸位置。但是UCSC发现使用0-based计数系统（用数字指代核苷酸间的位置）</p>
-<p>&emsp;&emsp;<strong>应用范畴：对于直接给所有用户提供直观访问服务的data portal（比如说NCBI、Ensembl、UCSC Genome Browser、mirBase）、常用的生物信息学软件（如BLAST）以及某些格式的文件（如GFF、SAM、VCF），采用的是1-based的计数方法。与之相反，UCSC的Table Browser以及它在数据库中存储的数据、BED/BAM等格式的文件，以及Chado、DAS2、dbSNP这样的data portal则采用的是0-based的计数方法。</strong></p>
-<h1 id="单个格式介绍"><a href="#单个格式介绍" class="headerlink" title="单个格式介绍"></a>单个格式介绍</h1><h2 id="BED格式"><a href="#BED格式" class="headerlink" title="BED格式"></a>BED格式</h2><p><img src="http://i.imgur.com/ImVRGpB.jpg" alt=""></p>
-<p>注意：</p>
-<ul>
-<li>chromStart起始坐标第一个碱基为0</li>
-<li>BED行名会展示在基因组浏览器中的bed行的左侧</li>
-</ul>
-<p>UCSC中展示效果：</p>
-<p><img src="http://i.imgur.com/1tweu6f.png" alt=""></p>
-<hr>
-<p><strong>其实，你可以通过UCSC Genome Browser展示你的注释 tracks数据,并以可视化的方式与其他注释数据进行比较！！！</strong></p>
-<p>UCSC官方说明—-Displaying Your Own Annotations in the Genome Browser：</p>
-<p><a href="http://genome.ucsc.edu/goldenPath/help/customTrack.html#EXAMPLE1" target="_blank" rel="external">http://genome.ucsc.edu/goldenPath/help/customTrack.html#EXAMPLE1</a></p>
-<h3 id="具体介绍"><a href="#具体介绍" class="headerlink" title="具体介绍"></a>具体介绍</h3><p>&emsp;&emsp;个人的注释数据再上传48小时后将失效，除非你登陆并创建会话。</p>
-<p>如何登陆Genome Browser并创建会话：</p>
-<p><a href="http://genome.ucsc.edu/goldenPath/help/hgSessionHelp.html#CTs" target="_blank" rel="external">http://genome.ucsc.edu/goldenPath/help/hgSessionHelp.html#CTs</a></p>
-<p>当然，你也可以查看别人的定制注释tracks数据：</p>
-<p><a href="http://genome.ucsc.edu/goldenPath/customTracks/custTracks.html" target="_blank" rel="external">http://genome.ucsc.edu/goldenPath/customTracks/custTracks.html</a></p>
-<p>Genome Browser annotation tracks是基于面向行格式的文件的，文件中每行展示一个track特征，注释文件包含三种类型的行：browser lines, track lines, and data lines。空行和其他以#开头的行将被忽略。</p>
-<ol>
-<li>如何构建注释文件呢？</li>
-</ol>
-<ul>
-<li>（1）数据格式</li>
-</ul>
-<p>目前支持标准的GFF格式，以及为Human Genome Project 和 UCSC Genome Browser定制的数据格式，常见的如BED,BAM,VCF,MAF等。注意GFF和GTF文件必须以tab键分割，而不是以空格分隔。参考染色体必须以chrN的形式（区分大小写）。</p>
-<ul>
-<li>（2）定义 Genome Browser展示特征的区间</li>
-</ul>
-<p>例如：browser position chr22:20100000-20100900</p>
-<p>没有的话，展示的tracks在基因组的位置可能不对</p>
-<ul>
-<li>（3）定义注释track的一些属性</li>
-</ul>
-<p>例如track的name, description, colors, initial display mode, use score等等</p>
-<ol>
-<li>如何展示呢？</li>
-</ol>
-<p>例如注释数据如下：</p>
-<p>browser position chr22:1000-10000<br>browser hide all<br>track name=”BED track” description=”BED format custom track example” visibility=2 color=0,128,0 useScore=1<br>chr22 1000 5000 itemA 960 + 1100 4700 0 2 1567,1488, 0,2512<br>chr22 2000 7000 itemB 200 - 2200 6950 0 4 433,100,550,1500 0,500,2000,3500</p>
-<p>网址：</p>
-<p><a href="http://genome.ucsc.edu/cgi-bin/hgCustom" target="_blank" rel="external">http://genome.ucsc.edu/cgi-bin/hgCustom</a></p>
-<p><img src="http://i.imgur.com/31EJFSz.jpg" alt=""></p>
-<p><img src="http://i.imgur.com/FCQA4pM.png" alt=""></p>
-<p><img src="http://i.imgur.com/V3tPNzp.png" alt=""></p>
-<p>&emsp;&emsp;当然，可视化展示并不是真正的目的，主要目的是与其他注释数据进行比较，从而发现某些科学问题。最上面是你的track(Custom Tracks),下面就是按照不同数据类型划分的注释数据，默认都是隐藏的（hide），你可以勾选相应你感兴趣的数据，选择（hide,dense,squish,pack,full）不同展现形式显示其他注释数据，然后refresh，进行可视化比较。</p>
-<hr>
-<h2 id="GFF格式"><a href="#GFF格式" class="headerlink" title="GFF格式"></a>GFF格式</h2><p>参考：</p>
-<p><a href="http://www.bbioo.com/lifesciences/40-112835-1.html" target="_blank" rel="external">http://www.bbioo.com/lifesciences/40-112835-1.html</a></p>
-<p>GFF格式（General Feature Format）是一种简单的以tab键分割的，用于描述基因组特征的格式文件。有GFF1, GFF2，GFF3和GTF2四种版本。</p>
-<h3 id="GFF1"><a href="#GFF1" class="headerlink" title="GFF1"></a>GFF1</h3><p><img src="http://i.imgur.com/M5NdmeO.jpg" alt=""></p>
-<p>注意：</p>
-<ul>
-<li>start第一个碱基是从1开始计数的</li>
-<li>frame：在feature是coding exon时，frame可以取值0-2，表示读码框的第一个碱基；如果不是coding exon,则用.表示</li>
-<li>GFF1与其他GFF格式的最大区别在于所有相同的feature的行是聚集在一起的</li>
-<li>扩展名为.gff1而不是gff</li>
-</ul>
-<h3 id="GFF2"><a href="#GFF2" class="headerlink" title="GFF2"></a>GFF2</h3><p><a href="http://gmod.org/wiki/GFF2" target="_blank" rel="external">http://gmod.org/wiki/GFF2</a></p>
-<p><img src="http://i.imgur.com/1XNehY5.jpg" alt=""></p>
-<p>注意：</p>
-<ul>
-<li>start第一个碱基是从1开始计数的</li>
-<li>frame：在feature是coding exon时，frame可以取值0-2，表示读码框的第一个碱基；如果不是coding exon,则用.表示</li>
-<li>attribute：用;分隔键值对（tag-value），为每个feature提供额外的信息。同时attribute包含identifiers，可以用于联系各个特征。</li>
-<li>扩展名为.gff2而不是gff</li>
-</ul>
-<p><strong>GFF2格式的不足</strong></p>
-<p>&emsp;&emsp;GFF2的一个问题是它只能表现一个层次的嵌套功能。 当处理具有多个交替剪接的转录物的基因时存在问题。 GFF2无法处理基因→转录本→外显子的三级体系。 大多数人给出一系列的转录本，并给出类似的名称来表明它们来自相同的基因。 第二个限制是，虽然GFF2允许您创建两级层次结构，如转录本→外显子，但它没有层次结构方向的任何概念。 所以它不知道外显子是否是转录本的subfeature，反之亦然。 这意味着你必须使用“aggregators”来整理关系。  因此，GFF2格式已被弃用，转而支持GFF3格式。</p>
-<p><strong>但是，目前Genome Browser是不支持GFF3的，所有的GFF track都是基于Sanger’s GFF2 specification</strong></p>
-<h3 id="GFF3"><a href="#GFF3" class="headerlink" title="GFF3"></a>GFF3</h3><p><a href="http://gmod.org/wiki/GFF3" target="_blank" rel="external">http://gmod.org/wiki/GFF3</a></p>
-<p><img src="http://i.imgur.com/bz4xuEw.jpg" alt=""></p>
-<p>注意：</p>
-<ul>
-<li>start第一个碱基是从1开始计数的</li>
-<li>phase：在feature是coding exon时，phase可以取值0-2，表示读码框的第一个碱基；如果不是coding exon,则用.表示</li>
-<li>attribute：用 “=” 分隔键值对（tag-value），为每个feature提供额外的信息。同时attribute包含identifiers，可以用于联系各个特征。</li>
-<li>扩展名为.gff3而不是gff</li>
-</ul>
-<p><strong>与其他GFF版本格式最大区别在于：</strong></p>
-<ul>
-<li>第一行表明版本：##gff-version 3</li>
-<li>第9列attributes关联了转录本，之前的GFF版本限制于低层次的feature(exon)</li>
-<li>key=value具有特殊的含义<ul>
-<li>ID - unique idenfifier for this feature.</li>
-<li>Parent - idenfier of parent feature.</li>
-<li>Name - used as the feature label in the feature map.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="GTF"><a href="#GTF" class="headerlink" title="GTF"></a>GTF</h2><p>GTF是另外一种与GFF2十分相似的数据格式，有时称之为GFF2.5。GTF的前8列与GFF2完全一样，group列（attribute列）被扩展了，每个属性包含了一个 type/value pair，属性以;结束，初次之外，属性之间还有一个空格。</p>
-<p>属性列（第9列）：</p>
-<ul>
-<li>gene_id value - A globally unique identifier for the genomic source of the sequence.</li>
-<li>transcript_id value - A globally unique identifier for the predicted transcript.</li>
-</ul>
-<p>属性列例子(UCSC)：</p>
-<pre><code>gene_id &quot;Em:U62317.C22.6.mRNA&quot;; transcript_id &quot;Em:U62317.C22.6.mRNA&quot;; exon_number 1
-</code></pre><p>属性列例子(Ensemble)：</p>
-<pre><code>gene_id &quot;ENSG00000223972&quot;; transcript_id &quot;ENST00000456328&quot;; gene_name &quot;DDX11L1&quot;; gene_sourc e &quot;havana&quot;; gene_biotype &quot;transcribed_unprocessed_pseudogene&quot;; transcript_name &quot;DDX11L1-002&quot;; transcript_source &quot;havana&quot;;
-</code></pre><p>GTF是不被 GMOD支持的，如果使用，可以将其转换为GFF3格式。</p>
-<hr>
-<h1 id="不同格式比较"><a href="#不同格式比较" class="headerlink" title="不同格式比较"></a>不同格式比较</h1><h2 id="BED和GFF-GTF"><a href="#BED和GFF-GTF" class="headerlink" title="BED和GFF/GTF"></a>BED和GFF/GTF</h2><ol>
-<li>BED文件中起始坐标为0，结束坐标至少是1,； GFF中起始坐标是1而结束坐标至少是1</li>
-<li>两者都是基因注释文件，gtf的一行表示一个exon，多行表示一个基因。而bed的一行表示一个基因。</li>
-</ol>
-<h2 id="GTF与GFF区别"><a href="#GTF与GFF区别" class="headerlink" title="GTF与GFF区别"></a>GTF与GFF区别</h2><ol>
-<li><p>简单来说：GFF 2 -&gt; GTF -&gt; GFF 3</p>
-</li>
-<li><p>G的定义不同</p>
-</li>
-</ol>
-<p>GFF全称为general feature format，这种格式主要是用来注释基因组。</p>
-<p>GTF全称为gene transfer format，主要是用来对基因进行注释。</p>
-<ol>
-<li>GTF是在GFF（GFF2）的基础上的一个改良，GTF的前8列信息与GFF是一样的，主要区别在第九列，GTF扩充很多GFF不具备的其他的信息</li>
-</ol>
-<hr>
-<h1 id="数据格式转换"><a href="#数据格式转换" class="headerlink" title="数据格式转换"></a>数据格式转换</h1><table>
-<thead>
-<tr>
-<th>file conversion</th>
-<th>script</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GTF to GFF3</td>
-<td><a href="http://song.cvs.sourceforge.net/song/software/scripts/gtf2gff3/" target="_blank" rel="external">gft2gff3</a></td>
-</tr>
-<tr>
-<td>GTF to BED</td>
-<td><a href="http://blog.sciencenet.cn/home.php?mod=attachment&amp;filename=gtf2Bed.pl&amp;id=62831" target="_blank" rel="external">gtf2Bed.pl</a></td>
-</tr>
-<tr>
-<td>BED to GTF</td>
-<td><a href="http://blog.sciencenet.cn/home.php?mod=attachment&amp;filename=bedToGtf.sh&amp;id=62832" target="_blank" rel="external">bedToGtf.sh</a></td>
-</tr>
-</tbody>
-</table>
-<p>汇总，将各种格式转换为GFF格式的脚本。这些脚本分散在不同的软件包中，可以根据需要下载使用。</p>
-<p>bioPerl</p>
-<table>
-<thead>
-<tr>
-<th>script</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>search2gff</td>
-<td>This script will turn a protein Search report (BLASTP, FASTP, SSEARCH, AXT, WABA) into a GFF File.</td>
-</tr>
-<tr>
-<td>genbank2gff3.pl</td>
-<td>Genbank to gbrowse-friendly GFF3</td>
-</tr>
-<tr>
-<td>gff2ps</td>
-<td>This script provides GFF to postscript handling.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>如果你在win下安装了perl及bioperl直接在文件夹下搜索便可以找到上述脚本，可以直接使用</strong></p>
-<p>gbrowse</p>
-<table>
-<thead>
-<tr>
-<th>script</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://search.cpan.org/~lds/GBrowse-2.39/bin/bed2gff3.pl" target="_blank" rel="external">ucsc_genes2gff</a></td>
-<td>Convert UCSC Genome Browser-format gene files into GFF files suitable for loading into gbrowse</td>
-</tr>
-<tr>
-<td><a href="http://eugenes.org:7072/gmod/genogrid/scripts/" target="_blank" rel="external">blast92gff3.pl</a></td>
-<td>BLAST tabular output (-m 9 or 8) conversion to GFF version 3 format,</td>
-</tr>
-</tbody>
-</table>
-<p>DAWGPAWS</p>
-<table>
-<thead>
-<tr>
-<th>script</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://dawgpaws.sourceforge.net/man/cnv_blast2gff.html" target="_blank" rel="external">cnv_blast2gff.pl</a></td>
-<td>This program will translate a blast report for a single query sequence into the GFF format.</td>
-</tr>
-</tbody>
-</table>
-<p>Tandy software</p>
-<table>
-<thead>
-<tr>
-<th>script</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://eugenes.org/gmod/tandy/" target="_blank" rel="external">gff2aplot</a></td>
-<td>a program to visualize the alignment of two genomic sequences together with their annotations. From GFF-format input files it produces PostScript figures for that alignment.</td>
-</tr>
-<tr>
-<td><a href="http://iubio.bio.indiana.edu:7122/gmod/tandy/" target="_blank" rel="external">blat2gff</a></td>
-<td>Converts BLAT output files to GFF formatted files</td>
-</tr>
-</tbody>
-</table>
-<p><strong>BioWiki中还有一篇，总结更多GFF工具的文章，请参看下面链接：</strong></p>
-<p><a href="http://biowiki.org/GffTools" target="_blank" rel="external">http://biowiki.org/GffTools</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sciencenet.cn/blog-981687-726831.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-981687-726831.html</a></p>
-<p>（2）<a href="http://blog.sciencenet.cn/blog-1509670-847310.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-1509670-847310.html</a></p>
-<p>（3）<a href="https://www.yaolibio.com/2016/08/15/gene-coordinate-system/" target="_blank" rel="external">https://www.yaolibio.com/2016/08/15/gene-coordinate-system/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;NGS数据格式BED/GFF/GTF之介绍，比较，转换&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
-    
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
     
   </entry>
   
