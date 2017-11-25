@@ -115,7 +115,7 @@
 <meta property="og:image" content="https://i.imgur.com/nqtMqQV.jpg">
 <meta property="og:image" content="https://i.imgur.com/ThdiQ2j.jpg">
 <meta property="og:image" content="https://i.imgur.com/I809HBj.jpg">
-<meta property="og:updated_time" content="2017-11-24T11:16:20.050Z">
+<meta property="og:updated_time" content="2017-11-25T02:53:47.904Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql数据库与生信">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;主要介绍win下和linux下连接重用生信数据库，操作数据库中表，以及根据自己的需要下载公共数据，创建mysql数据库。 mysql数据库与生信">
@@ -401,7 +401,11 @@
 <a id="more"></a>
 <h1 id="mysql学习资料"><a href="#mysql学习资料" class="headerlink" title="mysql学习资料"></a>mysql学习资料</h1><p>（1）<a href="http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html" target="_blank" rel="external">21分钟 MySQL 入门教程</a></p>
 <p>（2）MySQL 5.7 Reference Manual: 具体技巧例如<a href="https://dev.mysql.com/doc/refman/5.7/en/counting-rows.html" target="_blank" rel="external"> Counting Rows</a>；<a href="https://dev.mysql.com/doc/refman/5.7/en/pattern-matching.html" target="_blank" rel="external">Pattern Matching</a></p>
-<h1 id="mysql连接生信主要公共数据库"><a href="#mysql连接生信主要公共数据库" class="headerlink" title="mysql连接生信主要公共数据库"></a>mysql连接生信主要公共数据库</h1><h2 id="linux下"><a href="#linux下" class="headerlink" title="linux下"></a>linux下</h2><h3 id="格式："><a href="#格式：" class="headerlink" title="格式："></a>格式：</h3><p>mysql -h[host] -u[user] -p[password] -P[port] [database-name]</p>
+<h1 id="mysql连接生信主要公共数据库"><a href="#mysql连接生信主要公共数据库" class="headerlink" title="mysql连接生信主要公共数据库"></a>mysql连接生信主要公共数据库</h1><h2 id="linux下格式："><a href="#linux下格式：" class="headerlink" title="linux下格式："></a>linux下格式：</h2><p>mysql -h[host] -u[user] -p[password] -P[port] [database-name]</p>
+<ul>
+<li>-h : 该命令用于指定客户端所要登录的MySQL主机名, 登录当前机器该参数可以省略;</li>
+<li>退出：输入 exit; 或 quit; 退出登录</li>
+</ul>
 <p>例如：</p>
 <table>
 <thead>
@@ -466,7 +470,18 @@
 <p><img src="https://i.imgur.com/nqtMqQV.jpg" alt=""></p>
 <p>使用shell脚本自动完成</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create database</span></div><div class="line">mysql -u root -prootab -e <span class="string">'create database hg19'</span></div><div class="line"><span class="comment"># obtain table schema</span></div><div class="line"><span class="built_in">cd</span> /home/wangdong/<span class="built_in">local</span>/mysql/data</div><div class="line">wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/ensGene.sql</div><div class="line"><span class="comment"># create table</span></div><div class="line">mysql -u root -prootab hg19 &lt; ensGene.sql</div><div class="line"><span class="comment"># obtain and import table data</span></div><div class="line">wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/ensGene.txt.gz</div><div class="line">gunzip ensGene.txt.gz</div><div class="line">mysqlimport -u root -prootab --<span class="built_in">local</span> hg19 ensGene.txt</div></pre></td></tr></table></figure>
-<p><strong>注意：数据需要下载到/home/wangdong/local/mysql/data，位置可以在配置文件(my.cnf)中修改</strong></p>
+<p><strong>注意：数据需要下载到/home/wangdong/local/mysql/data，位置可以在配置文件(my.cnf)中修改，具体操作查看链接：<a href="http://www.cnblogs.com/foreverycc/p/5511820.html" target="_blank" rel="external">MySQL 转移 datadir</a></strong></p>
+<ul>
+<li><p>为了便于在命令提示符下显示中文, 在创建时通过 character set gbk 将数据库字符编码指定为 gbk</p>
+<p>  create database samp_db character set gbk;</p>
+</li>
+<li><p>创建数据库表时，对于一些较长的语句在命令提示符下可能容易输错, 因此我们可以通过任何文本编辑器将语句输入好后保存为 createtable.sql 的文件中, 通过命令提示符下的文件重定向执行执行该脚本。</p>
+<p>  mysql -D samp_db -u root -p &lt; createtable.sql</p>
+</li>
+<li><p>desc TABLE_NAME; 显示数据库表的结构（desc是describe的缩写）</p>
+</li>
+<li>select * from TABLE_NAME limit 0,2;显示表的前两行内容，0表示起始行偏移量</li>
+</ul>
 <p><img src="https://i.imgur.com/ThdiQ2j.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/I809HBj.jpg" alt=""></p>
 <h2 id="补充LD-LIBRARY-PATH环境变量"><a href="#补充LD-LIBRARY-PATH环境变量" class="headerlink" title="补充LD_LIBRARY_PATH环境变量"></a>补充LD_LIBRARY_PATH环境变量</h2><p>LIBRARY_PATH和LD_LIBRARY_PATH是Linux下的两个环境变量，二者的含义和作用分别如下：</p>
@@ -905,7 +920,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql学习资料"><span class="nav-number">1.</span> <span class="nav-text">mysql学习资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql连接生信主要公共数据库"><span class="nav-number">2.</span> <span class="nav-text">mysql连接生信主要公共数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下"><span class="nav-number">2.1.</span> <span class="nav-text">linux下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式："><span class="nav-number">2.1.1.</span> <span class="nav-text">格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql直接读ucsc数据库数据"><span class="nav-number">2.1.2.</span> <span class="nav-text">mysql直接读ucsc数据库数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows下"><span class="nav-number">2.2.</span> <span class="nav-text">windows下</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python连接mysql数据库"><span class="nav-number">3.</span> <span class="nav-text">python连接mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用例子"><span class="nav-number">3.1.</span> <span class="nav-text">应用例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据需要创建UCSC-genome-MySQL-database"><span class="nav-number">4.</span> <span class="nav-text">根据需要创建UCSC genome MySQL database</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#补充LD-LIBRARY-PATH环境变量"><span class="nav-number">4.1.</span> <span class="nav-text">补充LD_LIBRARY_PATH环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别与使用："><span class="nav-number">4.1.1.</span> <span class="nav-text">区别与使用：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化管理工具-MySQL-Workbench"><span class="nav-number">5.</span> <span class="nav-text">可视化管理工具 MySQL Workbench</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-Show命令总结"><span class="nav-number">6.</span> <span class="nav-text">MySQL Show命令总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql学习资料"><span class="nav-number">1.</span> <span class="nav-text">mysql学习资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql连接生信主要公共数据库"><span class="nav-number">2.</span> <span class="nav-text">mysql连接生信主要公共数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下格式："><span class="nav-number">2.1.</span> <span class="nav-text">linux下格式：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql直接读ucsc数据库数据"><span class="nav-number">2.1.1.</span> <span class="nav-text">mysql直接读ucsc数据库数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows下"><span class="nav-number">2.2.</span> <span class="nav-text">windows下</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python连接mysql数据库"><span class="nav-number">3.</span> <span class="nav-text">python连接mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用例子"><span class="nav-number">3.1.</span> <span class="nav-text">应用例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据需要创建UCSC-genome-MySQL-database"><span class="nav-number">4.</span> <span class="nav-text">根据需要创建UCSC genome MySQL database</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#补充LD-LIBRARY-PATH环境变量"><span class="nav-number">4.1.</span> <span class="nav-text">补充LD_LIBRARY_PATH环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别与使用："><span class="nav-number">4.1.1.</span> <span class="nav-text">区别与使用：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化管理工具-MySQL-Workbench"><span class="nav-number">5.</span> <span class="nav-text">可视化管理工具 MySQL Workbench</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-Show命令总结"><span class="nav-number">6.</span> <span class="nav-text">MySQL Show命令总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -953,7 +968,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共45.7k字</span>
+  <span class="post-count">博客全站共46.1k字</span>
 </div>
 
 <div class="powered-by">
