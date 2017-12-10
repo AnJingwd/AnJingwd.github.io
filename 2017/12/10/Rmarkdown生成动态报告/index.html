@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R-绘图," />
+  <meta name="keywords" content="R," />
 
 
 
@@ -96,21 +96,22 @@
 
 
 
-<meta name="description" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta name="keywords" content="R-绘图">
+<meta name="description" content="Rmarkdown生成动态报告">
+<meta name="keywords" content="R">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/index.html">
+<meta property="og:title" content="Rmarkdown生成动态报告">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/12/10/Rmarkdown生成动态报告/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="解决ggplot 作图x轴和y轴不重合问题">
+<meta property="og:description" content="Rmarkdown生成动态报告">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/c0EnfOi.png">
-<meta property="og:image" content="http://i.imgur.com/2GNk480.png">
-<meta property="og:updated_time" content="2017-09-01T04:54:22.189Z">
+<meta property="og:image" content="https://i.imgur.com/SeQw9LV.jpg">
+<meta property="og:image" content="https://i.imgur.com/MfkEUSg.jpg">
+<meta property="og:image" content="https://i.imgur.com/qHiN24R.jpg">
+<meta property="og:updated_time" content="2017-12-10T14:14:38.362Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta name="twitter:description" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta name="twitter:image" content="http://i.imgur.com/c0EnfOi.png">
+<meta name="twitter:title" content="Rmarkdown生成动态报告">
+<meta name="twitter:description" content="Rmarkdown生成动态报告">
+<meta name="twitter:image" content="https://i.imgur.com/SeQw9LV.jpg">
 
 
 
@@ -143,7 +144,7 @@
 
 
 
-  <title>解决ggplot 作图x轴和y轴不重合问题 | 安静-不安静的博客</title>
+  <title>Rmarkdown生成动态报告 | 安静-不安静的博客</title>
   
 
 
@@ -297,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/12/10/Rmarkdown生成动态报告/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -314,7 +315,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">解决ggplot 作图x轴和y轴不重合问题</h2>
+          <h2 class="post-title" itemprop="name headline">Rmarkdown生成动态报告</h2>
         
 
         <div class="post-meta">
@@ -326,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T12:43:03+08:00">
-                2017-09-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T10:54:17+08:00">
+                2017-12-10
               </time>
             
 
@@ -349,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/R-绘图/" itemprop="url" rel="index">
-                    <span itemprop="name">R-绘图</span>
+                  <a href="https:/AnJingwd.github.io/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
                   </a>
                 </span>
 
@@ -386,28 +387,85 @@
       
 
       
-        <blockquote class="blockquote-center">解决ggplot 作图x轴和y轴不重合问题</blockquote>
+        <blockquote class="blockquote-center">Rmarkdown生成动态报告</blockquote>
 
 <a id="more"></a>
-<p>只需要在作图时加上加上一下代码，即可即可让x轴和y轴在坐标原点重合：</p>
-<pre><code>scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
-</code></pre><p>现在用测试代码看看前后变化：</p>
-<pre><code>library(ggplot2)
-df &lt;- data.frame(x = 1:5, y = 1:5)
-p1 &lt;- ggplot(df, aes(x, y)) + geom_point()
-p1 &lt;- p1 + expand_limits(x = 0, y = 0)
-p1
-</code></pre><p><img src="http://i.imgur.com/c0EnfOi.png" alt=""></p>
-<pre><code>library(ggplot2)
-df &lt;- data.frame(x = 1:5, y = 1:5)
-p2 &lt;- ggplot(df, aes(x, y)) + geom_point()
-p2 &lt;- p2 + expand_limits(x = 0, y = 0)+ scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
-p2
-</code></pre><p><img src="http://i.imgur.com/2GNk480.png" alt=""></p>
-<p>参考：</p>
-<p>（1）<a href="http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot" target="_blank" rel="external">http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot</a></p>
-<p>（2）<a href="http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r" target="_blank" rel="external">http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r</a></p>
-<p>（3）<a href="http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap" target="_blank" rel="external">http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap</a></p>
+<p>&emsp;&emsp;RStudio可以当做 Markdown 编辑器来用（R Markdown），根据数据处理结果快速生成报告文档，这一功能主要通过 Package Knit 及相关组件完成。</p>
+<p>&emsp;&emsp;R Markdown 的两大特别之处，一是通过 Pandoc 将 Markdown 转化成 LaTex，再由强大的 LaTex 转换成 HTML、PDF、Word，理论上来说借助 LaTex 可以生成学术论文、期刊杂志、数据报告等规范格式的文档；另一大特点是整合了 R 语言的环境，可以在 Markdown 语法中 code block 直接执行 R 语言代码并将结果插入文档。</p>
+<p>R Markdown from Rstudio <a href="http://rmarkdown.rstudio.com/lesson-1.html" target="_blank" rel="external">帮助文档</a></p>
+<h1 id="安装必要的包"><a href="#安装必要的包" class="headerlink" title="安装必要的包"></a>安装必要的包</h1><pre><code>install.packages(&quot;devtools&quot;) # 如果以前没有安装 devtools 包
+devtools::install_github(&quot;rstudio/rmarkdown&quot;)  #安装github上最新版rmarkdown
+library(rmarkdown)
+</code></pre><h1 id="如何编辑"><a href="#如何编辑" class="headerlink" title="如何编辑"></a>如何编辑</h1><ol>
+<li><p>添加的是普通的文字: 那就按照Markdown写吧，你看到过的功能R都支持。</p>
+</li>
+<li><p>添加的是代码: 那就放到代码区域里面去，和Markdown的代码标记不太一样，多了 {}。</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code</div></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>然后在 {} 里告诉 R Studio 你希望显示什么:</p>
+<ul>
+<li>只想显示代码 {r,echo = FALSE, eval = FALSE}</li>
+<li>只想显示结果 {r,echo = FALSE, eval = TRUE}</li>
+<li>想要代码+编译结果 {r,echo = TRUE，eval = FALSE}</li>
+</ul>
+</li>
+<li><p>如果是在文中添加代码，没有{}</p>
+<pre><code>`r 2+ 2`
+</code></pre></li>
+</ol>
+<ol>
+<li>chunk options</li>
+</ol>
+<p><img src="https://i.imgur.com/SeQw9LV.jpg" alt=""></p>
+<p>这个chunk放在最前面，声明以后的每一个chunk都不输出warnings和message</p>
+<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><pre><code>![Caption for the picture.](/path/to/image.png)
+</code></pre><h1 id="输出-html-word-pdf"><a href="#输出-html-word-pdf" class="headerlink" title="输出(html ,word, pdf)"></a>输出(html ,word, pdf)</h1><p>从Rmd格式可以导出为三种格式，用Pandoc实现:Word, HTML, PDF（额外需要LaTex支持，并且对中文的支持需要额外的设定）</p>
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>Windows</p>
+<p>There is a package installer at pandoc’s<a href="https://github.com/jgm/pandoc/releases/latest" target="_blank" rel="external"> download page</a>. 选择msi installer或者zip file都可以。</p>
+<p>For PDF output, you’ll also need to install LaTeX. We recommend <a href="http://miktex.org/" target="_blank" rel="external">MiKTeX</a>.</p>
+<h2 id="R-Studio的全局配置-为了支持中文pdf输出"><a href="#R-Studio的全局配置-为了支持中文pdf输出" class="headerlink" title="R Studio的全局配置(为了支持中文pdf输出)"></a>R Studio的全局配置(为了支持中文pdf输出)</h2><ul>
+<li>Tools – Global Options – Code—Saving， 设置Default text coding: UTF-8 coding</li>
+<li>Tools – Global Options – Sweave，将Typeset LaTeX into PDF using:设置为 XeLaTeX</li>
+</ul>
+<p>需要注意的就是latex_engine:xelatex 了。即使设置了默认的编译器为xeLaTeX依旧要手动再声明一遍编译器</p>
+<h2 id="设置-YAML"><a href="#设置-YAML" class="headerlink" title="设置 YAML"></a>设置 YAML</h2><p>完成对R Studio的全局配置后，对每个Rmd文件（R markdown）在最开头条线之间进行设置才是更重要的。这个部分叫做YAML <a href="https://en.wikipedia.org/wiki/YAML" target="_blank" rel="external">wiki</a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">author: <span class="string">"wd"</span></div><div class="line">date: <span class="string">"2017.12.10"</span></div><div class="line">output: pdf_document</div><div class="line">title: <span class="string">"MRstudy"</span></div><div class="line">outputs:</div><div class="line">  pdf_document:</div><div class="line">    includes:</div><div class="line">      in_header: header.tex</div><div class="line">    keep_tex: yes</div><div class="line">    latex_engine: xelatex</div><div class="line">---</div></pre></td></tr></table></figure>
+<p>步骤:</p>
+<ul>
+<li>在YMAL里面设置 output: pdf_document，或者word_document, html_document。</li>
+<li>设定好了之后三种导出的方法都一样，<strong>点击代码窗口上面的蓝色毛线团标记（选择输出html或者word或者pdf）。</strong>（knit英文是编织的意思，所以就是把代码织成文本吧）</li>
+</ul>
+<p><strong>注意正确的缩进和冒号</strong></p>
+<ul>
+<li>以上意思是，输出为html，word和pdf。html和word为默认设置。pdf设置包括，in_header，keep_tex和latex_engine。</li>
+<li>如果一个设置还没到具体的内容，它紧接的是冒号，换行后需要缩进两个空格在开始。</li>
+<li>如果已经指向明确的内容，结束没有冒号，换行之后不需要缩进。</li>
+</ul>
+<p><strong>header.tex需要和你的Rmd文档放到一个路径，</strong> 其中内容是：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">\usepackage&#123;xeCJK&#125;</div><div class="line">\setCJKmainfont&#123;楷体&#125;  % 字体可以更换</div><div class="line">\setmainfont&#123;Georgia&#125; % 設定英文字型</div><div class="line">\setromanfont&#123;Georgia&#125; % 字型</div><div class="line">\setmonofont&#123;Courier New&#125;</div></pre></td></tr></table></figure>
+<p>更多详细配置可以参考<a href="http://rmarkdown.rstudio.com/" target="_blank" rel="external">官方文档</a></p>
+<h1 id="编译前在viewer窗口预览文档"><a href="#编译前在viewer窗口预览文档" class="headerlink" title="编译前在viewer窗口预览文档"></a>编译前在viewer窗口预览文档</h1><p>使用方法：</p>
+<ol>
+<li><p>安装 Xaringan</p>
+<p> install.packages(“devtools”)<br> if (!requireNamespace(“xaringan”))<br> devtools::install_github(“yihui/xaringan”)</p>
+</li>
+<li>R markdown不需额外设置。</li>
+<li>编译的时候找到 Addin，点击Infinite Moon Reader</li>
+</ol>
+<p><img src="https://i.imgur.com/MfkEUSg.jpg" alt=""></p>
+<h1 id="rmarkdown转化中文字符为PDF的设置"><a href="#rmarkdown转化中文字符为PDF的设置" class="headerlink" title="rmarkdown转化中文字符为PDF的设置"></a>rmarkdown转化中文字符为PDF的设置</h1><p>rmarkdown对于输出含中文的html和word文档，在YAML设置html_document: default或者word_document: default即可，但对于输出含有中文的pdf文件需要单独设置YAML。如下：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">output:</div><div class="line">  pdf_document:</div><div class="line">    keep_tex: yes</div><div class="line">    latex_engine: xelatex</div><div class="line">    includes:</div><div class="line">      in_header: header.tex</div></pre></td></tr></table></figure>
+<h1 id="中文模板-详细说明"><a href="#中文模板-详细说明" class="headerlink" title="中文模板 详细说明"></a>中文模板 <a href="https://github.com/rstudio/rticles/pull/16" target="_blank" rel="external">详细说明</a></h1><p>安装rticles包，调用中文模板<br>    install.packages(“rticles”)</p>
+<p>安装成功之后，我们可以新建一个Rmarkdown文件。点击New-&gt;file-&gt;R markdown,其中有了一个From Template</p>
+<p><img src="https://i.imgur.com/qHiN24R.jpg" alt=""></p>
+<p>使用ctrl + shift + k的快捷键，稍等片刻会出现中文PDF</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.xueqing.tv/cms/article/96" target="_blank" rel="external">利用R-Markdown和Knitr创建动态报告（第一部分）</a></p>
+<p>（2）<a href="https://www.cnblogs.com/Xeonilian/p/7142379.html" target="_blank" rel="external">R Markdown 设置和使用</a></p>
+<p>（3）<a href="http://www.cnblogs.com/Xeonilian/p/7608290.html" target="_blank" rel="external">R Markdown + Infinite Moon Reader + 编辑实时更新</a></p>
+<p>（4）<a href="http://blog.rainy.im/2015/05/16/rmarkdown-in-rstudio/" target="_blank" rel="external">RStudio 中的 R Markdown（推荐）</a></p>
+<p>（5）<a href="http://blog.csdn.net/xmuecor/article/details/41956525" target="_blank" rel="external">Rmarkdown输出PDF的中文支持问题解决</a></p>
+<p>（6）<a href="http://www.jianshu.com/p/0bfda49f1a52" target="_blank" rel="external">rmarkdown转化中文字符为PDF的设置</a></p>
+<p>（7）<a href="http://www.jianshu.com/p/3a1d95f9965a" target="_blank" rel="external">Rmarkdown中文实现（推荐）</a></p>
 
       
     </div>
@@ -433,7 +491,7 @@ p2
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/R-绘图/" rel="tag"><i class="fa fa-tag"></i> R-绘图</a>
+            <a href="https:/AnJingwd.github.io/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
           
         </div>
       
@@ -446,8 +504,8 @@ p2
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/08/30/批量fastqc/" rel="next" title="批量fastqc">
-                <i class="fa fa-chevron-left"></i> 批量fastqc
+              <a href="https:/AnJingwd.github.io/2017/12/03/创建宏去除从pdf复制到word的回车换行/" rel="next" title="创建宏去除从pdf复制到word的回车换行">
+                <i class="fa fa-chevron-left"></i> 创建宏去除从pdf复制到word的回车换行
               </a>
             
           </div>
@@ -456,8 +514,8 @@ p2
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/09/02/python实现excel二维表格格式化/" rel="prev" title="python实现excel二维表格格式化">
-                python实现excel二维表格格式化 <i class="fa fa-chevron-right"></i>
+              <a href="https:/AnJingwd.github.io/2017/12/10/Rmarkdown报表输出表格/" rel="prev" title="Rmarkdown报表输出表格">
+                Rmarkdown报表输出表格 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,8 +591,17 @@ p2
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https:/AnJingwd.github.io/images/avatar.png"
@@ -792,6 +859,22 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装必要的包"><span class="nav-number">1.</span> <span class="nav-text">安装必要的包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何编辑"><span class="nav-number">2.</span> <span class="nav-text">如何编辑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#插入图片"><span class="nav-number">3.</span> <span class="nav-text">插入图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输出-html-word-pdf"><span class="nav-number">4.</span> <span class="nav-text">输出(html ,word, pdf)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#软件安装"><span class="nav-number">4.1.</span> <span class="nav-text">软件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-Studio的全局配置-为了支持中文pdf输出"><span class="nav-number">4.2.</span> <span class="nav-text">R Studio的全局配置(为了支持中文pdf输出)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-YAML"><span class="nav-number">4.3.</span> <span class="nav-text">设置 YAML</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译前在viewer窗口预览文档"><span class="nav-number">5.</span> <span class="nav-text">编译前在viewer窗口预览文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rmarkdown转化中文字符为PDF的设置"><span class="nav-number">6.</span> <span class="nav-text">rmarkdown转化中文字符为PDF的设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中文模板-详细说明"><span class="nav-number">7.</span> <span class="nav-text">中文模板 详细说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
