@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-12-10T14:34:30.665Z</updated>
+  <updated>2017-12-10T14:43:46.327Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https:///AnJingwd.github.io/2017/12/10/Rmarkdown%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E6%8A%A5%E5%91%8A/"/>
     <id>https:///AnJingwd.github.io/2017/12/10/Rmarkdown生成动态报告/</id>
     <published>2017-12-10T02:54:17.000Z</published>
-    <updated>2017-12-10T14:34:30.665Z</updated>
+    <updated>2017-12-10T14:43:46.327Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">Rmarkdown生成动态报告</blockquote>
 
@@ -119,7 +119,7 @@ library(rmarkdown)
 <p><img src="https://i.imgur.com/qHiN24R.jpg" alt=""></p>
 <p>使用ctrl + shift + k的快捷键，稍等片刻会出现中文PDF</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.xueqing.tv/cms/article/96" target="_blank" rel="external">利用R-Markdown和Knitr创建动态报告（第一部分）</a></p>
-<p>（2）利用R-Markdown和Knitr创建动态报告（第二部分）</p>
+<p>（2）<a href="http://www.xueqing.tv/cms/article/101" target="_blank" rel="external">利用R-Markdown和Knitr创建动态报告（第二部分）</a></p>
 <p>（3）<a href="https://www.cnblogs.com/Xeonilian/p/7142379.html" target="_blank" rel="external">R Markdown 设置和使用</a></p>
 <p>（4）<a href="http://www.cnblogs.com/Xeonilian/p/7608290.html" target="_blank" rel="external">R Markdown + Infinite Moon Reader + 编辑实时更新</a></p>
 <p>（5）<a href="http://blog.rainy.im/2015/05/16/rmarkdown-in-rstudio/" target="_blank" rel="external">RStudio 中的 R Markdown（推荐）</a></p>
