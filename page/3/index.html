@@ -535,61 +535,14 @@
 
       
         
-          
-            <h1 id="GWAS介绍"><a href="#GWAS介绍" class="headerlink" title="GWAS介绍"></a>GWAS介绍</h1><p>&emsp;&emsp;全基因组关联分析是对多个个体在全基因组范围的遗传变异多态性进行检测，获得基因型，进而将基因型与可观测的性状，即表型，进行群体水平的统计学分析，根据统计量或P值筛选出最有可能影响该性状的遗传变异。</p>
-<p><img src="http://i.imgur.com/tG0jxKr.png" alt=""></p>
-<h1 id="分析流程"><a href="#分析流程" class="headerlink" title="分析流程"></a>分析流程</h1><p><strong>材料选择，性状调查，基因分型，模型选择，关联结果，数据深度挖掘</strong></p>
-<p><strong>GWAS分析选材原则</strong></p>
-<ul>
-<li>保证选取的样本具有足够的代表性；</li>
-<li>样本中不能有明显的亚群分化（例如生殖隔离等），因为明显分化的群体会使得遗传背景的噪音较大；</li>
-<li>建议选择几个比较重要且遗传力较高的表型性状作为研究的重点；</li>
-<li>质量性状尽量为0、1二值性状，并且两类性状的样本数应当尽量相近；</li>
-<li>数量性状尽量精确量化记录（如抗病性可以量化为发病率、死亡率、存活率、病斑数、病斑面积等，而不是简单的多级衡量），并使表型总体呈近似正态分布；</li>
-<li>栽培植物可以进行多年多点多重复记录，多年多点的观测结果可以分别进行关联分析，多重复可以取平均值进行关联分析；</li>
-<li>表型变异丰富、性状有明显的主效位点控制时样本量可以适当减小，推荐200个以上；表型差异较小，多基因控制时样本量应当增大，推荐500个以上。</li>
-</ul>
-<p>自然群体GWAS的研究对象<br>非严格遗传群体：</p>
-<ol>
-<li>种质资源</li>
-<li>半同胞家系，混合家系</li>
-<li>MAGIC/NAM家系</li>
-<li>多个F2/RIL/全同胞家系</li>
-<li>高杂合类物种：F1群体</li>
-</ol>
-<p>师兄你好！<br>打扰百忙之中的你，学弟我甚感抱歉。我是南农的在读研究生，正在试图运用关联分析方法进行大豆各性状的QTL分析研究，很荣幸拜读了你发表在《TAG》和《作物学报》上的几篇文章，受益匪浅。</p>
-<p>由于底子浅薄，我对关联分析方面的一些问题不能很透彻地理解。比如在群体材料方面，<strong>关联分析要求材料应为相互间无直接亲缘关系。请问这一要求是为了能获得更多更广泛的等位基因数目、获得更好的多态吗？</strong> 这一要求是不是也与群体LD的强弱有关？然而即使材料间没有直接亲缘关系，但是当取材时如果这些材料出现产地位置的结构特征，而会使分析结果产生假阳性。为避免产生假阳性得用STRUCTURE对群体结构进行校正，请问这里所用的软件（STRUCTURE）和方法，与SA方法中对群体分层进行校正所用的相同吗？</p>
-<p>期待你的回信与帮助，谢谢！</p>
-<p>你好，感谢你对我研究的关注。</p>
-<p><strong>材料选择所要求的无直接亲缘关系，主要是为了避免等位变异在家族的传递不平衡，以及由于亲缘关系造成的群体的亚分等群体结构问题，因此获得更多更广泛的等位基因数目及多态不是问题的核心。</strong></p>
-<p><strong>材料不管怎么选都会有假阴、假阳这样那样的问题</strong>，因此你所说的“产地位置的结构特征，而会使分析结果产生假阳性”不无可能，这 才使得人们考虑用<strong>统计方法做矫正</strong>；structure软件分析原理我的论文里有所涉及，如要深究可参考论文后给出的参考文献 Pritchard J K, Stephens M, Donnelly P. Inference of population structure using multilocus genotype data. Genetics, 2000, 155:945-959<br>， 可以肯定的说它与SA方法中对群体分层进行校正所用的不相同。</p>
-<p><strong>模型选择</strong></p>
-<p><img src="http://i.imgur.com/AYIEPHG.png" alt=""></p>
-<p>&emsp;&emsp;目前的 GWAS 多采用两个阶段的设计：首先采用覆盖整个基因组的高通量 SNP 分型芯片（如affy6.0）对一批样本进行扫描，然后筛选出最显著的 SNP（如 P&lt;10-7）供第二阶段进行扩大样本验证,<strong>第一步选的snp大多是tag snp</strong>。GWAS 两阶段研究设计减少了基因分型的工作量和花费，同时通过重复实验降低了研究的假阳性率。GWAS 的整体过程比较复杂，其大致流程如下：</p>
-<ol>
-<li>经过处理的 DNA 样品与高通量的 SNP 分型芯片进行杂交；</li>
-<li>通过特定的扫描仪对芯片进行扫描，将每个样品所有的 SNP 分型信息以数字形式储存于计算机中</li>
-<li>对原始数据进行质控，检测分型样本和位点的得率（call rate） 、病例对照的匹配程度、人群结构的分层情况等；</li>
-<li>对经过各种严格质控的数据进行关联分析；</li>
-<li>根据关联分析结果，综合考虑基因功能多方面因素后，筛选出最有意义的一批 SNP 位点；</li>
-<li>根据需要验证 SNP 的数量选择合适通量的基因分型技术在独立样本中进行验证；</li>
-<li>合并分析 GWAS 两阶段数据。</li>
-</ol>
-<h1 id="关联分析的优点"><a href="#关联分析的优点" class="headerlink" title="关联分析的优点"></a>关联分析的优点</h1><p>（1）不需要专门构建作图群体，自然群体或种质资源都可作为研究材料；<br>（2）广泛的遗传材料可同时考察多个性状大多数QTL关联位点及其等位变异，不受传统的FBL的“两亲本范围”的限制；<br>（3）自然群体经历了许多轮重组后，LD衰减，存在于很短的距离内，保证了定位的更高精确性</p>
-<h1 id="生物信息学中的连锁分析与关联分析有哪些区别和联系？"><a href="#生物信息学中的连锁分析与关联分析有哪些区别和联系？" class="headerlink" title="生物信息学中的连锁分析与关联分析有哪些区别和联系？"></a>生物信息学中的连锁分析与关联分析有哪些区别和联系？</h1><ol>
-<li>连锁分析的定位依赖于家族中标记基因型与表现性的共分离，从而探知影响疾病风险的遗传位点</li>
-<li>关联分析的定位方法则是通过探测在种群水平上，哪个基因型或等位基因位点与表现性有关，并且这种相关能够在家系样本或者随机个体间实现（GWAS）</li>
-</ol>
-<h1 id="关联分析与-QTL定位的区别"><a href="#关联分析与-QTL定位的区别" class="headerlink" title="关联分析与 QTL定位的区别"></a>关联分析与 QTL定位的区别</h1><p><img src="http://i.imgur.com/3vB61sp.png" alt=""></p>
-<h1 id="全基因组关联研究-GWAS-后的新热点？"><a href="#全基因组关联研究-GWAS-后的新热点？" class="headerlink" title="全基因组关联研究(GWAS)后的新热点？"></a>全基因组关联研究(GWAS)后的新热点？</h1><p>&emsp;&emsp;<strong>GWAS的目的是从常见基因突变(common variant，&gt;5％的人口所具有的突变)中来找到至病的变异。现在越来越多的人开始还疑这个昂贵方法的普适性。</strong> 因为到目前为止，没有一个真正成功地用这个方法找到至病的变异，只能找到一些似是而非的、有统计意义但没有什么用的突变。</p>
-<p><strong>现在，有些人认为应该找罕见基因突变（rare variant，0.1-1％的人口所具有的突变）中来找到至病的变异。对于这样的变异，GWAS的方法就无效了。这个提议的假定是常见基因突变致病可能性不大，只有罕见基因突变才能致病。</strong>Hall的文中提到普林斯顿大学教授David Botstein认为1.4亿美金的HapMap(人类基因组单体型图计划)是巨大的失败(magnificent failure)。</p>
-<p>所以在可见的将来，随着下一代测序技术(Next generation sequencing)的普及，寻找常见基因突变的GWAS的死亡将催生寻找罕见基因突变的方法及其应用。一个新的热点即将涌现。</p>
-<p>&emsp;&emsp;我不认为GWAS是一个完全的失败，对于有些疾病还是发现了一些治病基因的。Nature Genetics上有很多的例子。另外，HapMap我也不认为是一个彻底的失败。毕竟，很多信息具有重大的参考价值，比如Allele frequency，不做怎么知道呢？第三，rare variants究竟有多大的作用还是一个比较不明朗的命题。如果真的是只有rare variants才能导致疾病，那每个人的治病基因就都不一样了。我同意你的结论，next generation sequencing是技术发展的根本，<strong>但是我觉得除了rare variants之外，通过NGS找到novel variation，进而找到causal variation也会是一个重要的研究方向。</strong> 在这里面，bioinformatics（而不是statistician）的作用就会更为明显。</p>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="http://blog.sciencenet.cn/blog-472757-376473.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-472757-376473.html</a></p>
-<p>（2）<a href="http://blog.sina.com.cn/s/blog_4b55f4130100us1m.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4b55f4130100us1m.html</a></p>
-<p>（3）<a href="http://blog.sina.com.cn/s/blog_4b55f4130100ibtg.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4b55f4130100ibtg.html</a></p>
-
-          
+          <blockquote class="blockquote-center">全基因组关联分析(GWAS)简介</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="https:/AnJingwd.github.io/2017/08/18/GWAS-简介/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
