@@ -213,9 +213,12 @@ library(rmarkdown)
     <link href="https:///AnJingwd.github.io/2017/11/25/%E6%96%87%E7%8C%AE%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%BC%95%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
     <id>https:///AnJingwd.github.io/2017/11/25/文献查询与引用技巧/</id>
     <published>2017-11-25T11:24:52.000Z</published>
-    <updated>2017-12-15T09:59:47.662Z</updated>
+    <updated>2017-12-15T10:27:28.174Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="只查询review"><a href="#只查询review" class="headerlink" title="只查询review"></a>只查询review</h1><p><img src="https://i.imgur.com/ugJKXz7.jpg" alt=""></p>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">文献查询与引用技巧</blockquote>
+
+<a id="more"></a>
+<h1 id="只查询review"><a href="#只查询review" class="headerlink" title="只查询review"></a>只查询review</h1><p><img src="https://i.imgur.com/ugJKXz7.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/E9XOueN.jpg" alt=""></p>
 <h1 id="sci-hub最新地址（20171215）"><a href="#sci-hub最新地址（20171215）" class="headerlink" title="sci-hub最新地址（20171215）"></a>sci-hub最新地址（20171215）</h1><ol>
 <li><a href="https://scihub22266qpcxt.onion.link/" target="_blank" rel="external">https://scihub22266qpcxt.onion.link/</a></li>
@@ -281,7 +284,7 @@ library(rmarkdown)
     
     <summary type="html">
     
-      &lt;h1 id=&quot;只查询review&quot;&gt;&lt;a href=&quot;#只查询review&quot; class=&quot;headerlink&quot; title=&quot;只查询review&quot;&gt;&lt;/a&gt;只查询review&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/ugJKXz7.jpg&quot;
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;文献查询与引用技巧&lt;/blockquote&gt;
     
     </summary>
     
