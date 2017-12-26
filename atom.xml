@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-12-10T14:43:46.327Z</updated>
+  <updated>2017-12-26T13:07:01.898Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,158 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GATK3.8分析环境搭建（一）</title>
+    <link href="https:///AnJingwd.github.io/2017/12/26/GATK3.8%E5%88%86%E6%9E%90%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>https:///AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建（一）/</id>
+    <published>2017-12-26T10:15:59.000Z</published>
+    <updated>2017-12-26T13:07:01.898Z</updated>
+    
+    <content type="html"><![CDATA[<p><blockquote class="blockquote-center">GATK3.8相关软件及文件准备</blockquote><br><a id="more"></a></p>
+<ul>
+<li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tool Documentation</a> （包含每个工具的使用说明）</li>
+<li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tutorials</a> (包含具体参数和细节)</li>
+<li><a href="https://software.broadinstitute.org/gatk/best-practices/" target="_blank" rel="external">GATK Best Practices</a> （包含两个主流的分析流程）</li>
+</ul>
+<p><strong>全外显子测序call Germline SNP &amp; Indel流程图</strong></p>
+<p><img src="https://i.imgur.com/jvbLuTm.jpg" alt=""></p>
+<p><strong>体细胞拷贝数变异分析流程!</strong></p>
+<p><a href="https://i.imgur.com/844zfg1.jpg" target="_blank" rel="external"></a></p>
+<ul>
+<li><a href="https://gatkforums.broadinstitute.org/gatk" target="_blank" rel="external">Forum</a> （提问和搜索报错解决很有用）</li>
+</ul>
+<p><img src="https://i.imgur.com/PADtsMb.jpg" alt=""></p>
+<ul>
+<li>Blog (包含历年的workshop材料，学习用得上)</li>
+</ul>
+<p><a href="https://drive.google.com/drive/folders/0B7akc6CTmxIHNGpibUFTNzVRazg?usp=sharing" target="_blank" rel="external">Presentation slides and tutorial materials - Pretoria 2017（需要翻墙才能下载）</a></p>
+<h1 id="GATK3-8下载"><a href="#GATK3-8下载" class="headerlink" title="GATK3.8下载"></a>GATK3.8下载</h1><p>GATK=GenomeAnalysisToolkit，最新稳定版为<a href="https://software.broadinstitute.org/gatk/download/" target="_blank" rel="external">GATK3.8</a> （<strong>需要注册！</strong>）</p>
+<p>&emsp;&emsp;电脑软件在投放市场前，需要有人测试一下，看看是不是有问题，在开发该软件的公司内部的由该公司内部人员测试的称为：alfa测试。alfa测试主要看有没有功能缺失或系统错误，<strong>alfa测试完后一般不会有大问题了，然后把软件拿给用户测试，称为：beta测试，主要是看用户对软件外观，使用方便等的反映。</strong> 如果beta1版用户反映有问题，拿到公司修改，改完后发布beta2版，还有不满意的地方，再改，再发布beta3版，直到用户满意，或正式版发布为止。</p>
+<p><a href="https://software.broadinstitute.org/gatk/download/beta" target="_blank" rel="external">GATK4.Beta.5</a>即为测试版</p>
+<pre><code>#解压：
+tar -jxvf GenomeAnalysisTK-3.8-0.tar.bz2
+</code></pre><h3 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h3><p>（1）java版本要求大于1.8.x</p>
+<pre><code>java -version
+</code></pre><p>（2）测试</p>
+<pre><code>java -jar /path/to/GenomeAnalysisTK.jar -h
+</code></pre><p>（3）设置别名</p>
+<pre><code>alias gatk=&quot;/home/wangdong/softwares/GATK3.8/GenomeAnalysisTK.jar&quot;
+</code></pre><p>（4）下载java1.7版本，解压即可（MuTect1.1.7需要）</p>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html" target="_blank" rel="external">Java SE 7 Archive Downloads</a></p>
+<p><img src="https://i.imgur.com/3T122nP.png" alt=""></p>
+<p>（5）mutect下载安装</p>
+<ul>
+<li><a href="https://github.com/broadinstitute/mutect" target="_blank" rel="external">github上mutect源码 broadinstitute/mutect(不必下载)</a></li>
+<li><a href="https://software.broadinstitute.org/gatk/download/mutect" target="_blank" rel="external">GATK官网提供的编译好的MuTect1.1.7</a></li>
+<li><a href="http://archive.broadinstitute.org/cancer/cga/mutect_run" target="_blank" rel="external">How do I run MuTect?（参数详解及使用例子）</a></li>
+</ul>
+<p>（6） 其他软件及环境配置</p>
+<p>Software packages</p>
+<ul>
+<li>BWA</li>
+<li>SAMtools</li>
+<li>Picard</li>
+<li>IGV</li>
+<li>RStudio IDE and R libraries ggplot2 and gsalib</li>
+</ul>
+<p>参考：<a href="https://gatkforums.broadinstitute.org/gatk/discussion/2899/howto-install-all-software-packages-required-to-follow-the-gatk-best-practices" target="_blank" rel="external">(howto) Install all software packages required to follow the GATK Best Practices.</a></p>
+<h1 id="Reference-sequence和annotation下载"><a href="#Reference-sequence和annotation下载" class="headerlink" title="Reference sequence和annotation下载"></a>Reference sequence和annotation下载</h1><p><strong>（请务必使用GATK resource bundle提供的参考基因组相关文件非常重要！）</strong></p>
+<p>GATK resource bundle介绍：<br><a href="http://gatkforums.broadinstitute.org/discussion/1213/whats-in-the-resource-bundle-and-how-can-i-get-it" target="_blank" rel="external">http://gatkforums.broadinstitute.org/discussion/1213/whats-in-the-resource-bundle-and-how-can-i-get-it</a></p>
+<p>GATK resource bundle FTP地址：<br><a href="http://gatkforums.broadinstitute.org/discussion/1215/how-can-i-access-the-gsa-public-ftp-server" target="_blank" rel="external">http://gatkforums.broadinstitute.org/discussion/1215/how-can-i-access-the-gsa-public-ftp-server</a></p>
+<p>（1）使用Xftp5等FTP server登陆</p>
+<pre><code>location: ftp.broadinstitute.org/bundle
+username: gsapubftp-anonymous
+password:
+</code></pre><p>（2）使用浏览器登陆</p>
+<pre><code>ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/
+</code></pre><h2 id="Reference-sequence"><a href="#Reference-sequence" class="headerlink" title="Reference sequence"></a>Reference sequence</h2><ul>
+<li>ucsc.hg19.dict.gz</li>
+<li>ucsc.hg19.fasta.fai.gz</li>
+<li>ucsc.hg19.fasta.gz</li>
+</ul>
+<h2 id="annotation"><a href="#annotation" class="headerlink" title="annotation"></a>annotation</h2><ul>
+<li>1000G_omni2.5.hg19.sites.vcf.idx</li>
+<li>1000G_omni2.5.hg19.sites.vcf.idx</li>
+<li>1000G_phase1.indels.hg19.sites.vcf</li>
+<li>1000G_phase1.indels.hg19.sites.vcf.idx</li>
+<li>dbsnp_138.hg19.vcf</li>
+<li>dbsnp_138.hg19.vcf.idx</li>
+<li>hapmap_3.3.hg19.sites.vcf</li>
+<li>hapmap_3.3.hg19.sites.vcf.idx</li>
+<li>Mills_and_1000G_gold_standard.indels.hg19.sites.vcf</li>
+<li>Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx</li>
+</ul>
+<ol>
+<li><p>dbSNP 用于去除部分候选突变，其在其他人中已经被观察到的，最有可能是胚系突变。因为提交给dbSNP数据库的突变验证水平很低，所以我们不能确定标记为胚系突变或者体细胞突变的标签是否可信。</p>
+</li>
+<li><p>相比之下，COSMIC是一个经过更高验证的资源，所以它基本上被用作白名单来“拯救”候选突变，否则这些候选突变将会因为在正常和/或dbSNP中而被去除。 我们期望在dbSNP中被标记为somatic的任何东西都将在COSMIC中，所以我们可以依靠COSMIC来重新回收这些位点。</p>
+</li>
+<li><p>当前最好的已知indels集合将被用于局部重新比对（local realignment）（请注意，我们不再使用dbSNP）; 使用这两个文件：</p>
+<ul>
+<li>1000G_phase1.indels.b37.vcf (currently from the 1000 Genomes Phase I indel calls)</li>
+<li>Mills_and_1000G_gold_standard.indels.b37.sites.vcf</li>
+</ul>
+</li>
+<li><p>If you run any GATK tool on a vcf that doesn’t have an index, it will automatically generate one for you, so knock yourself out。 <a href="https://gatkforums.broadinstitute.org/gatk/discussion/5426/generate-an-idx-file-for-a-vcf" target="_blank" rel="external">参考：generate an idx file for a vcf 
+</a></p>
+<h2 id="GATK-Prepare-Reference-Files"><a href="#GATK-Prepare-Reference-Files" class="headerlink" title="GATK: Prepare Reference Files"></a>GATK: Prepare Reference Files</h2></li>
+</ol>
+<p>参考： <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk" target="_blank" rel="external">(howto) Prepare a reference for use with BWA and GATK</a></p>
+<p>Prerequisites</p>
+<ul>
+<li>Installed BWA</li>
+<li>Installed SAMTools</li>
+<li>Installed Picard</li>
+</ul>
+<p>Steps</p>
+<ul>
+<li><p>Generate the BWA index</p>
+<p>  bwa index -a bwtsw ucsc.hg19.fasta &emsp;&emsp;#-a bwtsw指定索引算法</p>
+</li>
+<li><p>Generate the Fasta file index</p>
+<p>  samtools faidx ucsc.hg19.fasta &emsp;&emsp;#将生成ucsc.hg19.fasta.fai 文件</p>
+</li>
+<li><p>Generate the sequence dictionary（也可直接用已下载的ucsc.hg19.dict文件）</p>
+<p>  java -jar picard.jar CreateSequenceDictionary \ </p>
+<p>  REFERENCE=reference.fa \ </p>
+<p>  OUTPUT=reference.dict </p>
+</li>
+</ul>
+<p>（更详细的可参考：<a href="http://people.duke.edu/~ccc14/duke-hts-2017/Statistics/08032017/GATK-reference.html" target="_blank" rel="external">链接</a>）</p>
+<h2 id="Cosmic-gz文件下载"><a href="#Cosmic-gz文件下载" class="headerlink" title="Cosmic*.gz文件下载"></a>Cosmic*.gz文件下载</h2><p><a href="http://cancer.sanger.ac.uk/cosmic/download" target="_blank" rel="external">COSMIC</a>需要注册</p>
+<p>下载</p>
+<ul>
+<li>CosmicCodingMuts.vcf</li>
+<li>CosmicNonCodingVariants.vcf</li>
+</ul>
+<h2 id="Cosmic-hg19-vcf文件生成"><a href="#Cosmic-hg19-vcf文件生成" class="headerlink" title="Cosmic.hg19.vcf文件生成"></a>Cosmic.hg19.vcf文件生成</h2><p><a href="https://gatkforums.broadinstitute.org/gatk/discussion/2226/cosmic-and-dbsnp-files-for-mutect" target="_blank" rel="external">COSMIC and dbSNP files for MuTect</a></p>
+<p>sortByRef.pl was part of <a href="https://github.com/amplab/smash" target="_blank" rel="external">https://github.com/amplab/smash</a></p>
+<pre><code>gunzip Cosmic*.gz
+grep &quot;^#&quot; CosmicCodingMuts.vcf &gt; VCF_Header
+grep -v &quot;^#&quot; CosmicCodingMuts.vcf &gt; Coding.clean
+grep -v &quot;^#&quot; CosmicNonCodingVariants.vcf &gt; NonCoding.clean
+cat Coding.clean NonCoding.clean | sort -gk 2,2 | awk &apos;{print &quot;chr&quot;$0}&apos; | perl sortByRef.pl --k 1 - hg19UCSC.fa.fai &gt; Cosmic.hg19
+cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
+</code></pre><h1 id="GATK输入文件要求"><a href="#GATK输入文件要求" class="headerlink" title="GATK输入文件要求"></a>GATK输入文件要求</h1><p><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1204" target="_blank" rel="external">参考：What input files does the GATK accept / require?</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.plob.org/article/7070.html" target="_blank" rel="external">GATK使用（推荐）</a></p>
+<p>（2）<a href="https://software.broadinstitute.org/gatk/documentation/topic?name=problems" target="_blank" rel="external">使用GATK过程常见报错及解决</a></p>
+<p>（3）<a href="http://blog.sina.com.cn/s/blog_587cc04e0101l4bs.html" target="_blank" rel="external">GATK使用 备忘录（推荐）</a></p>
+<p>（4）<a href="https://www.bits.vib.be/training/286" target="_blank" rel="external">GATK Best practices for variant discovery （BITS Courses    TRAINING AT VIB）</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;GATK3.8相关软件及文件准备&lt;/blockquote&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
+    
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
+    
+  </entry>
   
   <entry>
     <title>Rmarkdown生成动态报告</title>
@@ -1590,1086 +1742,6 @@ CMD    //命令的名称和参数
     
     
       <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常用链接（持续更新）</title>
-    <link href="https:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
-    <id>https:///AnJingwd.github.io/2017/08/19/常用链接（持续更新）/</id>
-    <published>2017-08-19T06:51:52.000Z</published>
-    <updated>2017-12-14T08:36:14.235Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">常用链接（持续更新）</blockquote>
-
-<a id="more"></a>
-<h1 id="论坛"><a href="#论坛" class="headerlink" title="论坛"></a>论坛</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://www.cmt.com.cn/" target="_blank" rel="external">医学论坛网</a></td>
-<td>医学资讯及文献导读</td>
-</tr>
-<tr>
-<td><a href="http://www.seqanswers.com/" target="_blank" rel="external">seqanswer</a></td>
-<td>关于测序的一个论坛</td>
-</tr>
-<tr>
-<td><a href="https://www.plob.org/" target="_blank" rel="external">PLoB</a></td>
-<td>Public Library of Bioinformatics (中文博客)</td>
-</tr>
-<tr>
-<td><a href="http://www.rna-seqblog.com/" target="_blank" rel="external">rna-seqblog</a></td>
-<td>RNA-seq英文博客</td>
-</tr>
-<tr>
-<td><a href="http://www.biotrainee.com/forum.php" target="_blank" rel="external"> biotrainee</a></td>
-<td>生信技能树</td>
-</tr>
-<tr>
-<td><a href="http://www.oschina.net/" target="_blank" rel="external">oschina</a></td>
-<td>开源中国</td>
-</tr>
-<tr>
-<td><a href="https://d.cosx.org/" target="_blank" rel="external">Capital of Statistics, COS</a></td>
-<td>统计之都</td>
-</tr>
-<tr>
-<td><a href="http://shujuren.org/" target="_blank" rel="external">数据人网 </a></td>
-<td>大数据</td>
-</tr>
-<tr>
-<td><a href="http://qgenomics.org/" target="_blank" rel="external">Qgenomics</a></td>
-<td>人基因组学与生物信息学(推荐)</td>
-</tr>
-<tr>
-<td><a href="http://www.xueqing.tv/cms/article/243" target="_blank" rel="external">雪晴数据网资讯前沿</a></td>
-<td>R与python及数据分析（推荐）</td>
-</tr>
-</tbody>
-</table>
-<h1 id="学术导航"><a href="#学术导航" class="headerlink" title="学术导航"></a>学术导航</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://sxwldh.scholarnet.cn/" target="_blank" rel="external">学术网</a></td>
-<td>文献，科技部，工程院，基金，论坛</td>
-</tr>
-<tr>
-<td><a href="http://www.6453.net/" target="_blank" rel="external">龙猫学术导航</a></td>
-<td>国内外文献图书，科研工具，专利标准导航，信息交流等</td>
-</tr>
-<tr>
-<td><a href="http://www.gaokeyan.com/" target="_blank" rel="external">搞科研</a></td>
-<td>学术圈新闻，科研工具，生活小工具，在线小工具等</td>
-</tr>
-<tr>
-<td><a href="http://kbs.cnki.net/" target="_blank" rel="external">学术网站大全</a></td>
-<td>cnki 官方，绝对够全</td>
-</tr>
-</tbody>
-</table>
-<h1 id="linux及数据分析"><a href="#linux及数据分析" class="headerlink" title="linux及数据分析"></a>linux及数据分析</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://man.linuxde.net/" target="_blank" rel="external">Linux命令大全</a></td>
-<td>linux命令搜索，查看帮助</td>
-</tr>
-<tr>
-<td><a href="http://dongweiming.github.io/sed_and_awk/#/2" target="_blank" rel="external">awk &amp; sed</a></td>
-<td>awk &amp;sed ppt教程</td>
-</tr>
-<tr>
-<td><a href="http://userweb.eng.gla.ac.uk/umer.ijaz/bioinformatics/linux.html" target="_blank" rel="external">Linux command line exercises for NGS data processing</a></td>
-<td>NGS数据处理实践过程中的linux命令行知识点</td>
-</tr>
-<tr>
-<td><a href="http://wiki.bits.vib.be/index.php/Introduction_to_Linux_for_bioinformatics" target="_blank" rel="external">Introduction to Linux for bioinformatics</a></td>
-<td>VIB Bioinformatics Core Wiki</td>
-</tr>
-<tr>
-<td><a href="https://github.com/qiwsir/ITArticles/tree/master/Linux" target="_blank" rel="external">ITArticles/Linux/</a></td>
-<td>linux技术文章</td>
-</tr>
-</tbody>
-</table>
-<h1 id="分析流程"><a href="#分析流程" class="headerlink" title="分析流程"></a>分析流程</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://userweb.eng.gla.ac.uk/umer.ijaz/bioinformatics/Illumina_workflow.html" target="_blank" rel="external">Illumina Amplicons Processing Workflow</a></td>
-<td>16S pipelines</td>
-</tr>
-<tr>
-<td><a href="http://www.jianshu.com/p/938d362fc48d" target="_blank" rel="external">bio简书</a></td>
-<td>bwa+samtools+picardtools+GATK call SNP 流程</td>
-</tr>
-</tbody>
-</table>
-<h1 id="生信数据库"><a href="#生信数据库" class="headerlink" title="生信数据库"></a>生信数据库</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://www.snpedia.com" target="_blank" rel="external">SNPedia</a></td>
-<td>link SNP genotypes to specific traits （SNP与人类疾病，人群频率，文献报道）</td>
-</tr>
-<tr>
-<td><a href="https://link.zhihu.com/?target=http%3A//www.ebi.ac.uk/gwas/" target="_blank" rel="external">GWAS Catalog </a></td>
-<td>GWAS研究的SNP,triat,Study等</td>
-</tr>
-<tr>
-<td><a href="http://omim.org" target="_blank" rel="external"> OMIM(Online Mendelian Inheritance in Man)</a> &emsp; <a href="http://www.ncbi.nlm.nih.gov/gap/phegeni/" target="_blank" rel="external">PheGenI</a>  &emsp; <a href="http://www.ncbi.nlm.nih.gov/clinvar/" target="_blank" rel="external">ClinVar</a>  &emsp; <a href="http://www.phenoscanner.medschl.cam.ac.uk/phenoscanner" target="_blank" rel="external">Pheno-scanner</a></td>
-<td>基因型和表明相互关联数据库</td>
-</tr>
-<tr>
-<td><a href="https://link.zhihu.com/?target=http%3A//www.mirbase.org/" target="_blank" rel="external">miRBase</a></td>
-<td>miRNA “官方”列表。</td>
-</tr>
-<tr>
-<td><a href="http://timetree.org/" target="_blank" rel="external">TimeTree</a></td>
-<td>进化树的时间尺度。</td>
-</tr>
-<tr>
-<td><a href="http://pdgenetics.org/" target="_blank" rel="external">IPDGC</a></td>
-<td>International Parkinson Disease Genomics Consortium</td>
-</tr>
-<tr>
-<td><a href="http://portals.broadinstitute.org/collaboration/giant/index.php/GIANT_consortium" target="_blank" rel="external">GIANT</a></td>
-<td>Genetic Investigation of Anthropometric Traits)</td>
-</tr>
-<tr>
-<td><a href="https://wy2160640.github.io/%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/2017/10/26/databases-and-webserver.html" target="_blank" rel="external">2017NAR发布的收录数据库和web应用网站</a></td>
-<td>十分全面（推荐）</td>
-</tr>
-<tr>
-<td>ensembl: ftp://ftp.ensembl.org/pub) &emsp;NCBI: ftp://ftp.ncbi.nih.gov/genomes/ &emsp; UCSC: ftp://hgdownload.soe.ucsc.edu/goldenPath &emsp; HapMap:ftp://ftp.ncbi.nlm.nih.gov/hapmap/</td>
-<td>常用数据库FTP地址</td>
-</tr>
-</tbody>
-</table>
-<h1 id="开发社区"><a href="#开发社区" class="headerlink" title="开发社区"></a>开发社区</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://www.biostars.org/" target="_blank" rel="external">Biostars</a></td>
-<td>专注于生物信息学，计算基因组学和生物数据分析的问答社区</td>
-</tr>
-<tr>
-<td><a href="https://segmentfault.com/" target="_blank" rel="external">Segmentfault</a></td>
-<td>一个专注于解决编程问题，提高开发技能的社区</td>
-</tr>
-<tr>
-<td><a href="https://stackoverflow.com/" target="_blank" rel="external">Stackoverflow</a></td>
-<td>编程相关的IT技术问答网站</td>
-</tr>
-<tr>
-<td><a href="https://github.com/" target="_blank" rel="external">GitHub</a></td>
-<td>面向开源及私有软件项目的git托管平台</td>
-</tr>
-<tr>
-<td><a href="https://www.gitbook.com/explore" target="_blank" rel="external">Gitbook</a></td>
-<td>电子书搜索下载与diy</td>
-</tr>
-</tbody>
-</table>
-<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://pymotw.com/2/py-modindex.html" target="_blank" rel="external">PYMOTW</a></td>
-<td>Python2标准库的使用</td>
-</tr>
-<tr>
-<td><a href="https://github.com/jorvis/biocode" target="_blank" rel="external">Bioinformatics code libraries and scripts</a></td>
-<td>常遇到的问题都有脚本（py/pl）</td>
-</tr>
-<tr>
-<td><a href="http://simple-is-better.com/sites/" target="_blank" rel="external">Python4cn(news, jobs)</a></td>
-<td>Python商业网站,技术博客,开源项目,图书 ,教程,讨论区等</td>
-</tr>
-<tr>
-<td><a href="http://www.503error.com/category/python" target="_blank" rel="external">张志明的个人博客</a></td>
-<td>python，shell,运维（推荐）</td>
-</tr>
-<tr>
-<td><a href="http://cuiqingcai.com/" target="_blank" rel="external">静觅 崔庆才的个人博客</a></td>
-<td>python 爬虫</td>
-</tr>
-<tr>
-<td><a href="https://inventwithpython.com/blog/" target="_blank" rel="external">The Invent with Python Blog</a></td>
-<td>python英文博客</td>
-</tr>
-</tbody>
-</table>
-<h1 id="MySQL数据库与生信"><a href="#MySQL数据库与生信" class="headerlink" title="MySQL数据库与生信"></a>MySQL数据库与生信</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://barc.wi.mit.edu/education/bioinfo2006/db4bio/" target="_blank" rel="external">Relational Databases For Biologists:Efficiently Managing And Manipulating Your Data (2006)</a></td>
-<td>MySQL数据库操作与设计（推荐）</td>
-</tr>
-</tbody>
-</table>
-<h1 id="在线小工具"><a href="#在线小工具" class="headerlink" title="在线小工具"></a>在线小工具</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://tool.oschina.net/" target="_blank" rel="external">在线工具</a></td>
-<td>开源中国开发的，主要面向码农</td>
-</tr>
-<tr>
-<td><a href="https://smallpdf.com/" target="_blank" rel="external">smallpdf</a></td>
-<td>pdf转word等，在线工具</td>
-</tr>
-<tr>
-<td><a href="http://tool.oschina.net/regex/" target="_blank" rel="external">正则表达式在线测试</a></td>
-<td>检查脚本中使用的正则表达式是否正确，提前发现问题</td>
-</tr>
-<tr>
-<td><a href="http://tool.oschina.net/commons?type=3" target="_blank" rel="external">RGB颜色对照表</a></td>
-<td>绘图配色必备</td>
-</tr>
-<tr>
-<td><a href="http://tool.oschina.net/highlight" target="_blank" rel="external">在线代码着色</a></td>
-<td>看看就好</td>
-</tr>
-<tr>
-<td><a href="http://tool.oschina.net/markdown" target="_blank" rel="external">在线 Markdown 编译器</a></td>
-<td>用着不错</td>
-</tr>
-<tr>
-<td><a href="http://tool.oschina.net/commons?type=4" target="_blank" rel="external">ASCII码对照表</a></td>
-<td>速查</td>
-</tr>
-<tr>
-<td><a href="http://cli.im/" target="_blank" rel="external">草料二维码（静态二维码）</a> &emsp;&emsp; <a href="http://www.qmacode.com" target="_blank" rel="external">Q码（动态二维码）</a></td>
-<td>比较好玩儿</td>
-</tr>
-<tr>
-<td><a href="http://www.tagxedo.com/" target="_blank" rel="external">Tagxedo</a></td>
-<td>词云（不是所有浏览器都可以）</td>
-</tr>
-<tr>
-<td><a href="http://www.pigai.org/" target="_blank" rel="external">批改网</a></td>
-<td>英语作文在线免费批改（还阔以）</td>
-</tr>
-<tr>
-<td><a href="http://jvenn.toulouse.inra.fr/app/index.html" target="_blank" rel="external">jvenn</a></td>
-<td>在线绘制维恩图</td>
-</tr>
-</tbody>
-</table>
-<h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://www.pdfdrive.net/" target="_blank" rel="external">PDFDRIVE</a></td>
-<td>搜索下载免费的pdf电子书</td>
-</tr>
-<tr>
-<td><a href="https://www.slideshare.net/" target="_blank" rel="external">slideshare</a></td>
-<td>免费且高质量英文ppt下载与分享</td>
-</tr>
-<tr>
-<td><a href="http://hippter.com/" target="_blank" rel="external">Hi,PPTer</a></td>
-<td>PPT资源导航</td>
-</tr>
-<tr>
-<td> <a href="http://gen.lib.rus.ec/" target="_blank" rel="external">Library Genesis</a></td>
-<td>外文书籍的超级好用网址,免费下载</td>
-</tr>
-<tr>
-<td><a href="http://www.freebookcentre.net/" target="_blank" rel="external">FreeBookCentre.net</a></td>
-<td>英文版电子书分类免费下载</td>
-</tr>
-<tr>
-<td><a href="https://www.gitbook.com/explore" target="_blank" rel="external">Explore · GitBook</a></td>
-<td>GitBook开源电子书搜索</td>
-</tr>
-<tr>
-<td><a href="https://www.pipipan.com/dir/1738248-7093330-60a297/" target="_blank" rel="external">PDF电子书基地</a></td>
-<td>免费下载，比较全</td>
-</tr>
-<tr>
-<td><a href="https://www.youtube.com/" target="_blank" rel="external">youtube</a></td>
-<td>可以搜索很多视频教程（可以设置加字幕和自动翻译）</td>
-</tr>
-<tr>
-<td><a href="http://www.ucdrs.superlib.net/" target="_blank" rel="external">全国图书馆参考咨询联盟</a></td>
-<td>查询和试看</td>
-</tr>
-<tr>
-<td><a href="https://www.jiumodiary.com/" target="_blank" rel="external">鸠摩搜书</a></td>
-<td>pdf和epub电子书，好用</td>
-</tr>
-<tr>
-<td><a href="http://b-ok.org/" target="_blank" rel="external">B–OK</a></td>
-<td>The world’s largest ebook library.</td>
-</tr>
-</tbody>
-</table>
-<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://www.bingdian001.com/?p=30" target="_blank" rel="external">冰点文库下载器</a></td>
-<td>自由下载百度、豆丁、丁香、MBALib、道客巴巴、Book118等文库文档</td>
-</tr>
-<tr>
-<td><a href="http://www.3322.cc/soft/201509041764.html" target="_blank" rel="external">visio</a></td>
-<td>专业绘制流程图</td>
-</tr>
-<tr>
-<td><a href="http://www.ggfwzs.com/" target="_blank" rel="external">谷歌访问助手</a></td>
-<td>“google/gmail/google scholar”一网打尽</td>
-</tr>
-<tr>
-<td><a href="http://ac.scmor.com/" target="_blank" rel="external">Google和Google学术可用链接汇总</a></td>
-<td>能用</td>
-</tr>
-<tr>
-<td><a href="http://www.flvcd.com/" target="_blank" rel="external">硕鼠网络视频下载器</a></td>
-<td>爬取网络视频</td>
-</tr>
-<tr>
-<td><a href="https://www.teamviewer.com/zhCN/" target="_blank" rel="external">TeamViewer 12</a></td>
-<td>远程控制</td>
-</tr>
-<tr>
-<td><a href="http://www.ddooo.com/softdown/69975.htm" target="_blank" rel="external">iMindMap 8</a></td>
-<td>思维导图</td>
-</tr>
-<tr>
-<td><a href="http://portal.rapidbbs.cn/thread-258839-1-1.html" target="_blank" rel="external"> OK</a>  &emsp; <a href="https://www.baidu.com/link?url=hUT9QV7X--KXNTJvmhoEYPeGscqZXjrf4kZ59gTFnbCzPhxhi0MXYMsmj8CcAZf8XFLCtqigWOWlyQONq5fmmxb8EJiyTG9J0oYodIdjP1O&amp;wd=&amp;eqid=a432813800016bba0000000359acf878" target="_blank" rel="external">美化大师</a></td>
-<td>PPT特效，模板插件</td>
-</tr>
-<tr>
-<td><a href="https://prezi.com/" target="_blank" rel="external">prize</a> &emsp; <a href="http://www.prezicn.com/portal.php" target="_blank" rel="external">prize中国</a></td>
-<td>prezi是一款在线的演讲文稿生成软件,“动态”PPT</td>
-</tr>
-<tr>
-<td><a href="http://www.duokan.com/" target="_blank" rel="external">多看</a></td>
-<td>自带取词及字典功能，并且笔记可以直接导入印象笔记（推荐）</td>
-</tr>
-<tr>
-<td><a href="https://laod.cn/tools/pan-download.html" target="_blank" rel="external">Pan Download</a></td>
-<td>百度网盘不限速下载软件</td>
-</tr>
-</tbody>
-</table>
-<h1 id="谷歌插件"><a href="#谷歌插件" class="headerlink" title="谷歌插件"></a>谷歌插件</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://chrome.google.com/webstore/detail/sci-hub-links/olcgjijbclchlliaffaghajlbfppkbkl?hl=zh-CN" target="_blank" rel="external">Sci-Hub Links</a></td>
-<td>转换 DOI 和 Pubmed 位址为 sci-hub 连结</td>
-</tr>
-<tr>
-<td><a href="https://chrome.google.com/webstore/detail/the-paper-link-for-pubmed/kgdcooicefdfjcplcnehfpbngjccncko?hl=zh-CN" target="_blank" rel="external">医学文献助手(有限版) </a></td>
-<td>在 PubMed 搜索结果页面，添加 PDF 链接、影响因子、F1000评论、作者发表记录 等</td>
-</tr>
-<tr>
-<td><a href="https://chrome.google.com/webstore/detail/dream-afar-new-tab/henmfoppjjkcencpbjaigfahdjlgpegn?hl=zh-CN" target="_blank" rel="external">远方 New Tab</a></td>
-<td>每天打开新页面都是一段不期而遇的旅行</td>
-</tr>
-<tr>
-<td><a href="https://chrome.google.com/webstore/detail/search-by-image-by-google/dajedkncpodkggklbegccjpmnglmnflm" target="_blank" rel="external">Search by Image (by Google) </a></td>
-<td>用图片搜索</td>
-</tr>
-<tr>
-<td><a href="https://xmt.cn/plugin/install?from=install" target="_blank" rel="external">新媒体管家</a></td>
-<td>微信公众号排版及扩展功能</td>
-</tr>
-<tr>
-<td><a href="https://sspai.com/post/40485" target="_blank" rel="external">油猴（Tampermonkey）</a> &emsp;  <a href="https://greasyfork.org/zh-CN/scripts/26556-vip%E8%A7%86%E9%A2%91%E7%A0%B4%E8%A7%A3" target="_blank" rel="external">推荐“油猴脚本” 爱奇艺，腾讯VIP视频破解</a> &emsp; <a href="https://www.52pojie.cn/thread-611926-1-1.html" target="_blank" rel="external">无需插件、软件 在线解析VIP视频</a></td>
-<td>通过安装各类脚本对网站进行定制</td>
-</tr>
-<tr>
-<td><a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwiW4cbiovnXAhXHnJQKHdjvDtsQFggmMAA&amp;url=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Ftabs-outliner%2Feggkanocgddhmamlbiijnphhppkpkmkl&amp;usg=AOvVaw3-ZaSQSB_r4pkmD2PDf6b9" target="_blank" rel="external">Tabs Outliner</a></td>
-<td>书签快速保存</td>
-</tr>
-<tr>
-<td><a href="http://www.jianshu.com/p/38764e98268a" target="_blank" rel="external">四大高质量且实用的chrome翻译插件</a></td>
-<td>推荐 </td>
-</tr>
-</tbody>
-</table>
-<h1 id="文献"><a href="#文献" class="headerlink" title="文献"></a>文献</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://www.researchgate.net/home" target="_blank" rel="external">Researchgate</a> &emsp; <a href="http://www.360doc.com/content/16/1029/00/6943848_602219154.shtml" target="_blank" rel="external">文献鸟</a></td>
-<td>文献推送，文献跟踪与速读小工具</td>
-</tr>
-<tr>
-<td><a href="https://apps.webofknowledge.com/UA_GeneralSearch_input.do?product=UA&amp;SID=Z249gIMNTCPIcZBS93N&amp;search_mode=GeneralSearch" target="_blank" rel="external">Web of Science</a></td>
-<td>大型综合性、多学科、核心期刊引文索引数据库</td>
-</tr>
-<tr>
-<td><a href="https://www.ncbi.nlm.nih.gov/pubmed/" target="_blank" rel="external">PubMed</a></td>
-<td>免费海量英文文献</td>
-</tr>
-<tr>
-<td><a href="http://www.cnki.net/" target="_blank" rel="external">中国知网</a></td>
-<td>中文期刊</td>
-</tr>
-<tr>
-<td><a href="http://www.lunwenxiazai.com/zhongwenku/" target="_blank" rel="external">论文下载网</a></td>
-<td>中文论文下载，知网，万方</td>
-</tr>
-<tr>
-<td><a href="http://sci-hub.cc/" target="_blank" rel="external">SCI-HUB</a></td>
-<td>收费文献免费下载</td>
-</tr>
-<tr>
-<td><a href="http://www.medsci.cn/sci/" target="_blank" rel="external">梅斯医学</a></td>
-<td>影响因子查询（APP更好用）</td>
-</tr>
-<tr>
-<td><a href="http://www.howsci.com/" target="_blank" rel="external">科研动力</a></td>
-<td>专注EndNote, 关注科研论文写作</td>
-</tr>
-<tr>
-<td><a href="https://www.gcbi.com.cn/gclib/html/index" target="_blank" rel="external">GCBI</a></td>
-<td>与PubMed同步并课显示影响因子</td>
-</tr>
-<tr>
-<td><a href="https://pubmedplus.com/#/index" target="_blank" rel="external">pubmedplus</a></td>
-<td>文献摘要自动翻译（翻译得比较好）</td>
-</tr>
-<tr>
-<td><a href="http://www.chinapubmed.net/" target="_blank" rel="external">China PubMed</a></td>
-<td>英文文献摘要翻译（更新不够快）</td>
-</tr>
-<tr>
-<td><a href="http://pubmed.ict.griffith.edu.au/" target="_blank" rel="external">Article-based PubMed Search Engine</a></td>
-<td>快速搜寻到与你的PubMed索引论文所相关的文章</td>
-</tr>
-<tr>
-<td><a href="http://navi.cnki.net/KNavi/ppaper.html" target="_blank" rel="external">CNKI硕博士学位论文搜索</a></td>
-<td>根据学位授予单位分类搜索（推荐）</td>
-</tr>
-<tr>
-<td><a href="http://www.lib.sjtu.edu.cn/index.php?m=content&amp;c=index&amp;a=show&amp;catid=283&amp;id=1046" target="_blank" rel="external">SJTU</a></td>
-<td>上海交通大学学位论文数据库</td>
-</tr>
-</tbody>
-</table>
-<h1 id="论文写作与投稿"><a href="#论文写作与投稿" class="headerlink" title="论文写作与投稿"></a>论文写作与投稿</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://www.nature.com/scitable/ebooks/english-communication-for-scientists-14053993/contents" target="_blank" rel="external">English Communication for Scientists</a></td>
-<td>一本小书（推荐）</td>
-</tr>
-<tr>
-<td><a href="https://www.internationalscienceediting.com/verb-tenses-scientific-manuscripts/" target="_blank" rel="external">International Science Editing</a></td>
-<td>文章润色服务，其中writing tips部分很实用</td>
-</tr>
-<tr>
-<td><a href="http://www.ozdic.com/" target="_blank" rel="external">ozdic</a></td>
-<td>英语搭配词典（推荐）</td>
-</tr>
-<tr>
-<td><a href="https://owl.english.purdue.edu/" target="_blank" rel="external">Purdue Online Writing Lab</a></td>
-<td>普渡大学学术英语写作资源</td>
-</tr>
-<tr>
-<td><a href="https://www.indiana.edu/~academy/firstPrinciples/" target="_blank" rel="external">Plagiarism Certification Tests for Master’s and Doctoral Students</a></td>
-<td>印第安纳大学鉴别论文剽窃小测试</td>
-</tr>
-</tbody>
-</table>
-<h1 id="生信软件"><a href="#生信软件" class="headerlink" title="生信软件"></a>生信软件</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://tiramisutes.github.io/2015/08/05/bio-online.html#%E8%B7%A8%E8%86%9C%E7%BB%93%E6%9E%84%E5%9F%9F" target="_blank" rel="external">hope的博客总结</a></td>
-<td>常用生物信息在线工具</td>
-</tr>
-<tr>
-<td><a href="http://www.bio-info-club.com/?p=95" target="_blank" rel="external">生信客部落总结</a></td>
-<td>生物信息工具整合(包含在线工具与离线工具)</td>
-</tr>
-<tr>
-<td><a href="http://espript.ibcp.fr/ESPript/cgi-bin/ESPript.cgi" target="_blank" rel="external">ESPript</a></td>
-<td>美得令人心动的序列显示工具</td>
-</tr>
-<tr>
-<td><a href="http://www.uzzf.com/soft/186393.html" target="_blank" rel="external">Pathway Builder Tool</a></td>
-<td>零基础也能画出超酷信号通路图</td>
-</tr>
-<tr>
-<td><a href="http://cytoscape.org/" target="_blank" rel="external">cytoscape</a></td>
-<td>相互作用网络绘图</td>
-</tr>
-<tr>
-<td><a href="http://itol.embl.de/help.cgi" target="_blank" rel="external">ITOL</a></td>
-<td>进化树后期编辑神器</td>
-</tr>
-<tr>
-<td><a href="http://www.evolgenius.info/evolview/#login" target="_blank" rel="external">EVOLVIEW</a></td>
-<td>进化树编辑，编程加多层注释圈儿</td>
-</tr>
-<tr>
-<td><a href="http://www.bioconductor.org/packages/stats/data-annotation.html" target="_blank" rel="external"> Bioconductor annotation packages</a></td>
-<td>Bioconductor注释文件合集 </td>
-</tr>
-<tr>
-<td><a href="http://bbs.sciencenet.cn/thread-1251889-1-1.html" target="_blank" rel="external">DNAMAN</a></td>
-<td>DNAMAN 8 全功能英文版，免序列号（By Raindy）</td>
-</tr>
-</tbody>
-</table>
-<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://mp.aiweibang.com/m/u/299005/a?cid=0" target="_blank" rel="external">实验小白</a></td>
-<td>基础实验介绍</td>
-</tr>
-<tr>
-<td><a href="http://www.swwy.com/shengmingkexue.html" target="_blank" rel="external">生物无忧</a></td>
-<td>中文实验视频教程</td>
-</tr>
-<tr>
-<td><a href="https://www.jove.com/" target="_blank" rel="external">Journal of Visualized Experiments ( JoVE)</a></td>
-<td>JoVE是一份展示可视化实验的期刊，是世界上第一个同行评议的科技视频期刊</td>
-</tr>
-<tr>
-<td><a href="http://www.protocol-online.org/" target="_blank" rel="external">PROTOCAL ONLINE</a></td>
-<td>生物医学研究领域的实验protocols以及最新实验方面的文章</td>
-</tr>
-<tr>
-<td><a href="http://www.nature.com/nprot/index.html" target="_blank" rel="external">Nature protocols</a></td>
-<td>Nature的实验Protocol,述详细的实验步骤及注意事项</td>
-</tr>
-<tr>
-<td><a href="http://www.nature.com/nmeth/index.html" target="_blank" rel="external">Nature methods</a></td>
-<td>主要发表生命科学领域中新的研究方法或对经典方法有显著改进的相关论文</td>
-</tr>
-<tr>
-<td> <a href="http://www.oxfordjournals.org/our_journals/nar/new_nar_methods.html" target="_blank" rel="external">Nucleic Acids Research Methods</a></td>
-<td>可按不同研究领域来查找具体的实验技术</td>
-</tr>
-<tr>
-<td><a href="http://link.springer.com" target="_blank" rel="external">Springer出版社的Protocol系列</a></td>
-<td>在“Browse by discipline”一栏选择“Life science”,然后在“Content Type”一栏点击protocol,在搜索框输入关键词查询实验方法</td>
-</tr>
-<tr>
-<td><a href="http://cshprotocols.cshlp.org/" target="_blank" rel="external">Cold Spring Harbor Protocols</a></td>
-<td>冷泉港实验室Protocols</td>
-</tr>
-<tr>
-<td><a href="http://www.bio-protocol.org/cn/Default.aspx" target="_blank" rel="external">bio-protocol</a></td>
-<td>质量非常高，而且全部免费，非常好用</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Nature protocols或者Springer Protocol不仅可以搜实验的protocol，还可以搜分析的protocol</strong></p>
-<h1 id="推荐博客"><a href="#推荐博客" class="headerlink" title="推荐博客"></a>推荐博客</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://blog.sciencenet.cn/u/%E6%96%BD%E4%B8%80%E5%85%AC" target="_blank" rel="external">施一公个人博客</a></td>
-<td>心灵鸡汤</td>
-</tr>
-<tr>
-<td><a href="https://laod.cn/hosts" target="_blank" rel="external">老D博客</a></td>
-<td>网络为主，各种黑科技</td>
-</tr>
-<tr>
-<td><a href="http://blog.sina.com.cn/u/5691553152" target="_blank" rel="external">车小胖的博客</a></td>
-<td>网络</td>
-</tr>
-<tr>
-<td><a href="http://raindu.com/" target="_blank" rel="external">raindu’s home</a></td>
-<td>R与Excel数据可视化</td>
-</tr>
-<tr>
-<td><a href="http://qinqianshan.com/" target="_blank" rel="external">Sam’s Note</a></td>
-<td>专注转化医学，专注生物信息</td>
-</tr>
-<tr>
-<td><a href="http://www.tanboyu.com/" target="_blank" rel="external">Bob’s Blog</a></td>
-<td>药学工作者中的极客达人，精通SQL，R，擅长数据分析，数据挖掘。</td>
-</tr>
-<tr>
-<td><a href="http://blog.biochen.com/" target="_blank" rel="external">BioChen生物</a></td>
-<td>Lnc RNA , ChiP, Genome（推荐）</td>
-</tr>
-<tr>
-<td><a href="https://guangchuangyu.github.io/cn/" target="_blank" rel="external">Y叔的博客</a></td>
-<td>R ，生信 （推荐）</td>
-</tr>
-<tr>
-<td><a href="http://tiramisutes.github.io/" target="_blank" rel="external">hope</a></td>
-<td>基因组和转录组方面</td>
-</tr>
-<tr>
-<td><a href="http://blog.sina.com.cn/s/blog_4b55f4130100ir5a.html" target="_blank" rel="external">文字的博客</a></td>
-<td>GWAS (推荐)</td>
-</tr>
-<tr>
-<td><a href="http://www.cnblogs.com/freemao/" target="_blank" rel="external">free_mao的博客</a></td>
-<td>python, linux ,gwas</td>
-</tr>
-<tr>
-<td><a href="http://www.bio-info-club.com/" target="_blank" rel="external">生信客部落</a></td>
-<td>python , R ,工具</td>
-</tr>
-<tr>
-<td><a href="http://bioinformation.cn/" target="_blank" rel="external">生物信息博客</a></td>
-<td>生物数据库、软件、程序介绍</td>
-</tr>
-<tr>
-<td><a href="https://hui-liu.github.io/" target="_blank" rel="external">刘辉的博客</a></td>
-<td>生信基础</td>
-</tr>
-<tr>
-<td><a href="http://www.bioinfo-scrounger.com/" target="_blank" rel="external">生信笔记</a></td>
-<td>生信入门级</td>
-</tr>
-<tr>
-<td><a href="http://shandanxiazi.blog.163.com/" target="_blank" rel="external">花之恋的博客</a></td>
-<td>生信工具等</td>
-</tr>
-<tr>
-<td> <a href="http://www.calyx.biz/" target="_blank" rel="external">CALYX&amp;YAMOL 博客</a></td>
-<td>WeGene基因一员</td>
-</tr>
-<tr>
-<td><a href="https://zhuanlan.zhihu.com/jacktalk" target="_blank" rel="external">JackTalk</a></td>
-<td>生物信息学，计算生物学，python</td>
-</tr>
-<tr>
-<td><a href="http://blog.sina.com.cn/s/articlelist_2214034580_0_1.html" target="_blank" rel="external">fanyucai的博客</a></td>
-<td>生信</td>
-</tr>
-<tr>
-<td><a href="http://www.cnblogs.com/emanlee/category/302300.html" target="_blank" rel="external">EmanLee, Eman Lee’s Space (blog, website)</a></td>
-<td>生信</td>
-</tr>
-<tr>
-<td><a href="http://jch100.cool.blog.163.com/blog/#m=0&amp;t=1&amp;c=fks_084066081081080069084082094095081085083069083082094069" target="_blank" rel="external">飘的博客</a></td>
-<td>生物信息学资料分享，写的比较简单</td>
-</tr>
-<tr>
-<td><a href="http://zuguang.de/" target="_blank" rel="external">Zuguang Gu</a></td>
-<td>英文博客，博主在德国</td>
-</tr>
-<tr>
-<td><a href="http://www.chenlianfu.com/" target="_blank" rel="external">陈连福NGS</a></td>
-<td>陈连福NGS,开培训班</td>
-</tr>
-<tr>
-<td><a href="http://boyun.sh.cn/bio/" target="_blank" rel="external">博耘生物</a></td>
-<td>已经不再更新了</td>
-</tr>
-<tr>
-<td><a href="http://bio-spring.info/category/bio/bioinfo/page/2/" target="_blank" rel="external">Spring‘s info</a></td>
-<td>生物信息，已经不再更新</td>
-</tr>
-<tr>
-<td><a href="http://www.iwhgao.com/" target="_blank" rel="external">rabbit gao’s blog</a></td>
-<td>计算机、数学、生物混合男，已经不再更新了</td>
-</tr>
-<tr>
-<td><a href="http://bioinformatics.lofter.com/?page=2&amp;t=1383492570403" target="_blank" rel="external">Bioinformatics</a></td>
-<td>已经不再更新了</td>
-</tr>
-<tr>
-<td><a href="http://blog.sina.com.cn/tiehan1990" target="_blank" rel="external">铁汉1990的博客</a></td>
-<td>已经不再更新了</td>
-</tr>
-<tr>
-<td><a href="http://www.zilhua.com/" target="_blank" rel="external">生物日志-鸣一到</a></td>
-<td>生物信息分析教程，数据可视化，已经不再更新了</td>
-</tr>
-<tr>
-<td><a href="http://fhqdddddd.blog.163.com/" target="_blank" rel="external">云之南博客</a></td>
-<td>已经不再更新了</td>
-</tr>
-<tr>
-<td><a href="http://www.bioinformaticszen.com/" target="_blank" rel="external">Bioinformatics Zen</a></td>
-<td>英文博客，已经不再更新了</td>
-</tr>
-<tr>
-<td><a href="http://shemy.site/" target="_blank" rel="external">沈梦圆博客</a></td>
-<td>似乎已经不再更新了</td>
-</tr>
-<tr>
-<td><a href="http://www.liuhao.me/" target="_blank" rel="external">欧拉的博客</a></td>
-<td>程序员&amp;金融喵</td>
-</tr>
-</tbody>
-</table>
-<h1 id="R语言"><a href="#R语言" class="headerlink" title="R语言"></a>R语言</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://ask.hellobi.com/blog/asxinyu/5721" target="_blank" rel="external">awesome-R</a></td>
-<td>R包中文介绍【全】</td>
-</tr>
-<tr>
-<td><a href="https://www.bioconductor.org/about/mirrors/" target="_blank" rel="external">Bioconductor - Mirrors</a></td>
-<td>Bioconductor镜像汇总</td>
-</tr>
-<tr>
-<td><a href="https://blog.rstudio.com/" target="_blank" rel="external">RStudio Blog</a> &emsp;<a href="https://www.r-bloggers.com/the-r-graphical-manual/" target="_blank" rel="external">R-bloggers</a> &emsp;<a href="https://www.nceas.ucsb.edu/scicomp/software/r" target="_blank" rel="external">R Programming Resource Center</a>&emsp; <a href="http://www.r-china.net/portal.php" target="_blank" rel="external">R China</a></td>
-<td>RStudio 博客, R博客,R 编程资源中心（链接），R语言中文网</td>
-</tr>
-<tr>
-<td><a href="http://www.statmethods.net/index.html" target="_blank" rel="external">Quick-R</a> &emsp; <a href="http://cyclismo.org/tutorial/R/input.html" target="_blank" rel="external">R Tutorial</a> &emsp; <a href="https://www.programiz.com/r-programming/if-else-statement" target="_blank" rel="external">R</a> &emsp;</td>
-<td>R基础资料</td>
-</tr>
-<tr>
-<td><a href="https://bookdown.org/yihui/r-ninja/" target="_blank" rel="external">R语言忍者秘笈</a> &emsp;</td>
-<td>R语言在线电子书</td>
-</tr>
-<tr>
-<td><a href="http://libguides.library.kent.edu/SPSS/home" target="_blank" rel="external">KENT STATE</a></td>
-<td>SPSS 教程</td>
-</tr>
-<tr>
-<td><a href="http://libguides.princeton.edu/dss/SPSS" target="_blank" rel="external">PUL</a></td>
-<td>Getting Started in Data Analysis: Stata, R, SPSS, Excel: SPSS</td>
-</tr>
-<tr>
-<td><a href="http://cn.mathworks.com/examples/product-group/matlab-computational-biology" target="_blank" rel="external">MATLAB Bioinformatics Toolbox</a></td>
-<td>MATLAB生信分析示例</td>
-</tr>
-<tr>
-<td><a href="http://rcourse.iop.kcl.ac.uk/2011/" target="_blank" rel="external">Kings college london</a></td>
-<td>R语言课件—伦敦国王大学</td>
-</tr>
-<tr>
-<td><a href="https://togaware.com/onepager/" target="_blank" rel="external">OnePageR</a></td>
-<td>A Survival Guide to Data Science with R</td>
-</tr>
-<tr>
-<td><a href="http://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/" target="_blank" rel="external"> R for Bioinformatics</a>  &emsp;<a href="http://a-little-book-of-r-for-biomedical-statistics.readthedocs.io/en/latest/" target="_blank" rel="external">R for Biomedical Statistics</a>  &emsp; <a href="http://a-little-book-of-r-for-time-series.readthedocs.io/en/latest/" target="_blank" rel="external">R for Time Series</a></td>
-<td>R语言英文小书</td>
-</tr>
-<tr>
-<td><a href="http://zoonek2.free.fr/UNIX/48_R/all.html?qqdrsign=01768" target="_blank" rel="external">Statistics with R</a> &emsp; <a href="http://www.gardenersown.co.uk/Education/Lectures/R/correl.htm" target="_blank" rel="external">Using R for statistical analyses</a></td>
-<td>R统计</td>
-</tr>
-<tr>
-<td><a href="http://www.statsblogs.com/about/" target="_blank" rel="external">StatsBlogs</a></td>
-<td>统计相关博客R,SAS等</td>
-</tr>
-<tr>
-<td><a href="http://kasperdanielhansen.github.io/genbioconductor/" target="_blank" rel="external">Bioconductor for Genomic Data Science</a></td>
-<td>关于Bioconductor的网络课程，有视频，有材料</td>
-</tr>
-<tr>
-<td><a href="http://blog.fens.me" target="_blank" rel="external">张丹博客</a></td>
-<td>原创了大量R语言技术实战文章，包括R的极客理想系列文章，RHadoop实战系列文章，R离间NoSQL系列文章，并写作”R的极客理想”系列图书</td>
-</tr>
-<tr>
-<td><a href="https://yihui.name/cn/" target="_blank" rel="external">谢益辉的个人博客</a></td>
-<td>博客主要包括各种有趣的技术和吐槽文章。谢益辉是统计之都的创始人，现任RStudio公司程序员</td>
-</tr>
-<tr>
-<td><a href="http://www.bjt.name/" target="_blank" rel="external">刘思喆的个人博客</a></td>
-<td>博客中主要包括R语言企业级应用的文章。刘思喆现任京东推荐算法经历</td>
-</tr>
-<tr>
-<td><a href="http://ww7.jliblog.com/" target="_blank" rel="external">李舰的个人博客</a></td>
-<td>博客中主要包括R语言建模的文章。李舰现任Mango Solutions中国区数据总监</td>
-</tr>
-<tr>
-<td><a href="http://www.wentrue.net/blog" target="_blank" rel="external">阿稳的个人博客——不周山</a></td>
-<td>博客中主要包括R语言并行技术的文章。</td>
-</tr>
-<tr>
-<td><a href="https://nsaunders.wordpress.com/" target="_blank" rel="external">WHAT YOU’RE DOING IS RATHER DESPERATE-（推荐）</a></td>
-<td>作者为澳大利亚悉尼大学的生物信息学家</td>
-</tr>
-<tr>
-<td><a href="http://blog.yhat.com/" target="_blank" rel="external">The Yhat Blog</a></td>
-<td>machine learning, data science, engineering(推荐)</td>
-</tr>
-</tbody>
-</table>
-<h1 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://plot.ly/feed/" target="_blank" rel="external">plotly</a></td>
-<td>支持R和python，图例丰富（含代码）</td>
-</tr>
-<tr>
-<td><a href="http://echarts.baidu.com/index.html" target="_blank" rel="external">ECharts</a></td>
-<td>ECharts GL 是 WebGL 的扩展包，提供了丰富的三维可视化组件以及常规图表的性能增强</td>
-</tr>
-<tr>
-<td><a href="http://www.hewebgl.com/" target="_blank" rel="external">WebGL 中文网</a></td>
-<td>教程</td>
-</tr>
-</tbody>
-</table>
-<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://blog.huzhifeng.com/about/" target="_blank" rel="external">胡智峰的博客</a></td>
-<td>Linux工具及网络</td>
-</tr>
-</tbody>
-</table>
-<h1 id="网络生信课程"><a href="#网络生信课程" class="headerlink" title="网络生信课程"></a>网络生信课程</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://www.coursera.org/" target="_blank" rel="external">coursera</a></td>
-<td>在网上学习全世界最好的课程</td>
-</tr>
-<tr>
-<td><a href="http://mooc.guokr.com/course/575/Bioinformatics--Introduction-and-Methods/" target="_blank" rel="external">Bioinformatics: Introduction and Methods</a></td>
-<td>北大MOOK生物信息学导论</td>
-</tr>
-<tr>
-<td><a href="http://www.iqiyi.com/paopao/u/2154955599/playlist/" target="_blank" rel="external">陈魏学基因</a></td>
-<td>NGS相关视频</td>
-</tr>
-<tr>
-<td><a href="http://abc.cbi.pku.edu.cn/manuals.php" target="_blank" rel="external">Applied Bioinformatics Course </a></td>
-<td>北大罗静初老师abc生信课程</td>
-</tr>
-<tr>
-<td><a href="http://genomicsclass.github.io/book/" target="_blank" rel="external">Biomedical Data Science</a></td>
-<td>统计，算法，NGS书籍</td>
-</tr>
-<tr>
-<td><a href="http://www.novocraft.com/documentation/novoalign-2/" target="_blank" rel="external"> NOVOCRAFT</a></td>
-<td>NOVOCRAFT 公司NGS资料（干货）</td>
-</tr>
-<tr>
-<td><a href="https://cbsu.tc.cornell.edu/workshops.aspx" target="_blank" rel="external">Workshops</a></td>
-<td>康奈尔大学生信课件（2010-2017）</td>
-</tr>
-<tr>
-<td><a href="https://webext.pasteur.fr/tekaia/BGA_courses.html" target="_blank" rel="external">Bioinformatics and Genome Analyses Courses</a></td>
-<td>巴斯德研究所2005-2017生信课程全集</td>
-</tr>
-<tr>
-<td><a href="http://petang.cgu.edu.tw/Bioinfomatics/" target="_blank" rel="external">CGU-GIBMS</a></td>
-<td>台湾长庚大学生信课件</td>
-</tr>
-<tr>
-<td><a href="https://wikis.utexas.edu/display/bioiteam" target="_blank" rel="external">Bioinformatics Team (BioITeam) at the University of Texas</a></td>
-<td>德州大学奥斯丁分校生信课件</td>
-</tr>
-<tr>
-<td><a href="http://tanlab.ucdenver.edu/labHomePage/teaching/CANB7640/" target="_blank" rel="external">CANB7640 COURSE WEBSITE</a></td>
-<td>生信课件-按研究内容分</td>
-</tr>
-<tr>
-<td><a href="https://qcb.ucla.edu/collaboratory/workshops/" target="_blank" rel="external">UCLA</a></td>
-<td>加利福尼亚大学洛杉矶分校NGS数据处理workshop最全合集</td>
-</tr>
-<tr>
-<td><a href="https://www.bioinformatics.purdue.edu/discoverypark/cyber/bioinformatics/services/workshops.php" target="_blank" rel="external">Purdue university Discovery Park</a></td>
-<td>普渡大学生物信息课程</td>
-</tr>
-<tr>
-<td><a href="http://biology.umd.edu/bioinformatics-crash-course---july-2014.html" target="_blank" rel="external">Bioinformatics Crash Course - July 2014</a> &emsp; <a href="http://biology.umd.edu/rna-seq-analysis.html" target="_blank" rel="external">RNA-seq Analysis</a> &emsp; <a href="http://biology.umd.edu/linux-and-hpcc-workshop.html" target="_blank" rel="external">Linux and HPCC</a></td>
-<td>马里兰大学的生信中心课程-NGS分析，RNA-seq分析，linux和高性能计算</td>
-</tr>
-<tr>
-<td><a href="https://btiplantbioinfocourse.wordpress.com/" target="_blank" rel="external">BTI Bioinformatics Course 2017</a></td>
-<td>美国康奈尔大学博伊斯汤普森植物研究所课件</td>
-</tr>
-<tr>
-<td><a href="https://edu.isb-sib.ch/course/index.php?categoryid=5" target="_blank" rel="external">Swiss Institute of  Bioinformatics</a></td>
-<td>瑞士生物信息学研究所8年培训资料</td>
-</tr>
-<tr>
-<td><a href="http://biof-edu.colorado.edu/videos/dowell-short-read-class" target="_blank" rel="external">BioFrontiers Education</a></td>
-<td>科罗拉多大学生物信息课程</td>
-</tr>
-<tr>
-<td><a href="https://www.stat.berkeley.edu/~terry/Classes/s246.2006/" target="_blank" rel="external">Statistics 246 Statistical Genetics Spring 2006</a></td>
-<td>伯克利大学的遗传统计学课程</td>
-</tr>
-<tr>
-<td><a href="https://ngschool.eu/2016/workshops" target="_blank" rel="external">NGSchool 2016 Workshops</a></td>
-<td>NGSchool非常全面的ppt</td>
-</tr>
-<tr>
-<td><a href="http://bioinformatics.mdc-berlin.de/intro2UnixandSGE/index.html" target="_blank" rel="external">BIOINFORMATICS PLATFORM</a></td>
-<td>德国柏林医学院中心生物信息学课程资料</td>
-</tr>
-<tr>
-<td><a href="http://compbio.uthscsa.edu/jinlab/courses.shtml" target="_blank" rel="external">UT HEALTH SCIENCE CENTER</a></td>
-<td>圣安东尼奥-生命健康中心-jin实验室生物信息学课程ppt</td>
-</tr>
-<tr>
-<td><a href="http://www.mi.fu-berlin.de/w/ABI/Genomics12" target="_blank" rel="external">MSc lecture Genomics</a></td>
-<td>柏林自由大学 Genomics12</td>
-</tr>
-<tr>
-<td><a href="http://www.soph.uab.edu/ssg/courses/archives" target="_blank" rel="external">Statistical  Genetics</a> &emsp;<a href="http://www.soph.uab.edu/ssg/nhgri_r25/fifthshortcourse" target="_blank" rel="external">NGS</a> &emsp;<a href="http://www.soph.uab.edu/ssg/nigmsstatgen/fifth" target="_blank" rel="external">Statistical Genetics and Genomics</a></td>
-<td>伯明翰阿拉巴马大学-生物信息视频教程</td>
-</tr>
-<tr>
-<td><a href="http://www.bioinformatics.babraham.ac.uk/training.html" target="_blank" rel="external">Babraham Institute the Bioinformatics</a></td>
-<td>伯拉罕研究所生信课程</td>
-</tr>
-<tr>
-<td><a href="http://www.personal.psu.edu/iua1/courses/2014-BMMB-852.html" target="_blank" rel="external">Applied Bioinformatics 2014</a></td>
-<td>biostar handbook-生信分析 </td>
-</tr>
-<tr>
-<td><a href="https://ocw.mit.edu/courses/biology/7-91j-foundations-of-computational-and-systems-biology-spring-2014/video-lectures/" target="_blank" rel="external">Computational and Systems Biology” Video Lectures</a></td>
-<td>MIT计算与系统生物学课程 </td>
-</tr>
-<tr>
-<td><a href="http://manuals.bioinformatics.ucr.edu/home" target="_blank" rel="external">UCR(Institute for In tegrative Genome Biology)</a></td>
-<td>Manuals 包括NGS with R/Bioconductor，NGS Analysis with Galaxy and IGV， EMBOSS，Linux 等十分全面。</td>
-</tr>
-<tr>
-<td><a href="https://www.bits.vib.be/training" target="_blank" rel="external">VIB Bioinformatics Core</a></td>
-<td>从基础到实践，非常全面</td>
-</tr>
-<tr>
-<td><a href="http://barc.wi.mit.edu/education/" target="_blank" rel="external">Learn about Bioinformatics and Computational Tools for Biology</a></td>
-<td>一直在更新，推荐</td>
-</tr>
-<tr>
-<td><a href="https://bioinformatics.ca/workshops/" target="_blank" rel="external">Canadian Bioinformatics Workshops Course Materials</a></td>
-<td>2004-2016超级多</td>
-</tr>
-<tr>
-<td><a href="https://bioinformatics.ca/links_directory/" target="_blank" rel="external">Bioinformatics Links Director</a>y</td>
-<td>生信资源，工具和数据库</td>
-</tr>
-<tr>
-<td><a href="https://openwetware.org/wiki/Wikiomics" target="_blank" rel="external">WikiOmics</a></td>
-<td>Open Bioinformatics - a collection of questions and answers about bioinformatics.</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;常用链接（持续更新）&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="常用链接" scheme="https:///AnJingwd.github.io/categories/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
-    
-    
-      <category term="常用链接" scheme="https:///AnJingwd.github.io/tags/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
     
   </entry>
   
