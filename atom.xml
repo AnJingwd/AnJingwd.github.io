@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2017-12-26T13:07:01.898Z</updated>
+  <updated>2017-12-26T13:11:42.971Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <link href="https:///AnJingwd.github.io/2017/12/26/GATK3.8%E5%88%86%E6%9E%90%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建（一）/</id>
     <published>2017-12-26T10:15:59.000Z</published>
-    <updated>2017-12-26T13:07:01.898Z</updated>
+    <updated>2017-12-26T13:11:42.971Z</updated>
     
     <content type="html"><![CDATA[<p><blockquote class="blockquote-center">GATK3.8相关软件及文件准备</blockquote><br><a id="more"></a></p>
-<ul>
+<h1 id="GATK官网相关栏目"><a href="#GATK官网相关栏目" class="headerlink" title="GATK官网相关栏目"></a>GATK官网相关栏目</h1><ul>
 <li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tool Documentation</a> （包含每个工具的使用说明）</li>
 <li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tutorials</a> (包含具体参数和细节)</li>
 <li><a href="https://software.broadinstitute.org/gatk/best-practices/" target="_blank" rel="external">GATK Best Practices</a> （包含两个主流的分析流程）</li>
@@ -45,7 +45,7 @@
 <p><a href="https://software.broadinstitute.org/gatk/download/beta" target="_blank" rel="external">GATK4.Beta.5</a>即为测试版</p>
 <pre><code>#解压：
 tar -jxvf GenomeAnalysisTK-3.8-0.tar.bz2
-</code></pre><h3 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h3><p>（1）java版本要求大于1.8.x</p>
+</code></pre><h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><p>（1）java版本要求大于1.8.x</p>
 <pre><code>java -version
 </code></pre><p>（2）测试</p>
 <pre><code>java -jar /path/to/GenomeAnalysisTK.jar -h
@@ -109,9 +109,9 @@ password:
 </li>
 <li><p>If you run any GATK tool on a vcf that doesn’t have an index, it will automatically generate one for you, so knock yourself out。 <a href="https://gatkforums.broadinstitute.org/gatk/discussion/5426/generate-an-idx-file-for-a-vcf" target="_blank" rel="external">参考：generate an idx file for a vcf 
 </a></p>
-<h2 id="GATK-Prepare-Reference-Files"><a href="#GATK-Prepare-Reference-Files" class="headerlink" title="GATK: Prepare Reference Files"></a>GATK: Prepare Reference Files</h2></li>
+</li>
 </ol>
-<p>参考： <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk" target="_blank" rel="external">(howto) Prepare a reference for use with BWA and GATK</a></p>
+<h2 id="GATK-Prepare-Reference-Files"><a href="#GATK-Prepare-Reference-Files" class="headerlink" title="GATK: Prepare Reference Files"></a>GATK: Prepare Reference Files</h2><p>参考： <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk" target="_blank" rel="external">(howto) Prepare a reference for use with BWA and GATK</a></p>
 <p>Prerequisites</p>
 <ul>
 <li>Installed BWA</li>
@@ -147,7 +147,7 @@ grep -v &quot;^#&quot; CosmicCodingMuts.vcf &gt; Coding.clean
 grep -v &quot;^#&quot; CosmicNonCodingVariants.vcf &gt; NonCoding.clean
 cat Coding.clean NonCoding.clean | sort -gk 2,2 | awk &apos;{print &quot;chr&quot;$0}&apos; | perl sortByRef.pl --k 1 - hg19UCSC.fa.fai &gt; Cosmic.hg19
 cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
-</code></pre><h1 id="GATK输入文件要求"><a href="#GATK输入文件要求" class="headerlink" title="GATK输入文件要求"></a>GATK输入文件要求</h1><p><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1204" target="_blank" rel="external">参考：What input files does the GATK accept / require?</a></p>
+</code></pre><h2 id="GATK输入文件要求"><a href="#GATK输入文件要求" class="headerlink" title="GATK输入文件要求"></a>GATK输入文件要求</h2><p><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1204" target="_blank" rel="external">参考：What input files does the GATK accept / require?</a></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.plob.org/article/7070.html" target="_blank" rel="external">GATK使用（推荐）</a></p>
 <p>（2）<a href="https://software.broadinstitute.org/gatk/documentation/topic?name=problems" target="_blank" rel="external">使用GATK过程常见报错及解决</a></p>
 <p>（3）<a href="http://blog.sina.com.cn/s/blog_587cc04e0101l4bs.html" target="_blank" rel="external">GATK使用 备忘录（推荐）</a></p>
