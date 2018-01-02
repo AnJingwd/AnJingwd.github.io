@@ -838,12 +838,13 @@ $WORKDIR/support-files/mysql.server stop
   
   <entry>
     <title>R一页多图</title>
-    <link href="https:///AnJingwd.github.io/2017/10/06/R%E4%B8%80%E9%A1%B5%E5%A4%9A%E5%9B%BE/"/>
-    <id>https:///AnJingwd.github.io/2017/10/06/R一页多图/</id>
-    <published>2017-10-06T13:25:47.000Z</published>
-    <updated>2017-10-06T13:43:23.014Z</updated>
+    <link href="https:///AnJingwd.github.io/2017/10/03/R%E4%B8%80%E9%A1%B5%E5%A4%9A%E5%9B%BE/"/>
+    <id>https:///AnJingwd.github.io/2017/10/03/R一页多图/</id>
+    <published>2017-10-03T08:24:48.000Z</published>
+    <updated>2017-10-06T13:24:12.779Z</updated>
     
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！</blockquote>
+    <content type="html"><![CDATA[<p>&emsp;&emsp;发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！</p>
+<blockquote class="blockquote-center">R一页多图</blockquote>
 
 <a id="more"></a>
 <h1 id="cowplot：基于ggplot的可视化系统"><a href="#cowplot：基于ggplot的可视化系统" class="headerlink" title="cowplot：基于ggplot的可视化系统"></a>cowplot：基于ggplot的可视化系统</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>&emsp;&emsp;cowplot是一个ggplot2包的简单补充，意味着其可以为ggplot2提供出版物级的主题等。更重要的是，这个包可以组合多个”ggplot2”绘制的图为一个图，并且<strong>为每个图加上例如A,B,C等标签，</strong> 这在具体的出版物上通常是要求的。</p>
@@ -867,7 +868,7 @@ $WORKDIR/support-files/mysql.server stop
 <h2 id="结果-3"><a href="#结果-3" class="headerlink" title="结果"></a>结果</h2><p><img src="https://i.imgur.com/km9h5k5.png" alt=""></p>
 <p><strong>关键代码就是利用了grid包的viewport函数，viewport简单说就是图形中一块矩形区域（类似于图层），是在这个区域中进一步绘图的基础。所以我们可以利用viewport函数在任意指定位置将两个或者多个图进行拼接~</strong></p>
 <hr>
-<h1 id="ggplot2之分组和分面（利用facet-grid）"><a href="#ggplot2之分组和分面（利用facet-grid）" class="headerlink" title="ggplot2之分组和分面（利用facet_grid）"></a>ggplot2之分组和分面（利用facet_grid）</h1><p><strong>&emsp;&emsp;以上是不同数据来源的图，以不同展现形式组合成一个图，另外ggplot2对一个数据集合进行分组，通过分面绘图，也算是实现一页多图的效果吧~</strong></p>
+<h1 id="ggplot2之分组和分面"><a href="#ggplot2之分组和分面" class="headerlink" title="ggplot2之分组和分面"></a>ggplot2之分组和分面</h1><p><strong>&emsp;&emsp;以上是不同数据来源的图，以不同展现形式组合成一个图，另外ggplot2对一个数据集合进行分组，通过分面绘图，也算是实现一页多图的效果吧~</strong></p>
 <h2 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">setwd(<span class="string">"F:/R working directory/GO enrichment"</span>)</div><div class="line">data&lt;-read.csv(<span class="string">"GO.csv"</span>,header=<span class="literal">TRUE</span>,check.names = <span class="literal">FALSE</span>)</div><div class="line">data_new&lt;-subset(data,data$FDR&lt;<span class="number">0.5</span>)</div><div class="line"><span class="keyword">library</span>(<span class="string">"ggplot2"</span>)</div><div class="line">ggplot(data=data_new)+</div><div class="line">  theme(plot.margin=unit(c(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">3</span>),<span class="string">"cm"</span>))+  <span class="comment">#调整作图边距，上，右，下，左</span></div><div class="line">  geom_bar(aes(x=Term,y=Count,fill=-log10(Pvalue)),stat=<span class="string">"identity"</span>)+ <span class="comment">#指定横纵变量，stat指定统计变换</span></div><div class="line">  scale_fill_gradient(low=<span class="string">'red'</span>,high=<span class="string">'blue'</span>)+xlab(<span class="string">''</span>)+ylab(<span class="string">''</span>)+   <span class="comment">#指定注释条带</span></div><div class="line">  <span class="comment">#指定横纵标签的大小，角度，距离等细节</span></div><div class="line">  theme(axis.text.x = element_text(color=<span class="string">'black'</span>,size = <span class="number">5</span>,angle=<span class="number">90</span>, hjust=<span class="number">1</span>),</div><div class="line">        axis.text.y = element_text(color=<span class="string">'black'</span>,size=<span class="number">10</span>))+   </div><div class="line">        facet_grid(.~Type)  <span class="comment">#根据Type划分作图区块</span></div></pre></td></tr></table></figure>
 <h2 id="结果-4"><a href="#结果-4" class="headerlink" title="结果"></a>结果</h2><p><img src="https://i.imgur.com/IZVQf7A.png" alt=""></p>
 <p><strong>可以看到结果并不是很好，横轴标签每个分组（BP,CC,MF）均含有13个通路，这是三个分组富集到的GO通路的交集，空值显示出来并不太美观</strong></p>
@@ -888,7 +889,8 @@ $WORKDIR/support-files/mysql.server stop
     
     <summary type="html">
     
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！&lt;/blockquote&gt;
+      &lt;p&gt;&amp;emsp;&amp;emsp;发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！&lt;/p&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;R一页多图&lt;/blockquote&gt;
     
     </summary>
     
