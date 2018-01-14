@@ -110,7 +110,7 @@
 <meta property="og:image" content="http://i.imgur.com/CLbhHg9.jpg">
 <meta property="og:image" content="http://i.imgur.com/k26Ar7F.jpg">
 <meta property="og:image" content="http://i.imgur.com/5kHXyrU.jpg">
-<meta property="og:updated_time" content="2017-10-29T12:10:28.348Z">
+<meta property="og:updated_time" content="2018-01-09T15:04:53.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bedtools使用教程详解">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;bedtools开发的目的是为了快速，灵活的比较大量的基因组特征（genomic features）。而genomic features通常使用Browser Extensible Data (BED) 或者 General Feature Format (GFF)文件表示，用UCSC Genome Browser进行可视化比较。 &amp;emsp;&amp;emsp;例如,bedtoo">
@@ -764,6 +764,8 @@ chr1  100 200  1  100 100 1.0000000
 chr2  0   100  0  0   100 0.0000000
 #name 覆盖次数 覆盖碱基数 总碱基数   覆盖度
 </code></pre><h2 id="6-getfasta：提取序列"><a href="#6-getfasta：提取序列" class="headerlink" title="(6)getfasta：提取序列"></a>(6)getfasta：提取序列</h2><p>提取指定位置的 DNA 序列，也是很好用的一个功能，反向互补链也可以提，不用自己写脚本提了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$ cat test.fa</div><div class="line">&gt;chr1</div><div class="line">AAAAAAAACCCCCCCCCCCCCGCTACTGGGGGGGGGGGGGGGGGG</div><div class="line"></div><div class="line">$ cat test.bed</div><div class="line">chr1 5 10</div><div class="line"></div><div class="line">$ bedtools getfasta -<span class="keyword">fi</span> test.fa -bed test.bed</div><div class="line">&gt;chr1:5-10</div><div class="line">AAACC</div></pre></td></tr></table></figure>
+<p><strong>注意取的是（5,10]，区间左开右闭</strong></p>
 <h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><pre><code>bedtools getfasta [OPTIONS] -fi &lt;fasta&gt; -bed &lt;bed/gff/vcf&gt; -fo &lt;fasta&gt; 
 </code></pre><h3 id="案例-3"><a href="#案例-3" class="headerlink" title="案例"></a>案例</h3><p>要求：基因组fasta文件（-fi指定）,提取区间BED/GTF/GFF/VCF文件(-bed指定),输出文件FASTA（-fo 指定）</p>
 <pre><code>bedtools getfasta -fi Mus_musculus.GRCm38.75.dna_rm.toplevel_chr1.fa -bed mm_GRCm38_3kb_promoters.gtf -fo mm_GRCm38_3kb_promoters.fasta
@@ -965,7 +967,7 @@ CCTCCTCTGACCAGCGCCCATCCCGGATTAGTGGAAGTGCTGGACTGCTGGCACCATGGT
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1266,7 +1268,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共50.5k字</span>
+  <span class="post-count">博客全站共52.3k字</span>
 </div>
 
 <div class="powered-by">

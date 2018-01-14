@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="技术," />
+  <meta name="keywords" content="NGS," />
 
 
 
@@ -96,22 +96,26 @@
 
 
 
-<meta name="description" content="Chrome浏览器一进入就全面崩溃，包括设置页面！">
-<meta name="keywords" content="技术">
+<meta name="description" content="RNA-seq质控：去除低质量reads，adapter以及rRNA">
+<meta name="keywords" content="NGS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="修复Chrome浏览器崩溃">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/28/修复Chrome浏览器崩溃/index.html">
+<meta property="og:title" content="RNA-seq质控">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/01/10/RNA-seq质控/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="Chrome浏览器一进入就全面崩溃，包括设置页面！">
+<meta property="og:description" content="RNA-seq质控：去除低质量reads，adapter以及rRNA">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/qfrctqm.png">
-<meta property="og:image" content="http://i.imgur.com/h6Ub9xV.png">
-<meta property="og:image" content="http://i.imgur.com/ceKPi1J.png">
-<meta property="og:updated_time" content="2017-08-28T04:15:04.508Z">
+<meta property="og:image" content="https://i.imgur.com/knNm3I5.jpg">
+<meta property="og:image" content="https://i.imgur.com/Pjm5pW6.jpg">
+<meta property="og:image" content="https://i.imgur.com/uasS1me.jpg">
+<meta property="og:image" content="https://i.imgur.com/GP3ZyEM.jpg">
+<meta property="og:image" content="https://i.imgur.com/Wlr5oMX.jpg">
+<meta property="og:image" content="https://i.imgur.com/IaxvSSe.jpg">
+<meta property="og:image" content="https://i.imgur.com/vE4ODha.jpg">
+<meta property="og:updated_time" content="2018-01-14T08:23:41.353Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="修复Chrome浏览器崩溃">
-<meta name="twitter:description" content="Chrome浏览器一进入就全面崩溃，包括设置页面！">
-<meta name="twitter:image" content="http://i.imgur.com/qfrctqm.png">
+<meta name="twitter:title" content="RNA-seq质控">
+<meta name="twitter:description" content="RNA-seq质控：去除低质量reads，adapter以及rRNA">
+<meta name="twitter:image" content="https://i.imgur.com/knNm3I5.jpg">
 
 
 
@@ -144,7 +148,7 @@
 
 
 
-  <title>修复Chrome浏览器崩溃 | 安静-不安静的博客</title>
+  <title>RNA-seq质控 | 安静-不安静的博客</title>
   
 
 
@@ -298,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/28/修复Chrome浏览器崩溃/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/01/10/RNA-seq质控/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -315,7 +319,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">修复Chrome浏览器崩溃</h2>
+          <h2 class="post-title" itemprop="name headline">RNA-seq质控</h2>
         
 
         <div class="post-meta">
@@ -327,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T11:18:41+08:00">
-                2017-08-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-10T21:39:44+08:00">
+                2017-01-10
               </time>
             
 
@@ -350,8 +354,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
+                  <a href="https:/AnJingwd.github.io/categories/NGS/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS</span>
                   </a>
                 </span>
 
@@ -387,22 +391,108 @@
       
 
       
-        <blockquote class="blockquote-center">Chrome浏览器一进入就全面崩溃，包括设置页面！</blockquote>
+        <blockquote class="blockquote-center">RNA-seq质控：去除低质量reads，adapter以及rRNA</blockquote>
 
 <a id="more"></a>
-<p>解决办法：</p>
-<p>原因就是 C:\Windows\System32\drivers\bd0001.sys 这个文件</p>
-<ul>
-<li>首先可以把这个文件利用360杀毒工具强力删除。</li>
-<li>因为书签路径是 C:\Users\Administrator\AppData\Local\Google\Chrome\User Data,所以然后将原Google删除（C:\Program Files (x86)\Google）并不会删除书签。</li>
-<li>重新安装Chrome稳定版<a href="https://www.baidu.com/link?url=MkVpzj1gf1_OJ3mxcnzzssfMv7eMA0dXfUgyoqlNDFcZZ1kUW9XJCbRwHqpRSrhcS3HVGx4Wm78JNaYFHj6qaqlM7iSxJyjH_PE7s99egGy&amp;wd=&amp;eqid=a1e33f840000f6e30000000359a38cae" target="_blank" rel="external">ChromeStandalone_60.0.3112.101_Setup.exe</a></li>
-<li>重启电脑即可！</li>
-</ul>
-<p>&emsp;&emsp;win7不能删除文件提示(您需要来自administrators的权限才能对此文件夹进行更改）该如何解决呢？</p>
-<p>可以使用360杀毒–功能大全-文件粉碎机</p>
-<p><img src="http://i.imgur.com/qfrctqm.png" alt=""></p>
-<p><img src="http://i.imgur.com/h6Ub9xV.png" alt=""></p>
-<p><img src="http://i.imgur.com/ceKPi1J.png" alt=""></p>
+<h1 id="pipline"><a href="#pipline" class="headerlink" title="pipline"></a>pipline</h1><p>比较值得关注的RNA-seq分析中的重要的步骤包括：实验设计，质控，read比对，表达定量，可视化，差异表达，识别可变剪切，功能注释，融合基因检测，eQTL定位等</p>
+<h1 id="质控"><a href="#质控" class="headerlink" title="质控"></a>质控</h1><p>（1）人类的Per sequence GC content峰值在48左右，否则就是有污染或者建库不均匀</p>
+<p>（2）Per base N content越低越好（未识别的碱基，一般为0）</p>
+<p>（3）Illumina 下机测序长度是一定的，如果reads小于定长，就会测到Adapter，使用cutadapt去接头</p>
+<p>（4）一般流程只保留paired-reads用于下一步比对</p>
+<p>（去除低质量reads过程中，可能导致原来paired的reads长度不一致，当长度小于阈值时，整条reads将被去除，所以只剩下另一条reads，一般为了接下来定量分析的方便，另一条reads不用于比对）</p>
+<p>结果分为绿色的”PASS”，黄色的”WARN”和红色的”FAIL”，其中，红色部分是我们质控的关键，以下将对红色的”FAIL”部分进行解释及用相应软件进行相对应的质控。</p>
+<p><img src="https://i.imgur.com/knNm3I5.jpg" alt=""></p>
+<h2 id="1-去除低质量的reads"><a href="#1-去除低质量的reads" class="headerlink" title="1. 去除低质量的reads"></a>1. 去除低质量的reads</h2><p><img src="https://i.imgur.com/Pjm5pW6.jpg" alt=""></p>
+<p>横轴代表位置，纵轴quality。红色水平线表示中位数，黄色柱子是25%-75%区间，触须是10%-90%区间，蓝线是平均数。</p>
+<p>若任一位置的下四分位数低于10或中位数低于25，报”WARN”；若任一位置的下四分位数低于5或中位数低于20，报”FAIL”.</p>
+<h2 id="2-检查每个tile的质量"><a href="#2-检查每个tile的质量" class="headerlink" title="2. 检查每个tile的质量"></a>2. 检查每个tile的质量</h2><p>Illumina flowcells被分成一个个的tiles。为了检查低质量是否与flowcell的某些区域相关联，FASTQC对每个tile计算reads在所有位置的平均质量分数。</p>
+<p><img src="https://i.imgur.com/uasS1me.jpg" alt=""></p>
+<p>图中y轴表示tile的编号，x轴表示reads中的位置。</p>
+<p>在此图中看到警告或失败的原因可能是短暂的问题，例如通过flowcell的气泡，或者可能是更持久的问题，例如在flowcell中出现的斑点或碎片，或者在tile中高密度的聚集。在这个模块中，最常见的警告原因是flowcell 被 overloaded。</p>
+<p>建议忽略那些轻微影响一小部分tile,仅为1或2个cycles的warnings 或者 failures，并且只追求更大的影响，这些影响在分数中表现出很高的偏差，或者持续数个cycles。</p>
+<h2 id="3-Adapter-Content"><a href="#3-Adapter-Content" class="headerlink" title="3. Adapter Content"></a>3. Adapter Content</h2><p>对于R1：</p>
+<p><img src="https://i.imgur.com/GP3ZyEM.jpg" alt=""></p>
+<p>对于R2</p>
+<p><img src="https://i.imgur.com/Wlr5oMX.jpg" alt=""></p>
+<p>所以需要去接头</p>
+<p>Per base sequence content 图的Failures 一般是由于文库污染造成的。如果一条特定的reads占了文库中的很大比例，那么这条reads将扭曲Per base sequence content图（在每个位置的碱基百分比将这条reads严重影响）</p>
+<p>你可以使用Overrepresented sequences模块检查序列的污染情况，其列出了所有组成超过0.1%的序列，并列出其最佳匹配。上图中发现一个污染，被鉴定为Illumina的接头序列。</p>
+<p><strong>不去除接头污染将影响比对过程中的比对百分率</strong></p>
+<p>常用trimming tools的功能：</p>
+<p><img src="https://i.imgur.com/IaxvSSe.jpg" alt=""></p>
+<p>使用软件：trim_galore ,该软件通过调用FastQC进行质检，调用cutadapt去接头，同时还能去除低质量的reads。附加功能还有去除RRBS(for directional, non-directional (or paired-end) sequencing)测序文件的甲基化偏好位点。</p>
+<p>其中去除低质量reads时最重要的两个参数是最小Phred score（1-30）和最小序列长度，不同文章对此观点不同，一般推荐Phred score 20 (90%置信区间)和最小50%-70%的序列长度。</p>
+<p><a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" target="_blank" rel="external">Trim Galore!官网</a>， Trim Galore is now also available from<a href="https://github.com/FelixKrueger/TrimGalore" target="_blank" rel="external"> GitHub</a>，具体参数使用参考<a href="https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md" target="_blank" rel="external">User Guide</a>。</p>
+<p>对于RRBS samples, 首先进行quality trimming，从3’端剪切掉低质量的reads；然后调用cutadapt程序从3’端去除接头，如果具体序列没有提供，其将使用标准的Illumina配对接头的前13bp （’AGATCGGAAGAGC’）序列来去除接头。给了控制去接头过程的严格程度，需要指定与接头序列最小的overlap数目，或者默认为1（即使与接头序列只有一个bp的overlap也会被剪切掉）。</p>
+<pre><code>agapter1=GATCGGAAGAGCACACGTCTGAACTCCAGTCACCGATGTATCTCGTATGC
+adapter2=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT
+
+time $trim_galore \
+--quality 20 \
+--stringency 5 \
+--dont_gzip \
+--fastqc \
+--retain_unpaired \
+-r1 31 -r2 31 \
+--length 30 \
+--output_dir $trim \
+--paired \
+--phred33 \
+--adapter ${adapter1} \
+--adapter2 ${adapter2} \
+$sample_r1 $sample_r2
+</code></pre><p><strong>注：如果No overrepresented sequences，但Adapter Content未黄色警告，可以对于adapter和adapter2两个参数都可以用 –illumina 代替，表示 first 13bp of the Illumina universal adapter AGATCGGAAGAGC</strong></p>
+<p>使用参考：<a href="http://overviewdifferentialexpression.blogspot.com/2014/02/quality-control-using-trim-galore.html" target="_blank" rel="external">Quality Control using Trim Galore: How to run trim galore?</a></p>
+<h1 id="去除核糖体rRNA"><a href="#去除核糖体rRNA" class="headerlink" title="去除核糖体rRNA"></a>去除核糖体rRNA</h1><p>对于总RNA建库测序的RNA-seq实验设计，rRNA将占总数据量的95%左右，如果不去除，将严重影响比对率及下游分析。</p>
+<p><a href="http://bioinfo.lifl.fr/sortmerna/sortmerna.php" target="_blank" rel="external">SortMeRNA官网</a>；<a href="http://bioinfo.lifl.fr/RNA/sortmerna/code/SortMeRNA-user-manual-v2.1.pdf" target="_blank" rel="external">SortMeRNA User Manual v2.1.pdf</a></p>
+<h2 id="建索引"><a href="#建索引" class="headerlink" title="建索引"></a>建索引</h2><pre><code>sortmerna_REF=/home/wangdong/miniconda3/sortmerna_db/rRNA_databases
+sortmerna_index=/home/wangdong/miniconda3/sortmerna_db/index
+
+indexdb_rna --ref $sortmerna_REF/silva-arc-16s-id95.fasta,$sortmerna_index/silva-arc-16s-id95
+indexdb_rna --ref $sortmerna_REF/silva-arc-23s-id98.fasta,$sortmerna_index/silva-arc-23s-id98
+indexdb_rna --ref $sortmerna_REF/silva-bac-16s-id90.fasta,$sortmerna_index/silva-bac-16s-id95
+indexdb_rna --ref $sortmerna_REF/silva-bac-23s-id98.fasta,$sortmerna_index/silva-bac-23s-id98
+indexdb_rna --ref $sortmerna_REF/silva-euk-18s-id95.fasta,$sortmerna_index/silva-euk-18s-id95
+indexdb_rna --ref $sortmerna_REF/silva-euk-28s-id98.fasta,$sortmerna_index/silva-euk-28s-id98
+indexdb_rna --ref $sortmerna_REF/rfam-5.8s-database-id98.fasta,$sortmerna_index/rfam-5.8s-db
+indexdb_rna --ref $sortmerna_REF/rfam-5s-database-id98.fasta,$sortmerna_index/rfam-5s-db
+</code></pre><h2 id="去除rRNA"><a href="#去除rRNA" class="headerlink" title="去除rRNA"></a>去除rRNA</h2><p><strong>SortMeRNA只接受一个reads输入文件，对于paired-end reads需要使用merge-paired-reads.sh脚本合并之后用于分析。</strong></p>
+<p><img src="https://i.imgur.com/vE4ODha.jpg" alt=""></p>
+<p><code>which merge-paired-reads.sh</code> ${trim}/${sample}_paired_r1.fq ${trim}/${sample}_paired_r2.fq ${remove_rrna}/${sample}_paired_merge.fq</p>
+<p>SortMeRNA去除rRNA后，对于paired-end reads的过滤时，如果一条reads比对上rRNA，而另一条reads没有比对上rRNA，但又想保证输出到fastq文件的都是paired-end reads，则需要考虑以下两个参数：</p>
+<ol>
+<li>–paired-in will put both reads into the file specified by –aligned</li>
+<li>–paired-out will put both reads into the file specified by –other</li>
+</ol>
+<p>第一个参数–paired-in表示所有在–other file中的reads都为non-rRNA;第二个参数–paired-out表示只有rRNA reads被输出到–aligned file。如果两个参数都不设置，则会导致输出结果的reads不配对，不利于后续分析。</p>
+<pre><code>time $sortmerna \
+--ref $sortmerna_REF/silva-arc-16s-id95.fasta,$sortmerna_index/silva-arc-16s-id95:\
+$sortmerna_REF/silva-arc-23s-id98.fasta,$sortmerna_index/silva-arc-23s-id98:\
+$sortmerna_REF/silva-bac-16s-id90.fasta,$sortmerna_index/silva-bac-16s-id95:\
+$sortmerna_REF/silva-bac-23s-id98.fasta,$sortmerna_index/silva-bac-23s-id98:\
+$sortmerna_REF/silva-euk-18s-id95.fasta,$sortmerna_index/silva-euk-18s-id95:\
+$sortmerna_REF/silva-euk-28s-id98.fasta,$sortmerna_index/silva-euk-28s-id98:\
+$sortmerna_REF/rfam-5.8s-database-id98.fasta,$sortmerna_index/rfam-5.8s-db:\
+$sortmerna_REF/rfam-5s-database-id98.fasta,$sortmerna_index/rfam-5s-db \
+--reads ${remove_rrna}/${sample}_paired_merge.fq \
+--aligned $remove_rrna/${sample}_paired_aligned_rRNA \
+--other $remove_rrna/${sample}_paired_filtered_non_rRNA \
+--fastx \
+--sam --num_alignments 1 \
+--paired_in \
+--log \
+-a 5 -v
+</code></pre><p>接着将$remove_rrna/${sample}_paired_filtered_non_rRNA.fq文件拆分为forward reads和reserve reads两个文件，用于下游的paried-reads的比对</p>
+<pre><code>`which unmerge-paired-reads.sh` $remove_rrna/${sample}_paired_filtered_non_rRNA.fq \
+$remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_paired_r2.fq
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>参考：</p>
+<p>（1） <a href="http://blog.sciencenet.cn/blog-303373-724110.html" target="_blank" rel="external">fastqc解释</a></p>
+<p>（2） <a href="https://wiki.bits.vib.be/index.php/Quality_control_of_NGS_data" target="_blank" rel="external">Quality control of NGS data（推荐）</a></p>
+<p>（3）<a href="https://sequencing.qcfail.com/page/2/" target="_blank" rel="external">qcfail.com：Articles about common next-generation sequencing problems（强烈推荐）</a></p>
+<p>（4）<a href="https://github.com/twbattaglia/RNAseq-workflow" target="_blank" rel="external">twbattaglia/RNAseq-workflow（推荐）</a></p>
+<p>（5）<a href="https://www.bits.vib.be/training/328" target="_blank" rel="external">RNA-Seq analysis for differential expression in GenePattern</a> <a href="http://data.bits.vib.be/pub/trainingen/GenePattern/genepattern.pdf" target="_blank" rel="external">Slides（推荐）</a></p>
+<p>（6）<a href="https://woaielf.github.io/2016/11/16/RNA-seq/" target="_blank" rel="external">RNA-seq分析流程思维导图</a></p>
+<p>（7）<a href="http://www.bio-info-trainee.com/2275.html" target="_blank" rel="external">一个RNA-seq的反思</a></p>
 
       
     </div>
@@ -428,7 +518,7 @@
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/技术/" rel="tag"><i class="fa fa-tag"></i> 技术</a>
+            <a href="https:/AnJingwd.github.io/tags/NGS/" rel="tag"><i class="fa fa-tag"></i> NGS</a>
           
         </div>
       
@@ -441,18 +531,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/08/25/使用bash脚本下载和处理基因表达数据/" rel="next" title="使用bash脚本下载和处理基因表达数据">
-                <i class="fa fa-chevron-left"></i> 使用bash脚本下载和处理基因表达数据
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/08/30/批量fastqc/" rel="prev" title="批量fastqc">
-                批量fastqc <i class="fa fa-chevron-right"></i>
+              <a href="https:/AnJingwd.github.io/2017/08/02/生命在于折腾之Github-HEXO搭建博客/" rel="prev" title="生命在于折腾之Github+HEXO搭建博客">
+                生命在于折腾之Github+HEXO搭建博客 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -528,8 +614,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https:/AnJingwd.github.io/images/avatar.png"
@@ -787,6 +882,22 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pipline"><span class="nav-number">1.</span> <span class="nav-text">pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#质控"><span class="nav-number">2.</span> <span class="nav-text">质控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-去除低质量的reads"><span class="nav-number">2.1.</span> <span class="nav-text">1. 去除低质量的reads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-检查每个tile的质量"><span class="nav-number">2.2.</span> <span class="nav-text">2. 检查每个tile的质量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Adapter-Content"><span class="nav-number">2.3.</span> <span class="nav-text">3. Adapter Content</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除核糖体rRNA"><span class="nav-number">3.</span> <span class="nav-text">去除核糖体rRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建索引"><span class="nav-number">3.1.</span> <span class="nav-text">建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去除rRNA"><span class="nav-number">3.2.</span> <span class="nav-text">去除rRNA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
