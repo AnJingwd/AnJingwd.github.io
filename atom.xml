@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-08T12:40:05.743Z</updated>
+  <updated>2018-01-14T08:28:08.591Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,130 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RNA-seq质控</title>
+    <link href="https:///AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/"/>
+    <id>https:///AnJingwd.github.io/2018/01/10/RNA-seq质控/</id>
+    <published>2018-01-10T13:39:44.000Z</published>
+    <updated>2018-01-14T08:28:08.591Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">RNA-seq质控：去除低质量reads，adapter以及rRNA</blockquote>
+
+<a id="more"></a>
+<h1 id="pipline"><a href="#pipline" class="headerlink" title="pipline"></a>pipline</h1><p>比较值得关注的RNA-seq分析中的重要的步骤包括：实验设计，质控，read比对，表达定量，可视化，差异表达，识别可变剪切，功能注释，融合基因检测，eQTL定位等</p>
+<h1 id="质控"><a href="#质控" class="headerlink" title="质控"></a>质控</h1><p>（1）人类的Per sequence GC content峰值在48左右，否则就是有污染或者建库不均匀</p>
+<p>（2）Per base N content越低越好（未识别的碱基，一般为0）</p>
+<p>（3）Illumina 下机测序长度是一定的，如果reads小于定长，就会测到Adapter，使用cutadapt去接头</p>
+<p>（4）一般流程只保留paired-reads用于下一步比对</p>
+<p>（去除低质量reads过程中，可能导致原来paired的reads长度不一致，当长度小于阈值时，整条reads将被去除，所以只剩下另一条reads，一般为了接下来定量分析的方便，另一条reads不用于比对）</p>
+<p>结果分为绿色的”PASS”，黄色的”WARN”和红色的”FAIL”，其中，红色部分是我们质控的关键，以下将对红色的”FAIL”部分进行解释及用相应软件进行相对应的质控。</p>
+<p><img src="https://i.imgur.com/knNm3I5.jpg" alt=""></p>
+<h2 id="1-去除低质量的reads"><a href="#1-去除低质量的reads" class="headerlink" title="1. 去除低质量的reads"></a>1. 去除低质量的reads</h2><p><img src="https://i.imgur.com/Pjm5pW6.jpg" alt=""></p>
+<p>横轴代表位置，纵轴quality。红色水平线表示中位数，黄色柱子是25%-75%区间，触须是10%-90%区间，蓝线是平均数。</p>
+<p>若任一位置的下四分位数低于10或中位数低于25，报”WARN”；若任一位置的下四分位数低于5或中位数低于20，报”FAIL”.</p>
+<h2 id="2-检查每个tile的质量"><a href="#2-检查每个tile的质量" class="headerlink" title="2. 检查每个tile的质量"></a>2. 检查每个tile的质量</h2><p>Illumina flowcells被分成一个个的tiles。为了检查低质量是否与flowcell的某些区域相关联，FASTQC对每个tile计算reads在所有位置的平均质量分数。</p>
+<p><img src="https://i.imgur.com/uasS1me.jpg" alt=""></p>
+<p>图中y轴表示tile的编号，x轴表示reads中的位置。</p>
+<p>在此图中看到警告或失败的原因可能是短暂的问题，例如通过flowcell的气泡，或者可能是更持久的问题，例如在flowcell中出现的斑点或碎片，或者在tile中高密度的聚集。在这个模块中，最常见的警告原因是flowcell 被 overloaded。</p>
+<p>建议忽略那些轻微影响一小部分tile,仅为1或2个cycles的warnings 或者 failures，并且只追求更大的影响，这些影响在分数中表现出很高的偏差，或者持续数个cycles。</p>
+<h2 id="3-Adapter-Content"><a href="#3-Adapter-Content" class="headerlink" title="3. Adapter Content"></a>3. Adapter Content</h2><p>对于R1：</p>
+<p><img src="https://i.imgur.com/GP3ZyEM.jpg" alt=""></p>
+<p>对于R2</p>
+<p><img src="https://i.imgur.com/Wlr5oMX.jpg" alt=""></p>
+<p>所以需要去接头</p>
+<p>Per base sequence content 图的Failures 一般是由于文库污染造成的。如果一条特定的reads占了文库中的很大比例，那么这条reads将扭曲Per base sequence content图（在每个位置的碱基百分比将这条reads严重影响）</p>
+<p>你可以使用Overrepresented sequences模块检查序列的污染情况，其列出了所有组成超过0.1%的序列，并列出其最佳匹配。上图中发现一个污染，被鉴定为Illumina的接头序列。</p>
+<p><strong>不去除接头污染将影响比对过程中的比对百分率</strong></p>
+<p>常用trimming tools的功能：</p>
+<p><img src="https://i.imgur.com/IaxvSSe.jpg" alt=""></p>
+<p>使用软件：trim_galore ,该软件通过调用FastQC进行质检，调用cutadapt去接头，同时还能去除低质量的reads。附加功能还有去除RRBS(for directional, non-directional (or paired-end) sequencing)测序文件的甲基化偏好位点。</p>
+<p>其中去除低质量reads时最重要的两个参数是最小Phred score（1-30）和最小序列长度，不同文章对此观点不同，一般推荐Phred score 20 (90%置信区间)和最小50%-70%的序列长度。</p>
+<p><a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" target="_blank" rel="external">Trim Galore!官网</a>， Trim Galore is now also available from<a href="https://github.com/FelixKrueger/TrimGalore" target="_blank" rel="external"> GitHub</a>，具体参数使用参考<a href="https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md" target="_blank" rel="external">User Guide</a>。</p>
+<p>对于RRBS samples, 首先进行quality trimming，从3’端剪切掉低质量的reads；然后调用cutadapt程序从3’端去除接头，如果具体序列没有提供，其将使用标准的Illumina配对接头的前13bp （’AGATCGGAAGAGC’）序列来去除接头。给了控制去接头过程的严格程度，需要指定与接头序列最小的overlap数目，或者默认为1（即使与接头序列只有一个bp的overlap也会被剪切掉）。</p>
+<pre><code>agapter1=GATCGGAAGAGCACACGTCTGAACTCCAGTCACCGATGTATCTCGTATGC
+adapter2=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT
+
+time $trim_galore \
+--quality 20 \
+--stringency 5 \
+--dont_gzip \
+--fastqc \
+--retain_unpaired \
+-r1 31 -r2 31 \
+--length 30 \
+--output_dir $trim \
+--paired \
+--phred33 \
+--adapter ${adapter1} \
+--adapter2 ${adapter2} \
+$sample_r1 $sample_r2
+</code></pre><p><strong>注：如果No overrepresented sequences，但Adapter Content未黄色警告，可以对于adapter和adapter2两个参数都可以用 –illumina 代替，表示 first 13bp of the Illumina universal adapter AGATCGGAAGAGC</strong></p>
+<p>使用参考：<a href="http://overviewdifferentialexpression.blogspot.com/2014/02/quality-control-using-trim-galore.html" target="_blank" rel="external">Quality Control using Trim Galore: How to run trim galore?</a></p>
+<h1 id="去除核糖体rRNA"><a href="#去除核糖体rRNA" class="headerlink" title="去除核糖体rRNA"></a>去除核糖体rRNA</h1><p>对于总RNA建库测序的RNA-seq实验设计，rRNA将占总数据量的95%左右，如果不去除，将严重影响比对率及下游分析。</p>
+<p><a href="http://bioinfo.lifl.fr/sortmerna/sortmerna.php" target="_blank" rel="external">SortMeRNA官网</a>；<a href="http://bioinfo.lifl.fr/RNA/sortmerna/code/SortMeRNA-user-manual-v2.1.pdf" target="_blank" rel="external">SortMeRNA User Manual v2.1.pdf</a></p>
+<h2 id="建索引"><a href="#建索引" class="headerlink" title="建索引"></a>建索引</h2><pre><code>sortmerna_REF=/home/wangdong/miniconda3/sortmerna_db/rRNA_databases
+sortmerna_index=/home/wangdong/miniconda3/sortmerna_db/index
+
+indexdb_rna --ref $sortmerna_REF/silva-arc-16s-id95.fasta,$sortmerna_index/silva-arc-16s-id95
+indexdb_rna --ref $sortmerna_REF/silva-arc-23s-id98.fasta,$sortmerna_index/silva-arc-23s-id98
+indexdb_rna --ref $sortmerna_REF/silva-bac-16s-id90.fasta,$sortmerna_index/silva-bac-16s-id95
+indexdb_rna --ref $sortmerna_REF/silva-bac-23s-id98.fasta,$sortmerna_index/silva-bac-23s-id98
+indexdb_rna --ref $sortmerna_REF/silva-euk-18s-id95.fasta,$sortmerna_index/silva-euk-18s-id95
+indexdb_rna --ref $sortmerna_REF/silva-euk-28s-id98.fasta,$sortmerna_index/silva-euk-28s-id98
+indexdb_rna --ref $sortmerna_REF/rfam-5.8s-database-id98.fasta,$sortmerna_index/rfam-5.8s-db
+indexdb_rna --ref $sortmerna_REF/rfam-5s-database-id98.fasta,$sortmerna_index/rfam-5s-db
+</code></pre><h2 id="去除rRNA"><a href="#去除rRNA" class="headerlink" title="去除rRNA"></a>去除rRNA</h2><p><strong>SortMeRNA只接受一个reads输入文件，对于paired-end reads需要使用merge-paired-reads.sh脚本合并之后用于分析。</strong></p>
+<p><img src="https://i.imgur.com/vE4ODha.jpg" alt=""></p>
+<p><code>which merge-paired-reads.sh</code> ${trim}/${sample}_paired_r1.fq ${trim}/${sample}_paired_r2.fq ${remove_rrna}/${sample}_paired_merge.fq</p>
+<p>SortMeRNA去除rRNA后，对于paired-end reads的过滤时，如果一条reads比对上rRNA，而另一条reads没有比对上rRNA，但又想保证输出到fastq文件的都是paired-end reads，则需要考虑以下两个参数：</p>
+<ol>
+<li>–paired-in will put both reads into the file specified by –aligned</li>
+<li>–paired-out will put both reads into the file specified by –other</li>
+</ol>
+<p>第一个参数–paired-in表示所有在–other file中的reads都为non-rRNA;第二个参数–paired-out表示只有rRNA reads被输出到–aligned file。如果两个参数都不设置，则会导致输出结果的reads不配对，不利于后续分析。</p>
+<pre><code>time $sortmerna \
+--ref $sortmerna_REF/silva-arc-16s-id95.fasta,$sortmerna_index/silva-arc-16s-id95:\
+$sortmerna_REF/silva-arc-23s-id98.fasta,$sortmerna_index/silva-arc-23s-id98:\
+$sortmerna_REF/silva-bac-16s-id90.fasta,$sortmerna_index/silva-bac-16s-id95:\
+$sortmerna_REF/silva-bac-23s-id98.fasta,$sortmerna_index/silva-bac-23s-id98:\
+$sortmerna_REF/silva-euk-18s-id95.fasta,$sortmerna_index/silva-euk-18s-id95:\
+$sortmerna_REF/silva-euk-28s-id98.fasta,$sortmerna_index/silva-euk-28s-id98:\
+$sortmerna_REF/rfam-5.8s-database-id98.fasta,$sortmerna_index/rfam-5.8s-db:\
+$sortmerna_REF/rfam-5s-database-id98.fasta,$sortmerna_index/rfam-5s-db \
+--reads ${remove_rrna}/${sample}_paired_merge.fq \
+--aligned $remove_rrna/${sample}_paired_aligned_rRNA \
+--other $remove_rrna/${sample}_paired_filtered_non_rRNA \
+--fastx \
+--sam --num_alignments 1 \
+--paired_in \
+--log \
+-a 5 -v
+</code></pre><p>接着将$remove_rrna/${sample}_paired_filtered_non_rRNA.fq文件拆分为forward reads和reserve reads两个文件，用于下游的paried-reads的比对</p>
+<pre><code>`which unmerge-paired-reads.sh` $remove_rrna/${sample}_paired_filtered_non_rRNA.fq \
+$remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_paired_r2.fq
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>参考：</p>
+<p>（1） <a href="http://blog.sciencenet.cn/blog-303373-724110.html" target="_blank" rel="external">fastqc解释</a></p>
+<p>（2） <a href="https://wiki.bits.vib.be/index.php/Quality_control_of_NGS_data" target="_blank" rel="external">Quality control of NGS data（推荐）</a></p>
+<p>（3）<a href="https://sequencing.qcfail.com/page/2/" target="_blank" rel="external">qcfail.com：Articles about common next-generation sequencing problems（强烈推荐）</a></p>
+<p>（4）<a href="https://github.com/twbattaglia/RNAseq-workflow" target="_blank" rel="external">twbattaglia/RNAseq-workflow（推荐）</a></p>
+<p>（5）<a href="https://www.bits.vib.be/training/328" target="_blank" rel="external">RNA-Seq analysis for differential expression in GenePattern</a> <a href="http://data.bits.vib.be/pub/trainingen/GenePattern/genepattern.pdf" target="_blank" rel="external">Slides（推荐）</a></p>
+<p>（6）<a href="https://woaielf.github.io/2016/11/16/RNA-seq/" target="_blank" rel="external">RNA-seq分析流程思维导图</a></p>
+<p>（7）<a href="http://www.bio-info-trainee.com/2275.html" target="_blank" rel="external">一个RNA-seq的反思</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;RNA-seq质控：去除低质量reads，adapter以及rRNA&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
+    
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
+    
+  </entry>
   
   <entry>
     <title>GATK3.8分析环境搭建（一）</title>
@@ -1682,71 +1806,6 @@ CMD    //命令的名称和参数
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何优雅的生成及遍历python嵌套字典</title>
-    <link href="https:///AnJingwd.github.io/2017/08/19/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%94%9F%E6%88%90python%E5%B5%8C%E5%A5%97%E5%AD%97%E5%85%B8/"/>
-    <id>https:///AnJingwd.github.io/2017/08/19/如何优雅的生成python嵌套字典/</id>
-    <published>2017-08-19T07:41:32.000Z</published>
-    <updated>2017-08-19T10:56:56.020Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">如何优雅的生成及遍历python嵌套字典</blockquote>
-
-<a id="more"></a>
-<h1 id="嵌套字典生成"><a href="#嵌套字典生成" class="headerlink" title="嵌套字典生成"></a>嵌套字典生成</h1><h2 id="方法一-定义类"><a href="#方法一-定义类" class="headerlink" title="方法一:定义类"></a>方法一:定义类</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vividict</span><span class="params">(dict)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__missing__</span><span class="params">(self, key)</span>:</span></div><div class="line">		value = self[key] = type(self)()</div><div class="line">		<span class="keyword">return</span> value</div></pre></td></tr></table></figure>
-<p>解释：</p>
-<ul>
-<li>第一行：class后面紧接着是类名，即Vividict，类名通常是大写开头的单词，紧接着是(dict)，表示该类是dict类继承下来的。</li>
-</ul>
-<p>我们可以使用dir(dict）查看dict的方法<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">In[<span class="number">22</span>]: print(dir(dict))</div><div class="line">[<span class="string">'__class__'</span>, <span class="string">'__contains__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__delitem__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__getitem__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__iter__'</span>, <span class="string">'__le__'</span>, <span class="string">'__len__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__setitem__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'clear'</span>, <span class="string">'copy'</span>, <span class="string">'fromkeys'</span>, <span class="string">'get'</span>, <span class="string">'items'</span>, <span class="string">'keys'</span>, <span class="string">'pop'</span>, <span class="string">'popitem'</span>, <span class="string">'setdefault'</span>, <span class="string">'update'</span>, <span class="string">'values'</span>]</div></pre></td></tr></table></figure></p>
-<p>同理，可以查看Vividict的方法<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">In[<span class="number">23</span>]: print(dir(Vividict))</div><div class="line">[<span class="string">'__class__'</span>, <span class="string">'__contains__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__delitem__'</span>, <span class="string">'__dict__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__getitem__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__iter__'</span>, <span class="string">'__le__'</span>, <span class="string">'__len__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__missing__'</span>, <span class="string">'__module__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__setitem__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'__weakref__'</span>, <span class="string">'clear'</span>, <span class="string">'copy'</span>, <span class="string">'fromkeys'</span>, <span class="string">'get'</span>, <span class="string">'items'</span>, <span class="string">'keys'</span>, <span class="string">'pop'</span>, <span class="string">'popitem'</span>, <span class="string">'setdefault'</span>, <span class="string">'update'</span>, <span class="string">'values'</span>]</div></pre></td></tr></table></figure></p>
-<p>比较两者可以发现，Vividict的方法比dict的方法多了一个<strong>missing</strong>方法，也就是我们添加的方法。所以这就是继承，继承最大的好处是子类获得了父类的全部功能，而不必重新造轮子。</p>
-<ul>
-<li><p>第二行：python魔法方法中的自定义序列，类似于定义一个函数。<strong>missing</strong> 在字典的子类中使用，它定义了当试图访问一个字典中不存在的键时的行为（目前为止是指字典的实例，例如我有一个字典 d ， “george” 不是字典中的一个键，当试图访问 d[‘george’] 时就会调用 d.<strong>missing</strong>(“george”)，结果为{} ）。</p>
-</li>
-<li><p>第三行，第四行：访问字典中不存在的键(key)时，返回空字典作为其返回值（value）</p>
-</li>
-</ul>
-<p>例如：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">In[<span class="number">17</span>]: a = dict()</div><div class="line">In[<span class="number">18</span>]: type(a)()</div><div class="line">Out[<span class="number">18</span>]: </div><div class="line">&#123;&#125;</div></pre></td></tr></table></figure></p>
-<p>注意：</p>
-<ul>
-<li>特殊方法“missing”前后有两个下划线！！！</li>
-<li>和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。</li>
-</ul>
-<p>使用：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="comment">#导入模块</span></div><div class="line"><span class="keyword">import</span> os, openpyxl</div><div class="line"><span class="keyword">import</span> pprint</div><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> DataFrame</div><div class="line"></div><div class="line"><span class="comment">#pprint模块可以输出漂亮的字典结构，但是不利于后期利用R作图</span></div><div class="line"><span class="comment">#DataFrame可以将字典结构转为数据框输出，方便后期利用R作图</span></div><div class="line"></div><div class="line"><span class="comment">#切换工作路径</span></div><div class="line">os.chdir(<span class="string">r'F:\pycharm_project\mutation_count'</span>)</div><div class="line"></div><div class="line"><span class="comment">#读取excel表格</span></div><div class="line">wb = openpyxl.load_workbook(<span class="string">'东方肝胆数据综合.xlsx'</span>)</div><div class="line">sheet = wb.active</div><div class="line"></div><div class="line"><span class="comment">#定义类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vividict</span><span class="params">(dict)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__missing__</span><span class="params">(self, key)</span>:</span></div><div class="line">		value = self[key] = type(self)()</div><div class="line">		<span class="keyword">return</span> value</div><div class="line"></div><div class="line"><span class="comment">#实例化</span></div><div class="line">d = Vividict()</div><div class="line"></div><div class="line"><span class="comment">#字典初始化，赋初值0</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,sheet.max_row+<span class="number">1</span>):</div><div class="line">	d[sheet.cell(row=i, column=<span class="number">1</span>).value][sheet.cell(row=i, column=<span class="number">15</span>).value] = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="comment">#累加统计各个样本各种突变类型的数目</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,sheet.max_row+<span class="number">1</span>):</div><div class="line">	d[sheet.cell(row=i, column=<span class="number">1</span>).value][sheet.cell(row=i, column=<span class="number">15</span>).value] +=<span class="number">1</span></div><div class="line"></div><div class="line">pprint.pprint(d)</div><div class="line"></div><div class="line"><span class="comment">#输出字典结构</span></div><div class="line"></div><div class="line">pprint.pprint(d)</div><div class="line"></div><div class="line">&#123;<span class="string">'PDC1279A_vs_PDC1279'</span>: &#123;<span class="string">'UTR3'</span>: <span class="number">9</span>,</div><div class="line">                         <span class="string">'UTR5'</span>: <span class="number">4</span>,</div><div class="line">                         <span class="string">'downstream'</span>: <span class="number">5</span>,</div><div class="line">                         <span class="string">'exonic'</span>: <span class="number">149</span>,</div><div class="line">                         <span class="string">'intergenic'</span>: <span class="number">170</span>,</div><div class="line">                         <span class="string">'intronic'</span>: <span class="number">163</span>,</div><div class="line">                         <span class="string">'ncRNA_exonic'</span>: <span class="number">17</span>,</div><div class="line">                         <span class="string">'ncRNA_intronic'</span>: <span class="number">23</span>,</div><div class="line">                         <span class="string">'splicing'</span>: <span class="number">2</span>,</div><div class="line">                         <span class="string">'upstream;downstream'</span>: <span class="number">2</span>&#125;,</div><div class="line"> <span class="string">'PDC1279C_vs_PDC1279'</span>: &#123;<span class="string">'UTR3'</span>: <span class="number">11</span>,</div><div class="line">                         <span class="string">'UTR5'</span>: <span class="number">13</span>,</div><div class="line">                         <span class="string">'downstream'</span>: <span class="number">1</span>,</div><div class="line">                         <span class="string">'exonic'</span>: <span class="number">174</span>,</div><div class="line">                         <span class="string">'intergenic'</span>: <span class="number">189</span>,</div><div class="line">                         <span class="string">'intronic'</span>: <span class="number">172</span>,</div><div class="line">                         <span class="string">'ncRNA_exonic'</span>: <span class="number">24</span>,</div><div class="line">                         <span class="string">'ncRNA_intronic'</span>: <span class="number">36</span>,</div><div class="line">                         <span class="string">'splicing'</span>: <span class="number">4</span>,</div><div class="line">                         <span class="string">'upstream'</span>: <span class="number">2</span>,</div><div class="line">                         <span class="string">'upstream;downstream'</span>: <span class="number">2</span>&#125;&#125;</div><div class="line"></div><div class="line"><span class="comment">#输出数据框结构，缺损的元素用 NaN补齐</span></div><div class="line"></div><div class="line">frame = DataFrame(d)</div><div class="line">print(frame)</div><div class="line"></div><div class="line">                     PDC1279A_vs_PDC1279  PDC1279C_vs_PDC1279  \</div><div class="line">UTR3                                 <span class="number">9.0</span>                 <span class="number">11.0</span>   </div><div class="line">UTR5                                 <span class="number">4.0</span>                 <span class="number">13.0</span>   </div><div class="line">downstream                           <span class="number">5.0</span>                  <span class="number">1.0</span>   </div><div class="line">exonic                             <span class="number">149.0</span>                <span class="number">174.0</span>   </div><div class="line">exonic;splicing                      NaN                  NaN   </div><div class="line">intergenic                         <span class="number">170.0</span>                <span class="number">189.0</span>   </div><div class="line">intronic                           <span class="number">163.0</span>                <span class="number">172.0</span>   </div><div class="line">ncRNA_exonic                        <span class="number">17.0</span>                 <span class="number">24.0</span>   </div><div class="line">ncRNA_intronic                      <span class="number">23.0</span>                 <span class="number">36.0</span>   </div><div class="line">ncRNA_splicing                       NaN                  NaN   </div><div class="line">splicing                             <span class="number">2.0</span>                  <span class="number">4.0</span>   </div><div class="line">upstream                             NaN                  <span class="number">2.0</span>   </div><div class="line">upstream;downstream                  <span class="number">2.0</span>                  <span class="number">2.0</span></div></pre></td></tr></table></figure>
-<h2 id="方法二：使用defaultdict"><a href="#方法二：使用defaultdict" class="headerlink" title="方法二：使用defaultdict()"></a>方法二：使用defaultdict()</h2><p>两个维度字典：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</div><div class="line"></div><div class="line">d = defaultdict(defaultdict)</div><div class="line">d[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<p>等价于：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">nested_dict_factory</span><span class="params">()</span>:</span> </div><div class="line">    <span class="keyword">return</span> defaultdict(int)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">nested_dict_factory2</span><span class="params">()</span>:</span> </div><div class="line">    <span class="keyword">return</span> defaultdict(nested_dict_factory)</div><div class="line"></div><div class="line">db = defaultdict(nested_dict_factory2)</div></pre></td></tr></table></figure>
-<p>当然，第一种方法简洁的多！</p>
-<p>要获得更多维度，你可以（三维）：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</div><div class="line">d = defaultdict(<span class="keyword">lambda</span> :defaultdict(defaultdict))</div><div class="line">d[<span class="number">1</span>][<span class="number">2</span>][<span class="number">3</span>] = <span class="number">4</span></div></pre></td></tr></table></figure>
-<p>使用defaultdict任何未定义的key都会默认返回一个根据method_factory参数不同的默认值, 而相同情况下dict()会返回KeyError.</p>
-<p>python中lambda存在意义就是对简单函数的简洁表示</p>
-<p>实际上 defaultdict也是通过<strong>missing</strong>方法实现的。defaultdict在dict的基础上添加了一个missing(key)方法, 在调用一个不存的key的时候, defaultdict会调用<strong>missing</strong>, 返回一个根据default_factory参数的默认值, 所以不会返回Keyerror.</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">In[<span class="number">35</span>]: print(dir(defaultdict))</div><div class="line">[<span class="string">'__class__'</span>, <span class="string">'__contains__'</span>, <span class="string">'__copy__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__delitem__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>, <span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__getitem__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__iter__'</span>, <span class="string">'__le__'</span>, <span class="string">'__len__'</span>, <span class="string">'__lt__'</span>, <span class="string">'__missing__'</span>, <span class="string">'__ne__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__setitem__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'clear'</span>, <span class="string">'copy'</span>, <span class="string">'default_factory'</span>, <span class="string">'fromkeys'</span>, <span class="string">'get'</span>, <span class="string">'items'</span>, <span class="string">'keys'</span>, <span class="string">'pop'</span>, <span class="string">'popitem'</span>, <span class="string">'setdefault'</span>, <span class="string">'update'</span>, <span class="string">'values'</span>]</div></pre></td></tr></table></figure>
-<h1 id="嵌套字典的遍历"><a href="#嵌套字典的遍历" class="headerlink" title="嵌套字典的遍历"></a>嵌套字典的遍历</h1><h2 id="方法一：一层一层的嵌套迭代-从而实现遍历"><a href="#方法一：一层一层的嵌套迭代-从而实现遍历" class="headerlink" title="方法一：一层一层的嵌套迭代,从而实现遍历"></a>方法一：一层一层的嵌套迭代,从而实现遍历</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> d.items():</div><div class="line">    <span class="keyword">for</span> key2, val2 <span class="keyword">in</span> value.items():</div><div class="line">        <span class="keyword">print</span> (key2, val2)</div></pre></td></tr></table></figure>
-<h1 id="在类中定义walk方法实现嵌套字典的遍历"><a href="#在类中定义walk方法实现嵌套字典的遍历" class="headerlink" title="在类中定义walk方法实现嵌套字典的遍历"></a>在类中定义walk方法实现嵌套字典的遍历</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vividict</span><span class="params">(dict)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__missing__</span><span class="params">(self, key)</span>:</span></div><div class="line">		value = self[key] = type(self)()</div><div class="line">		<span class="keyword">return</span> value</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">walk</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">for</span> key, value <span class="keyword">in</span> self.items():</div><div class="line">			<span class="keyword">if</span> isinstance(value, Vividict):</div><div class="line">				<span class="keyword">for</span> tup <span class="keyword">in</span> value.walk():</div><div class="line">					<span class="keyword">yield</span> (key,) + tup</div><div class="line">			<span class="keyword">else</span>:</div><div class="line">				<span class="keyword">yield</span> key, value</div></pre></td></tr></table></figure>
-<p>解释:<br>第1-4行：上面已经解释过了<br>第5-11行：定义一个walk函数，并对字典items对象的key和value进行遍历，isinstance用于判断对象类型，如果value是一个字典，那么对value调用walk（）方法继续进行遍历，一层一层将key,value存储在元祖中（）。当最里面一层，即else情况，输出key,value。整个过程即<strong>将字典数据结构扁平化为元祖</strong></p>
-<p>此时，我们可以这样来遍历字典（输出元祖）</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#打印整个元祖</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> tup <span class="keyword">in</span> d.walk():</div><div class="line">	print(tup)</div><div class="line"></div><div class="line">(<span class="string">'PDC1279_vs_PDC1279C6'</span>, <span class="string">'downstream'</span>, <span class="number">3</span>)</div><div class="line">(<span class="string">'PDC1279_vs_PDC1279C6'</span>, <span class="string">'UTR3'</span>, <span class="number">11</span>)</div><div class="line">(<span class="string">'PDC1279_vs_PDC1279C6'</span>, <span class="string">'intronic'</span>, <span class="number">164</span>)</div><div class="line">(<span class="string">'PDC1279_vs_PDC1279C6'</span>, <span class="string">'splicing'</span>, <span class="number">4</span>)</div><div class="line"></div><div class="line">**这就是扁平化的字典**</div><div class="line"></div><div class="line"><span class="comment">#打印元祖的第3列</span></div><div class="line"><span class="keyword">for</span> tup <span class="keyword">in</span> d.walk():</div><div class="line">	print(tup[<span class="number">2</span>])</div></pre></td></tr></table></figure>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://ask.helplib.com/229754" target="_blank" rel="external">https://ask.helplib.com/229754</a></p>
-<p>（2）Python魔法方法指南（推荐阅读）</p>
-<p><a href="http://pyzh.readthedocs.io/en/latest/python-magic-methods-guide.html" target="_blank" rel="external">http://pyzh.readthedocs.io/en/latest/python-magic-methods-guide.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;如何优雅的生成及遍历python嵌套字典&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/categories/python/"/>
-    
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
     
   </entry>
   
