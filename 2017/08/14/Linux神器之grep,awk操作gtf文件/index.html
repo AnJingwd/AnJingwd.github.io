@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="Linux神器之grep,awk操作gtf文件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-20T07:42:44.212Z">
+<meta property="og:updated_time" content="2018-01-21T03:08:08.532Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux神器之grep,awk操作gtf文件">
 <meta name="twitter:description" content="Linux神器之grep,awk操作gtf文件">
@@ -530,6 +530,12 @@ done
 <li>如果没有定义pattern,则直接执行action；</li>
 <li>如果没有提供action,则直接输出满足pattern的内容</li>
 </ul>
+<h1 id="补充知识点"><a href="#补充知识点" class="headerlink" title="补充知识点"></a>补充知识点</h1><ol>
+<li>grep -w, –word-regexp         强制 PATTERN 仅完全匹配字词</li>
+<li><p>grep 匹配TAB键</p>
+<p> grep -P ‘\tsh’ file.txt<br> grep $’\tsh’ test file.txt</p>
+</li>
+</ol>
 <h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p>（1）<a href="http://www.jianshu.com/p/7af624409dcd" target="_blank" rel="external">http://www.jianshu.com/p/7af624409dcd</a></p>
 <p>（2）<a href="https://mp.weixin.qq.com/s/NZCt2SR3WmCnqpb2FGcbsQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/NZCt2SR3WmCnqpb2FGcbsQ</a></p>
 
@@ -682,7 +688,7 @@ done
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -935,7 +941,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux神器之grep-awk操作gtf文件"><span class="nav-number">1.</span> <span class="nav-text">Linux神器之grep,awk操作gtf文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤-开头注释行"><span class="nav-number">1.1.</span> <span class="nav-text">过滤#开头注释行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提取并计数有多少类feature"><span class="nav-number">1.2.</span> <span class="nav-text">提取并计数有多少类feature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#筛选出特定行"><span class="nav-number">1.3.</span> <span class="nav-text">筛选出特定行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"><span class="nav-number">1.4.</span> <span class="nav-text">先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算所有CDS的累积长度，其他类似"><span class="nav-number">1.5.</span> <span class="nav-text">计算所有CDS的累积长度，其他类似</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算1号染色体cds的平均长度"><span class="nav-number">1.6.</span> <span class="nav-text">计算1号染色体cds的平均长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从gtf文件中分离提取基因名字"><span class="nav-number">1.7.</span> <span class="nav-text">从gtf文件中分离提取基因名字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据基因名列表提取gtf文件"><span class="nav-number">1.8.</span> <span class="nav-text">根据基因名列表提取gtf文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充基本语法："><span class="nav-number">2.</span> <span class="nav-text">补充基本语法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">3.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux神器之grep-awk操作gtf文件"><span class="nav-number">1.</span> <span class="nav-text">Linux神器之grep,awk操作gtf文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤-开头注释行"><span class="nav-number">1.1.</span> <span class="nav-text">过滤#开头注释行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提取并计数有多少类feature"><span class="nav-number">1.2.</span> <span class="nav-text">提取并计数有多少类feature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#筛选出特定行"><span class="nav-number">1.3.</span> <span class="nav-text">筛选出特定行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序"><span class="nav-number">1.4.</span> <span class="nav-text">先过滤出基因，然后按照chr顺序排序然后根据基因起始位置排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算所有CDS的累积长度，其他类似"><span class="nav-number">1.5.</span> <span class="nav-text">计算所有CDS的累积长度，其他类似</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算1号染色体cds的平均长度"><span class="nav-number">1.6.</span> <span class="nav-text">计算1号染色体cds的平均长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从gtf文件中分离提取基因名字"><span class="nav-number">1.7.</span> <span class="nav-text">从gtf文件中分离提取基因名字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据基因名列表提取gtf文件"><span class="nav-number">1.8.</span> <span class="nav-text">根据基因名列表提取gtf文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充基本语法："><span class="nav-number">2.</span> <span class="nav-text">补充基本语法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充知识点"><span class="nav-number">3.</span> <span class="nav-text">补充知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考："><span class="nav-number">4.</span> <span class="nav-text">参考：</span></a></li></ol></div>
             
 
           </div>
@@ -983,7 +989,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共54.8k字</span>
+  <span class="post-count">博客全站共55.3k字</span>
 </div>
 
 <div class="powered-by">

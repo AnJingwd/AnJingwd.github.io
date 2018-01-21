@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-21T01:53:20.743Z</updated>
+  <updated>2018-01-21T05:20:28.419Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>批量生成与提交shell脚本</title>
+    <link href="https:///AnJingwd.github.io/2018/01/21/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E4%B8%8E%E6%8F%90%E4%BA%A4shell%E8%84%9A%E6%9C%AC/"/>
+    <id>https:///AnJingwd.github.io/2018/01/21/批量生成与提交shell脚本/</id>
+    <published>2018-01-21T02:15:40.000Z</published>
+    <updated>2018-01-21T05:20:28.419Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">批量生成与提交shell脚本</blockquote>
+
+<a id="more"></a>
+<p>同一分析流程的shell脚本，通过替换样本参数，批量生成每个样本单独的piplines，从而实现批量提交，批量运行，在样本多的时候适用。</p>
+<h1 id="批量生成shell脚本"><a href="#批量生成shell脚本" class="headerlink" title="批量生成shell脚本"></a>批量生成shell脚本</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#creat_multi_piplines.py</span></div><div class="line"></div><div class="line">  <span class="number">1</span> <span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">  <span class="number">2</span> <span class="comment">#!/home/wangdong/python/python27/bin/python2.7</span></div><div class="line">  <span class="number">3</span> </div><div class="line">  <span class="number">4</span> <span class="keyword">import</span> argparse,os,re,sys</div><div class="line">  <span class="number">5</span> </div><div class="line">  <span class="number">6</span> <span class="comment">#import parameters</span></div><div class="line">  <span class="number">7</span> parser = argparse.ArgumentParser(description=<span class="string">'manual to this script'</span>)</div><div class="line">  <span class="number">8</span> parser.add_argument(<span class="string">'--pipline_file'</span>, type=str, default=<span class="keyword">None</span>)</div><div class="line">  <span class="number">9</span> parser.add_argument(<span class="string">'--info_file'</span>, type=str, default=<span class="keyword">None</span>)</div><div class="line"> <span class="number">10</span> parser.add_argument(<span class="string">'--result_dir'</span>, type=str, default=<span class="keyword">None</span>)</div><div class="line"> <span class="number">11</span> args = parser.parse_args()</div><div class="line"> <span class="number">12</span> </div><div class="line"> <span class="number">13</span> </div><div class="line"> <span class="number">14</span> <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(args.result_dir):</div><div class="line"> <span class="number">15</span> &gt;---os.mkdir(args.result_dir)</div><div class="line"> <span class="number">16</span> </div><div class="line"> <span class="number">17</span> sample_pair = &#123;&#125;</div><div class="line"> <span class="number">18</span> <span class="keyword">with</span> open(args.info_file) <span class="keyword">as</span> f1:</div><div class="line"> <span class="number">19</span> &gt;---<span class="keyword">for</span> line <span class="keyword">in</span> f1:</div><div class="line"> 20 &gt;---&gt;---line = line.strip()</div><div class="line"> 21 &gt;---&gt;---mylist = line.split('\t')</div><div class="line"> 22 &gt;---&gt;---sample_pair[mylist[1]] = [mylist[0],mylist[2]]</div><div class="line"> <span class="number">23</span> </div><div class="line"> <span class="number">24</span> </div><div class="line"> <span class="number">25</span> <span class="keyword">for</span> key <span class="keyword">in</span> sample_pair:</div><div class="line"> <span class="number">26</span> &gt;---new_pip_file_name = <span class="string">"&#123;&#125;.sh"</span>.format(key)</div><div class="line"> <span class="number">27</span> &gt;---result_file = open(os.path.join(args.result_dir,new_pip_file_name),<span class="string">'w'</span>)</div><div class="line"> <span class="number">28</span> &gt;---<span class="keyword">with</span> open(args.pipline_file,<span class="string">'r'</span>) <span class="keyword">as</span> f2:</div><div class="line"> 29 &gt;---&gt;---for line in f2:</div><div class="line"> 30 &gt;---&gt;---&gt;---line = re.sub("MY_SAMPLE_ID_2017", str(sample_pair[key][0]), str(line))</div><div class="line"> 31 &gt;---&gt;---&gt;---line = re.sub("MY_SAMPLE_ID_2018", str(sample_pair[key][1]), str(line))</div><div class="line"> 32 &gt;---&gt;---&gt;---line = re.sub("MY_LIBRARY_ID", str(key), str(line))</div><div class="line"> 33 &gt;---&gt;---&gt;---result_file.write(line)</div><div class="line"> <span class="number">34</span> &gt;---result_file.close()</div><div class="line"> <span class="number">35</span> &gt;---chmod_commond = <span class="string">"chmod +x &#123;&#125;"</span>.format(os.path.join(args.result_dir, new_pip_file_name))</div><div class="line"> <span class="number">36</span> &gt;---os.system(chmod_commond)</div><div class="line"> <span class="number">37</span> </div><div class="line"> <span class="number">38</span> </div><div class="line"> <span class="number">39</span> </div><div class="line"> <span class="number">40</span> <span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line"> <span class="number">41</span> &gt;---print(<span class="string">'well done!'</span>)</div></pre></td></tr></table></figure>
+<h1 id="批量提交shell脚本"><a href="#批量提交shell脚本" class="headerlink" title="批量提交shell脚本"></a>批量提交shell脚本</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#submit_multi_work.sh</span></div><div class="line"></div><div class="line">  1 <span class="comment">####################</span></div><div class="line">  2 <span class="comment">###function###</span></div><div class="line">  3 <span class="comment">#submit_multi_work</span></div><div class="line">  4 <span class="comment">####data####</span></div><div class="line">  5 <span class="comment">#20180121</span></div><div class="line">  6 <span class="comment">####use#####</span></div><div class="line">  7 <span class="built_in">echo</span> <span class="string">"usage: ./submit_multi_work.sh tasks_list.txt "</span></div><div class="line">  8                                              </div><div class="line">  9 <span class="comment">####################           </span></div><div class="line"> 10 <span class="comment">#!/bin/bash                       </span></div><div class="line"> 11 <span class="built_in">set</span> -u                           </div><div class="line"> 12 <span class="built_in">set</span> -e    </div><div class="line"> 13 <span class="built_in">set</span> -o pipefail</div><div class="line"> 14           </div><div class="line"> 15 <span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">""</span> ] ; <span class="keyword">then</span></div><div class="line"> 16 &gt;---<span class="built_in">echo</span> <span class="string">"Bad command. No tasklist file been appointed. Right format: <span class="variable">$0</span> tasks_list.txt"</span></div><div class="line"> 17 &gt;---<span class="built_in">exit</span> 1</div><div class="line"> 18 <span class="keyword">fi</span></div><div class="line"> 19 tasks_num=`cat <span class="variable">$1</span>|wc -l`</div><div class="line"> 20 <span class="built_in">echo</span> <span class="string">"total tasks founded:<span class="variable">$tasks_num</span>"</span></div><div class="line"> 21 <span class="built_in">echo</span> <span class="string">"Now begin running....."</span></div><div class="line"> 22 mix_tasks=6  <span class="comment">#set mix tasks to assign</span></div><div class="line"> 23 cat <span class="variable">$1</span>|<span class="keyword">while</span> <span class="built_in">read</span> line</div><div class="line"> 24 <span class="keyword">do</span></div><div class="line"> 25 &gt;---tasks=`ps -u wangdong |grep -w <span class="string">'sh'</span> | wc -l`</div><div class="line"> 26 &gt;---<span class="keyword">while</span> [ <span class="variable">$tasks</span> -gt <span class="variable">$mix_tasks</span> ]</div><div class="line"> 27 &gt;---&gt;---<span class="keyword">do</span></div><div class="line"> 28 &gt;---&gt;---sleep 20</div><div class="line"> 29 &gt;---&gt;---&gt;---<span class="built_in">echo</span> <span class="string">"task is running"</span></div><div class="line"> 30 &gt;---&gt;---&gt;---tasks=`ps -u wangdong |grep -w <span class="string">'sh'</span> | wc -l`</div><div class="line"> 31 &gt;---&gt;---<span class="keyword">done</span></div><div class="line"> 32 &gt;---<span class="variable">$line</span>  <span class="comment"># run the COMMOND in tasklist</span></div><div class="line"> 33 &gt;---<span class="built_in">echo</span> <span class="string">"running <span class="variable">$line</span>"</span>~~</div><div class="line"> 34 &gt;---sleep 5</div><div class="line"> 35 <span class="keyword">done</span>~~</div><div class="line"> 36 <span class="built_in">echo</span> <span class="string">"end."</span>~</div><div class="line"></div><div class="line"><span class="comment">#tasks_list.txt</span></div><div class="line"></div><div class="line">  1 nohup /home/wangdong/projects/project4/piplines/oi_capture_process_sh/oi_1.sh &gt; oi_1.logfile 2&gt;&amp;1 &amp;</div><div class="line">  2 nohup /home/wangdong/projects/project4/piplines/oi_capture_process_sh/oi_2.sh &gt; oi_2.logfile 2&gt;&amp;1 &amp;</div><div class="line">  3 nohup /home/wangdong/projects/project4/piplines/oi_capture_process_sh/oi_3.sh &gt; oi_3.logfile 2&gt;&amp;1 &amp;</div><div class="line"></div><div class="line"><span class="comment">#run the submit_multi_work.sh</span></div><div class="line"></div><div class="line">    ./submit_multi_work.sh tasks_list.txt &gt; batchRun.log &amp;</div><div class="line"></div><div class="line"><span class="comment">#simple commond </span></div><div class="line"></div><div class="line">    cat task_list.txt |<span class="keyword">while</span> <span class="built_in">read</span> line;<span class="keyword">do</span> <span class="variable">$line</span>;<span class="keyword">done</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;批量生成与提交shell脚本&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>ANNOVAR进行突变注释</title>
@@ -1972,87 +1995,6 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux命令之nohup</title>
-    <link href="https:///AnJingwd.github.io/2017/08/25/linux%E5%91%BD%E4%BB%A4%E4%B9%8Bnohup/"/>
-    <id>https:///AnJingwd.github.io/2017/08/25/linux命令之nohup/</id>
-    <published>2017-08-25T08:49:13.000Z</published>
-    <updated>2017-09-01T03:17:00.417Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">命令后台运行及相关操作</blockquote>
-
-<a id="more"></a>
-<h1 id="nohup命令参考"><a href="#nohup命令参考" class="headerlink" title="nohup命令参考"></a>nohup命令参考</h1><p>用途：该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。nohup就是不挂起的意思( no hang up)</p>
-<ul>
-<li>语法：nohup Command [ Arg … ] [　&amp; ]</li>
-<li>描述：nohup 命令运行由 Command 参数和任何相关的 Arg 参数指定的命令，忽略所有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 nohup 命令，<strong>添加 &amp; （ 表示”and”的符号）到命令的尾部</strong></li>
-</ul>
-<h1 id="将任务移至后台"><a href="#将任务移至后台" class="headerlink" title="将任务移至后台"></a>将任务移至后台</h1><p>在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp; 在程序结尾来让程序自动运行。比如我们要在后台运行一个aaa.sh的脚本：</p>
-<pre><code>./test2.sh &amp;                                                             
-</code></pre><p><strong>可是当我们注销或者屏保后，这个脚本就会自动停止，这时我们就需要nohup命令，</strong> 怎样使用nohup命令呢？请看:</p>
-<pre><code>[wangdong@frontend ~]$ nohup ./test2.sh &amp;
-[1] 18569    
-[wangdong@frontend ~]$ nohup: ignoring input and appending output to `nohup.out&apos;
-</code></pre><h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><ul>
-<li><strong>只有当虚拟终端是 $ 或者 # 时候（如下图所示），才可关闭此终端，否则可能导致已经启动的进程被关闭</strong>（如果程序持续输出信息而没有出现 $ 或 #，按一下enter即可）</li>
-</ul>
-<p><img src="http://i.imgur.com/Rw7hIG7.png" alt=""></p>
-<ul>
-<li><p>后台执行脚本（<strong>有多个脚本，每个窗口最好只执行一个</strong>），如果在同一个窗口执行，下个执行命令需要等待前面一个执行完成才能执行，这种效率不是我们要的。</p>
-</li>
-<li><p>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中，起到了log的作用。</p>
-</li>
-<li><strong>如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中。除非另外指定了输出文件：nohup command &gt; myout.file 2&gt;&amp;1 &amp;</strong> </li>
-<li>/dev/null 是黑洞路径， 可用于用于丢弃输出，例如nohup COMMAND &gt; /dev/null &amp;</li>
-</ul>
-<h1 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h1><h2 id="用-jobs-命令可以查看当前Screen中的后台任务。"><a href="#用-jobs-命令可以查看当前Screen中的后台任务。" class="headerlink" title="用 jobs 命令可以查看当前Screen中的后台任务。"></a>用 jobs 命令可以查看当前Screen中的后台任务。</h2><pre><code>jobs
-[1]+  Done                    nohup ./test2.sh
-</code></pre><p>（1）jobs命令执行的结果，＋表示是一个当前的作业，减号表是是一个当前作业之后的一个作业。</p>
-<p>（2）jobs -l 选项可显示所有任务的PID,</p>
-<p>（3）jobs的状态可以是running, stopped, Terminated</p>
-<p><strong>但当关闭该窗口在打开查看，这时候jobs已经不能使用，只能通过以下方式查看后台执行的脚本是否正在执行</strong></p>
-<pre><code>ps -ef | grep conda 
-</code></pre><p>#grep conda用于过滤命令</p>
-<p><img src="http://i.imgur.com/P1zghVP.png" alt=""></p>
-<h2 id="用-fg-JOBID-命令可以将后台的任务调入前台继续运行（Foreground）。"><a href="#用-fg-JOBID-命令可以将后台的任务调入前台继续运行（Foreground）。" class="headerlink" title="用 fg JOBID 命令可以将后台的任务调入前台继续运行（Foreground）。"></a>用 fg JOBID 命令可以将后台的任务调入前台继续运行（Foreground）。</h2><p>&emsp;&emsp;如果执行完后台脚本命令，当前窗口没有关闭，可以执行jobs查看当前窗口运行的后台进程的进程号，再通过fg n，将此后台进程调到前台执行。</p>
-<p><img src="http://i.imgur.com/n78JTfz.png" alt=""></p>
-<h2 id="命令在前台执行一半了，想转入后台执行"><a href="#命令在前台执行一半了，想转入后台执行" class="headerlink" title="命令在前台执行一半了，想转入后台执行"></a>命令在前台执行一半了，想转入后台执行</h2><ul>
-<li>首先用 ctrl + z 快捷键可以将一个正在前台执行的命令放到后台，并且暂停  </li>
-<li>接着用 bg JOBID 命令可以将一个在后台暂停的命令，变成继续执行（Background）。 </li>
-</ul>
-<h2 id="进程的终止"><a href="#进程的终止" class="headerlink" title="进程的终止"></a>进程的终止</h2><p>前台进程的终止：ctrl+c</p>
-<p>后台进程的终止：</p>
-<p>方法一：通过jobs命令查看job号（假设为num），然后执行kill num</p>
-<p>方法二：通过ps命令查看job的进程号（PID，假设为pid），然后执行kill pid
-　　</p>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="概念：当前任务"><a href="#概念：当前任务" class="headerlink" title="概念：当前任务"></a>概念：当前任务</h2><p>&emsp;&emsp;如果后台的任务号有2个，[1],[2]；如果当第一个后台任务顺利执行完毕，第二个后台任务还在执行中时，当前任务便会自动变成后台任务号码“[2]”的后台任务。所以可以得出一点，<strong>即当前任务是会变动的。当用户输入“fg”、“bg”和“stop”等命令时，如果未指定jobsid，则所变动的均是当前任务。</strong></p>
-<h2 id="ps-ef-是用标准的格式显示进程的"><a href="#ps-ef-是用标准的格式显示进程的" class="headerlink" title="ps -ef 是用标准的格式显示进程的"></a>ps -ef 是用标准的格式显示进程的</h2><p><img src="http://i.imgur.com/QfGAegr.png" alt=""></p>
-<p>其中各列的内容意思如下</p>
-<pre><code>UID    //用户ID、但输出的是用户名 
-PID    //进程的ID 
-PPID    //父进程ID 
-C      //进程占用CPU的百分比 
-STIME  //进程启动到现在的时间 
-TTY    //该进程在那个终端上运行，若与终端无关，则显示? 若为pts/0等，则表示由网络连接主机进程。 
-CMD    //命令的名称和参数
-</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://rajaruan.blog.51cto.com/2771737/822199" target="_blank" rel="external">http://rajaruan.blog.51cto.com/2771737/822199</a></p>
-<p>（2）<a href="https://wenku.baidu.com/view/28863c79581b6bd97f19ead8.html" target="_blank" rel="external">https://wenku.baidu.com/view/28863c79581b6bd97f19ead8.html</a></p>
-<p>（3）<a href="http://blog.sina.com.cn/s/blog_673ee2b50100iywr.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_673ee2b50100iywr.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;命令后台运行及相关操作&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
     
   </entry>
   
