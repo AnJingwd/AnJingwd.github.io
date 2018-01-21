@@ -181,10 +181,10 @@
     <url>https%3A%2F%2F%2FAnJingwd.github.io%2F2017%2F09%2F01%2F%E8%A7%A3%E5%86%B3ggplot-%E4%BD%9C%E5%9B%BEx%E8%BD%B4%E5%92%8Cy%E8%BD%B4%E4%B8%8D%E9%87%8D%E5%90%88%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[解决ggplot 作图x轴和y轴不重合问题 只需要在作图时加上加上一下代码，即可即可让x轴和y轴在坐标原点重合： scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0)) 现在用测试代码看看前后变化： library(ggplot2) df &lt;- data.frame(x = 1:5, y = 1:5) p1 &lt;- ggplot(df, aes(x, y)) + geom_point() p1 &lt;- p1 + expand_limits(x = 0, y = 0) p1 library(ggplot2) df &lt;- data.frame(x = 1:5, y = 1:5) p2 &lt;- ggplot(df, aes(x, y)) + geom_point() p2 &lt;- p2 + expand_limits(x = 0, y = 0)+ scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0)) p2 参考： （1）http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot （2）http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r （3）http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap]]></content>
       <categories>
-        <category>R-绘图</category>
+        <category>R绘图</category>
       </categories>
       <tags>
-        <tag>R-绘图</tag>
+        <tag>R绘图</tag>
       </tags>
   </entry>
   <entry>

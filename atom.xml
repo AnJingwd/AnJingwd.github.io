@@ -1783,7 +1783,7 @@ $ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;s
     <link href="https:///AnJingwd.github.io/2017/09/01/%E8%A7%A3%E5%86%B3ggplot-%E4%BD%9C%E5%9B%BEx%E8%BD%B4%E5%92%8Cy%E8%BD%B4%E4%B8%8D%E9%87%8D%E5%90%88%E9%97%AE%E9%A2%98/"/>
     <id>https:///AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/</id>
     <published>2017-09-01T04:43:03.000Z</published>
-    <updated>2017-09-01T04:54:22.189Z</updated>
+    <updated>2018-01-21T05:26:24.976Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">解决ggplot 作图x轴和y轴不重合问题</blockquote>
 
@@ -1815,10 +1815,10 @@ p2
     
     </summary>
     
-      <category term="R-绘图" scheme="https:///AnJingwd.github.io/categories/R-%E7%BB%98%E5%9B%BE/"/>
+      <category term="R绘图" scheme="https:///AnJingwd.github.io/categories/R%E7%BB%98%E5%9B%BE/"/>
     
     
-      <category term="R-绘图" scheme="https:///AnJingwd.github.io/tags/R-%E7%BB%98%E5%9B%BE/"/>
+      <category term="R绘图" scheme="https:///AnJingwd.github.io/tags/R%E7%BB%98%E5%9B%BE/"/>
     
   </entry>
   
