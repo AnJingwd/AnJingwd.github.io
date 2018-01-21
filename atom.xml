@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-21T01:48:09.874Z</updated>
+  <updated>2018-01-21T01:53:20.743Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https:///AnJingwd.github.io/2018/01/20/ANNOVAR%E8%BF%9B%E8%A1%8C%E7%AA%81%E5%8F%98%E6%B3%A8%E9%87%8A/"/>
     <id>https:///AnJingwd.github.io/2018/01/20/ANNOVAR进行突变注释/</id>
     <published>2018-01-20T13:50:21.000Z</published>
-    <updated>2018-01-21T01:48:09.874Z</updated>
+    <updated>2018-01-21T01:53:20.743Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">ANNOVAR进行突变注释</blockquote>
 
@@ -302,11 +302,10 @@ annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput 
 <li>一般而言，建议使用one popular prediction score (such as SIFT) 和 one meta-score (such as metaSVM)预测来判断突变是否是有害的</li>
 <li>对于 noncoding variants的有害性预测推荐使用one popular prediction score (such as PhyloP) 和 one meta-score (such as CADD)</li>
 </ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.ncbi.nlm.nih.gov/pubmed/26379229" target="_blank" rel="external">Genomic variant annotation and prioritization with<br>ANNOVAR and wANNOVAR</a></p>
-<p>（1）<a href="http://blog.sina.com.cn/s/blog_670445240101j0pa.html" target="_blank" rel="external">每日一生信–基于保守性和规则性的预测方法SIFT和PolyPhen</a></p>
-<p>（2）<a href="http://blog.csdn.net/g863402758/article/details/75304391" target="_blank" rel="external">annovar对人类基因组和非人类基因组variants注释流程</a></p>
-<p>（3）<a href="http://ishare.iask.sina.com.cn/f/63732396.html" target="_blank" rel="external">ANNOVAR注释上机（推荐）</a></p>
-<p>（4）<a href="http://annovar.openbioinformatics.org/en/latest/" target="_blank" rel="external">ANNOVAR Documentation</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.ncbi.nlm.nih.gov/pubmed/26379229" target="_blank" rel="external">Genomic variant annotation and prioritization with ANNOVAR and wANNOVAR</a></p>
+<p>（2）<a href="http://blog.sina.com.cn/s/blog_670445240101j0pa.html" target="_blank" rel="external">每日一生信–基于保守性和规则性的预测方法SIFT和PolyPhen</a></p>
+<p>（3）<a href="http://blog.csdn.net/g863402758/article/details/75304391" target="_blank" rel="external">annovar对人类基因组和非人类基因组variants注释流程</a></p>
+<p>（4）<a href="http://ishare.iask.sina.com.cn/f/63732396.html" target="_blank" rel="external">ANNOVAR注释上机（推荐）</a></p>
 ]]></content>
     
     <summary type="html">
