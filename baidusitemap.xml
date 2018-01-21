@@ -4,8 +4,68 @@
 
     
   <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/20/ANNOVAR%E8%BF%9B%E8%A1%8C%E7%AA%81%E5%8F%98%E6%B3%A8%E9%87%8A/</loc>
+    <lastmod>2018-01-21T01:48:09.874Z</lastmod>
+    <data>
+        <display>
+        <title>ANNOVAR进行突变注释</title>
+        <pubTime>2018-01-20T13:50:21.000Z</pubTime>
+        
+        <tag>NGS</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2018-01-20T07:42:44.212Z</lastmod>
+    <data>
+        <display>
+        <title>Linux神器之grep,awk操作gtf文件</title>
+        <pubTime>2017-08-14T02:21:26.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
+    <lastmod>2018-01-17T04:55:45.469Z</lastmod>
+    <data>
+        <display>
+        <title>常用链接（持续更新）</title>
+        <pubTime>2017-08-19T06:51:52.000Z</pubTime>
+        
+        <tag>常用链接</tag>
+         
+         
+           
+             
+              <breadCrumb title="常用链接" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/</loc>
-    <lastmod>2018-01-14T08:28:08.591Z</lastmod>
+    <lastmod>2018-01-15T13:37:25.766Z</lastmod>
     <data>
         <display>
         <title>RNA-seq质控</title>
@@ -37,26 +97,6 @@
            
              
               <breadCrumb title="NGS软件" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS%E8%BD%AF%E4%BB%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    <lastmod>2018-01-08T13:41:36.768Z</lastmod>
-    <data>
-        <display>
-        <title>常用链接（持续更新）</title>
-        <pubTime>2017-08-19T06:51:52.000Z</pubTime>
-        
-        <tag>常用链接</tag>
-         
-         
-           
-             
-              <breadCrumb title="常用链接" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
           
         </display>
     </data>
@@ -430,26 +470,6 @@
         <display>
         <title>linux的CPU拓扑结构（Topology）</title>
         <pubTime>2017-09-17T07:46:01.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/</loc>
-    <lastmod>2017-09-15T03:28:19.724Z</lastmod>
-    <data>
-        <display>
-        <title>Linux神器之grep,awk操作gtf文件</title>
-        <pubTime>2017-08-14T02:21:26.000Z</pubTime>
         
         <tag>linux</tag>
          

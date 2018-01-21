@@ -104,6 +104,8 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="RNA-seq质控：去除低质量reads，adapter以及rRNA">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/f80qQqm.jpg">
+<meta property="og:image" content="https://i.imgur.com/p8BGXgl.jpg">
 <meta property="og:image" content="https://i.imgur.com/knNm3I5.jpg">
 <meta property="og:image" content="https://i.imgur.com/Pjm5pW6.jpg">
 <meta property="og:image" content="https://i.imgur.com/uasS1me.jpg">
@@ -111,11 +113,11 @@
 <meta property="og:image" content="https://i.imgur.com/Wlr5oMX.jpg">
 <meta property="og:image" content="https://i.imgur.com/IaxvSSe.jpg">
 <meta property="og:image" content="https://i.imgur.com/vE4ODha.jpg">
-<meta property="og:updated_time" content="2018-01-14T08:28:08.591Z">
+<meta property="og:updated_time" content="2018-01-15T13:37:25.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNA-seq质控">
 <meta name="twitter:description" content="RNA-seq质控：去除低质量reads，adapter以及rRNA">
-<meta name="twitter:image" content="https://i.imgur.com/knNm3I5.jpg">
+<meta name="twitter:image" content="https://i.imgur.com/f80qQqm.jpg">
 
 
 
@@ -395,6 +397,11 @@
 
 <a id="more"></a>
 <h1 id="pipline"><a href="#pipline" class="headerlink" title="pipline"></a>pipline</h1><p>比较值得关注的RNA-seq分析中的重要的步骤包括：实验设计，质控，read比对，表达定量，可视化，差异表达，识别可变剪切，功能注释，融合基因检测，eQTL定位等</p>
+<h1 id="建库质控"><a href="#建库质控" class="headerlink" title="建库质控"></a>建库质控</h1><p>使用Agilent 2100 Bioanalyzer，以下将简介其原理和结果如何解读</p>
+<p><img src="https://i.imgur.com/f80qQqm.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/p8BGXgl.jpg" alt=""></p>
+<p>横坐标为片段长度，纵坐标为FU：arbitrary fluorescent unit</p>
+<p>左边的峰为ladder，右边的峰为marker, ladder孔和样品孔中的marker起到对其和丁范围的校准作用。中间为样品峰。面积表示浓度。</p>
 <h1 id="质控"><a href="#质控" class="headerlink" title="质控"></a>质控</h1><p>（1）人类的Per sequence GC content峰值在48左右，否则就是有污染或者建库不均匀</p>
 <p>（2）Per base N content越低越好（未识别的碱基，一般为0）</p>
 <p>（3）Illumina 下机测序长度是一定的，如果reads小于定长，就会测到Adapter，使用cutadapt去接头</p>
@@ -541,6 +548,10 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="https:/AnJingwd.github.io/2018/01/20/ANNOVAR进行突变注释/" rel="prev" title="ANNOVAR进行突变注释">
+                ANNOVAR进行突变注释 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -639,7 +650,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -892,7 +903,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pipline"><span class="nav-number">1.</span> <span class="nav-text">pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#质控"><span class="nav-number">2.</span> <span class="nav-text">质控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-去除低质量的reads"><span class="nav-number">2.1.</span> <span class="nav-text">1. 去除低质量的reads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-检查每个tile的质量"><span class="nav-number">2.2.</span> <span class="nav-text">2. 检查每个tile的质量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Adapter-Content"><span class="nav-number">2.3.</span> <span class="nav-text">3. Adapter Content</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除核糖体rRNA"><span class="nav-number">3.</span> <span class="nav-text">去除核糖体rRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建索引"><span class="nav-number">3.1.</span> <span class="nav-text">建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去除rRNA"><span class="nav-number">3.2.</span> <span class="nav-text">去除rRNA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pipline"><span class="nav-number">1.</span> <span class="nav-text">pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建库质控"><span class="nav-number">2.</span> <span class="nav-text">建库质控</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#质控"><span class="nav-number">3.</span> <span class="nav-text">质控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-去除低质量的reads"><span class="nav-number">3.1.</span> <span class="nav-text">1. 去除低质量的reads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-检查每个tile的质量"><span class="nav-number">3.2.</span> <span class="nav-text">2. 检查每个tile的质量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Adapter-Content"><span class="nav-number">3.3.</span> <span class="nav-text">3. Adapter Content</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除核糖体rRNA"><span class="nav-number">4.</span> <span class="nav-text">去除核糖体rRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建索引"><span class="nav-number">4.1.</span> <span class="nav-text">建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去除rRNA"><span class="nav-number">4.2.</span> <span class="nav-text">去除rRNA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -940,7 +951,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共52.3k字</span>
+  <span class="post-count">博客全站共54.8k字</span>
 </div>
 
 <div class="powered-by">
