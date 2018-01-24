@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-24T16:37:50.913Z</updated>
+  <updated>2018-01-24T16:47:06.739Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https:///AnJingwd.github.io/2018/01/24/%E8%AE%BE%E8%AE%A1miRNA%E7%9A%84qPCR%E5%BC%95%E7%89%A9/"/>
     <id>https:///AnJingwd.github.io/2018/01/24/设计miRNA的qPCR引物/</id>
     <published>2018-01-24T02:01:15.000Z</published>
-    <updated>2018-01-24T16:37:50.913Z</updated>
+    <updated>2018-01-24T16:47:06.739Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">在线设计miRNA的qPCR引物</blockquote>
 
@@ -62,7 +62,7 @@
 </ul>
 <p><strong>最后，需要检测下引物对的几个参数</strong></p>
 <p>NCBI 的<a href="https://www.ncbi.nlm.nih.gov/tools/primer-blast/" target="_blank" rel="external">Primer-BLAST</a>工具</p>
-<p>在Primer Parameters 中分别输入上下游引物，在Primer Pair Specificity Checking Parameters 的Database 中选择相应模板类型，将Organism 的物种改成自己所需要的物种，然后点击左下角的Get Primers就可以得到比对结果。</p>
+<p>在Primer Parameters 中分别输入上下游引物，在Primer Pair Specificity Checking Parameters 的Database 中选择相应模板类型（这里我选择Refseq mRNA)，将Organism 的物种改成Mus (taxid:10088)，即小鼠。然后点击左下角的Get Primers就可以得到比对结果。</p>
 <ul>
 <li>结果中主要看看是否有目的基因以外的基因出现，如果其它的基因也可以扩增出来，那说明引物特异性不好，可将引物返回我们再重新设计</li>
 <li>如果出现的非目的条带和目的条带大小相差较大，可忽略不计，因为PCR扩增程序中延伸时间的限制，这种非目的条带扩增不出来。</li>
