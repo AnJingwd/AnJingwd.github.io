@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-21T05:23:53.678Z</updated>
+  <updated>2018-01-24T16:37:50.913Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,87 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计miRNA的qPCR引物</title>
+    <link href="https:///AnJingwd.github.io/2018/01/24/%E8%AE%BE%E8%AE%A1miRNA%E7%9A%84qPCR%E5%BC%95%E7%89%A9/"/>
+    <id>https:///AnJingwd.github.io/2018/01/24/设计miRNA的qPCR引物/</id>
+    <published>2018-01-24T02:01:15.000Z</published>
+    <updated>2018-01-24T16:37:50.913Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">在线设计miRNA的qPCR引物</blockquote>
+
+<h1 id="miRNA简介"><a href="#miRNA简介" class="headerlink" title="miRNA简介"></a>miRNA简介</h1><p>&emsp;&emsp;microRNAs(miRNAs)是指长度在20-24nt的非编码RNAs,其可通过影响转录的mRNAs的转录和稳定性，参与细胞组织的转录后基因表达调控。miRNAs由RNA聚合酶II转录为带帽子和多聚腺苷酸的初级转录物（pri-miRNA）的一部分（有的编码蛋白，有的是非编码的）。初级转录物被Drosha核糖核酸酶III切割产生大约70nt的茎环前体miRNA(pre-miRNA)，其被细胞质Dicer 核糖核酸酶裂解产生成熟的miRNA和反义miRNA star(miRNA*)。成熟的miRNA包含在RNA诱导的沉默复合物（RISC)中。通过不完全的碱基配对，其能够识别靶标mRNA的3’端，并通常导致的结果是翻译被抑制或者靶标mRNA的去稳定化。RefSeq代表预测的microRNA的茎环结构。</p>
+<p>miRNA主要公共数据库<a href="http://www.mirbase.org/" target="_blank" rel="external">miRBase</a>中已经有1W多条来自不同物种的miRNA序列</p>
+<p><img src="https://i.imgur.com/qfASLJU.jpg" alt=""></p>
+<h1 id="miRNA检测引物设计"><a href="#miRNA检测引物设计" class="headerlink" title="miRNA检测引物设计"></a>miRNA检测引物设计</h1><p>引物有两种类型，一个是poly加尾，一个是加茎环结构。PCR荧光定量又分为探针法和染料法：</p>
+<ol>
+<li>Poly方法的话，引物设计简单，但是引起非特异性扩增的可能性大。</li>
+<li>探针法特异性更高，但是价格高，不适合大批量的实验。</li>
+</ol>
+<h2 id="加Poly方法"><a href="#加Poly方法" class="headerlink" title="加Poly方法"></a>加Poly方法</h2><p>miRNA qRT-PCR Detection Kit中已提供有miRNA检测的Reverse 通用引物：“Universal adaptor PCR Primer”，Forward 检测引物需客户参考miRNA序列自行设计。因为miRNA序列长度一般都在18～24nt之间，所以其检测的Forward 检测引物一般都直接选用其miRNA序列或为增加其检测的特异性而特殊设计的序列：如有的miRNA GC含量偏高或引物易形成引物二聚体，其引物可为miRNA 3’端去除几个碱基后整理的序列。</p>
+<p>miRNA qPCR Forward Primer 设计举例（以小鼠mmu-miR-125b-5p为例）：<br>在miRNA Database中查找检测的miRNA序列，如下图所示：<a href="http://www.mirbase.org/cgi-bin/mature.pl?mature_acc=MIMAT0000136" target="_blank" rel="external">miRNA Database</a></p>
+<p><img src="https://i.imgur.com/a8j33ex.jpg" alt=""></p>
+<p><strong>如果不确定5p或者3p哪一个有功能，要么都设计，要么参考Previous IDs并查阅文献</strong></p>
+<p>则其Forward 检测引物可为：</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Sequences</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>miRNA 成熟序列</td>
+<td>ucccugagacccuaacuuguga</td>
+</tr>
+<tr>
+<td>上游引物序列</td>
+<td>tccctgagaccctaacttgtga （Tm：58.8）</td>
+</tr>
+</tbody>
+</table>
+<p>通用序列是：5′-GCTGTCAACGATACGCTACGTAACG-3′，也就是下游引物序列，内参一般使用U6基因：</p>
+<ul>
+<li>U6-Control-F 5＇ -CTCGCTTCGGCAGCACA-3＇</li>
+<li>U6-Control-R 5＇ -AACGCTTCACGAATTTGCGT-3＇</li>
+</ul>
+<p><strong>最后，需要检测下引物对的几个参数</strong></p>
+<p>NCBI 的<a href="https://www.ncbi.nlm.nih.gov/tools/primer-blast/" target="_blank" rel="external">Primer-BLAST</a>工具</p>
+<p>在Primer Parameters 中分别输入上下游引物，在Primer Pair Specificity Checking Parameters 的Database 中选择相应模板类型，将Organism 的物种改成自己所需要的物种，然后点击左下角的Get Primers就可以得到比对结果。</p>
+<ul>
+<li>结果中主要看看是否有目的基因以外的基因出现，如果其它的基因也可以扩增出来，那说明引物特异性不好，可将引物返回我们再重新设计</li>
+<li>如果出现的非目的条带和目的条带大小相差较大，可忽略不计，因为PCR扩增程序中延伸时间的限制，这种非目的条带扩增不出来。</li>
+<li>另外，有些非目的条带和引物之间有四五个碱基不能互补配对，一般是扩增不出来的，尤其是这种不能互补的碱基在引物的3’端时，扩增不出的可能性更大。</li>
+</ul>
+<p><img src="https://i.imgur.com/c9BYFJe.jpg" alt=""></p>
+<ol>
+<li>Tm 融链温度 这个最关键，主要还是看这个，内参基因U6的Tm值为60，所以设计的上游引物也尽量在这个温度左右。通用引物做一些优化后为GCTGTCAACGATACGCTACCTA(去掉右端的剩下22个碱基，保持与大多成熟miRNA长度一致，然后将右端第三位的G改为C，降低通用引物的Self complementarity)。</li>
+</ol>
+<p><img src="https://i.imgur.com/Q6Fm06U.png" alt=""></p>
+<p><strong>设计过程中，通过对上游引物5’端加1-3个GC碱基或者对上游引物3’端去除几个碱基使上游引物Tm值也在60左右即可！！！</strong></p>
+<ol>
+<li>GC%值 这个标准的话是45-50左右，但是主要还是服从于调整Tm值。</li>
+<li>Self complementarity 贴吧里说的是越低越好，我有一条引物的值为9，打算让生工重新设计，但是生工的MM说了，miRNA他的要求跟别的普通的要求不一样，好吧</li>
+<li><strong>最重要的特异性扩增问题：miRNA是不用检测特异性的，可以直接使用的。</strong></li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://wenku.baidu.com/view/882b5c2b2f60ddccda38a087.html" target="_blank" rel="external">miRNA命名规范</a></p>
+<p>（2）<a href="http://www.dxy.cn/bbs/topic/17332608" target="_blank" rel="external">miRNA用荧光定量PCR检测的流程以及汇总 [推荐]</a></p>
+<p>（3）<a href="https://jingyan.baidu.com/article/b0b63dbf19baf74a483070c8.html" target="_blank" rel="external">如何在pubmed中设计QPCR引物？</a></p>
+<p>（4）<a href="http://www.dxy.cn/bbs/thread/30911259#30911259" target="_blank" rel="external">MiRNA 引物设计与合成总结</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;在线设计miRNA的qPCR引物&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;miRNA简介&quot;&gt;&lt;a href=&quot;#miRNA简介&quot; class=&quot;headerlink&quot; title=&quot;miRNA简介&quot;&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>批量生成与提交shell脚本</title>
@@ -1924,81 +2005,6 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
     
     
       <category term="技术" scheme="https:///AnJingwd.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用bash脚本下载和处理基因表达数据</title>
-    <link href="https:///AnJingwd.github.io/2017/08/25/%E4%BD%BF%E7%94%A8bash%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%A4%84%E7%90%86%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E6%95%B0%E6%8D%AE/"/>
-    <id>https:///AnJingwd.github.io/2017/08/25/使用bash脚本下载和处理基因表达数据/</id>
-    <published>2017-08-25T12:21:17.000Z</published>
-    <updated>2017-08-25T13:12:28.046Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">使用bash脚本从ArrayExpress下载和处理基因表达数据（去接头和质控），也就是练习写生信分析pipline</blockquote>
-
-<a id="more"></a>
-<h1 id="ArrayExpress数据库简介"><a href="#ArrayExpress数据库简介" class="headerlink" title="ArrayExpress数据库简介"></a>ArrayExpress数据库简介</h1><p>&emsp;&emsp;<strong>ArrayExpress是EBI的微阵列实验和基因表达谱的公共数据库</strong>，它是一个一般的基因表达数据库，设计用来保存来自所有微阵列平台的数据。ArrayExpress使用MIAME(Minimum Information About a Microarray Experiment，有关微阵列实验的最小化信息)注释标准及相关的XML数据交换格式MAGE-ML(Microarray Gene Expression Markup Language，微阵列基因表达标记语言)，它被设计成以结构化的方式来存储良好注释的数据。ArrayExpress基础结构由数据库本身，以MAGE-ML格式的数据提交或通过在线的提交工具MIAMExpress，在线数据库查询接口，Expression Profiler在线分析工具组成。<strong>ArrayExpress提供三种类型的提交，阵列，实验和实验方案，它们中的每一个都分配一个登录号。</strong>数据提交和注释的帮助由监管小组提供。<strong>数据库可以用诸如作者，实验室，物种，试验或阵列类型等参数进行查询。</strong> 随着越来越多的(an increasing number of)组织采用MAGE-ML标准，提交到ArrayExpress的量在快速增长着。</p>
-<h1 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h1><p>1.AEArrayExpress主页搜索E-MTAB-567</p>
-<p><a href="https://www.ebi.ac.uk/arrayexpress/" target="_blank" rel="external">https://www.ebi.ac.uk/arrayexpress/</a></p>
-<p><img src="http://i.imgur.com/BwlwiUS.png" alt=""></p>
-<p>点击Export table in Tab-delimited format，下载E-MTAB-567.sdrf.txt</p>
-<p><img src="http://i.imgur.com/RP1Th6u.png" alt=""></p>
-<p>2.提取status,ID,link</p>
-<pre><code>grep &apos;fastq.gz&apos; E-MTAB-567.sdrf.txt | head -2 | awk &apos;{print $39&quot;,&quot;$21&quot;,&quot;$35}&apos; &gt; status,ID,link.csv
-</code></pre><p>输出:<br><img src="http://i.imgur.com/9AkTi6g.png" alt=""></p>
-<p>3.mainPipeline.sh</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="built_in">set</span> -u</div><div class="line"><span class="built_in">set</span> -e</div><div class="line"><span class="built_in">set</span> -o pipefail</div><div class="line"></div><div class="line"><span class="comment">################################################################################################################################################</span></div><div class="line"><span class="comment">####################################################################</span></div><div class="line"><span class="comment">#使用bash脚本从ArrayExpress下载和处理基因表达数据（去接头和质控）</span></div><div class="line"><span class="comment">####################################################################</span></div><div class="line"></div><div class="line"><span class="comment">#软件安装</span></div><div class="line"><span class="comment">##安装fastx_toolkit</span></div><div class="line">conda install fastx_toolkit </div><div class="line"></div><div class="line"><span class="comment">##安装FastQ</span></div><div class="line">conda install fastqc</div><div class="line"></div><div class="line"><span class="comment">################################################################################################################################################</span></div><div class="line"></div><div class="line"><span class="comment">#提取相关信息（extract.sh）</span></div><div class="line"><span class="keyword">for</span> LINE <span class="keyword">in</span> $(cat status,ID,link.csv)</div><div class="line"><span class="keyword">do</span></div><div class="line">    <span class="built_in">echo</span> <span class="variable">$LINE</span></div><div class="line">    STATUS=$(<span class="built_in">echo</span> <span class="variable">$LINE</span>|cut -d, -f1)</div><div class="line">    ID=$(<span class="built_in">echo</span> <span class="variable">$LINE</span>|cut -d, -f2)</div><div class="line">    LINK=$(<span class="built_in">echo</span> <span class="variable">$LINE</span>|cut -d, -f3)</div><div class="line"></div><div class="line">    FILE=$(basename <span class="variable">$LINK</span>)</div><div class="line">    STEM=$(basename <span class="variable">$LINK</span> .gz)</div><div class="line"></div><div class="line">    NEWID=<span class="variable">$STATUS</span>.<span class="variable">$ID</span></div><div class="line"></div><div class="line">    <span class="built_in">echo</span> <span class="variable">$STATUS</span>, <span class="variable">$ID</span>, <span class="variable">$LINK</span>, <span class="variable">$STEM</span>, <span class="variable">$FILE</span>, <span class="variable">$NEWID</span></div><div class="line"><span class="comment">#############################################################################################</span></div><div class="line"><span class="comment">#输出：</span></div><div class="line"><span class="comment">#u641750@GenekServer:~$ ./extract.sh </span></div><div class="line"><span class="comment">#Normal,10N_1,ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR031/ERR031017/ERR031017_1.fastq.gz</span></div><div class="line"><span class="comment">#Normal, 10N_1, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR031/ERR031017/ERR031017_1.fastq.gz, ERR031017_1.fastq, ERR031017_1.fastq.gz, Normal.10N_1</span></div><div class="line"><span class="comment">#Normal,10N_2,ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR031/ERR031017/ERR031017_2.fastq.gz</span></div><div class="line"><span class="comment">#Normal, 10N_2, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR031/ERR031017/ERR031017_2.fastq.gz, ERR031017_2.fastq, ERR031017_2.fastq.gz, Normal.10N_2</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#例如：$STATUS：Normal, $ID:10N_1, $LINK:ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR031/ERR031017/ERR031017_1.fastq.gz , $STEM:ERR031017_1.fastq, $FILE:ERR031017_1.fastq.gz, $NEWID:Normal.10N_1</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">################################################################################################################################################</span></div><div class="line">[ -d ./fastqFiles ]|| mkdir -p ./fastqFiles</div><div class="line"><span class="comment">#下载数据</span></div><div class="line">    <span class="keyword">if</span> [ ! -f ./fastqFiles/<span class="variable">$NEWID</span>.<span class="variable">$STEM</span> ];<span class="keyword">then</span></div><div class="line">        wget <span class="variable">$LINK</span></div><div class="line">        gunzip <span class="variable">$FILE</span></div><div class="line">        mv <span class="variable">$STEM</span> ./fastqFiles/<span class="variable">$NEWID</span>.<span class="variable">$STEM</span>  <span class="comment">#移动并改名</span></div><div class="line">    <span class="keyword">fi</span></div><div class="line"><span class="keyword">done</span></div><div class="line"></div><div class="line"><span class="comment">#############################################################################################</span></div><div class="line"></div><div class="line"><span class="comment">#输出：</span></div><div class="line"><span class="comment">#u641750@GenekServer:~/fastqFiles$ ls -l</span></div><div class="line"><span class="comment">#total 16341536</span></div><div class="line"><span class="comment">#-rw-r--r-- 1 u641750 GenekVIP 8358690360 Aug 22 21:29 Normal.10N_1.ERR031017_1.fastq</span></div><div class="line"><span class="comment">#-rw-r--r-- 1 u641750 GenekVIP 8358690360 Aug 25 13:20 Normal.10N_2.ERR031017_2.fastq</span></div><div class="line"></div><div class="line"><span class="comment">################################################################################################################################################</span></div><div class="line"></div><div class="line"><span class="comment">#质量控制(修剪)</span></div><div class="line">[ -d ./trimmed/fastQC ]||mkdir -p ./trimmed/fastQC</div><div class="line"></div><div class="line"><span class="keyword">for</span> FILE <span class="keyword">in</span> ./fastqFiles/*.fastq</div><div class="line"><span class="keyword">do</span></div><div class="line">    ls -lh <span class="variable">$FILE</span></div><div class="line">    STEM=$(basename <span class="variable">$FILE</span> .fastq)</div><div class="line">    <span class="keyword">if</span> [ ! -f ./trimmed/<span class="variable">$STEM</span>.trimmed.fastaq ];<span class="keyword">then</span></div><div class="line">        fastq_quality_trimmer -v -t 20 -l 20 -Q 33 -i <span class="variable">$FILE</span> -o ./trimmed/<span class="variable">$STEM</span>.trimmed.fastq</div><div class="line">    <span class="keyword">fi</span></div><div class="line"><span class="keyword">done</span></div><div class="line"></div><div class="line"><span class="comment">#############################################################################################</span></div><div class="line"></div><div class="line"><span class="comment">#结果</span></div><div class="line"><span class="comment">#u641750@GenekServer:~/trimmed$ ls</span></div><div class="line"><span class="comment">#fastQC	Normal.10N_1.ERR031017_1.trimmed.fastq Normal.10N_2.ERR031017_2.trimmed.fastq</span></div><div class="line"></div><div class="line"><span class="comment">#输出：</span></div><div class="line"><span class="comment">#-rw-r--r-- 1 u641750 GenekVIP 7.8G Aug 22 21:29 ./fastqFiles/#Normal.10N_1.ERR031017_1.fastq</span></div><div class="line"><span class="comment">#Minimum Quality Threshold: 20</span></div><div class="line"><span class="comment">#Minimum Length: 20</span></div><div class="line"><span class="comment">#Input: 34536162 reads.</span></div><div class="line"><span class="comment">#Output: 34458851 reads.</span></div><div class="line"><span class="comment">#discarded 77311 (0%) too-short reads.</span></div><div class="line"><span class="comment">#-rw-r--r-- 1 u641750 GenekVIP 7.8G Aug 25 13:20 ./fastqFiles/#Normal.10N_2.ERR031017_2.fastq</span></div><div class="line"><span class="comment">#Minimum Quality Threshold: 20</span></div><div class="line"><span class="comment">#Minimum Length: 20</span></div><div class="line"><span class="comment">#Input: 34536162 reads.</span></div><div class="line"><span class="comment">#Output: 33968272 reads.</span></div><div class="line"><span class="comment">#discarded 567890 (1%) too-short reads.</span></div><div class="line"></div><div class="line"><span class="comment">################################################################################################################################################</span></div><div class="line"></div><div class="line"><span class="comment">#质量控制（评估）</span></div><div class="line"></div><div class="line">[ -d ./trimmed/fastQC ]||mkdir -p ./trimmed/fastQC</div><div class="line"></div><div class="line">FASTQC=/home/u641750/miniconda3/bin/fastqc</div><div class="line"></div><div class="line"><span class="keyword">for</span> FILE <span class="keyword">in</span> ./trimmed/*.trimmed.fastq</div><div class="line"><span class="keyword">do</span></div><div class="line"></div><div class="line">    ls -lh <span class="variable">$FILE</span></div><div class="line">    STEM=$(basename <span class="variable">$FILE</span> .fastq)</div><div class="line">    <span class="keyword">if</span> [ ! -d ./trimmed/fastQC/<span class="variable">$STEM_fastqc</span> ]; <span class="keyword">then</span></div><div class="line">        <span class="variable">$FASTQC</span> -o ./trimmed/fastQC <span class="variable">$FILE</span></div><div class="line">    <span class="keyword">fi</span></div><div class="line"><span class="keyword">done</span></div><div class="line"><span class="comment">#############################################################################################</span></div><div class="line"><span class="comment">#结果：</span></div><div class="line"><span class="comment">#u641750@GenekServer:~/trimmed/fastQC$ ls</span></div><div class="line"><span class="comment">#Normal.10N_1.ERR031017_1.trimmed_fastqc.html</span></div><div class="line"><span class="comment">#Normal.10N_1.ERR031017_1.trimmed_fastqc.zip</span></div><div class="line"><span class="comment">#Normal.10N_2.ERR031017_2.trimmed_fastqc.html</span></div><div class="line"><span class="comment">#Normal.10N_2.ERR031017_2.trimmed_fastqc.zip</span></div><div class="line"></div><div class="line"><span class="comment">################################################################################################################################################</span></div><div class="line"></div><div class="line"><span class="comment">#改名</span></div><div class="line"><span class="keyword">for</span> FILEONE <span class="keyword">in</span> ./trimmed/*_1.trimmed.fastq</div><div class="line"><span class="keyword">do</span></div><div class="line">    STEM=$(basename <span class="variable">$FILEONE</span> _1.trimmed.fastq | sed <span class="string">''</span> s/_1//g<span class="string">')</span></div><div class="line"><span class="string">    FILETWO=$(echo $FILEONE | sed '</span>s/_1./_2./g<span class="string">')</span></div><div class="line"><span class="string">    ls -lh $FILEONE</span></div><div class="line"><span class="string">    ls -lh $FILETWO</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    echo stem $STEM</span></div><div class="line"><span class="string">exit </span></div><div class="line"><span class="string">done</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">#############################################################################################</span></div><div class="line"><span class="string">#输出</span></div><div class="line"><span class="string">#-rw-r--r-- 1 u641750 GenekVIP 7.5G Aug 25 15:29 ./trimmed/Normal.10N_1.ERR031017_1.trimmed.fastq</span></div><div class="line"><span class="string">#-rw-r--r-- 1 u641750 GenekVIP 7.5G Aug 25 15:44 ./trimmed/Normal.10N_2.ERR031017_2.trimmed.fastq</span></div><div class="line"><span class="string">#stem Normal.10N.ERR031017</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">################################################################################################################################################</span></div></pre></td></tr></table></figure>
-<p>在后台运行脚本nohup ./mainPipeline.sh &gt; outMainPipeline.log &amp;</p>
-<h1 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h1><p>1.基本命令：basename </p>
-<p>用途:返回一个字符串参数的基本文件名称</p>
-<p>语法:basename String [ Suffix ]</p>
-<p>描述:basename 命令读取 String 参数，删除以 /(斜杠) 结尾的前缀以及任何指定的 Suffix 参数，并将剩余的基本文件名称写至标准输出。</p>
-<ul>
-<li><p>（截取文件名）例如，输入：</p>
-<p>  basename Normal.10N_1.ERR031017_1.trimmed.fastq _1.trimmed.fastq</p>
-</li>
-</ul>
-<p>结果是：Normal.10N_1.ERR031017</p>
-<ul>
-<li><p>例如，输入：</p>
-<p>  basename /u/dee/desktop/cns.boo cns.boo</p>
-</li>
-</ul>
-<p>结果是：cns.boo</p>
-<ul>
-<li><p>如果指定 Suffix（后缀名）参数，且它和字符串中所有字符都不相同，但和字符串的后缀相同，则除去指定后缀。例如，输入：</p>
-<p>   basename /u/dee/desktop/cns.boo .boo</p>
-</li>
-</ul>
-<p>结果是：cns</p>
-<p>2.fastq_quality_trimmer</p>
-<ul>
-<li>fastq_quality_trimmer [-h] [-v] [-t N] [-l N] [-z] [-i INFILE] [-o OUTFILE] 修剪reads的末端</li>
-<li>[-t N] = 从5’端开始，低与N的质量的碱基将被修剪掉</li>
-<li>[-l N] = 修建之后的reads的长度允许的最短值</li>
-<li>[-z]   = 压缩输出</li>
-<li>[-v]   =详细-报告序列编号，如果使用了-o则报告会直接在STDOUT，如果没有则输入到STDERR</li>
-</ul>
-<p>3.以下代码段用于脚本的分步测试</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#########################################################</span></div><div class="line"><span class="comment">#用于测试</span></div><div class="line">STATUS=<span class="string">"do"</span></div><div class="line"><span class="comment">#STATUS="done"</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$STATUS</span> !=<span class="string">"done"</span> ];<span class="keyword">then</span></div><div class="line"> </div><div class="line"> <span class="keyword">do</span> something</div><div class="line"></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="comment">#########################################################</span></div></pre></td></tr></table></figure>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h1><p>（1）Bash scripting for Bioinformatics</p>
-<p><a href="https://www.youtube.com/watch?v=3ME7gayYeUQ" target="_blank" rel="external">https://www.youtube.com/watch?v=3ME7gayYeUQ</a></p>
-<p>（2）Linux命令之basename 命令 </p>
-<p><a href="http://blog.sina.com.cn/s/blog_5f70c7060100ukyh.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_5f70c7060100ukyh.html</a></p>
-<p>（3）高通量测序数据的质控工具—fastx_toolkit软件使用说明</p>
-<p><a href="http://blog.sciencenet.cn/blog-1509670-848270.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-1509670-848270.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;使用bash脚本从ArrayExpress下载和处理基因表达数据（去接头和质控），也就是练习写生信分析pipline&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
-    
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
     
   </entry>
   
