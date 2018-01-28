@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-28T14:18:02.796Z</updated>
+  <updated>2018-01-28T14:24:16.386Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,9 +20,12 @@
     <link href="https:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/"/>
     <id>https:///AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/</id>
     <published>2018-01-28T14:08:43.000Z</published>
-    <updated>2018-01-28T14:18:02.796Z</updated>
+    <updated>2018-01-28T14:24:16.386Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="R相关资源"><a href="#R相关资源" class="headerlink" title="R相关资源"></a>R相关资源</h1><p>（1）<a href="https://r-forge.r-project.org/" target="_blank" rel="external">R-Forge</a>：offers a central platform for the development of R packages, R-related software and further projects.</p>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R</blockquote>
+
+<a id="more"></a>
+<h1 id="R相关资源"><a href="#R相关资源" class="headerlink" title="R相关资源"></a>R相关资源</h1><p>（1）<a href="https://r-forge.r-project.org/" target="_blank" rel="external">R-Forge</a>：offers a central platform for the development of R packages, R-related software and further projects.</p>
 <p>（2）<a href="http://rseek.org/" target="_blank" rel="external">rseek</a>：RSeek.org R-project Search Engine </p>
 <p>（3）<a href="http://blog.yhat.com/" target="_blank" rel="external">The Yhat Blog</a>: machine learning, data science, engineering(推荐)</p>
 <h1 id="查看R包函数源码"><a href="#查看R包函数源码" class="headerlink" title="查看R包函数源码"></a>查看R包函数源码</h1><p>&emsp;&emsp;首先，一个扩展包中定义的函数有区分公开和不公开的，会在扩展包根目录下的NAMESPACE文件中定义是否Export，如果一个函数没有Export，则为不公开的函数，只能在包内部调用。</p>
@@ -67,7 +70,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
     
     <summary type="html">
     
-      &lt;h1 id=&quot;R相关资源&quot;&gt;&lt;a href=&quot;#R相关资源&quot; class=&quot;headerlink&quot; title=&quot;R相关资源&quot;&gt;&lt;/a&gt;R相关资源&lt;/h1&gt;&lt;p&gt;（1）&lt;a href=&quot;https://r-forge.r-project.org/&quot; target=&quot;_blank
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R&lt;/blockquote&gt;
     
     </summary>
     
