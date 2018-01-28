@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-28T09:15:06.332Z</updated>
+  <updated>2018-01-28T11:12:51.469Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>qPCR结果分析及非参数检验</title>
+    <link href="https:///AnJingwd.github.io/2018/01/28/qPCR%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E5%8F%8A%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C/"/>
+    <id>https:///AnJingwd.github.io/2018/01/28/qPCR结果分析及非参数检验/</id>
+    <published>2018-01-28T02:33:14.000Z</published>
+    <updated>2018-01-28T11:12:51.469Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">qPCR结果分析及非参数检验</blockquote>
+
+<a id="more"></a>
+<h1 id="相对表达量计算"><a href="#相对表达量计算" class="headerlink" title="相对表达量计算"></a>相对表达量计算</h1><p>一：⊿Ct如何计算，公式推导</p>
+<p>(1)    一般，我们都假设扩增效率为1，也就是每个循环增加一倍。</p>
+<p><img src="https://i.imgur.com/DyztX9Q.jpg" alt=""></p>
+<p>(2)    当产物量达到同一水平的时候，但Ct值不同，其原因就在于期初的模板量的差距，而当检测样本和内参基因的产物量相同的时候，找出他们模板量的比值差的话，就需要做一下除法，也就是下面这样： </p>
+<p><img src="https://i.imgur.com/v10u3n5.jpg" alt=""></p>
+<p>二：具体例子（⊿⊿Ct计算）</p>
+<p><img src="https://i.imgur.com/3Wd6BKb.png" alt=""></p>
+<p>一般在进行qPCR实验时，都会设计独立三次重复试验，每次作3个复孔，然后根据下列公式先分别计算试验组和对照组的ΔCt值</p>
+<ul>
+<li>ΔCt试验=Ct目的基因-Ct内参基因</li>
+<li>ΔCt对照=Ct目的基因-Ct内参基因</li>
+</ul>
+<p>注：Ct目的基因和Ct内参基因是三个复孔Ct值求得的均值</p>
+<p>ΔΔCt=ΔCt试验-ΔCt对照，相对表达量=2^(-⊿⊿Ct)</p>
+<p>&emsp;&emsp;相对表达量是指目的基因在试验组中的表达是目的基因在对照组表达的多少倍。在P&lt;0.05的情况下，如果2-ΔΔCt小于1说明目的基因在试验组中表达下调，大于1说明目的基因在试验组中表达上调。否则表达无差异。</p>
+<h1 id="组间差异非参数检验"><a href="#组间差异非参数检验" class="headerlink" title="组间差异非参数检验"></a>组间差异非参数检验</h1><p>原始数据处理（EXCEL）：</p>
+<p><img src="https://i.imgur.com/4Lgn5iR.png" alt=""></p>
+<p>&emsp;&emsp;如果数据无法满足t检验或ANOVA的参数假设，可以转而使用非参数方法。<strong>若两组数据独立，</strong> 可以使用Wilcoxon秩和检验（更广为人知的名字是Mann-Whitney U检验）来评估观测是否是从相同的概率分布中抽得的（即，在一个总体中获得更高得分的概率是否比另<br>一个总体要大）。调用格式为：</p>
+<pre><code>wilcox.test(y ~ x, data)
+</code></pre><p>其中的y是数值型变量，而x是一个二分变量。</p>
+<p>Wilcoxon符号秩检验是<strong>非独立样本</strong>t检验的一种非参数替代方法。它适用于两组成对数据和无法保证正态性假设的情境。调用格式与Mann-Whitney U检验完全相同，不过还可以添加参数paired=TRUE。</p>
+<h2 id="绘制箱图"><a href="#绘制箱图" class="headerlink" title="绘制箱图"></a>绘制箱图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#qPCR_barplot.R</span></div><div class="line">setwd(<span class="string">"F:/R working directory/qPCR"</span>)</div><div class="line">qPCR&lt;-read.csv(<span class="string">"miRNA_qPCR_plot.csv"</span>,header=<span class="literal">TRUE</span>,check.names = <span class="literal">FALSE</span>)</div><div class="line"><span class="keyword">library</span>(ggplot2)</div><div class="line">p&lt;-ggplot(data=qPCR, aes(x=miRNA,y=value))+geom_boxplot(aes(fill=sample))</div><div class="line"></div><div class="line">p + facet_wrap(~ miRNA, scales=<span class="string">"free"</span>)</div></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.360doc.com/content/17/0706/21/44614528_669420186.shtml" target="_blank" rel="external">如何分析你凌乱不堪的qPCR数据（推荐）</a></p>
+<p>（2）<a href="http://www.dxy.cn/bbs/topic/25725392" target="_blank" rel="external">分享自己关于qPCR（RT-PCR）数据相对定量的分析方法与经验！</a></p>
+<p>（3）<a href="http://www.dxy.cn/bbs/thread/29554700#29554700" target="_blank" rel="external">△△CT数据处理</a></p>
+<p>（4）<a href="http://www.dxy.cn/bbs/thread/26343222#26343222" target="_blank" rel="external">相对荧光定量数据处理</a></p>
+<p>（5）<a href="http://www.jianshu.com/p/b7274afff14f?from=timeline" target="_blank" rel="external">R语言可视化学习笔记之添加p-value和显著性标记（推荐）</a></p>
+<p>（6）<a href="https://github.com/const-ae/ggsignif" target="_blank" rel="external">添加线条来连接比较的两组，这一功能已由包ggsignif实现（推荐）</a></p>
+<p>（7）<a href="https://www.tanboyu.com/r-for-nonparametric-tests.html" target="_blank" rel="external">非参检验R语言实现</a></p>
+<p>（8）<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=4&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjVxeX1x_DXAhXMxrwKHVvOAnwQFgg4MAM&amp;url=http%3A%2F%2Fblog.csdn.net%2Ftimothyzh%2Farticle%2Fdetails%2F7657470&amp;usg=AOvVaw3SpJzBCWcgBwfbkJn65CFP" target="_blank" rel="external">Wilcoxon-Mann-Whitney秩和检验/rank sum test（或test U）</a></p>
+<p>（9）<a href="https://wenku.baidu.com/view/d09fcc7033687e21ae45a902.html" target="_blank" rel="external">荧光定量PCR应用指南{推荐}</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;qPCR结果分析及非参数检验&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="实验" scheme="https:///AnJingwd.github.io/categories/%E5%AE%9E%E9%AA%8C/"/>
+    
+    
+      <category term="实验" scheme="https:///AnJingwd.github.io/tags/%E5%AE%9E%E9%AA%8C/"/>
+    
+  </entry>
   
   <entry>
     <title>IGV批量查看变异</title>
@@ -1993,73 +2049,6 @@ p2
     
     
       <category term="R绘图" scheme="https:///AnJingwd.github.io/tags/R%E7%BB%98%E5%9B%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>批量fastqc</title>
-    <link href="https:///AnJingwd.github.io/2017/08/30/%E6%89%B9%E9%87%8Ffastqc/"/>
-    <id>https:///AnJingwd.github.io/2017/08/30/批量fastqc/</id>
-    <published>2017-08-30T01:26:21.000Z</published>
-    <updated>2017-09-01T03:16:09.393Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">分别介绍使用循环和MultiQC软件两种方式批量进行fastqc</blockquote>
-
-<a id="more"></a>
-<h1 id="方法一：循环与命令并行"><a href="#方法一：循环与命令并行" class="headerlink" title="方法一：循环与命令并行"></a>方法一：循环与命令并行</h1><p>问：</p>
-<p>我当前文件夹下面有100个fastq测序文件，我要批量对他们运行fastqc软件（软件安装目录：~/biosoft/fastqc ）来处理，所以写了脚本<br>    ls *fastq | while read id ; do ~/biosoft/fastqc $id;done</p>
-<p>但是这样有一个弊端，就是这100个fastq测序文件是一个个被运行，这样耗时太长！<br>所以我稍作修改：</p>
-<pre><code>ls *fastq | while read id ; do nohup ~/biosoft/fastqc $id &amp; ;done
-</code></pre><p>这样又一下子把100个fastqc任务提交了，我的服务器根本受不了。</p>
-<p>所以需要修改修改脚本，让它一下子并行提交10个任务，因为我服务器限制。</p>
-<p>该如何最简单的完成呢？</p>
-<p>答：加个参数-p</p>
-<pre><code>ls *fastq | xargs -n 1 -p 10 -i FQ ~/biosoft/fastqc FQ
-</code></pre><p>每次最多提交10个文件，加-p就可以并行计算啦</p>
-<h1 id="方法二：MultiQC"><a href="#方法二：MultiQC" class="headerlink" title="方法二：MultiQC"></a>方法二：MultiQC</h1><p>homepage: <a href="http://multiqc.info" target="_blank" rel="external">http://multiqc.info</a></p>
-<p>功能：把多个测序结果的qc结果整合成一个报告。支持fastqc、trimmomatic、bowtie、STAR等多种软件结果的整合。</p>
-<h2 id="Installation-安装"><a href="#Installation-安装" class="headerlink" title="Installation 安装"></a>Installation 安装</h2><pre><code>conda install -c bioconda multiqc
-</code></pre><h2 id="Run-MultiQC-运行"><a href="#Run-MultiQC-运行" class="headerlink" title="Run MultiQC 运行"></a>Run MultiQC 运行</h2><p>安装好后，进入你要分析的测序文件所在的文件夹，直接输入multiqc加要扫描的目录即可运行，如果要扫描当前文件夹，直接输入”multiqc .”即可</p>
-<pre><code>multiqc .
-multiqc /data/mydir/
-multiqc /data/*fastqc.zip
-multiqc /data/sanple_1*
-</code></pre><h2 id="相关参数"><a href="#相关参数" class="headerlink" title="相关参数"></a>相关参数</h2><h3 id="使用“–ignore”参数忽略某些文件"><a href="#使用“–ignore”参数忽略某些文件" class="headerlink" title="使用“–ignore”参数忽略某些文件"></a>使用“–ignore”参数忽略某些文件</h3><pre><code>multiqc . --ingore *_R2*
-multiqc . --ignore run_two/
-multiqc . --ignore */run_three/*/fastqc/*.zip
-</code></pre><h3 id="使用文本指定要分析的文件的路径"><a href="#使用文本指定要分析的文件的路径" class="headerlink" title="使用文本指定要分析的文件的路径"></a>使用文本指定要分析的文件的路径</h3><pre><code>multiqc --file-list_my_file_list.txt
-</code></pre><h3 id="重命名输出结果"><a href="#重命名输出结果" class="headerlink" title="重命名输出结果"></a>重命名输出结果</h3><p>分析结果默认命名为“multiqc_report.html”，相关的以tab风格的data file保存在“multiqc_data”文件夹下。可以用“-n”参数改变结果文件的名字，用“-o”改变输出文件的位置。</p>
-<h3 id="覆盖已存在的结果"><a href="#覆盖已存在的结果" class="headerlink" title="覆盖已存在的结果"></a>覆盖已存在的结果</h3><p>添加参数“-f”，输出结果时会自动覆盖同名文件。</p>
-<h3 id="更换报告模板"><a href="#更换报告模板" class="headerlink" title="更换报告模板"></a>更换报告模板</h3><p>添加参数“-t”或者“–template”可以选择不同风格的报告模板，具体内容请查看帮助文档“multiqc –help”。同时，MultiQC也支持自行创作结果文件的模板。</p>
-<h3 id="输出图片Exporting-plot"><a href="#输出图片Exporting-plot" class="headerlink" title="输出图片Exporting plot"></a>输出图片Exporting plot</h3><p>除了直接输出html文件外，Multiqc还可以直接保存图片文件。用以下参数进行保存：</p>
-<pre><code>multiqc -p/--export
-</code></pre><p>默认设置下，图片会保存在“multiqc_plots”文件夹中，以.png/.svg或者pdf格式保存。</p>
-<p>同时，也可以直接在html文件中使用“toolbox”中的Export 保存图片。</p>
-<h2 id="报告正文"><a href="#报告正文" class="headerlink" title="报告正文"></a>报告正文</h2><p>报告页面分为三部分，左边是导航页面，中间是报告正文，右边是toolbox</p>
-<p><img src="http://i.imgur.com/VCs7xMz.png" alt=""></p>
-<ol>
-<li>General Statistics</li>
-</ol>
-<p>（Configure Conlumns）可选择需要展示的列名</p>
-<p><img src="http://i.imgur.com/r6rkXjl.png" alt=""></p>
-<p>点击列名可进行排序</p>
-<p><img src="http://i.imgur.com/LPpyikL.png" alt=""></p>
-<p>(plot)可选择任意两列进行plot</p>
-<p>Toolbox</p>
-<p>工具栏主要有Hightlight Samples、Rename Samples、Show/Hide Samples、Export Plots、Saving Setting以及帮助等功能。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA" target="_blank" rel="external">https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA</a><br>（2）<a href="http://www.cnblogs.com/leezx/p/7360668.html" target="_blank" rel="external">http://www.cnblogs.com/leezx/p/7360668.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;分别介绍使用循环和MultiQC软件两种方式批量进行fastqc&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
-    
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
     
   </entry>
   
