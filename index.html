@@ -294,6 +294,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="https:/AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/" itemprop="url">查看R包源码及linux下编译安装R</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T22:08:43+08:00">
+                2018-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="R相关资源"><a href="#R相关资源" class="headerlink" title="R相关资源"></a>R相关资源</h1><p>（1）<a href="https://r-forge.r-project.org/" target="_blank" rel="external">R-Forge</a>：offers a central platform for the development of R packages, R-related software and further projects.</p>
+<p>（2）<a href="http://rseek.org/" target="_blank" rel="external">rseek</a>：RSeek.org R-project Search Engine </p>
+<p>（3）<a href="http://blog.yhat.com/" target="_blank" rel="external">The Yhat Blog</a>: machine learning, data science, engineering(推荐)</p>
+<h1 id="查看R包函数源码"><a href="#查看R包函数源码" class="headerlink" title="查看R包函数源码"></a>查看R包函数源码</h1><p>&emsp;&emsp;首先，一个扩展包中定义的函数有区分公开和不公开的，会在扩展包根目录下的NAMESPACE文件中定义是否Export，如果一个函数没有Export，则为不公开的函数，只能在包内部调用。</p>
+<p>&emsp;&emsp;lattice::qq是一个Generic Function，就像是plot，summary等函数，是由对象的class来确定实际执行的函数（例如对于data frame,执行summary时会执行summary.data.frame，对于lm会执行summary.lm等等，都不是则会执行summary.default）这是R S3 面向对象系统的设计。因此看到qq源代码时只能看到 UseMethod(“qq”)，还要看到哪些class实现了qq方法，而lattice并没有把这些实现给Export</p>
+<p>&emsp;&emsp;想要看到源代码本可以直接在Console中输入函数名称或者在RStudio中函数上按F2即可，即 lattice::qq，但是这只是看到了Generic Function的源代码，如果需要看到具体的执行函数的源代码，那么就需要获得整个包的源码。可以到CRAN的页面CRAN - Package lattice 中下载Package source那个链接，这里面包含了整个lattice的源代码：<a href="http://cran.r-project.org/src/contrib/lattice_0.20-29.tar.gz" target="_blank" rel="external">http://cran.r-project.org/src/contrib/lattice_0.20-29.tar.gz</a></p>
+<p>转自知乎：任坤 <a href="https://www.zhihu.com/question/24586822/answer/28305172" target="_blank" rel="external">链接</a></p>
+<h2 id="以pheatmap包及其函数为例"><a href="#以pheatmap包及其函数为例" class="headerlink" title="以pheatmap包及其函数为例"></a>以pheatmap包及其函数为例</h2><p>（1）在Rstudio下查看</p>
+<pre><code>??pheatmap
+</code></pre><p><img src="https://i.imgur.com/6I5TzWq.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/4r5imUK.jpg" alt=""></p>
+<p><strong>上述方法只能查到该包的Generic Function,对于不公开的内部函数只能下载源码包查看</strong></p>
+<p>（2）找到R CRAN的相关源码包（.tar.gz）</p>
+<p>例如：<a href="https://cran.r-project.org/web/packages/ggplot2/" target="_blank" rel="external">https://cran.r-project.org/web/packages/ggplot2/</a> 不同包只需要更改最后包名即可</p>
+<h1 id="linux下源码安装R-3-1-2"><a href="#linux下源码安装R-3-1-2" class="headerlink" title="linux下源码安装R-3.1.2"></a>linux下源码安装R-3.1.2</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#下载R 安装包(R-3.1.2.tar.gz)</span></div><div class="line">wget http://cran.rstudio.com/src/base/R-<span class="number">3</span>/R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line"><span class="comment">#检查编译环境是否正常</span></div><div class="line">cd R-<span class="number">3.1</span><span class="number">.2</span></div><div class="line">./configure  --enable-R-shlib  --prefix=./configure  --enable-R-shlib  --prefix=/home/wangdong/R</div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="keyword">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
+<h2 id="安装packages"><a href="#安装packages" class="headerlink" title="安装packages"></a>安装packages</h2><h2 id="方法一：每次安装包时指定镜像"><a href="#方法一：每次安装包时指定镜像" class="headerlink" title="方法一：每次安装包时指定镜像"></a>方法一：每次安装包时指定镜像</h2><ul>
+<li>查看所有镜像：chooseCRANmirror()</li>
+<li>选择镜像：chooseCRANmirror(ind=36)</li>
+<li>通过getOption(“repos”)函数知道目前的镜像网站是哪里</li>
+<li><p>所有的镜像网站网址在本地的一个csv<br>  cd /home/wangdong/R/R-3.1.2/doc<br>  less CRAN_mirrors.csv</p>
+<p>  install.packages(‘plyr’, repos=’<a href="http://mirrors.tuna.tsinghua.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/CRAN/</a>‘)</p>
+</li>
+</ul>
+<h2 id="方法二：修改配置文件"><a href="#方法二：修改配置文件" class="headerlink" title="方法二：修改配置文件"></a>方法二：修改配置文件</h2><p>Rprofile.site (in the directory /your-R-installation/etc/ , eg R-2.14.0/etc)</p>
+<pre><code>cd /home/wangdong/R/R-3.1.2/etc
+vim repositories
+
+#set a CRAN mirror
+local({r &lt;- getOption(&quot;repos&quot;)
+    r[&quot;CRAN&quot;] &lt;- &quot;http://mirrors.tuna.tsinghua.edu.cn/CRAN/&quot;
+    options(repos=r)})
+</code></pre><p>备用镜像：</p>
+<ul>
+<li><a href="http://mirror.bjtu.edu.cn/cran/" target="_blank" rel="external">http://mirror.bjtu.edu.cn/cran/</a></li>
+<li><a href="http://mirrors.ustc.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.ustc.edu.cn/CRAN/</a></li>
+<li><a href="http://mirrors.xmu.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.xmu.edu.cn/CRAN/</a></li>
+</ul>
+<h2 id="安装bioconder"><a href="#安装bioconder" class="headerlink" title="安装bioconder"></a>安装bioconder</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">source</span>(<span class="string">"http://bioconductor.org/biocLite.R"</span>)</div><div class="line">options(BioC_mirror=<span class="string">"http://mirrors.ustc.edu.cn/bioc/"</span>)</div><div class="line">biocLite(<span class="string">"methylKit"</span>)</div></pre></td></tr></table></figure>
+<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>R中用.libPaths()函数查看lib路径，如果有多个lib,install.packages()默认是安装在第一个目录下</p>
+<p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/…/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
+<h1 id="终端直接调用R脚本"><a href="#终端直接调用R脚本" class="headerlink" title="终端直接调用R脚本"></a>终端直接调用R脚本</h1><pre><code>/home/wangdong/R/bin/Rscript 或者 Rscript test.R
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+	</div>
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/qPCR结果分析及非参数检验/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1592,154 +1776,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/11/25/文献查询与引用技巧/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="AJ's blog">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="安静-不安静的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="https:/AnJingwd.github.io/2017/11/25/文献查询与引用技巧/" itemprop="url">文献查询与引用技巧</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-25T19:24:52+08:00">
-                2017-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote class="blockquote-center">文献查询与引用技巧</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="https:/AnJingwd.github.io/2017/11/25/文献查询与引用技巧/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-	<div>
-	
-	</div>
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1790,7 +1826,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2075,7 +2111,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共58.2k字</span>
+  <span class="post-count">博客全站共59.0k字</span>
 </div>
 
 <div class="powered-by">

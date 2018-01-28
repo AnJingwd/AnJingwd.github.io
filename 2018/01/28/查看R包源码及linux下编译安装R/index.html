@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="NGS," />
+  <meta name="keywords" content="R," />
 
 
 
@@ -96,23 +96,21 @@
 
 
 
-<meta name="description" content="GATK3.8相关软件及文件准备">
-<meta name="keywords" content="NGS">
+<meta name="description" content="R相关资源（1）R-Forge：offers a central platform for the development of R packages, R-related software and further projects. （2）rseek：RSeek.org R-project Search Engine  （3）The Yhat Blog: machine learning, da">
+<meta name="keywords" content="R">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GATK3.8分析环境搭建（一）">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建（一）/index.html">
+<meta property="og:title" content="查看R包源码及linux下编译安装R">
+<meta property="og:url" content="https:///AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="GATK3.8相关软件及文件准备">
+<meta property="og:description" content="R相关资源（1）R-Forge：offers a central platform for the development of R packages, R-related software and further projects. （2）rseek：RSeek.org R-project Search Engine  （3）The Yhat Blog: machine learning, da">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/jvbLuTm.jpg">
-<meta property="og:image" content="https://i.imgur.com/GEF1W45.jpg">
-<meta property="og:image" content="https://i.imgur.com/PADtsMb.jpg">
-<meta property="og:image" content="https://i.imgur.com/3T122nP.png">
-<meta property="og:updated_time" content="2018-01-08T12:40:05.743Z">
+<meta property="og:image" content="https://i.imgur.com/6I5TzWq.jpg">
+<meta property="og:image" content="https://i.imgur.com/4r5imUK.jpg">
+<meta property="og:updated_time" content="2018-01-28T14:18:02.796Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GATK3.8分析环境搭建（一）">
-<meta name="twitter:description" content="GATK3.8相关软件及文件准备">
-<meta name="twitter:image" content="https://i.imgur.com/jvbLuTm.jpg">
+<meta name="twitter:title" content="查看R包源码及linux下编译安装R">
+<meta name="twitter:description" content="R相关资源（1）R-Forge：offers a central platform for the development of R packages, R-related software and further projects. （2）rseek：RSeek.org R-project Search Engine  （3）The Yhat Blog: machine learning, da">
+<meta name="twitter:image" content="https://i.imgur.com/6I5TzWq.jpg">
 
 
 
@@ -145,7 +143,7 @@
 
 
 
-  <title>GATK3.8分析环境搭建（一） | 安静-不安静的博客</title>
+  <title>查看R包源码及linux下编译安装R | 安静-不安静的博客</title>
   
 
 
@@ -299,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建（一）/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -316,7 +314,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">GATK3.8分析环境搭建（一）</h2>
+          <h2 class="post-title" itemprop="name headline">查看R包源码及linux下编译安装R</h2>
         
 
         <div class="post-meta">
@@ -328,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-26T18:15:59+08:00">
-                2017-12-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T22:08:43+08:00">
+                2018-01-28
               </time>
             
 
@@ -351,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/NGS/" itemprop="url" rel="index">
-                    <span itemprop="name">NGS</span>
+                  <a href="https:/AnJingwd.github.io/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
                   </a>
                 </span>
 
@@ -388,140 +386,48 @@
       
 
       
-        <p><blockquote class="blockquote-center">GATK3.8相关软件及文件准备</blockquote><br><a id="more"></a></p>
-<h1 id="GATK官网相关栏目"><a href="#GATK官网相关栏目" class="headerlink" title="GATK官网相关栏目"></a>GATK官网相关栏目</h1><ul>
-<li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tool Documentation</a> （包含每个工具的使用说明）</li>
-<li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tutorials</a> (包含具体参数和细节)</li>
-<li><a href="https://software.broadinstitute.org/gatk/best-practices/" target="_blank" rel="external">GATK Best Practices</a> （包含两个主流的分析流程）</li>
-</ul>
-<p><strong>全外显子测序call Germline SNP &amp; Indel流程图</strong></p>
-<p><img src="https://i.imgur.com/jvbLuTm.jpg" alt=""></p>
-<p><strong>体细胞拷贝数变异分析流程!</strong></p>
-<p><a href="https://i.imgur.com/844zfg1.jpg" target="_blank" rel="external"></a></p>
-<p><strong>使用RNA-seq数据call变异</strong></p>
-<p><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=3891" target="_blank" rel="external">Calling variants in RNAseq</a></p>
-<p><img src="https://i.imgur.com/GEF1W45.jpg" alt=""></p>
-<ul>
-<li><a href="https://gatkforums.broadinstitute.org/gatk" target="_blank" rel="external">Forum</a> （提问和搜索报错解决很有用）</li>
-</ul>
-<p><img src="https://i.imgur.com/PADtsMb.jpg" alt=""></p>
-<ul>
-<li>Blog (包含历年的workshop材料，学习用得上)</li>
-</ul>
-<p><a href="https://drive.google.com/drive/folders/0B7akc6CTmxIHNGpibUFTNzVRazg?usp=sharing" target="_blank" rel="external">Presentation slides and tutorial materials - Pretoria 2017（需要翻墙才能下载）</a></p>
-<h1 id="GATK3-8下载"><a href="#GATK3-8下载" class="headerlink" title="GATK3.8下载"></a>GATK3.8下载</h1><p>GATK=GenomeAnalysisToolkit，最新稳定版为<a href="https://software.broadinstitute.org/gatk/download/" target="_blank" rel="external">GATK3.8</a> （<strong>需要注册！</strong>）</p>
-<p>&emsp;&emsp;电脑软件在投放市场前，需要有人测试一下，看看是不是有问题，在开发该软件的公司内部的由该公司内部人员测试的称为：alfa测试。alfa测试主要看有没有功能缺失或系统错误，<strong>alfa测试完后一般不会有大问题了，然后把软件拿给用户测试，称为：beta测试，主要是看用户对软件外观，使用方便等的反映。</strong> 如果beta1版用户反映有问题，拿到公司修改，改完后发布beta2版，还有不满意的地方，再改，再发布beta3版，直到用户满意，或正式版发布为止。</p>
-<p><a href="https://software.broadinstitute.org/gatk/download/beta" target="_blank" rel="external">GATK4.Beta.5</a>即为测试版</p>
-<pre><code>#解压：
-tar -jxvf GenomeAnalysisTK-3.8-0.tar.bz2
-</code></pre><h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><p>（1）java版本要求大于1.8.x</p>
-<pre><code>java -version
-</code></pre><p>（2）测试</p>
-<pre><code>java -jar /path/to/GenomeAnalysisTK.jar -h
-</code></pre><p>（3）设置别名</p>
-<pre><code>alias gatk=&quot;/home/wangdong/softwares/GATK3.8/GenomeAnalysisTK.jar&quot;
-</code></pre><p>（4）下载java1.7版本，解压即可（MuTect1.1.7需要）</p>
-<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html" target="_blank" rel="external">Java SE 7 Archive Downloads</a></p>
-<p><img src="https://i.imgur.com/3T122nP.png" alt=""></p>
-<p>（5）mutect下载安装</p>
-<ul>
-<li><a href="https://github.com/broadinstitute/mutect" target="_blank" rel="external">github上mutect源码 broadinstitute/mutect(不必下载)</a></li>
-<li><a href="https://software.broadinstitute.org/gatk/download/mutect" target="_blank" rel="external">GATK官网提供的编译好的MuTect1.1.7</a></li>
-<li><a href="http://archive.broadinstitute.org/cancer/cga/mutect_run" target="_blank" rel="external">How do I run MuTect?（参数详解及使用例子）</a></li>
-</ul>
-<p>（6） 其他软件及环境配置</p>
-<p>Software packages</p>
-<ul>
-<li>BWA</li>
-<li>SAMtools</li>
-<li>Picard</li>
-<li>IGV</li>
-<li>RStudio IDE and R libraries ggplot2 and gsalib</li>
-</ul>
-<p>参考：<a href="https://gatkforums.broadinstitute.org/gatk/discussion/2899/howto-install-all-software-packages-required-to-follow-the-gatk-best-practices" target="_blank" rel="external">(howto) Install all software packages required to follow the GATK Best Practices.</a></p>
-<h1 id="Reference-sequence和annotation下载"><a href="#Reference-sequence和annotation下载" class="headerlink" title="Reference sequence和annotation下载"></a>Reference sequence和annotation下载</h1><p><strong>（请务必使用GATK resource bundle提供的参考基因组相关文件非常重要！）</strong></p>
-<p>GATK resource bundle介绍：<br><a href="http://gatkforums.broadinstitute.org/discussion/1213/whats-in-the-resource-bundle-and-how-can-i-get-it" target="_blank" rel="external">http://gatkforums.broadinstitute.org/discussion/1213/whats-in-the-resource-bundle-and-how-can-i-get-it</a></p>
-<p>GATK resource bundle FTP地址：<br><a href="http://gatkforums.broadinstitute.org/discussion/1215/how-can-i-access-the-gsa-public-ftp-server" target="_blank" rel="external">http://gatkforums.broadinstitute.org/discussion/1215/how-can-i-access-the-gsa-public-ftp-server</a></p>
-<p>（1）使用Xftp5等FTP server登陆</p>
-<pre><code>location: ftp.broadinstitute.org/bundle
-username: gsapubftp-anonymous
-password:
-</code></pre><p>（2）使用浏览器登陆</p>
-<pre><code>ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/
-</code></pre><h2 id="Reference-sequence"><a href="#Reference-sequence" class="headerlink" title="Reference sequence"></a>Reference sequence</h2><ul>
-<li>ucsc.hg19.dict.gz</li>
-<li>ucsc.hg19.fasta.fai.gz</li>
-<li>ucsc.hg19.fasta.gz</li>
-</ul>
-<h2 id="annotation"><a href="#annotation" class="headerlink" title="annotation"></a>annotation</h2><ul>
-<li>1000G_omni2.5.hg19.sites.vcf.idx</li>
-<li>1000G_omni2.5.hg19.sites.vcf.idx</li>
-<li>1000G_phase1.indels.hg19.sites.vcf</li>
-<li>1000G_phase1.indels.hg19.sites.vcf.idx</li>
-<li>dbsnp_138.hg19.vcf</li>
-<li>dbsnp_138.hg19.vcf.idx</li>
-<li>hapmap_3.3.hg19.sites.vcf</li>
-<li>hapmap_3.3.hg19.sites.vcf.idx</li>
-<li>Mills_and_1000G_gold_standard.indels.hg19.sites.vcf</li>
-<li>Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx</li>
-</ul>
-<ol>
-<li><p>dbSNP 用于去除部分候选突变，其在其他人中已经被观察到的，最有可能是胚系突变。因为提交给dbSNP数据库的突变验证水平很低，所以我们不能确定标记为胚系突变或者体细胞突变的标签是否可信。</p>
-</li>
-<li><p>相比之下，COSMIC是一个经过更高验证的资源，所以它基本上被用作白名单来“拯救”候选突变，否则这些候选突变将会因为在正常和/或dbSNP中而被去除。 我们期望在dbSNP中被标记为somatic的任何东西都将在COSMIC中，所以我们可以依靠COSMIC来重新回收这些位点。</p>
-</li>
-<li><p>当前最好的已知indels集合将被用于局部重新比对（local realignment）（请注意，我们不再使用dbSNP）; 使用这两个文件：</p>
-<ul>
-<li>1000G_phase1.indels.b37.vcf (currently from the 1000 Genomes Phase I indel calls)</li>
-<li>Mills_and_1000G_gold_standard.indels.b37.sites.vcf</li>
-</ul>
-</li>
-<li><p>If you run any GATK tool on a vcf that doesn’t have an index, it will automatically generate one for you, so knock yourself out。 <a href="https://gatkforums.broadinstitute.org/gatk/discussion/5426/generate-an-idx-file-for-a-vcf" target="_blank" rel="external">参考：generate an idx file for a vcf 
-</a></p>
-</li>
-</ol>
-<h2 id="GATK-Prepare-Reference-Files"><a href="#GATK-Prepare-Reference-Files" class="headerlink" title="GATK: Prepare Reference Files"></a>GATK: Prepare Reference Files</h2><p>参考： <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk" target="_blank" rel="external">(howto) Prepare a reference for use with BWA and GATK</a></p>
-<p>Prerequisites</p>
-<ul>
-<li>Installed BWA</li>
-<li>Installed SAMTools</li>
-<li>Installed Picard</li>
-</ul>
-<p>Steps</p>
-<ul>
-<li><p>Generate the BWA index</p>
-<p>  bwa index -a bwtsw ucsc.hg19.fasta &emsp;&emsp;#-a bwtsw指定索引算法</p>
-</li>
-<li><p>Generate the Fasta file index</p>
-<p>  samtools faidx ucsc.hg19.fasta &emsp;&emsp;#将生成ucsc.hg19.fasta.fai 文件</p>
-</li>
-<li><p>Generate the sequence dictionary（也可直接用已下载的ucsc.hg19.dict文件）</p>
-<p>  java -jar picard.jar CreateSequenceDictionary \ </p>
-<p>  REFERENCE=reference.fa \ </p>
-<p>  OUTPUT=reference.dict </p>
+        <h1 id="R相关资源"><a href="#R相关资源" class="headerlink" title="R相关资源"></a>R相关资源</h1><p>（1）<a href="https://r-forge.r-project.org/" target="_blank" rel="external">R-Forge</a>：offers a central platform for the development of R packages, R-related software and further projects.</p>
+<p>（2）<a href="http://rseek.org/" target="_blank" rel="external">rseek</a>：RSeek.org R-project Search Engine </p>
+<p>（3）<a href="http://blog.yhat.com/" target="_blank" rel="external">The Yhat Blog</a>: machine learning, data science, engineering(推荐)</p>
+<h1 id="查看R包函数源码"><a href="#查看R包函数源码" class="headerlink" title="查看R包函数源码"></a>查看R包函数源码</h1><p>&emsp;&emsp;首先，一个扩展包中定义的函数有区分公开和不公开的，会在扩展包根目录下的NAMESPACE文件中定义是否Export，如果一个函数没有Export，则为不公开的函数，只能在包内部调用。</p>
+<p>&emsp;&emsp;lattice::qq是一个Generic Function，就像是plot，summary等函数，是由对象的class来确定实际执行的函数（例如对于data frame,执行summary时会执行summary.data.frame，对于lm会执行summary.lm等等，都不是则会执行summary.default）这是R S3 面向对象系统的设计。因此看到qq源代码时只能看到 UseMethod(“qq”)，还要看到哪些class实现了qq方法，而lattice并没有把这些实现给Export</p>
+<p>&emsp;&emsp;想要看到源代码本可以直接在Console中输入函数名称或者在RStudio中函数上按F2即可，即 lattice::qq，但是这只是看到了Generic Function的源代码，如果需要看到具体的执行函数的源代码，那么就需要获得整个包的源码。可以到CRAN的页面CRAN - Package lattice 中下载Package source那个链接，这里面包含了整个lattice的源代码：<a href="http://cran.r-project.org/src/contrib/lattice_0.20-29.tar.gz" target="_blank" rel="external">http://cran.r-project.org/src/contrib/lattice_0.20-29.tar.gz</a></p>
+<p>转自知乎：任坤 <a href="https://www.zhihu.com/question/24586822/answer/28305172" target="_blank" rel="external">链接</a></p>
+<h2 id="以pheatmap包及其函数为例"><a href="#以pheatmap包及其函数为例" class="headerlink" title="以pheatmap包及其函数为例"></a>以pheatmap包及其函数为例</h2><p>（1）在Rstudio下查看</p>
+<pre><code>??pheatmap
+</code></pre><p><img src="https://i.imgur.com/6I5TzWq.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/4r5imUK.jpg" alt=""></p>
+<p><strong>上述方法只能查到该包的Generic Function,对于不公开的内部函数只能下载源码包查看</strong></p>
+<p>（2）找到R CRAN的相关源码包（.tar.gz）</p>
+<p>例如：<a href="https://cran.r-project.org/web/packages/ggplot2/" target="_blank" rel="external">https://cran.r-project.org/web/packages/ggplot2/</a> 不同包只需要更改最后包名即可</p>
+<h1 id="linux下源码安装R-3-1-2"><a href="#linux下源码安装R-3-1-2" class="headerlink" title="linux下源码安装R-3.1.2"></a>linux下源码安装R-3.1.2</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#下载R 安装包(R-3.1.2.tar.gz)</span></div><div class="line">wget http://cran.rstudio.com/src/base/R-<span class="number">3</span>/R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line"><span class="comment">#检查编译环境是否正常</span></div><div class="line">cd R-<span class="number">3.1</span><span class="number">.2</span></div><div class="line">./configure  --enable-R-shlib  --prefix=./configure  --enable-R-shlib  --prefix=/home/wangdong/R</div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="keyword">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
+<h2 id="安装packages"><a href="#安装packages" class="headerlink" title="安装packages"></a>安装packages</h2><h2 id="方法一：每次安装包时指定镜像"><a href="#方法一：每次安装包时指定镜像" class="headerlink" title="方法一：每次安装包时指定镜像"></a>方法一：每次安装包时指定镜像</h2><ul>
+<li>查看所有镜像：chooseCRANmirror()</li>
+<li>选择镜像：chooseCRANmirror(ind=36)</li>
+<li>通过getOption(“repos”)函数知道目前的镜像网站是哪里</li>
+<li><p>所有的镜像网站网址在本地的一个csv<br>  cd /home/wangdong/R/R-3.1.2/doc<br>  less CRAN_mirrors.csv</p>
+<p>  install.packages(‘plyr’, repos=’<a href="http://mirrors.tuna.tsinghua.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/CRAN/</a>‘)</p>
 </li>
 </ul>
-<p>（更详细的可参考：<a href="http://people.duke.edu/~ccc14/duke-hts-2017/Statistics/08032017/GATK-reference.html" target="_blank" rel="external">链接</a>）</p>
-<h2 id="Cosmic-gz文件下载"><a href="#Cosmic-gz文件下载" class="headerlink" title="Cosmic*.gz文件下载"></a>Cosmic*.gz文件下载</h2><p><a href="http://cancer.sanger.ac.uk/cosmic/download" target="_blank" rel="external">COSMIC</a>需要注册</p>
-<p>下载</p>
-<ul>
-<li>CosmicCodingMuts.vcf</li>
-<li>CosmicNonCodingVariants.vcf</li>
-</ul>
-<h2 id="Cosmic-hg19-vcf文件生成"><a href="#Cosmic-hg19-vcf文件生成" class="headerlink" title="Cosmic.hg19.vcf文件生成"></a>Cosmic.hg19.vcf文件生成</h2><p><a href="https://gatkforums.broadinstitute.org/gatk/discussion/2226/cosmic-and-dbsnp-files-for-mutect" target="_blank" rel="external">COSMIC and dbSNP files for MuTect</a></p>
-<p>sortByRef.pl was part of <a href="https://github.com/amplab/smash" target="_blank" rel="external">https://github.com/amplab/smash</a></p>
-<pre><code>gunzip Cosmic*.gz
-grep &quot;^#&quot; CosmicCodingMuts.vcf &gt; VCF_Header
-grep -v &quot;^#&quot; CosmicCodingMuts.vcf &gt; Coding.clean
-grep -v &quot;^#&quot; CosmicNonCodingVariants.vcf &gt; NonCoding.clean
-cat Coding.clean NonCoding.clean | sort -gk 2,2 | awk &apos;{print &quot;chr&quot;$0}&apos; | perl sortByRef.pl --k 1 - hg19UCSC.fa.fai &gt; Cosmic.hg19
-cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
-</code></pre><h2 id="GATK输入文件要求"><a href="#GATK输入文件要求" class="headerlink" title="GATK输入文件要求"></a>GATK输入文件要求</h2><p><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1204" target="_blank" rel="external">参考：What input files does the GATK accept / require?</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.plob.org/article/7070.html" target="_blank" rel="external">GATK使用（推荐）</a></p>
-<p>（2）<a href="https://software.broadinstitute.org/gatk/documentation/topic?name=problems" target="_blank" rel="external">使用GATK过程常见报错及解决</a></p>
-<p>（3）<a href="http://blog.sina.com.cn/s/blog_587cc04e0101l4bs.html" target="_blank" rel="external">GATK使用 备忘录（推荐）</a></p>
-<p>（4）<a href="https://www.bits.vib.be/training/286" target="_blank" rel="external">GATK Best practices for variant discovery （BITS Courses    TRAINING AT VIB）</a></p>
+<h2 id="方法二：修改配置文件"><a href="#方法二：修改配置文件" class="headerlink" title="方法二：修改配置文件"></a>方法二：修改配置文件</h2><p>Rprofile.site (in the directory /your-R-installation/etc/ , eg R-2.14.0/etc)</p>
+<pre><code>cd /home/wangdong/R/R-3.1.2/etc
+vim repositories
 
+#set a CRAN mirror
+local({r &lt;- getOption(&quot;repos&quot;)
+    r[&quot;CRAN&quot;] &lt;- &quot;http://mirrors.tuna.tsinghua.edu.cn/CRAN/&quot;
+    options(repos=r)})
+</code></pre><p>备用镜像：</p>
+<ul>
+<li><a href="http://mirror.bjtu.edu.cn/cran/" target="_blank" rel="external">http://mirror.bjtu.edu.cn/cran/</a></li>
+<li><a href="http://mirrors.ustc.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.ustc.edu.cn/CRAN/</a></li>
+<li><a href="http://mirrors.xmu.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.xmu.edu.cn/CRAN/</a></li>
+</ul>
+<h2 id="安装bioconder"><a href="#安装bioconder" class="headerlink" title="安装bioconder"></a>安装bioconder</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">source</span>(<span class="string">"http://bioconductor.org/biocLite.R"</span>)</div><div class="line">options(BioC_mirror=<span class="string">"http://mirrors.ustc.edu.cn/bioc/"</span>)</div><div class="line">biocLite(<span class="string">"methylKit"</span>)</div></pre></td></tr></table></figure>
+<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>R中用.libPaths()函数查看lib路径，如果有多个lib,install.packages()默认是安装在第一个目录下</p>
+<p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/…/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
+<h1 id="终端直接调用R脚本"><a href="#终端直接调用R脚本" class="headerlink" title="终端直接调用R脚本"></a>终端直接调用R脚本</h1><pre><code>/home/wangdong/R/bin/Rscript 或者 Rscript test.R
+</code></pre>
       
     </div>
     
@@ -546,7 +452,7 @@ cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/NGS/" rel="tag"><i class="fa fa-tag"></i> NGS</a>
+            <a href="https:/AnJingwd.github.io/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
           
         </div>
       
@@ -559,8 +465,8 @@ cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/12/10/Rmarkdown生成动态报告/" rel="next" title="Rmarkdown生成动态报告">
-                <i class="fa fa-chevron-left"></i> Rmarkdown生成动态报告
+              <a href="https:/AnJingwd.github.io/2018/01/28/qPCR结果分析及非参数检验/" rel="next" title="qPCR结果分析及非参数检验">
+                <i class="fa fa-chevron-left"></i> qPCR结果分析及非参数检验
               </a>
             
           </div>
@@ -568,10 +474,6 @@ cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="https:/AnJingwd.github.io/2018/01/10/RNA-seq质控/" rel="prev" title="RNA-seq质控">
-                RNA-seq质控 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -924,7 +826,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GATK官网相关栏目"><span class="nav-number">1.</span> <span class="nav-text">GATK官网相关栏目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GATK3-8下载"><span class="nav-number">2.</span> <span class="nav-text">GATK3.8下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Getting-Started"><span class="nav-number">3.</span> <span class="nav-text">Getting Started</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference-sequence和annotation下载"><span class="nav-number">4.</span> <span class="nav-text">Reference sequence和annotation下载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-sequence"><span class="nav-number">4.1.</span> <span class="nav-text">Reference sequence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#annotation"><span class="nav-number">4.2.</span> <span class="nav-text">annotation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GATK-Prepare-Reference-Files"><span class="nav-number">4.3.</span> <span class="nav-text">GATK: Prepare Reference Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cosmic-gz文件下载"><span class="nav-number">4.4.</span> <span class="nav-text">Cosmic*.gz文件下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cosmic-hg19-vcf文件生成"><span class="nav-number">4.5.</span> <span class="nav-text">Cosmic.hg19.vcf文件生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GATK输入文件要求"><span class="nav-number">4.6.</span> <span class="nav-text">GATK输入文件要求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#R相关资源"><span class="nav-number">1.</span> <span class="nav-text">R相关资源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看R包函数源码"><span class="nav-number">2.</span> <span class="nav-text">查看R包函数源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#以pheatmap包及其函数为例"><span class="nav-number">2.1.</span> <span class="nav-text">以pheatmap包及其函数为例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux下源码安装R-3-1-2"><span class="nav-number">3.</span> <span class="nav-text">linux下源码安装R-3.1.2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装packages"><span class="nav-number">3.1.</span> <span class="nav-text">安装packages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一：每次安装包时指定镜像"><span class="nav-number">3.2.</span> <span class="nav-text">方法一：每次安装包时指定镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二：修改配置文件"><span class="nav-number">3.3.</span> <span class="nav-text">方法二：修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装bioconder"><span class="nav-number">3.4.</span> <span class="nav-text">安装bioconder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量"><span class="nav-number">3.5.</span> <span class="nav-text">设置环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#终端直接调用R脚本"><span class="nav-number">4.</span> <span class="nav-text">终端直接调用R脚本</span></a></li></ol></div>
             
 
           </div>

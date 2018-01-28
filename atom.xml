@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-28T11:12:51.469Z</updated>
+  <updated>2018-01-28T14:18:02.796Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -16,11 +16,74 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>查看R包源码及linux下编译安装R</title>
+    <link href="https:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/"/>
+    <id>https:///AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/</id>
+    <published>2018-01-28T14:08:43.000Z</published>
+    <updated>2018-01-28T14:18:02.796Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="R相关资源"><a href="#R相关资源" class="headerlink" title="R相关资源"></a>R相关资源</h1><p>（1）<a href="https://r-forge.r-project.org/" target="_blank" rel="external">R-Forge</a>：offers a central platform for the development of R packages, R-related software and further projects.</p>
+<p>（2）<a href="http://rseek.org/" target="_blank" rel="external">rseek</a>：RSeek.org R-project Search Engine </p>
+<p>（3）<a href="http://blog.yhat.com/" target="_blank" rel="external">The Yhat Blog</a>: machine learning, data science, engineering(推荐)</p>
+<h1 id="查看R包函数源码"><a href="#查看R包函数源码" class="headerlink" title="查看R包函数源码"></a>查看R包函数源码</h1><p>&emsp;&emsp;首先，一个扩展包中定义的函数有区分公开和不公开的，会在扩展包根目录下的NAMESPACE文件中定义是否Export，如果一个函数没有Export，则为不公开的函数，只能在包内部调用。</p>
+<p>&emsp;&emsp;lattice::qq是一个Generic Function，就像是plot，summary等函数，是由对象的class来确定实际执行的函数（例如对于data frame,执行summary时会执行summary.data.frame，对于lm会执行summary.lm等等，都不是则会执行summary.default）这是R S3 面向对象系统的设计。因此看到qq源代码时只能看到 UseMethod(“qq”)，还要看到哪些class实现了qq方法，而lattice并没有把这些实现给Export</p>
+<p>&emsp;&emsp;想要看到源代码本可以直接在Console中输入函数名称或者在RStudio中函数上按F2即可，即 lattice::qq，但是这只是看到了Generic Function的源代码，如果需要看到具体的执行函数的源代码，那么就需要获得整个包的源码。可以到CRAN的页面CRAN - Package lattice 中下载Package source那个链接，这里面包含了整个lattice的源代码：<a href="http://cran.r-project.org/src/contrib/lattice_0.20-29.tar.gz" target="_blank" rel="external">http://cran.r-project.org/src/contrib/lattice_0.20-29.tar.gz</a></p>
+<p>转自知乎：任坤 <a href="https://www.zhihu.com/question/24586822/answer/28305172" target="_blank" rel="external">链接</a></p>
+<h2 id="以pheatmap包及其函数为例"><a href="#以pheatmap包及其函数为例" class="headerlink" title="以pheatmap包及其函数为例"></a>以pheatmap包及其函数为例</h2><p>（1）在Rstudio下查看</p>
+<pre><code>??pheatmap
+</code></pre><p><img src="https://i.imgur.com/6I5TzWq.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/4r5imUK.jpg" alt=""></p>
+<p><strong>上述方法只能查到该包的Generic Function,对于不公开的内部函数只能下载源码包查看</strong></p>
+<p>（2）找到R CRAN的相关源码包（.tar.gz）</p>
+<p>例如：<a href="https://cran.r-project.org/web/packages/ggplot2/" target="_blank" rel="external">https://cran.r-project.org/web/packages/ggplot2/</a> 不同包只需要更改最后包名即可</p>
+<h1 id="linux下源码安装R-3-1-2"><a href="#linux下源码安装R-3-1-2" class="headerlink" title="linux下源码安装R-3.1.2"></a>linux下源码安装R-3.1.2</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#下载R 安装包(R-3.1.2.tar.gz)</span></div><div class="line">wget http://cran.rstudio.com/src/base/R-<span class="number">3</span>/R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line"><span class="comment">#检查编译环境是否正常</span></div><div class="line">cd R-<span class="number">3.1</span><span class="number">.2</span></div><div class="line">./configure  --enable-R-shlib  --prefix=./configure  --enable-R-shlib  --prefix=/home/wangdong/R</div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="keyword">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
+<h2 id="安装packages"><a href="#安装packages" class="headerlink" title="安装packages"></a>安装packages</h2><h2 id="方法一：每次安装包时指定镜像"><a href="#方法一：每次安装包时指定镜像" class="headerlink" title="方法一：每次安装包时指定镜像"></a>方法一：每次安装包时指定镜像</h2><ul>
+<li>查看所有镜像：chooseCRANmirror()</li>
+<li>选择镜像：chooseCRANmirror(ind=36)</li>
+<li>通过getOption(“repos”)函数知道目前的镜像网站是哪里</li>
+<li><p>所有的镜像网站网址在本地的一个csv<br>  cd /home/wangdong/R/R-3.1.2/doc<br>  less CRAN_mirrors.csv</p>
+<p>  install.packages(‘plyr’, repos=’<a href="http://mirrors.tuna.tsinghua.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/CRAN/</a>‘)</p>
+</li>
+</ul>
+<h2 id="方法二：修改配置文件"><a href="#方法二：修改配置文件" class="headerlink" title="方法二：修改配置文件"></a>方法二：修改配置文件</h2><p>Rprofile.site (in the directory /your-R-installation/etc/ , eg R-2.14.0/etc)</p>
+<pre><code>cd /home/wangdong/R/R-3.1.2/etc
+vim repositories
+
+#set a CRAN mirror
+local({r &lt;- getOption(&quot;repos&quot;)
+    r[&quot;CRAN&quot;] &lt;- &quot;http://mirrors.tuna.tsinghua.edu.cn/CRAN/&quot;
+    options(repos=r)})
+</code></pre><p>备用镜像：</p>
+<ul>
+<li><a href="http://mirror.bjtu.edu.cn/cran/" target="_blank" rel="external">http://mirror.bjtu.edu.cn/cran/</a></li>
+<li><a href="http://mirrors.ustc.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.ustc.edu.cn/CRAN/</a></li>
+<li><a href="http://mirrors.xmu.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.xmu.edu.cn/CRAN/</a></li>
+</ul>
+<h2 id="安装bioconder"><a href="#安装bioconder" class="headerlink" title="安装bioconder"></a>安装bioconder</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">source</span>(<span class="string">"http://bioconductor.org/biocLite.R"</span>)</div><div class="line">options(BioC_mirror=<span class="string">"http://mirrors.ustc.edu.cn/bioc/"</span>)</div><div class="line">biocLite(<span class="string">"methylKit"</span>)</div></pre></td></tr></table></figure>
+<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>R中用.libPaths()函数查看lib路径，如果有多个lib,install.packages()默认是安装在第一个目录下</p>
+<p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/…/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
+<h1 id="终端直接调用R脚本"><a href="#终端直接调用R脚本" class="headerlink" title="终端直接调用R脚本"></a>终端直接调用R脚本</h1><pre><code>/home/wangdong/R/bin/Rscript 或者 Rscript test.R
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;R相关资源&quot;&gt;&lt;a href=&quot;#R相关资源&quot; class=&quot;headerlink&quot; title=&quot;R相关资源&quot;&gt;&lt;/a&gt;R相关资源&lt;/h1&gt;&lt;p&gt;（1）&lt;a href=&quot;https://r-forge.r-project.org/&quot; target=&quot;_blank
+    
+    </summary>
+    
+      <category term="R" scheme="https:///AnJingwd.github.io/categories/R/"/>
+    
+    
+      <category term="R" scheme="https:///AnJingwd.github.io/tags/R/"/>
+    
+  </entry>
+  
+  <entry>
     <title>qPCR结果分析及非参数检验</title>
     <link href="https:///AnJingwd.github.io/2018/01/28/qPCR%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E5%8F%8A%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C/"/>
     <id>https:///AnJingwd.github.io/2018/01/28/qPCR结果分析及非参数检验/</id>
     <published>2018-01-28T02:33:14.000Z</published>
-    <updated>2018-01-28T11:12:51.469Z</updated>
+    <updated>2018-01-28T11:22:47.442Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">qPCR结果分析及非参数检验</blockquote>
 
@@ -56,6 +119,7 @@
 <p>（7）<a href="https://www.tanboyu.com/r-for-nonparametric-tests.html" target="_blank" rel="external">非参检验R语言实现</a></p>
 <p>（8）<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=4&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjVxeX1x_DXAhXMxrwKHVvOAnwQFgg4MAM&amp;url=http%3A%2F%2Fblog.csdn.net%2Ftimothyzh%2Farticle%2Fdetails%2F7657470&amp;usg=AOvVaw3SpJzBCWcgBwfbkJn65CFP" target="_blank" rel="external">Wilcoxon-Mann-Whitney秩和检验/rank sum test（或test U）</a></p>
 <p>（9）<a href="https://wenku.baidu.com/view/d09fcc7033687e21ae45a902.html" target="_blank" rel="external">荧光定量PCR应用指南{推荐}</a></p>
+<p>（10） <a href="http://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_nonparametric/BS704_Nonparametric4.html" target="_blank" rel="external">Mann Whitney U Test (Wilcoxon Rank Sum Test)</a></p>
 ]]></content>
     
     <summary type="html">
@@ -2005,50 +2069,6 @@ $ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;s
     
     
       <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决ggplot 作图x轴和y轴不重合问题</title>
-    <link href="https:///AnJingwd.github.io/2017/09/01/%E8%A7%A3%E5%86%B3ggplot-%E4%BD%9C%E5%9B%BEx%E8%BD%B4%E5%92%8Cy%E8%BD%B4%E4%B8%8D%E9%87%8D%E5%90%88%E9%97%AE%E9%A2%98/"/>
-    <id>https:///AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/</id>
-    <published>2017-09-01T04:43:03.000Z</published>
-    <updated>2018-01-21T05:26:24.976Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">解决ggplot 作图x轴和y轴不重合问题</blockquote>
-
-<a id="more"></a>
-<p>只需要在作图时加上加上一下代码，即可即可让x轴和y轴在坐标原点重合：</p>
-<pre><code>scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
-</code></pre><p>现在用测试代码看看前后变化：</p>
-<pre><code>library(ggplot2)
-df &lt;- data.frame(x = 1:5, y = 1:5)
-p1 &lt;- ggplot(df, aes(x, y)) + geom_point()
-p1 &lt;- p1 + expand_limits(x = 0, y = 0)
-p1
-</code></pre><p><img src="http://i.imgur.com/c0EnfOi.png" alt=""></p>
-<pre><code>library(ggplot2)
-df &lt;- data.frame(x = 1:5, y = 1:5)
-p2 &lt;- ggplot(df, aes(x, y)) + geom_point()
-p2 &lt;- p2 + expand_limits(x = 0, y = 0)+ scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
-p2
-</code></pre><p><img src="http://i.imgur.com/2GNk480.png" alt=""></p>
-<p>参考：</p>
-<p>（1）<a href="http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot" target="_blank" rel="external">http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot</a></p>
-<p>（2）<a href="http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r" target="_blank" rel="external">http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r</a></p>
-<p>（3）<a href="http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap" target="_blank" rel="external">http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;解决ggplot 作图x轴和y轴不重合问题&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="R绘图" scheme="https:///AnJingwd.github.io/categories/R%E7%BB%98%E5%9B%BE/"/>
-    
-    
-      <category term="R绘图" scheme="https:///AnJingwd.github.io/tags/R%E7%BB%98%E5%9B%BE/"/>
     
   </entry>
   
