@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-24T16:47:06.739Z</updated>
+  <updated>2018-01-28T09:15:06.332Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -16,14 +16,109 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>IGV批量查看变异</title>
+    <link href="https:///AnJingwd.github.io/2018/01/26/IGV%E6%89%B9%E9%87%8F%E6%9F%A5%E7%9C%8B%E5%8F%98%E5%BC%82/"/>
+    <id>https:///AnJingwd.github.io/2018/01/26/IGV批量查看变异/</id>
+    <published>2018-01-26T03:21:34.000Z</published>
+    <updated>2018-01-28T09:15:06.332Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">IGV批量查看变异并过滤</blockquote>
+
+<a id="more"></a>
+<h1 id="IGV可视化准备"><a href="#IGV可视化准备" class="headerlink" title="IGV可视化准备"></a>IGV可视化准备</h1><p><a href="http://www.nature.com/nbt/journal/v29/n1/full/nbt.1754.html" target="_blank" rel="external">Nature biotechnology文献</a>：Integrative Genomics Viewer</p>
+<p><a href="http://software.broadinstitute.org/software/igv/download" target="_blank" rel="external">Downloads IGV </a>; &emsp;<a href="http://software.broadinstitute.org/software/igv/igvtools" target="_blank" rel="external">igvtools</a>为一些数据可视化预处理程序</p>
+<p>IGV可视化数据准备</p>
+<ul>
+<li>不是什么数据都可以拿IGV看的，参考基因组必须为FASTA格式；</li>
+<li>IGV只是负责将比对结果可视化，并没有比对过程，所以不能直接载入reads；</li>
+<li>需要将待比对的reads与前面指定的参考基因组用bwa进行比对；</li>
+<li>比对后的sam文件也不能直接载入，<strong>要转bam；bam排序；bam建索引（可以一步完成）</strong>；</li>
+</ul>
+<p><strong>需要两个文件.bam文件和.bam.bai文件</strong></p>
+<h1 id="IGV批量查看变异"><a href="#IGV批量查看变异" class="headerlink" title="IGV批量查看变异"></a>IGV批量查看变异</h1><h2 id="生成批量查看-bat文件"><a href="#生成批量查看-bat文件" class="headerlink" title="生成批量查看.bat文件"></a>生成批量查看.bat文件</h2><p>IGV批量运行的.bat文件命令参数及例子：<a href="http://software.broadinstitute.org/software/igv/PortCommands" target="_blank" rel="external">Controlling IGV through a Port</a> ,&emsp;&emsp; <a href="http://software.broadinstitute.org/software/igv/batch" target="_blank" rel="external">a batch file example</a> &emsp;&emsp; <a href="https://github.com/stevekm/IGV-snapshot-automator" target="_blank" rel="external">IGV-snapshot-automator项目</a></p>
+<p>使用命令：<br>    java -Xmx1024M -jar ~/bin/igv-2.3.52/igv.jar -b IGV_screenshot.bat</p>
+<h1 id="NVC-Viewer使用"><a href="#NVC-Viewer使用" class="headerlink" title="NVC Viewer使用"></a>NVC Viewer使用</h1><p>&emsp;&emsp;VNC (Virtual Network Console)是虚拟网络控制台的缩写。它 是一款优秀的远程控制工具软件，由著名的 AT&amp;T 的欧洲研究实验室开发的。VNC 是在基于 UNIX 和 Linux 操作系统的免费的开源软件。VNC基本上是由两部分组成：一部分是客户端的应用程序(vncviewer)；另外一部分是服务器端的应用程序(vncserver)。<a href="https://www.realvnc.com/en/connect/download/viewer/" target="_blank" rel="external">Download VNC Viewer </a></p>
+<p>工作流程：</p>
+<ol>
+<li>服务器端启动VNC Server，使用命令vncserver,之后输入密码并确认，之后获得数字1，表示vncserver创建的第一个vnc viewer用户；</li>
+<li>在win7的客户端创建连接即可</li>
+</ol>
+<p><img src="https://i.imgur.com/qnCN4Vt.jpg" alt=""></p>
+<p>之后点击igv.sh运行igv,在Tools的Run Batch Script，导入.bat文件即可！</p>
+<h1 id="变异的过滤"><a href="#变异的过滤" class="headerlink" title="变异的过滤"></a>变异的过滤</h1><p>&emsp;&emsp;在对Func.refGene，ExonicFunc.refGene，1000g2015aug_eas等进行hard filter后，一般全外显子测序找到的突变依然还有一两百个，接下来需要通过直观的可视化，验证SNP/SNV calls和结构重排，进一步去除假阳性的结果。<a href="https://github.com/griffithlab/rnaseq_tutorial/wiki/IGV-Tutorial" target="_blank" rel="external">IGV Tutorial（推荐）</a></p>
+<h2 id="查看技巧"><a href="#查看技巧" class="headerlink" title="查看技巧"></a>查看技巧</h2><ol>
+<li>File—&gt;Load from Server可以加载许多tracks</li>
+</ol>
+<p><img src="https://i.imgur.com/Okk9sPp.jpg" alt=""></p>
+<ol>
+<li>在reads区右键可以选择不同的查看方式</li>
+</ol>
+<p><img src="https://i.imgur.com/SeQvjJ9.jpg" alt=""></p>
+<h2 id="过滤标准"><a href="#过滤标准" class="headerlink" title="过滤标准"></a>过滤标准</h2><ol>
+<li>高质量的SNVs和SNPs要求在所有的reas中High base qualities，并且不能在reads的末端；</li>
+<li>Good mapping quality of reads, no strand bias, allele frequency consistent with heterozygous mutation</li>
+</ol>
+<h3 id="Important-metrics-for-evaluating-the-validity-of-SNVs"><a href="#Important-metrics-for-evaluating-the-validity-of-SNVs" class="headerlink" title="Important    metrics    for    evaluating    the    validity of    SNVs:"></a>Important    metrics    for    evaluating    the    validity of    SNVs:</h3><ul>
+<li>Coverage    </li>
+<li>Amount  of     support    </li>
+<li>Strand     bias    /    PCR    artifacts    </li>
+<li>Mapping    qualities    </li>
+<li>Base    qualities    </li>
+</ul>
+<ol>
+<li>通过Coverage track查看比对情况，没有比对上参考基因组的碱基将在Coverage track和data panel以不同颜色高亮显示；</li>
+</ol>
+<p><img src="https://i.imgur.com/5dNcVPB.jpg" alt=""></p>
+<ol>
+<li>低质量的碱基calls是半透明的（faint,semi-transparent）</li>
+</ol>
+<p><img src="https://i.imgur.com/OYSyAsZ.png" alt=""></p>
+<h3 id="区分SNP突变和错配："><a href="#区分SNP突变和错配：" class="headerlink" title="区分SNP突变和错配："></a>区分SNP突变和错配：</h3><ol>
+<li>SNP突变如果是杂合，会在Coverage track处显示红蓝box,当鼠标悬停在上面时显示allele counts 和frequencies。可以在此处右键，选择sort alignments by &gt; base查看，以此根据碱基的透明度确定SNP碱基call的质量；</li>
+</ol>
+<p><img src="https://i.imgur.com/A5XUxR9.jpg" alt=""></p>
+<ol>
+<li>而错配的情况在在Coverage track处是没有红蓝box的。通过在此处右键，选择shade base by quality使得用半透明颜色表示的低质量碱基全部高亮显示，方便查看；接着选择Sort alignments by &gt; read strand，然后Color alignments by &gt; read strand，以此确定是否存在stand bias。</li>
+</ol>
+<p><img src="https://i.imgur.com/vgCysAl.png" alt=""></p>
+<p><img src="https://i.imgur.com/Cu5w71N.png" alt=""></p>
+<p><img src="https://i.imgur.com/HlMwp7F.png" alt=""></p>
+<h3 id="Important-metrics-for-evaluating-SVs"><a href="#Important-metrics-for-evaluating-SVs" class="headerlink" title="Important    metrics    for    evaluating    SVs:"></a>Important    metrics    for    evaluating    SVs:</h3><ul>
+<li>Coverage    </li>
+<li>Insert    size    </li>
+<li>Read    pair orientation</li>
+</ul>
+<p>具体使用可查看：<a href="https://github.com/griffithlab/rnaseq_tutorial/wiki/LectureFiles/cshl/2016/IGV_Tutorial_Long_BroadInstitute.pdf" target="_blank" rel="external">IGV Lecture - Long, from Broad Institute    </a>，<strong>也包括了查看RNA-seq比对情况的操作</strong></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.cnblogs.com/leezx/p/5603481.html" target="_blank" rel="external">可视化工具之 IGV 使用方法</a></p>
+<p>（2）<a href="https://gist.github.com/dfjenkins3/5c6dc1e55e78fa17b931" target="_blank" rel="external">IGV_Batch_Screenshots.md</a></p>
+<p>（3）<a href="http://blog.csdn.net/Bingorl/article/details/78289280?locationNum=8&amp;fps=1" target="_blank" rel="external">如何使用VNC Viewer连接远程CentOS服务器</a></p>
+<p>（4）<a href="https://www.biostars.org/p/5563/" target="_blank" rel="external">Quick Visual Inspection Of Mapping Images For A List Of Regions</a></p>
+<p>（5）<a href="https://github.com/igvteam/igv/issues/160" target="_blank" rel="external">Unable to adjust image height via batch script </a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;IGV批量查看变异并过滤&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
+    
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计miRNA的qPCR引物</title>
     <link href="https:///AnJingwd.github.io/2018/01/24/%E8%AE%BE%E8%AE%A1miRNA%E7%9A%84qPCR%E5%BC%95%E7%89%A9/"/>
     <id>https:///AnJingwd.github.io/2018/01/24/设计miRNA的qPCR引物/</id>
     <published>2018-01-24T02:01:15.000Z</published>
-    <updated>2018-01-24T16:47:06.739Z</updated>
+    <updated>2018-01-25T01:04:07.551Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">在线设计miRNA的qPCR引物</blockquote>
 
+<a id="more"></a>
 <h1 id="miRNA简介"><a href="#miRNA简介" class="headerlink" title="miRNA简介"></a>miRNA简介</h1><p>&emsp;&emsp;microRNAs(miRNAs)是指长度在20-24nt的非编码RNAs,其可通过影响转录的mRNAs的转录和稳定性，参与细胞组织的转录后基因表达调控。miRNAs由RNA聚合酶II转录为带帽子和多聚腺苷酸的初级转录物（pri-miRNA）的一部分（有的编码蛋白，有的是非编码的）。初级转录物被Drosha核糖核酸酶III切割产生大约70nt的茎环前体miRNA(pre-miRNA)，其被细胞质Dicer 核糖核酸酶裂解产生成熟的miRNA和反义miRNA star(miRNA*)。成熟的miRNA包含在RNA诱导的沉默复合物（RISC)中。通过不完全的碱基配对，其能够识别靶标mRNA的3’端，并通常导致的结果是翻译被抑制或者靶标mRNA的去稳定化。RefSeq代表预测的microRNA的茎环结构。</p>
 <p>miRNA主要公共数据库<a href="http://www.mirbase.org/" target="_blank" rel="external">miRBase</a>中已经有1W多条来自不同物种的miRNA序列</p>
 <p><img src="https://i.imgur.com/qfASLJU.jpg" alt=""></p>
@@ -88,8 +183,6 @@
     <summary type="html">
     
       &lt;blockquote class=&quot;blockquote-center&quot;&gt;在线设计miRNA的qPCR引物&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;miRNA简介&quot;&gt;&lt;a href=&quot;#miRNA简介&quot; class=&quot;headerlink&quot; title=&quot;miRNA简介&quot;&gt;
     
     </summary>
     
@@ -1967,44 +2060,6 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>修复Chrome浏览器崩溃</title>
-    <link href="https:///AnJingwd.github.io/2017/08/28/%E4%BF%AE%E5%A4%8DChrome%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B4%A9%E6%BA%83/"/>
-    <id>https:///AnJingwd.github.io/2017/08/28/修复Chrome浏览器崩溃/</id>
-    <published>2017-08-28T03:18:41.000Z</published>
-    <updated>2017-08-28T04:15:04.508Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">Chrome浏览器一进入就全面崩溃，包括设置页面！</blockquote>
-
-<a id="more"></a>
-<p>解决办法：</p>
-<p>原因就是 C:\Windows\System32\drivers\bd0001.sys 这个文件</p>
-<ul>
-<li>首先可以把这个文件利用360杀毒工具强力删除。</li>
-<li>因为书签路径是 C:\Users\Administrator\AppData\Local\Google\Chrome\User Data,所以然后将原Google删除（C:\Program Files (x86)\Google）并不会删除书签。</li>
-<li>重新安装Chrome稳定版<a href="https://www.baidu.com/link?url=MkVpzj1gf1_OJ3mxcnzzssfMv7eMA0dXfUgyoqlNDFcZZ1kUW9XJCbRwHqpRSrhcS3HVGx4Wm78JNaYFHj6qaqlM7iSxJyjH_PE7s99egGy&amp;wd=&amp;eqid=a1e33f840000f6e30000000359a38cae" target="_blank" rel="external">ChromeStandalone_60.0.3112.101_Setup.exe</a></li>
-<li>重启电脑即可！</li>
-</ul>
-<p>&emsp;&emsp;win7不能删除文件提示(您需要来自administrators的权限才能对此文件夹进行更改）该如何解决呢？</p>
-<p>可以使用360杀毒–功能大全-文件粉碎机</p>
-<p><img src="http://i.imgur.com/qfrctqm.png" alt=""></p>
-<p><img src="http://i.imgur.com/h6Ub9xV.png" alt=""></p>
-<p><img src="http://i.imgur.com/ceKPi1J.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;Chrome浏览器一进入就全面崩溃，包括设置页面！&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="https:///AnJingwd.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="技术" scheme="https:///AnJingwd.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
     
   </entry>
   
