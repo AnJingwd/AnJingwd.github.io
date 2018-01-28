@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-28T14:24:16.386Z</updated>
+  <updated>2018-01-28T14:38:44.399Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/"/>
     <id>https:///AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/</id>
     <published>2018-01-28T14:08:43.000Z</published>
-    <updated>2018-01-28T14:24:16.386Z</updated>
+    <updated>2018-01-28T14:38:44.399Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R</blockquote>
 
@@ -66,7 +66,12 @@ local({r &lt;- getOption(&quot;repos&quot;)
 <h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>R中用.libPaths()函数查看lib路径，如果有多个lib,install.packages()默认是安装在第一个目录下</p>
 <p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/…/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
 <h1 id="终端直接调用R脚本"><a href="#终端直接调用R脚本" class="headerlink" title="终端直接调用R脚本"></a>终端直接调用R脚本</h1><pre><code>/home/wangdong/R/bin/Rscript 或者 Rscript test.R
-</code></pre>]]></content>
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_605f5b4f010160su.html" target="_blank" rel="external">R中查看函数源代码</a></p>
+<p>（2）<a href="http://blog.sina.com.cn/s/blog_605f5b4f010160su.html" target="_blank" rel="external">R中查看函数源代码</a></p>
+<p>（3）<a href="http://blog.csdn.net/high2011/article/details/52052333" target="_blank" rel="external">linux下源码安装R-3.1.2.tar.gz   和RStudio开发工具</a></p>
+<p>（4）<a href="http://m.blog.itpub.net/9036/viewspace-2122686/" target="_blank" rel="external">CentOS 下 R 的安装</a></p>
+<p>（5）<a href="https://stackoverflow.com/questions/11488174/how-to-select-a-cran-mirror-in-r" target="_blank" rel="external">How to select a CRAN mirror in R</a></p>
+]]></content>
     
     <summary type="html">
     

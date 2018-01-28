@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/6I5TzWq.jpg">
 <meta property="og:image" content="https://i.imgur.com/4r5imUK.jpg">
-<meta property="og:updated_time" content="2018-01-28T14:24:16.386Z">
+<meta property="og:updated_time" content="2018-01-28T14:38:44.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查看R包源码及linux下编译安装R">
 <meta name="twitter:description" content="查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R">
@@ -430,7 +430,12 @@ local({r &lt;- getOption(&quot;repos&quot;)
 <h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>R中用.libPaths()函数查看lib路径，如果有多个lib,install.packages()默认是安装在第一个目录下</p>
 <p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/…/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
 <h1 id="终端直接调用R脚本"><a href="#终端直接调用R脚本" class="headerlink" title="终端直接调用R脚本"></a>终端直接调用R脚本</h1><pre><code>/home/wangdong/R/bin/Rscript 或者 Rscript test.R
-</code></pre>
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_605f5b4f010160su.html" target="_blank" rel="external">R中查看函数源代码</a></p>
+<p>（2）<a href="http://blog.sina.com.cn/s/blog_605f5b4f010160su.html" target="_blank" rel="external">R中查看函数源代码</a></p>
+<p>（3）<a href="http://blog.csdn.net/high2011/article/details/52052333" target="_blank" rel="external">linux下源码安装R-3.1.2.tar.gz   和RStudio开发工具</a></p>
+<p>（4）<a href="http://m.blog.itpub.net/9036/viewspace-2122686/" target="_blank" rel="external">CentOS 下 R 的安装</a></p>
+<p>（5）<a href="https://stackoverflow.com/questions/11488174/how-to-select-a-cran-mirror-in-r" target="_blank" rel="external">How to select a CRAN mirror in R</a></p>
+
       
     </div>
     
@@ -829,7 +834,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#R相关资源"><span class="nav-number">1.</span> <span class="nav-text">R相关资源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看R包函数源码"><span class="nav-number">2.</span> <span class="nav-text">查看R包函数源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#以pheatmap包及其函数为例"><span class="nav-number">2.1.</span> <span class="nav-text">以pheatmap包及其函数为例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux下源码安装R-3-1-2"><span class="nav-number">3.</span> <span class="nav-text">linux下源码安装R-3.1.2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装packages"><span class="nav-number">3.1.</span> <span class="nav-text">安装packages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一：每次安装包时指定镜像"><span class="nav-number">3.2.</span> <span class="nav-text">方法一：每次安装包时指定镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二：修改配置文件"><span class="nav-number">3.3.</span> <span class="nav-text">方法二：修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装bioconder"><span class="nav-number">3.4.</span> <span class="nav-text">安装bioconder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量"><span class="nav-number">3.5.</span> <span class="nav-text">设置环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#终端直接调用R脚本"><span class="nav-number">4.</span> <span class="nav-text">终端直接调用R脚本</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#R相关资源"><span class="nav-number">1.</span> <span class="nav-text">R相关资源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看R包函数源码"><span class="nav-number">2.</span> <span class="nav-text">查看R包函数源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#以pheatmap包及其函数为例"><span class="nav-number">2.1.</span> <span class="nav-text">以pheatmap包及其函数为例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux下源码安装R-3-1-2"><span class="nav-number">3.</span> <span class="nav-text">linux下源码安装R-3.1.2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装packages"><span class="nav-number">3.1.</span> <span class="nav-text">安装packages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一：每次安装包时指定镜像"><span class="nav-number">3.2.</span> <span class="nav-text">方法一：每次安装包时指定镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二：修改配置文件"><span class="nav-number">3.3.</span> <span class="nav-text">方法二：修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装bioconder"><span class="nav-number">3.4.</span> <span class="nav-text">安装bioconder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量"><span class="nav-number">3.5.</span> <span class="nav-text">设置环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#终端直接调用R脚本"><span class="nav-number">4.</span> <span class="nav-text">终端直接调用R脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -877,7 +882,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共59.1k字</span>
+  <span class="post-count">博客全站共59.2k字</span>
 </div>
 
 <div class="powered-by">
