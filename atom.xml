@@ -780,6 +780,80 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
   </entry>
   
   <entry>
+    <title>GATK变异检测概述</title>
+    <link href="https:///AnJingwd.github.io/2017/12/26/GATK%E5%8F%98%E5%BC%82%E6%A3%80%E6%B5%8B%E6%A6%82%E8%BF%B0/"/>
+    <id>https:///AnJingwd.github.io/2017/12/26/GATK变异检测概述/</id>
+    <published>2017-12-26T12:58:54.000Z</published>
+    <updated>2018-02-01T13:07:45.400Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">变异检测概述</blockquote>
+
+<a id="more"></a>
+<h1 id="突变发现背景介绍"><a href="#突变发现背景介绍" class="headerlink" title="突变发现背景介绍"></a>突变发现背景介绍</h1><p>个体相对于参考基因组的两种突变</p>
+<ul>
+<li>Germline    (inherited)    </li>
+<li>Somatic    (cancer)    </li>
+</ul>
+<h2 id="不同的突变类型"><a href="#不同的突变类型" class="headerlink" title="不同的突变类型"></a>不同的突变类型</h2><p><img src="https://i.imgur.com/W3L0QGg.jpg" alt=""></p>
+<h2 id="实验策略"><a href="#实验策略" class="headerlink" title="实验策略"></a>实验策略</h2><ol>
+<li>全基因组测序</li>
+<li>全外显子测序，或者设计目标基因的panel进行目标区域捕获测序</li>
+</ol>
+<p><img src="https://i.imgur.com/9fKpXfy.jpg" alt=""></p>
+<p>HTS    machine    processes a    flowcell containing    lanes;each    lane cons)tutes    a read group (RG) (unless multiplexed)</p>
+<h2 id="Raw-sequence的质控"><a href="#Raw-sequence的质控" class="headerlink" title="Raw sequence的质控"></a>Raw sequence的质控</h2><p>目的：将ASCII code转换为Phred-scale Q    scores，考察测序质量（错误率）</p>
+<p><img src="https://i.imgur.com/v0ZLr2G.jpg" alt=""></p>
+<p><strong>所以phred score一般选择20即可</strong></p>
+<h1 id="分析流程"><a href="#分析流程" class="headerlink" title="分析流程"></a>分析流程</h1><ul>
+<li>Map to reference</li>
+<li>Sort, Index</li>
+<li>Mark Duplicates &amp; Sort (Picard)</li>
+<li>Indels Realigment</li>
+<li>Base Quality Score Recalibration</li>
+<li>Variant Calling (HaplotypeCaller)</li>
+<li>Variant Filtration (Hard Filter, see <a href="http://gatkforums.broadinstitute.org/gatk/discussion/2806/howto-apply-hard-filters-to-a-call-set" target="_blank" rel="external">GATK Best Practices</a>)</li>
+<li>Annotation</li>
+</ul>
+<p><img src="https://i.imgur.com/xWy0liU.jpg" alt=""></p>
+<h2 id="（1）Map"><a href="#（1）Map" class="headerlink" title="（1）Map"></a>（1）Map</h2><ul>
+<li>BWA    for    DNA    </li>
+<li>STAR    for    RNAseq</li>
+</ul>
+<p>Sequence/Binary    Alignment    Map    (SAM/BAM)    </p>
+<p><img src="https://i.imgur.com/r3ayrha.jpg" alt=""></p>
+<h2 id="（2）Mark-duplicates"><a href="#（2）Mark-duplicates" class="headerlink" title="（2）Mark    duplicates"></a>（2）Mark    duplicates</h2><p>这一步是为了减少duplication artifacts,为了能正确评估alleles</p>
+<p>Duplicates    =    non-independent    measurements of    a sequenc fragment</p>
+<p><img src="https://i.imgur.com/oWRVjhD.jpg" alt=""></p>
+<h2 id="（3）Local-realignment"><a href="#（3）Local-realignment" class="headerlink" title="（3）Local realignment"></a>（3）Local realignment</h2><p>对于indel区域进行局部的重新比对，为了纠正比对错误。</p>
+<h2 id="（4）Base-Recalibration-简称BQSR"><a href="#（4）Base-Recalibration-简称BQSR" class="headerlink" title="（4）Base    Recalibration (简称BQSR)"></a>（4）Base    Recalibration (简称BQSR)</h2><p>纠正机器产生的错误，主要针对测序一产生的碱基质量分数的系统错误，BQSR纠正碱基质量分数（不是碱基本身）</p>
+<h2 id="（5）Variant-Calling"><a href="#（5）Variant-Calling" class="headerlink" title="（5）Variant Calling"></a>（5）Variant Calling</h2><p>根据变异来源和实验设计不同，选择不同的检测变异方案：</p>
+<p><img src="https://i.imgur.com/FkTZcp5.jpg" alt=""></p>
+<p>胚系突变检测是最容易的，对于肿瘤体细胞突变主要受肿瘤异质性和正常组织污染的影响，而拷贝数变异本质是计算reads覆盖的丰度</p>
+<p>单个基因组是孤立的，通常并不能得出什么变异是致病性变异。一般要求家系或者群体数据，可以发现稀有变异，de novo变异，以及种族背景信息。</p>
+<p><img src="https://i.imgur.com/CyxQF14.jpg" alt=""></p>
+<p><strong>对于多样本或者家系的突变比较分析，可以使用HaplotypeCaller 的GVCF模式，主要目的GVCF文件输出所有的记录位点，无论其是否是变异。其目的是输出每个样本的每个位点，以便接下来的多样本联合比较分析。</strong></p>
+<p><img src="https://i.imgur.com/BV54Ah7.jpg" alt=""></p>
+<p>具体参考：</p>
+<ol>
+<li><a href="https://gatkforums.broadinstitute.org/gatk/discussion/3893/calling-variants-on-cohorts-of-samples-using-the-haplotypecaller-in-gvcf-mode" target="_blank" rel="external">Calling variants on cohorts of samples using the HaplotypeCaller in GVCF mode</a></li>
+<li><a href="https://software.broadinstitute.org/gatk/documentation/article?id=11004" target="_blank" rel="external">GVCF - Genomic Variant Call Format</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;变异检测概述&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
+    
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>GATK3.8分析环境搭建（一）</title>
     <link href="https:///AnJingwd.github.io/2017/12/26/GATK3.8%E5%88%86%E6%9E%90%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>https:///AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建（一）/</id>
@@ -2042,41 +2116,6 @@ $ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;s
     
     
       <category term="R" scheme="https:///AnJingwd.github.io/tags/R/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python实现excel二维表格格式化</title>
-    <link href="https:///AnJingwd.github.io/2017/09/02/python%E5%AE%9E%E7%8E%B0excel%E4%BA%8C%E7%BB%B4%E8%A1%A8%E6%A0%BC%E6%A0%BC%E5%BC%8F%E5%8C%96/"/>
-    <id>https:///AnJingwd.github.io/2017/09/02/python实现excel二维表格格式化/</id>
-    <published>2017-09-02T03:40:51.000Z</published>
-    <updated>2017-09-02T04:45:33.389Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;Excel 是 Windows 环境下流行的、强大的电子表格应用。openpyxl 模块让 Python 程序能读取和修改 Excel 电子表格文<br>件。例如，可能有一个无聊的任务，需要从一个电子表格拷贝一些数据，粘贴到另一个电子表格中。或者可能需要从几千行中挑选几行，根据某种条件稍作修改。或者需要查看几百份部门预算电子表格，寻找其中的赤字。正是这种无聊无脑的电子表格任务，可以通过 Python 来完成。</p>
-<p>&emsp;&emsp;同时，发现之前写了很多小脚本，但代码的复用率极低。因此，今后的代码得更加注意用函数进行代码的封装。EXCEL中行的排序及筛选比较容易，但对于列比较麻烦。在此，通过一个对EXCEL列排序及筛选（取子列）的例子进行演示。</p>
-<a id="more"></a>
-<h1 id="sort-column-py"><a href="#sort-column-py" class="headerlink" title="sort_column.py"></a>sort_column.py</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="string">'''</span></div><div class="line"><span class="string">EXCEL文件列根据自定义规则排序</span></div><div class="line"><span class="string">'''</span></div><div class="line"></div><div class="line">__file__    = <span class="string">'sort_column.py'</span></div><div class="line">__date__    = <span class="string">'2017-9-2'</span></div><div class="line">__version__ = <span class="string">'0.1'</span></div><div class="line">__author__  = <span class="string">'anjing'</span></div><div class="line">__blog__    = <span class="string">'https://anjingwd.github.io/'</span></div><div class="line">__license__ = <span class="string">'GPL v3 License'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sort_column</span><span class="params">(file, row1, column1_letter ,column2_letter)</span>:</span></div><div class="line"></div><div class="line">	<span class="keyword">import</span> openpyxl</div><div class="line">	<span class="keyword">from</span> openpyxl.cell <span class="keyword">import</span> column_index_from_string</div><div class="line"></div><div class="line">	<span class="comment">#列字母和数字之间的转换</span></div><div class="line">	column1_num = column_index_from_string(str(column1_letter))</div><div class="line">	column2_num = column_index_from_string(str(column2_letter))</div><div class="line"></div><div class="line">	<span class="comment">#从工作簿中取得工作表</span></div><div class="line">	wb = openpyxl.load_workbook(file)</div><div class="line">	sheet1 = wb.get_sheet_by_name(<span class="string">'Sheet1'</span>)</div><div class="line">	sheet2 = wb.get_sheet_by_name(<span class="string">'Sheet2'</span>)</div><div class="line">	sheet3 = wb.create_sheet(<span class="string">'result_sorted'</span>)</div><div class="line"></div><div class="line">	<span class="comment">#按顺序记录下待排序列的列号</span></div><div class="line">	order = []</div><div class="line">	<span class="comment">#注意range范围是左闭区间，右开区间</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,sheet2.max_row+<span class="number">1</span>):</div><div class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(column1_num, column2_num+<span class="number">1</span>):</div><div class="line">			<span class="keyword">if</span> sheet2.cell(row=i, column=<span class="number">1</span>).value == sheet1.cell(row=row1, column=j).value:</div><div class="line">				order.append(j)</div><div class="line"></div><div class="line">	<span class="comment">#将排序结果写入新的sheet3</span></div><div class="line">	count = column1_num</div><div class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> order:</div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> range(row1, sheet1.max_row+<span class="number">1</span>):</div><div class="line">			sheet3.cell(row=i, column=count).value = sheet1.cell(row=i, column=j).value</div><div class="line">		count += <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="comment">#将起始列之前的列写入，一般是行名等</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(row1, sheet1.max_row+<span class="number">1</span>):</div><div class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, column1_num):</div><div class="line">			sheet3.cell(row=i, column=j).value = sheet1.cell(row=i, column=j).value</div><div class="line"></div><div class="line">	<span class="comment"># 写入之后需要保存</span></div><div class="line">	wb.save(file)</div><div class="line">	print(<span class="string">"Everything has been done"</span>)</div><div class="line"></div><div class="line"><span class="comment">######################################################################################################</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line"></div><div class="line">	print(<span class="string">'对excel文件指定列区间排序，sheet1为数据，sheet2为自定义顺序顺序。'</span>)</div><div class="line">	print(<span class="string">'四个参数：输入excel绝对路径，需排序列的标题，列的起始列，终止列'</span>)</div><div class="line">	print(<span class="string">r'用法例如：python sort_column.py F:\pycharm_project\excel_format\new1.xlsx 1 H AU'</span>)</div><div class="line"></div><div class="line">	<span class="comment">#Sys.argv是一个元组，里边的项为用户从程序外部输入的参数</span></div><div class="line">	<span class="keyword">import</span> sys</div><div class="line">	file = sys.argv[<span class="number">1</span>]</div><div class="line">	row1 = int(sys.argv[<span class="number">2</span>])</div><div class="line">	column1_letter = sys.argv[<span class="number">3</span>]</div><div class="line">	column2_letter = sys.argv[<span class="number">4</span>]</div><div class="line">	sort_column(file, row1, column1_letter, column2_letter)</div></pre></td></tr></table></figure>
-<h1 id="测试数据-new1-xlsx"><a href="#测试数据-new1-xlsx" class="headerlink" title="测试数据 new1.xlsx"></a>测试数据 new1.xlsx</h1><p>Sheet1</p>
-<p><img src="https://i.imgur.com/fm8rjs8.png" alt=""></p>
-<p>Sheet2</p>
-<p><img src="https://i.imgur.com/tme2ia3.png" alt=""></p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>在cmd下进入脚本sort_column.py和测试数据new1.xlsx所在目录，运行：</p>
-<pre><code>python sort_column.py F:\pycharm_project\excel_format\new1.xlsx 1 B S
-</code></pre><h1 id="结果result-sorted"><a href="#结果result-sorted" class="headerlink" title="结果result_sorted"></a>结果result_sorted</h1><p><img src="https://i.imgur.com/wlUd4Ky.png" alt=""></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）书籍-Python编程快速上手让繁琐工作自动化–第12章处理 Excel 电子表格</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;Excel 是 Windows 环境下流行的、强大的电子表格应用。openpyxl 模块让 Python 程序能读取和修改 Excel 电子表格文&lt;br&gt;件。例如，可能有一个无聊的任务，需要从一个电子表格拷贝一些数据，粘贴到另一个电子表格中。或者可能需要从几千行中挑选几行，根据某种条件稍作修改。或者需要查看几百份部门预算电子表格，寻找其中的赤字。正是这种无聊无脑的电子表格任务，可以通过 Python 来完成。&lt;/p&gt;
-&lt;p&gt;&amp;emsp;&amp;emsp;同时，发现之前写了很多小脚本，但代码的复用率极低。因此，今后的代码得更加注意用函数进行代码的封装。EXCEL中行的排序及筛选比较容易，但对于列比较麻烦。在此，通过一个对EXCEL列排序及筛选（取子列）的例子进行演示。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/categories/python/"/>
-    
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
     
   </entry>
   
