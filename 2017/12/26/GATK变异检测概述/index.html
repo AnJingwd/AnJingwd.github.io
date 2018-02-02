@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://i.imgur.com/W3L0QGg.jpg">
 <meta property="og:image" content="https://i.imgur.com/9fKpXfy.jpg">
 <meta property="og:image" content="https://i.imgur.com/v0ZLr2G.jpg">
-<meta property="og:image" content="https://i.imgur.com/xWy0liU.jpg">
+<meta property="og:image" content="https://i.imgur.com/cIZbbh2.jpg">
 <meta property="og:image" content="https://i.imgur.com/r3ayrha.jpg">
 <meta property="og:image" content="https://i.imgur.com/oWRVjhD.jpg">
 <meta property="og:image" content="https://i.imgur.com/N5kPt0j.jpg">
@@ -138,7 +138,7 @@
 <meta property="og:image" content="https://i.imgur.com/p9i0C4X.jpg">
 <meta property="og:image" content="https://i.imgur.com/oDZl1f7.jpg">
 <meta property="og:image" content="https://i.imgur.com/p69fkwu.jpg">
-<meta property="og:updated_time" content="2018-02-02T08:05:41.227Z">
+<meta property="og:updated_time" content="2018-02-02T08:42:52.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GATK变异检测概述">
 <meta name="twitter:description" content="变异检测概述">
@@ -436,7 +436,7 @@
 <h2 id="Raw-sequence的质控"><a href="#Raw-sequence的质控" class="headerlink" title="Raw sequence的质控"></a>Raw sequence的质控</h2><p>目的：将ASCII code转换为Phred-scale Q    scores，考察测序质量（错误率）</p>
 <p><img src="https://i.imgur.com/v0ZLr2G.jpg" alt=""></p>
 <p><strong>所以phred score一般选择20即可</strong></p>
-<h1 id="分析流程"><a href="#分析流程" class="headerlink" title="分析流程"></a>分析流程</h1><ul>
+<h1 id="胚系突变snp-amp-indel分析流程"><a href="#胚系突变snp-amp-indel分析流程" class="headerlink" title="胚系突变snp&amp;indel分析流程"></a>胚系突变snp&amp;indel分析流程</h1><ul>
 <li>Map to reference</li>
 <li>Sort, Index</li>
 <li>Mark Duplicates &amp; Sort (Picard)</li>
@@ -446,13 +446,17 @@
 <li>Variant Filtration (Hard Filter, see <a href="http://gatkforums.broadinstitute.org/gatk/discussion/2806/howto-apply-hard-filters-to-a-call-set" target="_blank" rel="external">GATK Best Practices</a>)</li>
 <li>Annotation</li>
 </ul>
-<p><img src="https://i.imgur.com/xWy0liU.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/cIZbbh2.jpg" alt=""></p>
 <h2 id="（1）Map"><a href="#（1）Map" class="headerlink" title="（1）Map"></a>（1）Map</h2><ul>
 <li>BWA    for    DNA    </li>
 <li>STAR    for    RNAseq</li>
 </ul>
 <p>Sequence/Binary    Alignment    Map    (SAM/BAM)    </p>
 <p><img src="https://i.imgur.com/r3ayrha.jpg" alt=""></p>
+<h3 id="细节："><a href="#细节：" class="headerlink" title="细节："></a>细节：</h3><p>（1）It is recommended from the GATK best practices guideline that unmapped sam/bam files should be treated with Picard tools “cleansam” and “fixmate” before removeduplicate。</p>
+<p>CleanSam (Picard)<br>Cleans the provided SAM/BAM, soft-clipping beyond-end-of-reference alignments and setting MAPQ to 0 for unmapped reads</p>
+<p>（2）<a href="https://gatkforums.broadinstitute.org/gatk/discussion/6472/read-groups" target="_blank" rel="external">Add read groups, sort the reads by coordinate, save as a bam file and index the bam file</a></p>
+<p><strong>Add read group 对于使用mutect检测配对样本是必须的</strong></p>
 <h2 id="（2）Mark-duplicates"><a href="#（2）Mark-duplicates" class="headerlink" title="（2）Mark    duplicates"></a>（2）Mark    duplicates</h2><p>这一步是为了减少duplication artifacts,为了能正确评估alleles。duplicates的状态通过SAM flag来标记，但并没有去除（绝大多数的GATK tools默认忽 duplicates）</p>
 <p>duplicates来源：（1）PCR duplicates ; (2) Optical duplicates</p>
 <p>以下两种情况不能 mark duplicates:</p>
@@ -532,6 +536,19 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
 <p><img src="https://i.imgur.com/lKHfD2r.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/vLF563q.jpg" alt=""></p>
 <p><strong>GenotypeGVCFs (i) also has an -allSites    mode and (ii) by default pre-filters    low    QUAL (&lt;30) records</strong></p>
+<h3 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h3><h4 id="变异输出模式选择，输出模式总共有3种"><a href="#变异输出模式选择，输出模式总共有3种" class="headerlink" title="变异输出模式选择，输出模式总共有3种"></a>变异输出模式选择，输出模式总共有3种</h4><p>–output_mode / -out_mode (OUTPUT_MODE with default value EMIT_VARIANTS_ONLY)</p>
+<ul>
+<li>EMIT_VARIANTS_ONLY 只输出variants位点(SNPs和INDELs)</li>
+<li>EMIT_ALL_CONFIDENT_SITES 除了variants位点以外与reference一致的可靠位点也输出</li>
+<li>EMIT_ALL_SITES 只要是能call的到的位点都输出(应该是除了没覆盖到的位点，其余位点都输出)，这个模式下会得到最多的结果</li>
+</ul>
+<h4 id="指定区间或者位点（使用-L参数）"><a href="#指定区间或者位点（使用-L参数）" class="headerlink" title="指定区间或者位点（使用-L参数）"></a>指定区间或者位点（使用-L参数）</h4><p>具体可参考：<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1319" target="_blank" rel="external">Collected FAQs about interval lists</a></p>
+<ul>
+<li>对于外显子测序，可以使用.bed文件指定call变异的区间，包含三列（<chr> <start> <end>），以tab键分隔，不需要列名，chr1-chr20,chrX,chrY，并且需要根据坐标排序</end></start></chr></li>
+<li><strong>也可以使用vcf文件指定位点call 变异，这对于几个样本的变异位点之间比较很有用</strong></li>
+</ul>
+<h4 id="Optimizing-and-tuning-the-pipeline"><a href="#Optimizing-and-tuning-the-pipeline" class="headerlink" title="# Optimizing and tuning the pipeline"></a># Optimizing and tuning the pipeline</h4><p>Manage the java heap memory</p>
+<p>You can control this by capping the maximum the heap memory can reach using the -Xmx{n} switch. For example, to cap at 8Gb add -Xmx8Gb</p>
 <h2 id="（6）Variant-Filtering"><a href="#（6）Variant-Filtering" class="headerlink" title="（6）Variant    Filtering"></a>（6）Variant    Filtering</h2><p>前面提到Base    Recalibration只是纠正碱基质量分数（不是碱基本身），在此Variant Filtering 便是基于Quality    Score    Recalibration的变异过滤。</p>
 <p>对于Raw callsets的过滤必须平衡敏感度和准确度</p>
 <ul>
@@ -723,8 +740,8 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建（一）/" rel="next" title="GATK3.8分析环境搭建（一）">
-                <i class="fa fa-chevron-left"></i> GATK3.8分析环境搭建（一）
+              <a href="https:/AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建/" rel="next" title="GATK3.8分析环境搭建">
+                <i class="fa fa-chevron-left"></i> GATK3.8分析环境搭建
               </a>
             
           </div>
@@ -1088,7 +1105,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#突变发现背景介绍"><span class="nav-number">1.</span> <span class="nav-text">突变发现背景介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的突变类型"><span class="nav-number">1.1.</span> <span class="nav-text">不同的突变类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验策略"><span class="nav-number">1.2.</span> <span class="nav-text">实验策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Raw-sequence的质控"><span class="nav-number">1.3.</span> <span class="nav-text">Raw sequence的质控</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析流程"><span class="nav-number">2.</span> <span class="nav-text">分析流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）Map"><span class="nav-number">2.1.</span> <span class="nav-text">（1）Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）Mark-duplicates"><span class="nav-number">2.2.</span> <span class="nav-text">（2）Mark    duplicates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（3）Local-realignment"><span class="nav-number">2.3.</span> <span class="nav-text">（3）Local realignment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（4）Base-Recalibration-简称BQSR"><span class="nav-number">2.4.</span> <span class="nav-text">（4）Base    Recalibration (简称BQSR)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（5）Variant-Calling"><span class="nav-number">2.5.</span> <span class="nav-text">（5）Variant Calling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（6）Variant-Filtering"><span class="nav-number">2.6.</span> <span class="nav-text">（6）Variant    Filtering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-1-VariantRecalibrator"><span class="nav-number">2.6.1.</span> <span class="nav-text">Step 1:    VariantRecalibrator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-2-ApplyRecalibration"><span class="nav-number">2.6.2.</span> <span class="nav-text">Step 2: ApplyRecalibration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于外显子数据跑VQSR的一些小建议"><span class="nav-number">2.6.3.</span> <span class="nav-text">对于外显子数据跑VQSR的一些小建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Genotype-Refinement"><span class="nav-number">2.6.4.</span> <span class="nav-text">Genotype Refinement</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基因型校正的重要性："><span class="nav-number">2.6.4.1.</span> <span class="nav-text">基因型校正的重要性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用于基因型校正的数据："><span class="nav-number">2.6.4.2.</span> <span class="nav-text">用于基因型校正的数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基因型校正的工作流程"><span class="nav-number">2.6.4.3.</span> <span class="nav-text">基因型校正的工作流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Variant-Evaluation"><span class="nav-number">2.6.5.</span> <span class="nav-text">Variant Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommended-metrics-for-callset-evalua-on"><span class="nav-number">2.6.5.1.</span> <span class="nav-text">Recommended metrics for    callset    evalua+on</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#突变发现背景介绍"><span class="nav-number">1.</span> <span class="nav-text">突变发现背景介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的突变类型"><span class="nav-number">1.1.</span> <span class="nav-text">不同的突变类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验策略"><span class="nav-number">1.2.</span> <span class="nav-text">实验策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Raw-sequence的质控"><span class="nav-number">1.3.</span> <span class="nav-text">Raw sequence的质控</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#胚系突变snp-amp-indel分析流程"><span class="nav-number">2.</span> <span class="nav-text">胚系突变snp&indel分析流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）Map"><span class="nav-number">2.1.</span> <span class="nav-text">（1）Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#细节："><span class="nav-number">2.1.1.</span> <span class="nav-text">细节：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）Mark-duplicates"><span class="nav-number">2.2.</span> <span class="nav-text">（2）Mark    duplicates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（3）Local-realignment"><span class="nav-number">2.3.</span> <span class="nav-text">（3）Local realignment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（4）Base-Recalibration-简称BQSR"><span class="nav-number">2.4.</span> <span class="nav-text">（4）Base    Recalibration (简称BQSR)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（5）Variant-Calling"><span class="nav-number">2.5.</span> <span class="nav-text">（5）Variant Calling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#细节"><span class="nav-number">2.5.1.</span> <span class="nav-text">细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变异输出模式选择，输出模式总共有3种"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">变异输出模式选择，输出模式总共有3种</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定区间或者位点（使用-L参数）"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">指定区间或者位点（使用-L参数）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimizing-and-tuning-the-pipeline"><span class="nav-number">2.5.1.3.</span> <span class="nav-text"># Optimizing and tuning the pipeline</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（6）Variant-Filtering"><span class="nav-number">2.6.</span> <span class="nav-text">（6）Variant    Filtering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-1-VariantRecalibrator"><span class="nav-number">2.6.1.</span> <span class="nav-text">Step 1:    VariantRecalibrator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-2-ApplyRecalibration"><span class="nav-number">2.6.2.</span> <span class="nav-text">Step 2: ApplyRecalibration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于外显子数据跑VQSR的一些小建议"><span class="nav-number">2.6.3.</span> <span class="nav-text">对于外显子数据跑VQSR的一些小建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Genotype-Refinement"><span class="nav-number">2.6.4.</span> <span class="nav-text">Genotype Refinement</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基因型校正的重要性："><span class="nav-number">2.6.4.1.</span> <span class="nav-text">基因型校正的重要性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用于基因型校正的数据："><span class="nav-number">2.6.4.2.</span> <span class="nav-text">用于基因型校正的数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基因型校正的工作流程"><span class="nav-number">2.6.4.3.</span> <span class="nav-text">基因型校正的工作流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Variant-Evaluation"><span class="nav-number">2.6.5.</span> <span class="nav-text">Variant Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommended-metrics-for-callset-evalua-on"><span class="nav-number">2.6.5.1.</span> <span class="nav-text">Recommended metrics for    callset    evalua+on</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1136,7 +1153,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共61.2k字</span>
+  <span class="post-count">博客全站共61.5k字</span>
 </div>
 
 <div class="powered-by">
