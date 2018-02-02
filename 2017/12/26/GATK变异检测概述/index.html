@@ -110,10 +110,35 @@
 <meta property="og:image" content="https://i.imgur.com/xWy0liU.jpg">
 <meta property="og:image" content="https://i.imgur.com/r3ayrha.jpg">
 <meta property="og:image" content="https://i.imgur.com/oWRVjhD.jpg">
+<meta property="og:image" content="https://i.imgur.com/N5kPt0j.jpg">
+<meta property="og:image" content="https://i.imgur.com/Bzem6S3.png">
+<meta property="og:image" content="https://i.imgur.com/murEihF.jpg">
+<meta property="og:image" content="https://i.imgur.com/Zry1hvH.jpg">
+<meta property="og:image" content="https://i.imgur.com/w7BsDj9.jpg">
+<meta property="og:image" content="https://i.imgur.com/lsEMXQk.jpg">
+<meta property="og:image" content="https://i.imgur.com/ulVOTdY.jpg">
 <meta property="og:image" content="https://i.imgur.com/FkTZcp5.jpg">
 <meta property="og:image" content="https://i.imgur.com/CyxQF14.jpg">
 <meta property="og:image" content="https://i.imgur.com/BV54Ah7.jpg">
-<meta property="og:updated_time" content="2018-02-01T13:07:45.400Z">
+<meta property="og:image" content="https://i.imgur.com/lKHfD2r.jpg">
+<meta property="og:image" content="https://i.imgur.com/vLF563q.jpg">
+<meta property="og:image" content="https://i.imgur.com/swA19TJ.jpg">
+<meta property="og:image" content="https://i.imgur.com/P8oeuDk.jpg">
+<meta property="og:image" content="https://i.imgur.com/UKTedbs.png">
+<meta property="og:image" content="https://i.imgur.com/LouIHI6.jpg">
+<meta property="og:image" content="https://i.imgur.com/tCv4gpU.jpg">
+<meta property="og:image" content="https://i.imgur.com/EoGdjYO.jpg">
+<meta property="og:image" content="https://i.imgur.com/PuPNxd8.jpg">
+<meta property="og:image" content="https://i.imgur.com/3Op72W9.jpg">
+<meta property="og:image" content="https://i.imgur.com/tQP2gCd.jpg">
+<meta property="og:image" content="https://i.imgur.com/kSzUwtQ.jpg">
+<meta property="og:image" content="https://i.imgur.com/4gy1NSD.jpg">
+<meta property="og:image" content="https://i.imgur.com/MjvZPu0.jpg">
+<meta property="og:image" content="https://i.imgur.com/WIRa8Pq.jpg">
+<meta property="og:image" content="https://i.imgur.com/p9i0C4X.jpg">
+<meta property="og:image" content="https://i.imgur.com/oDZl1f7.jpg">
+<meta property="og:image" content="https://i.imgur.com/p69fkwu.jpg">
+<meta property="og:updated_time" content="2018-02-02T08:05:41.227Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GATK变异检测概述">
 <meta name="twitter:description" content="变异检测概述">
@@ -428,23 +453,238 @@
 </ul>
 <p>Sequence/Binary    Alignment    Map    (SAM/BAM)    </p>
 <p><img src="https://i.imgur.com/r3ayrha.jpg" alt=""></p>
-<h2 id="（2）Mark-duplicates"><a href="#（2）Mark-duplicates" class="headerlink" title="（2）Mark    duplicates"></a>（2）Mark    duplicates</h2><p>这一步是为了减少duplication artifacts,为了能正确评估alleles</p>
+<h2 id="（2）Mark-duplicates"><a href="#（2）Mark-duplicates" class="headerlink" title="（2）Mark    duplicates"></a>（2）Mark    duplicates</h2><p>这一步是为了减少duplication artifacts,为了能正确评估alleles。duplicates的状态通过SAM flag来标记，但并没有去除（绝大多数的GATK tools默认忽 duplicates）</p>
+<p>duplicates来源：（1）PCR duplicates ; (2) Optical duplicates</p>
+<p>以下两种情况不能 mark duplicates:</p>
+<p>Amplicon    sequencing</p>
+<ul>
+<li>all    reads    start    at    same    posi7on    by    design    </li>
+<li>UMIAwareMarkDuplicatesWithMateCigar</li>
+</ul>
+<p>RNAseq    allele-specific    expression    analysis    </p>
+<ul>
+<li>(ASEReadCounter    can    disable    DuplicateFilter)    </li>
+</ul>
 <p>Duplicates    =    non-independent    measurements of    a sequenc fragment</p>
 <p><img src="https://i.imgur.com/oWRVjhD.jpg" alt=""></p>
 <h2 id="（3）Local-realignment"><a href="#（3）Local-realignment" class="headerlink" title="（3）Local realignment"></a>（3）Local realignment</h2><p>对于indel区域进行局部的重新比对，为了纠正比对错误。</p>
+<p><img src="https://i.imgur.com/N5kPt0j.jpg" alt=""></p>
+<p>Mappers对于在reads末端的indel较难检出，因为错配的罚分为-1，而open gap的罚分为-3。咋局部的indel realignment后能减少假阳性的SNPs数量。</p>
+<p>具体过程：</p>
+<p>（1）通过RealignerTargetCreator，根据1000    Genomes    Project, dbSNP等已知位点的VCF文件获取已知indels的位置区间，输出Target    intervals    </p>
+<p><img src="https://i.imgur.com/Bzem6S3.png" alt=""></p>
+<p>（2）通过IndelRealigner进行realignment，输出Realigned BAM</p>
+<p>通过–targetIntervals realigner.intervals指定indelrealignment的区间</p>
+<p><img src="https://i.imgur.com/murEihF.jpg" alt=""></p>
+<p>realignment algorithm 的工作原理：</p>
+<p><img src="https://i.imgur.com/Zry1hvH.jpg" alt=""></p>
 <h2 id="（4）Base-Recalibration-简称BQSR"><a href="#（4）Base-Recalibration-简称BQSR" class="headerlink" title="（4）Base    Recalibration (简称BQSR)"></a>（4）Base    Recalibration (简称BQSR)</h2><p>纠正机器产生的错误，主要针对测序一产生的碱基质量分数的系统错误，BQSR纠正碱基质量分数（不是碱基本身）</p>
-<h2 id="（5）Variant-Calling"><a href="#（5）Variant-Calling" class="headerlink" title="（5）Variant Calling"></a>（5）Variant Calling</h2><p>根据变异来源和实验设计不同，选择不同的检测变异方案：</p>
+<p><img src="https://i.imgur.com/w7BsDj9.jpg" alt=""></p>
+<p>Base Recalibra2on steps/tools</p>
+<ul>
+<li>Model    the    error    modes    and    compute    adjustments—–》BaseRecalibrator</li>
+<li>Apply    recalibra2on adjustments    + write    to    file —–》PrintReads</li>
+<li>Make    before/after plots  ——-》AnalyzeCovariates （可选）</li>
+</ul>
+<p><img src="https://i.imgur.com/lsEMXQk.jpg" alt=""></p>
+<p>BaseRecalibrator (1)</p>
+<pre><code>java –jar GenomeAnalysisTK.jar \
+–T BaseRecalibrator \
+–R human.fasta \
+–I realigned.bam \
+–knownSites dbsnp137.vcf \
+–knownSites gold.standard.indels.vcf \
+–o recal.table
+
+java –jar GenomeAnalysisTK.jar –T PrintReads \
+–R human.fasta \
+–I realigned.bam \
+–BQSR recal.table \
+–o recal.bam
+</code></pre><p>BaseRecalibrator (2)(可选)</p>
+<p><img src="https://i.imgur.com/ulVOTdY.jpg" alt=""></p>
+<pre><code>ava –jar GenomeAnalysisTK.jar –T BaseRecalibrator \
+–R human.fasta \
+–I realigned.bam \
+–knownSites dbsnp137.vcf \
+–knownSites gold.standard.indels.vcf \
+–BQSR recal.table \
+–o after_recal.table
+
+java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
+–R human.fasta \
+–before recal.table \
+–after after_recal.table \
+–plots recal_plots.pdf
+</code></pre><h2 id="（5）Variant-Calling"><a href="#（5）Variant-Calling" class="headerlink" title="（5）Variant Calling"></a>（5）Variant Calling</h2><p>根据变异来源和实验设计不同，选择不同的检测变异方案：</p>
 <p><img src="https://i.imgur.com/FkTZcp5.jpg" alt=""></p>
 <p>胚系突变检测是最容易的，对于肿瘤体细胞突变主要受肿瘤异质性和正常组织污染的影响，而拷贝数变异本质是计算reads覆盖的丰度</p>
 <p>单个基因组是孤立的，通常并不能得出什么变异是致病性变异。一般要求家系或者群体数据，可以发现稀有变异，de novo变异，以及种族背景信息。</p>
 <p><img src="https://i.imgur.com/CyxQF14.jpg" alt=""></p>
 <p><strong>对于多样本或者家系的突变比较分析，可以使用HaplotypeCaller 的GVCF模式，主要目的GVCF文件输出所有的记录位点，无论其是否是变异。其目的是输出每个样本的每个位点，以便接下来的多样本联合比较分析。</strong></p>
-<p><img src="https://i.imgur.com/BV54Ah7.jpg" alt=""></p>
+<p><strong>但做多样本的联合分析必须注意，Similar    technical    generation是至关重要的，包括technology,    capture,    read    length,    depth</strong></p>
 <p>具体参考：</p>
 <ol>
 <li><a href="https://gatkforums.broadinstitute.org/gatk/discussion/3893/calling-variants-on-cohorts-of-samples-using-the-haplotypecaller-in-gvcf-mode" target="_blank" rel="external">Calling variants on cohorts of samples using the HaplotypeCaller in GVCF mode</a></li>
 <li><a href="https://software.broadinstitute.org/gatk/documentation/article?id=11004" target="_blank" rel="external">GVCF - Genomic Variant Call Format</a></li>
 </ol>
+<p><img src="https://i.imgur.com/BV54Ah7.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/lKHfD2r.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/vLF563q.jpg" alt=""></p>
+<p><strong>GenotypeGVCFs (i) also has an -allSites    mode and (ii) by default pre-filters    low    QUAL (&lt;30) records</strong></p>
+<h2 id="（6）Variant-Filtering"><a href="#（6）Variant-Filtering" class="headerlink" title="（6）Variant    Filtering"></a>（6）Variant    Filtering</h2><p>前面提到Base    Recalibration只是纠正碱基质量分数（不是碱基本身），在此Variant Filtering 便是基于Quality    Score    Recalibration的变异过滤。</p>
+<p>对于Raw callsets的过滤必须平衡敏感度和准确度</p>
+<ul>
+<li>Mutation calling算法设计上是宽容的</li>
+<li>原始的高敏感度的callests包含大量的假阳性</li>
+</ul>
+<p>两种过滤方法：</p>
+<ul>
+<li><p>（1）Hard-filters    using    binary    thresholds    </p>
+<ul>
+<li>Applicable    to    all    BUT    requires    exper4se    to    define    appropriately    </li>
+</ul>
+</li>
+<li><p>（2）Variant    “recalibration”    using    machine    learning</p>
+<ul>
+<li>More    powerful    BUT    requires    well-curated    known    resources</li>
+</ul>
+</li>
+</ul>
+<p>但是Hard-filtering    is    a    very    blunt    instrument,接下来主要讲述基于variant recalibration的过滤。</p>
+<p><strong>基本思想：训练已知的高置信度的位点来确定其他位点正确与否的可能性</strong></p>
+<ul>
+<li>Assume    annota4ons    tend    to    form    Gaussian    clusters    </li>
+<li>Build    a    “Gaussian    mixture    model”    from<br>annotations    of    known    variants    in    our    dataset    </li>
+<li>Score    all    variants    by    where    their    annotations    lie<br>relative    to    these    clusters    </li>
+<li>Filter    base    on    sensiOvity    to    truth    set    </li>
+</ul>
+<p><img src="https://i.imgur.com/swA19TJ.jpg" alt=""></p>
+<p>那么如何设置VQSLOD阈值呢？即设定X%    of    the    sites in    the    truth<br>set?    </p>
+<p><img src="https://i.imgur.com/P8oeuDk.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/UKTedbs.png" alt=""></p>
+<h3 id="Step-1-VariantRecalibrator"><a href="#Step-1-VariantRecalibrator" class="headerlink" title="Step 1:    VariantRecalibrator"></a>Step 1:    VariantRecalibrator</h3><p>（1）VariantRecalibrator    builds    the    Gaussian    mixture    model    </p>
+<ul>
+<li>Uses    the    variants    in    the    input    callset    that    overlap    the    training    data    </li>
+<li>Uses    the    annotations    in    our    callset,    not    the    resource    callset</li>
+</ul>
+<p><img src="https://i.imgur.com/LouIHI6.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/tCv4gpU.jpg" alt=""></p>
+<pre><code>java –jar GenomeAnalysisTK.jar –T VariantRecalibrator \
+–R human.fasta \
+–input raw.SNPs.vcf \
+–resource: {see next slide} \
+–an DP –an QD –an FS –an MQRankSum {…} \
+–mode SNP \
+–recalFile raw.SNPs.recal \
+–tranchesFile raw.SNPs.tranches \
+–rscriptFile recal.plots.R
+</code></pre><p>输出：recal    file,    tranches,    plots</p>
+<ul>
+<li>Recalibration    plots    show    aspects    of    the    model</li>
+<li>Tranche    plots    show    estimated    TP    vs    FP    tradeoff<br>(Default    target    Ti/Tv    is    for    WGS    and    must    be    adapted    for    exomes)</li>
+<li>Tranches    :    slices    of    sensitivity    threshold    values</li>
+</ul>
+<h3 id="Step-2-ApplyRecalibration"><a href="#Step-2-ApplyRecalibration" class="headerlink" title="Step 2: ApplyRecalibration"></a>Step 2: ApplyRecalibration</h3><p>ApplyRecalibration    applies    the    filtering    threshold</p>
+<ul>
+<li>Executes    the    desired    sensitivity    /    specificity    tradeoff<br>by    applying    filters    to    the    input    callset    (no    new    calculations)    </li>
+<li><p>Creates    a    new,    filtered,    analysis-worthy    VCF    file.    </p>
+<p>  java –jar GenomeAnalysisTK.jar –T ApplyRecalibration \<br>  –R human.fasta \<br>  –input raw.vcf \<br>  –mode SNP \<br>  –recalFile raw.SNPs.recal \<br>  –tranchesFile raw.SNPs.tranches \<br>  –o recal.SNPs.vcf \<br>  –ts_filter_level 99.0</p>
+</li>
+</ul>
+<p>输出变异每个突变将被注释上VQSLOD score</p>
+<h3 id="对于外显子数据跑VQSR的一些小建议"><a href="#对于外显子数据跑VQSR的一些小建议" class="headerlink" title="对于外显子数据跑VQSR的一些小建议"></a>对于外显子数据跑VQSR的一些小建议</h3><ul>
+<li>Smaller    number    of    variants    per    sample    compared    to    WGS<br>  -&gt;    typically    insufficient    to    build    a    robust    recalibraOon    model        <pre><code>if    running    on    only    a    few    samples    
+</code></pre></li>
+<li>Analyze    samples    jointly    in    cohorts    of    at    least    <strong>30    samples</strong></li>
+<li>If    necessary,    add    exomes    from    1000G    Project    or    comparable</li>
+</ul>
+<p><img src="https://i.imgur.com/EoGdjYO.jpg" alt=""></p>
+<p><strong>什么时候不推荐使用VQSR进行过滤呢？</strong></p>
+<ol>
+<li>Non-human    organisms    where    known    resources    are    unavailable    or<br>insufficiently    curated    </li>
+<li>RNAseq    data    à    see    RNAseq-specific    filtering</li>
+<li>Cohort    is    too    small(&lt;30)    and    no    other    samples    are    available    for<br>“padding”    the    cohort    </li>
+</ol>
+<p>—–&gt;  Use    manual    filtering    recommendations    instead</p>
+<p>具体参考：<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=39" target="_blank" rel="external">Variant Quality Score Recalibration (VQSR)</a></p>
+<h3 id="Genotype-Refinement"><a href="#Genotype-Refinement" class="headerlink" title="Genotype Refinement"></a>Genotype Refinement</h3><p>Using    additional    data    to    improve    genotype    calls    and    likelihoods</p>
+<h4 id="基因型校正的重要性："><a href="#基因型校正的重要性：" class="headerlink" title="基因型校正的重要性："></a>基因型校正的重要性：</h4><ol>
+<li><p>临床遗传医生需要给病人提供基因型</p>
+<ul>
+<li>是否病人具有LOF mutation的两个拷贝</li>
+<li>患病孩子的父母是否可能生出患该病更严重的孩子</li>
+</ul>
+</li>
+<li><p>群体遗传学家需要基因型数据用于关联研究</p>
+<ul>
+<li>一个allele的多少拷贝能影响表型</li>
+</ul>
+</li>
+</ol>
+<h4 id="用于基因型校正的数据："><a href="#用于基因型校正的数据：" class="headerlink" title="用于基因型校正的数据："></a>用于基因型校正的数据：</h4><ol>
+<li>使用高质量的数据（例如1000G）作为先验者</li>
+<li>使用家系数据（若可以得到）</li>
+<li>计算后验者的基因型可能性</li>
+</ol>
+<p><img src="https://i.imgur.com/PuPNxd8.jpg" alt=""></p>
+<p>基本方法：Bayes’s    Rule</p>
+<p><img src="https://i.imgur.com/3Op72W9.jpg" alt=""></p>
+<h4 id="基因型校正的工作流程"><a href="#基因型校正的工作流程" class="headerlink" title="基因型校正的工作流程"></a>基因型校正的工作流程</h4><p><img src="https://i.imgur.com/tQP2gCd.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/kSzUwtQ.jpg" alt=""></p>
+<p>CalculateGenotypePosteriors：</p>
+<pre><code>java -jar GenomeAnalysisTK.jar \
+-T CalculateGenotypePosteriors \
+-R reference.fasta \
+-V input.vcf \
+-ped family.ped \
+-supporting population.vcf \
+-o output.vcf
+</code></pre><p>Filter    low    confidence    GQs:</p>
+<pre><code>java -jar GenomeAnalysisTK.jar \
+-T VariantFiltration \
+-R reference.fasta \
+-V input.vcf \
+--filterExpression “GQ&lt;20” \
+--filterName “lowGQ” \
+-o output.vcf
+</code></pre><p>Recommended    threshold is GQ=20    –  GQ 20     is Phred-scaled    99%    confidence</p>
+<p>VariantAnnotator:</p>
+<pre><code>java -jar GenomeAnalysisTK.jar \
+-T VariantAnnotator \
+-R reference.fasta \
+-V input.vcf \
+-A PossibleDeNovo \
+-o output.vcf
+</code></pre><p><img src="https://i.imgur.com/4gy1NSD.jpg" alt=""></p>
+<p>De Novo mutations的特点：</p>
+<p><img src="https://i.imgur.com/MjvZPu0.jpg" alt=""></p>
+<p>具体参考：</p>
+<p>（1）<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=4723" target="_blank" rel="external">Genotype Refinement workflow</a></p>
+<p>（2）<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=4727" target="_blank" rel="external">(howto) Run the genotype refinement workflow</a></p>
+<p>（3）<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=4726" target="_blank" rel="external">Genotype Refinement workflow: mathematical details</a></p>
+<h3 id="Variant-Evaluation"><a href="#Variant-Evaluation" class="headerlink" title="Variant Evaluation"></a>Variant Evaluation</h3><p>基本思想：真实变异是具有代表性的，并且是可比较的</p>
+<p>变异代表性的影响因素：</p>
+<ul>
+<li>种群（Ethnicity）:Older     popula+ons    tend    to    display    more    heterogeneity</li>
+</ul>
+<p>可以作为真实variant sets的数据来源：</p>
+<ul>
+<li>Sanger sequencing</li>
+<li>GeneChip/Microarrays</li>
+</ul>
+<p>Commonly used truth    sets</p>
+<p><img src="https://i.imgur.com/WIRa8Pq.jpg" alt=""></p>
+<h4 id="Recommended-metrics-for-callset-evalua-on"><a href="#Recommended-metrics-for-callset-evalua-on" class="headerlink" title="Recommended metrics for    callset    evalua+on"></a>Recommended metrics for    callset    evalua+on</h4><p><img src="https://i.imgur.com/p9i0C4X.jpg" alt=""></p>
+<ol>
+<li>Indels    &amp;    SNPs的数量，对于单个样本，WGS大约能检测到4.4M个;WES大约能检测到41k个。</li>
+<li>如果变异是随机的，那么期望的TiTv Ratio应该为0.5，对于人类WGS测序，TiTv Ratio （Transitions/Transversions）大约为2.0-2.1；对于WES测序，TiTv Ratio大约为3.0-3.3,低的TiTv Ratio暗示可能存在高的假阳性。</li>
+<li>Indel Ration表示insertions和deletions的比值，Common的情况Indel Ratio为1； Rare情况下为0.2-0.5。</li>
+<li>Genotype    Concordance指标则认为最准确的truth set 是对相同的样本进行genotyping chip，将自己的结果与truth相比较，没有匹配的则认为是假阳性的结果。</li>
+</ol>
+<p><img src="https://i.imgur.com/oDZl1f7.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/p69fkwu.jpg" alt=""></p>
+<p>具体参考：<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=6308" target="_blank" rel="external">Evaluating the quality of a variant callset</a></p>
 
       
     </div>
@@ -848,7 +1088,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#突变发现背景介绍"><span class="nav-number">1.</span> <span class="nav-text">突变发现背景介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的突变类型"><span class="nav-number">1.1.</span> <span class="nav-text">不同的突变类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验策略"><span class="nav-number">1.2.</span> <span class="nav-text">实验策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Raw-sequence的质控"><span class="nav-number">1.3.</span> <span class="nav-text">Raw sequence的质控</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析流程"><span class="nav-number">2.</span> <span class="nav-text">分析流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）Map"><span class="nav-number">2.1.</span> <span class="nav-text">（1）Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）Mark-duplicates"><span class="nav-number">2.2.</span> <span class="nav-text">（2）Mark    duplicates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（3）Local-realignment"><span class="nav-number">2.3.</span> <span class="nav-text">（3）Local realignment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（4）Base-Recalibration-简称BQSR"><span class="nav-number">2.4.</span> <span class="nav-text">（4）Base    Recalibration (简称BQSR)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（5）Variant-Calling"><span class="nav-number">2.5.</span> <span class="nav-text">（5）Variant Calling</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#突变发现背景介绍"><span class="nav-number">1.</span> <span class="nav-text">突变发现背景介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的突变类型"><span class="nav-number">1.1.</span> <span class="nav-text">不同的突变类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验策略"><span class="nav-number">1.2.</span> <span class="nav-text">实验策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Raw-sequence的质控"><span class="nav-number">1.3.</span> <span class="nav-text">Raw sequence的质控</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析流程"><span class="nav-number">2.</span> <span class="nav-text">分析流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）Map"><span class="nav-number">2.1.</span> <span class="nav-text">（1）Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）Mark-duplicates"><span class="nav-number">2.2.</span> <span class="nav-text">（2）Mark    duplicates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（3）Local-realignment"><span class="nav-number">2.3.</span> <span class="nav-text">（3）Local realignment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（4）Base-Recalibration-简称BQSR"><span class="nav-number">2.4.</span> <span class="nav-text">（4）Base    Recalibration (简称BQSR)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（5）Variant-Calling"><span class="nav-number">2.5.</span> <span class="nav-text">（5）Variant Calling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（6）Variant-Filtering"><span class="nav-number">2.6.</span> <span class="nav-text">（6）Variant    Filtering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-1-VariantRecalibrator"><span class="nav-number">2.6.1.</span> <span class="nav-text">Step 1:    VariantRecalibrator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-2-ApplyRecalibration"><span class="nav-number">2.6.2.</span> <span class="nav-text">Step 2: ApplyRecalibration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于外显子数据跑VQSR的一些小建议"><span class="nav-number">2.6.3.</span> <span class="nav-text">对于外显子数据跑VQSR的一些小建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Genotype-Refinement"><span class="nav-number">2.6.4.</span> <span class="nav-text">Genotype Refinement</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基因型校正的重要性："><span class="nav-number">2.6.4.1.</span> <span class="nav-text">基因型校正的重要性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用于基因型校正的数据："><span class="nav-number">2.6.4.2.</span> <span class="nav-text">用于基因型校正的数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基因型校正的工作流程"><span class="nav-number">2.6.4.3.</span> <span class="nav-text">基因型校正的工作流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Variant-Evaluation"><span class="nav-number">2.6.5.</span> <span class="nav-text">Variant Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommended-metrics-for-callset-evalua-on"><span class="nav-number">2.6.5.1.</span> <span class="nav-text">Recommended metrics for    callset    evalua+on</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -896,7 +1136,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共59.8k字</span>
+  <span class="post-count">博客全站共61.2k字</span>
 </div>
 
 <div class="powered-by">
