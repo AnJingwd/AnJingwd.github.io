@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-01-28T14:38:44.399Z</updated>
+  <updated>2018-02-07T14:07:57.819Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,133 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RNA-seq鉴定LncRNA概述</title>
+    <link href="https:///AnJingwd.github.io/2018/02/05/RNA-seq%E9%89%B4%E5%AE%9ALncRNA%E6%A6%82%E8%BF%B0/"/>
+    <id>https:///AnJingwd.github.io/2018/02/05/RNA-seq鉴定LncRNA概述/</id>
+    <published>2018-02-05T13:44:08.000Z</published>
+    <updated>2018-02-07T14:07:57.819Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">RNA-seq鉴定LncRNA概述：lncRNA简介，分析pipline，分析软件，结果评估指标</blockquote>
+
+<a id="more"></a>
+<h1 id="lncRNA简介"><a href="#lncRNA简介" class="headerlink" title="lncRNA简介"></a>lncRNA简介</h1><p>&emsp;&emsp;人类细胞中仅有少数转录生成的RNAs可作为蛋白质合成的模板。其余的RNA被称为非编码RNAs (ncRNAs)，它们位于编码蛋白的基因之间，其中长度超过200nt的ncRNAs称为lncRNAs(Long non-coding RNAs)</p>
+<p>&emsp;&emsp;LincRNA序列的获取有以下两种途径：①可参考LncRNA (Long non-coding RNA)序列的获取，只是在获得LncRNA的序列后需确认该LncRNA为LincRNA；②通过检索LincRNA的研究论文获取其序列，很多LincRNA的序列会在附件中包含或者文章提供链接地址。</p>
+<p>即lncRNA是一大类，长度超过200nt的称为LncRNA，位于基因间区的称为LincRNA.</p>
+<h1 id="lncRNA特点"><a href="#lncRNA特点" class="headerlink" title="lncRNA特点"></a>lncRNA特点</h1><ul>
+<li>lincRNA典型的表现出显著的组织和细胞特异性表达</li>
+<li>lincRNA可能与其共表达的蛋白编码基因具有共同的生物学功能</li>
+<li>lincRNA能折叠成热力学稳定的二级或者更高级的结构，这是其发挥功能的基础</li>
+<li>相当大比例的lncRNA是编码基因的反义转录本或者与编码基因的外显子区正义方向部分重叠。</li>
+</ul>
+<p><img src="https://i.imgur.com/T0BhoK3.jpg" alt=""></p>
+<h1 id="RNA-seq分析pipline"><a href="#RNA-seq分析pipline" class="headerlink" title="RNA-seq分析pipline"></a>RNA-seq分析pipline</h1><ol>
+<li><a href="http://rnaseq.uoregon.edu/" target="_blank" rel="external">RNA-Seq guide (RNA-seqlopedia)</a></li>
+</ol>
+<p><img src="https://i.imgur.com/mfsVvwT.jpg" alt=""></p>
+<p>转录组内的RNA，按照polyA形态：</p>
+<ul>
+<li>带polyA的RNA(mRNA和大部分的lncRNA)</li>
+<li>不带polyA的RNA(小RNA和小部分的lncRNA)</li>
+</ul>
+<p>取样实例：晚期肝癌病人的肝组织（共四个）</p>
+<ul>
+<li>癌旁组织（N）</li>
+<li>原发灶（P）</li>
+<li>转移灶（M）</li>
+<li>门脉血栓转移灶（V）</li>
+</ul>
+<p><img src="https://i.imgur.com/E8QHTUc.png" alt=""></p>
+<ol>
+<li><a href="https://github.com/twbattaglia/RNAseq-workflow" target="_blank" rel="external">twbattaglia/RNAseq-workflow</a></li>
+</ol>
+<p><img src="https://i.imgur.com/9MadHvS.jpg" alt=""></p>
+<ol>
+<li><a href="https://github.com/griffithlab/rnaseq_tutorial/wiki" target="_blank" rel="external">griffithlab/rnaseq_tutorial</a>,&emsp;&emsp;<a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004393" target="_blank" rel="external">文章</a> ,&emsp;&emsp; <a href="https://github.com/griffithlab/rnaseq_tutorial/wiki/Lectures" target="_blank" rel="external">Lectures</a></li>
+</ol>
+<p><img src="https://i.imgur.com/kYWBJdV.png" alt=""></p>
+<p><a href="https://github.com/griffithlab/rnaseq_tutorial/wiki/Expression" target="_blank" rel="external">Expression</a><br><img src="https://i.imgur.com/CD5YS69.jpg" alt=""> </p>
+<ol>
+<li><p><a href="https://bioinform.github.io/rnacocktail/" target="_blank" rel="external">RNACocktail：A comprehensive framework for accurate and efficient RNA-Seq analysis</a>， <a href="http://dx.doi.org/10.1038/s41467-017-00050-4" target="_blank" rel="external">文章</a></p>
+</li>
+<li><p><a href="https://github.com/griffithlab/rnaseq_tutorial/blob/master/manuscript/supplementary_tables/supplementary_table_9.md" target="_blank" rel="external">RNA-seq workshops and online tutorials</a></p>
+</li>
+</ol>
+<h1 id="LncRNA注释GTF文件及fasta文件"><a href="#LncRNA注释GTF文件及fasta文件" class="headerlink" title="LncRNA注释GTF文件及fasta文件"></a>LncRNA注释GTF文件及fasta文件</h1><ol>
+<li><a href="http://www.gencodegenes.org/releases/current.html" target="_blank" rel="external">GENCODE</a>  &emsp;&emsp; 2. <a href="http://www.noncode.org/download.php" target="_blank" rel="external">NONCODE</a></li>
+</ol>
+<p>ps: NONCODE has updated to NONCODEv5. NONCODE2016 website has been moved to <a href="http://www.bioinfo.org/NONCODE2016" target="_blank" rel="external">http://www.bioinfo.org/NONCODE2016</a></p>
+<p>&emsp;&emsp;ENCODE计划揭示了大约76%的人类基因组转录产生非编码蛋白的RNA分子，其中包括大约10000lincRNAs。NOCODE最新版数据库收录了&gt;30000个人的lincRNAs和 &gt;20000 小鼠的lincRNA。</p>
+<h1 id="RNA-seq分析软件"><a href="#RNA-seq分析软件" class="headerlink" title="RNA-seq分析软件"></a>RNA-seq分析软件</h1><ul>
+<li><a href="https://bioinformatics.ibers.aber.ac.uk/wiki/index.php/1.1_RNA-Seq_analysis_tools" target="_blank" rel="external">RNA-Seq analysis common tools</a></li>
+</ul>
+<p>推荐文献：<a href="https://www.nature.com/articles/s41467-017-00050-4" target="_blank" rel="external">Gaining comprehensive biological insight into the transcriptome by performing a broad-spectrum RNA-seq analysis</a></p>
+<h2 id="基因组和转录组比对"><a href="#基因组和转录组比对" class="headerlink" title="基因组和转录组比对"></a>基因组和转录组比对</h2><p><a href="https://github.com/NCBI-Hackathons/RNA_mapping/wiki" target="_blank" rel="external">NCBI-Hackathons/RNA_mapping</a></p>
+<p>&emsp;&emsp;RNA-Seq基因组比对工具HISAT2：HISAT2是TopHat2/Bowti2的继任者，使用改进的BWT算法，实现了更快的速度和更少的资源占用，作者推荐TopHat2/Bowti2和HISAT的用户转换到HISAT2。<a href="https://ccb.jhu.edu/software/hisat2/index.shtml" target="_blank" rel="external">官网</a></p>
+<p>gene annotation 一般选择 RefSeq 或者 Ensembl，这里，我们的参考基因组fasta文件和基因注释文件都选择 Ensembl的hg38版本（release-91），其ftp地址为：<a href="http://asia.ensembl.org/info/data/ftp/index.html" target="_blank" rel="external">http://asia.ensembl.org/info/data/ftp/index.html</a></p>
+<pre><code>wget ftp://ftp.ensembl.org/pub/release-91/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.91.chr.gtf.gz
+</code></pre><h2 id="比对质量评估"><a href="#比对质量评估" class="headerlink" title="比对质量评估"></a>比对质量评估</h2><p><img src="https://i.imgur.com/s2HS5Xp.png" alt=""></p>
+<p><a href="http://rseqc.sourceforge.net/" target="_blank" rel="external">RSeQC: An RNA-seq Quality Control Package</a></p>
+<pre><code>pip2.7 install RSeQC
+</code></pre><h2 id="转录本重构"><a href="#转录本重构" class="headerlink" title="转录本重构"></a>转录本重构</h2><p><img src="https://i.imgur.com/NrEDde5.jpg" alt=""></p>
+<p>转录本构建效果评估—评价指标：</p>
+<ul>
+<li>多外显子比率</li>
+<li>转录本长度</li>
+<li>转录本的可变剪切数目</li>
+<li>对已知基因的覆盖程度</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>基因数目</th>
+<th>转录本数目</th>
+<th>多外显子比率</th>
+<th>多外显子转录本数目</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5-8万</td>
+<td>&gt;10万</td>
+<td>30%-50%</td>
+<td>5万</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对已知编码基因的覆盖程度：&gt;60%</strong></p>
+<h2 id="转录本定量"><a href="#转录本定量" class="headerlink" title="转录本定量"></a>转录本定量</h2><p>官网：<a href="http://htseq.readthedocs.io/en/release_0.9.1/" target="_blank" rel="external">HTSeq: Analysing high-throughput sequencing data with Python</a></p>
+<ol>
+<li><p><a href="http://bioinformatics.cvr.ac.uk/blog/featurecounts-or-htseq-count/" target="_blank" rel="external">featureCounts or htseq-count?</a></p>
+</li>
+<li><p><a href="htseq-counts跟bedtools的区别">htseq-counts跟bedtools的区别</a></p>
+</li>
+</ol>
+<h2 id="lincRNA鉴定及功能注释"><a href="#lincRNA鉴定及功能注释" class="headerlink" title="lincRNA鉴定及功能注释"></a>lincRNA鉴定及功能注释</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/fSQhvH8.jpg" alt=""></p>
+<ul>
+<li>CNCI：<a href="https://academic.oup.com/nar/article/41/17/e166/2411728" target="_blank" rel="external">文献</a>，<a href="https://github.com/www-bioinfo-org/CNCI" target="_blank" rel="external">github仓库</a></li>
+</ul>
+<p><img src="https://i.imgur.com/xLkXFAQ.png" alt=""></p>
+<ul>
+<li>ncFANs： <a href="https://academic.oup.com/nar/article/39/suppl_2/W118/2506940" target="_blank" rel="external">文献</a>， <a href="https://github.com/www-bioinfo-org/ncFANs" target="_blank" rel="external">github仓库</a></li>
+</ul>
+<p><img src="https://i.imgur.com/nDRVJCw.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/TvTIJhl.jpg" alt=""></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1） <a href="https://academic.oup.com/bib/article-abstract/18/5/789/2562763?redirectedFrom=fulltext" target="_blank" rel="external">Identification and function annotation of long intervening noncoding RNAs</a></p>
+<p>（2）<a href="https://mp.weixin.qq.com/s/NUEi6oRFL7B3f1FpCD4Xug" target="_blank" rel="external">转录组分析工具哪家强？</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;RNA-seq鉴定LncRNA概述：lncRNA简介，分析pipline，分析软件，结果评估指标&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>查看R包源码及linux下编译安装R</title>
@@ -148,7 +275,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
     <link href="https:///AnJingwd.github.io/2018/01/26/IGV%E6%89%B9%E9%87%8F%E6%9F%A5%E7%9C%8B%E5%8F%98%E5%BC%82/"/>
     <id>https:///AnJingwd.github.io/2018/01/26/IGV批量查看变异/</id>
     <published>2018-01-26T03:21:34.000Z</published>
-    <updated>2018-01-28T09:15:06.332Z</updated>
+    <updated>2018-02-07T11:28:17.623Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">IGV批量查看变异并过滤</blockquote>
 
@@ -182,6 +309,12 @@ local({r &lt;- getOption(&quot;repos&quot;)
 <li>在reads区右键可以选择不同的查看方式</li>
 </ol>
 <p><img src="https://i.imgur.com/SeQvjJ9.jpg" alt=""></p>
+<ol>
+<li><p><strong>可以同时开多个igv.sh或者将IGV_snapshots.bat文件合并，并删除掉除最后一个之外的所有exit语句</strong></p>
+</li>
+<li><p><strong>maxPanelHeight 设置很重要，默认800，但是igv截图不全，所以设置为10000</strong></p>
+</li>
+</ol>
 <h2 id="过滤标准"><a href="#过滤标准" class="headerlink" title="过滤标准"></a>过滤标准</h2><ol>
 <li>高质量的SNVs和SNPs要求在所有的reas中High base qualities，并且不能在reads的末端；</li>
 <li>Good mapping quality of reads, no strand bias, allele frequency consistent with heterozygous mutation</li>
@@ -784,7 +917,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
     <link href="https:///AnJingwd.github.io/2017/12/26/GATK%E5%8F%98%E5%BC%82%E6%A3%80%E6%B5%8B%E6%A6%82%E8%BF%B0/"/>
     <id>https:///AnJingwd.github.io/2017/12/26/GATK变异检测概述/</id>
     <published>2017-12-26T12:58:54.000Z</published>
-    <updated>2018-02-02T08:42:52.128Z</updated>
+    <updated>2018-02-07T13:44:57.102Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">变异检测概述</blockquote>
 
@@ -804,6 +937,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
 <h2 id="Raw-sequence的质控"><a href="#Raw-sequence的质控" class="headerlink" title="Raw sequence的质控"></a>Raw sequence的质控</h2><p>目的：将ASCII code转换为Phred-scale Q    scores，考察测序质量（错误率）</p>
 <p><img src="https://i.imgur.com/v0ZLr2G.jpg" alt=""></p>
 <p><strong>所以phred score一般选择20即可</strong></p>
+<p><img src="https://i.imgur.com/iFODOKU.jpg" alt=""></p>
 <h1 id="胚系突变snp-amp-indel分析流程"><a href="#胚系突变snp-amp-indel分析流程" class="headerlink" title="胚系突变snp&amp;indel分析流程"></a>胚系突变snp&amp;indel分析流程</h1><ul>
 <li>Map to reference</li>
 <li>Sort, Index</li>
@@ -815,17 +949,28 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
 <li>Annotation</li>
 </ul>
 <p><img src="https://i.imgur.com/cIZbbh2.jpg" alt=""></p>
+<p>pipline:<a href="https://github.com/joergen7/variant-call-gatk" target="_blank" rel="external">variant-call-gatk</a></p>
+<p>文献：<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4243306/" target="_blank" rel="external">From FastQ data to high confidence variant calls: the Genome Analysis Toolkit best practices pipeline</a></p>
 <h2 id="（1）Map"><a href="#（1）Map" class="headerlink" title="（1）Map"></a>（1）Map</h2><ul>
 <li>BWA    for    DNA    </li>
 <li>STAR    for    RNAseq</li>
 </ul>
 <p>Sequence/Binary    Alignment    Map    (SAM/BAM)    </p>
 <p><img src="https://i.imgur.com/r3ayrha.jpg" alt=""></p>
-<h3 id="细节："><a href="#细节：" class="headerlink" title="细节："></a>细节：</h3><p>（1）It is recommended from the GATK best practices guideline that unmapped sam/bam files should be treated with Picard tools “cleansam” and “fixmate” before removeduplicate。</p>
-<p>CleanSam (Picard)<br>Cleans the provided SAM/BAM, soft-clipping beyond-end-of-reference alignments and setting MAPQ to 0 for unmapped reads</p>
-<p>（2）<a href="https://gatkforums.broadinstitute.org/gatk/discussion/6472/read-groups" target="_blank" rel="external">Add read groups, sort the reads by coordinate, save as a bam file and index the bam file</a></p>
-<p><strong>Add read group 对于使用mutect检测配对样本是必须的</strong></p>
-<h2 id="（2）Mark-duplicates"><a href="#（2）Mark-duplicates" class="headerlink" title="（2）Mark    duplicates"></a>（2）Mark    duplicates</h2><p>这一步是为了减少duplication artifacts,为了能正确评估alleles。duplicates的状态通过SAM flag来标记，但并没有去除（绝大多数的GATK tools默认忽 duplicates）</p>
+<h3 id="细节："><a href="#细节：" class="headerlink" title="细节："></a>细节：</h3><p>All BAM/CRAM files must satisfy the following requirements:</p>
+<ul>
+<li>It must be aligned to one of the references described here.</li>
+<li>It must be <strong>sorted in coordinate order</strong> (not by queryname and not “unsorted”).</li>
+<li>It must list the read groups with sample names in the header.</li>
+<li>Every read must belong to a <strong>read group</strong>.</li>
+<li>The BAM file must pass Picard ValidateSamFile validation.</li>
+</ul>
+<p>具体参考：<a href="https://gatkforums.broadinstitute.org/gatk/discussion/1317/collected-faqs-about-bam-files" target="_blank" rel="external">Collected FAQs about input files for sequence read data (BAM/CRAM)</a></p>
+<ul>
+<li>Add read group 对于多样本检测变异，比如mutect是必须的，否则当场一个样品处理</li>
+<li>You only need to run FixMateInformation if you are getting errors with mate information from Picard’s ValidateSamFile， <a href="https://gatkforums.broadinstitute.org/gatk/discussion/6047/necessary-to-run-fixmateinformation" target="_blank" rel="external">具体参考</a></li>
+</ul>
+<h2 id="（2）Mark-duplicates"><a href="#（2）Mark-duplicates" class="headerlink" title="（2）Mark    duplicates"></a>（2）Mark    duplicates</h2><p>测序原理是随机打断，那么理论上出现两条完全相同的read的概率是非常低的，而且建库时PCR扩增存在偏向性，因此标出完全相同的read。这一步是为了减少duplication artifacts,从而正确评估alleles。duplicates的状态通过SAM flag来标记，但并没有去除（绝大多数的GATK tools默认忽 duplicates）</p>
 <p>duplicates来源：（1）PCR duplicates ; (2) Optical duplicates</p>
 <p>以下两种情况不能 mark duplicates:</p>
 <p>Amplicon    sequencing</p>
@@ -993,7 +1138,8 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
 </ol>
 <p>—–&gt;  Use    manual    filtering    recommendations    instead</p>
 <p>具体参考：<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=39" target="_blank" rel="external">Variant Quality Score Recalibration (VQSR)</a></p>
-<h3 id="Genotype-Refinement"><a href="#Genotype-Refinement" class="headerlink" title="Genotype Refinement"></a>Genotype Refinement</h3><p>Using    additional    data    to    improve    genotype    calls    and    likelihoods</p>
+<p><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantrecalibration_VariantRecalibrator.php" target="_blank" rel="external">VariantRecalibrator</a></p>
+<h3 id="（7）-Genotype-Refinement"><a href="#（7）-Genotype-Refinement" class="headerlink" title="（7） Genotype Refinement"></a>（7） Genotype Refinement</h3><p>Using    additional    data    to    improve    genotype    calls    and    likelihoods</p>
 <h4 id="基因型校正的重要性："><a href="#基因型校正的重要性：" class="headerlink" title="基因型校正的重要性："></a>基因型校正的重要性：</h4><ol>
 <li><p>临床遗传医生需要给病人提供基因型</p>
 <ul>
@@ -1048,7 +1194,7 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
 <p>（1）<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=4723" target="_blank" rel="external">Genotype Refinement workflow</a></p>
 <p>（2）<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=4727" target="_blank" rel="external">(howto) Run the genotype refinement workflow</a></p>
 <p>（3）<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=4726" target="_blank" rel="external">Genotype Refinement workflow: mathematical details</a></p>
-<h3 id="Variant-Evaluation"><a href="#Variant-Evaluation" class="headerlink" title="Variant Evaluation"></a>Variant Evaluation</h3><p>基本思想：真实变异是具有代表性的，并且是可比较的</p>
+<h3 id="（8）-Variant-Evaluation"><a href="#（8）-Variant-Evaluation" class="headerlink" title="（8） Variant Evaluation"></a>（8） Variant Evaluation</h3><p>基本思想：真实变异是具有代表性的，并且是可比较的</p>
 <p>变异代表性的影响因素：</p>
 <ul>
 <li>种群（Ethnicity）:Older     popula+ons    tend    to    display    more    heterogeneity</li>
@@ -1090,7 +1236,7 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
     <link href="https:///AnJingwd.github.io/2017/12/26/GATK3.8%E5%88%86%E6%9E%90%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     <id>https:///AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建/</id>
     <published>2017-12-26T10:15:59.000Z</published>
-    <updated>2018-02-02T09:56:49.652Z</updated>
+    <updated>2018-02-03T09:20:38.673Z</updated>
     
     <content type="html"><![CDATA[<p><blockquote class="blockquote-center">GATK3.8相关软件及文件准备</blockquote><br><a id="more"></a></p>
 <h1 id="GATK官网相关栏目"><a href="#GATK官网相关栏目" class="headerlink" title="GATK官网相关栏目"></a>GATK官网相关栏目</h1><ul>
@@ -1164,6 +1310,8 @@ password:
 <li>1000G_omni2.5.hg19.sites.vcf.idx</li>
 <li>1000G_phase1.indels.hg19.sites.vcf</li>
 <li>1000G_phase1.indels.hg19.sites.vcf.idx</li>
+<li>hg19/1000G_phase1.snps.high_confidence.hg19.sites.vcf</li>
+<li>hg19/1000G_phase1.snps.high_confidence.hg19.sites.vcf.idx</li>
 <li>dbsnp_138.hg19.vcf</li>
 <li>dbsnp_138.hg19.vcf.idx</li>
 <li>hapmap_3.3.hg19.sites.vcf</li>
@@ -2315,41 +2463,6 @@ $ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;s
     
     
       <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R语言之批量导入csv文件，并以文件名作为变量名</title>
-    <link href="https:///AnJingwd.github.io/2017/09/04/R%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%89%B9%E9%87%8F%E5%AF%BC%E5%85%A5csv%E6%96%87%E4%BB%B6%EF%BC%8C%E5%B9%B6%E4%BB%A5%E6%96%87%E4%BB%B6%E5%90%8D%E4%BD%9C%E4%B8%BA%E5%8F%98%E9%87%8F%E5%90%8D/"/>
-    <id>https:///AnJingwd.github.io/2017/09/04/R语言之批量导入csv文件，并以文件名作为变量名/</id>
-    <published>2017-09-04T05:29:34.000Z</published>
-    <updated>2017-09-04T07:19:35.807Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;当要处理一批csv文件时，一个一个读入就太麻烦而且太low了。那么如何一次将工作路径的csv文件读入当前环境空间（Environment），并且使用文件名作为变量名，使用时直接调用即可呢??</p>
-<a id="more"></a>
-<h1 id="批量读入csv文件"><a href="#批量读入csv文件" class="headerlink" title="批量读入csv文件"></a>批量读入csv文件</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#将列表中文件读入环境空间，并以文件名作为变量名</span></div><div class="line">mycsvfile = list.files(pattern=<span class="string">"*.csv"</span>)   <span class="comment">#生成.csv文件的列表</span></div><div class="line">list2env(</div><div class="line">  lapply(setNames(mycsvfile, make.names(gsub(<span class="string">"*.csv$"</span>, <span class="string">""</span>, mycsvfile))),</div><div class="line">         read.csv,header=<span class="literal">TRUE</span>,check.names=<span class="literal">FALSE</span>), envir = .GlobalEnv)</div></pre></td></tr></table></figure>
-<h1 id="当然，上述语句也可以用于批量读入txt文件"><a href="#当然，上述语句也可以用于批量读入txt文件" class="headerlink" title="当然，上述语句也可以用于批量读入txt文件"></a>当然，上述语句也可以用于批量读入txt文件</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mytxtfile = list.files(pattern=<span class="string">"*.txt"</span>)</div><div class="line">list2env(</div><div class="line">  lapply(setNames(mytxtfile, make.names(gsub(<span class="string">"*.txt$"</span>, <span class="string">""</span>, mytxtfile))),</div><div class="line">         read.table,header=<span class="literal">TRUE</span>,sep=<span class="string">"\t"</span>), envir = .GlobalEnv)</div></pre></td></tr></table></figure>
-<h1 id="批量读入自定义函数"><a href="#批量读入自定义函数" class="headerlink" title="批量读入自定义函数"></a>批量读入自定义函数</h1><p>对于自定义的函数，可以通过source函数导入环境空间，然后才能调用，当然也可以写个函数，调用此函数批量导入罗！！！</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sourceDir &lt;- <span class="keyword">function</span>(path, trace = <span class="literal">TRUE</span>, <span class="keyword">...</span>) &#123;</div><div class="line">  <span class="keyword">for</span> (nm <span class="keyword">in</span> list.files(path, pattern = <span class="string">"[.][RrSsQq]$"</span>)) &#123;</div><div class="line">    <span class="keyword">if</span>(trace) cat(nm,<span class="string">":"</span>)</div><div class="line">    <span class="keyword">source</span>(file.path(path, nm), <span class="keyword">...</span>)</div><div class="line">    <span class="keyword">if</span>(trace) cat(<span class="string">"\n"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">sourceDir(<span class="string">"自定义函数所在文件夹的完整路径"</span>)</div></pre></td></tr></table></figure>
-<h1 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h1><p>涉及到的语法，包括R语言的环境空间，正则表达式。</p>
-<p>1.R语言的环境空间</p>
-<p>在R语言中，不管是变量，对象，或者函数，都存在于R的环境空间中，R程序在运行时都有自己的运行空间。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 当前环境空间</span></div><div class="line">&gt; .GlobalEnv</div><div class="line"></div><div class="line"><span class="comment"># 列出当前环境中的变量 </span></div><div class="line">&gt; ls()</div><div class="line"><span class="comment"># 查看环境空间加载的包</span></div><div class="line">&gt; search()</div></pre></td></tr></table></figure>
-<p>2.正则表达式</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pattern=<span class="string">"*.csv"</span>  <span class="comment">#list.files函数中用正则表达式匹配文件名的一个选项</span></div><div class="line">gsub(<span class="string">"*.txt$"</span>, <span class="string">""</span>, mytxtfile)  <span class="comment">#匹配以.txt结尾的文件名，将其替换为空，也就是去掉.txt，只留文件名作为变量名</span></div></pre></td></tr></table></figure>
-<p>3.lapply函数用于对mytxtfile列表中的文件，都应用read.csv函数，从而实现批量读取文件</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;当要处理一批csv文件时，一个一个读入就太麻烦而且太low了。那么如何一次将工作路径的csv文件读入当前环境空间（Environment），并且使用文件名作为变量名，使用时直接调用即可呢??&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="R" scheme="https:///AnJingwd.github.io/categories/R/"/>
-    
-    
-      <category term="R" scheme="https:///AnJingwd.github.io/tags/R/"/>
     
   </entry>
   
