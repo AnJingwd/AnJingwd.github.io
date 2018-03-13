@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Genetic Genealogy in Practice]]></title>
-    <url>https%3A%2F%2F%2FAnJingwd.github.io%2F2018%2F02%2F22%2FGenetic-Genealogy-in-Practice%2F</url>
-    <content type="text"><![CDATA[http://debbiewayne.com/pubs.php]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[gcc5.2编译安装]]></title>
     <url>https%3A%2F%2F%2FAnJingwd.github.io%2F2018%2F02%2F13%2Fgcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%2F</url>
     <content type="text"><![CDATA[gcc5.2编译安装 安装过程cd /home/wangdong/local wget http://www.netgull.com/gcc/releases/gcc-5.2.0/gcc-5.2.0.tar.gz tar xzf gcc-5.2.0.tar.gz cd gcc-5.2.0 ./contrib/download_prerequisites cd .. mkdir objdir cd objdir $PWD/../gcc-5.2.0/configure --prefix=$HOME/gcc-5.2.0 --enable-languages=c,c++,fortran,go --disable-multilib make make install echo &apos;export PATH=~/gcc-5.2.0/bin:$PATH&apos;&gt;&gt;~/.bashrc echo &apos;export LD_LIBRARY_PATH=~/gcc-5.2.0/lib:$LD_LIBRARY_PATH&apos;&gt;&gt;~/.bashrc echo &apos;export LD_LIBRARY_PATH=~/gcc-5.2.0/lib64:$LD_LIBRARY_PATH&apos;&gt;&gt;~/.bashrc source ~/.bashrc cc与gcccc、gcc、g++、CC的区别概括 gcc是C编译器；g++是C++编译器；linux下cc一般是一个符号连接，指向gcc；gcc和g++都是GUN（组织）的编译器。cc来自于昂贵的Unix系统，cc是商业软件。 对于cc设置软连接：ln -s gcc cc 参考（1）Installing GCC without Root Privileges（推荐） （2）Install gcc-5.2.0 without root （3）Install Latest version of gcc and gcc-c++ on CentOS 6.7 from source code]]></content>

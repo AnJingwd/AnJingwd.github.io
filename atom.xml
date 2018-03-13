@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-02-22T09:46:54.296Z</updated>
+  <updated>2018-03-13T12:12:23.336Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,26 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Genetic Genealogy in Practice</title>
-    <link href="https:///AnJingwd.github.io/2018/02/22/Genetic-Genealogy-in-Practice/"/>
-    <id>https:///AnJingwd.github.io/2018/02/22/Genetic-Genealogy-in-Practice/</id>
-    <published>2018-02-22T09:46:34.000Z</published>
-    <updated>2018-02-22T09:46:54.296Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="http://debbiewayne.com/pubs.php" target="_blank" rel="external">http://debbiewayne.com/pubs.php</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;http://debbiewayne.com/pubs.php&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://debbiewayne.com/pubs.php&lt;/a&gt;&lt;/p&gt;
-
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>gcc5.2编译安装</title>
@@ -2303,6 +2283,195 @@ $WORKDIR/support-files/mysql.server stop
     <summary type="html">
     
       &lt;blockquote class=&quot;blockquote-center&quot;&gt;文本挖掘与展示之文献关键词&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="https:///AnJingwd.github.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pandas使用入门</title>
+    <link href="https:///AnJingwd.github.io/2017/10/01/pandas%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/"/>
+    <id>https:///AnJingwd.github.io/2017/10/01/pandas使用入门/</id>
+    <published>2017-09-30T16:26:24.000Z</published>
+    <updated>2017-10-01T08:00:29.192Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">pandas使用入门</blockquote>
+
+<a id="more"></a>
+<h1 id="pandas从文件读写数据"><a href="#pandas从文件读写数据" class="headerlink" title="pandas从文件读写数据"></a>pandas从文件读写数据</h1><h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><ul>
+<li><p>读取txt数据（read_table默认以tab键分割数据）</p>
+<p>  Exp_matrix = pd.read_table(r’.\data\game_of_thrones_geneExp.txt’)</p>
+</li>
+<li><p>读取csv数据（read_csv默认以逗号分割数据）</p>
+<p>  Exp_matrix = pd.read_csv(r’.\data\game_of_thrones_geneExp.csv’)</p>
+</li>
+<li><p>读取数量不定的空白符分割的txt文件</p>
+<p>  Exp_matrix = pd.read_table(r’.\data\game_of_thrones_geneExp.txt’,sep=’\s+’)</p>
+</li>
+<li><p>读取Excel文件数据</p>
+<p>  xls_file = pd.ExcelFile(‘data.xls’)&emsp;&emsp; #创建ExcelFile实例</p>
+<p>  table = xls_file.parse( ‘Sheet1’)  &emsp;&emsp; #通过parse读取到DataFrame</p>
+</li>
+</ul>
+<p>（对于使用复杂分隔符或多字符串分隔符的文件，csv模块就无能为力了。这种情况下，就只能使用字符串的split方法或者正则表达式的re.split进行拆分和整理了）</p>
+<h3 id="读数据时关于行列名选项"><a href="#读数据时关于行列名选项" class="headerlink" title="读数据时关于行列名选项"></a>读数据时关于行列名选项</h3><ul>
+<li>header=None  &emsp;&emsp; #指定列名从0开始增长的数</li>
+<li>names=[‘a’,’b’,’c’,’d’,’e’]    &emsp;&emsp; #用names参数指定列名</li>
+<li>index_col=’e’   &emsp;&emsp; #用指定的列作为行名（index）</li>
+</ul>
+<h3 id="逐块读取文本文件"><a href="#逐块读取文本文件" class="headerlink" title="逐块读取文本文件"></a>逐块读取文本文件</h3><ul>
+<li>nrows = 5  &emsp;&emsp; #只读取文件前5行</li>
+</ul>
+<h3 id="其他参数"><a href="#其他参数" class="headerlink" title="其他参数"></a>其他参数</h3><ul>
+<li><p>使用skiprows跳过文件的某些行</p>
+<p>  skiprows = [0,2,3]</p>
+</li>
+</ul>
+<h2 id="写数据至文件"><a href="#写数据至文件" class="headerlink" title="写数据至文件"></a>写数据至文件</h2><ul>
+<li><p>写入csv文件</p>
+<p>  result.to_csv(‘D:\data\out1.csv’)</p>
+</li>
+</ul>
+<h3 id="写数据时关于行列名选项"><a href="#写数据时关于行列名选项" class="headerlink" title="写数据时关于行列名选项"></a>写数据时关于行列名选项</h3><ul>
+<li>index=False  &emsp;&emsp; #舍弃行名</li>
+<li>header=False  &emsp;&emsp; #舍弃列名</li>
+</ul>
+<h3 id="其他参数-1"><a href="#其他参数-1" class="headerlink" title="其他参数"></a>其他参数</h3><ul>
+<li>sep = ‘|’   &emsp;&emsp; #指定分隔符</li>
+<li>na_rep = ‘NULL’ &emsp;&emsp; #指定缺失值表示符号</li>
+</ul>
+<hr>
+<h1 id="数据规整化：清理，转换，合并，重塑"><a href="#数据规整化：清理，转换，合并，重塑" class="headerlink" title="数据规整化：清理，转换，合并，重塑"></a>数据规整化：清理，转换，合并，重塑</h1><h2 id="pandas访问元素"><a href="#pandas访问元素" class="headerlink" title="pandas访问元素"></a>pandas访问元素</h2><ul>
+<li><p>取前8行</p>
+<p>  Exp_matrix_class_3 = Exp_matrix[0:8]</p>
+</li>
+<li><p>取前8列</p>
+<p>  Exp_matrix_class_3 = Exp_matrix[Exp_matrix.columns[0:8]]</p>
+</li>
+<li><p>取前8行，及1-3列</p>
+<p>  Exp_matrix_class_3 = Exp_matrix.iloc[0:8,1:4]</p>
+</li>
+<li><p>根据条件筛选行</p>
+<p>  Exp_matrix[Exp_matrix[‘Class’] == 3]</p>
+</li>
+<li><p>数据框转置</p>
+<p>  Exp_matrix_class_3_T = Exp_matrix_class_3.T</p>
+</li>
+</ul>
+<p>注意：</p>
+<p>(1)行列最小从0开始</p>
+<p>(2)取值区间左闭右开</p>
+<h2 id="Dataframe-排序"><a href="#Dataframe-排序" class="headerlink" title="Dataframe 排序"></a>Dataframe 排序</h2><ul>
+<li>逆序<br>   Exp_matrix_T.sort_values([‘abs_dif_3_5’], ascending=False)</li>
+</ul>
+<h2 id="轴向连接"><a href="#轴向连接" class="headerlink" title="轴向连接"></a>轴向连接</h2><ul>
+<li><p>行合并</p>
+<p>  result = pd.concat([Exp_matrix_T[1:2],result_gene])</p>
+</li>
+<li><p>增加一列</p>
+<p>  Exp_matrix_T[‘abs_dif_3_5’] = abs_dif_3_5</p>
+</li>
+</ul>
+<h1 id="计算描述统计：统计函数"><a href="#计算描述统计：统计函数" class="headerlink" title="计算描述统计：统计函数"></a>计算描述统计：统计函数</h1><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count</td>
+<td>非NA值的数量</td>
+</tr>
+<tr>
+<td>describe</td>
+<td>针对Series或各DataFrame列计算汇总统计</td>
+</tr>
+<tr>
+<td>min,max</td>
+<td>计算最小值和最大值</td>
+</tr>
+<tr>
+<td>argmin,argmax</td>
+<td>计算能够获取到最小值和最大值的索引位置（整数)</td>
+</tr>
+<tr>
+<td>idxmin,idxmax</td>
+<td>计算能够获取到最小值和最大值的索引值</td>
+</tr>
+<tr>
+<td>quantile</td>
+<td>计算样本的分位数（0到 1） </td>
+</tr>
+<tr>
+<td>sum</td>
+<td>值的总和</td>
+</tr>
+<tr>
+<td>mean</td>
+<td>值的平均数， a.mean() 默认对每一列的数据求平均值；若加上参数a.mean(1)则对每一行求平均值</td>
+</tr>
+<tr>
+<td>media</td>
+<td>值的算术中位数（50%分位数)</td>
+</tr>
+<tr>
+<td>mad</td>
+<td>根据平均值计算平均绝对离差</td>
+</tr>
+<tr>
+<td>var</td>
+<td>样本值的方差 </td>
+</tr>
+<tr>
+<td>std</td>
+<td>样本值的标准差</td>
+</tr>
+<tr>
+<td>skew</td>
+<td>样本值的偏度（三阶矩）</td>
+</tr>
+<tr>
+<td>kurt</td>
+<td>样本值的峰度（四阶矩）</td>
+</tr>
+<tr>
+<td>cumsum</td>
+<td>样本值的累计和</td>
+</tr>
+<tr>
+<td>cummin,cummax</td>
+<td>样本值的累计最大值和累计最小</td>
+</tr>
+<tr>
+<td>cumprod</td>
+<td>样本值的累计积</td>
+</tr>
+<tr>
+<td>diff</td>
+<td>计算一阶差分（对时间序列很有用) </td>
+</tr>
+<tr>
+<td>pct_change</td>
+<td>计算百分数变化</td>
+</tr>
+</tbody>
+</table>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.csdn.net/stevenkwong/article/details/52528616" target="_blank" rel="external">PANDAS 数据合并与重塑（concat篇）</a></p>
+<p>（2）<a href="http://www.cnblogs.com/pengsixiong/p/5050833.html" target="_blank" rel="external">pandas数据的导入与导出</a></p>
+<p>（3）<a href="http://bluewhale.cc/2016-08-06/use-pandas-filter-and-sort.html" target="_blank" rel="external">使用Pandas对数据进行筛选和排序</a></p>
+<p>（4）<a href="http://blog.csdn.net/pipisorry/article/details/25625799" target="_blank" rel="external">pandas小记：pandas计算工具-汇总统计</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;pandas使用入门&lt;/blockquote&gt;
     
     </summary>
     
