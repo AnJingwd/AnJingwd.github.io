@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -96,16 +96,18 @@
 
 
 
-<meta name="description" content="生命在于折腾~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="安静-不安静的博客">
-<meta property="og:url" content="https:///AnJingwd.github.io/archives/2018/page/2/index.html">
+<meta name="description" content="gcc5.2编译安装">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gcc5.2编译安装">
+<meta property="og:url" content="https:///AnJingwd.github.io/2018/02/13/gcc5.2编译安装/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="生命在于折腾~">
+<meta property="og:description" content="gcc5.2编译安装">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-13T12:12:23.336Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安静-不安静的博客">
-<meta name="twitter:description" content="生命在于折腾~">
+<meta name="twitter:title" content="gcc5.2编译安装">
+<meta name="twitter:description" content="gcc5.2编译安装">
 
 
 
@@ -138,7 +140,7 @@
 
 
 
-  <title>归档 | 安静-不安静的博客</title>
+  <title>gcc5.2编译安装 | 安静-不安静的博客</title>
   
 
 
@@ -163,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,77 +280,228 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 49 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year motion-element" id="archive-year-2018">2018</h2>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/02/13/gcc5.2编译安装/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="https:/AnJingwd.github.io/2018/01/10/RNA-seq质控/" itemprop="url">
-              
-                <span itemprop="name">RNA-seq质控</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">gcc5.2编译安装</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-10T21:39:44+08:00"
-              content="2018-01-10" >
-          01-10
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-13T13:14:19+08:00">
+                2018-02-13
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <blockquote class="blockquote-center">gcc5.2编译安装</blockquote>
+
+<a id="more"></a>
+<h1 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h1><pre><code>cd /home/wangdong/local
+wget http://www.netgull.com/gcc/releases/gcc-5.2.0/gcc-5.2.0.tar.gz
+tar xzf gcc-5.2.0.tar.gz
+cd gcc-5.2.0
+./contrib/download_prerequisites
+cd ..
+mkdir objdir
+cd objdir
+$PWD/../gcc-5.2.0/configure --prefix=$HOME/gcc-5.2.0 --enable-languages=c,c++,fortran,go --disable-multilib
+make
+make install
+
+echo &apos;export PATH=~/gcc-5.2.0/bin:$PATH&apos;&gt;&gt;~/.bashrc
+echo &apos;export LD_LIBRARY_PATH=~/gcc-5.2.0/lib:$LD_LIBRARY_PATH&apos;&gt;&gt;~/.bashrc
+echo &apos;export LD_LIBRARY_PATH=~/gcc-5.2.0/lib64:$LD_LIBRARY_PATH&apos;&gt;&gt;~/.bashrc
+source ~/.bashrc
+</code></pre><h1 id="cc与gcc"><a href="#cc与gcc" class="headerlink" title="cc与gcc"></a>cc与gcc</h1><p><a href="https://www.cnblogs.com/xj626852095/p/3648246.html" target="_blank" rel="external">cc、gcc、g++、CC的区别概括</a></p>
+<p>gcc是C编译器；g++是C++编译器；linux下cc一般是一个符号连接，指向gcc；gcc和g++都是GUN（组织）的编译器。cc来自于昂贵的Unix系统，cc是商业软件。</p>
+<p>对于cc设置软连接：ln -s gcc cc</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://luiarthur.github.io/gccinstall" target="_blank" rel="external">Installing GCC without Root Privileges（推荐）</a></p>
+<p>（2）<a href="http://bakeronit.com/2015/11/04/install_gcc/" target="_blank" rel="external">Install gcc-5.2.0 without root</a></p>
+<p>（3）<a href="https://yhigu.wordpress.com/2016/03/02/install-latest-version-of-gcc-and-gcc-c-on-centos-6-7-from-source-code/" target="_blank" rel="external">Install Latest version of gcc and gcc-c++ on CentOS 6.7 from source code</a></p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="https:/AnJingwd.github.io/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2018/02/05/RNA-seq鉴定LncRNA概述/" rel="next" title="RNA-seq鉴定LncRNA概述">
+                <i class="fa fa-chevron-left"></i> RNA-seq鉴定LncRNA概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2018/02/22/Genetic-Genealogy-in-Practice/" rel="prev" title="Genetic Genealogy in Practice">
+                Genetic Genealogy in Practice <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="https:/AnJingwd.github.io/archives/2018/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="https:/AnJingwd.github.io/archives/2018/">1</a><span class="page-number current">2</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -356,6 +509,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -376,8 +533,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https:/AnJingwd.github.io/images/avatar.png"
@@ -392,7 +558,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -636,6 +802,22 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装过程"><span class="nav-number">1.</span> <span class="nav-text">安装过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cc与gcc"><span class="nav-number">2.</span> <span class="nav-text">cc与gcc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -677,7 +859,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共64.7k字</span>
+  <span class="post-count">博客全站共64.9k字</span>
 </div>
 
 <div class="powered-by">
@@ -778,11 +960,9 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
+
 
 
   
