@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://i.imgur.com/Wlr5oMX.jpg">
 <meta property="og:image" content="https://i.imgur.com/IaxvSSe.jpg">
 <meta property="og:image" content="https://i.imgur.com/vE4ODha.jpg">
-<meta property="og:updated_time" content="2018-01-15T13:37:25.766Z">
+<meta property="og:updated_time" content="2018-03-11T01:51:38.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNA-seq质控">
 <meta name="twitter:description" content="RNA-seq质控：去除低质量reads，adapter以及rRNA">
@@ -450,6 +450,19 @@ time $trim_galore \
 $sample_r1 $sample_r2
 </code></pre><p><strong>注：如果No overrepresented sequences，但Adapter Content未黄色警告，可以对于adapter和adapter2两个参数都可以用 –illumina 代替，表示 first 13bp of the Illumina universal adapter AGATCGGAAGAGC</strong></p>
 <p>使用参考：<a href="http://overviewdifferentialexpression.blogspot.com/2014/02/quality-control-using-trim-galore.html" target="_blank" rel="external">Quality Control using Trim Galore: How to run trim galore?</a></p>
+<p>如果使用Trimmomatic可以参考以下命令：</p>
+<pre><code>time java -Xmx${mythread}g -jar $Trimmomatic \
+PE -phred33 \
+-threads $mythread \
+$sample_r1 $sample_r2 \
+$trim/${sample}_paired.r1.fq.gz $trim/${sample}_unpaired.r1.fq.gz $trim/${sample}_paired.r2.fq.gz $trim/${sample}_unpaired.r2.fq.gz \
+ILLUMINACLIP: $Trimmomatic/adapters/TruSeq3-PE-2.fa:2:30:10 \
+LEADING:5 TRAILING:5 SLIDINGWINDOW:4:5 MINLEN:25 \
+2&gt; $trim/Trimmed.log
+</code></pre><p><strong>在Trimmomatic安装目录下有个adapter目录，其中TruSeq2适用于旧款测序仪的adapter序列的去除，而TruSeq3适用于Miseq,Hiseq等新款测序仪adapter序列的去除</strong></p>
+<h2 id="做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐"><a href="#做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐" class="headerlink" title="做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐"></a>做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐</h2><p>MultiQC: summarize analysis results for multiple tools and samples in a single report</p>
+<p><a href="https://github.com/ewels/MultiQC" target="_blank" rel="external">ewels/MultiQC</a></p>
+<p><a href="http://www.multiqc.info/docs/#coding-with-multiqc" target="_blank" rel="external">Using MultiQC manual</a></p>
 <h1 id="去除核糖体rRNA"><a href="#去除核糖体rRNA" class="headerlink" title="去除核糖体rRNA"></a>去除核糖体rRNA</h1><p>对于总RNA建库测序的RNA-seq实验设计，rRNA将占总数据量的95%左右，如果不去除，将严重影响比对率及下游分析。</p>
 <p><a href="http://bioinfo.lifl.fr/sortmerna/sortmerna.php" target="_blank" rel="external">SortMeRNA官网</a>；<a href="http://bioinfo.lifl.fr/RNA/sortmerna/code/SortMeRNA-user-manual-v2.1.pdf" target="_blank" rel="external">SortMeRNA User Manual v2.1.pdf</a></p>
 <h2 id="建索引"><a href="#建索引" class="headerlink" title="建索引"></a>建索引</h2><pre><code>sortmerna_REF=/home/wangdong/miniconda3/sortmerna_db/rRNA_databases
@@ -500,6 +513,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
 <p>（5）<a href="https://www.bits.vib.be/training/328" target="_blank" rel="external">RNA-Seq analysis for differential expression in GenePattern</a> <a href="http://data.bits.vib.be/pub/trainingen/GenePattern/genepattern.pdf" target="_blank" rel="external">Slides（推荐）</a></p>
 <p>（6）<a href="https://woaielf.github.io/2016/11/16/RNA-seq/" target="_blank" rel="external">RNA-seq分析流程思维导图</a></p>
 <p>（7）<a href="http://www.bio-info-trainee.com/2275.html" target="_blank" rel="external">一个RNA-seq的反思</a></p>
+<p>（8）<a href="https://mp.weixin.qq.com/s/lq3X3U03ozdkZGfcGNzNMg" target="_blank" rel="external">从零开始完整学习全基因组测序数据分析：第3节 数据质控</a></p>
 
       
     </div>
@@ -650,7 +664,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -903,7 +917,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pipline"><span class="nav-number">1.</span> <span class="nav-text">pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建库质控"><span class="nav-number">2.</span> <span class="nav-text">建库质控</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#质控"><span class="nav-number">3.</span> <span class="nav-text">质控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-去除低质量的reads"><span class="nav-number">3.1.</span> <span class="nav-text">1. 去除低质量的reads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-检查每个tile的质量"><span class="nav-number">3.2.</span> <span class="nav-text">2. 检查每个tile的质量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Adapter-Content"><span class="nav-number">3.3.</span> <span class="nav-text">3. Adapter Content</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除核糖体rRNA"><span class="nav-number">4.</span> <span class="nav-text">去除核糖体rRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建索引"><span class="nav-number">4.1.</span> <span class="nav-text">建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去除rRNA"><span class="nav-number">4.2.</span> <span class="nav-text">去除rRNA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pipline"><span class="nav-number">1.</span> <span class="nav-text">pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建库质控"><span class="nav-number">2.</span> <span class="nav-text">建库质控</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#质控"><span class="nav-number">3.</span> <span class="nav-text">质控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-去除低质量的reads"><span class="nav-number">3.1.</span> <span class="nav-text">1. 去除低质量的reads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-检查每个tile的质量"><span class="nav-number">3.2.</span> <span class="nav-text">2. 检查每个tile的质量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Adapter-Content"><span class="nav-number">3.3.</span> <span class="nav-text">3. Adapter Content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐"><span class="nav-number">3.4.</span> <span class="nav-text">做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除核糖体rRNA"><span class="nav-number">4.</span> <span class="nav-text">去除核糖体rRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建索引"><span class="nav-number">4.1.</span> <span class="nav-text">建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去除rRNA"><span class="nav-number">4.2.</span> <span class="nav-text">去除rRNA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -951,7 +965,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共62.6k字</span>
+  <span class="post-count">博客全站共64.7k字</span>
 </div>
 
 <div class="powered-by">

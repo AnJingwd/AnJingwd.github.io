@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-02-07T14:07:57.819Z</updated>
+  <updated>2018-03-13T13:32:24.077Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -16,11 +16,66 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>基因组项目</title>
+    <link href="https:///AnJingwd.github.io/2018/03/13/%E5%9F%BA%E5%9B%A0%E7%BB%84%E9%A1%B9%E7%9B%AE/"/>
+    <id>https:///AnJingwd.github.io/2018/03/13/基因组项目/</id>
+    <published>2018-03-13T13:32:24.000Z</published>
+    <updated>2018-03-13T13:32:24.077Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>无root权限docker 安装及使用</title>
+    <link href="https:///AnJingwd.github.io/2018/03/10/%E6%97%A0root%E6%9D%83%E9%99%90docker-%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/"/>
+    <id>https:///AnJingwd.github.io/2018/03/10/无root权限docker-安装及使用/</id>
+    <published>2018-03-10T13:22:25.000Z</published>
+    <updated>2018-03-10T13:30:47.391Z</updated>
+    
+    <content type="html"><![CDATA[<p>（1）<a href="http://www.genek.tv/article/43" target="_blank" rel="external">docker 和 docker-compose 的安装</a></p>
+<p>（2）<a href="http://blog.csdn.net/zqg5258423/article/details/53843757" target="_blank" rel="external">docker最新代码源码编译</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;（1）&lt;a href=&quot;http://www.genek.tv/article/43&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;docker 和 docker-compose 的安装&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;（2）&lt;a href=&quot;http://blog
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Genetic Genealogy in Practice</title>
+    <link href="https:///AnJingwd.github.io/2018/02/22/Genetic-Genealogy-in-Practice/"/>
+    <id>https:///AnJingwd.github.io/2018/02/22/Genetic-Genealogy-in-Practice/</id>
+    <published>2018-02-22T09:46:34.000Z</published>
+    <updated>2018-02-22T09:46:54.296Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://debbiewayne.com/pubs.php" target="_blank" rel="external">http://debbiewayne.com/pubs.php</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://debbiewayne.com/pubs.php&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://debbiewayne.com/pubs.php&lt;/a&gt;&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>RNA-seq鉴定LncRNA概述</title>
     <link href="https:///AnJingwd.github.io/2018/02/05/RNA-seq%E9%89%B4%E5%AE%9ALncRNA%E6%A6%82%E8%BF%B0/"/>
     <id>https:///AnJingwd.github.io/2018/02/05/RNA-seq鉴定LncRNA概述/</id>
     <published>2018-02-05T13:44:08.000Z</published>
-    <updated>2018-02-07T14:07:57.819Z</updated>
+    <updated>2018-02-22T06:19:50.710Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">RNA-seq鉴定LncRNA概述：lncRNA简介，分析pipline，分析软件，结果评估指标</blockquote>
 
@@ -111,6 +166,17 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 </tbody>
 </table>
 <p><strong>对已知编码基因的覆盖程度：&gt;60%</strong></p>
+<h3 id="Stringtie用于转录本重构"><a href="#Stringtie用于转录本重构" class="headerlink" title="Stringtie用于转录本重构"></a>Stringtie用于转录本重构</h3><p>两种方式：</p>
+<ol>
+<li>“refernece guided”模式：使用“-G”选项，不带“-e”选项（输出 reference transcripts 和任何 novel transcripts）<strong>推荐</strong></li>
+<li>“de novo”模式：不指定“-G” 和“-e”选项</li>
+</ol>
+<h3 id="Stringtie用于转录本合并"><a href="#Stringtie用于转录本合并" class="headerlink" title="Stringtie用于转录本合并"></a>Stringtie用于转录本合并</h3><p><img src="https://i.imgur.com/EGF9lzA.jpg" alt=""></p>
+<pre><code>stringtie --merge -p 8 -o stringtie_merged.gtf -G $RNA_REF_GTF assembly_GTF_list.txt
+</code></pre><p>Stringtie转录本合并以GTF文件作为输入， merges/assembles在所有RNA-seq样本中都观察到的转录本，为非冗余的转录本集合。该模式适用于多样本RNA-seq差异分析流程中，产生global且unified的转录本集合，用于后续差异基因的分析。</p>
+<h3 id="gffcompare转录本重构评估"><a href="#gffcompare转录本重构评估" class="headerlink" title="gffcompare转录本重构评估"></a>gffcompare转录本重构评估</h3><p>评估转录本组装情况简单的方式可以是统计基因和转录本计数，novel vs known等；或者使用<a href="https://ccb.jhu.edu/software/stringtie/gff.shtml#gffcompare" target="_blank" rel="external">gffcompare program</a>对多样本RNA-seq实验转录本重构进行准确性的计算和比较分析。</p>
+<pre><code>gffcompare –r $mRNA_gtf –G –o merged $Assemble/stringtie_mRNA_merged.gtf
+</code></pre><p><a href="https://github.com/gpertea/gffcompare" target="_blank" rel="external">gffcompare project on Github</a></p>
 <h2 id="转录本定量"><a href="#转录本定量" class="headerlink" title="转录本定量"></a>转录本定量</h2><p>官网：<a href="http://htseq.readthedocs.io/en/release_0.9.1/" target="_blank" rel="external">HTSeq: Analysing high-throughput sequencing data with Python</a></p>
 <ol>
 <li><p><a href="http://bioinformatics.cvr.ac.uk/blog/featurecounts-or-htseq-count/" target="_blank" rel="external">featureCounts or htseq-count?</a></p>
@@ -118,17 +184,35 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 <li><p><a href="htseq-counts跟bedtools的区别">htseq-counts跟bedtools的区别</a></p>
 </li>
 </ol>
-<h2 id="lincRNA鉴定及功能注释"><a href="#lincRNA鉴定及功能注释" class="headerlink" title="lincRNA鉴定及功能注释"></a>lincRNA鉴定及功能注释</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
+<p>具体参数：</p>
+<ol>
+<li><a href="http://blog.csdn.net/herokoking/article/details/78257714" target="_blank" rel="external">htseq-count的使用</a></li>
+</ol>
+<h2 id="lincRNA鉴定"><a href="#lincRNA鉴定" class="headerlink" title="lincRNA鉴定"></a>lincRNA鉴定</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/fSQhvH8.jpg" alt=""></p>
 <ul>
 <li>CNCI：<a href="https://academic.oup.com/nar/article/41/17/e166/2411728" target="_blank" rel="external">文献</a>，<a href="https://github.com/www-bioinfo-org/CNCI" target="_blank" rel="external">github仓库</a></li>
 </ul>
 <p><img src="https://i.imgur.com/xLkXFAQ.png" alt=""></p>
-<ul>
-<li>ncFANs： <a href="https://academic.oup.com/nar/article/39/suppl_2/W118/2506940" target="_blank" rel="external">文献</a>， <a href="https://github.com/www-bioinfo-org/ncFANs" target="_blank" rel="external">github仓库</a></li>
-</ul>
 <p><img src="https://i.imgur.com/nDRVJCw.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/TvTIJhl.jpg" alt=""></p>
+<h2 id="差异表达分析"><a href="#差异表达分析" class="headerlink" title="差异表达分析"></a>差异表达分析</h2><p>参考:<a href="https://mp.weixin.qq.com/s?__biz=MzAxMDkxODM1Ng==&amp;mid=2247485961&amp;idx=1&amp;sn=13dbe5dec3a8b3ccff67bbccc7cebb62&amp;chksm=9b484ab2ac3fc3a41b7653bec30def207d256199c97897ad21f99247be493758c346bc98a00b&amp;scene=21#wechat_redirect" target="_blank" rel="external">lncRNA实战项目-第五步-差异表达的mRNA和lncRNA</a></p>
+<p>对于无重复样本的差异分析有几种方法可以选择，如edgeR，DEGseq和GFOLD等</p>
+<h2 id="功能注释"><a href="#功能注释" class="headerlink" title="功能注释"></a>功能注释</h2><ol>
+<li>David GO（for coding genes）</li>
+<li>ncFANs (for lincRNAs)</li>
+</ol>
+<p><strong>预测长非编码RNA的功能的常用方法：</strong></p>
+<p>1). 基于lncRNA在基因组的位置（顺势调控/反式调控 编码基因）</p>
+<p><img src="https://i.imgur.com/lRtkC3t.jpg" alt=""></p>
+<p>使用UCSC Genome Browser 查看</p>
+<p>2). 基于lncRNA与protein-coding gene的表达量</p>
+<ul>
+<li>基因表达共聚类（heatmap）</li>
+<li>GSEA(lncRNA exp ~ protein-coding exp ~ GO)</li>
+<li>共表达网络 (基因间的表达相关性:ncFANs)</li>
+</ul>
+<p>ncFANs： <a href="https://academic.oup.com/nar/article/39/suppl_2/W118/2506940" target="_blank" rel="external">文献</a>， <a href="https://github.com/www-bioinfo-org/ncFANs" target="_blank" rel="external">github仓库</a></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1） <a href="https://academic.oup.com/bib/article-abstract/18/5/789/2562763?redirectedFrom=fulltext" target="_blank" rel="external">Identification and function annotation of long intervening noncoding RNAs</a></p>
 <p>（2）<a href="https://mp.weixin.qq.com/s/NUEi6oRFL7B3f1FpCD4Xug" target="_blank" rel="external">转录组分析工具哪家强？</a></p>
 ]]></content>
@@ -455,14 +539,16 @@ local({r &lt;- getOption(&quot;repos&quot;)
     <link href="https:///AnJingwd.github.io/2018/01/21/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E4%B8%8E%E6%8F%90%E4%BA%A4shell%E8%84%9A%E6%9C%AC/"/>
     <id>https:///AnJingwd.github.io/2018/01/21/批量生成与提交shell脚本/</id>
     <published>2018-01-21T02:15:40.000Z</published>
-    <updated>2018-01-21T05:23:53.678Z</updated>
+    <updated>2018-03-10T13:41:02.833Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">批量生成与提交shell脚本</blockquote>
 
 <a id="more"></a>
 <p>同一分析流程的shell脚本，通过替换样本参数，批量生成每个样本单独的piplines，从而实现批量提交，批量运行，在样本多的时候适用。</p>
 <h1 id="批量生成shell脚本"><a href="#批量生成shell脚本" class="headerlink" title="批量生成shell脚本"></a>批量生成shell脚本</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#creat_multi_piplines.py</span></div><div class="line"></div><div class="line">  <span class="number">1</span> <span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">  <span class="number">2</span> <span class="comment">#!/home/wangdong/python/python27/bin/python2.7</span></div><div class="line">  <span class="number">3</span> </div><div class="line">  <span class="number">4</span> <span class="keyword">import</span> argparse,os,re,sys</div><div class="line">  <span class="number">5</span> </div><div class="line">  <span class="number">6</span> <span class="comment">#import parameters</span></div><div class="line">  <span class="number">7</span> parser = argparse.ArgumentParser(description=<span class="string">'manual to this script'</span>)</div><div class="line">  <span class="number">8</span> parser.add_argument(<span class="string">'--pipline_file'</span>, type=str, default=<span class="keyword">None</span>)</div><div class="line">  <span class="number">9</span> parser.add_argument(<span class="string">'--info_file'</span>, type=str, default=<span class="keyword">None</span>)</div><div class="line"> <span class="number">10</span> parser.add_argument(<span class="string">'--result_dir'</span>, type=str, default=<span class="keyword">None</span>)</div><div class="line"> <span class="number">11</span> args = parser.parse_args()</div><div class="line"> <span class="number">12</span> </div><div class="line"> <span class="number">13</span> </div><div class="line"> <span class="number">14</span> <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(args.result_dir):</div><div class="line"> <span class="number">15</span> &gt;---os.mkdir(args.result_dir)</div><div class="line"> <span class="number">16</span> </div><div class="line"> <span class="number">17</span> sample_pair = &#123;&#125;</div><div class="line"> <span class="number">18</span> <span class="keyword">with</span> open(args.info_file) <span class="keyword">as</span> f1:</div><div class="line"> <span class="number">19</span> &gt;---<span class="keyword">for</span> line <span class="keyword">in</span> f1:</div><div class="line"> 20 &gt;---&gt;---line = line.strip()</div><div class="line"> 21 &gt;---&gt;---mylist = line.split('\t')</div><div class="line"> 22 &gt;---&gt;---sample_pair[mylist[1]] = [mylist[0],mylist[2]]</div><div class="line"> <span class="number">23</span> </div><div class="line"> <span class="number">24</span> </div><div class="line"> <span class="number">25</span> <span class="keyword">for</span> key <span class="keyword">in</span> sample_pair:</div><div class="line"> <span class="number">26</span> &gt;---new_pip_file_name = <span class="string">"&#123;&#125;.sh"</span>.format(key)</div><div class="line"> <span class="number">27</span> &gt;---result_file = open(os.path.join(args.result_dir,new_pip_file_name),<span class="string">'w'</span>)</div><div class="line"> <span class="number">28</span> &gt;---<span class="keyword">with</span> open(args.pipline_file,<span class="string">'r'</span>) <span class="keyword">as</span> f2:</div><div class="line"> 29 &gt;---&gt;---for line in f2:</div><div class="line"> 30 &gt;---&gt;---&gt;---line = re.sub("MY_SAMPLE_ID_2017", str(sample_pair[key][0]), str(line))</div><div class="line"> 31 &gt;---&gt;---&gt;---line = re.sub("MY_SAMPLE_ID_2018", str(sample_pair[key][1]), str(line))</div><div class="line"> 32 &gt;---&gt;---&gt;---line = re.sub("MY_LIBRARY_ID", str(key), str(line))</div><div class="line"> 33 &gt;---&gt;---&gt;---result_file.write(line)</div><div class="line"> <span class="number">34</span> &gt;---result_file.close()</div><div class="line"> <span class="number">35</span> &gt;---chmod_commond = <span class="string">"chmod +x &#123;&#125;"</span>.format(os.path.join(args.result_dir, new_pip_file_name))</div><div class="line"> <span class="number">36</span> &gt;---os.system(chmod_commond)</div><div class="line"> <span class="number">37</span> </div><div class="line"> <span class="number">38</span> </div><div class="line"> <span class="number">39</span> </div><div class="line"> <span class="number">40</span> <span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line"> <span class="number">41</span> &gt;---print(<span class="string">'well done!'</span>)</div></pre></td></tr></table></figure>
-<h1 id="批量提交shell脚本"><a href="#批量提交shell脚本" class="headerlink" title="批量提交shell脚本"></a>批量提交shell脚本</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#submit_multi_work.sh</span></div><div class="line"></div><div class="line">  1 <span class="comment">####################</span></div><div class="line">  2 <span class="comment">###function###</span></div><div class="line">  3 <span class="comment">#submit_multi_work</span></div><div class="line">  4 <span class="comment">####data####</span></div><div class="line">  5 <span class="comment">#20180121</span></div><div class="line">  6 <span class="comment">####use#####</span></div><div class="line">  7 <span class="built_in">echo</span> <span class="string">"usage: ./submit_multi_work.sh tasks_list.txt "</span></div><div class="line">  8                                              </div><div class="line">  9 <span class="comment">####################           </span></div><div class="line"> 10 <span class="comment">#!/bin/bash                       </span></div><div class="line"> 11 <span class="built_in">set</span> -u                           </div><div class="line"> 12 <span class="built_in">set</span> -e    </div><div class="line"> 13 <span class="built_in">set</span> -o pipefail</div><div class="line"> 14           </div><div class="line"> 15 <span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">""</span> ] ; <span class="keyword">then</span></div><div class="line"> 16 &gt;---<span class="built_in">echo</span> <span class="string">"Bad command. No tasklist file been appointed. Right format: <span class="variable">$0</span> tasks_list.txt"</span></div><div class="line"> 17 &gt;---<span class="built_in">exit</span> 1</div><div class="line"> 18 <span class="keyword">fi</span></div><div class="line"> 19 tasks_num=`cat <span class="variable">$1</span>|wc -l`</div><div class="line"> 20 <span class="built_in">echo</span> <span class="string">"total tasks founded:<span class="variable">$tasks_num</span>"</span></div><div class="line"> 21 <span class="built_in">echo</span> <span class="string">"Now begin running....."</span></div><div class="line"> 22 mix_tasks=6  <span class="comment">#set mix tasks to assign</span></div><div class="line"> 23 cat <span class="variable">$1</span>|<span class="keyword">while</span> <span class="built_in">read</span> line</div><div class="line"> 24 <span class="keyword">do</span></div><div class="line"> 25 &gt;---tasks=`ps -u wangdong |grep -w <span class="string">'sh'</span> | wc -l`</div><div class="line"> 26 &gt;---<span class="keyword">while</span> [ <span class="variable">$tasks</span> -gt <span class="variable">$mix_tasks</span> ]</div><div class="line"> 27 &gt;---&gt;---<span class="keyword">do</span></div><div class="line"> 28 &gt;---&gt;---sleep 20</div><div class="line"> 29 &gt;---&gt;---&gt;---<span class="built_in">echo</span> <span class="string">"task is running"</span></div><div class="line"> 30 &gt;---&gt;---&gt;---tasks=`ps -u wangdong |grep -w <span class="string">'sh'</span> | wc -l`</div><div class="line"> 31 &gt;---&gt;---<span class="keyword">done</span></div><div class="line"> 32 &gt;---<span class="variable">$line</span>  <span class="comment"># run the COMMOND in tasklist</span></div><div class="line"> 33 &gt;---<span class="built_in">echo</span> <span class="string">"running <span class="variable">$line</span>"</span>~~</div><div class="line"> 34 &gt;---sleep 5</div><div class="line"> 35 <span class="keyword">done</span>~~</div><div class="line"> 36 <span class="built_in">echo</span> <span class="string">"end."</span>~</div><div class="line"></div><div class="line"><span class="comment">#tasks_list.txt</span></div><div class="line"></div><div class="line">  1 nohup /home/wangdong/projects/project4/piplines/oi_capture_process_sh/oi_1.sh &gt; oi_1.logfile 2&gt;&amp;1 &amp;</div><div class="line">  2 nohup /home/wangdong/projects/project4/piplines/oi_capture_process_sh/oi_2.sh &gt; oi_2.logfile 2&gt;&amp;1 &amp;</div><div class="line">  3 nohup /home/wangdong/projects/project4/piplines/oi_capture_process_sh/oi_3.sh &gt; oi_3.logfile 2&gt;&amp;1 &amp;</div><div class="line"></div><div class="line"><span class="comment">#run the submit_multi_work.sh</span></div><div class="line"></div><div class="line">    ./submit_multi_work.sh tasks_list.txt &gt; batchRun.log &amp;</div><div class="line"></div><div class="line"><span class="comment">#simple commond </span></div><div class="line"></div><div class="line">    cat task_list.txt |<span class="keyword">while</span> <span class="built_in">read</span> line;<span class="keyword">do</span> <span class="variable">$line</span>;<span class="keyword">done</span></div></pre></td></tr></table></figure>]]></content>
+<h1 id="批量提交shell脚本"><a href="#批量提交shell脚本" class="headerlink" title="批量提交shell脚本"></a>批量提交shell脚本</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#submit_multi_work.sh</span></div><div class="line"></div><div class="line">  1 <span class="comment">####################</span></div><div class="line">  2 <span class="comment">###function###</span></div><div class="line">  3 <span class="comment">#submit_multi_work</span></div><div class="line">  4 <span class="comment">####data####</span></div><div class="line">  5 <span class="comment">#20180121</span></div><div class="line">  6 <span class="comment">####use#####</span></div><div class="line">  7 <span class="built_in">echo</span> <span class="string">"usage: ./submit_multi_work.sh tasks_list.txt "</span></div><div class="line">  8                                              </div><div class="line">  9 <span class="comment">####################           </span></div><div class="line"> 10 <span class="comment">#!/bin/bash                       </span></div><div class="line"> 11 <span class="built_in">set</span> -u                           </div><div class="line"> 12 <span class="built_in">set</span> -e    </div><div class="line"> 13 <span class="built_in">set</span> -o pipefail</div><div class="line"> 14           </div><div class="line"> 15 <span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">""</span> ] ; <span class="keyword">then</span></div><div class="line"> 16 &gt;---<span class="built_in">echo</span> <span class="string">"Bad command. No tasklist file been appointed. Right format: <span class="variable">$0</span> tasks_list.txt"</span></div><div class="line"> 17 &gt;---<span class="built_in">exit</span> 1</div><div class="line"> 18 <span class="keyword">fi</span></div><div class="line"> 19 tasks_num=`cat <span class="variable">$1</span>|wc -l`</div><div class="line"> 20 <span class="built_in">echo</span> <span class="string">"total tasks founded:<span class="variable">$tasks_num</span>"</span></div><div class="line"> 21 <span class="built_in">echo</span> <span class="string">"Now begin running....."</span></div><div class="line"> 22 mix_tasks=6  <span class="comment">#set mix tasks to assign</span></div><div class="line"> 23 cat <span class="variable">$1</span>|<span class="keyword">while</span> <span class="built_in">read</span> line</div><div class="line"> 24 <span class="keyword">do</span></div><div class="line"> 25 &gt;---tasks=`ps -u wangdong |grep -w <span class="string">'sh'</span> | wc -l`</div><div class="line"> 26 &gt;---<span class="keyword">while</span> [ <span class="variable">$tasks</span> -gt <span class="variable">$mix_tasks</span> ]</div><div class="line"> 27 &gt;---&gt;---<span class="keyword">do</span></div><div class="line"> 28 &gt;---&gt;---sleep 20</div><div class="line"> 29 &gt;---&gt;---&gt;---<span class="built_in">echo</span> <span class="string">"task is running"</span></div><div class="line"> 30 &gt;---&gt;---&gt;---tasks=`ps -u wangdong |grep -w <span class="string">'sh'</span> | wc -l`</div><div class="line"> 31 &gt;---&gt;---<span class="keyword">done</span></div><div class="line"> 32 &gt;---<span class="variable">$line</span>  <span class="comment"># run the COMMOND in tasklist</span></div><div class="line"> 33 &gt;---<span class="built_in">echo</span> <span class="string">"running <span class="variable">$line</span>"</span>~~</div><div class="line"> 34 &gt;---sleep 5</div><div class="line"> 35 <span class="keyword">done</span>~~</div><div class="line"> 36 <span class="built_in">echo</span> <span class="string">"end."</span>~</div><div class="line"></div><div class="line"><span class="comment">#tasks_list.txt</span></div><div class="line"></div><div class="line">  1 nohup /home/wangdong/projects/project4/piplines/oi_capture_process_sh/oi_1.sh &gt; oi_1.logfile 2&gt;&amp;1 &amp;</div><div class="line">  2 nohup /home/wangdong/projects/project4/piplines/oi_capture_process_sh/oi_2.sh &gt; oi_2.logfile 2&gt;&amp;1 &amp;</div><div class="line">  3 nohup /home/wangdong/projects/project4/piplines/oi_capture_process_sh/oi_3.sh &gt; oi_3.logfile 2&gt;&amp;1 &amp;</div><div class="line"></div><div class="line"><span class="comment">#run the submit_multi_work.sh</span></div><div class="line"></div><div class="line">    ./submit_multi_work.sh tasks_list.txt &gt; batchRun.log &amp;</div><div class="line"></div><div class="line"><span class="comment">#simple commond </span></div><div class="line"></div><div class="line">    cat task_list.txt |<span class="keyword">while</span> <span class="built_in">read</span> line;<span class="keyword">do</span> <span class="variable">$line</span>;<span class="keyword">done</span></div></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.genek.tv/article/25" target="_blank" rel="external">批量生成脚本的技巧</a></p>
+]]></content>
     
     <summary type="html">
     
@@ -482,7 +568,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
     <link href="https:///AnJingwd.github.io/2018/01/20/ANNOVAR%E8%BF%9B%E8%A1%8C%E7%AA%81%E5%8F%98%E6%B3%A8%E9%87%8A/"/>
     <id>https:///AnJingwd.github.io/2018/01/20/ANNOVAR进行突变注释/</id>
     <published>2018-01-20T13:50:21.000Z</published>
-    <updated>2018-01-21T01:53:20.743Z</updated>
+    <updated>2018-03-06T12:43:23.643Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">ANNOVAR进行突变注释</blockquote>
 
@@ -764,6 +850,36 @@ annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput 
 <li>一般而言，建议使用one popular prediction score (such as SIFT) 和 one meta-score (such as metaSVM)预测来判断突变是否是有害的</li>
 <li>对于 noncoding variants的有害性预测推荐使用one popular prediction score (such as PhyloP) 和 one meta-score (such as CADD)</li>
 </ul>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>vcf文件经过Annovar注释后突变个数应该相同，但对于原vcf文件类似如下情况，Annovar则会分别注释成两行</p>
+<p><img src="https://i.imgur.com/vzD3s1M.jpg" alt=""></p>
+<p>在Annovar官网的FAQ已经给出解释：</p>
+<p><img src="https://i.imgur.com/NTrEEp8.png" alt=""></p>
+<p>这里需要重新了解下vcf文件格式，（<a href="http://annovar.openbioinformatics.org/en/latest/articles/VCF/" target="_blank" rel="external">Annovar VCF Processing Guide</a>）：</p>
+<ol>
+<li>GT：样品的基因型（genotype）。两个数字中间用’/‘分 开，这两个数字表示双倍体的sample的基因型。0 表示样品中有ref的allele； 1 表示样品中variant的allele； <strong>2表示有第二个variant的allele</strong></li>
+<li>VCF文件是描述位点的格式文件。尽管称作变异检出格式，但并不是为了描述变异或者基因型检出。其可以作为包含基因型检出（甚至变异）的一种选择，并且对于很多肺二倍体物种或者喝多情况（例如线粒体或者人的肿瘤），其有时候甚至不能说是包含基因型检出。但是，很多变异检出软件的目的是为了产生基因型检出；它们使用VCF作为输出文件，但是这并不意味着VCF文件是未存储变异检出而专门设计的。</li>
+<li>因为VCF是一个位点描述文件，具有很多的结果。首先，并不是一行对应着一个变异。因为多个变异能在相同的位点，VCF文件的一行原则上可以描述多个突变（包含野生型非突变allele），和多种类型的基因型检出。例如，看下面这来自VCF文件的一行、其有8个tab键分割的列。在ALT列，具有数个逗号分割的改变的alleles。因此在单行上，数个插入和删除，以及一个单核苷酸（SNV）突变同时存在。</li>
+</ol>
+<p>1 112240038 . CTTT CTTTT,CTTTTT,CTTA,CTT,CT,C . PASS AC=986,3,1249,3,127,3;AF=0.196885,0.000599042,0.249401,0.000599042,0.0253594,0.000599042</p>
+<p>很多Annovar使用者喜欢保留VCF文件中的突变注释信息（通过INFO列）。因此对于上述这种情况，我们需要在相同行的INFO列加注释信息到所有的6个allels，并且确保使用者知道相应的注释对应相应的allele</p>
+<ol>
+<li>VCF可以hijack你的变异，使得SNVs变为多核苷酸突变，并且使得简单的indels变的复杂。这将对注释造成困难，举上述的 CTTT-&gt;CTTA 改变作为例子，其应该是简单的T&gt;A （SNV），但是因为deletion/insertion hijack the locus，其被写为CTTT-&gt;CTTA 而不是T-&gt;A 。考虑到单个allele频率数据库（例如千人基因组项目频率数据库）将只具有 T-&gt;A 但没有 CTTT-&gt;CTTA，然后这个变异通过注释软件注释后将被遗漏，甚至其确实在1000G中被观察到过。</li>
+</ol>
+<p>同样的，CTTT-&gt;CTTTT 变异可能在数据库中没有记录，因为C&gt;CT可能是更合适的记录这个变异的方式。</p>
+<ol>
+<li>目前为止还没有描述indel的普遍认同的特定方式。很多使用者偏好做left-normalization（变异开始的位置应该尽可能向左，直至不能再左，这样数目越少越好）。但是HGVS明确指明了left-normalization将被用在cDNA（mRNA）的坐标上,这意味着 right-normalization被要求使用在人的基因组一半的基因上。</li>
+<li>在阅读了这些事实后，现在的问题时我们应该如何注释VCF文件来确保最准确的结果呢？</li>
+</ol>
+<p>因为left-normalization变得越来越流行，我的建议是是就使用left-normalization。我的第二个建议是各个VCF行仅描述一个变异，以便indel不能隐藏SNPs，以此确保1对1的和数据库匹配。</p>
+<p>我作为ANNOVAR开发者决定去预处理所有的1000G文件，ESP6500si文件和dbSNP文件，以便一行包含一个变异，使得每个变异都采取 left-normalized。已经更新的数据再2014年的12月可以获得了。</p>
+<p>作为使用者我们应该这样做：（1）分割VCF文件确保每一行只包含一个变异；（2）left-normalize所有的VCF文件； （3）使用ANNOVAR注释</p>
+<p>所以使用命令：</p>
+<p>bcftools norm -m-both -o ex1.step1.vcf ex1.vcf.gz</p>
+<p>bcftools norm -f human_g1k_v37.fasta -o ex1.step2.vcf ex1.step1.vcf</p>
+<p>第一个命令分割多allels变异检出为单独的行，第二个命令运行真正的 left-normalization。（有时候第一个命令可能出现没有变异能被分解，尽管在文件中存在这些变异，这种情况下，你可以使用<a href="http://genome.sph.umich.edu/wiki/Vt" target="_blank" rel="external">vt program</a> 代替）</p>
+<ol>
+<li>目前使用left-normalized的数据集包括：avsnp138，avsnp142，clinvar_20150330<br>，1000g2014oct，exac03，esp6500siv2</li>
+</ol>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.ncbi.nlm.nih.gov/pubmed/26379229" target="_blank" rel="external">Genomic variant annotation and prioritization with ANNOVAR and wANNOVAR</a></p>
 <p>（2）<a href="http://blog.sina.com.cn/s/blog_670445240101j0pa.html" target="_blank" rel="external">每日一生信–基于保守性和规则性的预测方法SIFT和PolyPhen</a></p>
 <p>（3）<a href="http://blog.csdn.net/g863402758/article/details/75304391" target="_blank" rel="external">annovar对人类基因组和非人类基因组variants注释流程</a></p>
@@ -788,7 +904,7 @@ annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput 
     <link href="https:///AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/"/>
     <id>https:///AnJingwd.github.io/2018/01/10/RNA-seq质控/</id>
     <published>2018-01-10T13:39:44.000Z</published>
-    <updated>2018-01-15T13:37:25.766Z</updated>
+    <updated>2018-03-11T01:51:38.010Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">RNA-seq质控：去除低质量reads，adapter以及rRNA</blockquote>
 
@@ -847,6 +963,19 @@ time $trim_galore \
 $sample_r1 $sample_r2
 </code></pre><p><strong>注：如果No overrepresented sequences，但Adapter Content未黄色警告，可以对于adapter和adapter2两个参数都可以用 –illumina 代替，表示 first 13bp of the Illumina universal adapter AGATCGGAAGAGC</strong></p>
 <p>使用参考：<a href="http://overviewdifferentialexpression.blogspot.com/2014/02/quality-control-using-trim-galore.html" target="_blank" rel="external">Quality Control using Trim Galore: How to run trim galore?</a></p>
+<p>如果使用Trimmomatic可以参考以下命令：</p>
+<pre><code>time java -Xmx${mythread}g -jar $Trimmomatic \
+PE -phred33 \
+-threads $mythread \
+$sample_r1 $sample_r2 \
+$trim/${sample}_paired.r1.fq.gz $trim/${sample}_unpaired.r1.fq.gz $trim/${sample}_paired.r2.fq.gz $trim/${sample}_unpaired.r2.fq.gz \
+ILLUMINACLIP: $Trimmomatic/adapters/TruSeq3-PE-2.fa:2:30:10 \
+LEADING:5 TRAILING:5 SLIDINGWINDOW:4:5 MINLEN:25 \
+2&gt; $trim/Trimmed.log
+</code></pre><p><strong>在Trimmomatic安装目录下有个adapter目录，其中TruSeq2适用于旧款测序仪的adapter序列的去除，而TruSeq3适用于Miseq,Hiseq等新款测序仪adapter序列的去除</strong></p>
+<h2 id="做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐"><a href="#做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐" class="headerlink" title="做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐"></a>做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐</h2><p>MultiQC: summarize analysis results for multiple tools and samples in a single report</p>
+<p><a href="https://github.com/ewels/MultiQC" target="_blank" rel="external">ewels/MultiQC</a></p>
+<p><a href="http://www.multiqc.info/docs/#coding-with-multiqc" target="_blank" rel="external">Using MultiQC manual</a></p>
 <h1 id="去除核糖体rRNA"><a href="#去除核糖体rRNA" class="headerlink" title="去除核糖体rRNA"></a>去除核糖体rRNA</h1><p>对于总RNA建库测序的RNA-seq实验设计，rRNA将占总数据量的95%左右，如果不去除，将严重影响比对率及下游分析。</p>
 <p><a href="http://bioinfo.lifl.fr/sortmerna/sortmerna.php" target="_blank" rel="external">SortMeRNA官网</a>；<a href="http://bioinfo.lifl.fr/RNA/sortmerna/code/SortMeRNA-user-manual-v2.1.pdf" target="_blank" rel="external">SortMeRNA User Manual v2.1.pdf</a></p>
 <h2 id="建索引"><a href="#建索引" class="headerlink" title="建索引"></a>建索引</h2><pre><code>sortmerna_REF=/home/wangdong/miniconda3/sortmerna_db/rRNA_databases
@@ -897,6 +1026,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
 <p>（5）<a href="https://www.bits.vib.be/training/328" target="_blank" rel="external">RNA-Seq analysis for differential expression in GenePattern</a> <a href="http://data.bits.vib.be/pub/trainingen/GenePattern/genepattern.pdf" target="_blank" rel="external">Slides（推荐）</a></p>
 <p>（6）<a href="https://woaielf.github.io/2016/11/16/RNA-seq/" target="_blank" rel="external">RNA-seq分析流程思维导图</a></p>
 <p>（7）<a href="http://www.bio-info-trainee.com/2275.html" target="_blank" rel="external">一个RNA-seq的反思</a></p>
+<p>（8）<a href="https://mp.weixin.qq.com/s/lq3X3U03ozdkZGfcGNzNMg" target="_blank" rel="external">从零开始完整学习全基因组测序数据分析：第3节 数据质控</a></p>
 ]]></content>
     
     <summary type="html">
@@ -917,7 +1047,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
     <link href="https:///AnJingwd.github.io/2017/12/26/GATK%E5%8F%98%E5%BC%82%E6%A3%80%E6%B5%8B%E6%A6%82%E8%BF%B0/"/>
     <id>https:///AnJingwd.github.io/2017/12/26/GATK变异检测概述/</id>
     <published>2017-12-26T12:58:54.000Z</published>
-    <updated>2018-02-07T13:44:57.102Z</updated>
+    <updated>2018-03-11T00:49:20.278Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">变异检测概述</blockquote>
 
@@ -1216,6 +1346,16 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
 <p><img src="https://i.imgur.com/oDZl1f7.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/p69fkwu.jpg" alt=""></p>
 <p>具体参考：<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=6308" target="_blank" rel="external">Evaluating the quality of a variant callset</a></p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>生物信息中，一旦涉及到 fastq 数据的处理，通常都要消耗大量内存、CPU 和时间。所以，在正式运行任务之前，建议先从整体数据中抽取一部分小数据进行测试。如何从 fastq 文件中随机抽取数据。使用的工具是 seqtk。</p>
+<p>安装：conda install seqtk</p>
+<p>使用：</p>
+<p>Usage:   seqtk sample [-2] [-s seed=11] <in.fq> <frac>|<number></number></frac></in.fq></p>
+<p>Options: -s INT       RNG seed [11]<br>         -2           2-pass mode: twice as slow but with much reduced memory</p>
+<p>[]中的是可选参数，&lt;&gt; 中的是必需参数。<br>[-2] 内存较小的服务器上运行时，设置此参数。<br>[-s] 随机数的种子。如果是 Pair-end 数据，需要保证 read1 和 read2 的种子一致，才能抽到相同的raeds。默认是 11。<br>[in.fq] 输入文件</p>
+<p><frac|number>可以输入要抽取的比例或 reads 条数。</frac|number></p>
+<p>seqtk sample -s100 read1.fastq.gz 10000 | gzip - &gt; sub1.fastq.gz<br>seqtk sample -s100 read2.fastq.gz 10000 | gzip - &gt; sub2.fastq.gz</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/awdjoXRYobrQAbXmAp3C0g" target="_blank" rel="external">从零开始完整学习全基因组测序数据分析：第4节 构建WGS主流程</a></p>
+<p>（2）<a href="http://www.cureffi.org/2012/09/19/exome-sequencing-pipeline-using-gatk/" target="_blank" rel="external">Exome sequencing pipeline using GATK</a></p>
 ]]></content>
     
     <summary type="html">
@@ -1824,7 +1964,7 @@ library(rmarkdown)
     <link href="https:///AnJingwd.github.io/2017/10/29/%E8%AE%BE%E8%AE%A1%E5%8F%8A%E6%8C%91%E9%80%89%E6%8D%95%E8%8E%B7%E6%B5%8B%E5%BA%8F%E6%8E%A2%E9%92%88%EF%BC%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E8%A6%86%E7%9B%96%E5%BA%A6/"/>
     <id>https:///AnJingwd.github.io/2017/10/29/设计及挑选捕获测序探针，并计算覆盖度/</id>
     <published>2017-10-29T04:17:18.000Z</published>
-    <updated>2017-10-30T11:53:19.208Z</updated>
+    <updated>2018-03-05T01:30:46.905Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">使用bedtools进行捕获测序引物的筛选并计算覆盖度</blockquote>
 
@@ -1878,7 +2018,7 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
 <li>将A组合B组引物保留的部分引物合并，同时整理出A,B两组引物都没有覆盖的目标区域。</li>
 </ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#step1</span></div><div class="line">bedtools intersect -a target.bed -b primer20.bed -wao &gt; primer20_result.txt </div><div class="line">awk <span class="string">'$6-$5&gt;250 &#123;print $1,$2,$3&#125;'</span> primer20_result.txt &gt; target_region_of_primer20_up250.bed</div><div class="line"></div><div class="line"><span class="comment">#step2</span></div><div class="line">bedtools intersect -a target_region_of_primer20_up250.bed -b primer24.bed -wao &gt; primer24_result.txt</div><div class="line"></div><div class="line"><span class="comment">#step3</span></div><div class="line">primer20=($(cat primer20_reserved.txt));<span class="keyword">for</span> primer20 <span class="keyword">in</span> <span class="variable">$&#123;primer20[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer20&#125;</span>"</span> primer20_original.txt &gt;&gt;primer20_reserved_result.txt;<span class="keyword">done</span></div><div class="line"></div><div class="line">primer24=($(cat primer24_reserved.txt));<span class="keyword">for</span> primer24 <span class="keyword">in</span> <span class="variable">$&#123;primer24[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer24&#125;</span>"</span> primer24_original.txt &gt;&gt;primer24_reserved_result.txt;<span class="keyword">done</span></div></pre></td></tr></table></figure>
-<h1 id="根据targete-bed和primer20-bed计算覆盖度"><a href="#根据targete-bed和primer20-bed计算覆盖度" class="headerlink" title="根据targete.bed和primer20.bed计算覆盖度"></a>根据targete.bed和primer20.bed计算覆盖度</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(1)检验bed区间是否有重叠</div><div class="line"></div><div class="line">length_sum1=`awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span> target.bed |tail -n 1`</div><div class="line">length_sum2=`sort -k1,1 -k2,2n target.bed |bedtools merge -i | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span>|tail -n 1`</div><div class="line"></div><div class="line"><span class="comment">#如果length_sum1 &gt;  length_sum2,有重叠；如果length_sum1 = length_sum2,五重叠</span></div><div class="line"><span class="comment">#所以target.bed无重叠，primer20和primer24有重叠</span></div><div class="line"></div><div class="line">(2)先用bedtools工具得到primer20的merge后的bed文件，然后与target.bed查看覆盖碱基数，并求和</div><div class="line">sort -k1,1 -k2,2n primer20.bed|bedtools merge -i &gt; primer20_merge.bed</div><div class="line">length_sum3=`bedtools intersect -a target.bed -b primer20_merge.bed -wao | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$7&#125;&#123;print x&#125;'</span> |tail -n 1`  </div><div class="line"></div><div class="line">coverage = length_sum3/length_sum1*100</div></pre></td></tr></table></figure>
+<h1 id="根据targete-bed和primer20-bed计算覆盖度"><a href="#根据targete-bed和primer20-bed计算覆盖度" class="headerlink" title="根据targete.bed和primer20.bed计算覆盖度"></a>根据targete.bed和primer20.bed计算覆盖度</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(1)检验bed区间是否有重叠</div><div class="line"></div><div class="line">length_sum1=`awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span> target.bed |tail -n 1`</div><div class="line"></div><div class="line">length_sum2=`sort -k1,1 -k2,2n target.bed |bedtools merge -i | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span>|tail -n 1`</div><div class="line"></div><div class="line"><span class="comment">#如果length_sum1 &gt;  length_sum2,有重叠；如果length_sum1 = length_sum2,无重叠</span></div><div class="line"></div><div class="line"><span class="comment">#所以target.bed无重叠，primer20和primer24有重叠</span></div><div class="line"></div><div class="line">(2)先用bedtools工具得到primer20的merge后的bed文件，然后与target.bed查看覆盖碱基数，并求和</div><div class="line"></div><div class="line">sort -k1,1 -k2,2n primer20.bed|bedtools merge -i &gt; primer20_merge.bed</div><div class="line">length_sum3=`bedtools intersect -a target.bed -b primer20_merge.bed -wao | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$7&#125;&#123;print x&#125;'</span> |tail -n 1`  </div><div class="line"></div><div class="line">coverage = length_sum3/length_sum1*100</div></pre></td></tr></table></figure>
 <h2 id="bedtools-merge功能图示（需要先排序，否则报错）"><a href="#bedtools-merge功能图示（需要先排序，否则报错）" class="headerlink" title="bedtools merge功能图示（需要先排序，否则报错）"></a>bedtools merge功能图示（需要先排序，否则报错）</h2><p><img src="https://i.imgur.com/kAcaOMe.jpg" alt=""></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html" target="_blank" rel="external">染色体位置overlap的计算–bedtools应用</a></p>
 <p>（2）<a href="https://www.biostars.org/p/65558/" target="_blank" rel="external">Tool: Converting Genome Coordinates From One Genome Version To Another (Ucsc Liftover, Ncbi Remap, Ensembl Api)</a></p>
@@ -2121,348 +2261,6 @@ $WORKDIR/support-files/mysql.server stop
     
     
       <category term="R绘图" scheme="https:///AnJingwd.github.io/tags/R%E7%BB%98%E5%9B%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文本挖掘与展示之文献关键词</title>
-    <link href="https:///AnJingwd.github.io/2017/10/01/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98%E4%B8%8E%E5%B1%95%E7%A4%BA%E4%B9%8B%E6%96%87%E7%8C%AE%E5%85%B3%E9%94%AE%E8%AF%8D/"/>
-    <id>https:///AnJingwd.github.io/2017/10/01/文本挖掘与展示之文献关键词/</id>
-    <published>2017-10-01T12:35:02.000Z</published>
-    <updated>2017-10-01T13:37:22.588Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">文本挖掘与展示之文献关键词</blockquote>
-
-<a id="more"></a>
-<p>&emsp;&emsp;想看看Biotechnology and bioengineering杂志上最新的研究方向及研究热点，通过对文献的keywords进行统计分析，然后用词云进行可视化展示，似乎可行。</p>
-<h1 id="文献检索"><a href="#文献检索" class="headerlink" title="文献检索"></a>文献检索</h1><p><img src="https://i.imgur.com/4H6vt8n.png" alt=""></p>
-<p><img src="https://i.imgur.com/1WLX7Cd.png" alt=""></p>
-<p><strong>可以看到我们需要的keywords在\<div>标签下的\<p>段落内，可以通过class = “keywords”进行定位。</p></div></strong></p>
-<p><strong>火狐浏览器另存页面为PubMed-NCBI.html</strong></p>
-<h1 id="利用python的bs4模块解析html文件"><a href="#利用python的bs4模块解析html文件" class="headerlink" title="利用python的bs4模块解析html文件"></a>利用python的bs4模块解析html文件</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"></div><div class="line">os.chdir(<span class="string">r'F:\pycharm_project\bs4'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 读取html文件并生成Soup对象</span></div><div class="line">File = open(<span class="string">'PubMed-NCBI.html'</span>,encoding=<span class="string">'UTF-8'</span>)</div><div class="line">Soup = BeautifulSoup(File,<span class="string">"lxml"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 使用finfAll方法定位class属性为keywords的div块，存入列表</span></div><div class="line">divs = Soup.findAll(<span class="string">'div'</span>, &#123;<span class="string">'class'</span>:<span class="string">'keywords'</span>&#125;)</div><div class="line"></div><div class="line">resultFile = open(<span class="string">r'.\keywords_result.txt'</span>, <span class="string">'w'</span>,encoding=<span class="string">'UTF-8'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 遍历列表divs，将结果keywords写入文件</span></div><div class="line"><span class="keyword">for</span> div <span class="keyword">in</span> divs:</div><div class="line">	resultFile.write(div.p.string + <span class="string">'\n'</span>)</div><div class="line">resultFile.close()</div></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/y03jEpN.png" alt=""></p>
-<h1 id="利用R绘制词云进行展示"><a href="#利用R绘制词云进行展示" class="headerlink" title="利用R绘制词云进行展示"></a>利用R绘制词云进行展示</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#第一步：读取</span></div><div class="line">setwd(<span class="string">"F:/R working directory/wordcloud"</span>)</div><div class="line">text&lt;-scan(<span class="string">"keywords_result.txt"</span>,what=<span class="string">''</span>)</div><div class="line"></div><div class="line"><span class="comment">#第二步：分词</span></div><div class="line"><span class="keyword">library</span>(jiebaR) <span class="comment">##加载包</span></div><div class="line">engine_s&lt;-worker() <span class="comment">##初始化分词器</span></div><div class="line"></div><div class="line">seg&lt;-segment(text,engine_s)   <span class="comment">##分词</span></div><div class="line">head(seg)</div><div class="line"></div><div class="line">f1&lt;-freq(seg)   <span class="comment">##统计词频</span></div><div class="line">head(f1)</div><div class="line"></div><div class="line">f2&lt;-f1[order((f1)[<span class="number">2</span>],decreasing=<span class="literal">TRUE</span>),]</div><div class="line"><span class="comment">##根据词频降序排列</span></div><div class="line">head(f2) </div><div class="line"></div><div class="line"><span class="comment"># 第三步：绘图</span></div><div class="line"><span class="keyword">library</span>(wordcloud2)<span class="comment">#加载wordcloud2包</span></div><div class="line">wordcloud2(f2, size = <span class="number">0.8</span> ,shape=<span class="string">'star'</span>)<span class="comment">#绘制成五角形状词云</span></div><div class="line"></div><div class="line">letterCloud(f2, size=<span class="number">1</span>, word=<span class="string">"生信学习"</span>) <span class="comment">#绘制成字符</span></div></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/hHs8QWY.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/gDAHtyk.jpg" alt=""></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）python网络数据采集.pdf</p>
-<p>（2）<a href="https://mp.weixin.qq.com/s/Zhq7ysZ5wAvWNhPEauhRsQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/Zhq7ysZ5wAvWNhPEauhRsQ</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;文本挖掘与展示之文献关键词&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/categories/python/"/>
-    
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pandas使用入门</title>
-    <link href="https:///AnJingwd.github.io/2017/10/01/pandas%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/"/>
-    <id>https:///AnJingwd.github.io/2017/10/01/pandas使用入门/</id>
-    <published>2017-09-30T16:26:24.000Z</published>
-    <updated>2017-10-01T08:00:29.192Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">pandas使用入门</blockquote>
-
-<a id="more"></a>
-<h1 id="pandas从文件读写数据"><a href="#pandas从文件读写数据" class="headerlink" title="pandas从文件读写数据"></a>pandas从文件读写数据</h1><h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><ul>
-<li><p>读取txt数据（read_table默认以tab键分割数据）</p>
-<p>  Exp_matrix = pd.read_table(r’.\data\game_of_thrones_geneExp.txt’)</p>
-</li>
-<li><p>读取csv数据（read_csv默认以逗号分割数据）</p>
-<p>  Exp_matrix = pd.read_csv(r’.\data\game_of_thrones_geneExp.csv’)</p>
-</li>
-<li><p>读取数量不定的空白符分割的txt文件</p>
-<p>  Exp_matrix = pd.read_table(r’.\data\game_of_thrones_geneExp.txt’,sep=’\s+’)</p>
-</li>
-<li><p>读取Excel文件数据</p>
-<p>  xls_file = pd.ExcelFile(‘data.xls’)&emsp;&emsp; #创建ExcelFile实例</p>
-<p>  table = xls_file.parse( ‘Sheet1’)  &emsp;&emsp; #通过parse读取到DataFrame</p>
-</li>
-</ul>
-<p>（对于使用复杂分隔符或多字符串分隔符的文件，csv模块就无能为力了。这种情况下，就只能使用字符串的split方法或者正则表达式的re.split进行拆分和整理了）</p>
-<h3 id="读数据时关于行列名选项"><a href="#读数据时关于行列名选项" class="headerlink" title="读数据时关于行列名选项"></a>读数据时关于行列名选项</h3><ul>
-<li>header=None  &emsp;&emsp; #指定列名从0开始增长的数</li>
-<li>names=[‘a’,’b’,’c’,’d’,’e’]    &emsp;&emsp; #用names参数指定列名</li>
-<li>index_col=’e’   &emsp;&emsp; #用指定的列作为行名（index）</li>
-</ul>
-<h3 id="逐块读取文本文件"><a href="#逐块读取文本文件" class="headerlink" title="逐块读取文本文件"></a>逐块读取文本文件</h3><ul>
-<li>nrows = 5  &emsp;&emsp; #只读取文件前5行</li>
-</ul>
-<h3 id="其他参数"><a href="#其他参数" class="headerlink" title="其他参数"></a>其他参数</h3><ul>
-<li><p>使用skiprows跳过文件的某些行</p>
-<p>  skiprows = [0,2,3]</p>
-</li>
-</ul>
-<h2 id="写数据至文件"><a href="#写数据至文件" class="headerlink" title="写数据至文件"></a>写数据至文件</h2><ul>
-<li><p>写入csv文件</p>
-<p>  result.to_csv(‘D:\data\out1.csv’)</p>
-</li>
-</ul>
-<h3 id="写数据时关于行列名选项"><a href="#写数据时关于行列名选项" class="headerlink" title="写数据时关于行列名选项"></a>写数据时关于行列名选项</h3><ul>
-<li>index=False  &emsp;&emsp; #舍弃行名</li>
-<li>header=False  &emsp;&emsp; #舍弃列名</li>
-</ul>
-<h3 id="其他参数-1"><a href="#其他参数-1" class="headerlink" title="其他参数"></a>其他参数</h3><ul>
-<li>sep = ‘|’   &emsp;&emsp; #指定分隔符</li>
-<li>na_rep = ‘NULL’ &emsp;&emsp; #指定缺失值表示符号</li>
-</ul>
-<hr>
-<h1 id="数据规整化：清理，转换，合并，重塑"><a href="#数据规整化：清理，转换，合并，重塑" class="headerlink" title="数据规整化：清理，转换，合并，重塑"></a>数据规整化：清理，转换，合并，重塑</h1><h2 id="pandas访问元素"><a href="#pandas访问元素" class="headerlink" title="pandas访问元素"></a>pandas访问元素</h2><ul>
-<li><p>取前8行</p>
-<p>  Exp_matrix_class_3 = Exp_matrix[0:8]</p>
-</li>
-<li><p>取前8列</p>
-<p>  Exp_matrix_class_3 = Exp_matrix[Exp_matrix.columns[0:8]]</p>
-</li>
-<li><p>取前8行，及1-3列</p>
-<p>  Exp_matrix_class_3 = Exp_matrix.iloc[0:8,1:4]</p>
-</li>
-<li><p>根据条件筛选行</p>
-<p>  Exp_matrix[Exp_matrix[‘Class’] == 3]</p>
-</li>
-<li><p>数据框转置</p>
-<p>  Exp_matrix_class_3_T = Exp_matrix_class_3.T</p>
-</li>
-</ul>
-<p>注意：</p>
-<p>(1)行列最小从0开始</p>
-<p>(2)取值区间左闭右开</p>
-<h2 id="Dataframe-排序"><a href="#Dataframe-排序" class="headerlink" title="Dataframe 排序"></a>Dataframe 排序</h2><ul>
-<li>逆序<br>   Exp_matrix_T.sort_values([‘abs_dif_3_5’], ascending=False)</li>
-</ul>
-<h2 id="轴向连接"><a href="#轴向连接" class="headerlink" title="轴向连接"></a>轴向连接</h2><ul>
-<li><p>行合并</p>
-<p>  result = pd.concat([Exp_matrix_T[1:2],result_gene])</p>
-</li>
-<li><p>增加一列</p>
-<p>  Exp_matrix_T[‘abs_dif_3_5’] = abs_dif_3_5</p>
-</li>
-</ul>
-<h1 id="计算描述统计：统计函数"><a href="#计算描述统计：统计函数" class="headerlink" title="计算描述统计：统计函数"></a>计算描述统计：统计函数</h1><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>count</td>
-<td>非NA值的数量</td>
-</tr>
-<tr>
-<td>describe</td>
-<td>针对Series或各DataFrame列计算汇总统计</td>
-</tr>
-<tr>
-<td>min,max</td>
-<td>计算最小值和最大值</td>
-</tr>
-<tr>
-<td>argmin,argmax</td>
-<td>计算能够获取到最小值和最大值的索引位置（整数)</td>
-</tr>
-<tr>
-<td>idxmin,idxmax</td>
-<td>计算能够获取到最小值和最大值的索引值</td>
-</tr>
-<tr>
-<td>quantile</td>
-<td>计算样本的分位数（0到 1） </td>
-</tr>
-<tr>
-<td>sum</td>
-<td>值的总和</td>
-</tr>
-<tr>
-<td>mean</td>
-<td>值的平均数， a.mean() 默认对每一列的数据求平均值；若加上参数a.mean(1)则对每一行求平均值</td>
-</tr>
-<tr>
-<td>media</td>
-<td>值的算术中位数（50%分位数)</td>
-</tr>
-<tr>
-<td>mad</td>
-<td>根据平均值计算平均绝对离差</td>
-</tr>
-<tr>
-<td>var</td>
-<td>样本值的方差 </td>
-</tr>
-<tr>
-<td>std</td>
-<td>样本值的标准差</td>
-</tr>
-<tr>
-<td>skew</td>
-<td>样本值的偏度（三阶矩）</td>
-</tr>
-<tr>
-<td>kurt</td>
-<td>样本值的峰度（四阶矩）</td>
-</tr>
-<tr>
-<td>cumsum</td>
-<td>样本值的累计和</td>
-</tr>
-<tr>
-<td>cummin,cummax</td>
-<td>样本值的累计最大值和累计最小</td>
-</tr>
-<tr>
-<td>cumprod</td>
-<td>样本值的累计积</td>
-</tr>
-<tr>
-<td>diff</td>
-<td>计算一阶差分（对时间序列很有用) </td>
-</tr>
-<tr>
-<td>pct_change</td>
-<td>计算百分数变化</td>
-</tr>
-</tbody>
-</table>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.csdn.net/stevenkwong/article/details/52528616" target="_blank" rel="external">PANDAS 数据合并与重塑（concat篇）</a></p>
-<p>（2）<a href="http://www.cnblogs.com/pengsixiong/p/5050833.html" target="_blank" rel="external">pandas数据的导入与导出</a></p>
-<p>（3）<a href="http://bluewhale.cc/2016-08-06/use-pandas-filter-and-sort.html" target="_blank" rel="external">使用Pandas对数据进行筛选和排序</a></p>
-<p>（4）<a href="http://blog.csdn.net/pipisorry/article/details/25625799" target="_blank" rel="external">pandas小记：pandas计算工具-汇总统计</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;pandas使用入门&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/categories/python/"/>
-    
-    
-      <category term="python" scheme="https:///AnJingwd.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux的CPU拓扑结构（Topology）</title>
-    <link href="https:///AnJingwd.github.io/2017/09/17/linux%E7%9A%84CPU%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84%EF%BC%88Topology%EF%BC%89/"/>
-    <id>https:///AnJingwd.github.io/2017/09/17/linux的CPU拓扑结构（Topology）/</id>
-    <published>2017-09-17T07:46:01.000Z</published>
-    <updated>2017-09-17T10:11:19.431Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">由一次教训驱动的学习</blockquote>
-
-<p>&emsp;&emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”</p>
-<a id="more"></a>
-<p>登陆节点frontend：</p>
-<pre><code>[wangdong@frontend ~]$
-</code></pre><p><img src="https://i.imgur.com/UAY0Lsw.jpg" alt=""></p>
-<h1 id="查看某一节点cpu使用情况"><a href="#查看某一节点cpu使用情况" class="headerlink" title="查看某一节点cpu使用情况"></a>查看某一节点cpu使用情况</h1><p>例如第6节点：</p>
-<pre><code>ssh node6 &apos;top -n 1 -b&apos;| head
-</code></pre><p><img src="https://i.imgur.com/2iByJW3.jpg" alt=""></p>
-<h1 id="批量查看节点cpu使用情况"><a href="#批量查看节点cpu使用情况" class="headerlink" title="批量查看节点cpu使用情况"></a>批量查看节点cpu使用情况</h1><pre><code>for((i=2;i&lt;=8;i++));do ssh node${i} &apos;top -n 1 -b&apos;| head ;done
-</code></pre><h1 id="更换节点"><a href="#更换节点" class="headerlink" title="更换节点"></a>更换节点</h1><p>例如更换至6节点：</p>
-<pre><code>ssh node6
-</code></pre><p>[wangdong@node6 ~]$</p>
-<p><img src="https://i.imgur.com/bQQnZuf.jpg" alt=""></p>
-<p>具体含义：<a href="http://jingyan.baidu.com/article/4d58d5412917cb9dd4e9c0ed.html" target="_blank" rel="external">参考</a></p>
-<h1 id="不切换当前节点，在其他节点运行命令"><a href="#不切换当前节点，在其他节点运行命令" class="headerlink" title="不切换当前节点，在其他节点运行命令"></a>不切换当前节点，在其他节点运行命令</h1><p>直接把命令写在ssh nodeX后面，然后是我习惯于加引号</p>
-<pre><code>ssh nodeX &apos;command&apos;
-</code></pre><p>注意：</p>
-<ul>
-<li>登录节点主要用于日常操作，如提交作业、查看作业运行情况、编辑、编译、压缩/解压缩等</li>
-<li>不要在登录节点不通过作业调度系统直接运行作业，以免影响其余用户的正常使用</li>
-</ul>
-<p>&emsp;&emsp;一般跑小程序不用考虑这些，但大程序消耗内存很大，所以尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了。</p>
-<hr>
-<h1 id="补充命令"><a href="#补充命令" class="headerlink" title="补充命令"></a>补充命令</h1><h2 id="top查看当前运行的任务情况"><a href="#top查看当前运行的任务情况" class="headerlink" title="top查看当前运行的任务情况"></a>top查看当前运行的任务情况</h2><p>&emsp;&emsp;<strong>linux下用top命令查看cpu利用率超过100%。这里显示的所有的cpu加起来的使用率，说明你的CPU是多核，你运行top后按大键盘1看看，可以显示每个cpu的使用率，top里显示的是把所有使用率加起来。</strong></p>
-<p><img src="https://i.imgur.com/eGIFLwf.png" alt=""></p>
-<p>注意：</p>
-<ul>
-<li><p>按下1后可以看到我的机器的CPU是16核的。%Cpu0,,,,,,%Cpu15。</p>
-</li>
-<li><p><strong>若是 0 代表目前该核心空闲， 可以运算作业。 100代表 cpu核心满负荷运算。若某个节点 16 个 CPU 负荷已很高， 换至其余空闲节点运算作业。 建议一个计算节点核心数最多使用 15 核。</strong></p>
-</li>
-</ul>
-<h2 id="查看-CPU-Topology（拓扑结构）："><a href="#查看-CPU-Topology（拓扑结构）：" class="headerlink" title="查看 CPU Topology（拓扑结构）："></a>查看 CPU Topology（拓扑结构）：</h2><pre><code>cat /proc/cpuinfo 
-</code></pre><p><img src="https://i.imgur.com/nmPkqRq.jpg" alt=""></p>
-<p>具体含义：<a href="http://blog.sina.com.cn/s/blog_4a6151550100iowl.html" target="_blank" rel="external">参考</a></p>
-<ul>
-<li><p>逻辑CPU个数：</p>
-<p>  cat /proc/cpuinfo | grep ‘processor’ | wc -l</p>
-</li>
-<li><p>物理CPU个数：</p>
-<p>  cat /proc/cpuinfo | grep ‘physical id’ | sort | uniq | wc -l</p>
-</li>
-<li><p>每个物理CPU中Core的个数：</p>
-<p>  cat /proc/cpuinfo | grep ‘cpu cores’ | wc -l</p>
-</li>
-</ul>
-<p><img src="https://i.imgur.com/xACj6do.jpg" alt=""></p>
-<h2 id="查看内存的总量及消耗"><a href="#查看内存的总量及消耗" class="headerlink" title="查看内存的总量及消耗"></a>查看内存的总量及消耗</h2><pre><code>free -g 
-</code></pre><p><img src="https://i.imgur.com/wAobMtr.jpg" alt=""></p>
-<p>具体含义  <a href="http://blog.csdn.net/gxl0805/article/details/39393709" target="_blank" rel="external">参考</a></p>
-<h1 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h1><h2 id="NUNA与SMP"><a href="#NUNA与SMP" class="headerlink" title="NUNA与SMP"></a>NUNA与SMP</h2><p>&emsp;&emsp;NUMA(Non-Uniform Memory Access，非一致性内存访问)和SMP(Symmetric Multi-Processor，对称多处理器系统)是两种不同的CPU硬件体系架构。</p>
-<p>&emsp;&emsp;SMP的主要特征是共享，所有的CPU共享使用全部资源，例如内存、总线和I/O，多个CPU对称工作，彼此之间没有主次之分，平等地访问共享的资源，这样势必引入资源的竞争问题，从而导致它的扩展内力非常有限。</p>
-<p>&emsp;&emsp;NUMA技术将CPU划分成不同的组（Node)，每个Node由多个CPU组成，并且有独立的本地内存、I/O等资源。Node之间通过互联模块连接和沟通，因此除了本地内存外，每个CPU仍可以访问远端Node的内存，只不过效率会比访问本地内存差一些，我们用Node之间的距离（Distance，抽象的概念）来定义各个Node之间互访资源的开销。</p>
-<p>&emsp;&emsp;如果你只知道CPU这么一个概念，那么是无法理解CPU的拓扑的。<strong>事实上，在NUMA架构下，CPU的概念从大到小依次是：Node、Socket、Core、Processor（Node-&gt;Socket-&gt;Core-&gt;Processor）</strong></p>
-<p>&emsp;&emsp;<strong>随着多核技术的发展，我们将多个CPU封装在一起，这个封装一般被称为Socket（插槽的意思，也有人称之为Packet，不知到哪个更加准确？），而Socket中的每个核心被称为Core。为了进一步提升CPU的处理能力，Intel又引入了HT（Hyper-Threading，超线程)的技术，一个Core打开HT之后，在OS看来就是两个核，当然这个核是逻辑上的概念，所以也被称为Logical Processor，本文简称为Processor。</strong></p>
-<p>&emsp;&emsp;综上所述，<strong>一个NUMA Node可以有一个或者多个Socket，一个多核Socket显然包含多个Core，一个Core如果打开HT则变成两个Logical Processor。</strong> Logical processor只是OS内部看到的，实际上两个Processor还是位于同一个Core上，所以频繁的调度仍可能导致资源竞争，影响性能。</p>
-<h2 id="查看Numa-Node"><a href="#查看Numa-Node" class="headerlink" title="查看Numa Node"></a>查看Numa Node</h2><p>numactl是设定进程NUMA策略的命令行工具，也可以用来查看当前的Nuwa node:</p>
-<pre><code>numactl --hardware
-</code></pre><p><img src="https://i.imgur.com/TCYq3bu.jpg" alt=""></p>
-<p>从上面可以看出本机有两个Numa node，如果要进一步知道一个Node包含哪几个CPU，该怎么办？</p>
-<p>一种方法是通过查看ls /sys/devices/system/node/目录下的信息，例如：</p>
-<p><img src="https://i.imgur.com/3pOcus6.jpg" alt=""></p>
-<p>cpu0  cpu1  cpu10  cpu11  cpu2  cpu3  cpu8  cpu9  cpumap  distance  meminfo  numastat</p>
-<p><strong>可见, node0包含4/5/6/7/12/13/14/15八个Processor（刚好是一个Socket）。</strong></p>
-<h2 id="查看Socket"><a href="#查看Socket" class="headerlink" title="查看Socket"></a>查看Socket</h2><p>&emsp;&emsp;<strong>一个Socket对应主板上的一个插槽，在本文中是指一个CPU封装。在/proc/cpuinfo中的physical id就是Socket的ID，可以从中找到本机到底有多少个Socket，并且每个Socket有那几个Processor。</strong></p>
-<p>1) 查看有几个Socket</p>
-<pre><code>$ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;sort -un&quot;}&apos;
-0
-1
-$ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2 | &quot;sort -un&quot;}&apos; | wc -l
-2
-</code></pre><p>2) 查看每个Socket有几个Processor</p>
-<pre><code>$ grep &apos;physical id&apos; /proc/cpuinfo | awk -F: &apos;{print $2}&apos; | sort | uniq -c
-8  0
-8  1
-</code></pre><p>3) 查看Socket对应那几个Processor</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">awk -F: <span class="string">'&#123; </span></div><div class="line"><span class="string">    if ($1 ~ /processor/) &#123;</span></div><div class="line"><span class="string">        gsub(/ /,"",$2);</span></div><div class="line"><span class="string">        p_id=$2;</span></div><div class="line"><span class="string">    &#125; else if ($1 ~ /physical id/)&#123;</span></div><div class="line"><span class="string">        gsub(/ /,"",$2);</span></div><div class="line"><span class="string">        s_id=$2;</span></div><div class="line"><span class="string">        arr[s_id]=arr[s_id] " " p_id</span></div><div class="line"><span class="string">    &#125;</span></div><div class="line"><span class="string">&#125; </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">END&#123;</span></div><div class="line"><span class="string">    for (i in arr) </span></div><div class="line"><span class="string">        print arr[i];</span></div><div class="line"><span class="string">&#125;'</span> /proc/cpuinfo | cut -c2-</div></pre></td></tr></table></figure>
-<p>0 1 2 3 8 9 10 11<br>4 5 6 7 12 13 14 15</p>
-<h2 id="查看Core"><a href="#查看Core" class="headerlink" title="查看Core"></a>查看Core</h2><p><strong>/proc/cpuinfo文件中的cpu cores表明一个socket中有几个cores，</strong>例如：</p>
-<pre><code>cat /proc/cpuinfo | grep &apos;core&apos;  | sort -u
-</code></pre><p><img src="https://i.imgur.com/acrKbul.jpg" alt=""></p>
-<p><strong>上面的结果说明一个socket有4个cores，它们的id分别为0/1/9/10，根据之前查到的我们的机器有2个socket，所以总共有8个core。</strong></p>
-<h2 id="查看Processor"><a href="#查看Processor" class="headerlink" title="查看Processor"></a>查看Processor</h2><p>&emsp;&emsp;查看Processors的个数就比较简单了，从上面的统计结果中我们已经可以知道有16个Logical processor，不过也可以直接从/proc/cpuinfo文件中获取：</p>
-<pre><code>$ grep &apos;processor&apos; /proc/cpuinfo | wc -l
-16
-</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.bio-info-trainee.com/1028.html" target="_blank" rel="external">http://www.bio-info-trainee.com/1028.html</a></p>
-<p>（2）<a href="http://www.iwhgao.com/2-5-%E9%9B%86%E7%BE%A4%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E7%AE%A1%E7%90%86%E7%AE%80%E4%BB%8B/" target="_blank" rel="external">rabbit gao’s blog</a></p>
-<p>（3）<a href="http://blog.csdn.net/huangshanchun/article/details/44397581" target="_blank" rel="external">http://blog.csdn.net/huangshanchun/article/details/44397581</a></p>
-<p>（4）<a href="http://kodango.com/cpu-topology" target="_blank" rel="external">团子的小窝</a> （推荐）</p>
-<p>（5）<a href="http://tieba.baidu.com/p/1285719732?red_tag=s0690960116" target="_blank" rel="external">http://tieba.baidu.com/p/1285719732?red_tag=s0690960116</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;由一次教训驱动的学习&lt;/blockquote&gt;
-
-&lt;p&gt;&amp;emsp;&amp;emsp;“用服务器的同学注意下，以后请尽量不要在登录节点（frontend）提交任务，实在需要提交任务请注意任务消耗的资源情况，以免内存耗尽导致服务器死机！因为登录节点死机的话其他节点就都无法使用了！”&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/categories/linux/"/>
-    
-    
-      <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
     
   </entry>
   

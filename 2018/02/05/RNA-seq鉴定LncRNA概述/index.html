@@ -111,12 +111,14 @@
 <meta property="og:image" content="https://i.imgur.com/CD5YS69.jpg">
 <meta property="og:image" content="https://i.imgur.com/s2HS5Xp.png">
 <meta property="og:image" content="https://i.imgur.com/NrEDde5.jpg">
+<meta property="og:image" content="https://i.imgur.com/EGF9lzA.jpg">
 <meta property="og:image" content="https://i.imgur.com/kSQJyU6.jpg">
 <meta property="og:image" content="https://i.imgur.com/fSQhvH8.jpg">
 <meta property="og:image" content="https://i.imgur.com/xLkXFAQ.png">
 <meta property="og:image" content="https://i.imgur.com/nDRVJCw.jpg">
 <meta property="og:image" content="https://i.imgur.com/TvTIJhl.jpg">
-<meta property="og:updated_time" content="2018-02-07T14:07:57.819Z">
+<meta property="og:image" content="https://i.imgur.com/lRtkC3t.jpg">
+<meta property="og:updated_time" content="2018-02-22T06:19:50.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNA-seq鉴定LncRNA概述">
 <meta name="twitter:description" content="RNA-seq鉴定LncRNA概述：lncRNA简介，分析pipline，分析软件，结果评估指标">
@@ -463,6 +465,17 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 </tbody>
 </table>
 <p><strong>对已知编码基因的覆盖程度：&gt;60%</strong></p>
+<h3 id="Stringtie用于转录本重构"><a href="#Stringtie用于转录本重构" class="headerlink" title="Stringtie用于转录本重构"></a>Stringtie用于转录本重构</h3><p>两种方式：</p>
+<ol>
+<li>“refernece guided”模式：使用“-G”选项，不带“-e”选项（输出 reference transcripts 和任何 novel transcripts）<strong>推荐</strong></li>
+<li>“de novo”模式：不指定“-G” 和“-e”选项</li>
+</ol>
+<h3 id="Stringtie用于转录本合并"><a href="#Stringtie用于转录本合并" class="headerlink" title="Stringtie用于转录本合并"></a>Stringtie用于转录本合并</h3><p><img src="https://i.imgur.com/EGF9lzA.jpg" alt=""></p>
+<pre><code>stringtie --merge -p 8 -o stringtie_merged.gtf -G $RNA_REF_GTF assembly_GTF_list.txt
+</code></pre><p>Stringtie转录本合并以GTF文件作为输入， merges/assembles在所有RNA-seq样本中都观察到的转录本，为非冗余的转录本集合。该模式适用于多样本RNA-seq差异分析流程中，产生global且unified的转录本集合，用于后续差异基因的分析。</p>
+<h3 id="gffcompare转录本重构评估"><a href="#gffcompare转录本重构评估" class="headerlink" title="gffcompare转录本重构评估"></a>gffcompare转录本重构评估</h3><p>评估转录本组装情况简单的方式可以是统计基因和转录本计数，novel vs known等；或者使用<a href="https://ccb.jhu.edu/software/stringtie/gff.shtml#gffcompare" target="_blank" rel="external">gffcompare program</a>对多样本RNA-seq实验转录本重构进行准确性的计算和比较分析。</p>
+<pre><code>gffcompare –r $mRNA_gtf –G –o merged $Assemble/stringtie_mRNA_merged.gtf
+</code></pre><p><a href="https://github.com/gpertea/gffcompare" target="_blank" rel="external">gffcompare project on Github</a></p>
 <h2 id="转录本定量"><a href="#转录本定量" class="headerlink" title="转录本定量"></a>转录本定量</h2><p>官网：<a href="http://htseq.readthedocs.io/en/release_0.9.1/" target="_blank" rel="external">HTSeq: Analysing high-throughput sequencing data with Python</a></p>
 <ol>
 <li><p><a href="http://bioinformatics.cvr.ac.uk/blog/featurecounts-or-htseq-count/" target="_blank" rel="external">featureCounts or htseq-count?</a></p>
@@ -470,17 +483,35 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 <li><p><a href="htseq-counts跟bedtools的区别">htseq-counts跟bedtools的区别</a></p>
 </li>
 </ol>
-<h2 id="lincRNA鉴定及功能注释"><a href="#lincRNA鉴定及功能注释" class="headerlink" title="lincRNA鉴定及功能注释"></a>lincRNA鉴定及功能注释</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
+<p>具体参数：</p>
+<ol>
+<li><a href="http://blog.csdn.net/herokoking/article/details/78257714" target="_blank" rel="external">htseq-count的使用</a></li>
+</ol>
+<h2 id="lincRNA鉴定"><a href="#lincRNA鉴定" class="headerlink" title="lincRNA鉴定"></a>lincRNA鉴定</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/fSQhvH8.jpg" alt=""></p>
 <ul>
 <li>CNCI：<a href="https://academic.oup.com/nar/article/41/17/e166/2411728" target="_blank" rel="external">文献</a>，<a href="https://github.com/www-bioinfo-org/CNCI" target="_blank" rel="external">github仓库</a></li>
 </ul>
 <p><img src="https://i.imgur.com/xLkXFAQ.png" alt=""></p>
-<ul>
-<li>ncFANs： <a href="https://academic.oup.com/nar/article/39/suppl_2/W118/2506940" target="_blank" rel="external">文献</a>， <a href="https://github.com/www-bioinfo-org/ncFANs" target="_blank" rel="external">github仓库</a></li>
-</ul>
 <p><img src="https://i.imgur.com/nDRVJCw.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/TvTIJhl.jpg" alt=""></p>
+<h2 id="差异表达分析"><a href="#差异表达分析" class="headerlink" title="差异表达分析"></a>差异表达分析</h2><p>参考:<a href="https://mp.weixin.qq.com/s?__biz=MzAxMDkxODM1Ng==&amp;mid=2247485961&amp;idx=1&amp;sn=13dbe5dec3a8b3ccff67bbccc7cebb62&amp;chksm=9b484ab2ac3fc3a41b7653bec30def207d256199c97897ad21f99247be493758c346bc98a00b&amp;scene=21#wechat_redirect" target="_blank" rel="external">lncRNA实战项目-第五步-差异表达的mRNA和lncRNA</a></p>
+<p>对于无重复样本的差异分析有几种方法可以选择，如edgeR，DEGseq和GFOLD等</p>
+<h2 id="功能注释"><a href="#功能注释" class="headerlink" title="功能注释"></a>功能注释</h2><ol>
+<li>David GO（for coding genes）</li>
+<li>ncFANs (for lincRNAs)</li>
+</ol>
+<p><strong>预测长非编码RNA的功能的常用方法：</strong></p>
+<p>1). 基于lncRNA在基因组的位置（顺势调控/反式调控 编码基因）</p>
+<p><img src="https://i.imgur.com/lRtkC3t.jpg" alt=""></p>
+<p>使用UCSC Genome Browser 查看</p>
+<p>2). 基于lncRNA与protein-coding gene的表达量</p>
+<ul>
+<li>基因表达共聚类（heatmap）</li>
+<li>GSEA(lncRNA exp ~ protein-coding exp ~ GO)</li>
+<li>共表达网络 (基因间的表达相关性:ncFANs)</li>
+</ul>
+<p>ncFANs： <a href="https://academic.oup.com/nar/article/39/suppl_2/W118/2506940" target="_blank" rel="external">文献</a>， <a href="https://github.com/www-bioinfo-org/ncFANs" target="_blank" rel="external">github仓库</a></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1） <a href="https://academic.oup.com/bib/article-abstract/18/5/789/2562763?redirectedFrom=fulltext" target="_blank" rel="external">Identification and function annotation of long intervening noncoding RNAs</a></p>
 <p>（2）<a href="https://mp.weixin.qq.com/s/NUEi6oRFL7B3f1FpCD4Xug" target="_blank" rel="external">转录组分析工具哪家强？</a></p>
 
@@ -524,6 +555,10 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2018/02/22/Genetic-Genealogy-in-Practice/" rel="prev" title="Genetic Genealogy in Practice">
+                Genetic Genealogy in Practice <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -623,7 +658,7 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -876,7 +911,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA简介"><span class="nav-number">1.</span> <span class="nav-text">lncRNA简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA特点"><span class="nav-number">2.</span> <span class="nav-text">lncRNA特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析pipline"><span class="nav-number">3.</span> <span class="nav-text">RNA-seq分析pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LncRNA注释GTF文件及fasta文件"><span class="nav-number">4.</span> <span class="nav-text">LncRNA注释GTF文件及fasta文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析软件"><span class="nav-number">5.</span> <span class="nav-text">RNA-seq分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基因组和转录组比对"><span class="nav-number">5.1.</span> <span class="nav-text">基因组和转录组比对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比对质量评估"><span class="nav-number">5.2.</span> <span class="nav-text">比对质量评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录本重构"><span class="nav-number">5.3.</span> <span class="nav-text">转录本重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录本定量"><span class="nav-number">5.4.</span> <span class="nav-text">转录本定量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lincRNA鉴定及功能注释"><span class="nav-number">5.5.</span> <span class="nav-text">lincRNA鉴定及功能注释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA简介"><span class="nav-number">1.</span> <span class="nav-text">lncRNA简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA特点"><span class="nav-number">2.</span> <span class="nav-text">lncRNA特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析pipline"><span class="nav-number">3.</span> <span class="nav-text">RNA-seq分析pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LncRNA注释GTF文件及fasta文件"><span class="nav-number">4.</span> <span class="nav-text">LncRNA注释GTF文件及fasta文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析软件"><span class="nav-number">5.</span> <span class="nav-text">RNA-seq分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基因组和转录组比对"><span class="nav-number">5.1.</span> <span class="nav-text">基因组和转录组比对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比对质量评估"><span class="nav-number">5.2.</span> <span class="nav-text">比对质量评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录本重构"><span class="nav-number">5.3.</span> <span class="nav-text">转录本重构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stringtie用于转录本重构"><span class="nav-number">5.3.1.</span> <span class="nav-text">Stringtie用于转录本重构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stringtie用于转录本合并"><span class="nav-number">5.3.2.</span> <span class="nav-text">Stringtie用于转录本合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gffcompare转录本重构评估"><span class="nav-number">5.3.3.</span> <span class="nav-text">gffcompare转录本重构评估</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录本定量"><span class="nav-number">5.4.</span> <span class="nav-text">转录本定量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lincRNA鉴定"><span class="nav-number">5.5.</span> <span class="nav-text">lincRNA鉴定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差异表达分析"><span class="nav-number">5.6.</span> <span class="nav-text">差异表达分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能注释"><span class="nav-number">5.7.</span> <span class="nav-text">功能注释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -924,7 +959,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共62.6k字</span>
+  <span class="post-count">博客全站共64.7k字</span>
 </div>
 
 <div class="powered-by">

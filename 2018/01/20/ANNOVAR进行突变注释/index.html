@@ -107,7 +107,9 @@
 <meta property="og:image" content="https://i.imgur.com/UGMNkMZ.jpg">
 <meta property="og:image" content="https://i.imgur.com/mjzONDT.jpg">
 <meta property="og:image" content="https://i.imgur.com/rISPcMC.jpg">
-<meta property="og:updated_time" content="2018-01-21T01:53:20.743Z">
+<meta property="og:image" content="https://i.imgur.com/vzD3s1M.jpg">
+<meta property="og:image" content="https://i.imgur.com/NTrEEp8.png">
+<meta property="og:updated_time" content="2018-03-06T12:43:23.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ANNOVAR进行突变注释">
 <meta name="twitter:description" content="ANNOVAR进行突变注释">
@@ -667,6 +669,36 @@ annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput 
 <li>一般而言，建议使用one popular prediction score (such as SIFT) 和 one meta-score (such as metaSVM)预测来判断突变是否是有害的</li>
 <li>对于 noncoding variants的有害性预测推荐使用one popular prediction score (such as PhyloP) 和 one meta-score (such as CADD)</li>
 </ul>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>vcf文件经过Annovar注释后突变个数应该相同，但对于原vcf文件类似如下情况，Annovar则会分别注释成两行</p>
+<p><img src="https://i.imgur.com/vzD3s1M.jpg" alt=""></p>
+<p>在Annovar官网的FAQ已经给出解释：</p>
+<p><img src="https://i.imgur.com/NTrEEp8.png" alt=""></p>
+<p>这里需要重新了解下vcf文件格式，（<a href="http://annovar.openbioinformatics.org/en/latest/articles/VCF/" target="_blank" rel="external">Annovar VCF Processing Guide</a>）：</p>
+<ol>
+<li>GT：样品的基因型（genotype）。两个数字中间用’/‘分 开，这两个数字表示双倍体的sample的基因型。0 表示样品中有ref的allele； 1 表示样品中variant的allele； <strong>2表示有第二个variant的allele</strong></li>
+<li>VCF文件是描述位点的格式文件。尽管称作变异检出格式，但并不是为了描述变异或者基因型检出。其可以作为包含基因型检出（甚至变异）的一种选择，并且对于很多肺二倍体物种或者喝多情况（例如线粒体或者人的肿瘤），其有时候甚至不能说是包含基因型检出。但是，很多变异检出软件的目的是为了产生基因型检出；它们使用VCF作为输出文件，但是这并不意味着VCF文件是未存储变异检出而专门设计的。</li>
+<li>因为VCF是一个位点描述文件，具有很多的结果。首先，并不是一行对应着一个变异。因为多个变异能在相同的位点，VCF文件的一行原则上可以描述多个突变（包含野生型非突变allele），和多种类型的基因型检出。例如，看下面这来自VCF文件的一行、其有8个tab键分割的列。在ALT列，具有数个逗号分割的改变的alleles。因此在单行上，数个插入和删除，以及一个单核苷酸（SNV）突变同时存在。</li>
+</ol>
+<p>1 112240038 . CTTT CTTTT,CTTTTT,CTTA,CTT,CT,C . PASS AC=986,3,1249,3,127,3;AF=0.196885,0.000599042,0.249401,0.000599042,0.0253594,0.000599042</p>
+<p>很多Annovar使用者喜欢保留VCF文件中的突变注释信息（通过INFO列）。因此对于上述这种情况，我们需要在相同行的INFO列加注释信息到所有的6个allels，并且确保使用者知道相应的注释对应相应的allele</p>
+<ol>
+<li>VCF可以hijack你的变异，使得SNVs变为多核苷酸突变，并且使得简单的indels变的复杂。这将对注释造成困难，举上述的 CTTT-&gt;CTTA 改变作为例子，其应该是简单的T&gt;A （SNV），但是因为deletion/insertion hijack the locus，其被写为CTTT-&gt;CTTA 而不是T-&gt;A 。考虑到单个allele频率数据库（例如千人基因组项目频率数据库）将只具有 T-&gt;A 但没有 CTTT-&gt;CTTA，然后这个变异通过注释软件注释后将被遗漏，甚至其确实在1000G中被观察到过。</li>
+</ol>
+<p>同样的，CTTT-&gt;CTTTT 变异可能在数据库中没有记录，因为C&gt;CT可能是更合适的记录这个变异的方式。</p>
+<ol>
+<li>目前为止还没有描述indel的普遍认同的特定方式。很多使用者偏好做left-normalization（变异开始的位置应该尽可能向左，直至不能再左，这样数目越少越好）。但是HGVS明确指明了left-normalization将被用在cDNA（mRNA）的坐标上,这意味着 right-normalization被要求使用在人的基因组一半的基因上。</li>
+<li>在阅读了这些事实后，现在的问题时我们应该如何注释VCF文件来确保最准确的结果呢？</li>
+</ol>
+<p>因为left-normalization变得越来越流行，我的建议是是就使用left-normalization。我的第二个建议是各个VCF行仅描述一个变异，以便indel不能隐藏SNPs，以此确保1对1的和数据库匹配。</p>
+<p>我作为ANNOVAR开发者决定去预处理所有的1000G文件，ESP6500si文件和dbSNP文件，以便一行包含一个变异，使得每个变异都采取 left-normalized。已经更新的数据再2014年的12月可以获得了。</p>
+<p>作为使用者我们应该这样做：（1）分割VCF文件确保每一行只包含一个变异；（2）left-normalize所有的VCF文件； （3）使用ANNOVAR注释</p>
+<p>所以使用命令：</p>
+<p>bcftools norm -m-both -o ex1.step1.vcf ex1.vcf.gz</p>
+<p>bcftools norm -f human_g1k_v37.fasta -o ex1.step2.vcf ex1.step1.vcf</p>
+<p>第一个命令分割多allels变异检出为单独的行，第二个命令运行真正的 left-normalization。（有时候第一个命令可能出现没有变异能被分解，尽管在文件中存在这些变异，这种情况下，你可以使用<a href="http://genome.sph.umich.edu/wiki/Vt" target="_blank" rel="external">vt program</a> 代替）</p>
+<ol>
+<li>目前使用left-normalized的数据集包括：avsnp138，avsnp142，clinvar_20150330<br>，1000g2014oct，exac03，esp6500siv2</li>
+</ol>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.ncbi.nlm.nih.gov/pubmed/26379229" target="_blank" rel="external">Genomic variant annotation and prioritization with ANNOVAR and wANNOVAR</a></p>
 <p>（2）<a href="http://blog.sina.com.cn/s/blog_670445240101j0pa.html" target="_blank" rel="external">每日一生信–基于保守性和规则性的预测方法SIFT和PolyPhen</a></p>
 <p>（3）<a href="http://blog.csdn.net/g863402758/article/details/75304391" target="_blank" rel="external">annovar对人类基因组和非人类基因组variants注释流程</a></p>
@@ -821,7 +853,7 @@ annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput 
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1074,7 +1106,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ANNOVAR简介"><span class="nav-number">1.</span> <span class="nav-text">ANNOVAR简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载（无需安转，但需要安装perl环境）"><span class="nav-number">2.</span> <span class="nav-text">下载（无需安转，但需要安装perl环境）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用注释数据库下载"><span class="nav-number">3.</span> <span class="nav-text">常用注释数据库下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变异注释"><span class="nav-number">4.</span> <span class="nav-text">变异注释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ANNOVER-input-file"><span class="nav-number">4.1.</span> <span class="nav-text">ANNOVER input file</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对于ANNOVAR新手，最方便使用table-annovar-pl程序"><span class="nav-number">4.2.</span> <span class="nav-text">对于ANNOVAR新手，最方便使用table_annovar.pl程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释"><span class="nav-number">4.2.1.</span> <span class="nav-text">参数解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#annotate-variation-pl是-ANNOVAR的核心程序"><span class="nav-number">4.3.</span> <span class="nav-text">annotate_variation.pl是 ANNOVAR的核心程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释及技术问题"><span class="nav-number">4.3.1.</span> <span class="nav-text">参数解释及技术问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注释结果解释"><span class="nav-number">5.</span> <span class="nav-text">注释结果解释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表头含义"><span class="nav-number">5.1.</span> <span class="nav-text">表头含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各列内容及含义"><span class="nav-number">5.2.</span> <span class="nav-text">各列内容及含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Func-refGene列具体含义"><span class="nav-number">5.3.</span> <span class="nav-text">Func.refGene列具体含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ExonicFunc-refGene列具体含义"><span class="nav-number">5.4.</span> <span class="nav-text">ExonicFunc.refGene列具体含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-unified-annotation-format"><span class="nav-number">5.5.</span> <span class="nav-text">A unified annotation format</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#突变有害性注释结果选择建议（ANNOVER作者）"><span class="nav-number">6.</span> <span class="nav-text">突变有害性注释结果选择建议（ANNOVER作者）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ANNOVAR简介"><span class="nav-number">1.</span> <span class="nav-text">ANNOVAR简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载（无需安转，但需要安装perl环境）"><span class="nav-number">2.</span> <span class="nav-text">下载（无需安转，但需要安装perl环境）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用注释数据库下载"><span class="nav-number">3.</span> <span class="nav-text">常用注释数据库下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变异注释"><span class="nav-number">4.</span> <span class="nav-text">变异注释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ANNOVER-input-file"><span class="nav-number">4.1.</span> <span class="nav-text">ANNOVER input file</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对于ANNOVAR新手，最方便使用table-annovar-pl程序"><span class="nav-number">4.2.</span> <span class="nav-text">对于ANNOVAR新手，最方便使用table_annovar.pl程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释"><span class="nav-number">4.2.1.</span> <span class="nav-text">参数解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#annotate-variation-pl是-ANNOVAR的核心程序"><span class="nav-number">4.3.</span> <span class="nav-text">annotate_variation.pl是 ANNOVAR的核心程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释及技术问题"><span class="nav-number">4.3.1.</span> <span class="nav-text">参数解释及技术问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注释结果解释"><span class="nav-number">5.</span> <span class="nav-text">注释结果解释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表头含义"><span class="nav-number">5.1.</span> <span class="nav-text">表头含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各列内容及含义"><span class="nav-number">5.2.</span> <span class="nav-text">各列内容及含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Func-refGene列具体含义"><span class="nav-number">5.3.</span> <span class="nav-text">Func.refGene列具体含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ExonicFunc-refGene列具体含义"><span class="nav-number">5.4.</span> <span class="nav-text">ExonicFunc.refGene列具体含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-unified-annotation-format"><span class="nav-number">5.5.</span> <span class="nav-text">A unified annotation format</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#突变有害性注释结果选择建议（ANNOVER作者）"><span class="nav-number">6.</span> <span class="nav-text">突变有害性注释结果选择建议（ANNOVER作者）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充"><span class="nav-number">7.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1122,7 +1154,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共62.6k字</span>
+  <span class="post-count">博客全站共64.7k字</span>
 </div>
 
 <div class="powered-by">
