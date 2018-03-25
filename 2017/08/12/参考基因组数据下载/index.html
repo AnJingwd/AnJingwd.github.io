@@ -105,7 +105,7 @@
 <meta property="og:description" content="&amp;emsp;&amp;emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/dAYlW8e.png">
-<meta property="og:updated_time" content="2017-10-29T10:12:46.521Z">
+<meta property="og:updated_time" content="2018-03-17T02:23:04.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基因组数据下载">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;常用到的基因组数据格式括:fasta,fastq,gff,GenBank format, EMBL format；常用的基因组数据库包括：（1）Ensembl基因组注释数据库；（2）UCUS基因组浏览器">
@@ -611,6 +611,8 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
 <li>由于抽取数据脚本执行超时（&gt;10min）或者下载地的网络不佳，下载下来的文件可能会不完整；</li>
 <li>获取3’ UTR等序列时，若直接将track指定为系统自带的annotation，会有概率出现序列的start与annotation中不符的情况（0-based和1-based的杂合），建议先下载BED文件，然后通过前述的“获取指定范围的序列”来下载序列。</li>
 </ul>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p><a href="https://support.illumina.com/sequencing/sequencing_software/igenome.html" target="_blank" rel="external"> iGenomes</a></p>
+<p>The iGenomes are a collection of reference sequences and annotation files for commonly analyzed organisms. The files have been downloaded from Ensembl, NCBI, or UCSC, and chromosome names have been changed to be simple and consistent with their download source.</p>
 <h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>（1）为什么序列分析要repeatmasker：</p>
 <p><a href="http://www.dxy.cn/bbs/topic/9424163" target="_blank" rel="external">http://www.dxy.cn/bbs/topic/9424163</a></p>
 <p>（2）博耘生物：</p>
@@ -773,7 +775,7 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -784,7 +786,7 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -795,7 +797,7 @@ cut -f 2- refGene.txt | genePredToGtf -utr -source=hg38 file stdin refGene.gtf
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1026,7 +1028,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）通过Ensembl基因组注释数据库下载"><span class="nav-number">1.</span> <span class="nav-text">（1）通过Ensembl基因组注释数据库下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基因组序列下载"><span class="nav-number">1.1.</span> <span class="nav-text">基因组序列下载:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举个栗子"><span class="nav-number">1.2.</span> <span class="nav-text">举个栗子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要这样做呢？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要这样做呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#除基因组注释文件（GTF或者GFF）下载"><span class="nav-number">1.4.</span> <span class="nav-text">除基因组注释文件（GTF或者GFF）下载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定了需要下载什么后，那如何下载呢？"><span class="nav-number">2.</span> <span class="nav-text">确定了需要下载什么后，那如何下载呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）通过UCSC下载基因组注释数据"><span class="nav-number">3.</span> <span class="nav-text">（2）通过UCSC下载基因组注释数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）从FTP站点获取"><span class="nav-number">4.</span> <span class="nav-text">（1）从FTP站点获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）从Table-Browser获取"><span class="nav-number">5.</span> <span class="nav-text">（2）从Table Browser获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">6.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）通过Ensembl基因组注释数据库下载"><span class="nav-number">1.</span> <span class="nav-text">（1）通过Ensembl基因组注释数据库下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基因组序列下载"><span class="nav-number">1.1.</span> <span class="nav-text">基因组序列下载:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举个栗子"><span class="nav-number">1.2.</span> <span class="nav-text">举个栗子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要这样做呢？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要这样做呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#除基因组注释文件（GTF或者GFF）下载"><span class="nav-number">1.4.</span> <span class="nav-text">除基因组注释文件（GTF或者GFF）下载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定了需要下载什么后，那如何下载呢？"><span class="nav-number">2.</span> <span class="nav-text">确定了需要下载什么后，那如何下载呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）通过UCSC下载基因组注释数据"><span class="nav-number">3.</span> <span class="nav-text">（2）通过UCSC下载基因组注释数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）从FTP站点获取"><span class="nav-number">4.</span> <span class="nav-text">（1）从FTP站点获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）从Table-Browser获取"><span class="nav-number">5.</span> <span class="nav-text">（2）从Table Browser获取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充"><span class="nav-number"></span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">1.</span> <span class="nav-text">参考：</span></a></li></ol></div>
             
 
           </div>
@@ -1074,7 +1076,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共64.9k字</span>
+  <span class="post-count">博客全站共65.5k字</span>
 </div>
 
 <div class="powered-by">
