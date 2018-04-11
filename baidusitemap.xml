@@ -4,19 +4,39 @@
 
     
   <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/03/25/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%B1%82%E5%BA%8F%E5%88%97%E6%9C%80%E5%A4%A7%E5%BE%97%E5%88%86%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97/</loc>
-    <lastmod>2018-03-25T13:41:13.002Z</lastmod>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/03/12/lncRNApipe%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-04-11T10:31:56.840Z</lastmod>
     <data>
         <display>
-        <title>动态规划求序列最大得分连续子序列</title>
-        <pubTime>2018-03-25T12:31:19.000Z</pubTime>
+        <title>lncRNApipe安装及使用</title>
+        <pubTime>2018-03-12T11:28:53.000Z</pubTime>
         
-        <tag>算法</tag>
+        <tag>NGS</tag>
          
          
            
              
-              <breadCrumb title="算法" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/02/13/gcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2018-04-09T13:21:32.073Z</lastmod>
+    <data>
+        <display>
+        <title>gcc5.2编译安装</title>
+        <pubTime>2018-02-13T05:14:19.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
           
         </display>
     </data>
@@ -25,7 +45,7 @@
     
   <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    <lastmod>2018-03-17T02:34:43.091Z</lastmod>
+    <lastmod>2018-04-06T10:03:39.111Z</lastmod>
     <data>
         <display>
         <title>常用链接（持续更新）</title>
@@ -37,6 +57,106 @@
            
              
               <breadCrumb title="常用链接" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/26/IGV%E6%89%B9%E9%87%8F%E6%9F%A5%E7%9C%8B%E5%8F%98%E5%BC%82/</loc>
+    <lastmod>2018-04-03T02:52:51.291Z</lastmod>
+    <data>
+        <display>
+        <title>IGV批量查看变异</title>
+        <pubTime>2018-01-26T03:21:34.000Z</pubTime>
+        
+        <tag>NGS</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/12/26/GATK3.8%E5%88%86%E6%9E%90%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2018-04-01T10:10:29.537Z</lastmod>
+    <data>
+        <display>
+        <title>GATK3.8分析环境搭建</title>
+        <pubTime>2017-12-26T10:15:59.000Z</pubTime>
+        
+        <tag>NGS</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/</loc>
+    <lastmod>2018-04-01T06:49:52.475Z</lastmod>
+    <data>
+        <display>
+        <title>RNA-seq质控</title>
+        <pubTime>2018-01-10T13:39:44.000Z</pubTime>
+        
+        <tag>NGS</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/</loc>
+    <lastmod>2018-03-27T11:20:07.177Z</lastmod>
+    <data>
+        <display>
+        <title>查看R包源码及linux下编译安装R</title>
+        <pubTime>2018-01-28T14:08:43.000Z</pubTime>
+        
+        <tag>R</tag>
+         
+         
+           
+             
+              <breadCrumb title="R" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/R/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/03/25/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%B1%82%E5%BA%8F%E5%88%97%E6%9C%80%E5%A4%A7%E5%BE%97%E5%88%86%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97/</loc>
+    <lastmod>2018-03-25T13:53:52.334Z</lastmod>
+    <data>
+        <display>
+        <title>动态规划求序列最大得分连续子序列</title>
+        <pubTime>2018-03-25T12:31:19.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="算法" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E7%AE%97%E6%B3%95/"/>
           
         </display>
     </data>
@@ -73,46 +193,6 @@
         
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/02/13/gcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/</loc>
-    <lastmod>2018-03-13T12:12:23.336Z</lastmod>
-    <data>
-        <display>
-        <title>gcc5.2编译安装</title>
-        <pubTime>2018-02-13T05:14:19.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/</loc>
-    <lastmod>2018-03-11T01:51:38.010Z</lastmod>
-    <data>
-        <display>
-        <title>RNA-seq质控</title>
-        <pubTime>2018-01-10T13:39:44.000Z</pubTime>
-        
-        <tag>NGS</tag>
-         
-         
-           
-             
-              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
-          
         </display>
     </data>
     </url>
@@ -248,66 +328,6 @@
         
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/26/IGV%E6%89%B9%E9%87%8F%E6%9F%A5%E7%9C%8B%E5%8F%98%E5%BC%82/</loc>
-    <lastmod>2018-02-07T11:28:17.623Z</lastmod>
-    <data>
-        <display>
-        <title>IGV批量查看变异</title>
-        <pubTime>2018-01-26T03:21:34.000Z</pubTime>
-        
-        <tag>NGS</tag>
-         
-         
-           
-             
-              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/12/26/GATK3.8%E5%88%86%E6%9E%90%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2018-02-03T09:20:38.673Z</lastmod>
-    <data>
-        <display>
-        <title>GATK3.8分析环境搭建</title>
-        <pubTime>2017-12-26T10:15:59.000Z</pubTime>
-        
-        <tag>NGS</tag>
-         
-         
-           
-             
-              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/</loc>
-    <lastmod>2018-01-28T14:38:44.399Z</lastmod>
-    <data>
-        <display>
-        <title>查看R包源码及linux下编译安装R</title>
-        <pubTime>2018-01-28T14:08:43.000Z</pubTime>
-        
-        <tag>R</tag>
-         
-         
-           
-             
-              <breadCrumb title="R" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/R/"/>
-          
         </display>
     </data>
     </url>

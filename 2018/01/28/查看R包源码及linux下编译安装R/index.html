@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/6I5TzWq.jpg">
 <meta property="og:image" content="https://i.imgur.com/4r5imUK.jpg">
-<meta property="og:updated_time" content="2018-01-28T14:38:44.399Z">
+<meta property="og:updated_time" content="2018-03-27T11:20:07.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查看R包源码及linux下编译安装R">
 <meta name="twitter:description" content="查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R">
@@ -403,7 +403,11 @@
 <p><strong>上述方法只能查到该包的Generic Function,对于不公开的内部函数只能下载源码包查看</strong></p>
 <p>（2）找到R CRAN的相关源码包（.tar.gz）</p>
 <p>例如：<a href="https://cran.r-project.org/web/packages/ggplot2/" target="_blank" rel="external">https://cran.r-project.org/web/packages/ggplot2/</a> 不同包只需要更改最后包名即可</p>
-<h1 id="linux下源码安装R-3-1-2"><a href="#linux下源码安装R-3-1-2" class="headerlink" title="linux下源码安装R-3.1.2"></a>linux下源码安装R-3.1.2</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#下载R 安装包(R-3.1.2.tar.gz)</span></div><div class="line">wget http://cran.rstudio.com/src/base/R-<span class="number">3</span>/R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line"><span class="comment">#检查编译环境是否正常</span></div><div class="line">cd R-<span class="number">3.1</span><span class="number">.2</span></div><div class="line">./configure  --enable-R-shlib  --prefix=./configure  --enable-R-shlib  --prefix=/home/wangdong/R</div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="keyword">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
+<p>echo ‘export LDFLAGS=”-fPIC -L/home/wangdong/local/bzip2/lib”‘ &gt;&gt;~/.bashrc</p>
+<p>echo ‘export PATH=/home/wangdong/local/bzip2/bin:$PATH’ &gt;&gt;~/.bashrc<br>echo ‘export LD_LIBRARY_PATH=/home/wangdong/local/bzip2/lib:$LD_LIBRARY_PATH’ &gt;&gt;~/.bashrc<br>echo ‘export CFLAGS=”-I/home/wangdong/local/bzip2/include”‘ &gt;&gt;~/.bashrc<br>echo ‘export LDFLAGS=”-L/home/wangdong/local/bzip2/lib”‘ &gt;&gt;~/.bashrc</p>
+<p>设置环境变量：注意：CFLAGS和LDFLAGS 加上 -fPIC</p>
+<p>echo ‘export PATH=/home/wangdong/local/xz/bin:$PATH’ &gt;&gt;~/.bashrc<br>echo ‘export LD_LIBRARY_PATH=/home/wangdong/local/xz/lib:$LD_LIBRARY_PATH’ &gt;&gt;~/.bashrc<br>echo ‘export CFLAGS=”-I/home/wangdong/local/xz/include”‘ &gt;&gt;~/.bashrc<br>echo ‘export LDFLAGS=”-L/home/wangdong/local/xz/lib”‘ &gt;&gt;~/.bashrc</p>
+<h1 id="linux下源码安装R-3-1-2"><a href="#linux下源码安装R-3-1-2" class="headerlink" title="linux下源码安装R-3.1.2"></a>linux下源码安装R-3.1.2</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#下载R 安装包(R-3.1.2.tar.gz)</span></div><div class="line">wget http://cran.rstudio.com/src/base/R-<span class="number">3</span>/R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.1</span><span class="number">.2</span>.tar.gz</div><div class="line"><span class="comment">#检查编译环境是否正常</span></div><div class="line">cd R-<span class="number">3.1</span><span class="number">.2</span></div><div class="line">./configure  --enable-R-shlib  --prefix=/home/wangdong/R-<span class="number">3.4</span><span class="number">.4</span>/R</div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="keyword">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
 <h2 id="安装packages"><a href="#安装packages" class="headerlink" title="安装packages"></a>安装packages</h2><h2 id="方法一：每次安装包时指定镜像"><a href="#方法一：每次安装包时指定镜像" class="headerlink" title="方法一：每次安装包时指定镜像"></a>方法一：每次安装包时指定镜像</h2><ul>
 <li>查看所有镜像：chooseCRANmirror()</li>
 <li>选择镜像：chooseCRANmirror(ind=36)</li>
@@ -428,13 +432,17 @@ local({r &lt;- getOption(&quot;repos&quot;)
 </ul>
 <h2 id="安装bioconder"><a href="#安装bioconder" class="headerlink" title="安装bioconder"></a>安装bioconder</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">source</span>(<span class="string">"http://bioconductor.org/biocLite.R"</span>)</div><div class="line">options(BioC_mirror=<span class="string">"http://mirrors.ustc.edu.cn/bioc/"</span>)</div><div class="line">biocLite(<span class="string">"methylKit"</span>)</div></pre></td></tr></table></figure>
 <h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>R中用.libPaths()函数查看lib路径，如果有多个lib,install.packages()默认是安装在第一个目录下</p>
-<p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/…/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
+<p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/wangdong/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
 <h1 id="终端直接调用R脚本"><a href="#终端直接调用R脚本" class="headerlink" title="终端直接调用R脚本"></a>终端直接调用R脚本</h1><pre><code>/home/wangdong/R/bin/Rscript 或者 Rscript test.R
 </code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_605f5b4f010160su.html" target="_blank" rel="external">R中查看函数源代码</a></p>
 <p>（2）<a href="http://blog.sina.com.cn/s/blog_605f5b4f010160su.html" target="_blank" rel="external">R中查看函数源代码</a></p>
 <p>（3）<a href="http://blog.csdn.net/high2011/article/details/52052333" target="_blank" rel="external">linux下源码安装R-3.1.2.tar.gz   和RStudio开发工具</a></p>
 <p>（4）<a href="http://m.blog.itpub.net/9036/viewspace-2122686/" target="_blank" rel="external">CentOS 下 R 的安装</a></p>
 <p>（5）<a href="https://stackoverflow.com/questions/11488174/how-to-select-a-cran-mirror-in-r" target="_blank" rel="external">How to select a CRAN mirror in R</a></p>
+<p>（6）<a href="https://zhuanlan.zhihu.com/p/28055351" target="_blank" rel="external">linux下R3.4.1的安装手册（推荐）</a></p>
+<p>（7）<a href="https://oguya.ch/posts/2017-03-18-building-R-on-rhel-6/" target="_blank" rel="external">Building R on RedHat Linux 6</a></p>
+<p>（8）<a href="http://blog.sina.com.cn/s/blog_6aaea1760102x5ka.html" target="_blank" rel="external">Linux下的R安装、配置与测试 </a></p>
+<p>（9）<a href="https://stackoverflow.com/questions/40639138/configure-error-installing-r-3-3-2-on-ubuntu-checking-whether-bzip2-support-suf" target="_blank" rel="external">configure error installing R-3.3.2 on Ubuntu: checking whether bzip2 support suffices… configure: error: bzip2 library and headers are required</a></p>
 
       
     </div>
@@ -585,7 +593,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -886,7 +894,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共65.5k字</span>
+  <span class="post-count">博客全站共66.3k字</span>
 </div>
 
 <div class="powered-by">

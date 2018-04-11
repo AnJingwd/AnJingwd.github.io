@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="NGS," />
 
 
 
@@ -96,18 +96,18 @@
 
 
 
-<meta name="description" content="pandas使用入门">
-<meta name="keywords" content="python">
+<meta name="description" content="&amp;emsp;&amp;emsp;写摘要 lncRNApipe安装及使用">
+<meta name="keywords" content="NGS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pandas使用入门">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/10/01/pandas使用入门/index.html">
+<meta property="og:title" content="lncRNApipe安装及使用">
+<meta property="og:url" content="https:///AnJingwd.github.io/2018/03/12/lncRNApipe安装及使用/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="pandas使用入门">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;写摘要 lncRNApipe安装及使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-01T08:00:29.192Z">
+<meta property="og:updated_time" content="2018-04-11T10:31:56.840Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pandas使用入门">
-<meta name="twitter:description" content="pandas使用入门">
+<meta name="twitter:title" content="lncRNApipe安装及使用">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;写摘要 lncRNApipe安装及使用">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>pandas使用入门 | 安静-不安静的博客</title>
+  <title>lncRNApipe安装及使用 | 安静-不安静的博客</title>
   
 
 
@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/01/pandas使用入门/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/03/12/lncRNApipe安装及使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -311,7 +311,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">pandas使用入门</h2>
+          <h2 class="post-title" itemprop="name headline">lncRNApipe安装及使用</h2>
         
 
         <div class="post-meta">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-01T00:26:24+08:00">
-                2017-10-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T19:28:53+08:00">
+                2018-03-12
               </time>
             
 
@@ -346,8 +346,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="https:/AnJingwd.github.io/categories/NGS/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS</span>
                   </a>
                 </span>
 
@@ -383,174 +383,31 @@
       
 
       
-        <blockquote class="blockquote-center">pandas使用入门</blockquote>
+        <p>&emsp;&emsp;写摘要</p>
+<blockquote class="blockquote-center">lncRNApipe安装及使用</blockquote>
 
 <a id="more"></a>
-<h1 id="pandas从文件读写数据"><a href="#pandas从文件读写数据" class="headerlink" title="pandas从文件读写数据"></a>pandas从文件读写数据</h1><h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><ul>
-<li><p>读取txt数据（read_table默认以tab键分割数据）</p>
-<p>  Exp_matrix = pd.read_table(r’.\data\game_of_thrones_geneExp.txt’)</p>
-</li>
-<li><p>读取csv数据（read_csv默认以逗号分割数据）</p>
-<p>  Exp_matrix = pd.read_csv(r’.\data\game_of_thrones_geneExp.csv’)</p>
-</li>
-<li><p>读取数量不定的空白符分割的txt文件</p>
-<p>  Exp_matrix = pd.read_table(r’.\data\game_of_thrones_geneExp.txt’,sep=’\s+’)</p>
-</li>
-<li><p>读取Excel文件数据</p>
-<p>  xls_file = pd.ExcelFile(‘data.xls’)&emsp;&emsp; #创建ExcelFile实例</p>
-<p>  table = xls_file.parse( ‘Sheet1’)  &emsp;&emsp; #通过parse读取到DataFrame</p>
-</li>
-</ul>
-<p>（对于使用复杂分隔符或多字符串分隔符的文件，csv模块就无能为力了。这种情况下，就只能使用字符串的split方法或者正则表达式的re.split进行拆分和整理了）</p>
-<h3 id="读数据时关于行列名选项"><a href="#读数据时关于行列名选项" class="headerlink" title="读数据时关于行列名选项"></a>读数据时关于行列名选项</h3><ul>
-<li>header=None  &emsp;&emsp; #指定列名从0开始增长的数</li>
-<li>names=[‘a’,’b’,’c’,’d’,’e’]    &emsp;&emsp; #用names参数指定列名</li>
-<li>index_col=’e’   &emsp;&emsp; #用指定的列作为行名（index）</li>
-</ul>
-<h3 id="逐块读取文本文件"><a href="#逐块读取文本文件" class="headerlink" title="逐块读取文本文件"></a>逐块读取文本文件</h3><ul>
-<li>nrows = 5  &emsp;&emsp; #只读取文件前5行</li>
-</ul>
-<h3 id="其他参数"><a href="#其他参数" class="headerlink" title="其他参数"></a>其他参数</h3><ul>
-<li><p>使用skiprows跳过文件的某些行</p>
-<p>  skiprows = [0,2,3]</p>
-</li>
-</ul>
-<h2 id="写数据至文件"><a href="#写数据至文件" class="headerlink" title="写数据至文件"></a>写数据至文件</h2><ul>
-<li><p>写入csv文件</p>
-<p>  result.to_csv(‘D:\data\out1.csv’)</p>
-</li>
-</ul>
-<h3 id="写数据时关于行列名选项"><a href="#写数据时关于行列名选项" class="headerlink" title="写数据时关于行列名选项"></a>写数据时关于行列名选项</h3><ul>
-<li>index=False  &emsp;&emsp; #舍弃行名</li>
-<li>header=False  &emsp;&emsp; #舍弃列名</li>
-</ul>
-<h3 id="其他参数-1"><a href="#其他参数-1" class="headerlink" title="其他参数"></a>其他参数</h3><ul>
-<li>sep = ‘|’   &emsp;&emsp; #指定分隔符</li>
-<li>na_rep = ‘NULL’ &emsp;&emsp; #指定缺失值表示符号</li>
-</ul>
-<hr>
-<h1 id="数据规整化：清理，转换，合并，重塑"><a href="#数据规整化：清理，转换，合并，重塑" class="headerlink" title="数据规整化：清理，转换，合并，重塑"></a>数据规整化：清理，转换，合并，重塑</h1><h2 id="pandas访问元素"><a href="#pandas访问元素" class="headerlink" title="pandas访问元素"></a>pandas访问元素</h2><ul>
-<li><p>取前8行</p>
-<p>  Exp_matrix_class_3 = Exp_matrix[0:8]</p>
-</li>
-<li><p>取前8列</p>
-<p>  Exp_matrix_class_3 = Exp_matrix[Exp_matrix.columns[0:8]]</p>
-</li>
-<li><p>取前8行，及1-3列</p>
-<p>  Exp_matrix_class_3 = Exp_matrix.iloc[0:8,1:4]</p>
-</li>
-<li><p>根据条件筛选行</p>
-<p>  Exp_matrix[Exp_matrix[‘Class’] == 3]</p>
-</li>
-<li><p>数据框转置</p>
-<p>  Exp_matrix_class_3_T = Exp_matrix_class_3.T</p>
-</li>
-</ul>
-<p>注意：</p>
-<p>(1)行列最小从0开始</p>
-<p>(2)取值区间左闭右开</p>
-<h2 id="Dataframe-排序"><a href="#Dataframe-排序" class="headerlink" title="Dataframe 排序"></a>Dataframe 排序</h2><ul>
-<li>逆序<br>   Exp_matrix_T.sort_values([‘abs_dif_3_5’], ascending=False)</li>
-</ul>
-<h2 id="轴向连接"><a href="#轴向连接" class="headerlink" title="轴向连接"></a>轴向连接</h2><ul>
-<li><p>行合并</p>
-<p>  result = pd.concat([Exp_matrix_T[1:2],result_gene])</p>
-</li>
-<li><p>增加一列</p>
-<p>  Exp_matrix_T[‘abs_dif_3_5’] = abs_dif_3_5</p>
-</li>
-</ul>
-<h1 id="计算描述统计：统计函数"><a href="#计算描述统计：统计函数" class="headerlink" title="计算描述统计：统计函数"></a>计算描述统计：统计函数</h1><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>count</td>
-<td>非NA值的数量</td>
-</tr>
-<tr>
-<td>describe</td>
-<td>针对Series或各DataFrame列计算汇总统计</td>
-</tr>
-<tr>
-<td>min,max</td>
-<td>计算最小值和最大值</td>
-</tr>
-<tr>
-<td>argmin,argmax</td>
-<td>计算能够获取到最小值和最大值的索引位置（整数)</td>
-</tr>
-<tr>
-<td>idxmin,idxmax</td>
-<td>计算能够获取到最小值和最大值的索引值</td>
-</tr>
-<tr>
-<td>quantile</td>
-<td>计算样本的分位数（0到 1） </td>
-</tr>
-<tr>
-<td>sum</td>
-<td>值的总和</td>
-</tr>
-<tr>
-<td>mean</td>
-<td>值的平均数， a.mean() 默认对每一列的数据求平均值；若加上参数a.mean(1)则对每一行求平均值</td>
-</tr>
-<tr>
-<td>media</td>
-<td>值的算术中位数（50%分位数)</td>
-</tr>
-<tr>
-<td>mad</td>
-<td>根据平均值计算平均绝对离差</td>
-</tr>
-<tr>
-<td>var</td>
-<td>样本值的方差 </td>
-</tr>
-<tr>
-<td>std</td>
-<td>样本值的标准差</td>
-</tr>
-<tr>
-<td>skew</td>
-<td>样本值的偏度（三阶矩）</td>
-</tr>
-<tr>
-<td>kurt</td>
-<td>样本值的峰度（四阶矩）</td>
-</tr>
-<tr>
-<td>cumsum</td>
-<td>样本值的累计和</td>
-</tr>
-<tr>
-<td>cummin,cummax</td>
-<td>样本值的累计最大值和累计最小</td>
-</tr>
-<tr>
-<td>cumprod</td>
-<td>样本值的累计积</td>
-</tr>
-<tr>
-<td>diff</td>
-<td>计算一阶差分（对时间序列很有用) </td>
-</tr>
-<tr>
-<td>pct_change</td>
-<td>计算百分数变化</td>
-</tr>
-</tbody>
-</table>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.csdn.net/stevenkwong/article/details/52528616" target="_blank" rel="external">PANDAS 数据合并与重塑（concat篇）</a></p>
-<p>（2）<a href="http://www.cnblogs.com/pengsixiong/p/5050833.html" target="_blank" rel="external">pandas数据的导入与导出</a></p>
-<p>（3）<a href="http://bluewhale.cc/2016-08-06/use-pandas-filter-and-sort.html" target="_blank" rel="external">使用Pandas对数据进行筛选和排序</a></p>
-<p>（4）<a href="http://blog.csdn.net/pipisorry/article/details/25625799" target="_blank" rel="external">pandas小记：pandas计算工具-汇总统计</a></p>
-
+<h1 id="lncRNApipe介绍"><a href="#lncRNApipe介绍" class="headerlink" title="lncRNApipe介绍"></a>lncRNApipe介绍</h1><p><a href="https://github.com/biocoder/Perl-for-Bioinformatics/blob/master/NGS-Utils/README.pod" target="_blank" rel="external">biocoder/Perl-for-Bioinformatics</a></p>
+<p>对应文献：<a href="https://www.biorxiv.org/content/biorxiv/early/2015/04/10/017889.full.pdf" target="_blank" rel="external">Methods for distinguishing between protein-coding and long noncoding RNAs and the elusive biological purpose of translation of long noncoding RNAs</a></p>
+<p>#lncRNApipe安装</p>
+<p>perl lncRNApipe –setup –setup-compiler CC=g++</p>
+<p>报错：gcc:error:unrecognized command line option ‘-fstack-protector-strong’</p>
+<p><strong>‘-fstack-protector-strong’ 选项是gcc4.9以后的版本才加入的，也就是说需要安装gcc4.9以后的版本才可以编译通过</strong></p>
+<p><a href="https://stackoverflow.com/questions/9693031/how-to-install-xmlparser-without-expat-devel" target="_blank" rel="external">How to install XML::Parser without expat-devel?</a></p>
+<p>Download from: <a href="http://sourceforge.net/projects/expat/files/expat/" target="_blank" rel="external">http://sourceforge.net/projects/expat/files/expat/</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">install_dir=/home/wangdong/<span class="built_in">local</span></div><div class="line">mkdir -p <span class="variable">$install_dir</span>/expat</div><div class="line">tar zxf /[<span class="built_in">where</span>-ever]/expat-2.1.0.tar.gz -C <span class="variable">$install_dir</span>/expat</div><div class="line"><span class="built_in">cd</span> <span class="variable">$install_dir</span>/expat/expat-2.1.0</div><div class="line">perl ./configure --prefix=<span class="variable">$install_dir</span>/expat LDFLAGS=-L/<span class="variable">$install_dir</span>/expat/lib </div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"></div><div class="line">http://search.cpan.org - search <span class="keyword">for</span> and download - XML::Parser</div><div class="line"></div><div class="line">install_dir=/home/wangdong/<span class="built_in">local</span></div><div class="line">mkdir -p <span class="variable">$install_dir</span>/XML-parser</div><div class="line">wget http://search.cpan.org/CPAN/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz</div><div class="line">tar zxf XML-Parser-2.44.tar.gz -C <span class="variable">$install_dir</span>/XML-parser</div><div class="line"><span class="built_in">cd</span> <span class="variable">$install_dir</span>/XML-parser/XML-Parser-2.44</div><div class="line">perl ./Makefile.PL EXPATLIBPATH=<span class="variable">$install_dir</span>/expat/lib EXPATINCPATH=<span class="variable">$install_dir</span>/expat/include</div><div class="line">make</div><div class="line">make <span class="built_in">test</span></div><div class="line">make install</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/libexpat/libexpat/" target="_blank" rel="external">libexpat/libexpat（会报错）</a></p>
+<p>#lncRNApipe使用</p>
+<pre><code>time perl $lncRNApipe --run $merge/lncRNApipe \
+--cuffcmp &apos;-r &apos;$lncRNA_gtf&apos; -s &apos;$ref_hg38&apos; &apos;$merge&apos;/All_sample_assemble_merge.gtf&apos; \
+--cat-ncRNAs &apos;-sample-names &quot;All_sample&quot; -ov 80 -fpkm 2 -len 200 -max-len 10000 -min-exons 1 -antisense&apos; \
+--get-uq-feat &apos;-sf &apos;$lncRNA_bed&apos;&apos; \
+--fetch-seq &apos;-db hg38&apos; \
+--cpc \
+--rna \
+--cpu 16 \
+--inf &amp;&gt;$merge/lncRNApipe.run.log
+</code></pre>
       
     </div>
     
@@ -575,7 +432,7 @@
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+            <a href="https:/AnJingwd.github.io/tags/NGS/" rel="tag"><i class="fa fa-tag"></i> NGS</a>
           
         </div>
       
@@ -588,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/09/17/linux的CPU拓扑结构（Topology）/" rel="next" title="linux的CPU拓扑结构（Topology）">
-                <i class="fa fa-chevron-left"></i> linux的CPU拓扑结构（Topology）
+              <a href="https:/AnJingwd.github.io/2018/03/10/无root权限docker-安装及使用/" rel="next" title="无root权限docker 安装及使用">
+                <i class="fa fa-chevron-left"></i> 无root权限docker 安装及使用
               </a>
             
           </div>
@@ -598,8 +455,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/10/01/文本挖掘与展示之文献关键词/" rel="prev" title="文本挖掘与展示之文献关键词">
-                文本挖掘与展示之文献关键词 <i class="fa fa-chevron-right"></i>
+              <a href="https:/AnJingwd.github.io/2018/03/25/动态规划求序列最大得分连续子序列/" rel="prev" title="动态规划求序列最大得分连续子序列">
+                动态规划求序列最大得分连续子序列 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -953,7 +810,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pandas从文件读写数据"><span class="nav-number">1.</span> <span class="nav-text">pandas从文件读写数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#读取数据"><span class="nav-number">1.1.</span> <span class="nav-text">读取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读数据时关于行列名选项"><span class="nav-number">1.1.1.</span> <span class="nav-text">读数据时关于行列名选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逐块读取文本文件"><span class="nav-number">1.1.2.</span> <span class="nav-text">逐块读取文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他参数"><span class="nav-number">1.1.3.</span> <span class="nav-text">其他参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写数据至文件"><span class="nav-number">1.2.</span> <span class="nav-text">写数据至文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写数据时关于行列名选项"><span class="nav-number">1.2.1.</span> <span class="nav-text">写数据时关于行列名选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他参数-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">其他参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据规整化：清理，转换，合并，重塑"><span class="nav-number">2.</span> <span class="nav-text">数据规整化：清理，转换，合并，重塑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pandas访问元素"><span class="nav-number">2.1.</span> <span class="nav-text">pandas访问元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dataframe-排序"><span class="nav-number">2.2.</span> <span class="nav-text">Dataframe 排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#轴向连接"><span class="nav-number">2.3.</span> <span class="nav-text">轴向连接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算描述统计：统计函数"><span class="nav-number">3.</span> <span class="nav-text">计算描述统计：统计函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNApipe介绍"><span class="nav-number">1.</span> <span class="nav-text">lncRNApipe介绍</span></a></li></ol></div>
             
 
           </div>

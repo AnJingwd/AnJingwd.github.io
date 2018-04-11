@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="gcc5.2编译安装">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-13T12:12:23.336Z">
+<meta property="og:updated_time" content="2018-04-09T13:21:32.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gcc5.2编译安装">
 <meta name="twitter:description" content="gcc5.2编译安装">
@@ -405,6 +405,13 @@ source ~/.bashrc
 </code></pre><h1 id="cc与gcc"><a href="#cc与gcc" class="headerlink" title="cc与gcc"></a>cc与gcc</h1><p><a href="https://www.cnblogs.com/xj626852095/p/3648246.html" target="_blank" rel="external">cc、gcc、g++、CC的区别概括</a></p>
 <p>gcc是C编译器；g++是C++编译器；linux下cc一般是一个符号连接，指向gcc；gcc和g++都是GUN（组织）的编译器。cc来自于昂贵的Unix系统，cc是商业软件。</p>
 <p>对于cc设置软连接：ln -s gcc cc</p>
+<h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><p>在脚本./contrib/download_prerequisites中自动在gcc安装目录内安装了</p>
+<ul>
+<li>MPFR=mpfr-2.4.2</li>
+<li>GMP=gmp-4.3.2</li>
+<li>MPC=mpc-0.8.1</li>
+<li>isl=isl-0.14<br>等依赖，并设置了软连接</li>
+</ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://luiarthur.github.io/gccinstall" target="_blank" rel="external">Installing GCC without Root Privileges（推荐）</a></p>
 <p>（2）<a href="http://bakeronit.com/2015/11/04/install_gcc/" target="_blank" rel="external">Install gcc-5.2.0 without root</a></p>
 <p>（3）<a href="https://yhigu.wordpress.com/2016/03/02/install-latest-version-of-gcc-and-gcc-c-on-centos-6-7-from-source-code/" target="_blank" rel="external">Install Latest version of gcc and gcc-c++ on CentOS 6.7 from source code</a></p>
@@ -558,7 +565,7 @@ source ~/.bashrc
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -811,7 +818,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装过程"><span class="nav-number">1.</span> <span class="nav-text">安装过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cc与gcc"><span class="nav-number">2.</span> <span class="nav-text">cc与gcc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装过程"><span class="nav-number">1.</span> <span class="nav-text">安装过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cc与gcc"><span class="nav-number">2.</span> <span class="nav-text">cc与gcc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ps"><span class="nav-number">3.</span> <span class="nav-text">ps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -859,7 +866,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共65.5k字</span>
+  <span class="post-count">博客全站共66.3k字</span>
 </div>
 
 <div class="powered-by">
