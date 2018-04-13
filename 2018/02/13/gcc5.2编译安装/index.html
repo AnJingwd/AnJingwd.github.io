@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="gcc5.2编译安装">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-09T13:21:32.073Z">
+<meta property="og:updated_time" content="2018-04-13T11:39:14.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gcc5.2编译安装">
 <meta name="twitter:description" content="gcc5.2编译安装">
@@ -412,6 +412,8 @@ source ~/.bashrc
 <li>MPC=mpc-0.8.1</li>
 <li>isl=isl-0.14<br>等依赖，并设置了软连接</li>
 </ul>
+<h1 id="多核处理器下提高make的效率"><a href="#多核处理器下提高make的效率" class="headerlink" title="多核处理器下提高make的效率"></a>多核处理器下提高make的效率</h1><p>make的-j参数可以使make进行并行编译。make该参数的帮助如下：</p>
+<p>-j [N], –jobs[=N]          Allow N jobs at once; infinite jobs with no arg<br><strong>虽然-j 可以大大缩短gcc编译时间,但注意：make -j命令并不是任何情况下都可以用的，在存在编译依赖的情况下，单核编译还是一种比较稳妥的方案。</strong></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://luiarthur.github.io/gccinstall" target="_blank" rel="external">Installing GCC without Root Privileges（推荐）</a></p>
 <p>（2）<a href="http://bakeronit.com/2015/11/04/install_gcc/" target="_blank" rel="external">Install gcc-5.2.0 without root</a></p>
 <p>（3）<a href="https://yhigu.wordpress.com/2016/03/02/install-latest-version-of-gcc-and-gcc-c-on-centos-6-7-from-source-code/" target="_blank" rel="external">Install Latest version of gcc and gcc-c++ on CentOS 6.7 from source code</a></p>
@@ -463,8 +465,8 @@ source ~/.bashrc
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2018/03/10/无root权限docker-安装及使用/" rel="prev" title="无root权限docker 安装及使用">
-                无root权限docker 安装及使用 <i class="fa fa-chevron-right"></i>
+              <a href="https:/AnJingwd.github.io/2018/03/12/lncRNApipe安装及使用/" rel="prev" title="lncRNApipe安装及使用">
+                lncRNApipe安装及使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -565,7 +567,7 @@ source ~/.bashrc
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -818,7 +820,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装过程"><span class="nav-number">1.</span> <span class="nav-text">安装过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cc与gcc"><span class="nav-number">2.</span> <span class="nav-text">cc与gcc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ps"><span class="nav-number">3.</span> <span class="nav-text">ps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装过程"><span class="nav-number">1.</span> <span class="nav-text">安装过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cc与gcc"><span class="nav-number">2.</span> <span class="nav-text">cc与gcc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ps"><span class="nav-number">3.</span> <span class="nav-text">ps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多核处理器下提高make的效率"><span class="nav-number">4.</span> <span class="nav-text">多核处理器下提高make的效率</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -866,7 +868,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共66.3k字</span>
+  <span class="post-count">博客全站共66.7k字</span>
 </div>
 
 <div class="powered-by">
