@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-03-25T13:53:52.334Z</updated>
+  <updated>2018-04-15T02:05:47.010Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,126 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>任务提交系统使用</title>
+    <link href="https:///AnJingwd.github.io/2018/04/05/%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8/"/>
+    <id>https:///AnJingwd.github.io/2018/04/05/任务提交系统使用/</id>
+    <published>2018-04-05T02:07:10.000Z</published>
+    <updated>2018-04-15T02:05:47.010Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">任务提交系统使用</blockquote>
+
+<a id="more"></a>
+<h1 id="什么是批处理作业调度程序？"><a href="#什么是批处理作业调度程序？" class="headerlink" title="什么是批处理作业调度程序？"></a>什么是批处理作业调度程序？</h1><p>&emsp;&emsp;大多数现有的高性能计算集群都由作业调度程序管理; 也称为批量调度程序，工作负载管理器，排队系统或负载均衡器。调度程序允许多个用户公平地共享计算节点，允许系统管理员控制资源如何提供给不同用户组。所有调度程序都设计用于执行以下功能：</p>
+<ul>
+<li>允许用户向集群提交新作业</li>
+<li>允许用户监视其排队和正在运行的作业的状态</li>
+<li>允许用户和系统管理员控制正在运行的作业</li>
+<li>监控受管资源的状态，包括系统负载，可用内存等</li>
+</ul>
+<p>&emsp;&emsp;当用户提交新作业时，群集调度程序软件将分配计算核心和内存以满足作业要求。如果合适的资源不可用于运行作业，则调度程序会将作业添加到队列中，直到有足够的资源可用于作业运行。您可以配置调度程序来控制如何从队列中选择作业并在集群节点上执行作业，包括自动准备节点以运行并行MPI作业。作业完成运行后，调度程序将作业使用的资源返回到可用资源池，准备运行其他用户作业。</p>
+<h2 id="计算作业的类型"><a href="#计算作业的类型" class="headerlink" title="计算作业的类型"></a>计算作业的类型</h2><p>用户可以通过集群调度程序运行多种不同类型的作业，其中包括：</p>
+<ul>
+<li>批量作业 ; 单线程应用程序只能在一个计算核心上运行</li>
+<li>阵列作业 ; 为方便起见，将两个或多个类似的批处理作业一起提交</li>
+<li>SMP或多线程的工作; 在同一个计算节点上的两个或多个计算核心上运行的多线程应用程序</li>
+<li>并行作业 ; 多线程应用程序利用MPI库在分布在一个或多个计算节点上的多个内核上运行</li>
+</ul>
+<p>&emsp;&emsp;集群作业调度程序负责查找集群中的计算节点以运行所有这些不同类型的作业。它会跟踪可用资源并将作业分配给各个节点组，确保不会过度提交CPU和内存。以下示例显示了作业调度程序如何将不同类型的作业分配给一组8-CPU核心计算节点：</p>
+<p><img src="https://i.imgur.com/YGgb9H6.jpg" alt=""></p>
+<h2 id="交互式和批处理作业"><a href="#交互式和批处理作业" class="headerlink" title="交互式和批处理作业"></a>交互式和批处理作业</h2><p>用户通常通过运行交互式或批处理（也称为非交互式）作业与计算集群进行交互。</p>
+<ul>
+<li>交互式作业是用户通过图形界面或通过在命令提示符处键入来直接控制的作业。</li>
+<li>通过编写传递给计算节点的指令列表来运行批处理作业，以便将来在某个时刻运行。</li>
+</ul>
+<h2 id="为什么在个人群集上使用作业调度程序？"><a href="#为什么在个人群集上使用作业调度程序？" class="headerlink" title="为什么在个人群集上使用作业调度程序？"></a>为什么在个人群集上使用作业调度程序？</h2><p>&emsp;&emsp;在共享的多用户群集上，作业调度程序通常用作控制机制，以确保用户不会不公平地垄断有价值的计算资源。在极端情况下，系统管理员可能会使用调度程序强制在共享环境中执行“良好行为”，并且可能感觉像对集群用户进行强制操作。</p>
+<p>通过您自己的个人群集，您可以直接控制可用于工作的资源 - 不需要工作调度程序来限制您的使用。</p>
+<p>然而 - 有很多原因可以使你自己的作业调度程序在你的群集中仍然是一个有用的工具：</p>
+<ul>
+<li>它可以帮助您组织多阶段工作流程，批量作业在定义的过程中启动后续作业。</li>
+<li>它可以自动启动MPI作业，找到可用的节点来运行应用程序。</li>
+<li>它可以帮助防止意外地过度分配CPU或内存，这可能会导致节点故障。</li>
+<li>它可以帮助将纪律带入环境，提供一致的方法来复制不同环境中的作业运行。</li>
+<li>在调度程序中排队的作业可以用来触发扩大您的群集的大小，在没有作业运行时从群集中释放计算节点，为您节省成本。</li>
+</ul>
+<h2 id="可用的群集作业调度程序"><a href="#可用的群集作业调度程序" class="headerlink" title="可用的群集作业调度程序"></a>可用的群集作业调度程序</h2><ul>
+<li>开放网格调度器（SGE） - 一种开源的作业调度器，由最初的Sun Grid Engine（SGE）代码库构建而成，</li>
+<li>OpenLava调度程序（类似于IBM LSF）</li>
+<li>转矩调度器</li>
+<li>PBS Pro调度程序</li>
+</ul>
+<h2 id="作业调度系统"><a href="#作业调度系统" class="headerlink" title="作业调度系统"></a>作业调度系统</h2><ul>
+<li>SLURM（简单Linux资源管理实用程序）是全球超级计算机中心采用的可扩展工作负载管理器。<strong>它是免费的并且是开源的，在通用公共许可证下发布。</strong></li>
+<li>IBM®Platform™LSF®是一款功能强大的工作负载管理平台，适用于要求苛刻的分布式HPC环境。它提供了一套全面的智能策略驱动调度功能，使您能够利用所有计算基础架构资源并确保最佳的应用程序性能。</li>
+</ul>
+<p><img src="https://i.imgur.com/Y1DqlC0.jpg" alt=""></p>
+<h3 id="SLURM作业调度系统常用命令"><a href="#SLURM作业调度系统常用命令" class="headerlink" title="SLURM作业调度系统常用命令"></a>SLURM作业调度系统常用命令</h3><p><a href="https://pi.sjtu.edu.cn/doc/slurm/" target="_blank" rel="external">SLURM manual</a></p>
+<ul>
+<li>sinfo 查看各个节点的状态，资源是否充足，当前有多少正在执行的任务</li>
+</ul>
+<p>&emsp;&emsp;使用 sinfo 可粗略查看所有分区的节点信息，注意 ‘‘STATE’’ 一栏的输出 若为 ‘‘idle’’ 表示该节点处于闲置状态，若为 ‘‘alloc’’ 表示该节点已经没有多余的 资源了，若为 ‘‘mix’’ 表示该节点有人在占用，但是仍然有剩余资源。</p>
+<ul>
+<li><p>作业提交完毕后，可使用 squeue 命令查看任务状态</p>
+<p>  squeue -l: 以长列表显示更多信息。<br>  squeue -u username: 仅显示属于用户 username 的任务。<br>  squeue -t state: 仅显示处于 state 状态的任务。</p>
+</li>
+</ul>
+<p>&emsp;&emsp;ps: ST 表示当前状态，R是Runing的简写</p>
+<ul>
+<li><p>salloc [申请资源]</p>
+<p>  salloc -N 1 –cpus-per-task=4<br>  squeue 查看任务情况，获取分配节点，然后使用ssh 节点进行切换</p>
+</li>
+</ul>
+<h3 id="OpenLava调度程序常用命令"><a href="#OpenLava调度程序常用命令" class="headerlink" title="OpenLava调度程序常用命令"></a>OpenLava调度程序常用命令</h3><p><a href="http://docs.alces-flight.com/en/stable/openlava/openlava.html" target="_blank" rel="external">openlava manual</a> </p>
+<p>该OpenLava集群作业调度是一个开源平台的IBM兼容LSF作业调度程序。</p>
+<ul>
+<li><p>运行交互式作业</p>
+<p>  bsub -Is bash</p>
+<ul>
+<li>-Is：Submits an interactive job and creates a pseudo-terminal when the job starts</li>
+<li>bash：Choose the shell type to use when creating the interactive job</li>
+</ul>
+</li>
+<li><p>提交批处理作业</p>
+<p>  bsub -o $HOME/jobout.txt &lt; simplejobscript.sh</p>
+<p>  #jobout.txt  用于记录任何job输出</p>
+<p>  -J JOB_name 设置任务名</p>
+<p>  -n number of cores</p>
+<p>  simplejobscript.sh</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/bin/bash -l</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Starting running on host <span class="variable">$HOSTNAME</span>"</span></div><div class="line">sleep 120</div><div class="line"><span class="built_in">echo</span> <span class="string">"Finished running - goodbye from <span class="variable">$HOSTNAME</span>"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>查看和控制排队任务</p>
+<ul>
+<li>bjobs 查看任务的状态和排队情况，显示RUN（在运行）或者PEND(等待)</li>
+<li>bkill JOBID 杀任务，无论任务处在运行或者排队状态</li>
+<li>bhosts查看计算节点的状态, -l查看更详细的信息</li>
+</ul>
+</li>
+<li><p>运行多线程作业</p>
+<p>  如果用户想要在计算节点上使用多个内核来运行多线程应用程序，可以使用</p>
+<pre><code>-n number of cores
+</code></pre></li>
+</ul>
+<p>&emsp;&emsp;ps: 之前都是ssh node命令切换到计算节点再跑流程，有了集群作业调度程序就可以在登陆节点提交任务，其将自动分配计算节点资源，不包括登陆节点。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_62db9b190101eptz.html" target="_blank" rel="external">bsub更多使用例子</a></p>
+<p>（2）<a href="http://docplayer.net/35369468-Openlava-installation-procedure.html" target="_blank" rel="external">OpenLava Installation Procedure</a></p>
+<p>（3）<a href="http://bicmr.pku.edu.cn/~wenzw/pages/batch.html" target="_blank" rel="external">工作站使用指南（推荐）</a></p>
+<p>（4）<a href="https://pi.sjtu.edu.cn/doc/slurm/" target="_blank" rel="external">SLURM作业调度系统（推荐）</a></p>
+<p>（5）<a href="https://hpc.sjtu.edu.cn/info/1013/1539.htm" target="_blank" rel="external">交大高性能计算中心</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;任务提交系统使用&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="https:///AnJingwd.github.io/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="https:///AnJingwd.github.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>动态规划求序列最大得分连续子序列</title>
@@ -59,7 +179,7 @@
     <link href="https:///AnJingwd.github.io/2018/03/12/lncRNApipe%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/"/>
     <id>https:///AnJingwd.github.io/2018/03/12/lncRNApipe安装及使用/</id>
     <published>2018-03-12T11:28:53.000Z</published>
-    <updated>2018-04-13T01:30:04.254Z</updated>
+    <updated>2018-04-14T03:43:34.106Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">lncRNApipe安装及使用</blockquote>
 
@@ -67,6 +187,7 @@
 <h1 id="lncRNApipe介绍"><a href="#lncRNApipe介绍" class="headerlink" title="lncRNApipe介绍"></a>lncRNApipe介绍</h1><p><a href="https://github.com/biocoder/Perl-for-Bioinformatics/blob/master/NGS-Utils/README.pod" target="_blank" rel="external">biocoder/Perl-for-Bioinformatics</a></p>
 <p>对应文献：<a href="https://www.biorxiv.org/content/biorxiv/early/2015/04/10/017889.full.pdf" target="_blank" rel="external">Methods for distinguishing between protein-coding and long noncoding RNAs and the elusive biological purpose of translation of long noncoding RNAs</a></p>
 <h1 id="lncRNApipe安装"><a href="#lncRNApipe安装" class="headerlink" title="lncRNApipe安装"></a>lncRNApipe安装</h1><p>perl lncRNApipe –setup –setup-compiler CC=g++</p>
+<p>Perl-for-Bioinformatics-master.zip  —–<strong>325M</strong></p>
 <p>报错：gcc:error:unrecognized command line option ‘-fstack-protector-strong’</p>
 <p><strong>‘-fstack-protector-strong’ 选项是gcc4.9以后的版本才加入的，也就是说需要安装gcc4.9以后的版本才可以编译通过</strong></p>
 <p><a href="https://stackoverflow.com/questions/9693031/how-to-install-xmlparser-without-expat-devel" target="_blank" rel="external">How to install XML::Parser without expat-devel?</a></p>
@@ -158,7 +279,7 @@ source ~/.bashrc
     <link href="https:///AnJingwd.github.io/2018/02/05/RNA-seq%E9%89%B4%E5%AE%9ALncRNA%E6%A6%82%E8%BF%B0/"/>
     <id>https:///AnJingwd.github.io/2018/02/05/RNA-seq鉴定LncRNA概述/</id>
     <published>2018-02-05T13:44:08.000Z</published>
-    <updated>2018-02-22T06:19:50.710Z</updated>
+    <updated>2018-04-11T12:11:29.132Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">RNA-seq鉴定LncRNA概述：lncRNA简介，分析pipline，分析软件，结果评估指标</blockquote>
 
@@ -197,8 +318,10 @@ source ~/.bashrc
 <ol>
 <li><a href="https://github.com/griffithlab/rnaseq_tutorial/wiki" target="_blank" rel="external">griffithlab/rnaseq_tutorial</a>,&emsp;&emsp;<a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004393" target="_blank" rel="external">文章</a> ,&emsp;&emsp; <a href="https://github.com/griffithlab/rnaseq_tutorial/wiki/Lectures" target="_blank" rel="external">Lectures</a></li>
 </ol>
-<p><img src="https://i.imgur.com/kYWBJdV.png" alt=""></p>
+<p><img src="https://i.imgur.com/cxxChCD.png" alt=""></p>
 <p><a href="https://github.com/griffithlab/rnaseq_tutorial/wiki/Expression" target="_blank" rel="external">Expression</a><br><img src="https://i.imgur.com/CD5YS69.jpg" alt=""> </p>
+<p><a href="https://www.jianshu.com/p/0e48facb3786?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note&amp;utm_source=weixin-friends" target="_blank" rel="external">重复文章 “RNA-seq的转录水平表达分析”</a></p>
+<p>该流程不适用小样本数据：For small sample sizes (n &lt; 4 per group), it is often better to perform regularization. This can be done using the limma package in Bioconductor</p>
 <ol>
 <li><p><a href="https://bioinform.github.io/rnacocktail/" target="_blank" rel="external">RNACocktail：A comprehensive framework for accurate and efficient RNA-Seq analysis</a>， <a href="http://dx.doi.org/10.1038/s41467-017-00050-4" target="_blank" rel="external">文章</a></p>
 </li>
@@ -206,20 +329,34 @@ source ~/.bashrc
 </li>
 </ol>
 <h1 id="LncRNA注释GTF文件及fasta文件"><a href="#LncRNA注释GTF文件及fasta文件" class="headerlink" title="LncRNA注释GTF文件及fasta文件"></a>LncRNA注释GTF文件及fasta文件</h1><ol>
+<li>参考基因组fa及GTF文件下载：<a href="http://www.ensembl.org/info/data/ftp/index.html" target="_blank" rel="external">链接</a></li>
+</ol>
+<ul>
+<li>Homo_sapiens.GRCh38.dna.primary_assembly.fa</li>
+<li>Homo_sapiens.GRCh38.92.gtf</li>
+</ul>
+<p>建立索引：</p>
+<p><code>which hisat2_extract_exons.py</code> $known_coding_gtf &gt; genome.exon<br><code>which hisat2_extract_splice_sites.py</code> $known_coding_gtf &gt; genome.ss<br>time hisat2-build -p 8 $ref_hg38 –ss genome.ss –exon genome.exon genome_tran  </p>
+<ol>
 <li><a href="http://www.gencodegenes.org/releases/current.html" target="_blank" rel="external">GENCODE</a>  &emsp;&emsp; 2. <a href="http://www.noncode.org/download.php" target="_blank" rel="external">NONCODE</a></li>
 </ol>
 <p>ps: NONCODE has updated to NONCODEv5. NONCODE2016 website has been moved to <a href="http://www.bioinfo.org/NONCODE2016" target="_blank" rel="external">http://www.bioinfo.org/NONCODE2016</a></p>
+<p>建立索引：</p>
+<p><code>which hisat2_extract_exons.py</code> $lncRNA_gtf &gt; NONCODE2016_human.exon<br><code>which hisat2_extract_splice_sites.py</code> $lncRNA_gtf &gt; NONCODE2016_human.ss<br>time hisat2-build -p 8 $lncRNA_ref –ss NONCODE2016_human.ss –exon NONCODE2016_human.exon NONCODE2016_index</p>
 <p>&emsp;&emsp;ENCODE计划揭示了大约76%的人类基因组转录产生非编码蛋白的RNA分子，其中包括大约10000lincRNAs。NOCODE最新版数据库收录了&gt;30000个人的lincRNAs和 &gt;20000 小鼠的lincRNA。</p>
 <h1 id="RNA-seq分析软件"><a href="#RNA-seq分析软件" class="headerlink" title="RNA-seq分析软件"></a>RNA-seq分析软件</h1><ul>
 <li><a href="https://bioinformatics.ibers.aber.ac.uk/wiki/index.php/1.1_RNA-Seq_analysis_tools" target="_blank" rel="external">RNA-Seq analysis common tools</a></li>
 </ul>
 <p>推荐文献：<a href="https://www.nature.com/articles/s41467-017-00050-4" target="_blank" rel="external">Gaining comprehensive biological insight into the transcriptome by performing a broad-spectrum RNA-seq analysis</a></p>
-<h2 id="基因组和转录组比对"><a href="#基因组和转录组比对" class="headerlink" title="基因组和转录组比对"></a>基因组和转录组比对</h2><p><a href="https://github.com/NCBI-Hackathons/RNA_mapping/wiki" target="_blank" rel="external">NCBI-Hackathons/RNA_mapping</a></p>
+<h2 id="基因组和转录组比对"><a href="#基因组和转录组比对" class="headerlink" title="基因组和转录组比对"></a>基因组和转录组比对</h2><h3 id="stringTie"><a href="#stringTie" class="headerlink" title="stringTie"></a>stringTie</h3><p><a href="https://github.com/NCBI-Hackathons/RNA_mapping/wiki" target="_blank" rel="external">NCBI-Hackathons/RNA_mapping</a></p>
 <p>&emsp;&emsp;RNA-Seq基因组比对工具HISAT2：HISAT2是TopHat2/Bowti2的继任者，使用改进的BWT算法，实现了更快的速度和更少的资源占用，作者推荐TopHat2/Bowti2和HISAT的用户转换到HISAT2。<a href="https://ccb.jhu.edu/software/hisat2/index.shtml" target="_blank" rel="external">官网</a></p>
 <p>gene annotation 一般选择 RefSeq 或者 Ensembl，这里，我们的参考基因组fasta文件和基因注释文件都选择 Ensembl的hg38版本（release-91），其ftp地址为：<a href="http://asia.ensembl.org/info/data/ftp/index.html" target="_blank" rel="external">http://asia.ensembl.org/info/data/ftp/index.html</a></p>
 <pre><code>wget ftp://ftp.ensembl.org/pub/release-91/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.91.chr.gtf.gz
-</code></pre><h2 id="比对质量评估"><a href="#比对质量评估" class="headerlink" title="比对质量评估"></a>比对质量评估</h2><p><img src="https://i.imgur.com/s2HS5Xp.png" alt=""></p>
+</code></pre><h3 id="tophat-python2"><a href="#tophat-python2" class="headerlink" title="tophat(python2.*)"></a>tophat(python2.*)</h3><p><a href="http://blog.sina.com.cn/s/blog_a7f92a6a010101tv.html" target="_blank" rel="external">tophat 一些小错误</a></p>
+<p>#genome index<br>    samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa<br>    bowtie2-build Homo_sapiens.GRCh38.dna.primary_assembly.fa hg38_genome</p>
+<p>#transcriptome-index<br>    tophat -G $ref_mRNA_gtf –transcriptome-index=$tophat_transcriptome_index $bowtieGenomeIndex</p>
+<h2 id="比对质量评估"><a href="#比对质量评估" class="headerlink" title="比对质量评估"></a>比对质量评估</h2><p><img src="https://i.imgur.com/s2HS5Xp.png" alt=""></p>
 <p><a href="http://rseqc.sourceforge.net/" target="_blank" rel="external">RSeQC: An RNA-seq Quality Control Package</a></p>
 <pre><code>pip2.7 install RSeQC
 </code></pre><h2 id="转录本重构"><a href="#转录本重构" class="headerlink" title="转录本重构"></a>转录本重构</h2><p><img src="https://i.imgur.com/NrEDde5.jpg" alt=""></p>
@@ -249,17 +386,107 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 </tbody>
 </table>
 <p><strong>对已知编码基因的覆盖程度：&gt;60%</strong></p>
-<h3 id="Stringtie用于转录本重构"><a href="#Stringtie用于转录本重构" class="headerlink" title="Stringtie用于转录本重构"></a>Stringtie用于转录本重构</h3><p>两种方式：</p>
+<p>使用StringleTie的-个G模式构建转录本的输出文件主要有：</p>
 <ol>
-<li>“refernece guided”模式：使用“-G”选项，不带“-e”选项（输出 reference transcripts 和任何 novel transcripts）<strong>推荐</strong></li>
-<li>“de novo”模式：不指定“-G” 和“-e”选项</li>
+<li>.gtf文件:记录组装的转录本信息</li>
+<li>gene_abundances.tsv文件：以tab键分割的记录基因丰度信息</li>
+<li>在使用-B 参数下，生成*.ctab文件：用于下游Ballgown软件做差异表达分析的输入文件</li>
 </ol>
-<h3 id="Stringtie用于转录本合并"><a href="#Stringtie用于转录本合并" class="headerlink" title="Stringtie用于转录本合并"></a>Stringtie用于转录本合并</h3><p><img src="https://i.imgur.com/EGF9lzA.jpg" alt=""></p>
-<pre><code>stringtie --merge -p 8 -o stringtie_merged.gtf -G $RNA_REF_GTF assembly_GTF_list.txt
-</code></pre><p>Stringtie转录本合并以GTF文件作为输入， merges/assembles在所有RNA-seq样本中都观察到的转录本，为非冗余的转录本集合。该模式适用于多样本RNA-seq差异分析流程中，产生global且unified的转录本集合，用于后续差异基因的分析。</p>
-<h3 id="gffcompare转录本重构评估"><a href="#gffcompare转录本重构评估" class="headerlink" title="gffcompare转录本重构评估"></a>gffcompare转录本重构评估</h3><p>评估转录本组装情况简单的方式可以是统计基因和转录本计数，novel vs known等；或者使用<a href="https://ccb.jhu.edu/software/stringtie/gff.shtml#gffcompare" target="_blank" rel="external">gffcompare program</a>对多样本RNA-seq实验转录本重构进行准确性的计算和比较分析。</p>
-<pre><code>gffcompare –r $mRNA_gtf –G –o merged $Assemble/stringtie_mRNA_merged.gtf
-</code></pre><p><a href="https://github.com/gpertea/gffcompare" target="_blank" rel="external">gffcompare project on Github</a></p>
+<p>输出结果具体解释可查看StringTie官网的<a href="http://ccb.jhu.edu/software/stringtie/index.shtml?t=manual" target="_blank" rel="external">output部分</a></p>
+<h2 id="合并转录本"><a href="#合并转录本" class="headerlink" title="合并转录本"></a>合并转录本</h2><p><a href="https://github.com/cole-trapnell-lab/cufflinks" target="_blank" rel="external">cole-trapnell-lab/cufflinks</a></p>
+<p>可以直接下载解压预编译好的版本，省去安装 Boost C++ libraries的麻烦。在一下链接中选择linux版即可：<a href="http://cole-trapnell-lab.github.io/cufflinks/install/" target="_blank" rel="external">cufflinks</a></p>
+<p>事实上，对于多个样本构建的多套转录本，如何得到统一的一套转录本，有下面三种方法：</p>
+<ul>
+<li>1 在转录本拼接之前，把各样本的比对bam文件合并，然后用合并的bam跑cufflinks</li>
+<li>2 每个样本的比对bam文件分别单独跑cufflinks，各样本的转录本构建后，再用cuffcompare合并为一套转录本。</li>
+<li>3 每个样本的比对bam文件分别单独跑cufflinks，各样本的转录本构建后，再用cuffmerge合并为一套转录本。</li>
+</ul>
+<p>这三种做法区别在于：</p>
+<ul>
+<li>第一种方法流程相对简单，所有的工作都抛给cufflinks一人完成，你都不需要知道cuffmerge、cuffcompare的用法。貌似是种完美解决方案。但很大的问题是：cufflinks能处理得了最终合并的bam吗？对于小物种的样本还可以，但对于人，若是7，8个样本合成的bam，cufflinks吃不销！</li>
+<li>第二和三种方法是类似的，都是在保留可变剪切结构的前提下，将转录本合并。不同的是，cuffcompare只有A、B两条转录本结构相同的时候，才将A、B合并。而cuffmerge是A、B某些部分互相overlap，就将它俩合并。事实上，cuffmerge再做合并的时候，是把overlap的transfrag重新调用了cufflinks，合成一个transfrag。</li>
+<li>第二和三种方法还有一个很大的不同是，cuffmerge可以带上参考注释有参考的进行合并，而cuffcompare不能如此。这是cuffmerge对cuffcompare的一个优势。</li>
+</ul>
+<p>因此，我认为第三种方法比第二种方法是最接近于第一种方法，而第一种方法的可实现性较差，在现有条件，最完美的解决方案就是第三种方法：每个bam单独跑cufflinks，跑完的结果再用cuffmerge合并。</p>
+<p>参考：<a href="http://blog.csdn.net/shmilyringpull/article/details/8136837" target="_blank" rel="external">转录组测序分析中cufflinks的使用及问题</a></p>
+<h2 id="鉴定novel-lncRNA"><a href="#鉴定novel-lncRNA" class="headerlink" title="鉴定novel lncRNA"></a>鉴定novel lncRNA</h2><ul>
+<li>step1: 对所有样品拼接得到的转录本使用cuffcompare软件进行合并，筛除链方向不明的转录本；</li>
+<li>step2: 选择转录本长度&gt;=200bp，Exon个数&gt;=2的转录本；</li>
+<li>step3: 通过cufflinks计算每条转录本的reads覆盖度，选择至少在一个样品中覆盖度&gt;=3的转录本；</li>
+<li>step4: 若该物种存在已知lncRNA数据，首先通过cuffcompare软件，将前一步得到的转录本与已知lncRNA进行比较，得到与已知lncRNA相同的转录本。这一部分转录本直接纳入最终的lncRNA集，不再进行后续筛选。之后，通过与该物种已知非lncRNA及非mRNA类型（rRNA,tRNA,snRNA,snoRNA,pre-miRNA,pseudogenes等）的转录本进行比较，筛除那些与以上已知转录本相似或相同的转录本。若无已知lncRNA数据，则直接进行与该物种已知非lncRNA及非mRNA类型转录本的比较；</li>
+<li>step5: 通过与已知mRNA进行比较，并利用cuffcompare分析结果中的class_code(<a href="http://cole-trapnell-lab.github.io/cufflinks/cuffcompare/index.html#transfrag-class-codes)信息筛选候选lincRNA，intronic" target="_blank" rel="external">http://cole-trapnell-lab.github.io/cufflinks/cuffcompare/index.html#transfrag-class-codes)信息筛选候选lincRNA，intronic</a> lncRNA, anti-sense lncRNA类型的转录本。</li>
+</ul>
+<h3 id="class-code"><a href="#class-code" class="headerlink" title="class_code"></a>class_code</h3><table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Code</th>
+<th>Description </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>=</td>
+<td>Complete match of intron chain</td>
+</tr>
+<tr>
+<td>2</td>
+<td>c</td>
+<td>Contained</td>
+</tr>
+<tr>
+<td>3</td>
+<td>j</td>
+<td>Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript</td>
+</tr>
+<tr>
+<td>4</td>
+<td>e</td>
+<td>Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible pre-mRNA fragment.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>i</td>
+<td>A transfrag falling entirely within a reference intron</td>
+</tr>
+<tr>
+<td>6</td>
+<td>o</td>
+<td>Generic exonic overlap with a reference transcript</td>
+</tr>
+<tr>
+<td>7</td>
+<td>p</td>
+<td>Possible polymerase run-on fragment (within 2Kbases of a reference transcript)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>r</td>
+<td>Repeat. Currently determined by looking at the soft-masked reference sequence and applied to transcripts where at least 50% of the bases are lower case</td>
+</tr>
+<tr>
+<td>9</td>
+<td>u</td>
+<td>Unknown, intergenic transcript</td>
+</tr>
+<tr>
+<td>10</td>
+<td>x</td>
+<td>Exonic overlap with reference on the opposite strand</td>
+</tr>
+<tr>
+<td>11</td>
+<td>s</td>
+<td>An intron of the transfrag overlaps a reference intron on the opposite strand (likely due to read mapping errors)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>.</td>
+<td>(.tracking file only, indicates multiple classifications)</td>
+</tr>
+</tbody>
+</table>
 <h2 id="转录本定量"><a href="#转录本定量" class="headerlink" title="转录本定量"></a>转录本定量</h2><p>官网：<a href="http://htseq.readthedocs.io/en/release_0.9.1/" target="_blank" rel="external">HTSeq: Analysing high-throughput sequencing data with Python</a></p>
 <ol>
 <li><p><a href="http://bioinformatics.cvr.ac.uk/blog/featurecounts-or-htseq-count/" target="_blank" rel="external">featureCounts or htseq-count?</a></p>
@@ -267,35 +494,19 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 <li><p><a href="htseq-counts跟bedtools的区别">htseq-counts跟bedtools的区别</a></p>
 </li>
 </ol>
-<p>具体参数：</p>
-<ol>
-<li><a href="http://blog.csdn.net/herokoking/article/details/78257714" target="_blank" rel="external">htseq-count的使用</a></li>
-</ol>
-<h2 id="lincRNA鉴定"><a href="#lincRNA鉴定" class="headerlink" title="lincRNA鉴定"></a>lincRNA鉴定</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
+<h2 id="lincRNA鉴定及功能注释"><a href="#lincRNA鉴定及功能注释" class="headerlink" title="lincRNA鉴定及功能注释"></a>lincRNA鉴定及功能注释</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/fSQhvH8.jpg" alt=""></p>
 <ul>
 <li>CNCI：<a href="https://academic.oup.com/nar/article/41/17/e166/2411728" target="_blank" rel="external">文献</a>，<a href="https://github.com/www-bioinfo-org/CNCI" target="_blank" rel="external">github仓库</a></li>
 </ul>
 <p><img src="https://i.imgur.com/xLkXFAQ.png" alt=""></p>
+<p><a href="http://cpc.cbi.pku.edu.cn/docs/install_guide.jsp" target="_blank" rel="external">CPC </a></p>
+<ul>
+<li>ncFANs： <a href="https://academic.oup.com/nar/article/39/suppl_2/W118/2506940" target="_blank" rel="external">文献</a>， <a href="https://github.com/www-bioinfo-org/ncFANs" target="_blank" rel="external">github仓库</a></li>
+</ul>
 <p><img src="https://i.imgur.com/nDRVJCw.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/TvTIJhl.jpg" alt=""></p>
-<h2 id="差异表达分析"><a href="#差异表达分析" class="headerlink" title="差异表达分析"></a>差异表达分析</h2><p>参考:<a href="https://mp.weixin.qq.com/s?__biz=MzAxMDkxODM1Ng==&amp;mid=2247485961&amp;idx=1&amp;sn=13dbe5dec3a8b3ccff67bbccc7cebb62&amp;chksm=9b484ab2ac3fc3a41b7653bec30def207d256199c97897ad21f99247be493758c346bc98a00b&amp;scene=21#wechat_redirect" target="_blank" rel="external">lncRNA实战项目-第五步-差异表达的mRNA和lncRNA</a></p>
-<p>对于无重复样本的差异分析有几种方法可以选择，如edgeR，DEGseq和GFOLD等</p>
-<h2 id="功能注释"><a href="#功能注释" class="headerlink" title="功能注释"></a>功能注释</h2><ol>
-<li>David GO（for coding genes）</li>
-<li>ncFANs (for lincRNAs)</li>
-</ol>
-<p><strong>预测长非编码RNA的功能的常用方法：</strong></p>
-<p>1). 基于lncRNA在基因组的位置（顺势调控/反式调控 编码基因）</p>
-<p><img src="https://i.imgur.com/lRtkC3t.jpg" alt=""></p>
-<p>使用UCSC Genome Browser 查看</p>
-<p>2). 基于lncRNA与protein-coding gene的表达量</p>
-<ul>
-<li>基因表达共聚类（heatmap）</li>
-<li>GSEA(lncRNA exp ~ protein-coding exp ~ GO)</li>
-<li>共表达网络 (基因间的表达相关性:ncFANs)</li>
-</ul>
-<p>ncFANs： <a href="https://academic.oup.com/nar/article/39/suppl_2/W118/2506940" target="_blank" rel="external">文献</a>， <a href="https://github.com/www-bioinfo-org/ncFANs" target="_blank" rel="external">github仓库</a></p>
+<h2 id="差异表达分析"><a href="#差异表达分析" class="headerlink" title="差异表达分析"></a>差异表达分析</h2><p><a href="https://www.bioconductor.org/help/course-materials/2015/LearnBioconductorFeb2015/B02.1.1_RNASeqLab.html" target="_blank" rel="external">RNA-Seq workflow: gene-level exploratory analysis and differential expression</a></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1） <a href="https://academic.oup.com/bib/article-abstract/18/5/789/2562763?redirectedFrom=fulltext" target="_blank" rel="external">Identification and function annotation of long intervening noncoding RNAs</a></p>
 <p>（2）<a href="https://mp.weixin.qq.com/s/NUEi6oRFL7B3f1FpCD4Xug" target="_blank" rel="external">转录组分析工具哪家强？</a></p>
 ]]></content>
@@ -2291,71 +2502,6 @@ $WORKDIR/support-files/mysql.server stop
     
     
       <category term="MySQL" scheme="https:///AnJingwd.github.io/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>R一页多图</title>
-    <link href="https:///AnJingwd.github.io/2017/10/03/R%E4%B8%80%E9%A1%B5%E5%A4%9A%E5%9B%BE/"/>
-    <id>https:///AnJingwd.github.io/2017/10/03/R一页多图/</id>
-    <published>2017-10-03T08:24:48.000Z</published>
-    <updated>2018-01-02T11:32:24.570Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！</p>
-<blockquote class="blockquote-center">R一页多图</blockquote>
-
-<a id="more"></a>
-<h1 id="cowplot：基于ggplot的可视化系统"><a href="#cowplot：基于ggplot的可视化系统" class="headerlink" title="cowplot：基于ggplot的可视化系统"></a>cowplot：基于ggplot的可视化系统</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>&emsp;&emsp;cowplot是一个ggplot2包的简单补充，意味着其可以为ggplot2提供出版物级的主题等。更重要的是，这个包可以组合多个”ggplot2”绘制的图为一个图，并且<strong>为每个图加上例如A,B,C等标签，</strong> 这在具体的出版物上通常是要求的。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">library</span>(ggplot2)</div><div class="line"><span class="keyword">require</span>(cowplot)</div><div class="line">  </div><div class="line">plot.iris &lt;- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +</div><div class="line">    geom_point() + facet_grid(. ~ Species) +</div><div class="line">    stat_smooth(method = <span class="string">"lm"</span>) +</div><div class="line">    background_grid(major = <span class="string">'y'</span>, minor = <span class="string">"none"</span>) +</div><div class="line">    panel_border() +</div><div class="line">    labs(title = <span class="string">"dot-line plot"</span>)</div><div class="line"></div><div class="line">plot.mpg &lt;- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +</div><div class="line">    geom_point(size=<span class="number">2.5</span>) +</div><div class="line">    labs(title = <span class="string">"dot plot"</span>)</div><div class="line"></div><div class="line">plot.diamonds &lt;- ggplot(diamonds, aes(clarity, fill = cut)) +</div><div class="line">  geom_bar() +</div><div class="line">  theme(axis.text.x = element_text(angle=<span class="number">70</span>, vjust=<span class="number">0.5</span>)) +</div><div class="line">  labs(title = <span class="string">"bar plot"</span>)</div><div class="line"></div><div class="line">ggdraw() +</div><div class="line">  draw_plot(plot.iris, <span class="number">0</span>, <span class="number">.5</span>, <span class="number">1</span>, <span class="number">.5</span>) +</div><div class="line">  draw_plot(plot.mpg, <span class="number">0</span>, <span class="number">0</span>, <span class="number">.5</span>, <span class="number">.5</span>) +</div><div class="line">  draw_plot(plot.diamonds, <span class="number">.5</span>, <span class="number">0</span>, <span class="number">.5</span>, <span class="number">.5</span>) +</div><div class="line">  draw_plot_label(c(<span class="string">"A"</span>, <span class="string">"B"</span>, <span class="string">"C"</span>), c(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>), c(<span class="number">1</span>, <span class="number">0.5</span>, <span class="number">0.5</span>), size = <span class="number">15</span>)</div></pre></td></tr></table></figure>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="https://i.imgur.com/iLl9xR6.jpg" alt=""></p>
-<p><strong>注意：其中draw_plot(plot, x = 0, y = 0, width = 1, height = 1, scale = 1)，坐标参数范围为0-1，相当于每幅图占画布长宽的百分比</strong></p>
-<h1 id="rmisc包中的multiplot函数实现上述相同效果"><a href="#rmisc包中的multiplot函数实现上述相同效果" class="headerlink" title="rmisc包中的multiplot函数实现上述相同效果"></a>rmisc包中的multiplot函数实现上述相同效果</h1><p>简单高效，一句话搞定！可以实现上述同样的结果。</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">library</span>(<span class="string">"Rmisc"</span>)</div><div class="line"><span class="keyword">library</span>(<span class="string">"lattice"</span>)</div><div class="line"><span class="keyword">library</span>(<span class="string">"plyr"</span>)</div><div class="line">multiplot(plot.iris,plot.mpg,plot.diamonds, layout = matrix(c(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), nrow=<span class="number">2</span>, byrow=<span class="literal">TRUE</span>))</div></pre></td></tr></table></figure>
-<p><strong>下面看看源码中multiplot函数，本质是grid包！！</strong></p>
-<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">multiplot &lt;- <span class="keyword">function</span>(<span class="keyword">...</span>, plotlist=<span class="literal">NULL</span>, file, cols=<span class="number">1</span>, layout=<span class="literal">NULL</span>) &#123;</div><div class="line">  <span class="keyword">library</span>(grid)</div><div class="line"></div><div class="line">  <span class="comment"># Make a list from the ... arguments and plotlist</span></div><div class="line">  plots &lt;- c(list(<span class="keyword">...</span>), plotlist)</div><div class="line"></div><div class="line">  numPlots = length(plots)</div><div class="line"></div><div class="line">  <span class="comment"># If layout is NULL, then use 'cols' to determine layout</span></div><div class="line">  <span class="keyword">if</span> (is.null(layout)) &#123;</div><div class="line">    <span class="comment"># Make the panel</span></div><div class="line">    <span class="comment"># ncol: Number of columns of plots</span></div><div class="line">    <span class="comment"># nrow: Number of rows needed, calculated from # of cols</span></div><div class="line">    layout &lt;- matrix(seq(<span class="number">1</span>, cols * ceiling(numPlots/cols)),</div><div class="line">                    ncol = cols, nrow = ceiling(numPlots/cols))</div><div class="line">  &#125;</div><div class="line"></div><div class="line"> <span class="keyword">if</span> (numPlots==<span class="number">1</span>) &#123;</div><div class="line">    print(plots[[<span class="number">1</span>]])</div><div class="line"></div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">###新建图表版面</span></div><div class="line">    grid.newpage() </div><div class="line">    <span class="comment">####将版面分成nrow(layout)*ncol(layout)的矩阵</span></div><div class="line">    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))</div><div class="line"></div><div class="line">    <span class="comment"># Make each plot, in the correct location</span></div><div class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:numPlots) &#123;</div><div class="line">      <span class="comment"># Get the i,j matrix positions of the regions that contain this subplot</span></div><div class="line">      matchidx &lt;- as.data.frame(which(layout == i, arr.ind = <span class="literal">TRUE</span>))</div><div class="line"></div><div class="line">      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,</div><div class="line">                                      layout.pos.col = matchidx$col))</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="grid包实现上述相同效果"><a href="#grid包实现上述相同效果" class="headerlink" title="grid包实现上述相同效果"></a>grid包实现上述相同效果</h1><h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">grid.newpage()  <span class="comment">###新建图表版面</span></div><div class="line">grid.text(<span class="string">"title of this panel"</span>, vp = viewport(layout.pos.row = <span class="number">1</span>, layout.pos.col = <span class="number">1</span>:<span class="number">2</span>))</div><div class="line">pushViewport(viewport(layout = grid.layout(<span class="number">2</span>,<span class="number">2</span>))) <span class="comment">####将版面分成2*2矩阵</span></div><div class="line">vplayout &lt;- <span class="keyword">function</span>(x,y)&#123;viewport(layout.pos.row = x, layout.pos.col = y)&#125;</div><div class="line">print(plot.iris, vp = vplayout(<span class="number">1</span>,<span class="number">1</span>:<span class="number">2</span>))   <span class="comment">###将（1,1)和(1,2)的位置画图plot.iris</span></div><div class="line">print(plot.mpg, vp = vplayout(<span class="number">2</span>,<span class="number">1</span>))     <span class="comment">###将(2,1)的位置画图plot.mpg         </span></div><div class="line">print(plot.diamonds , vp = vplayout(<span class="number">2</span>,<span class="number">2</span>))    <span class="comment">###将（2,2)的位置画图plot.diamonds</span></div></pre></td></tr></table></figure>
-<h1 id="使用gridExtra包实现上述相同效果"><a href="#使用gridExtra包实现上述相同效果" class="headerlink" title="使用gridExtra包实现上述相同效果"></a>使用gridExtra包实现上述相同效果</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grid.arrange( arrangeGrob(plot.iris,left=<span class="string">"A"</span>), arrangeGrob(plot.mpg, left=<span class="string">"B"</span>), arrangeGrob(plot.diamonds, left=<span class="string">"C"</span>),</div><div class="line">              layout_matrix = matrix(c(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), ncol=<span class="number">2</span>, byrow=<span class="literal">TRUE</span>), </div><div class="line">              top = <span class="string">"Title"</span>,left = <span class="string">"This is my global Y-axis title"</span>)</div></pre></td></tr></table></figure>
-<h2 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h2><p><img src="https://i.imgur.com/PaFixxo.jpg" alt=""></p>
-<p><strong>单个图的标签（A,B,C）位置和属性不是很方便调整</strong></p>
-<h1 id="使用gridExtra包实现多图的轴向组合"><a href="#使用gridExtra包实现多图的轴向组合" class="headerlink" title="使用gridExtra包实现多图的轴向组合"></a>使用gridExtra包实现多图的轴向组合</h1><h2 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">hist_top &lt;- ggplot()+geom_histogram(aes(mtcars$mpg)) <span class="comment">#绘制上方条形图</span></div><div class="line"></div><div class="line">empty &lt;- ggplot()+geom_point(aes(<span class="number">1</span>,<span class="number">1</span>), colour=<span class="string">"white"</span>)+</div><div class="line">  theme(axis.ticks=element_blank(), </div><div class="line">        panel.background=element_blank(), </div><div class="line">        axis.line =element_blank(),</div><div class="line">        axis.text.x=element_blank(), axis.text.y=element_blank(),           </div><div class="line">        axis.title.x=element_blank(), axis.title.y=element_blank())</div><div class="line"></div><div class="line">scatter &lt;- ggplot()+geom_point(aes(mtcars$mpg, mtcars$qsec)) <span class="comment">#绘制主图散点图</span></div><div class="line">hist_right &lt;- ggplot()+geom_histogram(aes(mtcars$qsec))+coord_flip() <span class="comment">#绘制右侧条形图</span></div><div class="line"></div><div class="line"><span class="comment">#最终组合，由四个图拼图而成，只是右上角的图已经将各种标注去除了</span></div><div class="line">grid.arrange(hist_top, empty, scatter, hist_right, ncol=<span class="number">2</span>, nrow=<span class="number">2</span>, </div><div class="line">             widths=c(<span class="number">4</span>, <span class="number">1</span>), heights=c(<span class="number">1</span>, <span class="number">4</span>))</div></pre></td></tr></table></figure>
-<h2 id="结果-2"><a href="#结果-2" class="headerlink" title="结果"></a>结果</h2><p><img src="https://i.imgur.com/G8jWWtv.jpg" alt=""></p>
-<h1 id="其实绘制这种组合图已经有相应的R包了–ggExtra"><a href="#其实绘制这种组合图已经有相应的R包了–ggExtra" class="headerlink" title="其实绘制这种组合图已经有相应的R包了–ggExtra"></a>其实绘制这种组合图已经有相应的R包了–ggExtra</h1><h2 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">library</span>(ggplot2)</div><div class="line">df &lt;- data.frame(x = mtcars$mpg, y = mtcars$qsec)</div><div class="line">p &lt;- ggplot(df, aes(x, y)) + geom_point() + theme_classic()</div><div class="line">ggExtra::ggMarginal(p, type = <span class="string">"histogram"</span>)</div></pre></td></tr></table></figure>
-<p><strong>ggExtra包中最主要的函数ggMarginal - Add marginal histograms/boxplots/density plots to ggplot2 scatterplots</strong></p>
-<h1 id="子母图"><a href="#子母图" class="headerlink" title="子母图"></a>子母图</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>&emsp;&emsp;当做分组条形图时，有时碰到一组数据特北大，其他组数据特别小，这时候就不太美观了。可能你想到的第一个办法是截断，但其实还可以用字母图，形成局部放大的效果，既可以从整体上对比，又兼顾特别小的数据组可以轻松查看，而没必要单独做两张图。</p>
-<h2 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 载入需要的包</span></div><div class="line"><span class="keyword">library</span>(plyr)</div><div class="line"><span class="keyword">library</span>(Rmisc)</div><div class="line"><span class="keyword">library</span>(ggplot2)</div><div class="line"><span class="keyword">library</span>(grid)</div><div class="line"></div><div class="line"><span class="comment">#创建数据</span></div><div class="line">A &lt;- rnorm(<span class="number">10</span>,<span class="number">75</span>,<span class="number">10</span>)</div><div class="line">B &lt;- rnorm(<span class="number">10</span>,<span class="number">12</span>,<span class="number">5</span>)</div><div class="line">C &lt;- rnorm(<span class="number">10</span>,<span class="number">4</span>,<span class="number">3</span>)</div><div class="line">Group &lt;- c(rep(<span class="string">'A'</span>,<span class="number">10</span>),rep(<span class="string">'B'</span>,<span class="number">10</span>),rep(<span class="string">'C'</span>,<span class="number">10</span>))</div><div class="line">Value &lt;- c(A,B,C)</div><div class="line">D &lt;- data.frame(Group,Value)</div><div class="line"></div><div class="line"><span class="comment"># 求标准差，后面画误差要用</span></div><div class="line">DSe &lt;- summarySE(D,measurevar = <span class="string">'Value'</span>,groupvars = <span class="string">'Group'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 把组别转化成因子</span></div><div class="line">D$Group &lt;- factor(D$Group)</div><div class="line"></div><div class="line"><span class="comment"># 挑三种颜色</span></div><div class="line">C &lt;- c(<span class="string">'#55a0fb'</span>,<span class="string">'#ff8080'</span>,<span class="string">'#c5944e'</span>)</div><div class="line"></div><div class="line"><span class="comment">#画大图</span></div><div class="line">p1 &lt;- ggplot(DSe,aes(Group,Value)) + <span class="comment"># 定义环境</span></div><div class="line">  geom_bar(aes(Group,Value,fill = Group),stat = <span class="string">'identity'</span>,width = <span class="number">0.5</span>,show.legend = <span class="literal">T</span>) + <span class="comment"># 画条形图</span></div><div class="line">  geom_errorbar(aes(ymin = Value-se, ymax = Value+se),width = <span class="number">.2</span>) + <span class="comment">#加误差线</span></div><div class="line">  scale_fill_manual(values = C) + <span class="comment"># 配色</span></div><div class="line">  labs(x=<span class="string">'修改X轴为Group'</span>,y=<span class="string">'修改Y轴为Value'</span>,title = <span class="string">'添加标题'</span>)+</div><div class="line">  theme(axis.title = element_text(face = <span class="string">'bold'</span>),<span class="comment"># 定义主題，如坐标轴，标题样式、背景等</span></div><div class="line">        axis.text = element_text(face = <span class="string">'bold'</span>,colour = <span class="string">'black'</span>),</div><div class="line">        plot.title = element_text(face = <span class="string">'bold'</span>,colour = <span class="string">'black'</span>,hjust = <span class="number">0.5</span>,size = <span class="number">20</span>),</div><div class="line">        legend.background = element_rect(I(<span class="number">0</span>),linetype = <span class="number">1</span>))</div><div class="line"></div><div class="line">p1 <span class="comment"># 看下效果</span></div><div class="line"></div><div class="line"><span class="comment"># 选择小数据集、小颜色集</span></div><div class="line"></div><div class="line">DSe2 &lt;- DSe[<span class="number">2</span>:<span class="number">3</span>,]</div><div class="line"></div><div class="line">C2 &lt;- C[<span class="number">2</span>:<span class="number">3</span>]</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 画小图，基本和大图一樣，后面要背景透明、显示坐标轴</span></div><div class="line"></div><div class="line">p2 &lt;- ggplot(DSe2,aes(Group,Value)) + </div><div class="line">  geom_bar(aes(Group,Value,fill = Group), stat = <span class="string">'identity'</span>,width = <span class="number">0.5</span>) + </div><div class="line">  geom_errorbar(aes(ymin = Value-se, ymax = Value+se),width = <span class="number">.2</span>)+</div><div class="line">  scale_fill_manual(values = C2)+</div><div class="line">  guides(fill = <span class="literal">F</span>)+</div><div class="line">  theme(axis.text = element_text(face = <span class="string">'bold'</span>,colour = <span class="string">'black'</span>),</div><div class="line">        axis.title.y = element_blank(),</div><div class="line">        axis.line = element_line(linetype = <span class="number">1</span>,colour = <span class="string">'black'</span>), <span class="comment"># 显示坐标轴</span></div><div class="line">        plot.background = element_rect(I(<span class="number">0</span>),linetype = <span class="number">0</span>), <span class="comment"># 背景透明</span></div><div class="line">        panel.background = element_rect(I(<span class="number">0</span>)),</div><div class="line">        panel.grid.major = element_line(colour = <span class="literal">NA</span>),</div><div class="line">        panel.grid.minor = element_line(colour = <span class="literal">NA</span>))</div><div class="line"></div><div class="line">p2 <span class="comment"># 看下效果</span></div><div class="line"></div><div class="line"><span class="comment"># 嵌套</span></div><div class="line">sub &lt;- viewport(width = <span class="number">0.5</span>,height = <span class="number">0.4</span>,x = <span class="number">0.64</span>,y = <span class="number">0.6</span>) </div><div class="line"><span class="comment"># 配置环境。前兩個是子图的大小比例，后两个是位置，可自行调整到好看位置。</span></div><div class="line">p1 <span class="comment"># 上大图</span></div><div class="line">print(p2,vp = sub) <span class="comment"># 加小图</span></div></pre></td></tr></table></figure>
-<h2 id="结果-3"><a href="#结果-3" class="headerlink" title="结果"></a>结果</h2><p><img src="https://i.imgur.com/dKOaE8e.jpg" alt=""></p>
-<p><strong>关键代码就是利用了grid包的viewport函数，viewport简单说就是图形中一块矩形区域（类似于图层），是在这个区域中进一步绘图的基础。所以我们可以利用viewport函数在任意指定位置将两个或者多个图进行拼接~</strong></p>
-<hr>
-<h1 id="ggplot2之分组和分面"><a href="#ggplot2之分组和分面" class="headerlink" title="ggplot2之分组和分面"></a>ggplot2之分组和分面</h1><p><strong>&emsp;&emsp;以上是不同数据来源的图，以不同展现形式组合成一个图，另外ggplot2对一个数据集合进行分组，通过分面绘图，也算是实现一页多图的效果吧~</strong></p>
-<h2 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">setwd(<span class="string">"F:/R working directory/GO enrichment"</span>)</div><div class="line">data&lt;-read.csv(<span class="string">"GO.csv"</span>,header=<span class="literal">TRUE</span>,check.names = <span class="literal">FALSE</span>)</div><div class="line">data_new&lt;-subset(data,data$FDR&lt;<span class="number">0.5</span>)</div><div class="line"><span class="keyword">library</span>(<span class="string">"ggplot2"</span>)</div><div class="line">ggplot(data=data_new)+</div><div class="line">  theme(plot.margin=unit(c(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">3</span>),<span class="string">"cm"</span>))+  <span class="comment">#调整作图边距，上，右，下，左</span></div><div class="line">  geom_bar(aes(x=Term,y=Count,fill=-log10(Pvalue)),stat=<span class="string">"identity"</span>)+ <span class="comment">#指定横纵变量，stat指定统计变换</span></div><div class="line">  scale_fill_gradient(low=<span class="string">'red'</span>,high=<span class="string">'blue'</span>)+xlab(<span class="string">''</span>)+ylab(<span class="string">''</span>)+   <span class="comment">#指定注释条带</span></div><div class="line">  <span class="comment">#指定横纵标签的大小，角度，距离等细节</span></div><div class="line">  theme(axis.text.x = element_text(color=<span class="string">'black'</span>,size = <span class="number">5</span>,angle=<span class="number">90</span>, hjust=<span class="number">1</span>),</div><div class="line">        axis.text.y = element_text(color=<span class="string">'black'</span>,size=<span class="number">10</span>))+   </div><div class="line">        facet_grid(.~Type)  <span class="comment">#根据Type划分作图区块</span></div></pre></td></tr></table></figure>
-<h2 id="结果-4"><a href="#结果-4" class="headerlink" title="结果"></a>结果</h2><p><img src="https://i.imgur.com/7DSlUOH.jpg" alt=""></p>
-<p><strong>可以看到结果并不是很好，横轴标签每个分组（BP,CC,MF）均含有13个通路，这是三个分组富集到的GO通路的交集，空值显示出来并不太美观</strong></p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">setwd(<span class="string">"F:/R working directory/GO enrichment"</span>)</div><div class="line">data&lt;-read.csv(<span class="string">"GO.csv"</span>,header=<span class="literal">TRUE</span>,check.names = <span class="literal">FALSE</span>)</div><div class="line">data_new&lt;-subset(data,data$FDR&lt;<span class="number">0.5</span>) <span class="comment">#过滤数据</span></div><div class="line">Order &lt;-<span class="number">1</span>:dim(data_new)[<span class="number">1</span>]    <span class="comment">#生成横坐标输出顺序</span></div><div class="line">data_order&lt;-cbind(data_new,Order) <span class="comment">#数据框添加一列</span></div><div class="line"><span class="keyword">library</span>(<span class="string">"ggplot2"</span>)</div><div class="line">ggplot(data=data_order,aes(x=reorder(Term,data_order$Order),y=-log10(Pvalue),fill=Type))+</div><div class="line">       coord_flip()+ <span class="comment">#将图横向</span></div><div class="line">       xlab(<span class="string">''</span>)+  <span class="comment">#覆盖横坐标</span></div><div class="line">       theme(plot.margin=unit(c(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>),<span class="string">"cm"</span>))+  <span class="comment">#调整作图边距，上，右，下，左</span></div><div class="line">       geom_bar(stat=<span class="string">"identity"</span>)</div></pre></td></tr></table></figure>
-<h2 id="结果-5"><a href="#结果-5" class="headerlink" title="结果"></a>结果</h2><p><img src="https://i.imgur.com/FwUjvps.jpg" alt=""></p>
-<p><strong>主要通过给数据框加一列来对每一组进行排序输出</strong></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.jianshu.com/p/ff05c07d42d7" target="_blank" rel="external">【R:ggplot2】同时绘制多个图</a> </p>
-<p>（2）<a href="https://m.baidu.com/from=1099a/bd_page_type=1/ssid=0/uid=0/baiduid=146473DA1CD71725A4D168787307B578/w=0_10_/t=zbios/l=3/tc?ref=www_zbios&amp;pu=sz%401320_480%2Ccuid%407978D81D6BE37659D768D6902731891FF2458FDB3ORAQMNFTPI%2Ccua%40640_1136_iphone_9.3.0.11_0%2Ccut%40iPhone8%252C4_10.3.3%2Cosname%40baiduboxapp%2Cctv%401%2Ccfrom%401099a%2Ccsrc%40bdbox_tserch_txt%2Ccud%40RTMzOUY0NTItQzMwRC00OUNFLTk0MDgtM0Q0MjgyQUVBODNG%2Cta%40zbios_1_10.3_6_9.3%2Cusm%402%2Cvmgdb%400020100228y&amp;lid=13001167334004924177&amp;order=1&amp;fm=alop&amp;tj=www_normal_1_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;title=cowplot%3A%E5%9F%BA%E4%BA%8Eggplot%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96%E7%B3%BB%E7%BB%9F%3F%3FBiostack.org&amp;dict=32&amp;w_qd=IlPT2AEptyoA_yi7I6SxJywg&amp;sec=24387&amp;di=0f2e3ebca79135a3&amp;bdenc=1&amp;tch=124.316.52.125.2.530659&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_yxR0SmanEqwxPvxJxEsRHKgVmfTUCGcczO&amp;eqid=b46d6ccea0c6a0001000000559d1b6ab&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1506916022048%2C%22sig%22%3A%229731%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1" target="_blank" rel="external">cowplot：基于ggplot的可视化系统</a></p>
-<p>（3）<a href="http://raindu.com/2017/06/17/R%E8%AF%AD%E8%A8%80%E5%8F%AF%E8%A7%86%E5%8C%96%E2%80%94%E2%80%94%E5%9B%BE%E8%A1%A8%E6%8E%92%E7%89%88%E4%B9%8B%E4%B8%80%E9%A1%B5%E5%A4%9A%E5%9B%BE/" target="_blank" rel="external">R语言可视化——图表排版之一页多图</a></p>
-<p>（4）<a href="https://stackoverflow.com/questions/38867430/add-labels-to-a-plot-made-by-grid-arrange-from-multiple-plots" target="_blank" rel="external">Add labels to a plot made by grid.arrange from multiple plots
-</a></p>
-<p>（5）<a href="http://blog.csdn.net/vivihe0/article/details/47188329" target="_blank" rel="external">R语言grid包使用笔记——viewport</a></p>
-<p>（6）<a href="https://www.plob.org/article/3579.html" target="_blank" rel="external">利用ggplot将多个图形组合在一起（推荐-置信椭圆）</a></p>
-<p>（7）<a href="https://stackoverflow.com/questions/8545035/scatterplot-with-marginal-histograms-in-ggplot2" target="_blank" rel="external">Scatterplot with marginal histograms in ggplot2（推荐）</a></p>
-<p>（8）<a href="https://weiwenku.net/d/102185281" target="_blank" rel="external">你終於會做截斷圖了，可審稿人說不讓做，怎麼破？</a></p>
-<p>（9）<a href="http://blog.sina.com.cn/s/blog_15ff3b88f0102wk0r.html" target="_blank" rel="external">ggplot2之分组和分面</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;发表文章一般都要求将多个相关的图组合成单个图，并标上A,B,C等标签。所以总结一下R语言绘图的一页多图，以及多图的拼接，子母图等的各种实现方法，！&lt;/p&gt;
-&lt;blockquote class=&quot;blockquote-center&quot;&gt;R一页多图&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="R绘图" scheme="https:///AnJingwd.github.io/categories/R%E7%BB%98%E5%9B%BE/"/>
-    
-    
-      <category term="R绘图" scheme="https:///AnJingwd.github.io/tags/R%E7%BB%98%E5%9B%BE/"/>
     
   </entry>
   

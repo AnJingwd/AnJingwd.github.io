@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="NGS," />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -96,23 +96,21 @@
 
 
 
-<meta name="description" content="GATK3.8相关软件及文件准备">
-<meta name="keywords" content="NGS">
+<meta name="description" content="任务提交系统使用">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GATK3.8分析环境搭建">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建/index.html">
+<meta property="og:title" content="任务提交系统使用">
+<meta property="og:url" content="https:///AnJingwd.github.io/2018/04/05/任务提交系统使用/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="GATK3.8相关软件及文件准备">
+<meta property="og:description" content="任务提交系统使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/jvbLuTm.jpg">
-<meta property="og:image" content="https://i.imgur.com/GEF1W45.jpg">
-<meta property="og:image" content="https://i.imgur.com/PADtsMb.jpg">
-<meta property="og:image" content="https://i.imgur.com/3T122nP.png">
-<meta property="og:updated_time" content="2018-04-01T10:10:29.537Z">
+<meta property="og:image" content="https://i.imgur.com/YGgb9H6.jpg">
+<meta property="og:image" content="https://i.imgur.com/Y1DqlC0.jpg">
+<meta property="og:updated_time" content="2018-04-15T02:05:47.010Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GATK3.8分析环境搭建">
-<meta name="twitter:description" content="GATK3.8相关软件及文件准备">
-<meta name="twitter:image" content="https://i.imgur.com/jvbLuTm.jpg">
+<meta name="twitter:title" content="任务提交系统使用">
+<meta name="twitter:description" content="任务提交系统使用">
+<meta name="twitter:image" content="https://i.imgur.com/YGgb9H6.jpg">
 
 
 
@@ -145,7 +143,7 @@
 
 
 
-  <title>GATK3.8分析环境搭建 | 安静-不安静的博客</title>
+  <title>任务提交系统使用 | 安静-不安静的博客</title>
   
 
 
@@ -299,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/04/05/任务提交系统使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -316,7 +314,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">GATK3.8分析环境搭建</h2>
+          <h2 class="post-title" itemprop="name headline">任务提交系统使用</h2>
         
 
         <div class="post-meta">
@@ -328,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-26T18:15:59+08:00">
-                2017-12-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T10:07:10+08:00">
+                2018-04-05
               </time>
             
 
@@ -351,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/NGS/" itemprop="url" rel="index">
-                    <span itemprop="name">NGS</span>
+                  <a href="https:/AnJingwd.github.io/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -388,144 +386,104 @@
       
 
       
-        <p><blockquote class="blockquote-center">GATK3.8相关软件及文件准备</blockquote><br><a id="more"></a></p>
-<h1 id="GATK官网相关栏目"><a href="#GATK官网相关栏目" class="headerlink" title="GATK官网相关栏目"></a>GATK官网相关栏目</h1><ul>
-<li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tool Documentation</a> （包含每个工具的使用说明）</li>
-<li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tutorials</a> (包含具体参数和细节)</li>
-<li><a href="https://software.broadinstitute.org/gatk/best-practices/" target="_blank" rel="external">GATK Best Practices</a> （包含两个主流的分析流程）</li>
-</ul>
-<p><strong>全外显子测序call Germline SNP &amp; Indel流程图</strong></p>
-<p><img src="https://i.imgur.com/jvbLuTm.jpg" alt=""></p>
-<p><strong>体细胞拷贝数变异分析流程!</strong></p>
-<p><a href="https://i.imgur.com/844zfg1.jpg" target="_blank" rel="external"></a></p>
-<p><strong>使用RNA-seq数据call变异</strong></p>
-<p><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=3891" target="_blank" rel="external">Calling variants in RNAseq</a></p>
-<p><img src="https://i.imgur.com/GEF1W45.jpg" alt=""></p>
+        <blockquote class="blockquote-center">任务提交系统使用</blockquote>
+
+<a id="more"></a>
+<h1 id="什么是批处理作业调度程序？"><a href="#什么是批处理作业调度程序？" class="headerlink" title="什么是批处理作业调度程序？"></a>什么是批处理作业调度程序？</h1><p>&emsp;&emsp;大多数现有的高性能计算集群都由作业调度程序管理; 也称为批量调度程序，工作负载管理器，排队系统或负载均衡器。调度程序允许多个用户公平地共享计算节点，允许系统管理员控制资源如何提供给不同用户组。所有调度程序都设计用于执行以下功能：</p>
 <ul>
-<li><a href="https://gatkforums.broadinstitute.org/gatk" target="_blank" rel="external">Forum</a> （提问和搜索报错解决很有用）</li>
+<li>允许用户向集群提交新作业</li>
+<li>允许用户监视其排队和正在运行的作业的状态</li>
+<li>允许用户和系统管理员控制正在运行的作业</li>
+<li>监控受管资源的状态，包括系统负载，可用内存等</li>
 </ul>
-<p><img src="https://i.imgur.com/PADtsMb.jpg" alt=""></p>
+<p>&emsp;&emsp;当用户提交新作业时，群集调度程序软件将分配计算核心和内存以满足作业要求。如果合适的资源不可用于运行作业，则调度程序会将作业添加到队列中，直到有足够的资源可用于作业运行。您可以配置调度程序来控制如何从队列中选择作业并在集群节点上执行作业，包括自动准备节点以运行并行MPI作业。作业完成运行后，调度程序将作业使用的资源返回到可用资源池，准备运行其他用户作业。</p>
+<h2 id="计算作业的类型"><a href="#计算作业的类型" class="headerlink" title="计算作业的类型"></a>计算作业的类型</h2><p>用户可以通过集群调度程序运行多种不同类型的作业，其中包括：</p>
 <ul>
-<li>Blog (包含历年的workshop材料，学习用得上)</li>
+<li>批量作业 ; 单线程应用程序只能在一个计算核心上运行</li>
+<li>阵列作业 ; 为方便起见，将两个或多个类似的批处理作业一起提交</li>
+<li>SMP或多线程的工作; 在同一个计算节点上的两个或多个计算核心上运行的多线程应用程序</li>
+<li>并行作业 ; 多线程应用程序利用MPI库在分布在一个或多个计算节点上的多个内核上运行</li>
 </ul>
-<p><a href="https://drive.google.com/drive/folders/0B7akc6CTmxIHNGpibUFTNzVRazg?usp=sharing" target="_blank" rel="external">Presentation slides and tutorial materials - Pretoria 2017（需要翻墙才能下载）</a></p>
-<h1 id="GATK3-8下载"><a href="#GATK3-8下载" class="headerlink" title="GATK3.8下载"></a>GATK3.8下载</h1><p>GATK=GenomeAnalysisToolkit，最新稳定版为<a href="https://software.broadinstitute.org/gatk/download/" target="_blank" rel="external">GATK3.8</a> （<strong>需要注册！</strong>）</p>
-<p>&emsp;&emsp;电脑软件在投放市场前，需要有人测试一下，看看是不是有问题，在开发该软件的公司内部的由该公司内部人员测试的称为：alfa测试。alfa测试主要看有没有功能缺失或系统错误，<strong>alfa测试完后一般不会有大问题了，然后把软件拿给用户测试，称为：beta测试，主要是看用户对软件外观，使用方便等的反映。</strong> 如果beta1版用户反映有问题，拿到公司修改，改完后发布beta2版，还有不满意的地方，再改，再发布beta3版，直到用户满意，或正式版发布为止。</p>
-<p><a href="https://software.broadinstitute.org/gatk/download/beta" target="_blank" rel="external">GATK4.Beta.5</a>即为测试版</p>
-<pre><code>#解压：
-tar -jxvf GenomeAnalysisTK-3.8-0.tar.bz2
-</code></pre><h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><p>（1）java版本要求大于1.8.x</p>
-<pre><code>java -version
-</code></pre><p>（2）测试</p>
-<pre><code>java -jar /path/to/GenomeAnalysisTK.jar -h
-</code></pre><p>（3）设置别名</p>
-<pre><code>alias gatk=&quot;/home/wangdong/softwares/GATK3.8/GenomeAnalysisTK.jar&quot;
-</code></pre><p>（4）下载java1.7版本，解压即可（MuTect1.1.7需要）</p>
-<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html" target="_blank" rel="external">Java SE 7 Archive Downloads</a></p>
-<p><img src="https://i.imgur.com/3T122nP.png" alt=""></p>
-<p>（5）mutect下载安装</p>
+<p>&emsp;&emsp;集群作业调度程序负责查找集群中的计算节点以运行所有这些不同类型的作业。它会跟踪可用资源并将作业分配给各个节点组，确保不会过度提交CPU和内存。以下示例显示了作业调度程序如何将不同类型的作业分配给一组8-CPU核心计算节点：</p>
+<p><img src="https://i.imgur.com/YGgb9H6.jpg" alt=""></p>
+<h2 id="交互式和批处理作业"><a href="#交互式和批处理作业" class="headerlink" title="交互式和批处理作业"></a>交互式和批处理作业</h2><p>用户通常通过运行交互式或批处理（也称为非交互式）作业与计算集群进行交互。</p>
 <ul>
-<li><a href="https://github.com/broadinstitute/mutect" target="_blank" rel="external">github上mutect源码 broadinstitute/mutect(不必下载)</a></li>
-<li><a href="https://software.broadinstitute.org/gatk/download/mutect" target="_blank" rel="external">GATK官网提供的编译好的MuTect1.1.7</a></li>
-<li><a href="http://archive.broadinstitute.org/cancer/cga/mutect_run" target="_blank" rel="external">How do I run MuTect?（参数详解及使用例子）</a></li>
+<li>交互式作业是用户通过图形界面或通过在命令提示符处键入来直接控制的作业。</li>
+<li>通过编写传递给计算节点的指令列表来运行批处理作业，以便将来在某个时刻运行。</li>
 </ul>
-<p>（6） 其他软件及环境配置</p>
-<p>Software packages</p>
+<h2 id="为什么在个人群集上使用作业调度程序？"><a href="#为什么在个人群集上使用作业调度程序？" class="headerlink" title="为什么在个人群集上使用作业调度程序？"></a>为什么在个人群集上使用作业调度程序？</h2><p>&emsp;&emsp;在共享的多用户群集上，作业调度程序通常用作控制机制，以确保用户不会不公平地垄断有价值的计算资源。在极端情况下，系统管理员可能会使用调度程序强制在共享环境中执行“良好行为”，并且可能感觉像对集群用户进行强制操作。</p>
+<p>通过您自己的个人群集，您可以直接控制可用于工作的资源 - 不需要工作调度程序来限制您的使用。</p>
+<p>然而 - 有很多原因可以使你自己的作业调度程序在你的群集中仍然是一个有用的工具：</p>
 <ul>
-<li>BWA</li>
-<li>SAMtools</li>
-<li>Picard</li>
-<li>IGV</li>
-<li>RStudio IDE and R libraries ggplot2 and gsalib</li>
+<li>它可以帮助您组织多阶段工作流程，批量作业在定义的过程中启动后续作业。</li>
+<li>它可以自动启动MPI作业，找到可用的节点来运行应用程序。</li>
+<li>它可以帮助防止意外地过度分配CPU或内存，这可能会导致节点故障。</li>
+<li>它可以帮助将纪律带入环境，提供一致的方法来复制不同环境中的作业运行。</li>
+<li>在调度程序中排队的作业可以用来触发扩大您的群集的大小，在没有作业运行时从群集中释放计算节点，为您节省成本。</li>
 </ul>
-<p>参考：<a href="https://gatkforums.broadinstitute.org/gatk/discussion/2899/howto-install-all-software-packages-required-to-follow-the-gatk-best-practices" target="_blank" rel="external">(howto) Install all software packages required to follow the GATK Best Practices.</a></p>
-<h1 id="Reference-sequence和annotation下载"><a href="#Reference-sequence和annotation下载" class="headerlink" title="Reference sequence和annotation下载"></a>Reference sequence和annotation下载</h1><p><strong>（请务必使用GATK resource bundle提供的参考基因组相关文件非常重要！）</strong></p>
-<p>GATK resource bundle介绍：<br><a href="http://gatkforums.broadinstitute.org/discussion/1213/whats-in-the-resource-bundle-and-how-can-i-get-it" target="_blank" rel="external">http://gatkforums.broadinstitute.org/discussion/1213/whats-in-the-resource-bundle-and-how-can-i-get-it</a></p>
-<p>GATK resource bundle FTP地址：<br><a href="http://gatkforums.broadinstitute.org/discussion/1215/how-can-i-access-the-gsa-public-ftp-server" target="_blank" rel="external">http://gatkforums.broadinstitute.org/discussion/1215/how-can-i-access-the-gsa-public-ftp-server</a></p>
-<p>（1）使用Xftp5等FTP server登陆</p>
-<pre><code>location: ftp.broadinstitute.org/bundle
-username: gsapubftp-anonymous
-password:
-</code></pre><p>（2）使用浏览器登陆</p>
-<pre><code>ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/
-</code></pre><h2 id="Reference-sequence"><a href="#Reference-sequence" class="headerlink" title="Reference sequence"></a>Reference sequence</h2><ul>
-<li>ucsc.hg19.dict.gz</li>
-<li>ucsc.hg19.fasta.fai.gz</li>
-<li>ucsc.hg19.fasta.gz</li>
+<h2 id="可用的群集作业调度程序"><a href="#可用的群集作业调度程序" class="headerlink" title="可用的群集作业调度程序"></a>可用的群集作业调度程序</h2><ul>
+<li>开放网格调度器（SGE） - 一种开源的作业调度器，由最初的Sun Grid Engine（SGE）代码库构建而成，</li>
+<li>OpenLava调度程序（类似于IBM LSF）</li>
+<li>转矩调度器</li>
+<li>PBS Pro调度程序</li>
 </ul>
-<p><a href="https://software.broadinstitute.org/gatk/documentation/article?id=1601" target="_blank" rel="external">How can I prepare a FASTA file to use as reference?</a></p>
-<p> picard CreateSequenceDictionary R= hg19.fa O= hg19.dict</p>
-<h2 id="annotation"><a href="#annotation" class="headerlink" title="annotation"></a>annotation</h2><ul>
-<li>1000G_omni2.5.hg19.sites.vcf.idx</li>
-<li>1000G_omni2.5.hg19.sites.vcf.idx</li>
-<li>1000G_phase1.indels.hg19.sites.vcf</li>
-<li>1000G_phase1.indels.hg19.sites.vcf.idx</li>
-<li>hg19/1000G_phase1.snps.high_confidence.hg19.sites.vcf</li>
-<li>hg19/1000G_phase1.snps.high_confidence.hg19.sites.vcf.idx</li>
-<li>dbsnp_138.hg19.vcf</li>
-<li>dbsnp_138.hg19.vcf.idx</li>
-<li>hapmap_3.3.hg19.sites.vcf</li>
-<li>hapmap_3.3.hg19.sites.vcf.idx</li>
-<li>Mills_and_1000G_gold_standard.indels.hg19.sites.vcf</li>
-<li>Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx</li>
+<h2 id="作业调度系统"><a href="#作业调度系统" class="headerlink" title="作业调度系统"></a>作业调度系统</h2><ul>
+<li>SLURM（简单Linux资源管理实用程序）是全球超级计算机中心采用的可扩展工作负载管理器。<strong>它是免费的并且是开源的，在通用公共许可证下发布。</strong></li>
+<li>IBM®Platform™LSF®是一款功能强大的工作负载管理平台，适用于要求苛刻的分布式HPC环境。它提供了一套全面的智能策略驱动调度功能，使您能够利用所有计算基础架构资源并确保最佳的应用程序性能。</li>
 </ul>
-<ol>
-<li><p>dbSNP 用于去除部分候选突变，其在其他人中已经被观察到的，最有可能是胚系突变。因为提交给dbSNP数据库的突变验证水平很低，所以我们不能确定标记为胚系突变或者体细胞突变的标签是否可信。</p>
-</li>
-<li><p>相比之下，COSMIC是一个经过更高验证的资源，所以它基本上被用作白名单来“拯救”候选突变，否则这些候选突变将会因为在正常和/或dbSNP中而被去除。 我们期望在dbSNP中被标记为somatic的任何东西都将在COSMIC中，所以我们可以依靠COSMIC来重新回收这些位点。</p>
-</li>
-<li><p>当前最好的已知indels集合将被用于局部重新比对（local realignment）（请注意，我们不再使用dbSNP）; 使用这两个文件：</p>
+<p><img src="https://i.imgur.com/Y1DqlC0.jpg" alt=""></p>
+<h3 id="SLURM作业调度系统常用命令"><a href="#SLURM作业调度系统常用命令" class="headerlink" title="SLURM作业调度系统常用命令"></a>SLURM作业调度系统常用命令</h3><p><a href="https://pi.sjtu.edu.cn/doc/slurm/" target="_blank" rel="external">SLURM manual</a></p>
 <ul>
-<li>1000G_phase1.indels.b37.vcf (currently from the 1000 Genomes Phase I indel calls)</li>
-<li>Mills_and_1000G_gold_standard.indels.b37.sites.vcf</li>
+<li>sinfo 查看各个节点的状态，资源是否充足，当前有多少正在执行的任务</li>
 </ul>
-</li>
-<li><p>If you run any GATK tool on a vcf that doesn’t have an index, it will automatically generate one for you, so knock yourself out。 <a href="https://gatkforums.broadinstitute.org/gatk/discussion/5426/generate-an-idx-file-for-a-vcf" target="_blank" rel="external">参考：generate an idx file for a vcf 
-</a></p>
-</li>
-</ol>
-<h2 id="GATK-Prepare-Reference-Files"><a href="#GATK-Prepare-Reference-Files" class="headerlink" title="GATK: Prepare Reference Files"></a>GATK: Prepare Reference Files</h2><p>参考： <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk" target="_blank" rel="external">(howto) Prepare a reference for use with BWA and GATK</a></p>
-<p>Prerequisites</p>
+<p>&emsp;&emsp;使用 sinfo 可粗略查看所有分区的节点信息，注意 ‘‘STATE’’ 一栏的输出 若为 ‘‘idle’’ 表示该节点处于闲置状态，若为 ‘‘alloc’’ 表示该节点已经没有多余的 资源了，若为 ‘‘mix’’ 表示该节点有人在占用，但是仍然有剩余资源。</p>
 <ul>
-<li>Installed BWA</li>
-<li>Installed SAMTools</li>
-<li>Installed Picard</li>
-</ul>
-<p>Steps</p>
-<ul>
-<li><p>Generate the BWA index</p>
-<p>  bwa index -a bwtsw ucsc.hg19.fasta &emsp;&emsp;#-a bwtsw指定索引算法</p>
-</li>
-<li><p>Generate the Fasta file index</p>
-<p>  samtools faidx ucsc.hg19.fasta &emsp;&emsp;#将生成ucsc.hg19.fasta.fai 文件</p>
-</li>
-<li><p>Generate the sequence dictionary（也可直接用已下载的ucsc.hg19.dict文件）</p>
-<p>  java -jar picard.jar CreateSequenceDictionary \ </p>
-<p>  REFERENCE=reference.fa \ </p>
-<p>  OUTPUT=reference.dict </p>
+<li><p>作业提交完毕后，可使用 squeue 命令查看任务状态</p>
+<p>  squeue -l: 以长列表显示更多信息。<br>  squeue -u username: 仅显示属于用户 username 的任务。<br>  squeue -t state: 仅显示处于 state 状态的任务。</p>
 </li>
 </ul>
-<p>（更详细的可参考：<a href="http://people.duke.edu/~ccc14/duke-hts-2017/Statistics/08032017/GATK-reference.html" target="_blank" rel="external">链接</a>）</p>
-<h2 id="Cosmic-gz文件下载"><a href="#Cosmic-gz文件下载" class="headerlink" title="Cosmic*.gz文件下载"></a>Cosmic*.gz文件下载</h2><p><a href="http://cancer.sanger.ac.uk/cosmic/download" target="_blank" rel="external">COSMIC</a>需要注册</p>
-<p>下载</p>
+<p>&emsp;&emsp;ps: ST 表示当前状态，R是Runing的简写</p>
 <ul>
-<li>CosmicCodingMuts.vcf</li>
-<li>CosmicNonCodingVariants.vcf</li>
+<li><p>salloc [申请资源]</p>
+<p>  salloc -N 1 –cpus-per-task=4<br>  squeue 查看任务情况，获取分配节点，然后使用ssh 节点进行切换</p>
+</li>
 </ul>
-<h2 id="Cosmic-hg19-vcf文件生成"><a href="#Cosmic-hg19-vcf文件生成" class="headerlink" title="Cosmic.hg19.vcf文件生成"></a>Cosmic.hg19.vcf文件生成</h2><p><a href="https://gatkforums.broadinstitute.org/gatk/discussion/2226/cosmic-and-dbsnp-files-for-mutect" target="_blank" rel="external">COSMIC and dbSNP files for MuTect</a></p>
-<p>sortByRef.pl was part of <a href="https://github.com/amplab/smash" target="_blank" rel="external">https://github.com/amplab/smash</a></p>
-<pre><code>gunzip Cosmic*.gz
-grep &quot;^#&quot; CosmicCodingMuts.vcf &gt; VCF_Header
-grep -v &quot;^#&quot; CosmicCodingMuts.vcf &gt; Coding.clean
-grep -v &quot;^#&quot; CosmicNonCodingVariants.vcf &gt; NonCoding.clean
-cat Coding.clean NonCoding.clean | sort -gk 2,2 | awk &apos;{print &quot;chr&quot;$0}&apos; | perl sortByRef.pl --k 1 - hg19UCSC.fa.fai &gt; Cosmic.hg19
-cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
-</code></pre><h2 id="GATK输入文件要求"><a href="#GATK输入文件要求" class="headerlink" title="GATK输入文件要求"></a>GATK输入文件要求</h2><p><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1204" target="_blank" rel="external">参考：What input files does the GATK accept / require?</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.plob.org/article/7070.html" target="_blank" rel="external">GATK使用（推荐）</a></p>
-<p>（2）<a href="https://software.broadinstitute.org/gatk/documentation/topic?name=problems" target="_blank" rel="external">使用GATK过程常见报错及解决</a></p>
-<p>（3）<a href="http://blog.sina.com.cn/s/blog_587cc04e0101l4bs.html" target="_blank" rel="external">GATK使用 备忘录（推荐）</a></p>
-<p>（4）<a href="https://www.bits.vib.be/training/286" target="_blank" rel="external">GATK Best practices for variant discovery （BITS Courses    TRAINING AT VIB）</a></p>
-<p>（5）<a href="https://www.genedock.com/blog/2017/07/21/20170721_%E5%88%9D%E6%8E%A2GATK4_Beta/" target="_blank" rel="external">初探 GATK4 beta</a></p>
+<h3 id="OpenLava调度程序常用命令"><a href="#OpenLava调度程序常用命令" class="headerlink" title="OpenLava调度程序常用命令"></a>OpenLava调度程序常用命令</h3><p><a href="http://docs.alces-flight.com/en/stable/openlava/openlava.html" target="_blank" rel="external">openlava manual</a> </p>
+<p>该OpenLava集群作业调度是一个开源平台的IBM兼容LSF作业调度程序。</p>
+<ul>
+<li><p>运行交互式作业</p>
+<p>  bsub -Is bash</p>
+<ul>
+<li>-Is：Submits an interactive job and creates a pseudo-terminal when the job starts</li>
+<li>bash：Choose the shell type to use when creating the interactive job</li>
+</ul>
+</li>
+<li><p>提交批处理作业</p>
+<p>  bsub -o $HOME/jobout.txt &lt; simplejobscript.sh</p>
+<p>  #jobout.txt  用于记录任何job输出</p>
+<p>  -J JOB_name 设置任务名</p>
+<p>  -n number of cores</p>
+<p>  simplejobscript.sh</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/bin/bash -l</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Starting running on host <span class="variable">$HOSTNAME</span>"</span></div><div class="line">sleep 120</div><div class="line"><span class="built_in">echo</span> <span class="string">"Finished running - goodbye from <span class="variable">$HOSTNAME</span>"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>查看和控制排队任务</p>
+<ul>
+<li>bjobs 查看任务的状态和排队情况，显示RUN（在运行）或者PEND(等待)</li>
+<li>bkill JOBID 杀任务，无论任务处在运行或者排队状态</li>
+<li>bhosts查看计算节点的状态, -l查看更详细的信息</li>
+</ul>
+</li>
+<li><p>运行多线程作业</p>
+<p>  如果用户想要在计算节点上使用多个内核来运行多线程应用程序，可以使用</p>
+<pre><code>-n number of cores
+</code></pre></li>
+</ul>
+<p>&emsp;&emsp;ps: 之前都是ssh node命令切换到计算节点再跑流程，有了集群作业调度程序就可以在登陆节点提交任务，其将自动分配计算节点资源，不包括登陆节点。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_62db9b190101eptz.html" target="_blank" rel="external">bsub更多使用例子</a></p>
+<p>（2）<a href="http://docplayer.net/35369468-Openlava-installation-procedure.html" target="_blank" rel="external">OpenLava Installation Procedure</a></p>
+<p>（3）<a href="http://bicmr.pku.edu.cn/~wenzw/pages/batch.html" target="_blank" rel="external">工作站使用指南（推荐）</a></p>
+<p>（4）<a href="https://pi.sjtu.edu.cn/doc/slurm/" target="_blank" rel="external">SLURM作业调度系统（推荐）</a></p>
+<p>（5）<a href="https://hpc.sjtu.edu.cn/info/1013/1539.htm" target="_blank" rel="external">交大高性能计算中心</a></p>
 
       
     </div>
@@ -551,7 +509,7 @@ cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/NGS/" rel="tag"><i class="fa fa-tag"></i> NGS</a>
+            <a href="https:/AnJingwd.github.io/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
           
         </div>
       
@@ -564,8 +522,8 @@ cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/12/10/Rmarkdown生成动态报告/" rel="next" title="Rmarkdown生成动态报告">
-                <i class="fa fa-chevron-left"></i> Rmarkdown生成动态报告
+              <a href="https:/AnJingwd.github.io/2018/03/25/动态规划求序列最大得分连续子序列/" rel="next" title="动态规划求序列最大得分连续子序列">
+                <i class="fa fa-chevron-left"></i> 动态规划求序列最大得分连续子序列
               </a>
             
           </div>
@@ -573,10 +531,6 @@ cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="https:/AnJingwd.github.io/2017/12/26/GATK变异检测概述/" rel="prev" title="GATK变异检测概述">
-                GATK变异检测概述 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -929,7 +883,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GATK官网相关栏目"><span class="nav-number">1.</span> <span class="nav-text">GATK官网相关栏目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GATK3-8下载"><span class="nav-number">2.</span> <span class="nav-text">GATK3.8下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Getting-Started"><span class="nav-number">3.</span> <span class="nav-text">Getting Started</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference-sequence和annotation下载"><span class="nav-number">4.</span> <span class="nav-text">Reference sequence和annotation下载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-sequence"><span class="nav-number">4.1.</span> <span class="nav-text">Reference sequence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#annotation"><span class="nav-number">4.2.</span> <span class="nav-text">annotation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GATK-Prepare-Reference-Files"><span class="nav-number">4.3.</span> <span class="nav-text">GATK: Prepare Reference Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cosmic-gz文件下载"><span class="nav-number">4.4.</span> <span class="nav-text">Cosmic*.gz文件下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cosmic-hg19-vcf文件生成"><span class="nav-number">4.5.</span> <span class="nav-text">Cosmic.hg19.vcf文件生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GATK输入文件要求"><span class="nav-number">4.6.</span> <span class="nav-text">GATK输入文件要求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是批处理作业调度程序？"><span class="nav-number">1.</span> <span class="nav-text">什么是批处理作业调度程序？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算作业的类型"><span class="nav-number">1.1.</span> <span class="nav-text">计算作业的类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互式和批处理作业"><span class="nav-number">1.2.</span> <span class="nav-text">交互式和批处理作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么在个人群集上使用作业调度程序？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么在个人群集上使用作业调度程序？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可用的群集作业调度程序"><span class="nav-number">1.4.</span> <span class="nav-text">可用的群集作业调度程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业调度系统"><span class="nav-number">1.5.</span> <span class="nav-text">作业调度系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SLURM作业调度系统常用命令"><span class="nav-number">1.5.1.</span> <span class="nav-text">SLURM作业调度系统常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenLava调度程序常用命令"><span class="nav-number">1.5.2.</span> <span class="nav-text">OpenLava调度程序常用命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
