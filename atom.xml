@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-05-07T12:35:00.774Z</updated>
+  <updated>2018-05-07T12:41:57.016Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="https:///AnJingwd.github.io/2018/05/07/%E5%B1%82%E7%BA%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0/"/>
     <id>https:///AnJingwd.github.io/2018/05/07/层级聚类算法python实现/</id>
     <published>2018-05-07T12:02:46.000Z</published>
-    <updated>2018-05-07T12:35:00.774Z</updated>
+    <updated>2018-05-07T12:41:57.016Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">python实现对50个基因表达量层级聚类算法</blockquote>
 
-
+<a id="more"></a>
 <h1 id="聚类算法python实现"><a href="#聚类算法python实现" class="headerlink" title="聚类算法python实现"></a>聚类算法python实现</h1><h2 id="层级聚类"><a href="#层级聚类" class="headerlink" title="层级聚类"></a>层级聚类</h2><h3 id="Hierarchical-Clustering-py"><a href="#Hierarchical-Clustering-py" class="headerlink" title="Hierarchical_Clustering.py"></a>Hierarchical_Clustering.py</h3><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
 <li>通过50行基因，实验组和对照组两列，每组各3个重复的平均表达量，根据欧式距离计算距离矩阵DE</li>
 <li>对距离矩阵进行层级聚类</li>
@@ -51,9 +51,6 @@
     <summary type="html">
     
       &lt;blockquote class=&quot;blockquote-center&quot;&gt;python实现对50个基因表达量层级聚类算法&lt;/blockquote&gt;
-
-
-&lt;h1 id=&quot;聚类算法python实现&quot;&gt;&lt;a href=&quot;#聚类算法python实现&quot; class=&quot;headerlink
     
     </summary>
     
