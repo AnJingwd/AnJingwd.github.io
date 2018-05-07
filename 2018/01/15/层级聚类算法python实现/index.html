@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="https:/AnJingwd.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+  <link rel="alternate" href="https:/AnJingwd.github.io/atom.xml" title="安静-不安静的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https:/AnJingwd.github.io/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="python实现对50个基因表达量层级聚类算法   聚类算法python实现层级聚类Hierarchical_Clustering.py思路 通过50行基因，实验组和对照组两列，每组各3个重复的平均表达量，根据欧式距离计算距离矩阵DE 对距离矩阵进行层级聚类  层级聚类算法伪代码： Hierarchical_Clustering（d,n）  形成n个类，每个类含有一个元素 构建树型图，为每个类分配">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="层级聚类算法python实现">
+<meta property="og:url" content="https:///AnJingwd.github.io/2018/01/15/层级聚类算法python实现/index.html">
+<meta property="og:site_name" content="安静-不安静的博客">
+<meta property="og:description" content="python实现对50个基因表达量层级聚类算法   聚类算法python实现层级聚类Hierarchical_Clustering.py思路 通过50行基因，实验组和对照组两列，每组各3个重复的平均表达量，根据欧式距离计算距离矩阵DE 对距离矩阵进行层级聚类  层级聚类算法伪代码： Hierarchical_Clustering（d,n）  形成n个类，每个类含有一个元素 构建树型图，为每个类分配">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-07T12:28:37.752Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="层级聚类算法python实现">
+<meta name="twitter:description" content="python实现对50个基因表达量层级聚类算法   聚类算法python实现层级聚类Hierarchical_Clustering.py思路 通过50行基因，实验组和对照组两列，每组各3个重复的平均表达量，根据欧式距离计算距离矩阵DE 对距离矩阵进行层级聚类  层级聚类算法伪代码： Hierarchical_Clustering（d,n）  形成n个类，每个类含有一个元素 构建树型图，为每个类分配">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'https:///AnJingwd.github.io/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title>层级聚类算法python实现 | 安静-不安静的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="https:///AnJingwd.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安静-不安静的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https:/AnJingwd.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https:/AnJingwd.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https:/AnJingwd.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https:/AnJingwd.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https:/AnJingwd.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="https:/AnJingwd.github.io/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/15/层级聚类算法python实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">层级聚类算法python实现</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T11:02:46+08:00">
+                2018-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center">python实现对50个基因表达量层级聚类算法</blockquote>
+
+
+<h1 id="聚类算法python实现"><a href="#聚类算法python实现" class="headerlink" title="聚类算法python实现"></a>聚类算法python实现</h1><h2 id="层级聚类"><a href="#层级聚类" class="headerlink" title="层级聚类"></a>层级聚类</h2><h3 id="Hierarchical-Clustering-py"><a href="#Hierarchical-Clustering-py" class="headerlink" title="Hierarchical_Clustering.py"></a>Hierarchical_Clustering.py</h3><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>通过50行基因，实验组和对照组两列，每组各3个重复的平均表达量，根据欧式距离计算距离矩阵DE</li>
+<li>对距离矩阵进行层级聚类</li>
+</ul>
+<p>层级聚类算法伪代码：</p>
+<p>Hierarchical_Clustering（d,n）</p>
+<ol>
+<li>形成n个类，每个类含有一个元素</li>
+<li>构建树型图，为每个类分配一个单独的顶点</li>
+<li>while 存在多于一个类</li>
+<li>找到最近的两个雷C1和C2</li>
+<li>将C1和C2合并成一个新的类C,Chanyou |C1|+|C2|个元素</li>
+<li>计算C与其他各类的距离</li>
+<li>在树形图中增加一个顶点C,且与C1和C2相连</li>
+<li>在距离矩阵中删除与C1和C2相对应的行和列</li>
+<li>在距离矩阵中为新类增加一行一列</li>
+<li>return T</li>
+</ol>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> math,os</div><div class="line"></div><div class="line">os.chdir(<span class="string">r'F:\pycharm_project\cluster'</span>)</div><div class="line">data = pd.read_csv(<span class="string">r'.\microarray_gcrma_diff_TOP50.csv'</span>,nrows = <span class="number">51</span>,header=<span class="keyword">None</span>)</div><div class="line">Exp_matrix = np.array(data.iloc[<span class="number">1</span>:<span class="number">51</span>,<span class="number">1</span>:<span class="number">3</span>],dtype =np.float64)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Euclidean_Distances</span><span class="params">(A)</span>:</span></div><div class="line">	n = A.shape[<span class="number">0</span>]</div><div class="line">	mydist = np.zeros((n, n))</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">50</span>):</div><div class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">50</span>):</div><div class="line">			d = math.sqrt((A[i][<span class="number">0</span>]-A[j][<span class="number">0</span>])**<span class="number">2</span>+(A[i][<span class="number">1</span>]-A[j][<span class="number">1</span>])**<span class="number">2</span>)</div><div class="line">			mydist[i,j] = (<span class="string">"%.2f"</span> % d)</div><div class="line">	<span class="keyword">return</span> mydist</div><div class="line"></div><div class="line">DE = Euclidean_Distances(Exp_matrix)</div><div class="line"><span class="comment">#print(DE)</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_min_index_list</span><span class="params">(A)</span>:</span></div><div class="line">	<span class="keyword">if</span> <span class="number">0</span> <span class="keyword">in</span> A:</div><div class="line">		mask = A ==<span class="number">0</span></div><div class="line">		A[mask == <span class="keyword">True</span>] =np.inf</div><div class="line">	<span class="keyword">else</span>:</div><div class="line">		<span class="keyword">pass</span></div><div class="line">	dis_min = A.min()</div><div class="line">	dis_min_pos = np.where(A ==dis_min)</div><div class="line">	pos_list = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(dis_min_pos[<span class="number">0</span>])):</div><div class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>, len(dis_min_pos[<span class="number">0</span>])):</div><div class="line">			<span class="keyword">if</span> i &gt; j:</div><div class="line">				pos_list.append([dis_min_pos[<span class="number">0</span>][i],dis_min_pos[<span class="number">1</span>][i]])</div><div class="line">			<span class="keyword">else</span>:</div><div class="line">				<span class="keyword">pass</span></div><div class="line">	<span class="keyword">return</span> pos_list</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#min_index_list = find_min_index(DE)</span></div><div class="line"><span class="comment">#print(min_index_list)</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete_list</span><span class="params">(mylist,index_list)</span>:</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(index_list)):</div><div class="line">		<span class="keyword">if</span> i == <span class="number">0</span>:</div><div class="line">			<span class="keyword">del</span> mylist[index_list[i]]</div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			<span class="keyword">del</span> mylist[index_list[i]<span class="number">-1</span>]</div><div class="line">	<span class="keyword">return</span> mylist</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">class_Euclidean_min_Distances</span><span class="params">(min_index,A)</span>:</span></div><div class="line">	<span class="comment">#calculate class distance</span></div><div class="line">	min_row1 = A[min_index[<span class="number">0</span>],]</div><div class="line">	min_row2 = A[min_index[<span class="number">1</span>],]</div><div class="line">	class_dis_to_other = np.fmin(min_row1,min_row2)</div><div class="line"></div><div class="line">	<span class="comment">#delete distance list element</span></div><div class="line">	mylist = list(class_dis_to_other)</div><div class="line">	mylist_del = delete_list(mylist,list(min_index))</div><div class="line"></div><div class="line">	<span class="comment">#delete distance matrix</span></div><div class="line">	A_del_row = np.delete(A, [min_index[<span class="number">0</span>], min_index[<span class="number">1</span>]], <span class="number">0</span>)</div><div class="line">	A_del_column = np.delete(A_del_row, [min_index[<span class="number">0</span>], min_index[<span class="number">1</span>]], <span class="number">1</span>)</div><div class="line"></div><div class="line">	<span class="comment">#add distance list</span></div><div class="line">	A_add_row = np.row_stack((A_del_column,mylist_del))</div><div class="line">	mylist_del.append(np.inf)</div><div class="line">	A_add_column = np.column_stack((A_add_row,mylist_del ))</div><div class="line">	<span class="keyword">return</span> A_add_column</div><div class="line"></div><div class="line"><span class="comment">#min_index = split_min_index(min_index_list)</span></div><div class="line"><span class="comment">#DE_new = class_Euclidean_min_Distances(min_index,DE)</span></div><div class="line"><span class="comment">#print(DE_new)</span></div><div class="line"></div><div class="line"><span class="comment">#min_index_list = find_min_index(A)</span></div><div class="line"><span class="comment">#min_index = split_min_index(min_index_list)</span></div><div class="line"><span class="comment">#A = class_Euclidean_min_Distances(min_index[0],A)</span></div><div class="line"><span class="comment">#A = class_Euclidean_min_Distances(min_index[1],A)</span></div><div class="line"><span class="comment">#print(A)</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hierarchical_clustering</span><span class="params">(A,N)</span>:</span></div><div class="line">	n_class = len(A)</div><div class="line">	n_layer = <span class="number">1</span></div><div class="line">	<span class="keyword">while</span> n_class &gt; N:</div><div class="line">		min_index_list = find_min_index_list(A)</div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,int(len(min_index_list))):</div><div class="line">			A = class_Euclidean_min_Distances(min_index_list[i], A)</div><div class="line">			result = <span class="string">"the "</span> + str(n_layer) + <span class="string">" layer class process is "</span> + <span class="string">"&#123;g"</span> + str(</div><div class="line">				min_index_list[i][<span class="number">0</span>]) + <span class="string">","</span> + <span class="string">"g"</span> + str(min_index_list[i][<span class="number">1</span>]) + <span class="string">"&#125;"</span> + <span class="string">"---&gt;"</span> + <span class="string">"g"</span> + str(n_class<span class="number">-1</span>)</div><div class="line">			n_class = n_class - <span class="number">1</span></div><div class="line">			print(result)</div><div class="line">		n_layer +=<span class="number">1</span></div><div class="line">	<span class="keyword">return</span> A</div><div class="line"></div><div class="line"> A = hierarchical_clustering(DE,<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<h3 id="Hierarchical-Clustering输出结果及解释"><a href="#Hierarchical-Clustering输出结果及解释" class="headerlink" title="Hierarchical_Clustering输出结果及解释"></a>Hierarchical_Clustering输出结果及解释</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">the 1 layer class process is &#123;g38,g17&#125;---&gt;g49</div><div class="line">the 2 layer class process is &#123;g48,g16&#125;---&gt;g48</div><div class="line">the 3 layer class process is &#123;g47,g15&#125;---&gt;g47</div><div class="line">the 4 layer class process is &#123;g46,g14&#125;---&gt;g46</div><div class="line">the 5 layer class process is &#123;g45,g13&#125;---&gt;g45</div><div class="line">the 6 layer class process is &#123;g44,g12&#125;---&gt;g44</div><div class="line">the 7 layer class process is &#123;g43,g11&#125;---&gt;g43</div><div class="line">the 8 layer class process is &#123;g42,g10&#125;---&gt;g42</div><div class="line">the 9 layer class process is &#123;g41,g9&#125;---&gt;g41</div><div class="line">the 10 layer class process is &#123;g40,g8&#125;---&gt;g40</div><div class="line">the 11 layer class process is &#123;g39,g7&#125;---&gt;g39</div><div class="line">the 12 layer class process is &#123;g38,g6&#125;---&gt;g38</div><div class="line">the 13 layer class process is &#123;g37,g5&#125;---&gt;g37</div><div class="line">the 14 layer class process is &#123;g36,g4&#125;---&gt;g36</div><div class="line">the 15 layer class process is &#123;g35,g3&#125;---&gt;g35</div><div class="line">the 16 layer class process is &#123;g34,g2&#125;---&gt;g34</div><div class="line">the 17 layer class process is &#123;g33,g1&#125;---&gt;g33</div><div class="line">the 18 layer class process is &#123;g32,g0&#125;---&gt;g32</div><div class="line">the 19 layer class process is &#123;g31,g0&#125;---&gt;g31</div><div class="line">the 20 layer class process is &#123;g30,g0&#125;---&gt;g30</div><div class="line">the 21 layer class process is &#123;g29,g0&#125;---&gt;g29</div><div class="line">the 22 layer class process is &#123;g28,g0&#125;---&gt;g28</div><div class="line">the 23 layer class process is &#123;g27,g0&#125;---&gt;g27</div><div class="line">the 24 layer class process is &#123;g26,g0&#125;---&gt;g26</div><div class="line">the 25 layer class process is &#123;g25,g0&#125;---&gt;g25</div><div class="line">the 26 layer class process is &#123;g24,g0&#125;---&gt;g24</div><div class="line">the 27 layer class process is &#123;g23,g0&#125;---&gt;g23</div><div class="line">the 28 layer class process is &#123;g22,g0&#125;---&gt;g22</div><div class="line">the 29 layer class process is &#123;g21,g0&#125;---&gt;g21</div><div class="line">the 30 layer class process is &#123;g20,g0&#125;---&gt;g20</div><div class="line">the 31 layer class process is &#123;g19,g0&#125;---&gt;g19</div><div class="line">the 32 layer class process is &#123;g18,g0&#125;---&gt;g18</div><div class="line">the 33 layer class process is &#123;g17,g0&#125;---&gt;g17</div><div class="line">the 34 layer class process is &#123;g16,g0&#125;---&gt;g16</div><div class="line">the 35 layer class process is &#123;g15,g0&#125;---&gt;g15</div><div class="line">the 36 layer class process is &#123;g14,g0&#125;---&gt;g14</div><div class="line">the 37 layer class process is &#123;g13,g0&#125;---&gt;g13</div><div class="line">the 38 layer class process is &#123;g12,g0&#125;---&gt;g12</div><div class="line">the 39 layer class process is &#123;g11,g0&#125;---&gt;g11</div><div class="line">the 40 layer class process is &#123;g10,g0&#125;---&gt;g10</div><div class="line">the 41 layer class process is &#123;g9,g0&#125;---&gt;g9</div><div class="line">the 42 layer class process is &#123;g8,g0&#125;---&gt;g8</div><div class="line">the 43 layer class process is &#123;g7,g0&#125;---&gt;g7</div><div class="line">the 44 layer class process is &#123;g6,g0&#125;---&gt;g6</div><div class="line">the 45 layer class process is &#123;g5,g0&#125;---&gt;g5</div><div class="line">the 46 layer class process is &#123;g4,g0&#125;---&gt;g4</div><div class="line">the 47 layer class process is &#123;g3,g0&#125;---&gt;g3</div><div class="line">the 48 layer class process is &#123;g2,g0&#125;---&gt;g2</div><div class="line">the 49 layer class process is &#123;g1,g0&#125;---&gt;g1</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;层级聚类过程为：例如{g38,g17}—&gt;g49  表示原50个基因列表中第38个基因和第17个基因聚为一类，插入到剩下48个基因的末尾，作为新的第49个“基因”。以此类推，每次对两个基因聚为一类，插到剩下基因的末尾。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="https:/AnJingwd.github.io/tags/算法/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2018/01/10/RNA-seq质控/" rel="next" title="RNA-seq质控">
+                <i class="fa fa-chevron-left"></i> RNA-seq质控
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2018/01/20/ANNOVAR进行突变注释/" rel="prev" title="ANNOVAR进行突变注释">
+                ANNOVAR进行突变注释 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https:/AnJingwd.github.io/images/avatar.png"
+               alt="AJ's blog" />
+          <p class="site-author-name" itemprop="name">AJ's blog</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="https:/AnJingwd.github.io/archives">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="https:/AnJingwd.github.io/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="https:/AnJingwd.github.io/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https:/AnJingwd.github.io/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+			 <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(function() {
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+ 
+    function S() {
+        var e = document.createElement("audio");
+        e.setAttribute("class", l);
+        e.src = i;
+        e.loop = false;
+        e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h()
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+ 
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+})()'><i class="fa fa-music"></i> High</a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sina.com.cn/u/1253988497" title="种田农民的博客" target="_blank">种田农民的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.biostars.org/t/Tools/" title="Biostars" target="_blank">Biostars</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://segmentfault.com/" title="SegmentFault" target="_blank">SegmentFault</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.alloyteam.com/nav/" title="Web前端导航" target="_blank">Web前端导航</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.36zhen.com/t?id=3448" title="前端书籍资料" target="_blank">前端书籍资料</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+		
+<div id="music163player">		
+	<iframe frameborder="no" border="0" 
+	marginwidth="0" marginheight="0" width=330 height=86 
+src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
+	</iframe>
+</div>	
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#聚类算法python实现"><span class="nav-number">1.</span> <span class="nav-text">聚类算法python实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#层级聚类"><span class="nav-number">1.1.</span> <span class="nav-text">层级聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hierarchical-Clustering-py"><span class="nav-number">1.1.1.</span> <span class="nav-text">Hierarchical_Clustering.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">1.1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hierarchical-Clustering输出结果及解释"><span class="nav-number">1.1.3.</span> <span class="nav-text">Hierarchical_Clustering输出结果及解释</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AJ's blog</span>
+</div>
+
+
+<!--<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共71.3k字</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

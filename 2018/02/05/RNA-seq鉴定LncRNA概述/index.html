@@ -116,7 +116,7 @@
 <meta property="og:image" content="https://i.imgur.com/xLkXFAQ.png">
 <meta property="og:image" content="https://i.imgur.com/nDRVJCw.jpg">
 <meta property="og:image" content="https://i.imgur.com/TvTIJhl.jpg">
-<meta property="og:updated_time" content="2018-04-11T12:11:29.132Z">
+<meta property="og:updated_time" content="2018-04-25T01:42:04.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNA-seq鉴定LncRNA概述">
 <meta name="twitter:description" content="RNA-seq鉴定LncRNA概述：lncRNA简介，分析pipline，分析软件，结果评估指标">
@@ -428,27 +428,37 @@
 <li>Homo_sapiens.GRCh38.dna.primary_assembly.fa</li>
 <li>Homo_sapiens.GRCh38.92.gtf</li>
 </ul>
-<p>建立索引：</p>
+<p>参考基因组建立索引：</p>
 <p><code>which hisat2_extract_exons.py</code> $known_coding_gtf &gt; genome.exon<br><code>which hisat2_extract_splice_sites.py</code> $known_coding_gtf &gt; genome.ss<br>time hisat2-build -p 8 $ref_hg38 –ss genome.ss –exon genome.exon genome_tran  </p>
 <ol>
 <li><a href="http://www.gencodegenes.org/releases/current.html" target="_blank" rel="external">GENCODE</a>  &emsp;&emsp; 2. <a href="http://www.noncode.org/download.php" target="_blank" rel="external">NONCODE</a></li>
 </ol>
 <p>ps: NONCODE has updated to NONCODEv5. NONCODE2016 website has been moved to <a href="http://www.bioinfo.org/NONCODE2016" target="_blank" rel="external">http://www.bioinfo.org/NONCODE2016</a></p>
-<p>建立索引：</p>
+<p>lncRNA建立索引：</p>
 <p><code>which hisat2_extract_exons.py</code> $lncRNA_gtf &gt; NONCODE2016_human.exon<br><code>which hisat2_extract_splice_sites.py</code> $lncRNA_gtf &gt; NONCODE2016_human.ss<br>time hisat2-build -p 8 $lncRNA_ref –ss NONCODE2016_human.ss –exon NONCODE2016_human.exon NONCODE2016_index</p>
 <p>&emsp;&emsp;ENCODE计划揭示了大约76%的人类基因组转录产生非编码蛋白的RNA分子，其中包括大约10000lincRNAs。NOCODE最新版数据库收录了&gt;30000个人的lincRNAs和 &gt;20000 小鼠的lincRNA。</p>
 <h1 id="RNA-seq分析软件"><a href="#RNA-seq分析软件" class="headerlink" title="RNA-seq分析软件"></a>RNA-seq分析软件</h1><ul>
 <li><a href="https://bioinformatics.ibers.aber.ac.uk/wiki/index.php/1.1_RNA-Seq_analysis_tools" target="_blank" rel="external">RNA-Seq analysis common tools</a></li>
 </ul>
 <p>推荐文献：<a href="https://www.nature.com/articles/s41467-017-00050-4" target="_blank" rel="external">Gaining comprehensive biological insight into the transcriptome by performing a broad-spectrum RNA-seq analysis</a></p>
-<h2 id="基因组和转录组比对"><a href="#基因组和转录组比对" class="headerlink" title="基因组和转录组比对"></a>基因组和转录组比对</h2><h3 id="stringTie"><a href="#stringTie" class="headerlink" title="stringTie"></a>stringTie</h3><p><a href="https://github.com/NCBI-Hackathons/RNA_mapping/wiki" target="_blank" rel="external">NCBI-Hackathons/RNA_mapping</a></p>
+<h2 id="基因组和转录组比对"><a href="#基因组和转录组比对" class="headerlink" title="基因组和转录组比对"></a>基因组和转录组比对</h2><h2 id="基因水平定量"><a href="#基因水平定量" class="headerlink" title="基因水平定量"></a>基因水平定量</h2><p>官网：<a href="http://htseq.readthedocs.io/en/release_0.9.1/" target="_blank" rel="external">HTSeq: Analysing high-throughput sequencing data with Python</a></p>
+<p>使用：<a href="http://www.chenlianfu.com/?p=2438" target="_blank" rel="external">使用HTSeq进行有参转录组的表达量计算（推荐）</a></p>
+<p>扩展阅读：</p>
+<ol>
+<li><p><a href="http://bioinformatics.cvr.ac.uk/blog/featurecounts-or-htseq-count/" target="_blank" rel="external">featureCounts or htseq-count?</a></p>
+</li>
+<li><p><a href="htseq-counts跟bedtools的区别">htseq-counts跟bedtools的区别</a></p>
+</li>
+</ol>
+<h3 id="stringTie"><a href="#stringTie" class="headerlink" title="stringTie"></a>stringTie</h3><p><a href="https://github.com/NCBI-Hackathons/RNA_mapping/wiki" target="_blank" rel="external">NCBI-Hackathons/RNA_mapping</a></p>
 <p>&emsp;&emsp;RNA-Seq基因组比对工具HISAT2：HISAT2是TopHat2/Bowti2的继任者，使用改进的BWT算法，实现了更快的速度和更少的资源占用，作者推荐TopHat2/Bowti2和HISAT的用户转换到HISAT2。<a href="https://ccb.jhu.edu/software/hisat2/index.shtml" target="_blank" rel="external">官网</a></p>
 <p>gene annotation 一般选择 RefSeq 或者 Ensembl，这里，我们的参考基因组fasta文件和基因注释文件都选择 Ensembl的hg38版本（release-91），其ftp地址为：<a href="http://asia.ensembl.org/info/data/ftp/index.html" target="_blank" rel="external">http://asia.ensembl.org/info/data/ftp/index.html</a></p>
 <pre><code>wget ftp://ftp.ensembl.org/pub/release-91/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.91.chr.gtf.gz
-</code></pre><h3 id="tophat-python2"><a href="#tophat-python2" class="headerlink" title="tophat(python2.*)"></a>tophat(python2.*)</h3><p><a href="http://blog.sina.com.cn/s/blog_a7f92a6a010101tv.html" target="_blank" rel="external">tophat 一些小错误</a></p>
+</code></pre><h3 id="tophat-基于python2"><a href="#tophat-基于python2" class="headerlink" title="tophat(基于python2.*)"></a>tophat(基于python2.*)</h3><p><a href="http://blog.sina.com.cn/s/blog_a7f92a6a010101tv.html" target="_blank" rel="external">tophat 一些小错误</a></p>
 <p>#genome index<br>    samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa<br>    bowtie2-build Homo_sapiens.GRCh38.dna.primary_assembly.fa hg38_genome</p>
 <p>#transcriptome-index<br>    tophat -G $ref_mRNA_gtf –transcriptome-index=$tophat_transcriptome_index $bowtieGenomeIndex</p>
+<p>PS: Please note that it is highly recommended that a FASTA file with the sequence(s) the genome being indexed be present in the same directory with the Bowtie index files and having the name <genome_index_base>.fa. If not present, TopHat will automatically rebuild this FASTA file from the Bowtie index files</genome_index_base></p>
 <h2 id="比对质量评估"><a href="#比对质量评估" class="headerlink" title="比对质量评估"></a>比对质量评估</h2><p><img src="https://i.imgur.com/s2HS5Xp.png" alt=""></p>
 <p><a href="http://rseqc.sourceforge.net/" target="_blank" rel="external">RSeQC: An RNA-seq Quality Control Package</a></p>
 <pre><code>pip2.7 install RSeQC
@@ -580,14 +590,7 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 </tr>
 </tbody>
 </table>
-<h2 id="转录本定量"><a href="#转录本定量" class="headerlink" title="转录本定量"></a>转录本定量</h2><p>官网：<a href="http://htseq.readthedocs.io/en/release_0.9.1/" target="_blank" rel="external">HTSeq: Analysing high-throughput sequencing data with Python</a></p>
-<ol>
-<li><p><a href="http://bioinformatics.cvr.ac.uk/blog/featurecounts-or-htseq-count/" target="_blank" rel="external">featureCounts or htseq-count?</a></p>
-</li>
-<li><p><a href="htseq-counts跟bedtools的区别">htseq-counts跟bedtools的区别</a></p>
-</li>
-</ol>
-<h2 id="lincRNA鉴定及功能注释"><a href="#lincRNA鉴定及功能注释" class="headerlink" title="lincRNA鉴定及功能注释"></a>lincRNA鉴定及功能注释</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
+<h2 id="转录水平本定量"><a href="#转录水平本定量" class="headerlink" title="转录水平本定量"></a>转录水平本定量</h2><h2 id="lincRNA鉴定及功能注释"><a href="#lincRNA鉴定及功能注释" class="headerlink" title="lincRNA鉴定及功能注释"></a>lincRNA鉴定及功能注释</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/fSQhvH8.jpg" alt=""></p>
 <ul>
 <li>CNCI：<a href="https://academic.oup.com/nar/article/41/17/e166/2411728" target="_blank" rel="external">文献</a>，<a href="https://github.com/www-bioinfo-org/CNCI" target="_blank" rel="external">github仓库</a></li>
@@ -746,7 +749,7 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -999,7 +1002,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA简介"><span class="nav-number">1.</span> <span class="nav-text">lncRNA简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA特点"><span class="nav-number">2.</span> <span class="nav-text">lncRNA特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析pipline"><span class="nav-number">3.</span> <span class="nav-text">RNA-seq分析pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LncRNA注释GTF文件及fasta文件"><span class="nav-number">4.</span> <span class="nav-text">LncRNA注释GTF文件及fasta文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析软件"><span class="nav-number">5.</span> <span class="nav-text">RNA-seq分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基因组和转录组比对"><span class="nav-number">5.1.</span> <span class="nav-text">基因组和转录组比对</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stringTie"><span class="nav-number">5.1.1.</span> <span class="nav-text">stringTie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tophat-python2"><span class="nav-number">5.1.2.</span> <span class="nav-text">tophat(python2.*)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比对质量评估"><span class="nav-number">5.2.</span> <span class="nav-text">比对质量评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录本重构"><span class="nav-number">5.3.</span> <span class="nav-text">转录本重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并转录本"><span class="nav-number">5.4.</span> <span class="nav-text">合并转录本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#鉴定novel-lncRNA"><span class="nav-number">5.5.</span> <span class="nav-text">鉴定novel lncRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#class-code"><span class="nav-number">5.5.1.</span> <span class="nav-text">class_code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录本定量"><span class="nav-number">5.6.</span> <span class="nav-text">转录本定量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lincRNA鉴定及功能注释"><span class="nav-number">5.7.</span> <span class="nav-text">lincRNA鉴定及功能注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差异表达分析"><span class="nav-number">5.8.</span> <span class="nav-text">差异表达分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA简介"><span class="nav-number">1.</span> <span class="nav-text">lncRNA简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA特点"><span class="nav-number">2.</span> <span class="nav-text">lncRNA特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析pipline"><span class="nav-number">3.</span> <span class="nav-text">RNA-seq分析pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LncRNA注释GTF文件及fasta文件"><span class="nav-number">4.</span> <span class="nav-text">LncRNA注释GTF文件及fasta文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析软件"><span class="nav-number">5.</span> <span class="nav-text">RNA-seq分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基因组和转录组比对"><span class="nav-number">5.1.</span> <span class="nav-text">基因组和转录组比对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基因水平定量"><span class="nav-number">5.2.</span> <span class="nav-text">基因水平定量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stringTie"><span class="nav-number">5.2.1.</span> <span class="nav-text">stringTie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tophat-基于python2"><span class="nav-number">5.2.2.</span> <span class="nav-text">tophat(基于python2.*)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比对质量评估"><span class="nav-number">5.3.</span> <span class="nav-text">比对质量评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录本重构"><span class="nav-number">5.4.</span> <span class="nav-text">转录本重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并转录本"><span class="nav-number">5.5.</span> <span class="nav-text">合并转录本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#鉴定novel-lncRNA"><span class="nav-number">5.6.</span> <span class="nav-text">鉴定novel lncRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#class-code"><span class="nav-number">5.6.1.</span> <span class="nav-text">class_code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录水平本定量"><span class="nav-number">5.7.</span> <span class="nav-text">转录水平本定量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lincRNA鉴定及功能注释"><span class="nav-number">5.8.</span> <span class="nav-text">lincRNA鉴定及功能注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差异表达分析"><span class="nav-number">5.9.</span> <span class="nav-text">差异表达分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1047,7 +1050,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共69.5k字</span>
+  <span class="post-count">博客全站共71.3k字</span>
 </div>
 
 <div class="powered-by">

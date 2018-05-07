@@ -110,7 +110,7 @@
 <meta property="og:image" content="http://i.imgur.com/5UijmT0.png">
 <meta property="og:image" content="http://i.imgur.com/HGizIwQ.png">
 <meta property="og:image" content="http://i.imgur.com/IMYaE6l.png">
-<meta property="og:updated_time" content="2017-08-28T06:07:45.827Z">
+<meta property="og:updated_time" content="2018-04-26T12:28:04.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SRA数据加速下载打包解决">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结">
@@ -414,8 +414,8 @@
 <p>（2）使用ascp下载SRA数据：ascp是Aspera Connect的命令行程序。</p>
 <p>下载与安装（<strong>不需要root或者sudo权限</strong>）：</p>
 <pre><code>curl -O http://download.asperasoft.com/download/sw/connect/3.6.1/aspera-connect-3.6.1.110647-linux-64.tar.gz  
-tar zxf asper-commect-3.6.1.110647-linux.tar.gz 
-sh aspera-connect-2.4.7.37118-linux-64.sh  
+tar zxf asper-connect-3.6.1.110647-linux.tar.gz 
+sh aspera-connect-3.6.1.110647-linux-64.sh  
 </code></pre><p>添加环境变量：</p>
 <pre><code>export PATH=&quot;/home/u641750/.aspera/connect/bin:$PATH&quot;
 </code></pre><p><strong>可以将密钥备份到/home/的家目录下方便使用（后文将用到）</strong>:</p>
@@ -461,7 +461,7 @@ sh aspera-connect-2.4.7.37118-linux-64.sh
 <p>www.ncbi.nlm.nih.gov/sites/entrez?db=sra</p>
 <h3 id="接下来具体介绍："><a href="#接下来具体介绍：" class="headerlink" title="接下来具体介绍："></a>接下来具体介绍：</h3><p>搜索地址：<a href="https://www.ncbi.nlm.nih.gov/Traces/study/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/Traces/study/</a></p>
 <p>（1）通过以上网址，查询得到SRA数据的<strong>SRA Experiment accessions (prefixes SRX, DRX, ERX)</strong></p>
-<p>（2）在NCBI搜索SRA Experiment accessions，例如：SRX000004 </p>
+<p>（2）在NCBI的SRA数据库搜索SRA Experiment accessions，例如：SRX000004，点选All runs ,下载Accession List ，使用prefetch下载(<strong>prefetch直接调用ascp，没有安装ascp之前直接用http</strong>）</p>
 <p><img src="http://i.imgur.com/5UijmT0.png" alt=""></p>
 <p>点击Download data：</p>
 <p><img src="http://i.imgur.com/HGizIwQ.png" alt=""></p>
@@ -544,7 +544,11 @@ source ~/.bashrc
 <pre><code>prefetch SRR1553610
 </code></pre><p>（2）批量下载</p>
 <pre><code>for i in $(seq 58 79);do prefetch -v SRR8287$i ;done
-</code></pre><p>这些文件区哪儿了？这些文件去哪里了？存在了你home目录下的一个默认文件夹里。</p>
+
+或者使用 prefetch --option-file sra.ids ，其中sra.ids一行一个SRR编号
+</code></pre><p>（3)检查给定序列号是否可以能够下载</p>
+<pre><code>prefetch -c SRR390728
+</code></pre><p>这些文件区哪儿了？这些文件去哪里了？<strong>存在了你home目录下的一个默认文件夹里。</strong></p>
 <pre><code>ls ~/ncbi
 </code></pre><p><strong>从NCBI下下来的数据，双端测序数据是放在一个文件里的，所以需要把它们重新拆解为两个文件。</strong><br>我们用程序fastq-dump来把文件拆包</p>
 <pre><code>fastq-dump --split-files SRR1553610
@@ -743,7 +747,7 @@ source ~/.bashrc
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1044,7 +1048,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共69.5k字</span>
+  <span class="post-count">博客全站共71.3k字</span>
 </div>
 
 <div class="powered-by">

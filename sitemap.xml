@@ -2,9 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/15/%E5%B1%82%E7%BA%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0/</loc>
+    
+    <lastmod>2018-05-07T12:28:37.752Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
+    
+    <lastmod>2018-05-06T00:27:02.321Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/06/SRA%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%8A%A0%E9%80%9F%E4%B8%8B%E8%BD%BD%E6%89%93%E5%8C%85%E8%A7%A3%E5%86%B3/</loc>
+    
+    <lastmod>2018-04-26T12:28:04.218Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/02/05/RNA-seq%E9%89%B4%E5%AE%9ALncRNA%E6%A6%82%E8%BF%B0/</loc>
+    
+    <lastmod>2018-04-25T01:42:04.633Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/</loc>
+    
+    <lastmod>2018-04-19T13:04:18.807Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/04/19/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2018-04-19T03:56:11.426Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/04/19/hisat2%E6%9E%84%E5%BB%BAGRCH38%E8%BD%AC%E5%BD%95%E7%BB%84index%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3/</loc>
+    
+    <lastmod>2018-04-19T02:20:43.828Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/04/05/%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8/</loc>
     
-    <lastmod>2018-04-15T02:05:47.010Z</lastmod>
+    <lastmod>2018-04-18T03:03:04.441Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/02/13/gcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2018-04-15T02:37:40.337Z</lastmod>
     
   </url>
   
@@ -12,34 +68,6 @@
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/03/12/lncRNApipe%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2018-04-14T03:43:34.106Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/</loc>
-    
-    <lastmod>2018-04-13T13:15:55.812Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/02/13/gcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2018-04-13T11:39:14.549Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    
-    <lastmod>2018-04-13T04:15:22.020Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/02/05/RNA-seq%E9%89%B4%E5%AE%9ALncRNA%E6%A6%82%E8%BF%B0/</loc>
-    
-    <lastmod>2018-04-11T12:11:29.132Z</lastmod>
     
   </url>
   
@@ -285,13 +313,6 @@
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/30/%E6%89%B9%E9%87%8Ffastqc/</loc>
     
     <lastmod>2017-09-01T03:16:09.393Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/06/SRA%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%8A%A0%E9%80%9F%E4%B8%8B%E8%BD%BD%E6%89%93%E5%8C%85%E8%A7%A3%E5%86%B3/</loc>
-    
-    <lastmod>2017-08-28T06:07:45.827Z</lastmod>
     
   </url>
   

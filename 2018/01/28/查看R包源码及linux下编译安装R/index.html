@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/6I5TzWq.jpg">
 <meta property="og:image" content="https://i.imgur.com/4r5imUK.jpg">
-<meta property="og:updated_time" content="2018-04-13T13:15:55.812Z">
+<meta property="og:updated_time" content="2018-04-19T13:04:18.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查看R包源码及linux下编译安装R">
 <meta name="twitter:description" content="查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R">
@@ -431,6 +431,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
 <li><a href="http://mirrors.xmu.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.xmu.edu.cn/CRAN/</a></li>
 </ul>
 <h2 id="安装bioconder"><a href="#安装bioconder" class="headerlink" title="安装bioconder"></a>安装bioconder</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">source</span>(<span class="string">"http://bioconductor.org/biocLite.R"</span>)</div><div class="line">options(BioC_mirror=<span class="string">"http://mirrors.ustc.edu.cn/bioc/"</span>)</div><div class="line">biocLite()</div></pre></td></tr></table></figure>
+<p>如果安装bioconductor软件包安装不上，可以先update.packages()，然后选择镜像。</p>
 <h2 id="设置环境变量-1"><a href="#设置环境变量-1" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>R中用.libPaths()函数查看lib路径，如果有多个lib,install.packages()默认是安装在第一个目录下</p>
 <p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/wangdong/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
 <h3 id="终端直接调用R脚本"><a href="#终端直接调用R脚本" class="headerlink" title="终端直接调用R脚本"></a>终端直接调用R脚本</h3><pre><code>/home/wangdong/R/bin/Rscript 或者 Rscript test.R
@@ -593,7 +594,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -894,7 +895,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共69.5k字</span>
+  <span class="post-count">博客全站共71.3k字</span>
 </div>
 
 <div class="powered-by">

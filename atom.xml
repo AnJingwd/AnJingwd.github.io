@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-04-15T02:05:47.010Z</updated>
+  <updated>2018-04-19T03:56:11.426Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -16,11 +16,72 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>统计学习</title>
+    <link href="https:///AnJingwd.github.io/2018/04/19/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/"/>
+    <id>https:///AnJingwd.github.io/2018/04/19/统计学习/</id>
+    <published>2018-04-19T03:51:31.000Z</published>
+    <updated>2018-04-19T03:56:11.426Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li>多组数据检验是否有显著差异，用Annovar，也可以用T-test，但需要做多重检验校正？</li>
+<li>当知道数据的分布时，参数检验的power一定比非参数检验的power大，但不知数据的分布时，非参数检验的power比参数检验的power大</li>
+<li>当不知数据的分布时，参数检验不可用，可以用拟合的方法，也可以同非参数检验</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;多组数据检验是否有显著差异，用Annovar，也可以用T-test，但需要做多重检验校正？&lt;/li&gt;
+&lt;li&gt;当知道数据的分布时，参数检验的power一定比非参数检验的power大，但不知数据的分布时，非参数检验的power比参数检验的power大&lt;/li&gt;
+&lt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hisat2构建GRCH38转录组index内存不足</title>
+    <link href="https:///AnJingwd.github.io/2018/04/19/hisat2%E6%9E%84%E5%BB%BAGRCH38%E8%BD%AC%E5%BD%95%E7%BB%84index%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3/"/>
+    <id>https:///AnJingwd.github.io/2018/04/19/hisat2构建GRCH38转录组index内存不足/</id>
+    <published>2018-04-19T02:09:54.000Z</published>
+    <updated>2018-04-19T02:20:43.828Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">hisat2构建GRCH38转录组index内存不足</blockquote>
+
+<a id="more"></a>
+<h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><p>Ran out of memory; auhisat2 tomatically trying more memory-economical parameters</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>首先查看hisat2官网的manual,可以看到这样一句话：</p>
+<p><strong>If you use –snp, –ss, and/or –exon, hisat2-build will need about 200GB RAM for the human genome size as index building involves a graph construction.<br>Otherwise, you will be able to build an index on your desktop with 8GB RAM.</strong></p>
+<p>同时注意到参数–known-splicesite-infile:</p>
+<p>With this mode, you can provide a list of known splice sites, which HISAT2 makes use of to align reads with small anchors.</p>
+<p>You can create such a list using python hisat2_extract_splice_sites.py genes.gtf &gt; splicesites.txt, where hisat2_extract_splice_sites.py is included in the HISAT2 package, genes.gtf is a gene annotation file, and splicesites.txt is a list of splice sites with which you provide HISAT2 in this mode. Note that it is better to use indexes built using annotated transcripts (such as genome_tran or genome_snp_tran), which works better than using this option. It has no effect to provide splice sites that are already included in the indexes.</p>
+<p>所以有两种解决方式：第一种可以申请更多的内存资源重新建索引；第二种，可以在建索引的时候不加可变剪切位点，在比对的时候提供，但效果不如第一种好。</p>
+<h1 id="查看节点可用内存"><a href="#查看节点可用内存" class="headerlink" title="查看节点可用内存"></a>查看节点可用内存</h1><p>使用top命令查看：</p>
+<p><img src="https://i.imgur.com/2secSKs.jpg" alt=""></p>
+<p>如果出于习惯去计算可用内存数，这里有个近似的计算公式：第四行的free + 第四行的buffers + 第五行的cached，按这个公式此台服务器的可用内存：530668+79236+4231276 = 4.7GB</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;hisat2构建GRCH38转录组index内存不足&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
+    
+    
+      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>任务提交系统使用</title>
     <link href="https:///AnJingwd.github.io/2018/04/05/%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8/"/>
     <id>https:///AnJingwd.github.io/2018/04/05/任务提交系统使用/</id>
     <published>2018-04-05T02:07:10.000Z</published>
-    <updated>2018-04-15T02:05:47.010Z</updated>
+    <updated>2018-04-18T03:03:04.441Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">任务提交系统使用</blockquote>
 
@@ -68,6 +129,7 @@
 <li>IBM®Platform™LSF®是一款功能强大的工作负载管理平台，适用于要求苛刻的分布式HPC环境。它提供了一套全面的智能策略驱动调度功能，使您能够利用所有计算基础架构资源并确保最佳的应用程序性能。</li>
 </ul>
 <p><img src="https://i.imgur.com/Y1DqlC0.jpg" alt=""></p>
+<p><a href="http://scc.ustc.edu.cn/yhsq/sycjwt/201406/lsf_using.html" target="_blank" rel="external">LSF作业调度系统用户使用常见问题（推荐）</a></p>
 <h3 id="SLURM作业调度系统常用命令"><a href="#SLURM作业调度系统常用命令" class="headerlink" title="SLURM作业调度系统常用命令"></a>SLURM作业调度系统常用命令</h3><p><a href="https://pi.sjtu.edu.cn/doc/slurm/" target="_blank" rel="external">SLURM manual</a></p>
 <ul>
 <li>sinfo 查看各个节点的状态，资源是否充足，当前有多少正在执行的任务</li>
@@ -223,7 +285,7 @@
     <link href="https:///AnJingwd.github.io/2018/02/13/gcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
     <id>https:///AnJingwd.github.io/2018/02/13/gcc5.2编译安装/</id>
     <published>2018-02-13T05:14:19.000Z</published>
-    <updated>2018-04-13T11:39:14.549Z</updated>
+    <updated>2018-04-15T02:37:40.337Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">gcc5.2编译安装</blockquote>
 
@@ -259,6 +321,7 @@ source ~/.bashrc
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://luiarthur.github.io/gccinstall" target="_blank" rel="external">Installing GCC without Root Privileges（推荐）</a></p>
 <p>（2）<a href="http://bakeronit.com/2015/11/04/install_gcc/" target="_blank" rel="external">Install gcc-5.2.0 without root</a></p>
 <p>（3）<a href="https://yhigu.wordpress.com/2016/03/02/install-latest-version-of-gcc-and-gcc-c-on-centos-6-7-from-source-code/" target="_blank" rel="external">Install Latest version of gcc and gcc-c++ on CentOS 6.7 from source code</a></p>
+<p>（4）<a href="https://www.jianshu.com/p/7872d02694ea" target="_blank" rel="external">一文解决C程序的编译问题（推荐）</a></p>
 ]]></content>
     
     <summary type="html">
@@ -279,7 +342,7 @@ source ~/.bashrc
     <link href="https:///AnJingwd.github.io/2018/02/05/RNA-seq%E9%89%B4%E5%AE%9ALncRNA%E6%A6%82%E8%BF%B0/"/>
     <id>https:///AnJingwd.github.io/2018/02/05/RNA-seq鉴定LncRNA概述/</id>
     <published>2018-02-05T13:44:08.000Z</published>
-    <updated>2018-04-11T12:11:29.132Z</updated>
+    <updated>2018-04-25T01:42:04.633Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">RNA-seq鉴定LncRNA概述：lncRNA简介，分析pipline，分析软件，结果评估指标</blockquote>
 
@@ -335,27 +398,37 @@ source ~/.bashrc
 <li>Homo_sapiens.GRCh38.dna.primary_assembly.fa</li>
 <li>Homo_sapiens.GRCh38.92.gtf</li>
 </ul>
-<p>建立索引：</p>
+<p>参考基因组建立索引：</p>
 <p><code>which hisat2_extract_exons.py</code> $known_coding_gtf &gt; genome.exon<br><code>which hisat2_extract_splice_sites.py</code> $known_coding_gtf &gt; genome.ss<br>time hisat2-build -p 8 $ref_hg38 –ss genome.ss –exon genome.exon genome_tran  </p>
 <ol>
 <li><a href="http://www.gencodegenes.org/releases/current.html" target="_blank" rel="external">GENCODE</a>  &emsp;&emsp; 2. <a href="http://www.noncode.org/download.php" target="_blank" rel="external">NONCODE</a></li>
 </ol>
 <p>ps: NONCODE has updated to NONCODEv5. NONCODE2016 website has been moved to <a href="http://www.bioinfo.org/NONCODE2016" target="_blank" rel="external">http://www.bioinfo.org/NONCODE2016</a></p>
-<p>建立索引：</p>
+<p>lncRNA建立索引：</p>
 <p><code>which hisat2_extract_exons.py</code> $lncRNA_gtf &gt; NONCODE2016_human.exon<br><code>which hisat2_extract_splice_sites.py</code> $lncRNA_gtf &gt; NONCODE2016_human.ss<br>time hisat2-build -p 8 $lncRNA_ref –ss NONCODE2016_human.ss –exon NONCODE2016_human.exon NONCODE2016_index</p>
 <p>&emsp;&emsp;ENCODE计划揭示了大约76%的人类基因组转录产生非编码蛋白的RNA分子，其中包括大约10000lincRNAs。NOCODE最新版数据库收录了&gt;30000个人的lincRNAs和 &gt;20000 小鼠的lincRNA。</p>
 <h1 id="RNA-seq分析软件"><a href="#RNA-seq分析软件" class="headerlink" title="RNA-seq分析软件"></a>RNA-seq分析软件</h1><ul>
 <li><a href="https://bioinformatics.ibers.aber.ac.uk/wiki/index.php/1.1_RNA-Seq_analysis_tools" target="_blank" rel="external">RNA-Seq analysis common tools</a></li>
 </ul>
 <p>推荐文献：<a href="https://www.nature.com/articles/s41467-017-00050-4" target="_blank" rel="external">Gaining comprehensive biological insight into the transcriptome by performing a broad-spectrum RNA-seq analysis</a></p>
-<h2 id="基因组和转录组比对"><a href="#基因组和转录组比对" class="headerlink" title="基因组和转录组比对"></a>基因组和转录组比对</h2><h3 id="stringTie"><a href="#stringTie" class="headerlink" title="stringTie"></a>stringTie</h3><p><a href="https://github.com/NCBI-Hackathons/RNA_mapping/wiki" target="_blank" rel="external">NCBI-Hackathons/RNA_mapping</a></p>
+<h2 id="基因组和转录组比对"><a href="#基因组和转录组比对" class="headerlink" title="基因组和转录组比对"></a>基因组和转录组比对</h2><h2 id="基因水平定量"><a href="#基因水平定量" class="headerlink" title="基因水平定量"></a>基因水平定量</h2><p>官网：<a href="http://htseq.readthedocs.io/en/release_0.9.1/" target="_blank" rel="external">HTSeq: Analysing high-throughput sequencing data with Python</a></p>
+<p>使用：<a href="http://www.chenlianfu.com/?p=2438" target="_blank" rel="external">使用HTSeq进行有参转录组的表达量计算（推荐）</a></p>
+<p>扩展阅读：</p>
+<ol>
+<li><p><a href="http://bioinformatics.cvr.ac.uk/blog/featurecounts-or-htseq-count/" target="_blank" rel="external">featureCounts or htseq-count?</a></p>
+</li>
+<li><p><a href="htseq-counts跟bedtools的区别">htseq-counts跟bedtools的区别</a></p>
+</li>
+</ol>
+<h3 id="stringTie"><a href="#stringTie" class="headerlink" title="stringTie"></a>stringTie</h3><p><a href="https://github.com/NCBI-Hackathons/RNA_mapping/wiki" target="_blank" rel="external">NCBI-Hackathons/RNA_mapping</a></p>
 <p>&emsp;&emsp;RNA-Seq基因组比对工具HISAT2：HISAT2是TopHat2/Bowti2的继任者，使用改进的BWT算法，实现了更快的速度和更少的资源占用，作者推荐TopHat2/Bowti2和HISAT的用户转换到HISAT2。<a href="https://ccb.jhu.edu/software/hisat2/index.shtml" target="_blank" rel="external">官网</a></p>
 <p>gene annotation 一般选择 RefSeq 或者 Ensembl，这里，我们的参考基因组fasta文件和基因注释文件都选择 Ensembl的hg38版本（release-91），其ftp地址为：<a href="http://asia.ensembl.org/info/data/ftp/index.html" target="_blank" rel="external">http://asia.ensembl.org/info/data/ftp/index.html</a></p>
 <pre><code>wget ftp://ftp.ensembl.org/pub/release-91/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.91.chr.gtf.gz
-</code></pre><h3 id="tophat-python2"><a href="#tophat-python2" class="headerlink" title="tophat(python2.*)"></a>tophat(python2.*)</h3><p><a href="http://blog.sina.com.cn/s/blog_a7f92a6a010101tv.html" target="_blank" rel="external">tophat 一些小错误</a></p>
+</code></pre><h3 id="tophat-基于python2"><a href="#tophat-基于python2" class="headerlink" title="tophat(基于python2.*)"></a>tophat(基于python2.*)</h3><p><a href="http://blog.sina.com.cn/s/blog_a7f92a6a010101tv.html" target="_blank" rel="external">tophat 一些小错误</a></p>
 <p>#genome index<br>    samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa<br>    bowtie2-build Homo_sapiens.GRCh38.dna.primary_assembly.fa hg38_genome</p>
 <p>#transcriptome-index<br>    tophat -G $ref_mRNA_gtf –transcriptome-index=$tophat_transcriptome_index $bowtieGenomeIndex</p>
+<p>PS: Please note that it is highly recommended that a FASTA file with the sequence(s) the genome being indexed be present in the same directory with the Bowtie index files and having the name <genome_index_base>.fa. If not present, TopHat will automatically rebuild this FASTA file from the Bowtie index files</genome_index_base></p>
 <h2 id="比对质量评估"><a href="#比对质量评估" class="headerlink" title="比对质量评估"></a>比对质量评估</h2><p><img src="https://i.imgur.com/s2HS5Xp.png" alt=""></p>
 <p><a href="http://rseqc.sourceforge.net/" target="_blank" rel="external">RSeQC: An RNA-seq Quality Control Package</a></p>
 <pre><code>pip2.7 install RSeQC
@@ -487,14 +560,7 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 </tr>
 </tbody>
 </table>
-<h2 id="转录本定量"><a href="#转录本定量" class="headerlink" title="转录本定量"></a>转录本定量</h2><p>官网：<a href="http://htseq.readthedocs.io/en/release_0.9.1/" target="_blank" rel="external">HTSeq: Analysing high-throughput sequencing data with Python</a></p>
-<ol>
-<li><p><a href="http://bioinformatics.cvr.ac.uk/blog/featurecounts-or-htseq-count/" target="_blank" rel="external">featureCounts or htseq-count?</a></p>
-</li>
-<li><p><a href="htseq-counts跟bedtools的区别">htseq-counts跟bedtools的区别</a></p>
-</li>
-</ol>
-<h2 id="lincRNA鉴定及功能注释"><a href="#lincRNA鉴定及功能注释" class="headerlink" title="lincRNA鉴定及功能注释"></a>lincRNA鉴定及功能注释</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
+<h2 id="转录水平本定量"><a href="#转录水平本定量" class="headerlink" title="转录水平本定量"></a>转录水平本定量</h2><h2 id="lincRNA鉴定及功能注释"><a href="#lincRNA鉴定及功能注释" class="headerlink" title="lincRNA鉴定及功能注释"></a>lincRNA鉴定及功能注释</h2><p><img src="https://i.imgur.com/kSQJyU6.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/fSQhvH8.jpg" alt=""></p>
 <ul>
 <li>CNCI：<a href="https://academic.oup.com/nar/article/41/17/e166/2411728" target="_blank" rel="external">文献</a>，<a href="https://github.com/www-bioinfo-org/CNCI" target="_blank" rel="external">github仓库</a></li>
@@ -525,7 +591,7 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
     <link href="https:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/"/>
     <id>https:///AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/</id>
     <published>2018-01-28T14:08:43.000Z</published>
-    <updated>2018-04-13T13:15:55.812Z</updated>
+    <updated>2018-04-19T13:04:18.807Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R</blockquote>
 
@@ -572,6 +638,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
 <li><a href="http://mirrors.xmu.edu.cn/CRAN/" target="_blank" rel="external">http://mirrors.xmu.edu.cn/CRAN/</a></li>
 </ul>
 <h2 id="安装bioconder"><a href="#安装bioconder" class="headerlink" title="安装bioconder"></a>安装bioconder</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">source</span>(<span class="string">"http://bioconductor.org/biocLite.R"</span>)</div><div class="line">options(BioC_mirror=<span class="string">"http://mirrors.ustc.edu.cn/bioc/"</span>)</div><div class="line">biocLite()</div></pre></td></tr></table></figure>
+<p>如果安装bioconductor软件包安装不上，可以先update.packages()，然后选择镜像。</p>
 <h2 id="设置环境变量-1"><a href="#设置环境变量-1" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>R中用.libPaths()函数查看lib路径，如果有多个lib,install.packages()默认是安装在第一个目录下</p>
 <p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/wangdong/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
 <h3 id="终端直接调用R脚本"><a href="#终端直接调用R脚本" class="headerlink" title="终端直接调用R脚本"></a>终端直接调用R脚本</h3><pre><code>/home/wangdong/R/bin/Rscript 或者 Rscript test.R
@@ -1200,6 +1267,55 @@ annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput 
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>层级聚类算法python实现</title>
+    <link href="https:///AnJingwd.github.io/2018/01/15/%E5%B1%82%E7%BA%A7%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0/"/>
+    <id>https:///AnJingwd.github.io/2018/01/15/层级聚类算法python实现/</id>
+    <published>2018-01-15T03:02:46.000Z</published>
+    <updated>2018-05-07T12:28:37.752Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">python实现对50个基因表达量层级聚类算法</blockquote>
+
+
+<h1 id="聚类算法python实现"><a href="#聚类算法python实现" class="headerlink" title="聚类算法python实现"></a>聚类算法python实现</h1><h2 id="层级聚类"><a href="#层级聚类" class="headerlink" title="层级聚类"></a>层级聚类</h2><h3 id="Hierarchical-Clustering-py"><a href="#Hierarchical-Clustering-py" class="headerlink" title="Hierarchical_Clustering.py"></a>Hierarchical_Clustering.py</h3><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>通过50行基因，实验组和对照组两列，每组各3个重复的平均表达量，根据欧式距离计算距离矩阵DE</li>
+<li>对距离矩阵进行层级聚类</li>
+</ul>
+<p>层级聚类算法伪代码：</p>
+<p>Hierarchical_Clustering（d,n）</p>
+<ol>
+<li>形成n个类，每个类含有一个元素</li>
+<li>构建树型图，为每个类分配一个单独的顶点</li>
+<li>while 存在多于一个类</li>
+<li>找到最近的两个雷C1和C2</li>
+<li>将C1和C2合并成一个新的类C,Chanyou |C1|+|C2|个元素</li>
+<li>计算C与其他各类的距离</li>
+<li>在树形图中增加一个顶点C,且与C1和C2相连</li>
+<li>在距离矩阵中删除与C1和C2相对应的行和列</li>
+<li>在距离矩阵中为新类增加一行一列</li>
+<li>return T</li>
+</ol>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> math,os</div><div class="line"></div><div class="line">os.chdir(<span class="string">r'F:\pycharm_project\cluster'</span>)</div><div class="line">data = pd.read_csv(<span class="string">r'.\microarray_gcrma_diff_TOP50.csv'</span>,nrows = <span class="number">51</span>,header=<span class="keyword">None</span>)</div><div class="line">Exp_matrix = np.array(data.iloc[<span class="number">1</span>:<span class="number">51</span>,<span class="number">1</span>:<span class="number">3</span>],dtype =np.float64)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Euclidean_Distances</span><span class="params">(A)</span>:</span></div><div class="line">	n = A.shape[<span class="number">0</span>]</div><div class="line">	mydist = np.zeros((n, n))</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">50</span>):</div><div class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">50</span>):</div><div class="line">			d = math.sqrt((A[i][<span class="number">0</span>]-A[j][<span class="number">0</span>])**<span class="number">2</span>+(A[i][<span class="number">1</span>]-A[j][<span class="number">1</span>])**<span class="number">2</span>)</div><div class="line">			mydist[i,j] = (<span class="string">"%.2f"</span> % d)</div><div class="line">	<span class="keyword">return</span> mydist</div><div class="line"></div><div class="line">DE = Euclidean_Distances(Exp_matrix)</div><div class="line"><span class="comment">#print(DE)</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_min_index_list</span><span class="params">(A)</span>:</span></div><div class="line">	<span class="keyword">if</span> <span class="number">0</span> <span class="keyword">in</span> A:</div><div class="line">		mask = A ==<span class="number">0</span></div><div class="line">		A[mask == <span class="keyword">True</span>] =np.inf</div><div class="line">	<span class="keyword">else</span>:</div><div class="line">		<span class="keyword">pass</span></div><div class="line">	dis_min = A.min()</div><div class="line">	dis_min_pos = np.where(A ==dis_min)</div><div class="line">	pos_list = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(dis_min_pos[<span class="number">0</span>])):</div><div class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>, len(dis_min_pos[<span class="number">0</span>])):</div><div class="line">			<span class="keyword">if</span> i &gt; j:</div><div class="line">				pos_list.append([dis_min_pos[<span class="number">0</span>][i],dis_min_pos[<span class="number">1</span>][i]])</div><div class="line">			<span class="keyword">else</span>:</div><div class="line">				<span class="keyword">pass</span></div><div class="line">	<span class="keyword">return</span> pos_list</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#min_index_list = find_min_index(DE)</span></div><div class="line"><span class="comment">#print(min_index_list)</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete_list</span><span class="params">(mylist,index_list)</span>:</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(index_list)):</div><div class="line">		<span class="keyword">if</span> i == <span class="number">0</span>:</div><div class="line">			<span class="keyword">del</span> mylist[index_list[i]]</div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			<span class="keyword">del</span> mylist[index_list[i]<span class="number">-1</span>]</div><div class="line">	<span class="keyword">return</span> mylist</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">class_Euclidean_min_Distances</span><span class="params">(min_index,A)</span>:</span></div><div class="line">	<span class="comment">#calculate class distance</span></div><div class="line">	min_row1 = A[min_index[<span class="number">0</span>],]</div><div class="line">	min_row2 = A[min_index[<span class="number">1</span>],]</div><div class="line">	class_dis_to_other = np.fmin(min_row1,min_row2)</div><div class="line"></div><div class="line">	<span class="comment">#delete distance list element</span></div><div class="line">	mylist = list(class_dis_to_other)</div><div class="line">	mylist_del = delete_list(mylist,list(min_index))</div><div class="line"></div><div class="line">	<span class="comment">#delete distance matrix</span></div><div class="line">	A_del_row = np.delete(A, [min_index[<span class="number">0</span>], min_index[<span class="number">1</span>]], <span class="number">0</span>)</div><div class="line">	A_del_column = np.delete(A_del_row, [min_index[<span class="number">0</span>], min_index[<span class="number">1</span>]], <span class="number">1</span>)</div><div class="line"></div><div class="line">	<span class="comment">#add distance list</span></div><div class="line">	A_add_row = np.row_stack((A_del_column,mylist_del))</div><div class="line">	mylist_del.append(np.inf)</div><div class="line">	A_add_column = np.column_stack((A_add_row,mylist_del ))</div><div class="line">	<span class="keyword">return</span> A_add_column</div><div class="line"></div><div class="line"><span class="comment">#min_index = split_min_index(min_index_list)</span></div><div class="line"><span class="comment">#DE_new = class_Euclidean_min_Distances(min_index,DE)</span></div><div class="line"><span class="comment">#print(DE_new)</span></div><div class="line"></div><div class="line"><span class="comment">#min_index_list = find_min_index(A)</span></div><div class="line"><span class="comment">#min_index = split_min_index(min_index_list)</span></div><div class="line"><span class="comment">#A = class_Euclidean_min_Distances(min_index[0],A)</span></div><div class="line"><span class="comment">#A = class_Euclidean_min_Distances(min_index[1],A)</span></div><div class="line"><span class="comment">#print(A)</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hierarchical_clustering</span><span class="params">(A,N)</span>:</span></div><div class="line">	n_class = len(A)</div><div class="line">	n_layer = <span class="number">1</span></div><div class="line">	<span class="keyword">while</span> n_class &gt; N:</div><div class="line">		min_index_list = find_min_index_list(A)</div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,int(len(min_index_list))):</div><div class="line">			A = class_Euclidean_min_Distances(min_index_list[i], A)</div><div class="line">			result = <span class="string">"the "</span> + str(n_layer) + <span class="string">" layer class process is "</span> + <span class="string">"&#123;g"</span> + str(</div><div class="line">				min_index_list[i][<span class="number">0</span>]) + <span class="string">","</span> + <span class="string">"g"</span> + str(min_index_list[i][<span class="number">1</span>]) + <span class="string">"&#125;"</span> + <span class="string">"---&gt;"</span> + <span class="string">"g"</span> + str(n_class<span class="number">-1</span>)</div><div class="line">			n_class = n_class - <span class="number">1</span></div><div class="line">			print(result)</div><div class="line">		n_layer +=<span class="number">1</span></div><div class="line">	<span class="keyword">return</span> A</div><div class="line"></div><div class="line"> A = hierarchical_clustering(DE,<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<h3 id="Hierarchical-Clustering输出结果及解释"><a href="#Hierarchical-Clustering输出结果及解释" class="headerlink" title="Hierarchical_Clustering输出结果及解释"></a>Hierarchical_Clustering输出结果及解释</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">the 1 layer class process is &#123;g38,g17&#125;---&gt;g49</div><div class="line">the 2 layer class process is &#123;g48,g16&#125;---&gt;g48</div><div class="line">the 3 layer class process is &#123;g47,g15&#125;---&gt;g47</div><div class="line">the 4 layer class process is &#123;g46,g14&#125;---&gt;g46</div><div class="line">the 5 layer class process is &#123;g45,g13&#125;---&gt;g45</div><div class="line">the 6 layer class process is &#123;g44,g12&#125;---&gt;g44</div><div class="line">the 7 layer class process is &#123;g43,g11&#125;---&gt;g43</div><div class="line">the 8 layer class process is &#123;g42,g10&#125;---&gt;g42</div><div class="line">the 9 layer class process is &#123;g41,g9&#125;---&gt;g41</div><div class="line">the 10 layer class process is &#123;g40,g8&#125;---&gt;g40</div><div class="line">the 11 layer class process is &#123;g39,g7&#125;---&gt;g39</div><div class="line">the 12 layer class process is &#123;g38,g6&#125;---&gt;g38</div><div class="line">the 13 layer class process is &#123;g37,g5&#125;---&gt;g37</div><div class="line">the 14 layer class process is &#123;g36,g4&#125;---&gt;g36</div><div class="line">the 15 layer class process is &#123;g35,g3&#125;---&gt;g35</div><div class="line">the 16 layer class process is &#123;g34,g2&#125;---&gt;g34</div><div class="line">the 17 layer class process is &#123;g33,g1&#125;---&gt;g33</div><div class="line">the 18 layer class process is &#123;g32,g0&#125;---&gt;g32</div><div class="line">the 19 layer class process is &#123;g31,g0&#125;---&gt;g31</div><div class="line">the 20 layer class process is &#123;g30,g0&#125;---&gt;g30</div><div class="line">the 21 layer class process is &#123;g29,g0&#125;---&gt;g29</div><div class="line">the 22 layer class process is &#123;g28,g0&#125;---&gt;g28</div><div class="line">the 23 layer class process is &#123;g27,g0&#125;---&gt;g27</div><div class="line">the 24 layer class process is &#123;g26,g0&#125;---&gt;g26</div><div class="line">the 25 layer class process is &#123;g25,g0&#125;---&gt;g25</div><div class="line">the 26 layer class process is &#123;g24,g0&#125;---&gt;g24</div><div class="line">the 27 layer class process is &#123;g23,g0&#125;---&gt;g23</div><div class="line">the 28 layer class process is &#123;g22,g0&#125;---&gt;g22</div><div class="line">the 29 layer class process is &#123;g21,g0&#125;---&gt;g21</div><div class="line">the 30 layer class process is &#123;g20,g0&#125;---&gt;g20</div><div class="line">the 31 layer class process is &#123;g19,g0&#125;---&gt;g19</div><div class="line">the 32 layer class process is &#123;g18,g0&#125;---&gt;g18</div><div class="line">the 33 layer class process is &#123;g17,g0&#125;---&gt;g17</div><div class="line">the 34 layer class process is &#123;g16,g0&#125;---&gt;g16</div><div class="line">the 35 layer class process is &#123;g15,g0&#125;---&gt;g15</div><div class="line">the 36 layer class process is &#123;g14,g0&#125;---&gt;g14</div><div class="line">the 37 layer class process is &#123;g13,g0&#125;---&gt;g13</div><div class="line">the 38 layer class process is &#123;g12,g0&#125;---&gt;g12</div><div class="line">the 39 layer class process is &#123;g11,g0&#125;---&gt;g11</div><div class="line">the 40 layer class process is &#123;g10,g0&#125;---&gt;g10</div><div class="line">the 41 layer class process is &#123;g9,g0&#125;---&gt;g9</div><div class="line">the 42 layer class process is &#123;g8,g0&#125;---&gt;g8</div><div class="line">the 43 layer class process is &#123;g7,g0&#125;---&gt;g7</div><div class="line">the 44 layer class process is &#123;g6,g0&#125;---&gt;g6</div><div class="line">the 45 layer class process is &#123;g5,g0&#125;---&gt;g5</div><div class="line">the 46 layer class process is &#123;g4,g0&#125;---&gt;g4</div><div class="line">the 47 layer class process is &#123;g3,g0&#125;---&gt;g3</div><div class="line">the 48 layer class process is &#123;g2,g0&#125;---&gt;g2</div><div class="line">the 49 layer class process is &#123;g1,g0&#125;---&gt;g1</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;层级聚类过程为：例如{g38,g17}—&gt;g49  表示原50个基因列表中第38个基因和第17个基因聚为一类，插入到剩下48个基因的末尾，作为新的第49个“基因”。以此类推，每次对两个基因聚为一类，插到剩下基因的末尾。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;python实现对50个基因表达量层级聚类算法&lt;/blockquote&gt;
+
+
+&lt;h1 id=&quot;聚类算法python实现&quot;&gt;&lt;a href=&quot;#聚类算法python实现&quot; class=&quot;headerlink
+    
+    </summary>
+    
+      <category term="算法" scheme="https:///AnJingwd.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https:///AnJingwd.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
@@ -2113,395 +2229,6 @@ library(rmarkdown)
     
     
       <category term="技术" scheme="https:///AnJingwd.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql数据库与生信</title>
-    <link href="https:///AnJingwd.github.io/2017/11/23/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%94%9F%E4%BF%A1/"/>
-    <id>https:///AnJingwd.github.io/2017/11/23/mysql数据库与生信/</id>
-    <published>2017-11-23T08:03:44.000Z</published>
-    <updated>2017-11-25T03:39:13.724Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;主要介绍win下和linux下连接重用生信数据库，操作数据库中表，以及根据自己的需要下载公共数据，创建mysql数据库。</p>
-<blockquote class="blockquote-center">mysql数据库与生信</blockquote>
-
-<a id="more"></a>
-<h1 id="mysql学习资料"><a href="#mysql学习资料" class="headerlink" title="mysql学习资料"></a>mysql学习资料</h1><p>（1）<a href="http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html" target="_blank" rel="external">21分钟 MySQL 入门教程</a></p>
-<p>（2）MySQL 5.7 Reference Manual: 具体技巧例如<a href="https://dev.mysql.com/doc/refman/5.7/en/counting-rows.html" target="_blank" rel="external"> Counting Rows</a>；<a href="https://dev.mysql.com/doc/refman/5.7/en/pattern-matching.html" target="_blank" rel="external">Pattern Matching</a></p>
-<h1 id="mysql连接生信主要公共数据库"><a href="#mysql连接生信主要公共数据库" class="headerlink" title="mysql连接生信主要公共数据库"></a>mysql连接生信主要公共数据库</h1><h2 id="linux下格式："><a href="#linux下格式：" class="headerlink" title="linux下格式："></a>linux下格式：</h2><p>mysql -h[host] -u[user] -p[password] -P[port] [database-name]</p>
-<ul>
-<li>-h : 该命令用于指定客户端所要登录的MySQL主机名, 登录当前机器该参数可以省略;</li>
-<li>退出：输入 exit; 或 quit; 退出登录</li>
-</ul>
-<p>例如：</p>
-<table>
-<thead>
-<tr>
-<th>Server</th>
-<th>User</th>
-<th>Password</th>
-<th>Port</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>mysql-db.1000genomes.org</td>
-<td>anonymous</td>
-<td>-</td>
-<td>4272</td>
-</tr>
-</tbody>
-</table>
-<p>（1）<a href="http://www.internationalgenome.org/public-ensembl-mysql-instance" target="_blank" rel="external">1000 Genomes: since June 16, 2011</a></p>
-<pre><code>mysql -h mysql-db.1000genomes.org -u anonymous -P 4272  -A
-</code></pre><p>（2）<a href="http://genome.ucsc.edu/goldenPath/help/mysql.html" target="_blank" rel="external">UCSC Downloading Data using MySQL</a></p>
-<pre><code>mysql -h genome-mysql.soe.ucsc.edu -u genome -P 3306 -A
-</code></pre><p>或者</p>
-<pre><code>mysql -h genome-euro-mysql.soe.ucsc.edu -u genome -P 3306 -A
-</code></pre><p>注意：必须加上端口号-P 3306，按照官网的方法会报错：</p>
-<p>ERROR 2003 (HY000): Can’t connect to MySQL server on ‘genome-mysql.soe.ucsc.edu’ (111)</p>
-<p>（3）<a href="http://uswest.ensembl.org/info/data/mysql.html" target="_blank" rel="external">The Ensembl public MySQL Servers</a></p>
-<pre><code>mysql -h ensembldb.ensembl.org -u anonymous -P  5306  -A
-</code></pre><p>（4）<a href="http://www.geneontology.org/GO.database.shtml#mirrors" target="_blank" rel="external">GO</a></p>
-<pre><code>mysql -h mysql-amigo.ebi.ac.uk -u go_select -P 4085 -pamigo -A
-</code></pre><p>The -A flag is optional but is recommended for speed.</p>
-<p>其他数据库：参见<a href="What Are The Public Sql Servers For Bioinformatics ?">网址</a></p>
-<h3 id="mysql直接读ucsc数据库数据"><a href="#mysql直接读ucsc数据库数据" class="headerlink" title="mysql直接读ucsc数据库数据"></a>mysql直接读ucsc数据库数据</h3><pre><code>mysql --user=genome --host=genome-mysql.cse.ucsc.edu -P 3306 -A -D hg19 -e &apos;select * from refGene where name=&quot;NM_000038&quot;&apos; | less 
-</code></pre><p>显示：</p>
-<pre><code>bin     name    chrom   strand  txStart txEnd   cdsStart        cdsEnd  exonCount       exonStarts      exonEnds        score   name2
-1440    NM_000038       chr5    +       112073555       112181936       112090587       112179823       16      112073555,112090569,112
-</code></pre><h2 id="windows下"><a href="#windows下" class="headerlink" title="windows下"></a>windows下</h2><p>使用Navicat，其好处在于更加方便直观</p>
-<p>如图：<br><img src="https://i.imgur.com/aBUXPU1.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/HSXg4DS.jpg" alt=""></p>
-<p>查询某一张表，查看具体内容，导出，筛选等等，很方便</p>
-<p><img src="https://i.imgur.com/AC1sYil.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/wRlokSh.jpg" alt=""></p>
-<p>mac下可以使用<a href="http://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/" target="_blank" rel="external">Sequel Pro</a></p>
-<h1 id="python连接mysql数据库"><a href="#python连接mysql数据库" class="headerlink" title="python连接mysql数据库"></a>python连接mysql数据库</h1><pre><code>pip2.7 install MySQL-python
-</code></pre><p><img src="https://i.imgur.com/dNbsWE5.jpg" alt=""></p>
-<p>解决：libmysqlclient.so.18库在mysql安装目录的lib下，设置LD_LIBRARY_PATH环境变量即可</p>
-<pre><code>export LD_LIBRARY_PATH=&quot;$DYLD_LIBRARY_PATH:/home/wangdong/local/mysql/lib&quot;
-</code></pre><p><img src="https://i.imgur.com/SNb5BTT.jpg" alt=""></p>
-<p>ps： 网上一般的做法是在mysql/lib目录下找到libmysqlclient.so.18，设置软链接到usr/lib或者usr/lib64，但这两个目录都需要管理员权限的。</p>
-<h2 id="应用例子"><a href="#应用例子" class="headerlink" title="应用例子"></a>应用例子</h2><p>利用mysql客户端查询UCSC数据库，获取geneSymbol名的bed信息</p>
-<p><a href="https://github.com/Wy2160640/py_scripts/blob/master/geneInfo.py" target="_blank" rel="external">脚本geneInfo.py</a></p>
-<p><img src="https://i.imgur.com/SjGGLYp.jpg" alt=""></p>
-<h1 id="根据需要创建UCSC-genome-MySQL-database"><a href="#根据需要创建UCSC-genome-MySQL-database" class="headerlink" title="根据需要创建UCSC genome MySQL database"></a>根据需要创建UCSC genome MySQL database</h1><p>数据来源：UCSC <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/" target="_blank" rel="external">hg19</a>  <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/" target="_blank" rel="external">hg38</a></p>
-<p><img src="https://i.imgur.com/sO4nvEc.jpg" alt=""></p>
-<p>需要两种文件：</p>
-<ul>
-<li>（1）*sql是一种数据库脚本语言，是一种对关系数据库中的数据进行定义和操作的句法，为大多数关系数据库管理系统所支持的工业标准。可以用文本编辑器打开并查看</li>
-<li>（2)数据文件。txt文件</li>
-</ul>
-<p>例子：.sql文件</p>
-<p><img src="https://i.imgur.com/nqtMqQV.jpg" alt=""></p>
-<p>使用shell脚本自动完成</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create database</span></div><div class="line">mysql -u root -prootab -e <span class="string">'create database hg19'</span></div><div class="line"><span class="comment"># obtain table schema</span></div><div class="line"><span class="built_in">cd</span> /home/wangdong/<span class="built_in">local</span>/mysql/data</div><div class="line">wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/ensGene.sql</div><div class="line"><span class="comment"># create table</span></div><div class="line">mysql -u root -prootab hg19 &lt; ensGene.sql</div><div class="line"><span class="comment"># obtain and import table data</span></div><div class="line">wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/ensGene.txt.gz</div><div class="line">gunzip ensGene.txt.gz</div><div class="line">mysqlimport -u root -prootab --<span class="built_in">local</span> hg19 ensGene.txt</div></pre></td></tr></table></figure>
-<p><strong>注意：数据需要下载到/home/wangdong/local/mysql/data，位置可以在配置文件(my.cnf)中修改，具体操作查看链接：<a href="http://www.cnblogs.com/foreverycc/p/5511820.html" target="_blank" rel="external">MySQL 转移 datadir</a></strong></p>
-<ul>
-<li><p>为了便于在命令提示符下显示中文, 在创建时通过 character set gbk 将数据库字符编码指定为 gbk</p>
-<p>  create database samp_db character set gbk;</p>
-</li>
-<li><p>创建数据库表时，对于一些较长的语句在命令提示符下可能容易输错, 因此我们可以通过任何文本编辑器将语句输入好后保存为 createtable.sql 的文件中, 通过命令提示符下的文件重定向执行执行该脚本。</p>
-<p>  mysql -D samp_db -u root -p &lt; createtable.sql</p>
-</li>
-<li><p>desc TABLE_NAME; 显示数据库表的结构（desc是describe的缩写）</p>
-</li>
-<li>select * from TABLE_NAME limit 0,2;显示表的前两行内容，0表示起始行偏移量</li>
-</ul>
-<p><img src="https://i.imgur.com/ThdiQ2j.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/I809HBj.jpg" alt=""></p>
-<h2 id="补充LD-LIBRARY-PATH环境变量"><a href="#补充LD-LIBRARY-PATH环境变量" class="headerlink" title="补充LD_LIBRARY_PATH环境变量"></a>补充LD_LIBRARY_PATH环境变量</h2><p>LIBRARY_PATH和LD_LIBRARY_PATH是Linux下的两个环境变量，二者的含义和作用分别如下：</p>
-<p><strong>LIBRARY_PATH环境变量用于在程序编译期间查找动态链接库时指定查找共享库的路径，</strong> 例如，指定gcc编译需要用到的动态链接库的目录。设置方法如下（其中，LIBDIR1和LIBDIR2为两个库目录）：</p>
-<p>export LIBRARY_PATH=LIBDIR1:LIBDIR2:$LIBRARY_PATH</p>
-<p><strong>LD_LIBRARY_PATH环境变量用于在程序加载运行期间查找动态链接库时指定除了系统默认路径之外的其他路径，</strong> 注意，LD_LIBRARY_PATH中指定的路径会在系统默认路径之前进行查找。设置方法如下（其中，LIBDIR1和LIBDIR2为两个库目录）：</p>
-<p>export LD_LIBRARY_PATH=LIBDIR1:LIBDIR2:$LD_LIBRARY_PATH</p>
-<h3 id="区别与使用："><a href="#区别与使用：" class="headerlink" title="区别与使用："></a>区别与使用：</h3><p>开发时，设置LIBRARY_PATH，以便gcc能够找到编译时需要的动态链接库。</p>
-<p>发布时，设置LD_LIBRARY_PATH，以便程序加载运行时能够自动找到需要的动态链接库。</p>
-<h1 id="可视化管理工具-MySQL-Workbench"><a href="#可视化管理工具-MySQL-Workbench" class="headerlink" title="可视化管理工具 MySQL Workbench"></a>可视化管理工具 MySQL Workbench</h1><p>&emsp;&emsp;尽管我们可以在命令提示符下通过一行行的输入或者通过重定向文件来执行mysql语句, 但该方式效率较低, 由于没有执行前的语法自动检查, 输入失误造成的一些错误的可能性会大大增加, 这时不妨试试一些可视化的MySQL数据库管理工具, MySQL Workbench 就是 MySQL 官方 为 MySQL 提供的一款可视化管理工具, 你可以在里面通过可视化的方式直接管理数据库中的内容, 并且 MySQL Workbench 的 SQL 脚本编辑器支持语法高亮以及输入时的语法检查, 当然, 它的功能强大, 绝不仅限于这两点。</p>
-<p>MySQL Workbench官方介绍: <a href="http://www.mysql.com/products/workbench/" target="_blank" rel="external">http://www.mysql.com/products/workbench/</a></p>
-<p>MySQL Workbench 下载页: <a href="http://dev.mysql.com/downloads/tools/workbench/" target="_blank" rel="external">http://dev.mysql.com/downloads/tools/workbench/</a></p>
-<h1 id="MySQL-Show命令总结"><a href="#MySQL-Show命令总结" class="headerlink" title="MySQL Show命令总结"></a>MySQL Show命令总结</h1><p>MySQL中有很多的基本命令，show命令也是其中之一，在很多使用者中对show命令的使用还容易产生混淆，本文汇集了show命令的众多用法。</p>
-<ul>
-<li>show tables或show tables from database_name; — 显示当前数据库中所有表的名称。</li>
-<li>show tables like ‘my<em>%’; — 显示当前数据库中以my</em>开头的表。</li>
-<li>show databases; — 显示mysql中所有数据库的名称。</li>
-<li>show [full] columns from table_name from database_name; 或show [full] columns from database_name.table_name; — 显示表中列名称。</li>
-<li>show grants for user_name; — 显示一个用户的权限，显示结果类似于grant 命令。</li>
-<li>show index from table_name; — 显示表的索引。</li>
-<li>show status;(show master status;show slave status) — 显示一些系统特定资源的信息，例如，正在运行的线程数量。</li>
-<li>show variables; — 显示系统变量的名称和值。</li>
-<li>show [full] processlist; — 显示系统中正在运行的所有进程，也就是当前正在执行的查询。大多数用户可以查看他们自己的进程，但是如果他们拥有process权限，就可以查看所有人的进程，包括密码。</li>
-<li>show table status; — 显示当前使用或者指定的database中的每个表的信息。信息包括表类型和表的最新更新时间。</li>
-<li>show privileges; — 显示服务器所支持的不同权限。</li>
-<li>show create database database_name; — 显示create database 语句是否能够创建指定的数据库。</li>
-<li>show create table table_name; — 显示create database 语句是否能够创建指定的数据库。</li>
-<li>show engies; — 显示安装以后可用的存储引擎和默认引擎。</li>
-<li>show innodb status; — 显示innoDB存储引擎的状态。</li>
-<li>show logs; — 显示BDB存储引擎的日志。</li>
-<li>show warnings; — 显示最后一个执行的语句所产生的错误、警告和通知。</li>
-<li>show errors; — 只显示最后一个执行语句所产生的错误。</li>
-<li>show [storage] engines; –显示安装后的可用存储引擎和默认引擎。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.bio-info-trainee.com/1045.html" target="_blank" rel="external">生物信息学学者学习mysql之路</a></p>
-<p>（2）<a href="http://dev.dafan.info/detail/194350?p=55" target="_blank" rel="external">Linux环境变量LD_LIBRARY_PATH</a></p>
-<p>（3）<a href="https://www.cnblogs.com/foreverycc/p/5491884.html" target="_blank" rel="external">使用MySQL制作SNP146数据库</a></p>
-<p>（4）<a href="https://nsaunders.wordpress.com/2011/05/18/how-to-create-a-partial-ucsc-genome-mysql-database/" target="_blank" rel="external">How to: create a partial UCSC genome MySQL database</a></p>
-<p>（5）<a href="http://www.jianshu.com/p/dc58a4efdd84" target="_blank" rel="external">5分钟入门MySQL Workbench</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;主要介绍win下和linux下连接重用生信数据库，操作数据库中表，以及根据自己的需要下载公共数据，创建mysql数据库。&lt;/p&gt;
-&lt;blockquote class=&quot;blockquote-center&quot;&gt;mysql数据库与生信&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="MySQL" scheme="https:///AnJingwd.github.io/categories/MySQL/"/>
-    
-    
-      <category term="MySQL" scheme="https:///AnJingwd.github.io/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计及挑选捕获测序探针，并计算覆盖度</title>
-    <link href="https:///AnJingwd.github.io/2017/10/29/%E8%AE%BE%E8%AE%A1%E5%8F%8A%E6%8C%91%E9%80%89%E6%8D%95%E8%8E%B7%E6%B5%8B%E5%BA%8F%E6%8E%A2%E9%92%88%EF%BC%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E8%A6%86%E7%9B%96%E5%BA%A6/"/>
-    <id>https:///AnJingwd.github.io/2017/10/29/设计及挑选捕获测序探针，并计算覆盖度/</id>
-    <published>2017-10-29T04:17:18.000Z</published>
-    <updated>2018-03-05T01:30:46.905Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">使用bedtools进行捕获测序引物的筛选并计算覆盖度</blockquote>
-
-<a id="more"></a>
-<h1 id="基因CDS区域捕获测序，引物设计"><a href="#基因CDS区域捕获测序，引物设计" class="headerlink" title="基因CDS区域捕获测序，引物设计"></a>基因CDS区域捕获测序，引物设计</h1><h2 id="确定目标基因的某一转录本的CDS区域坐标，整理成bed文件"><a href="#确定目标基因的某一转录本的CDS区域坐标，整理成bed文件" class="headerlink" title="确定目标基因的某一转录本的CDS区域坐标，整理成bed文件"></a>确定目标基因的某一转录本的CDS区域坐标，整理成bed文件</h2><p>最简单的方法是从gff文件中，根据转录本蛋白ID,直接grep抽取出CDS区间的chr, satrt, end</p>
-<pre><code>wget http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation/GRCh38_latest/refseq_identifiers/GRCh38_latest_genomic.gff.gz
-ungz GRCh38_latest_genomic.gff.gz
-mv GRCh38_latest_genomic.gff GRCh38.p10_ncbi.gff
-
-#get genes positions by gene symbol list in gene.txt
-gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; GRCh38.p10_ncbi.gff &gt;&gt;gene_result.txt;done
-</code></pre><p><img src="https://i.imgur.com/K0bANVd.jpg" alt=""></p>
-<pre><code>#get cds regions positions by proteins list in proteins_id.txt
-protein_id=($(cat protein_id.txt));for protein_id in ${protein_id[@]}; do grep &quot;${protein_id}&quot; GRCh38.p10_ncbi.gff &gt;&gt;cds_result.txt;done
-</code></pre><p><img src="https://i.imgur.com/XmfwHoG.jpg" alt=""></p>
-<pre><code>#get gene chrom locations or transfor gene symbol ID to essenble ID by gene symbol list in gene.txt
-wget http://ftp.ncbi.nih.gov/refseq/H_sapiens/Homo_sapiens.gene_info.gz
-head -n 1 Homo_sapiens.gene_info &gt; chr_result.txt
-gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; Homo_sapiens.gene_info &gt;&gt;chr_result.txt;done
-</code></pre><p><img src="https://i.imgur.com/QQnWpwO.jpg" alt=""></p>
-<p>整理成bed文件</p>
-<p><img src="https://i.imgur.com/flbem5B.jpg" alt=""></p>
-<p>安捷伦的<a href="http://www.genomics.agilent.com/zh/Custom-Design-Tools/eArray/?cid=AG-PT-122&amp;tabId=AG-PR-1047&amp;pageId=1456&amp;crumbAction=push&amp;navAction=pop" target="_blank" rel="external">eArray</a>可以设计，输入只需要目标区域的bed文件即可！</p>
-<ul>
-<li><a href="https://earray.chem.agilent.com/cghanalytics/index.html" target="_blank" rel="external">Agilent Genomic Workbench Downloads</a> </li>
-<li><a href="https://earray.chem.agilent.com/cghanalytics/InstData/7.0/G3800-90046_Installation.pdf" target="_blank" rel="external">Installation Guide</a></li>
-</ul>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>（1）NCBI 的FTP站点中GRCh37和GRCh38的最新版基因组注释数据在该路径下：<a href="http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation" target="_blank" rel="external">http://ftp.ncbi.nih.gov/refseq/H_sapiens/annotation</a></p>
-<ul>
-<li>Last updated: April 19, 2017</li>
-<li><strong>assembly name: GRCh38.p10</strong>（第十版）</li>
-</ul>
-<p>（2）对于做湿实验的同学可能通过浏览器的方式查询CDS区域坐标，但存在一个问题（<strong>首先浏览器上的版本是GRCh38.p7（第七版）</strong>）！</p>
-<p>NCBI —&gt;选择gene数据库—&gt;输入gene symbol —-&gt;点选gene symbol—-&gt;genebank—-&gt;找到目标转录本</p>
-<p><img src="https://i.imgur.com/pjVTs2f.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/6C2Lk1p.jpg" alt=""></p>
-<p>&emsp;&emsp;可以看到CDS由一段一段的区域join形成的，但这是相对坐标，如何转换成基因组的绝对坐标呢？或许你会用基因的起始和结束位置进行加减，但尝试比较了下，发现坐标偏差很大（0.2M）。首先是<strong>版本的问题？</strong>, 其次可能NCBI的坐标系统中CDS区域的位置，使用在基因区间的基础上加减的做法不对。将<a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000007.14?report=genbank&amp;from=140719331&amp;to=140924764&amp;strand=true" target="_blank" rel="external">上述链接</a>最下方的FASTA序列的第62-199区间摘取出来，在UCSC中<a href="http://genome.ucsc.edu/cgi-bin/hgBlat?command=start" target="_blank" rel="external">BLAT</a>发现其结果是与从GRCh38.p10_ncbi.gff文件摘取出来的坐标一致的，<strong>所以用基因的起始和结束位置进行加减的方法是不正确的。</strong></p>
-<h1 id="引物筛选"><a href="#引物筛选" class="headerlink" title="引物筛选"></a>引物筛选</h1><ul>
-<li><p>A组引物扩增区域（Amplicon_Stop-Amplicon_Start）长度范围为126-274nt，平均值为238nt</p>
-</li>
-<li><p>B组引物扩增区域（Amplicon_Stop-Amplicon_Start）长度范围为124-174nt,平均值为158nt</p>
-</li>
-<li><p>A,B两组引物都是针对同一目标区域设计的捕获探针，但是参数不同，导致扩增长度不同，覆盖度不同</p>
-</li>
-</ul>
-<p>&emsp;&emsp;所以A组引物（primer20）偏长，B组引物（primer24）偏短，现在需要将A组引物中扩增区域大于250nt的目标区域用 B组引物来扩增，实现长度互补和综合。</p>
-<p>方法：使用bedtools工具即可！</p>
-<ol>
-<li>将targeted.bed与primer20.bed查看覆盖情况，将没有引物覆盖的，或者覆盖的引物扩增长度大于250nt的<strong>目标区域的bed区间</strong>抽取出来整理为target_region_of_primer20_up250.bed</li>
-<li>将target_region_of_primer20_up250.bed与primer24.bed查看覆盖情况，将覆盖上的引物挑出，<strong>此时原则是目标区域即使有某条引物能全部覆盖，但为了测序数据更加准确，一个位置保证2-3个引物覆盖为好</strong></li>
-<li>将A组合B组引物保留的部分引物合并，同时整理出A,B两组引物都没有覆盖的目标区域。</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#step1</span></div><div class="line">bedtools intersect -a target.bed -b primer20.bed -wao &gt; primer20_result.txt </div><div class="line">awk <span class="string">'$6-$5&gt;250 &#123;print $1,$2,$3&#125;'</span> primer20_result.txt &gt; target_region_of_primer20_up250.bed</div><div class="line"></div><div class="line"><span class="comment">#step2</span></div><div class="line">bedtools intersect -a target_region_of_primer20_up250.bed -b primer24.bed -wao &gt; primer24_result.txt</div><div class="line"></div><div class="line"><span class="comment">#step3</span></div><div class="line">primer20=($(cat primer20_reserved.txt));<span class="keyword">for</span> primer20 <span class="keyword">in</span> <span class="variable">$&#123;primer20[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer20&#125;</span>"</span> primer20_original.txt &gt;&gt;primer20_reserved_result.txt;<span class="keyword">done</span></div><div class="line"></div><div class="line">primer24=($(cat primer24_reserved.txt));<span class="keyword">for</span> primer24 <span class="keyword">in</span> <span class="variable">$&#123;primer24[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer24&#125;</span>"</span> primer24_original.txt &gt;&gt;primer24_reserved_result.txt;<span class="keyword">done</span></div></pre></td></tr></table></figure>
-<h1 id="根据targete-bed和primer20-bed计算覆盖度"><a href="#根据targete-bed和primer20-bed计算覆盖度" class="headerlink" title="根据targete.bed和primer20.bed计算覆盖度"></a>根据targete.bed和primer20.bed计算覆盖度</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(1)检验bed区间是否有重叠</div><div class="line"></div><div class="line">length_sum1=`awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span> target.bed |tail -n 1`</div><div class="line"></div><div class="line">length_sum2=`sort -k1,1 -k2,2n target.bed |bedtools merge -i | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span>|tail -n 1`</div><div class="line"></div><div class="line"><span class="comment">#如果length_sum1 &gt;  length_sum2,有重叠；如果length_sum1 = length_sum2,无重叠</span></div><div class="line"></div><div class="line"><span class="comment">#所以target.bed无重叠，primer20和primer24有重叠</span></div><div class="line"></div><div class="line">(2)先用bedtools工具得到primer20的merge后的bed文件，然后与target.bed查看覆盖碱基数，并求和</div><div class="line"></div><div class="line">sort -k1,1 -k2,2n primer20.bed|bedtools merge -i &gt; primer20_merge.bed</div><div class="line">length_sum3=`bedtools intersect -a target.bed -b primer20_merge.bed -wao | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$7&#125;&#123;print x&#125;'</span> |tail -n 1`  </div><div class="line"></div><div class="line">coverage = length_sum3/length_sum1*100</div></pre></td></tr></table></figure>
-<h2 id="bedtools-merge功能图示（需要先排序，否则报错）"><a href="#bedtools-merge功能图示（需要先排序，否则报错）" class="headerlink" title="bedtools merge功能图示（需要先排序，否则报错）"></a>bedtools merge功能图示（需要先排序，否则报错）</h2><p><img src="https://i.imgur.com/kAcaOMe.jpg" alt=""></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html" target="_blank" rel="external">染色体位置overlap的计算–bedtools应用</a></p>
-<p>（2）<a href="https://www.biostars.org/p/65558/" target="_blank" rel="external">Tool: Converting Genome Coordinates From One Genome Version To Another (Ucsc Liftover, Ncbi Remap, Ensembl Api)</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;使用bedtools进行捕获测序引物的筛选并计算覆盖度&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="NGS实验" scheme="https:///AnJingwd.github.io/categories/NGS%E5%AE%9E%E9%AA%8C/"/>
-    
-    
-      <category term="NGS实验" scheme="https:///AnJingwd.github.io/tags/NGS%E5%AE%9E%E9%AA%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL数据库安装及入门</title>
-    <link href="https:///AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/"/>
-    <id>https:///AnJingwd.github.io/2017/10/21/MySQL数据库安装及入门/</id>
-    <published>2017-10-21T10:06:15.000Z</published>
-    <updated>2017-11-23T13:46:26.321Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">无root权限，从源码编译安装MySQL数据库，及其简单使用</blockquote>
-
-<a id="more"></a>
-<h1 id="科德十二定律"><a href="#科德十二定律" class="headerlink" title="科德十二定律"></a>科德十二定律</h1><p><a href="https://en.wikipedia.org/wiki/Codd%27s_12_rules" target="_blank" rel="external">科德十二定律（Codd’s 12 rules）</a>是由数据库的关系模型的先驱埃德加·科德（EdgarF. Codd）提出的，使数据库管理系统关系化需满足的十三条（从0至12）准则。又称为“黄金十二定律”。</p>
-<ul>
-<li>准则0:&emsp;一个关系形的关系数据库系统必须能完全通过它的关系能力来管理数据库。</li>
-<li>准则1 信息准则: &emsp;关系数据库系统的所有信息都应该在逻辑一级上用表中的值这一种方法显式的表示。</li>
-<li>准则2 保证访问准则: &emsp; 依靠表名、主码和列名的组合，保证能以逻辑方式访问关系数据库中的每个数据项。</li>
-<li>准则3 空值的系统化处理: &emsp;全关系的关系数据库系统支持空值的概念，并用系统化的方法处理空值。</li>
-<li>准则4 基于关系模型的动态的联机数据字典: &emsp;数据库的描述在逻辑级上和普通数据采用同样的表述方式。</li>
-<li>准则5 统一的数据子语言: &emsp;一个关系数据库系统可以具有几种语言和多种终端访问方式，但必须有一种语言，它的语句可以表示为严格语法规定的字符串，并能全面的支持各种规则。</li>
-<li>准则6 视图更新准则: &emsp;所有理论上可更新的视图也应该允许由系统更新。</li>
-<li>准则7 高级的插入、修改和删除操作: &emsp;系统应该对各种操作进行查询优化。</li>
-<li>准则8 数据的物理独立性: &emsp;无论数据库的数据在存储表示或存取方法上作任何变化，应用程序和终端活动都保持逻辑上的不变性。</li>
-<li>准则9 数据逻辑独立性: &emsp;当对基本关系进行理论上信息不受损害的任何改变时，应用程序和终端活动都保持逻辑上的不变性。</li>
-<li>准则10 数据完整的独立性: &emsp;关系数据库的完整性约束条件必须是用数据库语言定义并存储在数据字典中的。</li>
-<li>准则11 分布独立性: &emsp;关系数据库系统在引入分布数据或数据重新分布时保持逻辑不变。</li>
-<li>准则12 无破坏准则: &emsp;如果一个关系数据库系统具有一个低级语言，那么这个低级语言不能违背或绕过完整性准则。</li>
-</ul>
-<h1 id="Relational-Database-Management-Systems-RDBMS"><a href="#Relational-Database-Management-Systems-RDBMS" class="headerlink" title="Relational Database Management Systems (RDBMS)"></a>Relational Database Management Systems (RDBMS)</h1><table>
-<thead>
-<tr>
-<th>Commercial products</th>
-<th>Open-source offerings</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Oracle</td>
-<td>MySQL (Oracle)</td>
-</tr>
-<tr>
-<td>DB2 (IBM)</td>
-<td>PostgreSQL</td>
-</tr>
-<tr>
-<td>MS SQL Server (Microsoft)</td>
-<td>SQLite</td>
-</tr>
-</tbody>
-</table>
-<h1 id="下载MySQL"><a href="#下载MySQL" class="headerlink" title="下载MySQL"></a>下载MySQL</h1><p><a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">下载MySQL源代码</a> </p>
-<p><img src="https://i.imgur.com/jm0LLv7.png" alt=""></p>
-<p><img src="https://i.imgur.com/1N13zGe.png" alt=""></p>
-<h2 id="下载选项："><a href="#下载选项：" class="headerlink" title="下载选项："></a>下载选项：</h2><ul>
-<li>Source Code -&gt; 源代码</li>
-<li>Generic Linux (Architecture Independent) -&gt; 通用的Linux（独立结构）</li>
-<li><p>Compressed TAR Archive，Includes Boost Headers -&gt; 选择带有Boost头的压缩包（MySQL需要Boost C++库构建）</p>
-<p>  wget <a href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.20.tar.gz" target="_blank" rel="external">https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-boost-5.7.20.tar.gz</a></p>
-</li>
-</ul>
-<h1 id="从源安装MySQL，需要安装CMake"><a href="#从源安装MySQL，需要安装CMake" class="headerlink" title="从源安装MySQL，需要安装CMake"></a>从源安装MySQL，需要安装CMake</h1><p>cmake，一个跨平台的编译自动配置工具（作用生成makefile 文件）</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!bin/sh</span></div><div class="line">HOME=/home/wangdong</div><div class="line">install_path=<span class="variable">$HOME</span>/<span class="built_in">local</span>/cmake</div><div class="line">mkdir -p <span class="variable">$install_path</span>/.src</div><div class="line"><span class="built_in">cd</span> <span class="variable">$install_path</span>/.src</div><div class="line">wget http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz</div><div class="line">tar zxvf cmake-2.8.12.2.tar.gz</div><div class="line"><span class="built_in">cd</span> cmake-2.8.12.2</div><div class="line">./configure --prefix=<span class="variable">$install_path</span></div></pre></td></tr></table></figure>
-<p>输出 CMake has bootstrapped.  Now run gmake.</p>
-<p>#确保cmake没有错误发生</p>
-<p>echo $?</p>
-<p>0</p>
-<p>#下面运行gmake命令</p>
-<pre><code>gmake
-gmake install
-</code></pre><h1 id="编译安装MySQL"><a href="#编译安装MySQL" class="headerlink" title="编译安装MySQL"></a>编译安装MySQL</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#（1）下载MySQL-5.6及创建相应目录结构</span></div><div class="line">HOME=/home/wangdong</div><div class="line">install_path=<span class="variable">$HOME</span>/<span class="built_in">local</span>/mysql</div><div class="line">mkdir -p /home/wangdong/<span class="built_in">local</span>/mysql</div><div class="line"></div><div class="line">wget https://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.35.tar.gz</div><div class="line">tar zxvf mysql-5.6.35.tar.gz</div><div class="line"><span class="built_in">cd</span> mysql-5.6.35</div><div class="line">mkdir <span class="variable">$install_path</span>/data</div><div class="line"></div><div class="line"><span class="comment">#（2）编译(系统已经安装cmake,此处徐使用上述自己安装的cmake)</span></div><div class="line">/home/wangdong/<span class="built_in">local</span>/cmake/.src/cmake-2.8.12.2/bin/cmake -DCMAKE_INSTALL_PREFIX=<span class="variable">$install_path</span>  \</div><div class="line">-DMYSQL_DATADIR=<span class="variable">$install_path</span>/data  \</div><div class="line">-DMYSQL_UNIX_ADDR=<span class="variable">$install_path</span>/mysql.sock  \</div><div class="line">-DDEFAULT_CHARSET=utf8  \</div><div class="line">-DDEFAULT_COLLATION=utf8_general_ci  \</div><div class="line">-DMYSQL_TCP_PORT=8701  \ </div><div class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1  \ </div><div class="line">-DENABLED_LOCAL_INFILE=1</div><div class="line"></div><div class="line"><span class="comment">#（3)安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">#(4)配置（找到support-files/my-default.cnf，该文件是一个配置模板，在此基础上自己修改配置）</span></div><div class="line">cp support-files/my-default.cnf my.cnf</div><div class="line"></div><div class="line"><span class="comment">#(5)使用启动my.cnf配置文件中的设置启动mysqld_safe服务和启动mysql</span></div><div class="line"></div><div class="line">bin/mysqld_safe --defaults-file=my.cnf &amp;     <span class="comment">#&amp;表示后台运行</span></div><div class="line">support-files/mysql.server start|stop|restart   <span class="comment">#开始|停止|重启</span></div></pre></td></tr></table></figure>
-<h2 id="如果执行成功，会提示如下内容："><a href="#如果执行成功，会提示如下内容：" class="headerlink" title="如果执行成功，会提示如下内容："></a>如果执行成功，会提示如下内容：</h2><p><img src="https://i.imgur.com/ueBDeEE.jpg" alt=""></p>
-<p>同时，生成mysql.pid和mysql.sock文件，正常！</p>
-<p><img src="https://i.imgur.com/xCmA0K1.jpg" alt=""></p>
-<p>以及查看13306端口，正常！</p>
-<p><img src="https://i.imgur.com/lQo2XsV.jpg" alt=""></p>
-<h2 id="关于配置的注意事项"><a href="#关于配置的注意事项" class="headerlink" title="关于配置的注意事项"></a>关于配置的注意事项</h2><p>（1）最基本的需要修改以下7项（关于my.cnf配置文件的具体解释可以看这里（<a href="http://blog.csdn.net/l1028386804/article/details/50635169" target="_blank" rel="external">MySQL之——MySQL5.6 my.cnf 参数说明(附上自己服务器上真实配置文件</a>)））</p>
-<ul>
-<li>在[mysqld]里修改port=13306</li>
-<li>在[mysqld]里修改sock文件位置（socket）</li>
-<li>在[mysqld]里添加MySQL基础目录（basedir）</li>
-<li>在[mysqld]里添加MySQL数据存储目录（datadir）</li>
-<li>在[mysqld]里添加MySQL日志文件（log-error）</li>
-<li>在[mysqld]里添加MySQL进程文件（pid-file）</li>
-<li>在[mysqld]里添加指定MySQL数据库所属用户（user -这里填写你所用的linux用户）</li>
-</ul>
-<p>（2）检查MySQL默认端口3306是否被占用，执行命令：netstat -apn | grep 3306如下图表明3306已经被占用，那么换一个端口，建议端口号在10000以上，比如改成13306，所以可以设置port=13306</p>
-<p><img src="https://i.imgur.com/KcpubsU.jpg" alt=""></p>
-<p>如下图为my-default.cnf原始文件（模板）</p>
-<p><img src="https://i.imgur.com/MVbfLC9.jpg" alt=""></p>
-<p>如下图为修改配置后的my.cnf文件</p>
-<p><img src="https://i.imgur.com/ZDz01xX.jpg" alt=""></p>
-<p><strong>注意：修改好my.cnf文件后，记得创建/home/wangdong/local/mysql/data和/home/wangdong/local/mysql/logs文件目录，否则在第（5）步会报错</strong></p>
-<h1 id="启动MySQL"><a href="#启动MySQL" class="headerlink" title="启动MySQL"></a>启动MySQL</h1><h2 id="每次启动MySQL都需要"><a href="#每次启动MySQL都需要" class="headerlink" title="每次启动MySQL都需要"></a>每次启动MySQL都需要</h2><pre><code>bin/mysqld_safe --defaults-file=my.cnf &amp;     #&amp;表示后台运行
-support-files/mysql.server start   #开始
-support-files/mysql.server stop   #关闭
-</code></pre><p><img src="https://i.imgur.com/QQPY7WV.jpg" alt=""></p>
-<p>可以看到MySQL正常启动了，但是写入日志时不具有/var/log/mysqld.log的权限，问题是我们之前不是设置了log-error   = /home/wangdong/local/mysql/logs/mysql_error.log吗？原因在于在linux系统中mysql配置文件的读取顺序为:/etc/my.cnf;/etc/mysql/my.cnf;/usr/local/mysql/etc/my.cnf ;~/.my.cnf </p>
-<p>我们可以使用locate查找系统已有的my.cnf配置文件，如下图，</p>
-<p><img src="https://i.imgur.com/BpkeoHW.jpg" alt=""></p>
-<p>网上搜了一下解决办法，删除系统上/etc目录下的my.cnf配置文件，但无root权限做不到的，但还好，写入日志文件无权限并不影响MySQL的正常启动和使用！</p>
-<h3 id="MySQL数据库使用"><a href="#MySQL数据库使用" class="headerlink" title="MySQL数据库使用"></a>MySQL数据库使用</h3><h4 id="大致步骤包括："><a href="#大致步骤包括：" class="headerlink" title="大致步骤包括："></a>大致步骤包括：</h4><ol>
-<li>第一次访问MySQL数据库的时候要以root进去（及-u root），且没有密码。 </li>
-<li>然后使用mysql数据库，修改root密码。 </li>
-<li>创建新的用户，以及授权 </li>
-<li>正常使用、登录mysql,root进去，且需要密码。</li>
-</ol>
-<h5 id="第一次访问MySQL数据库"><a href="#第一次访问MySQL数据库" class="headerlink" title="第一次访问MySQL数据库"></a>第一次访问MySQL数据库</h5><p>执行命令格式：bin/mysql –socket=mysql.sock -u root </p>
-<p><strong>一定要加上–socket=mysql.sock（mysql安装目录中的mysql.sock，否则提示ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var/lib/mysql/mysql.sock’ (2)）</strong></p>
-<h5 id="查看已有数据库，删除内置的test数据库"><a href="#查看已有数据库，删除内置的test数据库" class="headerlink" title="查看已有数据库，删除内置的test数据库"></a>查看已有数据库，删除内置的test数据库</h5><p>执行命令（注意命令末尾的分号不可少）：</p>
-<pre><code>show databases;
-drop database test;
-</code></pre><p><img src="https://i.imgur.com/7Bl2Jm8.jpg" alt=""></p>
-<h5 id="查看内置MySQL用户，删除匿名用户"><a href="#查看内置MySQL用户，删除匿名用户" class="headerlink" title="查看内置MySQL用户，删除匿名用户"></a>查看内置MySQL用户，删除匿名用户</h5><p>执行命令：</p>
-<pre><code>use mysql;  #选择mysql数据库
-select host, user, password from user; #从mysql数据库中的user表格中选择host, user, password三个字段
-delete from user where user = &apos;&apos;;  
-</code></pre><p><img src="https://i.imgur.com/XDLMMLx.jpg" alt=""></p>
-<h5 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h5><p>执行命令：</p>
-<pre><code>update user set password = password(&apos;rootab&apos;);
-</code></pre><p><strong>修改密码后需要先关闭mysql服务，然后重新启动my.cnf配置文件中的设置启动mysqld_safe服务和启动mysql，使新密码生效！！</strong></p>
-<p>执行命令：</p>
-<pre><code>support-files/mysql.server stop
-bin/mysqld_safe --defaults-file=my.cnf &amp;         
-support-files/mysql.server start     
-</code></pre><p><img src="https://i.imgur.com/Dn5ZSW9.jpg" alt=""></p>
-<h5 id="正常使用，使用root登陆，并且需要密码登陆"><a href="#正常使用，使用root登陆，并且需要密码登陆" class="headerlink" title="正常使用，使用root登陆，并且需要密码登陆"></a>正常使用，使用root登陆，并且需要密码登陆</h5><p>mysql -u 用户名 -h host_name -P  端口号  -p密码  (<strong>‘-P 端口号’的P大写  ‘-p密码’的p小写，且密码(password)和p之间没有空格</strong>)</p>
-<p>如bin/mysql –socket=mysql.sock -u root -h localhost -P 13306 -prootab </p>
-<p>也可以这样写：</p>
-<pre><code>bin/mysql --socket=mysql.sock -u root -h localhost -P 13306 -p 
-</code></pre><p>然后在窗口弹出Enter password:时输入密码即可</p>
-<p>（查看mysql命令的帮助: bin/mysql -I）</p>
-<h5 id="将bin-mysql加入环境变量"><a href="#将bin-mysql加入环境变量" class="headerlink" title="将bin/mysql加入环境变量"></a>将bin/mysql加入环境变量</h5><pre><code>echo &apos;export PATH=/home/wangdong/local/mysql/bin:$PATH&apos;&gt;&gt;~/.bashrc  
-
-source ~/.bashrc
-</code></pre><p>以后登陆直接：</p>
-<pre><code>WORKDIR=/home/wangdong/local/mysql/
-mysqld_safe --defaults-file=$WORKDIR/my.cnf &amp;
-$WORKDIR/support-files/mysql.server start
-mysql --socket=$WORKDIR/mysql.sock -u root -h localhost -P 13306 -p 
-
-Do somethings
-exit;
-$WORKDIR/support-files/mysql.server stop
-</code></pre><p>(使用版本：Server version: 5.6.35 Source distribution)</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://segmentfault.com/a/1190000004026950" target="_blank" rel="external">CentOS 6.4编译安装mysql 5.7</a></p>
-<p>（2）<a href="https://segmentfault.com/a/1190000010806192" target="_blank" rel="external">从源编译MySQL</a></p>
-<p>（3）<a href="http://jingyan.baidu.com/article/ad310e80cf9ce81849f49ea2.html" target="_blank" rel="external">Linux MySQL免安装及配置</a></p>
-<p>（4） <a href="http://blog.csdn.net/f229338596/article/details/72575403" target="_blank" rel="external">linux中无root权限，装mysql 于用户目录步骤</a></p>
-<p>（5）<a href="https://jingyan.baidu.com/article/3c343ff7ca8eab0d37796317.html" target="_blank" rel="external">非root权限安装mysql</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;无root权限，从源码编译安装MySQL数据库，及其简单使用&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="MySQL" scheme="https:///AnJingwd.github.io/categories/MySQL/"/>
-    
-    
-      <category term="MySQL" scheme="https:///AnJingwd.github.io/tags/MySQL/"/>
     
   </entry>
   
