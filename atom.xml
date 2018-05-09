@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-05-07T12:41:57.016Z</updated>
+  <updated>2018-05-09T14:15:10.652Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>k_means聚类算法python实现</title>
+    <link href="https:///AnJingwd.github.io/2018/05/09/k-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0/"/>
+    <id>https:///AnJingwd.github.io/2018/05/09/k-means聚类算法python实现/</id>
+    <published>2018-05-09T14:04:50.000Z</published>
+    <updated>2018-05-09T14:15:10.652Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">k_means聚类算法python实现，并对50个基因表达量聚类</blockquote>
+
+<a id="more"></a>
+<h2 id="k-means-聚类"><a href="#k-means-聚类" class="headerlink" title="k means 聚类"></a>k means 聚类</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>K-means算法以k为参数，把n个对象分为k个簇，使簇内具有较高的相似度，而簇间的相似度较低。</p>
+<ol>
+<li>随机选择K个点作为初始的聚类中心</li>
+<li>对于剩下的点，根据其与聚类中心的距离，将其归入最近的簇</li>
+<li>对每个簇，计算所有点的均值作为新的聚类中心</li>
+<li>重复步骤2,3直到聚类中心不再变化</li>
+</ol>
+<h3 id="K-meas-cluster-py"><a href="#K-meas-cluster-py" class="headerlink" title="K_meas_cluster.py"></a>K_meas_cluster.py</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> math,os,random</div><div class="line"></div><div class="line"></div><div class="line">os.chdir(<span class="string">r'F:\pycharm_project\cluster'</span>)</div><div class="line">data = pd.read_csv(<span class="string">r'.\microarray_gcrma_diff_TOP50.csv'</span>,nrows = <span class="number">51</span>,header=<span class="keyword">None</span>)</div><div class="line">Exp_matrix = np.array(data.iloc[<span class="number">1</span>:<span class="number">51</span>,<span class="number">1</span>:<span class="number">3</span>],dtype =np.float64)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_k_start</span><span class="params">(A,k)</span>:</span></div><div class="line">	k_point_list = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,k):</div><div class="line">		random_index = random.randint(<span class="number">0</span>, A.shape[<span class="number">0</span>])</div><div class="line">		k_point_list.append(A[random_index])</div><div class="line">	<span class="keyword">return</span> k_point_list</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Euclidean_Distances</span><span class="params">(a,b)</span>:</span></div><div class="line">	d = math.sqrt((a[<span class="number">0</span>] - b[<span class="number">0</span>]) ** <span class="number">2</span> + (a[<span class="number">1</span>] - b[<span class="number">1</span>]) ** <span class="number">2</span>)</div><div class="line">	<span class="keyword">return</span> d</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span>  <span class="title">classify_points</span><span class="params">(A,center)</span>:</span></div><div class="line">	classified_list = []</div><div class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>, len(center)):</div><div class="line">		names = locals()</div><div class="line">		names[<span class="string">'point_list%s'</span> % j] = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,A.shape[<span class="number">0</span>]):</div><div class="line">		dis_list = []</div><div class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,len(center)):</div><div class="line">			dis = Euclidean_Distances(A[i],center[j])</div><div class="line">			dis_list.append(dis)</div><div class="line">		min_dis_index =dis_list.index(min(dis_list))</div><div class="line">		names[<span class="string">'point_list%s'</span> % min_dis_index].append(A[i])</div><div class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,len(center)):</div><div class="line">		classified_list.append(names[<span class="string">'point_list%s'</span> % j])</div><div class="line">	<span class="keyword">return</span> classified_list</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">creat_new_center</span><span class="params">(mylist)</span>:</span></div><div class="line">	center_new = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(mylist)):</div><div class="line">		point_x_sum = <span class="number">0</span></div><div class="line">		point_y_sum = <span class="number">0</span></div><div class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>, len(mylist[i])):</div><div class="line">			point_x_sum += mylist[i][j][<span class="number">0</span>]</div><div class="line">			point_y_sum += mylist[i][j][<span class="number">1</span>]</div><div class="line">		point_pos = [point_x_sum/len(mylist[i]),point_y_sum/len(mylist[i])]</div><div class="line">		center_new.append(point_pos)</div><div class="line">	<span class="keyword">return</span> center_new</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">k_mens_loop</span><span class="params">(A,k)</span>:</span></div><div class="line">	start = random_k_start(A,k)</div><div class="line">	classified_list = classify_points(A, start)</div><div class="line"></div><div class="line">	center_new = creat_new_center(classified_list)</div><div class="line">	classified_list = classify_points(A, center_new)</div><div class="line">	center_new_next = creat_new_center(classified_list)</div><div class="line"></div><div class="line">	<span class="keyword">while</span> center_new != center_new_next:</div><div class="line">		center_new = creat_new_center(classified_list)</div><div class="line">		classified_list = classify_points(A, center_new)</div><div class="line">		center_new_next= creat_new_center(classified_list)</div><div class="line">	<span class="keyword">return</span> classified_list</div><div class="line"></div><div class="line">result_k_means_cluster = k_mens_loop(Exp_matrix,<span class="number">3</span>)</div><div class="line">print(result_k_means_cluster)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">format_cluster_result</span><span class="params">(mylist)</span>:</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(mylist)):</div><div class="line">		print(<span class="string">"The "</span>+ str(i+<span class="number">1</span>)+<span class="string">" class include this points  "</span>+str(mylist[i]))</div><div class="line"></div><div class="line">format_cluster_result(result_k_means_cluster)</div></pre></td></tr></table></figure>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">The 1 class include this points  [array([ 4.93486944, 13.14640868]), array([ 9.44642109, 13.35037465]), array([ 2.49151711, 10.83512875]), array([ 9.8840153 , 12.83855873]), array([ 6.00091999, 11.32824297]), array([ 7.80347201, 11.06602904]), array([ 6.68408837, 11.29720113]), array([6.13240771, 8.75948733]), array([ 7.41177163, 11.46909421]), array([ 5.81649515, 12.38062477]), array([ 7.99449013, 10.8097551 ]), array([ 7.15714487, 11.575675  ]), array([ 6.45817254, 10.02135377]), array([ 8.17631453, 10.85800827]), array([ 7.90910338, 11.01532861]), array([ 8.02190753, 13.19604362]), array([6.47480105, 9.0377897 ]), array([ 8.97900038, 11.21312381]), array([6.12469976, 9.84061508]), array([ 7.380284 , 12.1630906]), array([6.01540939, 9.75805721])]</div><div class="line"></div><div class="line">The 2 class include this points  [array([2.50308546, 5.91300188]), array([2.24197899, 9.8390274 ]), array([5.33573424, 8.07922933]), array([5.64747242, 3.61139246]), array([5.35174955, 7.57523097]), array([6.91440679, 3.1232664 ]), array([2.71849667, 4.76027382]), array([3.97446062, 8.03512416]), array([6.45228078, 2.44931761]), array([4.5782664 , 7.51644097]), array([3.99185391, 6.05134528]), array([4.06301573, 7.63789036]), array([3.89376658, 6.12632702]), array([3.09482821, 9.36668278]), array([5.30726995, 8.56688374]), array([4.33465033, 8.58483349]), array([2.64882616, 4.71169159]), array([2.23241425, 6.36768551])]</div><div class="line"></div><div class="line">The 3 class include this points  [array([14.23058515, 12.21441832]), array([10.21858224,  7.9990988 ]), array([9.07154372, 6.73460898]), array([11.34847715,  8.99124024]), array([12.4881844, 10.2497519]), array([9.97529373, 6.69985229]), array([10.97051098,  8.08711864]), array([9.90668681, 7.8113881 ]), array([9.37065246, 4.70014833]), array([8.6836169 , 6.10392713]), array([9.2391499 , 6.50016246])]</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;k_means聚类算法python实现，并对50个基因表达量聚类&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="算法" scheme="https:///AnJingwd.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https:///AnJingwd.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>层级聚类算法python实现</title>
@@ -2200,155 +2234,6 @@ library(rmarkdown)
     
     
       <category term="技术" scheme="https:///AnJingwd.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql数据库与生信</title>
-    <link href="https:///AnJingwd.github.io/2017/11/23/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%94%9F%E4%BF%A1/"/>
-    <id>https:///AnJingwd.github.io/2017/11/23/mysql数据库与生信/</id>
-    <published>2017-11-23T08:03:44.000Z</published>
-    <updated>2017-11-25T03:39:13.724Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;主要介绍win下和linux下连接重用生信数据库，操作数据库中表，以及根据自己的需要下载公共数据，创建mysql数据库。</p>
-<blockquote class="blockquote-center">mysql数据库与生信</blockquote>
-
-<a id="more"></a>
-<h1 id="mysql学习资料"><a href="#mysql学习资料" class="headerlink" title="mysql学习资料"></a>mysql学习资料</h1><p>（1）<a href="http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html" target="_blank" rel="external">21分钟 MySQL 入门教程</a></p>
-<p>（2）MySQL 5.7 Reference Manual: 具体技巧例如<a href="https://dev.mysql.com/doc/refman/5.7/en/counting-rows.html" target="_blank" rel="external"> Counting Rows</a>；<a href="https://dev.mysql.com/doc/refman/5.7/en/pattern-matching.html" target="_blank" rel="external">Pattern Matching</a></p>
-<h1 id="mysql连接生信主要公共数据库"><a href="#mysql连接生信主要公共数据库" class="headerlink" title="mysql连接生信主要公共数据库"></a>mysql连接生信主要公共数据库</h1><h2 id="linux下格式："><a href="#linux下格式：" class="headerlink" title="linux下格式："></a>linux下格式：</h2><p>mysql -h[host] -u[user] -p[password] -P[port] [database-name]</p>
-<ul>
-<li>-h : 该命令用于指定客户端所要登录的MySQL主机名, 登录当前机器该参数可以省略;</li>
-<li>退出：输入 exit; 或 quit; 退出登录</li>
-</ul>
-<p>例如：</p>
-<table>
-<thead>
-<tr>
-<th>Server</th>
-<th>User</th>
-<th>Password</th>
-<th>Port</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>mysql-db.1000genomes.org</td>
-<td>anonymous</td>
-<td>-</td>
-<td>4272</td>
-</tr>
-</tbody>
-</table>
-<p>（1）<a href="http://www.internationalgenome.org/public-ensembl-mysql-instance" target="_blank" rel="external">1000 Genomes: since June 16, 2011</a></p>
-<pre><code>mysql -h mysql-db.1000genomes.org -u anonymous -P 4272  -A
-</code></pre><p>（2）<a href="http://genome.ucsc.edu/goldenPath/help/mysql.html" target="_blank" rel="external">UCSC Downloading Data using MySQL</a></p>
-<pre><code>mysql -h genome-mysql.soe.ucsc.edu -u genome -P 3306 -A
-</code></pre><p>或者</p>
-<pre><code>mysql -h genome-euro-mysql.soe.ucsc.edu -u genome -P 3306 -A
-</code></pre><p>注意：必须加上端口号-P 3306，按照官网的方法会报错：</p>
-<p>ERROR 2003 (HY000): Can’t connect to MySQL server on ‘genome-mysql.soe.ucsc.edu’ (111)</p>
-<p>（3）<a href="http://uswest.ensembl.org/info/data/mysql.html" target="_blank" rel="external">The Ensembl public MySQL Servers</a></p>
-<pre><code>mysql -h ensembldb.ensembl.org -u anonymous -P  5306  -A
-</code></pre><p>（4）<a href="http://www.geneontology.org/GO.database.shtml#mirrors" target="_blank" rel="external">GO</a></p>
-<pre><code>mysql -h mysql-amigo.ebi.ac.uk -u go_select -P 4085 -pamigo -A
-</code></pre><p>The -A flag is optional but is recommended for speed.</p>
-<p>其他数据库：参见<a href="What Are The Public Sql Servers For Bioinformatics ?">网址</a></p>
-<h3 id="mysql直接读ucsc数据库数据"><a href="#mysql直接读ucsc数据库数据" class="headerlink" title="mysql直接读ucsc数据库数据"></a>mysql直接读ucsc数据库数据</h3><pre><code>mysql --user=genome --host=genome-mysql.cse.ucsc.edu -P 3306 -A -D hg19 -e &apos;select * from refGene where name=&quot;NM_000038&quot;&apos; | less 
-</code></pre><p>显示：</p>
-<pre><code>bin     name    chrom   strand  txStart txEnd   cdsStart        cdsEnd  exonCount       exonStarts      exonEnds        score   name2
-1440    NM_000038       chr5    +       112073555       112181936       112090587       112179823       16      112073555,112090569,112
-</code></pre><h2 id="windows下"><a href="#windows下" class="headerlink" title="windows下"></a>windows下</h2><p>使用Navicat，其好处在于更加方便直观</p>
-<p>如图：<br><img src="https://i.imgur.com/aBUXPU1.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/HSXg4DS.jpg" alt=""></p>
-<p>查询某一张表，查看具体内容，导出，筛选等等，很方便</p>
-<p><img src="https://i.imgur.com/AC1sYil.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/wRlokSh.jpg" alt=""></p>
-<p>mac下可以使用<a href="http://www.danielecook.com/accessing-the-ucsc-genome-browser-mysql-database/" target="_blank" rel="external">Sequel Pro</a></p>
-<h1 id="python连接mysql数据库"><a href="#python连接mysql数据库" class="headerlink" title="python连接mysql数据库"></a>python连接mysql数据库</h1><pre><code>pip2.7 install MySQL-python
-</code></pre><p><img src="https://i.imgur.com/dNbsWE5.jpg" alt=""></p>
-<p>解决：libmysqlclient.so.18库在mysql安装目录的lib下，设置LD_LIBRARY_PATH环境变量即可</p>
-<pre><code>export LD_LIBRARY_PATH=&quot;$DYLD_LIBRARY_PATH:/home/wangdong/local/mysql/lib&quot;
-</code></pre><p><img src="https://i.imgur.com/SNb5BTT.jpg" alt=""></p>
-<p>ps： 网上一般的做法是在mysql/lib目录下找到libmysqlclient.so.18，设置软链接到usr/lib或者usr/lib64，但这两个目录都需要管理员权限的。</p>
-<h2 id="应用例子"><a href="#应用例子" class="headerlink" title="应用例子"></a>应用例子</h2><p>利用mysql客户端查询UCSC数据库，获取geneSymbol名的bed信息</p>
-<p><a href="https://github.com/Wy2160640/py_scripts/blob/master/geneInfo.py" target="_blank" rel="external">脚本geneInfo.py</a></p>
-<p><img src="https://i.imgur.com/SjGGLYp.jpg" alt=""></p>
-<h1 id="根据需要创建UCSC-genome-MySQL-database"><a href="#根据需要创建UCSC-genome-MySQL-database" class="headerlink" title="根据需要创建UCSC genome MySQL database"></a>根据需要创建UCSC genome MySQL database</h1><p>数据来源：UCSC <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/" target="_blank" rel="external">hg19</a>  <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/" target="_blank" rel="external">hg38</a></p>
-<p><img src="https://i.imgur.com/sO4nvEc.jpg" alt=""></p>
-<p>需要两种文件：</p>
-<ul>
-<li>（1）*sql是一种数据库脚本语言，是一种对关系数据库中的数据进行定义和操作的句法，为大多数关系数据库管理系统所支持的工业标准。可以用文本编辑器打开并查看</li>
-<li>（2)数据文件。txt文件</li>
-</ul>
-<p>例子：.sql文件</p>
-<p><img src="https://i.imgur.com/nqtMqQV.jpg" alt=""></p>
-<p>使用shell脚本自动完成</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># create database</span></div><div class="line">mysql -u root -prootab -e <span class="string">'create database hg19'</span></div><div class="line"><span class="comment"># obtain table schema</span></div><div class="line"><span class="built_in">cd</span> /home/wangdong/<span class="built_in">local</span>/mysql/data</div><div class="line">wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/ensGene.sql</div><div class="line"><span class="comment"># create table</span></div><div class="line">mysql -u root -prootab hg19 &lt; ensGene.sql</div><div class="line"><span class="comment"># obtain and import table data</span></div><div class="line">wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/ensGene.txt.gz</div><div class="line">gunzip ensGene.txt.gz</div><div class="line">mysqlimport -u root -prootab --<span class="built_in">local</span> hg19 ensGene.txt</div></pre></td></tr></table></figure>
-<p><strong>注意：数据需要下载到/home/wangdong/local/mysql/data，位置可以在配置文件(my.cnf)中修改，具体操作查看链接：<a href="http://www.cnblogs.com/foreverycc/p/5511820.html" target="_blank" rel="external">MySQL 转移 datadir</a></strong></p>
-<ul>
-<li><p>为了便于在命令提示符下显示中文, 在创建时通过 character set gbk 将数据库字符编码指定为 gbk</p>
-<p>  create database samp_db character set gbk;</p>
-</li>
-<li><p>创建数据库表时，对于一些较长的语句在命令提示符下可能容易输错, 因此我们可以通过任何文本编辑器将语句输入好后保存为 createtable.sql 的文件中, 通过命令提示符下的文件重定向执行执行该脚本。</p>
-<p>  mysql -D samp_db -u root -p &lt; createtable.sql</p>
-</li>
-<li><p>desc TABLE_NAME; 显示数据库表的结构（desc是describe的缩写）</p>
-</li>
-<li>select * from TABLE_NAME limit 0,2;显示表的前两行内容，0表示起始行偏移量</li>
-</ul>
-<p><img src="https://i.imgur.com/ThdiQ2j.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/I809HBj.jpg" alt=""></p>
-<h2 id="补充LD-LIBRARY-PATH环境变量"><a href="#补充LD-LIBRARY-PATH环境变量" class="headerlink" title="补充LD_LIBRARY_PATH环境变量"></a>补充LD_LIBRARY_PATH环境变量</h2><p>LIBRARY_PATH和LD_LIBRARY_PATH是Linux下的两个环境变量，二者的含义和作用分别如下：</p>
-<p><strong>LIBRARY_PATH环境变量用于在程序编译期间查找动态链接库时指定查找共享库的路径，</strong> 例如，指定gcc编译需要用到的动态链接库的目录。设置方法如下（其中，LIBDIR1和LIBDIR2为两个库目录）：</p>
-<p>export LIBRARY_PATH=LIBDIR1:LIBDIR2:$LIBRARY_PATH</p>
-<p><strong>LD_LIBRARY_PATH环境变量用于在程序加载运行期间查找动态链接库时指定除了系统默认路径之外的其他路径，</strong> 注意，LD_LIBRARY_PATH中指定的路径会在系统默认路径之前进行查找。设置方法如下（其中，LIBDIR1和LIBDIR2为两个库目录）：</p>
-<p>export LD_LIBRARY_PATH=LIBDIR1:LIBDIR2:$LD_LIBRARY_PATH</p>
-<h3 id="区别与使用："><a href="#区别与使用：" class="headerlink" title="区别与使用："></a>区别与使用：</h3><p>开发时，设置LIBRARY_PATH，以便gcc能够找到编译时需要的动态链接库。</p>
-<p>发布时，设置LD_LIBRARY_PATH，以便程序加载运行时能够自动找到需要的动态链接库。</p>
-<h1 id="可视化管理工具-MySQL-Workbench"><a href="#可视化管理工具-MySQL-Workbench" class="headerlink" title="可视化管理工具 MySQL Workbench"></a>可视化管理工具 MySQL Workbench</h1><p>&emsp;&emsp;尽管我们可以在命令提示符下通过一行行的输入或者通过重定向文件来执行mysql语句, 但该方式效率较低, 由于没有执行前的语法自动检查, 输入失误造成的一些错误的可能性会大大增加, 这时不妨试试一些可视化的MySQL数据库管理工具, MySQL Workbench 就是 MySQL 官方 为 MySQL 提供的一款可视化管理工具, 你可以在里面通过可视化的方式直接管理数据库中的内容, 并且 MySQL Workbench 的 SQL 脚本编辑器支持语法高亮以及输入时的语法检查, 当然, 它的功能强大, 绝不仅限于这两点。</p>
-<p>MySQL Workbench官方介绍: <a href="http://www.mysql.com/products/workbench/" target="_blank" rel="external">http://www.mysql.com/products/workbench/</a></p>
-<p>MySQL Workbench 下载页: <a href="http://dev.mysql.com/downloads/tools/workbench/" target="_blank" rel="external">http://dev.mysql.com/downloads/tools/workbench/</a></p>
-<h1 id="MySQL-Show命令总结"><a href="#MySQL-Show命令总结" class="headerlink" title="MySQL Show命令总结"></a>MySQL Show命令总结</h1><p>MySQL中有很多的基本命令，show命令也是其中之一，在很多使用者中对show命令的使用还容易产生混淆，本文汇集了show命令的众多用法。</p>
-<ul>
-<li>show tables或show tables from database_name; — 显示当前数据库中所有表的名称。</li>
-<li>show tables like ‘my<em>%’; — 显示当前数据库中以my</em>开头的表。</li>
-<li>show databases; — 显示mysql中所有数据库的名称。</li>
-<li>show [full] columns from table_name from database_name; 或show [full] columns from database_name.table_name; — 显示表中列名称。</li>
-<li>show grants for user_name; — 显示一个用户的权限，显示结果类似于grant 命令。</li>
-<li>show index from table_name; — 显示表的索引。</li>
-<li>show status;(show master status;show slave status) — 显示一些系统特定资源的信息，例如，正在运行的线程数量。</li>
-<li>show variables; — 显示系统变量的名称和值。</li>
-<li>show [full] processlist; — 显示系统中正在运行的所有进程，也就是当前正在执行的查询。大多数用户可以查看他们自己的进程，但是如果他们拥有process权限，就可以查看所有人的进程，包括密码。</li>
-<li>show table status; — 显示当前使用或者指定的database中的每个表的信息。信息包括表类型和表的最新更新时间。</li>
-<li>show privileges; — 显示服务器所支持的不同权限。</li>
-<li>show create database database_name; — 显示create database 语句是否能够创建指定的数据库。</li>
-<li>show create table table_name; — 显示create database 语句是否能够创建指定的数据库。</li>
-<li>show engies; — 显示安装以后可用的存储引擎和默认引擎。</li>
-<li>show innodb status; — 显示innoDB存储引擎的状态。</li>
-<li>show logs; — 显示BDB存储引擎的日志。</li>
-<li>show warnings; — 显示最后一个执行的语句所产生的错误、警告和通知。</li>
-<li>show errors; — 只显示最后一个执行语句所产生的错误。</li>
-<li>show [storage] engines; –显示安装后的可用存储引擎和默认引擎。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.bio-info-trainee.com/1045.html" target="_blank" rel="external">生物信息学学者学习mysql之路</a></p>
-<p>（2）<a href="http://dev.dafan.info/detail/194350?p=55" target="_blank" rel="external">Linux环境变量LD_LIBRARY_PATH</a></p>
-<p>（3）<a href="https://www.cnblogs.com/foreverycc/p/5491884.html" target="_blank" rel="external">使用MySQL制作SNP146数据库</a></p>
-<p>（4）<a href="https://nsaunders.wordpress.com/2011/05/18/how-to-create-a-partial-ucsc-genome-mysql-database/" target="_blank" rel="external">How to: create a partial UCSC genome MySQL database</a></p>
-<p>（5）<a href="http://www.jianshu.com/p/dc58a4efdd84" target="_blank" rel="external">5分钟入门MySQL Workbench</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;主要介绍win下和linux下连接重用生信数据库，操作数据库中表，以及根据自己的需要下载公共数据，创建mysql数据库。&lt;/p&gt;
-&lt;blockquote class=&quot;blockquote-center&quot;&gt;mysql数据库与生信&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="MySQL" scheme="https:///AnJingwd.github.io/categories/MySQL/"/>
-    
-    
-      <category term="MySQL" scheme="https:///AnJingwd.github.io/tags/MySQL/"/>
     
   </entry>
   
