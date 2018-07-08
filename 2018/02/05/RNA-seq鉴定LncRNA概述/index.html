@@ -116,7 +116,9 @@
 <meta property="og:image" content="https://i.imgur.com/xLkXFAQ.png">
 <meta property="og:image" content="https://i.imgur.com/nDRVJCw.jpg">
 <meta property="og:image" content="https://i.imgur.com/TvTIJhl.jpg">
-<meta property="og:updated_time" content="2018-04-25T01:42:04.633Z">
+<meta property="og:image" content="https://i.imgur.com/gL1s3XJ.jpg">
+<meta property="og:image" content="https://i.imgur.com/4p4BFu5.jpg">
+<meta property="og:updated_time" content="2018-07-07T07:25:02.471Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNA-seq鉴定LncRNA概述">
 <meta name="twitter:description" content="RNA-seq鉴定LncRNA概述：lncRNA简介，分析pipline，分析软件，结果评估指标">
@@ -603,6 +605,25 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 <p><img src="https://i.imgur.com/nDRVJCw.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/TvTIJhl.jpg" alt=""></p>
 <h2 id="差异表达分析"><a href="#差异表达分析" class="headerlink" title="差异表达分析"></a>差异表达分析</h2><p><a href="https://www.bioconductor.org/help/course-materials/2015/LearnBioconductorFeb2015/B02.1.1_RNASeqLab.html" target="_blank" rel="external">RNA-Seq workflow: gene-level exploratory analysis and differential expression</a></p>
+<p>cuffdiff -L 选项有两种写法：<br>偶数个样本：<br><img src="https://i.imgur.com/gL1s3XJ.jpg" alt=""></p>
+<p>奇数个样本：</p>
+<p><img src="https://i.imgur.com/4p4BFu5.jpg" alt=""></p>
+<h3 id="ballgown安装"><a href="#ballgown安装" class="headerlink" title="ballgown安装"></a>ballgown安装</h3><p>需要先安装libxml2</p>
+<pre><code>wget http://xmlsoft.org/sources/old/libxml2-2.7.1.tar.gz
+untargz libxml2-2.7.1.targz
+cd libxml2-2.7.1
+./configure --prefix=/home/wangdong/softwares/libxml2
+make &amp;&amp; make install
+
+
+echo &apos;export PATH=/home/wangdong/softwares/libxml2/bin:$PATH&apos;&gt;&gt;~/.bashr    
+echo &apos;export LD_LIBRARY_PATH=/home/wangdong/softwares/libxml2/lib:$LD_LIBRARY_PATH&apos;&gt;&gt;~/.bashrc 
+echo &apos;export PKG_CONFIG_PATH=/home/wangdong/softwares/libxml2/lib/pkgconfig:$PKG_CONFIG_PATH&apos;&gt;&gt;~/.bashrc
+</code></pre><p>ps:安装 dplyr包之前需要安装assertthat包</p>
+<p>可参考：<a href="http://blog.sina.com.cn/s/blog_520d74440102w7um.html" target="_blank" rel="external">链接</a></p>
+<p>使用可参考：<a href="https://www.jianshu.com/p/1f5d13cc47f8" target="_blank" rel="external">链接</a></p>
+<p>ps:pheno_data里面第一列样本名需要和ballgown下面的文件夹的样本名一样，且先后顺序保持一致，不然会报错</p>
+<h2 id="富集分析"><a href="#富集分析" class="headerlink" title="富集分析"></a>富集分析</h2><p>Gene ontology or pathway analysis for differentially expressed genes, this step is only applicable for <strong>protein coding genes</strong></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1） <a href="https://academic.oup.com/bib/article-abstract/18/5/789/2562763?redirectedFrom=fulltext" target="_blank" rel="external">Identification and function annotation of long intervening noncoding RNAs</a></p>
 <p>（2）<a href="https://mp.weixin.qq.com/s/NUEi6oRFL7B3f1FpCD4Xug" target="_blank" rel="external">转录组分析工具哪家强？</a></p>
 
@@ -749,7 +770,7 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -760,7 +781,7 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -771,7 +792,7 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1002,7 +1023,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA简介"><span class="nav-number">1.</span> <span class="nav-text">lncRNA简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA特点"><span class="nav-number">2.</span> <span class="nav-text">lncRNA特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析pipline"><span class="nav-number">3.</span> <span class="nav-text">RNA-seq分析pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LncRNA注释GTF文件及fasta文件"><span class="nav-number">4.</span> <span class="nav-text">LncRNA注释GTF文件及fasta文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析软件"><span class="nav-number">5.</span> <span class="nav-text">RNA-seq分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基因组和转录组比对"><span class="nav-number">5.1.</span> <span class="nav-text">基因组和转录组比对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基因水平定量"><span class="nav-number">5.2.</span> <span class="nav-text">基因水平定量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stringTie"><span class="nav-number">5.2.1.</span> <span class="nav-text">stringTie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tophat-基于python2"><span class="nav-number">5.2.2.</span> <span class="nav-text">tophat(基于python2.*)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比对质量评估"><span class="nav-number">5.3.</span> <span class="nav-text">比对质量评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录本重构"><span class="nav-number">5.4.</span> <span class="nav-text">转录本重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并转录本"><span class="nav-number">5.5.</span> <span class="nav-text">合并转录本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#鉴定novel-lncRNA"><span class="nav-number">5.6.</span> <span class="nav-text">鉴定novel lncRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#class-code"><span class="nav-number">5.6.1.</span> <span class="nav-text">class_code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录水平本定量"><span class="nav-number">5.7.</span> <span class="nav-text">转录水平本定量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lincRNA鉴定及功能注释"><span class="nav-number">5.8.</span> <span class="nav-text">lincRNA鉴定及功能注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差异表达分析"><span class="nav-number">5.9.</span> <span class="nav-text">差异表达分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA简介"><span class="nav-number">1.</span> <span class="nav-text">lncRNA简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNA特点"><span class="nav-number">2.</span> <span class="nav-text">lncRNA特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析pipline"><span class="nav-number">3.</span> <span class="nav-text">RNA-seq分析pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LncRNA注释GTF文件及fasta文件"><span class="nav-number">4.</span> <span class="nav-text">LncRNA注释GTF文件及fasta文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNA-seq分析软件"><span class="nav-number">5.</span> <span class="nav-text">RNA-seq分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基因组和转录组比对"><span class="nav-number">5.1.</span> <span class="nav-text">基因组和转录组比对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基因水平定量"><span class="nav-number">5.2.</span> <span class="nav-text">基因水平定量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stringTie"><span class="nav-number">5.2.1.</span> <span class="nav-text">stringTie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tophat-基于python2"><span class="nav-number">5.2.2.</span> <span class="nav-text">tophat(基于python2.*)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比对质量评估"><span class="nav-number">5.3.</span> <span class="nav-text">比对质量评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录本重构"><span class="nav-number">5.4.</span> <span class="nav-text">转录本重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并转录本"><span class="nav-number">5.5.</span> <span class="nav-text">合并转录本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#鉴定novel-lncRNA"><span class="nav-number">5.6.</span> <span class="nav-text">鉴定novel lncRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#class-code"><span class="nav-number">5.6.1.</span> <span class="nav-text">class_code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转录水平本定量"><span class="nav-number">5.7.</span> <span class="nav-text">转录水平本定量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lincRNA鉴定及功能注释"><span class="nav-number">5.8.</span> <span class="nav-text">lincRNA鉴定及功能注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差异表达分析"><span class="nav-number">5.9.</span> <span class="nav-text">差异表达分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ballgown安装"><span class="nav-number">5.9.1.</span> <span class="nav-text">ballgown安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#富集分析"><span class="nav-number">5.10.</span> <span class="nav-text">富集分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1050,7 +1071,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.9k字</span>
+  <span class="post-count">博客全站共75.2k字</span>
 </div>
 
 <div class="powered-by">

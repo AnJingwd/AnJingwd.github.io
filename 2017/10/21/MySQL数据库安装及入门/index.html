@@ -117,7 +117,7 @@
 <meta property="og:image" content="https://i.imgur.com/7Bl2Jm8.jpg">
 <meta property="og:image" content="https://i.imgur.com/XDLMMLx.jpg">
 <meta property="og:image" content="https://i.imgur.com/Dn5ZSW9.jpg">
-<meta property="og:updated_time" content="2017-11-23T13:46:26.321Z">
+<meta property="og:updated_time" content="2018-05-12T15:40:37.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库安装及入门">
 <meta name="twitter:description" content="无root权限，从源码编译安装MySQL数据库，及其简单使用">
@@ -455,7 +455,8 @@
 <p>echo $?</p>
 <p>0</p>
 <p>#下面运行gmake命令</p>
-<pre><code>gmake
+<pre><code>./bootstrap --system-curl
+gmake
 gmake install
 </code></pre><h1 id="编译安装MySQL"><a href="#编译安装MySQL" class="headerlink" title="编译安装MySQL"></a>编译安装MySQL</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#（1）下载MySQL-5.6及创建相应目录结构</span></div><div class="line">HOME=/home/wangdong</div><div class="line">install_path=<span class="variable">$HOME</span>/<span class="built_in">local</span>/mysql</div><div class="line">mkdir -p /home/wangdong/<span class="built_in">local</span>/mysql</div><div class="line"></div><div class="line">wget https://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.35.tar.gz</div><div class="line">tar zxvf mysql-5.6.35.tar.gz</div><div class="line"><span class="built_in">cd</span> mysql-5.6.35</div><div class="line">mkdir <span class="variable">$install_path</span>/data</div><div class="line"></div><div class="line"><span class="comment">#（2）编译(系统已经安装cmake,此处徐使用上述自己安装的cmake)</span></div><div class="line">/home/wangdong/<span class="built_in">local</span>/cmake/.src/cmake-2.8.12.2/bin/cmake -DCMAKE_INSTALL_PREFIX=<span class="variable">$install_path</span>  \</div><div class="line">-DMYSQL_DATADIR=<span class="variable">$install_path</span>/data  \</div><div class="line">-DMYSQL_UNIX_ADDR=<span class="variable">$install_path</span>/mysql.sock  \</div><div class="line">-DDEFAULT_CHARSET=utf8  \</div><div class="line">-DDEFAULT_COLLATION=utf8_general_ci  \</div><div class="line">-DMYSQL_TCP_PORT=8701  \ </div><div class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1  \ </div><div class="line">-DENABLED_LOCAL_INFILE=1</div><div class="line"></div><div class="line"><span class="comment">#（3)安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">#(4)配置（找到support-files/my-default.cnf，该文件是一个配置模板，在此基础上自己修改配置）</span></div><div class="line">cp support-files/my-default.cnf my.cnf</div><div class="line"></div><div class="line"><span class="comment">#(5)使用启动my.cnf配置文件中的设置启动mysqld_safe服务和启动mysql</span></div><div class="line"></div><div class="line">bin/mysqld_safe --defaults-file=my.cnf &amp;     <span class="comment">#&amp;表示后台运行</span></div><div class="line">support-files/mysql.server start|stop|restart   <span class="comment">#开始|停止|重启</span></div></pre></td></tr></table></figure>
 <h2 id="如果执行成功，会提示如下内容："><a href="#如果执行成功，会提示如下内容：" class="headerlink" title="如果执行成功，会提示如下内容："></a>如果执行成功，会提示如下内容：</h2><p><img src="https://i.imgur.com/ueBDeEE.jpg" alt=""></p>
@@ -687,7 +688,7 @@ $WORKDIR/support-files/mysql.server stop
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -698,7 +699,7 @@ $WORKDIR/support-files/mysql.server stop
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -709,7 +710,7 @@ $WORKDIR/support-files/mysql.server stop
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -988,7 +989,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.9k字</span>
+  <span class="post-count">博客全站共75.2k字</span>
 </div>
 
 <div class="powered-by">

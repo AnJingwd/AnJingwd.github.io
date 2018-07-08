@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="lncRNApipe安装及使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T03:43:34.106Z">
+<meta property="og:updated_time" content="2018-07-01T01:40:30.742Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lncRNApipe安装及使用">
 <meta name="twitter:description" content="lncRNApipe安装及使用">
@@ -397,7 +397,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">install_dir=/home/wangdong/<span class="built_in">local</span></div><div class="line">mkdir -p <span class="variable">$install_dir</span>/expat</div><div class="line">tar zxf /[<span class="built_in">where</span>-ever]/expat-2.1.0.tar.gz -C <span class="variable">$install_dir</span>/expat</div><div class="line"><span class="built_in">cd</span> <span class="variable">$install_dir</span>/expat/expat-2.1.0</div><div class="line">perl ./configure --prefix=<span class="variable">$install_dir</span>/expat LDFLAGS=-L/<span class="variable">$install_dir</span>/expat/lib </div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"></div><div class="line">http://search.cpan.org - search <span class="keyword">for</span> and download - XML::Parser</div><div class="line"></div><div class="line">install_dir=/home/wangdong/<span class="built_in">local</span></div><div class="line">mkdir -p <span class="variable">$install_dir</span>/XML-parser</div><div class="line">wget http://search.cpan.org/CPAN/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz</div><div class="line">tar zxf XML-Parser-2.44.tar.gz -C <span class="variable">$install_dir</span>/XML-parser</div><div class="line"><span class="built_in">cd</span> <span class="variable">$install_dir</span>/XML-parser/XML-Parser-2.44</div><div class="line">perl ./Makefile.PL EXPATLIBPATH=<span class="variable">$install_dir</span>/expat/lib EXPATINCPATH=<span class="variable">$install_dir</span>/expat/include</div><div class="line">make</div><div class="line">make <span class="built_in">test</span></div><div class="line">make install</div></pre></td></tr></table></figure>
 <p><a href="https://github.com/libexpat/libexpat/" target="_blank" rel="external">libexpat/libexpat（会报错）</a></p>
 <h1 id="lncRNApipe使用"><a href="#lncRNApipe使用" class="headerlink" title="lncRNApipe使用"></a>lncRNApipe使用</h1><pre><code>time perl $lncRNApipe --run $merge/lncRNApipe \
---cuffcmp &apos;-r &apos;$lncRNA_gtf&apos; -s &apos;$ref_hg38&apos; &apos;$merge&apos;/All_sample_assemble_merge.gtf&apos; \
+--cuffcmp &apos;-r &apos;$ref_mRNA_gtf&apos; -s &apos;$ref_hg38&apos; &apos;$merge&apos;/All_sample_assemble_merge.gtf&apos; \
 --cat-ncRNAs &apos;-sample-names &quot;All_sample&quot; -ov 80 -fpkm 2 -len 200 -max-len 10000 -min-exons 1 -antisense&apos; \
 --get-uq-feat &apos;-sf &apos;$lncRNA_bed&apos;&apos; \
 --fetch-seq &apos;-db hg38&apos; \
@@ -405,7 +405,17 @@
 --rna \
 --cpu 16 \
 --inf &amp;&gt;$merge/lncRNApipe.run.log
-</code></pre>
+</code></pre><hr>
+<p>通过以上方法安装该软件过于麻烦，如果只是使用该软件的鉴定lncRNA过程的相关脚本（cuffcompare, categorize_ncRNAs.pl, get_unique_features.pl, fetch_seq_from_ucsc.pl, RNAfold, Infernal and Coding Potential Calculator (CPC)），其实可以只有安装一些perl模块和软件即可。</p>
+<p>需要安装的软件或者模块</p>
+<ul>
+<li>cuffcompare在cufflinks软件里</li>
+<li>Perl脚本categorize_ncRNAs.pl，get_unique_features.pl, fetch_seq_from_ucsc.pl需要的模块在脚本开头都已经指明，用cpan安装即可，需要注意的是唯有一个该包自定义的perl模块需要手动安装</li>
+</ul>
+<p>git clone <a href="https://github.com/biocoder/Perl-for-Bioinformatics.git" target="_blank" rel="external">https://github.com/biocoder/Perl-for-Bioinformatics.git</a><br>cd IO-Routine<br>perl Makefile.PL PREFIX=/home/wangdong/perl/lib/site_perl/5.26.1/x86_64-linux LIB=/home/wangdong/perl/lib/site_perl/5.26.1/x86_64-linux<br>make<br>make install</p>
+<h1 id="refGene-txt数据下载及处理"><a href="#refGene-txt数据下载及处理" class="headerlink" title="refGene.txt数据下载及处理"></a>refGene.txt数据下载及处理</h1><p>wget <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/refGene.txt.gz" target="_blank" rel="external">http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/refGene.txt.gz</a><br>ungz refGene.txt.gz<br>cat refGene.txt|awk ‘BEGIN{FS=”\t”;OFS=”\t”}{print $2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16}’&gt;hg38_refGene.txt</p>
+<p>ps:lncRNApipe也没有说清楚refGene.txt的具体格式是什么，只说是Gene Prediction format，原因是refGene_to_bed.pl脚本有说明，该脚本需要从refGene.txt提取chrom   strand  txStart txEnd   name2这些列转换为bed文件</p>
+
       
     </div>
     
@@ -555,7 +565,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -566,7 +576,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -577,7 +587,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -808,7 +818,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNApipe介绍"><span class="nav-number">1.</span> <span class="nav-text">lncRNApipe介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNApipe安装"><span class="nav-number">2.</span> <span class="nav-text">lncRNApipe安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNApipe使用"><span class="nav-number">3.</span> <span class="nav-text">lncRNApipe使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNApipe介绍"><span class="nav-number">1.</span> <span class="nav-text">lncRNApipe介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNApipe安装"><span class="nav-number">2.</span> <span class="nav-text">lncRNApipe安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lncRNApipe使用"><span class="nav-number">3.</span> <span class="nav-text">lncRNApipe使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#refGene-txt数据下载及处理"><span class="nav-number">4.</span> <span class="nav-text">refGene.txt数据下载及处理</span></a></li></ol></div>
             
 
           </div>
@@ -856,7 +866,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.9k字</span>
+  <span class="post-count">博客全站共75.2k字</span>
 </div>
 
 <div class="powered-by">

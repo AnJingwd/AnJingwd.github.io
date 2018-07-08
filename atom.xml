@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-05-09T14:15:10.652Z</updated>
+  <updated>2018-07-07T07:58:59.991Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,103 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基因差异表达软件汇总</title>
+    <link href="https:///AnJingwd.github.io/2018/07/07/%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E8%BD%AF%E4%BB%B6%E6%B1%87%E6%80%BB/"/>
+    <id>https:///AnJingwd.github.io/2018/07/07/基因差异表达软件汇总/</id>
+    <published>2018-07-07T07:58:59.000Z</published>
+    <updated>2018-07-07T07:58:59.991Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Kaggle</title>
+    <link href="https:///AnJingwd.github.io/2018/05/13/Kaggle%E5%85%A5%E9%97%A8/"/>
+    <id>https:///AnJingwd.github.io/2018/05/13/Kaggle入门/</id>
+    <published>2018-05-13T10:21:08.000Z</published>
+    <updated>2018-07-08T01:21:01.828Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">kaggle简介及数据竞赛相关平台</blockquote>
+
+<a id="more"></a>
+<h1 id="众包平台"><a href="#众包平台" class="headerlink" title="众包平台"></a>众包平台</h1><ul>
+<li><a href="https://www.kaggle.com/" target="_blank" rel="external">Kaggle</a>：是一个流行的数据科学竞赛平台，已被谷歌收购</li>
+<li><a href="http://www.kdd.org/" target="_blank" rel="external">国际知识发现和数据挖掘竞赛</a>： 自1997年以来，KDD举办了年度预测建模竞赛，KDDCup。没有托管所有KDDCups的单个网站，但您可以查看每年的KDD网站以获取信息。</li>
+<li><a href="https://tianchi.shuju.aliyun.com/competition/index.htm?id=&amp;spm=5176.100067.1234.2.e66NSP" target="_blank" rel="external">天池</a>：一个新的中文网站，最近主办了IJCAI-16大赛，并且正在举办INFORMS比赛。</li>
+<li><p><a href="http://topcoder.com/" target="_blank" rel="external">Topcoder</a>：已经有近15年的历史，拥有主要的企业合作伙伴，并且在竞争性编程领域与Kaggle（竞争数据科学网站）最为接近。</p>
+<p>&emsp;&emsp;企业或者研究者可以将问题背景、数据、期望指标等发布到Kaggle上，以竞赛的形式向广大的数据科学家征集解决方案。而热爱数(dong)据(shou)挖(zhe)掘(teng)的小伙伴们可以下载/分析数据，使用统计/机器学习/数据挖掘等知识，建立算法模型，得出结果并提交，排名top的可能会有奖金哦！</p>
+<p>&emsp;&emsp;因为竞赛模式中的任务是公司悬赏发布的实际案例，并没有标准的答案；而练习赛不仅项目难度低，而且是有官方给出的参考方案的，大家可以用来对比改善自己的测试结果，从中进行提高。所以呢，建议感兴趣的同学先去独立做一下101和playground的训练赛，至于做多少个案例才能上道，就要看个人素质啦。这里为大家推荐几篇非常好的文章，里面手把手的教了大家入门级的三个经典练习项目，供大家学习。</p>
+</li>
+</ul>
+<h1 id="入门kaggle"><a href="#入门kaggle" class="headerlink" title="入门kaggle"></a>入门kaggle</h1><ul>
+<li><a href="https://ajourneyintodatascience.quora.com/" target="_blank" rel="external">数据科学之旅（博客）</a></li>
+<li><a href="https://www.quora.com/profile/Vincent-Firmansyah" target="_blank" rel="external">文森特·费尔曼西亚</a></li>
+<li><a href="https://www.datacamp.com/community/tutorials/machine-learning-python" target="_blank" rel="external">Python Machine Learning: Scikit-Learn Tutorial</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/25742261" target="_blank" rel="external">Kaggle 入门指南（推荐）</a></li>
+<li><a href="https://mlnote.wordpress.com/2015/12/16/python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5%E4%B8%8Ekaggle%E5%AE%9E%E6%88%98-machine-learning-for-kaggle-competition-in-python/" target="_blank" rel="external">Machine Learning &amp; Kaggle Competition</a></li>
+<li><a href="http://dataunion.org/9805.html?utm_source=tuicool" target="_blank" rel="external">数据科学的完整学习路径—Python版</a></li>
+<li><a href="https://www.zhihu.com/question/29316149" target="_blank" rel="external">特征工程到底是什么？</a></li>
+</ul>
+<ul>
+<li><a href="https://www.kaggle.com/learn/overview" target="_blank" rel="external">kaggle Hands-On Data Science Education</a></li>
+<li><a href="https://www.kaggle.com/competitions?sortBy=relevance&amp;group=inClass&amp;search=biology&amp;page=1&amp;pageSize=20" target="_blank" rel="external">kaggle in class </a></li>
+<li><a href="http://blog.kaggle.com/category/tutorials/" target="_blank" rel="external">Data Science 101</a></li>
+<li><a href="https://archive.ics.uci.edu/ml/index.php" target="_blank" rel="external">UC Irvine Machine Learning Repository</a></li>
+</ul>
+<h1 id="kaggle入门竞赛"><a href="#kaggle入门竞赛" class="headerlink" title="kaggle入门竞赛"></a>kaggle入门竞赛</h1><p>1.Titanic（泰坦尼克之灾）</p>
+<p>中文教程： <a href="http://link.zhihu.com/?target=http%3A//blog.csdn.net/han_xiaoyang/article/details/49797143" target="_blank" rel="external">逻辑回归应用之Kaggle泰坦尼克之灾 </a>  &emsp;&emsp; 英文教程：<a href="http://link.zhihu.com/?target=https%3A//www.kaggle.com/helgejo/titanic/an-interactive-data-science-tutorial" target="_blank" rel="external">An Interactive Data Science Tutorial</a></p>
+<p>2.House Prices: Advanced Regression Techniques（房价预测）</p>
+<p>中文教程：<a href="http://link.zhihu.com/?target=http%3A//www.hao123.com/mid%3Fkey%3DpZwYTjCEQLwEIgwGmyt8mvqVQvDvn1T4PHnvPH0snHc1PH6zP1czQs%26from%3Dtuijian%26pn%3D1" target="_blank" rel="external">Kaggle竞赛 — 2017年房价预测</a>  &emsp;&emsp; 英文教程：<a href="http://link.zhihu.com/?target=https%3A//www.kaggle.com/neviadomski/house-prices-advanced-regression-techniques/how-to-get-to-top-25-with-simple-model-sklearn" target="_blank" rel="external">How to get to TOP 25% with Simple Model using sklearn</a></p>
+<p>3.Digital Recognition（数字识别）</p>
+<p>中文教程：<a href="http://link.zhihu.com/?target=http%3A//blog.csdn.net/u012162613/article/details/41929171" target="_blank" rel="external">大数据竞赛平台—Kaggle 入门 </a>  &emsp;&emsp; 英文教程：<a href="http://link.zhihu.com/?target=https%3A//www.kaggle.com/arthurtok/digit-recognizer/interactive-intro-to-dimensionality-reduction" target="_blank" rel="external">Interactive Intro to Dimensionality Reduction</a></p>
+<h1 id="bioninformatics-competitions"><a href="#bioninformatics-competitions" class="headerlink" title="bioninformatics competitions"></a>bioninformatics competitions</h1><ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Critical_Assessment_of_Function_Annotation" target="_blank" rel="external">Critical Assessment of Function Annotation </a>：给定一个基因序列，你可以开发一个软件工具，可以预测基因编码的功能。基本上，你开发一个工具并预测一些未注释基因的功能。在几个月内，这些基因中的一些将被注释，并且这些新注释的基因可以用来衡量你的工具的准确性。这与过去几年ISMB一起举行。</p>
+</li>
+<li><p><a href="http://en.wikipedia.org/wiki/CASP" target="_blank" rel="external">CASP</a>：类似的概念。给定一个基因序列，你能预测它编码的蛋白质的结构（假设它编码一种蛋白质）。</p>
+</li>
+<li><p><a href="http://en.wikipedia.org/wiki/Critical_Assessment_of_Prediction_of_Interactions" target="_blank" rel="external">Critical Assessment of Prediction of Interactions</a> ：类似的概念。鉴于蛋白质，你能预测这种蛋白质可以与哪些蛋白质相互作用。</p>
+</li>
+<li><p><a href="http://assemblathon.org/" target="_blank" rel="external">Assemblathons</a>：Genome 10K项目的一个分支，主要由加州大学戴维斯分校基因组中心组织，Assemblathons是评估基因组组装领域最先进的方法的比赛。</p>
+</li>
+<li><p><a href="https://www.projectdatasphere.org/projectdatasphere/html/about" target="_blank" rel="external">Project Data Sphere</a>：该项目数据球球平台可与生命科学公司，医院和机构，以及独立的研究人员研究人员所。任何对癌症研究感兴趣的人都可以申请成为授权用户。</p>
+</li>
+<li><p><a href="https://www.kaggle.com/c/seizure-prediction" target="_blank" rel="external">American Epilepsy Society Seizure Prediction Challenge</a></p>
+</li>
+</ul>
+<h2 id="Dream-Challenges"><a href="#Dream-Challenges" class="headerlink" title="Dream Challenges"></a><a href="http://dreamchallenges.org/" target="_blank" rel="external">Dream Challenges</a></h2><p>DREAM挑战是众包挑战，考察生物学和医学问题</p>
+<ul>
+<li><a href="http://dreamchallenges.org/challenges/" target="_blank" rel="external">开放挑战</a></li>
+<li><a href="http://dreamchallenges.org/publications/" target="_blank" rel="external">梦想挑战参与者出版物</a></li>
+<li><a href="http://dreamchallenges.org/tools-2/challenge-algorithms/" target="_blank" rel="external">挑战算法</a>：竞赛报告及算法源码</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://blog.csdn.net/han_xiaoyang/article/details/49797143" target="_blank" rel="external">机器学习系列(3)_逻辑回归应用之Kaggle泰坦尼克之灾</a></p>
+<p>（2）<a href="http://trevorstephens.com/kaggle-titanic-tutorial/getting-started-with-r/" target="_blank" rel="external">Titanic: Getting Started With R</a></p>
+<p>（3）<a href="https://www.quora.com/What-Kaggle-competitions-should-a-beginner-start-with-1" target="_blank" rel="external">初学者应该参加哪些Kaggle比赛？</a></p>
+<p>（4）<a href="https://www.quora.com/What-competition-platforms-are-there-for-different-fields-in-computer-science" target="_blank" rel="external">计算机科学领域有哪些竞争平台？</a></p>
+<p>（5）<a href="https://www.zhihu.com/question/24533374" target="_blank" rel="external">参加kaggle竞赛是怎样一种体验？</a></p>
+<p>（6）<a href="file:///C:/Users/Administrator.HXICBAVUV7DWEV6/Desktop/What%20are%20some%20open%20competitions%20in%20bioinformatics%20and%20genomics%20%20-%20Quora.htm" target="_blank" rel="external">生物信息学和基因组学中的一些公开竞争是什么？</a></p>
+<p>（7）<a href="https://www.quora.com/What-are-the-best-universities-to-study-bioinformatics" target="_blank" rel="external">What are the best universities to study bioinformatics?</a></p>
+<p>（8）<a href="https://www.biostars.org/p/164475/" target="_blank" rel="external">Question: Bioinformatic Algorithms Books</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;kaggle简介及数据竞赛相关平台&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="数据竞赛" scheme="https:///AnJingwd.github.io/categories/%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/"/>
+    
+    
+      <category term="数据竞赛" scheme="https:///AnJingwd.github.io/tags/%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/"/>
+    
+  </entry>
   
   <entry>
     <title>k_means聚类算法python实现</title>
@@ -252,6 +349,42 @@
   </entry>
   
   <entry>
+    <title>HMM与viterbi算法</title>
+    <link href="https:///AnJingwd.github.io/2018/04/03/HMM%E4%B8%8Eviterbi%E7%AE%97%E6%B3%95/"/>
+    <id>https:///AnJingwd.github.io/2018/04/03/HMM与viterbi算法/</id>
+    <published>2018-04-03T02:03:20.000Z</published>
+    <updated>2018-07-08T01:18:00.631Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">维特比算法python实现</blockquote>
+
+<a id="more"></a>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>&emsp;&emsp;维特比算法是一种动态规划算法用于寻找最有可能产生观测事件序列的-维特比路径-隐含状态序列，特别是在马尔可夫信息源上下文和隐马尔可夫模型中。</p>
+<p><img src="https://i.imgur.com/792wDjb.png" alt=""></p>
+<h1 id="python实现"><a href="#python实现" class="headerlink" title="python实现"></a>python实现</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">seq = <span class="string">'THHTHTTTHHHHHTTTHHHHHHHTHHTHHH'</span></div><div class="line">coins = (<span class="string">'F'</span>,<span class="string">'B'</span>)</div><div class="line"></div><div class="line">coin_start_probability = &#123;</div><div class="line">    <span class="string">'F'</span> : <span class="number">1</span>,</div><div class="line">    <span class="string">'B'</span> : <span class="number">0</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">dealer_switch_probability = &#123;</div><div class="line">    <span class="string">'F'</span> : &#123;<span class="string">'F'</span>: <span class="number">0.99</span>, <span class="string">'B'</span>: <span class="number">0.01</span>&#125;,</div><div class="line">    <span class="string">'B'</span>: &#123;<span class="string">'F'</span> : <span class="number">0</span>, <span class="string">'B'</span>: <span class="number">0.95</span>&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">flip_probability = &#123;</div><div class="line">    <span class="string">'F'</span> : &#123;<span class="string">'H'</span>:<span class="number">0.5</span>, <span class="string">'T'</span>:<span class="number">0.5</span>&#125;,</div><div class="line">    <span class="string">'B'</span> : &#123;<span class="string">'H'</span>:<span class="number">0.8</span>, <span class="string">'T'</span>:<span class="number">0.2</span>&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">trace_F_way = &#123;</div><div class="line">    <span class="string">'0'</span> : <span class="string">'FF'</span>,</div><div class="line">    <span class="string">'1'</span> : <span class="string">'BF'</span></div><div class="line">&#125;</div><div class="line">trace_F_list = []</div><div class="line"></div><div class="line"></div><div class="line">trace_B_way = &#123;</div><div class="line">    <span class="string">'0'</span> : <span class="string">'FB'</span>,</div><div class="line">    <span class="string">'1'</span> : <span class="string">'BB'</span></div><div class="line">&#125;</div><div class="line">trace_B_list = []</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">path_traceback</span><span class="params">(trace_F_list,trace_B_list)</span>:</span></div><div class="line">    trace = [<span class="string">'B'</span>,]</div><div class="line">    trace_reverse = [<span class="string">'F'</span>,]</div><div class="line">    N = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(trace_F_list)<span class="number">-1</span>,<span class="number">0</span>,<span class="number">-1</span>):</div><div class="line">        <span class="keyword">if</span> trace_B_list[i][<span class="number">0</span>] != trace_F_list[i<span class="number">-1</span>][<span class="number">1</span>]:</div><div class="line">            trace.append(trace_B_list[i<span class="number">-1</span>][<span class="number">0</span>])</div><div class="line">        <span class="keyword">else</span> :</div><div class="line">            N = i</div><div class="line">            <span class="keyword">break</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N,<span class="number">0</span>,<span class="number">-1</span>):</div><div class="line">        trace.append(<span class="string">'F'</span>)</div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(trace)<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</div><div class="line">        trace_reverse.append(trace[j])</div><div class="line">    <span class="keyword">return</span> trace_reverse</div><div class="line"></div><div class="line"></div><div class="line">path_max = <span class="number">1</span></div><div class="line">path_min = <span class="number">1</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(seq)):</div><div class="line">    print(seq[i])</div><div class="line">    </div><div class="line">    trans_FF = dealer_switch_probability[<span class="string">'F'</span>][<span class="string">'F'</span>]*flip_probability[<span class="string">'F'</span>][str(seq[i<span class="number">-1</span>])]</div><div class="line">    trans_BF = dealer_switch_probability[<span class="string">'B'</span>][<span class="string">'F'</span>]*flip_probability[<span class="string">'B'</span>][str(seq[i<span class="number">-1</span>])]</div><div class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</div><div class="line">            path_F = max(trans_FF*coin_start_probability[<span class="string">'F'</span>],trans_BF*coin_start_probability[<span class="string">'B'</span>])</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">            path_F = max(trans_FF*path_max,trans_BF*path_min)</div><div class="line">            </div><div class="line">    trace_F = [trans_FF*path_max,trans_BF*path_min].index(path_F)</div><div class="line">    print(trace_F_way[str(trace_F)])</div><div class="line">    trace_F_list.append(trace_F_way[str(trace_F)])</div><div class="line">    </div><div class="line">    trans_FB = dealer_switch_probability[<span class="string">'F'</span>][<span class="string">'B'</span>]*flip_probability[<span class="string">'F'</span>][str(seq[i<span class="number">-1</span>])]</div><div class="line">    trans_BB = dealer_switch_probability[<span class="string">'B'</span>][<span class="string">'B'</span>]*flip_probability[<span class="string">'B'</span>][str(seq[i<span class="number">-1</span>])]</div><div class="line">    <span class="keyword">if</span> i == <span class="number">1</span>:</div><div class="line">            path_B = max(trans_FB*coin_start_probability[<span class="string">'F'</span>], trans_FB*coin_start_probability[<span class="string">'B'</span>])</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">            path_B = max(trans_FB*path_max, trans_BB*path_min)</div><div class="line">    trace_B = [trans_FB*path_max,trans_BB*path_min].index(path_B)</div><div class="line">    print(trace_B_way[str(trace_B)])</div><div class="line">    trace_B_list.append(trace_B_way[str(trace_B)])</div><div class="line">    </div><div class="line">    path_max = max(path_F,path_B)</div><div class="line">    path_min = min(path_F,path_B)</div><div class="line">    print(path_F)</div><div class="line">    print(path_B)</div><div class="line">    print(path_max) </div><div class="line">    print()</div><div class="line">    </div><div class="line">    </div><div class="line">        </div><div class="line">print(trace_F_list)</div><div class="line">print(trace_B_list)</div><div class="line">print(path_traceback(trace_F_list,trace_B_list))</div></pre></td></tr></table></figure>
+<h1 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">FB</div><div class="line"><span class="number">0.495</span></div><div class="line"><span class="number">0.005</span></div><div class="line"><span class="number">0.495</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">0.245025</span></div><div class="line"><span class="number">0.0038</span></div><div class="line"><span class="number">0.245025</span></div><div class="line"></div><div class="line">T</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">0.12128737499999999</span></div><div class="line"><span class="number">0.002888</span></div><div class="line"><span class="number">0.12128737499999999</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">FB</div><div class="line"><span class="number">0.060037250625</span></div><div class="line"><span class="number">0.000606436875</span></div><div class="line"><span class="number">0.060037250625</span></div><div class="line"></div><div class="line">T</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">0.029718439059374997</span></div><div class="line"><span class="number">0.00046089202499999997</span></div><div class="line"><span class="number">0.029718439059374997</span></div><div class="line"></div><div class="line">T</div><div class="line">FF</div><div class="line">FB</div><div class="line"><span class="number">0.014710627334390623</span></div><div class="line"><span class="number">0.000148592195296875</span></div><div class="line"><span class="number">0.014710627334390623</span></div><div class="line"></div><div class="line">T</div><div class="line">FF</div><div class="line">FB</div><div class="line"><span class="number">0.007281760530523359</span></div><div class="line"><span class="number">7.355313667195311e-05</span></div><div class="line"><span class="number">0.007281760530523359</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">FB</div><div class="line"><span class="number">0.0036044714626090623</span></div><div class="line"><span class="number">3.64088026526168e-05</span></div><div class="line"><span class="number">0.0036044714626090623</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">0.0017842133739914858</span></div><div class="line"><span class="number">2.7670690015988765e-05</span></div><div class="line"><span class="number">0.0017842133739914858</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">0.0008831856201257854</span></div><div class="line"><span class="number">2.1029724412151462e-05</span></div><div class="line"><span class="number">0.0008831856201257854</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">0.0004371768819622638</span></div><div class="line"><span class="number">1.5982590553235112e-05</span></div><div class="line"><span class="number">0.0004371768819622638</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">0.00021640255657132059</span></div><div class="line"><span class="number">1.2146768820458686e-05</span></div><div class="line"><span class="number">0.00021640255657132059</span></div><div class="line"></div><div class="line">T</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">0.00010711926550280369</span></div><div class="line"><span class="number">9.231544303548602e-06</span></div><div class="line"><span class="number">0.00010711926550280369</span></div><div class="line"></div><div class="line">T</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">5.3024036423887824e-05</span></div><div class="line"><span class="number">1.7539934176742344e-06</span></div><div class="line"><span class="number">5.3024036423887824e-05</span></div><div class="line"></div><div class="line">T</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">2.6246898029824473e-05</span></div><div class="line"><span class="number">3.3325874935810454e-07</span></div><div class="line"><span class="number">2.6246898029824473e-05</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">FB</div><div class="line"><span class="number">1.2992214524763114e-05</span></div><div class="line"><span class="number">1.3123449014912237e-07</span></div><div class="line"><span class="number">1.2992214524763114e-05</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">6.431146189757741e-06</span></div><div class="line"><span class="number">9.9738212513333e-08</span></div><div class="line"><span class="number">6.431146189757741e-06</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">3.183417363930082e-06</span></div><div class="line"><span class="number">7.580104151013309e-08</span></div><div class="line"><span class="number">3.183417363930082e-06</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">1.5757915951453906e-06</span></div><div class="line"><span class="number">5.760879154770115e-08</span></div><div class="line"><span class="number">1.5757915951453906e-06</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">7.800168395969683e-07</span></div><div class="line"><span class="number">4.3782681576252876e-08</span></div><div class="line"><span class="number">7.800168395969683e-07</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">3.861083356004993e-07</span></div><div class="line"><span class="number">3.3274837997952185e-08</span></div><div class="line"><span class="number">3.861083356004993e-07</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">1.9112362612224716e-07</span></div><div class="line"><span class="number">2.528887687844366e-08</span></div><div class="line"><span class="number">1.9112362612224716e-07</span></div><div class="line"></div><div class="line">T</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">9.460619493051234e-08</span></div><div class="line"><span class="number">1.9219546427617182e-08</span></div><div class="line"><span class="number">9.460619493051234e-08</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">4.683006649060361e-08</span></div><div class="line"><span class="number">3.6517138212472648e-09</span></div><div class="line"><span class="number">4.683006649060361e-08</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">2.3180882912848787e-08</span></div><div class="line"><span class="number">2.7753025041479213e-09</span></div><div class="line"><span class="number">2.3180882912848787e-08</span></div><div class="line"></div><div class="line">T</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">1.147453704186015e-08</span></div><div class="line"><span class="number">2.10922990315242e-09</span></div><div class="line"><span class="number">1.147453704186015e-08</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">5.679895835720774e-09</span></div><div class="line"><span class="number">4.0075368159895986e-10</span></div><div class="line"><span class="number">5.679895835720774e-09</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">2.811548438681783e-09</span></div><div class="line"><span class="number">3.045727980152095e-10</span></div><div class="line"><span class="number">2.811548438681783e-09</span></div><div class="line"></div><div class="line">H</div><div class="line">FF</div><div class="line">BB</div><div class="line"><span class="number">1.3917164771474826e-09</span></div><div class="line"><span class="number">2.3147532649155923e-10</span></div><div class="line"><span class="number">1.3917164771474826e-09</span></div><div class="line"></div><div class="line">[<span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>, <span class="string">'FF'</span>]</div><div class="line">[<span class="string">'FB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'FB'</span>, <span class="string">'BB'</span>, <span class="string">'FB'</span>, <span class="string">'FB'</span>, <span class="string">'FB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'FB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>, <span class="string">'BB'</span>]</div><div class="line">[<span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'F'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>]</div></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.davidsbatista.net/assets/documents/posts/2017-11-12-hmm_viterbi_mini_example.pdf" target="_blank" rel="external">Hidden Markov Model inference with the Viterbi algorithm: a mini-example（推荐）</a></p>
+<p>（2）<a href="https://www.jianshu.com/p/218c1e4f0891" target="_blank" rel="external">viterbi算法：利用动态规划寻找最短路径（推荐）</a></p>
+<p>（3）<a href="https://www.cnblogs.com/skyme/p/4651331.html" target="_blank" rel="external">一文搞懂HMM</a></p>
+<p>（4）<a href="http://wulc.me/2017/07/14/%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%B8%89%E5%A4%A7%E9%97%AE%E9%A2%98%E5%8F%8A%E6%B1%82%E8%A7%A3%E6%96%B9%E6%B3%95/" target="_blank" rel="external">隐马尔可夫模型的三大问题及求解方法</a></p>
+<p>（5）<a href="http://wulc.me/2017/03/02/%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/" target="_blank" rel="external">维特比算法</a></p>
+<p>（6）<a href="https://zh.wikipedia.org/wiki/%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95" target="_blank" rel="external">维特比算法wiki</a></p>
+<p>（7）<a href="https://github.com/StephHippo/viterbi" target="_blank" rel="external">StephHippo/viterbi</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;维特比算法python实现&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="算法" scheme="https:///AnJingwd.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https:///AnJingwd.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>动态规划求序列最大得分连续子序列</title>
     <link href="https:///AnJingwd.github.io/2018/03/25/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%B1%82%E5%BA%8F%E5%88%97%E6%9C%80%E5%A4%A7%E5%BE%97%E5%88%86%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97/"/>
     <id>https:///AnJingwd.github.io/2018/03/25/动态规划求序列最大得分连续子序列/</id>
@@ -295,7 +428,7 @@
     <link href="https:///AnJingwd.github.io/2018/03/12/lncRNApipe%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/"/>
     <id>https:///AnJingwd.github.io/2018/03/12/lncRNApipe安装及使用/</id>
     <published>2018-03-12T11:28:53.000Z</published>
-    <updated>2018-04-14T03:43:34.106Z</updated>
+    <updated>2018-07-01T01:40:30.742Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">lncRNApipe安装及使用</blockquote>
 
@@ -311,7 +444,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">install_dir=/home/wangdong/<span class="built_in">local</span></div><div class="line">mkdir -p <span class="variable">$install_dir</span>/expat</div><div class="line">tar zxf /[<span class="built_in">where</span>-ever]/expat-2.1.0.tar.gz -C <span class="variable">$install_dir</span>/expat</div><div class="line"><span class="built_in">cd</span> <span class="variable">$install_dir</span>/expat/expat-2.1.0</div><div class="line">perl ./configure --prefix=<span class="variable">$install_dir</span>/expat LDFLAGS=-L/<span class="variable">$install_dir</span>/expat/lib </div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"></div><div class="line">http://search.cpan.org - search <span class="keyword">for</span> and download - XML::Parser</div><div class="line"></div><div class="line">install_dir=/home/wangdong/<span class="built_in">local</span></div><div class="line">mkdir -p <span class="variable">$install_dir</span>/XML-parser</div><div class="line">wget http://search.cpan.org/CPAN/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz</div><div class="line">tar zxf XML-Parser-2.44.tar.gz -C <span class="variable">$install_dir</span>/XML-parser</div><div class="line"><span class="built_in">cd</span> <span class="variable">$install_dir</span>/XML-parser/XML-Parser-2.44</div><div class="line">perl ./Makefile.PL EXPATLIBPATH=<span class="variable">$install_dir</span>/expat/lib EXPATINCPATH=<span class="variable">$install_dir</span>/expat/include</div><div class="line">make</div><div class="line">make <span class="built_in">test</span></div><div class="line">make install</div></pre></td></tr></table></figure>
 <p><a href="https://github.com/libexpat/libexpat/" target="_blank" rel="external">libexpat/libexpat（会报错）</a></p>
 <h1 id="lncRNApipe使用"><a href="#lncRNApipe使用" class="headerlink" title="lncRNApipe使用"></a>lncRNApipe使用</h1><pre><code>time perl $lncRNApipe --run $merge/lncRNApipe \
---cuffcmp &apos;-r &apos;$lncRNA_gtf&apos; -s &apos;$ref_hg38&apos; &apos;$merge&apos;/All_sample_assemble_merge.gtf&apos; \
+--cuffcmp &apos;-r &apos;$ref_mRNA_gtf&apos; -s &apos;$ref_hg38&apos; &apos;$merge&apos;/All_sample_assemble_merge.gtf&apos; \
 --cat-ncRNAs &apos;-sample-names &quot;All_sample&quot; -ov 80 -fpkm 2 -len 200 -max-len 10000 -min-exons 1 -antisense&apos; \
 --get-uq-feat &apos;-sf &apos;$lncRNA_bed&apos;&apos; \
 --fetch-seq &apos;-db hg38&apos; \
@@ -319,7 +452,17 @@
 --rna \
 --cpu 16 \
 --inf &amp;&gt;$merge/lncRNApipe.run.log
-</code></pre>]]></content>
+</code></pre><hr>
+<p>通过以上方法安装该软件过于麻烦，如果只是使用该软件的鉴定lncRNA过程的相关脚本（cuffcompare, categorize_ncRNAs.pl, get_unique_features.pl, fetch_seq_from_ucsc.pl, RNAfold, Infernal and Coding Potential Calculator (CPC)），其实可以只有安装一些perl模块和软件即可。</p>
+<p>需要安装的软件或者模块</p>
+<ul>
+<li>cuffcompare在cufflinks软件里</li>
+<li>Perl脚本categorize_ncRNAs.pl，get_unique_features.pl, fetch_seq_from_ucsc.pl需要的模块在脚本开头都已经指明，用cpan安装即可，需要注意的是唯有一个该包自定义的perl模块需要手动安装</li>
+</ul>
+<p>git clone <a href="https://github.com/biocoder/Perl-for-Bioinformatics.git" target="_blank" rel="external">https://github.com/biocoder/Perl-for-Bioinformatics.git</a><br>cd IO-Routine<br>perl Makefile.PL PREFIX=/home/wangdong/perl/lib/site_perl/5.26.1/x86_64-linux LIB=/home/wangdong/perl/lib/site_perl/5.26.1/x86_64-linux<br>make<br>make install</p>
+<h1 id="refGene-txt数据下载及处理"><a href="#refGene-txt数据下载及处理" class="headerlink" title="refGene.txt数据下载及处理"></a>refGene.txt数据下载及处理</h1><p>wget <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/refGene.txt.gz" target="_blank" rel="external">http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/refGene.txt.gz</a><br>ungz refGene.txt.gz<br>cat refGene.txt|awk ‘BEGIN{FS=”\t”;OFS=”\t”}{print $2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16}’&gt;hg38_refGene.txt</p>
+<p>ps:lncRNApipe也没有说清楚refGene.txt的具体格式是什么，只说是Gene Prediction format，原因是refGene_to_bed.pl脚本有说明，该脚本需要从refGene.txt提取chrom   strand  txStart txEnd   name2这些列转换为bed文件</p>
+]]></content>
     
     <summary type="html">
     
@@ -396,7 +539,7 @@ source ~/.bashrc
     <link href="https:///AnJingwd.github.io/2018/02/05/RNA-seq%E9%89%B4%E5%AE%9ALncRNA%E6%A6%82%E8%BF%B0/"/>
     <id>https:///AnJingwd.github.io/2018/02/05/RNA-seq鉴定LncRNA概述/</id>
     <published>2018-02-05T13:44:08.000Z</published>
-    <updated>2018-04-25T01:42:04.633Z</updated>
+    <updated>2018-07-07T07:25:02.471Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">RNA-seq鉴定LncRNA概述：lncRNA简介，分析pipline，分析软件，结果评估指标</blockquote>
 
@@ -627,6 +770,25 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 <p><img src="https://i.imgur.com/nDRVJCw.jpg" alt=""></p>
 <p><img src="https://i.imgur.com/TvTIJhl.jpg" alt=""></p>
 <h2 id="差异表达分析"><a href="#差异表达分析" class="headerlink" title="差异表达分析"></a>差异表达分析</h2><p><a href="https://www.bioconductor.org/help/course-materials/2015/LearnBioconductorFeb2015/B02.1.1_RNASeqLab.html" target="_blank" rel="external">RNA-Seq workflow: gene-level exploratory analysis and differential expression</a></p>
+<p>cuffdiff -L 选项有两种写法：<br>偶数个样本：<br><img src="https://i.imgur.com/gL1s3XJ.jpg" alt=""></p>
+<p>奇数个样本：</p>
+<p><img src="https://i.imgur.com/4p4BFu5.jpg" alt=""></p>
+<h3 id="ballgown安装"><a href="#ballgown安装" class="headerlink" title="ballgown安装"></a>ballgown安装</h3><p>需要先安装libxml2</p>
+<pre><code>wget http://xmlsoft.org/sources/old/libxml2-2.7.1.tar.gz
+untargz libxml2-2.7.1.targz
+cd libxml2-2.7.1
+./configure --prefix=/home/wangdong/softwares/libxml2
+make &amp;&amp; make install
+
+
+echo &apos;export PATH=/home/wangdong/softwares/libxml2/bin:$PATH&apos;&gt;&gt;~/.bashr    
+echo &apos;export LD_LIBRARY_PATH=/home/wangdong/softwares/libxml2/lib:$LD_LIBRARY_PATH&apos;&gt;&gt;~/.bashrc 
+echo &apos;export PKG_CONFIG_PATH=/home/wangdong/softwares/libxml2/lib/pkgconfig:$PKG_CONFIG_PATH&apos;&gt;&gt;~/.bashrc
+</code></pre><p>ps:安装 dplyr包之前需要安装assertthat包</p>
+<p>可参考：<a href="http://blog.sina.com.cn/s/blog_520d74440102w7um.html" target="_blank" rel="external">链接</a></p>
+<p>使用可参考：<a href="https://www.jianshu.com/p/1f5d13cc47f8" target="_blank" rel="external">链接</a></p>
+<p>ps:pheno_data里面第一列样本名需要和ballgown下面的文件夹的样本名一样，且先后顺序保持一致，不然会报错</p>
+<h2 id="富集分析"><a href="#富集分析" class="headerlink" title="富集分析"></a>富集分析</h2><p>Gene ontology or pathway analysis for differentially expressed genes, this step is only applicable for <strong>protein coding genes</strong></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1） <a href="https://academic.oup.com/bib/article-abstract/18/5/789/2562763?redirectedFrom=fulltext" target="_blank" rel="external">Identification and function annotation of long intervening noncoding RNAs</a></p>
 <p>（2）<a href="https://mp.weixin.qq.com/s/NUEi6oRFL7B3f1FpCD4Xug" target="_blank" rel="external">转录组分析工具哪家强？</a></p>
 ]]></content>
@@ -645,7 +807,7 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
     <link href="https:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/"/>
     <id>https:///AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/</id>
     <published>2018-01-28T14:08:43.000Z</published>
-    <updated>2018-04-19T13:04:18.807Z</updated>
+    <updated>2018-05-28T04:00:16.528Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R</blockquote>
 
@@ -665,9 +827,9 @@ wget ftp://ftp.ensembl.org/pub/release-91/gtf/homo_sapiens/Homo_sapiens.GRCh38.9
 <p>（2）找到R CRAN的相关源码包（.tar.gz）</p>
 <p>例如：<a href="https://cran.r-project.org/web/packages/ggplot2/" target="_blank" rel="external">https://cran.r-project.org/web/packages/ggplot2/</a> 不同包只需要更改最后包名即可</p>
 <h1 id="linux下源码安装R-3-4-4"><a href="#linux下源码安装R-3-4-4" class="headerlink" title="linux下源码安装R-3.4.4"></a>linux下源码安装R-3.4.4</h1><h2 id="建议先升级gcc"><a href="#建议先升级gcc" class="headerlink" title="建议先升级gcc"></a>建议先升级gcc</h2><p>可参考<a href="https://anjingwd.github.io/AnJingwd.github.io/2018/02/13/gcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" target="_blank" rel="external">gcc5.2编译安装</a>，因为需要相应的动态链接库。</p>
-<h2 id="安装依赖的包"><a href="#安装依赖的包" class="headerlink" title="安装依赖的包"></a>安装依赖的包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#新建一个文件夹，然后把需要依赖的组件安装这个路径下</span></div><div class="line">mkdir -p <span class="variable">$HOME</span>/softwares/packages</div><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/softwares/packages</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##bzip2-1.0.6</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</div><div class="line">    untargz bzip2-1.0.6.tar.gz</div><div class="line">    <span class="built_in">cd</span> bzip2-1.0.6</div><div class="line">    </div><div class="line">    修改bzip2-1.0.6的<span class="string">"Makefile"</span>文件：</div><div class="line">    </div><div class="line">    CC=gcc -fPIC  &lt;&lt; 新增 -fPIC，默认是64位编译的；</div><div class="line">    AR=ar</div><div class="line">    RANLIB=ranlib</div><div class="line">    LDFLAGS=</div><div class="line">    BIGFILES=-D_FILE_OFFSET_BITS=64</div><div class="line">    CFLAGS=-fPIC -Wall -Winline -O2 -g  $(BIGFILES)   <span class="comment"># 这里也可以加上</span></div><div class="line"></div><div class="line">    make -f Makefile-libbz2_so</div><div class="line">    make clean &lt;------------保守建议，还是clean一下 </div><div class="line">    make</div><div class="line">    make install PREFIX=<span class="variable">$HOME</span>/softwares/packages   <span class="comment"># prefix表示的安装的路径前缀</span></div><div class="line"></div><div class="line"><span class="comment">## curl-7.59</span></div><div class="line">    wget https://curl.haxx.se/download/curl-7.59.0.zip</div><div class="line">    gunzip curl-7.59.0.zip</div><div class="line">    <span class="built_in">cd</span> curl-7.59.0</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/packages   <span class="comment"># 这个是之前设置的packages路径</span></div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## pcre-8.41.tar.gz</span></div><div class="line">    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.42.tar.gz</div><div class="line">    tar –xvf pcre-8.41.tar.gz</div><div class="line">    <span class="built_in">cd</span> pcre</div><div class="line">    ./configure --<span class="built_in">enable</span>-utf8  --prefix=<span class="variable">$HOME</span>/softwares/packages  <span class="comment"># 这个是之前设置的packages路径，一定要设置enable-utf8;</span></div><div class="line">    make</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## xz-5.2.3.tar.gz</span></div><div class="line">    下载路径：https://sourceforge.net/projects/lzmautils/files/xz-5.2.3.tar.gz/download</div><div class="line">    tar xzvf xz-5.2.3.tar.gz</div><div class="line">    <span class="built_in">cd</span> xz-5.2.3</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## zlib-1.2.8.tar.gz</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//zlib.net/zlib-1.2.11.tar.g</div><div class="line">    tar xzvf zlib-1.2.8.tar.gz</div><div class="line">    <span class="built_in">cd</span> zlib-1.2.8</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make</div><div class="line">    make install</div></pre></td></tr></table></figure>
-<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$HOME</span>/softwares/packages/bin:<span class="variable">$PATH</span></div><div class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$HOME</span>/softwares/packages/lib:<span class="variable">$LD_LIBRARY_PATH</span> </div><div class="line"><span class="built_in">export</span> CFLAGS=<span class="string">"-I<span class="variable">$HOME</span>/softwares/packages/include"</span> </div><div class="line"><span class="built_in">export</span> LDFLAGS=<span class="string">"-L<span class="variable">$HOME</span>/softwares/packages/lib"</span></div><div class="line"></div><div class="line"><span class="built_in">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
-<h2 id="安装R3-4-4"><a href="#安装R3-4-4" class="headerlink" title="安装R3.4.4"></a>安装R3.4.4</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">wget https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-<span class="number">3</span>/R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">cd R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">./configure --prefix=$HOME/softwares/packages/R  --enable-R-shlib  --with-readline=yes --with-libpng=yes --with-x=no  </div><div class="line"><span class="comment"># --enable-R-shlib一定要设置，否则安装不上Rserve;  prefix是安装路径，可以自定义；</span></div><div class="line"></div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"></div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="keyword">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
+<h2 id="安装依赖的包"><a href="#安装依赖的包" class="headerlink" title="安装依赖的包"></a>安装依赖的包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#新建一个文件夹，然后把需要依赖的组件安装这个路径下</span></div><div class="line">mkdir -p <span class="variable">$HOME</span>/softwares/packages</div><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/softwares/packages</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##bzip2-1.0.6</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</div><div class="line">    untargz bzip2-1.0.6.tar.gz</div><div class="line">    <span class="built_in">cd</span> bzip2-1.0.6</div><div class="line">    </div><div class="line">    修改bzip2-1.0.6的<span class="string">"Makefile"</span>文件：</div><div class="line">    </div><div class="line">    CC=gcc -fPIC  &lt;&lt; 新增 -fPIC，默认是64位编译的；</div><div class="line">    AR=ar</div><div class="line">    RANLIB=ranlib</div><div class="line">    LDFLAGS=</div><div class="line">    BIGFILES=-D_FILE_OFFSET_BITS=64</div><div class="line">    CFLAGS=-fPIC -Wall -Winline -O2 -g  $(BIGFILES)   <span class="comment"># 这里也可以加上</span></div><div class="line"></div><div class="line">    make -f Makefile-libbz2_so</div><div class="line">    make clean &lt;------------保守建议，还是clean一下 </div><div class="line">    make</div><div class="line">    make install PREFIX=<span class="variable">$HOME</span>/softwares/packages   <span class="comment"># prefix表示的安装的路径前缀</span></div><div class="line"></div><div class="line"><span class="comment">## curl-7.59</span></div><div class="line">    wget https://curl.haxx.se/download/curl-7.59.0.zip</div><div class="line">    unzip curl-7.59.0.zip</div><div class="line">    <span class="built_in">cd</span> curl-7.59.0</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/packages   <span class="comment"># 这个是之前设置的packages路径</span></div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## pcre-8.41.tar.gz</span></div><div class="line">    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.42.tar.gz</div><div class="line">    tar –xvf pcre-8.41.tar.gz</div><div class="line">    <span class="built_in">cd</span> pcre</div><div class="line">    ./configure --<span class="built_in">enable</span>-utf8  --prefix=<span class="variable">$HOME</span>/softwares/packages  <span class="comment"># 这个是之前设置的packages路径，一定要设置enable-utf8;</span></div><div class="line">    make</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## xz-5.2.3.tar.gz</span></div><div class="line">    下载路径：https://sourceforge.net/projects/lzmautils/files/xz-5.2.3.tar.gz/download</div><div class="line">    tar xzvf xz-5.2.3.tar.gz</div><div class="line">    <span class="built_in">cd</span> xz-5.2.3</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## zlib-1.2.8.tar.gz</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//zlib.net/zlib-1.2.11.tar.gz</div><div class="line">    tar xzvf zlib-1.2.8.tar.gz</div><div class="line">    <span class="built_in">cd</span> zlib-1.2.8</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make</div><div class="line">    make install</div></pre></td></tr></table></figure>
+<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$HOME/softwares/packages/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="built_in">echo</span> <span class="string">'export LD_LIBRARY_PATH=$HOME/softwares/packages/lib:$LD_LIBRARY_PATH'</span>&gt;&gt;~/.bashrc </div><div class="line"><span class="built_in">echo</span> <span class="string">'export CFLAGS="-I$HOME/softwares/packages/include"'</span>&gt;&gt;~/.bashrc </div><div class="line"><span class="built_in">echo</span> <span class="string">'export LDFLAGS="-L$HOME/softwares/packages/lib"'</span>&gt;&gt;~/.bashrc</div><div class="line"></div><div class="line"><span class="built_in">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
+<h2 id="安装R3-4-4"><a href="#安装R3-4-4" class="headerlink" title="安装R3.4.4"></a>安装R3.4.4</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">wget https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-<span class="number">3</span>/R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">cd R-<span class="number">3.4</span><span class="number">.4</span></div><div class="line">./configure --prefix=$HOME/softwares/packages/R  --enable-R-shlib  --with-readline=yes --with-libpng=yes --with-x=no  </div><div class="line"><span class="comment"># --enable-R-shlib一定要设置，否则安装不上Rserve;  prefix是安装路径，可以自定义；</span></div><div class="line"></div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"></div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="keyword">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
 <h1 id="安装packages"><a href="#安装packages" class="headerlink" title="安装packages"></a>安装packages</h1><h2 id="方法一：每次安装包时指定镜像"><a href="#方法一：每次安装包时指定镜像" class="headerlink" title="方法一：每次安装包时指定镜像"></a>方法一：每次安装包时指定镜像</h2><ul>
 <li>查看所有镜像：chooseCRANmirror()</li>
 <li>选择镜像：chooseCRANmirror(ind=36)</li>
@@ -725,7 +887,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
     <link href="https:///AnJingwd.github.io/2018/01/28/qPCR%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E5%8F%8A%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C/"/>
     <id>https:///AnJingwd.github.io/2018/01/28/qPCR结果分析及非参数检验/</id>
     <published>2018-01-28T02:33:14.000Z</published>
-    <updated>2018-01-28T11:22:47.442Z</updated>
+    <updated>2018-05-24T12:51:02.131Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">qPCR结果分析及非参数检验</blockquote>
 
@@ -748,7 +910,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
 <h1 id="组间差异非参数检验"><a href="#组间差异非参数检验" class="headerlink" title="组间差异非参数检验"></a>组间差异非参数检验</h1><p>原始数据处理（EXCEL）：</p>
 <p><img src="https://i.imgur.com/4Lgn5iR.png" alt=""></p>
 <p>&emsp;&emsp;如果数据无法满足t检验或ANOVA的参数假设，可以转而使用非参数方法。<strong>若两组数据独立，</strong> 可以使用Wilcoxon秩和检验（更广为人知的名字是Mann-Whitney U检验）来评估观测是否是从相同的概率分布中抽得的（即，在一个总体中获得更高得分的概率是否比另<br>一个总体要大）。调用格式为：</p>
-<pre><code>wilcox.test(y ~ x, data)
+<pre><code>wilcox.test(y ~ x, data，exact=FALSE)
 </code></pre><p>其中的y是数值型变量，而x是一个二分变量。</p>
 <p>Wilcoxon符号秩检验是<strong>非独立样本</strong>t检验的一种非参数替代方法。它适用于两组成对数据和无法保证正态性假设的情境。调用格式与Mann-Whitney U检验完全相同，不过还可以添加参数paired=TRUE。</p>
 <h2 id="绘制箱图"><a href="#绘制箱图" class="headerlink" title="绘制箱图"></a>绘制箱图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#qPCR_barplot.R</span></div><div class="line">setwd(<span class="string">"F:/R working directory/qPCR"</span>)</div><div class="line">qPCR&lt;-read.csv(<span class="string">"miRNA_qPCR_plot.csv"</span>,header=<span class="literal">TRUE</span>,check.names = <span class="literal">FALSE</span>)</div><div class="line"><span class="keyword">library</span>(ggplot2)</div><div class="line">p&lt;-ggplot(data=qPCR, aes(x=miRNA,y=value))+geom_boxplot(aes(fill=sample))</div><div class="line"></div><div class="line">p + facet_wrap(~ miRNA, scales=<span class="string">"free"</span>)</div></pre></td></tr></table></figure>
@@ -782,14 +944,19 @@ local({r &lt;- getOption(&quot;repos&quot;)
     <link href="https:///AnJingwd.github.io/2018/01/26/IGV%E6%89%B9%E9%87%8F%E6%9F%A5%E7%9C%8B%E5%8F%98%E5%BC%82/"/>
     <id>https:///AnJingwd.github.io/2018/01/26/IGV批量查看变异/</id>
     <published>2018-01-26T03:21:34.000Z</published>
-    <updated>2018-04-11T10:50:23.029Z</updated>
+    <updated>2018-07-02T11:16:13.114Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">IGV批量查看变异并过滤</blockquote>
 
 <a id="more"></a>
 <h1 id="IGV可视化准备"><a href="#IGV可视化准备" class="headerlink" title="IGV可视化准备"></a>IGV可视化准备</h1><p><a href="http://www.nature.com/nbt/journal/v29/n1/full/nbt.1754.html" target="_blank" rel="external">Nature biotechnology文献</a>：Integrative Genomics Viewer</p>
 <p><a href="http://software.broadinstitute.org/software/igv/download" target="_blank" rel="external">Downloads IGV </a>; &emsp;<a href="http://software.broadinstitute.org/software/igv/igvtools" target="_blank" rel="external">igvtools</a>为一些数据可视化预处理程序</p>
-<p>IGV可视化数据准备</p>
+<p>PS:igv 要求java 1.8 ,安装java1.8可参考<a href="https://www.cnblogs.com/xuliangxing/p/7066913.html" target="_blank" rel="external">链接</a></p>
+<pre><code>export JAVA_HOME=/home/wangdong/softwares/java1.8/jdk1.8.0_172
+export JRE_HOME=/home/wangdong/softwares/java1.8/jdk1.8.0_172/jre 
+export PATH=$PATH:/home/wangdong/softwares/java1.8/jdk1.8.0_172/bin 
+export CLASSPATH=./:/home/wangdong/softwares/java1.8/jdk1.8.0_172/lib:/home/wangdong/softwares/java1.8/jdk1.8.0_172/jre/lib
+</code></pre><p>IGV可视化数据准备</p>
 <ul>
 <li>不是什么数据都可以拿IGV看的，参考基因组必须为FASTA格式；</li>
 <li>IGV只是负责将比对结果可视化，并没有比对过程，所以不能直接载入reads；</li>
@@ -858,6 +1025,16 @@ local({r &lt;- getOption(&quot;repos&quot;)
 <li>Read    pair orientation</li>
 </ul>
 <p>具体使用可查看：<a href="https://github.com/griffithlab/rnaseq_tutorial/wiki/LectureFiles/cshl/2016/IGV_Tutorial_Long_BroadInstitute.pdf" target="_blank" rel="external">IGV Lecture - Long, from Broad Institute    </a>，<strong>也包括了查看RNA-seq比对情况的操作</strong></p>
+<h2 id="vncviewer-连接上后黑屏解决"><a href="#vncviewer-连接上后黑屏解决" class="headerlink" title="vncviewer 连接上后黑屏解决"></a>vncviewer 连接上后黑屏解决</h2><p>参考：<a href="https://zhidao.baidu.com/question/269172162176272125.html" target="_blank" rel="external">vnc viewer连接黑屏</a></p>
+<p>（1）修改/home/wangdong/.vnc/xstartup文件<br>    vi /home/wangdong/.vnc/xstartup</p>
+<pre><code>##如果使用的是gnome图像界面，则需要注释掉以下两行,
+#xterm -geometry 80x24+10+10 -ls -title &quot;$VNCDESKTOP Desktop&quot; &amp;
+#twm &amp;
+##并添加以下这行：
+gnome-session &amp;
+</code></pre><p>（2）改变xstartup的权限</p>
+<pre><code>chmod 777 /home/wangdong/.vnc/xstartup
+</code></pre><p>ps: 首选在图形桌面用命令行运行igv.sh,再点击igv.sh运行</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.cnblogs.com/leezx/p/5603481.html" target="_blank" rel="external">可视化工具之 IGV 使用方法</a></p>
 <p>（2）<a href="https://gist.github.com/dfjenkins3/5c6dc1e55e78fa17b931" target="_blank" rel="external">IGV_Batch_Screenshots.md</a></p>
 <p>（3）<a href="http://blog.csdn.net/Bingorl/article/details/78289280?locationNum=8&amp;fps=1" target="_blank" rel="external">如何使用VNC Viewer连接远程CentOS服务器</a></p>
@@ -1329,7 +1506,7 @@ annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput 
     <link href="https:///AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/"/>
     <id>https:///AnJingwd.github.io/2018/01/10/RNA-seq质控/</id>
     <published>2018-01-10T13:39:44.000Z</published>
-    <updated>2018-04-01T06:49:52.475Z</updated>
+    <updated>2018-05-27T07:25:16.975Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">RNA-seq质控：去除低质量reads，adapter以及rRNA</blockquote>
 
@@ -1368,6 +1545,12 @@ annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput 
 <p>使用软件：trim_galore ,该软件通过调用FastQC进行质检，调用cutadapt去接头，同时还能去除低质量的reads。附加功能还有去除RRBS(for directional, non-directional (or paired-end) sequencing)测序文件的甲基化偏好位点。</p>
 <p>其中去除低质量reads时最重要的两个参数是最小Phred score（1-30）和最小序列长度，不同文章对此观点不同，一般推荐Phred score 20 (90%置信区间)和最小50%-70%的序列长度。</p>
 <p><a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" target="_blank" rel="external">Trim Galore!官网</a>， Trim Galore is now also available from<a href="https://github.com/FelixKrueger/TrimGalore" target="_blank" rel="external"> GitHub</a>，具体参数使用参考<a href="https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md" target="_blank" rel="external">User Guide</a>。</p>
+<h2 id="4-GC"><a href="#4-GC" class="headerlink" title="4. GC"></a>4. GC</h2><p>平滑分布的锐利峰通常是特定污染物（例如适配体二聚体）的结果，这可能被过度表示的序列模块所挑选。更宽的峰可能代表不同物种的污染</p>
+<h2 id="5-常见问题"><a href="#5-常见问题" class="headerlink" title="5. 常见问题"></a>5. 常见问题</h2><p><a href="https://www.biostars.org/p/160440/" target="_blank" rel="external">Question: GC content and Kmer</a></p>
+<p>For RNAseq datasets one typically sees failures in those modules. I should point out that FastQC is really geared toward whole-genome sequencing. We use it for all types of datasets, but many of them will have failures in various modules that can be ignored.</p>
+<p><a href="https://www.biostars.org/p/159590/" target="_blank" rel="external">Many overrepresented sequences in RNA-seq data. Should them be trimmed out?</a></p>
+<p>High sequence duplication levels in RNA-seq are normal and expected. Do not remove duplicates. This would underestimate the true expression of highly expressed genes, as it would artificially downscale the counts of these genes.</p>
+<p>n RNA-Seq libraries sequences from different transcripts will be present at wildly different levels in the starting population. In order to be able to observe lowly expressed transcripts it is therefore common to greatly over sequence high expressed transcripts, and this will potentially create large set of duplicates. This will result in high overall duplication in this test, and will often produce peaks in the higher duplication bins. This duplication will come from physically connected regions, and an examination of the distribution of duplicates in a specific genomic region will allow the distinction between over-sequencing and general technical duplication, but these distinctions are not possible from raw fastq files.</p>
 <p>对于RRBS samples, 首先进行quality trimming，从3’端剪切掉低质量的reads；然后调用cutadapt程序从3’端去除接头，如果具体序列没有提供，其将使用标准的Illumina配对接头的前13bp （’AGATCGGAAGAGC’）序列来去除接头。给了控制去接头过程的严格程度，需要指定与接头序列最小的overlap数目，或者默认为1（即使与接头序列只有一个bp的overlap也会被剪切掉）。</p>
 <pre><code>agapter1=GATCGGAAGAGCACACGTCTGAACTCCAGTCACCGATGTATCTCGTATGC
 adapter2=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT
@@ -1954,286 +2137,6 @@ cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Rmarkdown生成动态报告</title>
-    <link href="https:///AnJingwd.github.io/2017/12/10/Rmarkdown%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E6%8A%A5%E5%91%8A/"/>
-    <id>https:///AnJingwd.github.io/2017/12/10/Rmarkdown生成动态报告/</id>
-    <published>2017-12-10T02:54:17.000Z</published>
-    <updated>2017-12-10T14:43:46.327Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">Rmarkdown生成动态报告</blockquote>
-
-<a id="more"></a>
-<p>&emsp;&emsp;RStudio可以当做 Markdown 编辑器来用（R Markdown），根据数据处理结果快速生成报告文档，这一功能主要通过 Package Knit 及相关组件完成。</p>
-<p>&emsp;&emsp;R Markdown 的两大特别之处，一是通过 Pandoc 将 Markdown 转化成 LaTex，再由强大的 LaTex 转换成 HTML、PDF、Word，理论上来说借助 LaTex 可以生成学术论文、期刊杂志、数据报告等规范格式的文档；另一大特点是整合了 R 语言的环境，可以在 Markdown 语法中 code block 直接执行 R 语言代码并将结果插入文档。</p>
-<p>R Markdown from Rstudio <a href="http://rmarkdown.rstudio.com/lesson-1.html" target="_blank" rel="external">帮助文档</a></p>
-<p>一个小教程:</p>
-<ul>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/02/03/writing-your-thesis-with-r-markdown-1-getting-started/" target="_blank" rel="external">Writing your thesis with R Markdown (1) – Getting started</a></p>
-</li>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/02/17/writing-your-thesis-with-rmarkdown-2-making-a-chapter/" target="_blank" rel="external">Writing your thesis with R Markdown (2) – Text, citations and equations</a></p>
-</li>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/03/18/writing-your-thesis-with-r-markdown-3-figures-r-code-and-tables/" target="_blank" rel="external">Writing your thesis with R Markdown (3) – Figures, R code and tables</a></p>
-</li>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/03/29/writing-your-thesis-with-r-markdown-4-putting-the-thesis-together/" target="_blank" rel="external">Writing your thesis with R Markdown (4) – Putting the thesis together</a></p>
-</li>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/03/30/writing-your-thesis-with-r-markdown-5-the-thesis-layout/" target="_blank" rel="external">Writing your thesis with R Markdown (5) – The thesis layout</a></p>
-</li>
-</ul>
-<h1 id="安装必要的包"><a href="#安装必要的包" class="headerlink" title="安装必要的包"></a>安装必要的包</h1><pre><code>install.packages(&quot;devtools&quot;) # 如果以前没有安装 devtools 包
-devtools::install_github(&quot;rstudio/rmarkdown&quot;)  #安装github上最新版rmarkdown
-library(rmarkdown)
-</code></pre><h1 id="如何编辑"><a href="#如何编辑" class="headerlink" title="如何编辑"></a>如何编辑</h1><ol>
-<li><p>添加的是普通的文字: 那就按照Markdown写吧，你看到过的功能R都支持。</p>
-</li>
-<li><p>添加的是代码: 那就放到代码区域里面去，和Markdown的代码标记不太一样，多了 {}。</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code</div></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>然后在 {} 里告诉 R Studio 你希望显示什么:</p>
-</li>
-</ol>
-<ul>
-<li>echo控制R代码块是否可见,设置为FALSE表示隐藏R代码，但会运行代码块并输出结果到文档。如果你只是为了显示而不需要运行一个代码块，设置eval = FALSE即可。 </li>
-<li>message参数用于设置是否显示控制台输出的信息，message = FALSE表示不显示。<ul>
-<li>只想显示代码 {r,echo = FALSE, eval = FALSE}</li>
-<li>只想显示结果 {r,echo = FALSE, eval = TRUE}</li>
-<li>想要代码+编译结果 {r,echo = TRUE，eval = FALSE}</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li><p>如果是在文中添加代码，没有{}</p>
-<pre><code>`r 2+ 2`
-</code></pre></li>
-<li><p>chunk options</p>
-</li>
-</ol>
-<p><img src="https://i.imgur.com/SeQw9LV.jpg" alt=""></p>
-<p>这个chunk放在最前面，声明以后的每一个chunk都不输出warnings和message</p>
-<ol>
-<li><p>在代码块执行完后，控制结果的输出形式。包括文本、图表和图形的输出。有四个取值（更多细节参考<a href="http://yihui.name/knitr/options/）：" target="_blank" rel="external">http://yihui.name/knitr/options/）：</a> 1.markup—标记显示 2.asis—文本显示 3.hold—末尾显示 4.hide—隐藏 </p>
-</li>
-<li><p>由graphics和ggplot2得到的图形对齐方式可通过fig.align = ‘left’/‘right’/‘center’分别设置成左对齐，右对齐，居中。下图设置图形居中（默认是左对齐）</p>
-</li>
-</ol>
-<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><pre><code>![Caption for the picture.](/path/to/image.png)
-</code></pre><h1 id="输出-html-word-pdf"><a href="#输出-html-word-pdf" class="headerlink" title="输出(html ,word, pdf)"></a>输出(html ,word, pdf)</h1><p>从Rmd格式可以导出为三种格式，用Pandoc实现:Word, HTML, PDF（额外需要LaTex支持，并且对中文的支持需要额外的设定）</p>
-<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>Windows</p>
-<p>There is a package installer at pandoc’s<a href="https://github.com/jgm/pandoc/releases/latest" target="_blank" rel="external"> download page</a>. 选择msi installer或者zip file都可以。</p>
-<p>For PDF output, you’ll also need to install LaTeX. We recommend <a href="http://miktex.org/" target="_blank" rel="external">MiKTeX</a>.</p>
-<h2 id="R-Studio的全局配置-为了支持中文pdf输出"><a href="#R-Studio的全局配置-为了支持中文pdf输出" class="headerlink" title="R Studio的全局配置(为了支持中文pdf输出)"></a>R Studio的全局配置(为了支持中文pdf输出)</h2><ul>
-<li>Tools – Global Options – Code—Saving， 设置Default text coding: UTF-8 coding</li>
-<li>Tools – Global Options – Sweave，将Typeset LaTeX into PDF using:设置为 XeLaTeX</li>
-</ul>
-<p>需要注意的就是latex_engine:xelatex 了。即使设置了默认的编译器为xeLaTeX依旧要手动再声明一遍编译器</p>
-<h2 id="设置-YAML"><a href="#设置-YAML" class="headerlink" title="设置 YAML"></a>设置 YAML</h2><p>完成对R Studio的全局配置后，对每个Rmd文件（R markdown）在最开头条线之间进行设置才是更重要的。这个部分叫做YAML <a href="https://en.wikipedia.org/wiki/YAML" target="_blank" rel="external">wiki</a></p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">author: <span class="string">"wd"</span></div><div class="line">date: <span class="string">"2017.12.10"</span></div><div class="line">output: pdf_document</div><div class="line">title: <span class="string">"MRstudy"</span></div><div class="line">outputs:</div><div class="line">  pdf_document:</div><div class="line">    includes:</div><div class="line">      in_header: header.tex</div><div class="line">    keep_tex: yes</div><div class="line">    latex_engine: xelatex</div><div class="line">---</div></pre></td></tr></table></figure>
-<p>步骤:</p>
-<ul>
-<li>在YMAL里面设置 output: pdf_document，或者word_document, html_document。</li>
-<li>设定好了之后三种导出的方法都一样，<strong>点击代码窗口上面的蓝色毛线团标记（选择输出html或者word或者pdf）。</strong>（knit英文是编织的意思，所以就是把代码织成文本吧）</li>
-</ul>
-<p><strong>注意正确的缩进和冒号</strong></p>
-<ul>
-<li>以上意思是，输出为html，word和pdf。html和word为默认设置。pdf设置包括，in_header，keep_tex和latex_engine。</li>
-<li>如果一个设置还没到具体的内容，它紧接的是冒号，换行后需要缩进两个空格在开始。</li>
-<li>如果已经指向明确的内容，结束没有冒号，换行之后不需要缩进。</li>
-</ul>
-<p><strong>header.tex需要和你的Rmd文档放到一个路径，</strong> 其中内容是：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">\usepackage&#123;xeCJK&#125;</div><div class="line">\setCJKmainfont&#123;楷体&#125;  % 字体可以更换</div><div class="line">\setmainfont&#123;Georgia&#125; % 設定英文字型</div><div class="line">\setromanfont&#123;Georgia&#125; % 字型</div><div class="line">\setmonofont&#123;Courier New&#125;</div></pre></td></tr></table></figure>
-<p>更多详细配置可以参考<a href="http://rmarkdown.rstudio.com/" target="_blank" rel="external">官方文档</a></p>
-<h1 id="编译前在viewer窗口预览文档"><a href="#编译前在viewer窗口预览文档" class="headerlink" title="编译前在viewer窗口预览文档"></a>编译前在viewer窗口预览文档</h1><p>使用方法：</p>
-<ol>
-<li><p>安装 Xaringan</p>
-<p> install.packages(“devtools”)<br> if (!requireNamespace(“xaringan”))<br> devtools::install_github(“yihui/xaringan”)</p>
-</li>
-<li>R markdown不需额外设置。</li>
-<li>编译的时候找到 Addin，点击Infinite Moon Reader</li>
-</ol>
-<p><img src="https://i.imgur.com/MfkEUSg.jpg" alt=""></p>
-<h1 id="rmarkdown转化中文字符为PDF的设置"><a href="#rmarkdown转化中文字符为PDF的设置" class="headerlink" title="rmarkdown转化中文字符为PDF的设置"></a>rmarkdown转化中文字符为PDF的设置</h1><p>rmarkdown对于输出含中文的html和word文档，在YAML设置html_document: default或者word_document: default即可，但对于输出含有中文的pdf文件需要单独设置YAML。如下：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">output:</div><div class="line">  pdf_document:</div><div class="line">    keep_tex: yes</div><div class="line">    latex_engine: xelatex</div><div class="line">    includes:</div><div class="line">      in_header: header.tex</div></pre></td></tr></table></figure>
-<h1 id="中文模板-详细说明"><a href="#中文模板-详细说明" class="headerlink" title="中文模板 详细说明"></a>中文模板 <a href="https://github.com/rstudio/rticles/pull/16" target="_blank" rel="external">详细说明</a></h1><p>安装rticles包，调用中文模板<br>    install.packages(“rticles”)</p>
-<p>安装成功之后，我们可以新建一个Rmarkdown文件。点击New-&gt;file-&gt;R markdown,其中有了一个From Template</p>
-<p><img src="https://i.imgur.com/qHiN24R.jpg" alt=""></p>
-<p>使用ctrl + shift + k的快捷键，稍等片刻会出现中文PDF</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.xueqing.tv/cms/article/96" target="_blank" rel="external">利用R-Markdown和Knitr创建动态报告（第一部分）</a></p>
-<p>（2）<a href="http://www.xueqing.tv/cms/article/101" target="_blank" rel="external">利用R-Markdown和Knitr创建动态报告（第二部分）</a></p>
-<p>（3）<a href="https://www.cnblogs.com/Xeonilian/p/7142379.html" target="_blank" rel="external">R Markdown 设置和使用</a></p>
-<p>（4）<a href="http://www.cnblogs.com/Xeonilian/p/7608290.html" target="_blank" rel="external">R Markdown + Infinite Moon Reader + 编辑实时更新</a></p>
-<p>（5）<a href="http://blog.rainy.im/2015/05/16/rmarkdown-in-rstudio/" target="_blank" rel="external">RStudio 中的 R Markdown（推荐）</a></p>
-<p>（6）<a href="http://blog.csdn.net/xmuecor/article/details/41956525" target="_blank" rel="external">Rmarkdown输出PDF的中文支持问题解决</a></p>
-<p>（7）<a href="http://www.jianshu.com/p/0bfda49f1a52" target="_blank" rel="external">rmarkdown转化中文字符为PDF的设置</a></p>
-<p>（8）<a href="http://www.jianshu.com/p/3a1d95f9965a" target="_blank" rel="external">Rmarkdown中文实现（推荐）</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;Rmarkdown生成动态报告&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="R" scheme="https:///AnJingwd.github.io/categories/R/"/>
-    
-    
-      <category term="R" scheme="https:///AnJingwd.github.io/tags/R/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>创建宏去除从pdf复制到word的回车换行</title>
-    <link href="https:///AnJingwd.github.io/2017/12/03/%E5%88%9B%E5%BB%BA%E5%AE%8F%E5%8E%BB%E9%99%A4%E4%BB%8Epdf%E5%A4%8D%E5%88%B6%E5%88%B0word%E7%9A%84%E5%9B%9E%E8%BD%A6%E6%8D%A2%E8%A1%8C/"/>
-    <id>https:///AnJingwd.github.io/2017/12/03/创建宏去除从pdf复制到word的回车换行/</id>
-    <published>2017-12-03T10:12:38.000Z</published>
-    <updated>2017-12-03T10:41:41.736Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;从PDF或网页中复制一段文字再粘贴到WORD中，会出现很多多余的空格和回车，一个一个去删除费时费力费心。在word创建宏，并设置按钮即可。</p>
-<blockquote class="blockquote-center">创建宏去除从pdf复制到word的回车换行</blockquote>
-
-<a id="more"></a>
-<h1 id="如何创建宏及设置按钮"><a href="#如何创建宏及设置按钮" class="headerlink" title="如何创建宏及设置按钮"></a>如何创建宏及设置按钮</h1><h2 id="Steps-to-Record-a-Macro-in-Word"><a href="#Steps-to-Record-a-Macro-in-Word" class="headerlink" title="Steps to Record a Macro in Word"></a>Steps to Record a Macro in Word</h2><ol>
-<li>Firstly, open your Word.</li>
-<li>And make sure you have added “Developer” tab on the Ribbon first. For detailed instructions to add “Developer”, please read the article: How to Insert Background Music into Your Word Document</li>
-<li>Once “Developer” tab is available, click it.</li>
-<li>Then click “Record Macro” in “Code” group.</li>
-</ol>
-<p><img src="https://i.imgur.com/jBnJRul.jpg" alt=""></p>
-<ol>
-<li>Now a “Record Macro” dialog box will pop up. First, type the macro name, such as “copytext” here.</li>
-<li>Then in “Assign macro to” part, choose either “Button” or “Keyboard”. Here we will go “Button”.</li>
-<li><p>Next, click “OK”.<br><img src="https://i.imgur.com/W4PtR1j.jpg" alt=""></p>
-</li>
-<li><p>And now you will see the “Word Options” window. Click “Customize Ribbon”.</p>
-</li>
-<li>Then find a location for the macro on the right side. Here we will click “New Group” to set a new one for the macro.</li>
-<li>Noe continue to choose “Macros” from the drop-down list of “Choose commands from”.</li>
-<li>Next click the macro you just create.</li>
-<li>Then click “Add” in the middle of the window.</li>
-<li>Now the macro will be placed in the new group. Just right click the macro</li>
-<li>And choose “Rename” option.<br><img src="https://i.imgur.com/wxgOLUM.jpg" alt=""></li>
-<li>In “Rename” dialog box, choose a symbol for your macro.</li>
-<li>Then type the display name.</li>
-<li>Click “OK”.</li>
-</ol>
-<p><img src="https://i.imgur.com/9LQzOKA.jpg" alt=""></p>
-<ol>
-<li>Now go back to “Word Options” window, and click “OK” there. The macro starts recording from now.</li>
-</ol>
-<p><img src="https://i.imgur.com/bTy2Okj.jpg" alt=""></p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">Sub 粘贴并替换回车()</div><div class="line">   </div><div class="line">    Dim Flag As Integer</div><div class="line">   </div><div class="line">    <span class="string">'粘贴并选中</span></div><div class="line"><span class="string">    startpos = Selection.Start</span></div><div class="line"><span class="string">    '</span>Selection.Paste  <span class="string">'普通粘贴</span></div><div class="line"><span class="string">    Selection.PasteAndFormat (wdFormatPlainText)  '</span>粘贴为文本</div><div class="line">    Selection.Start = startpos</div><div class="line"></div><div class="line">   </div><div class="line">    <span class="string">'先将多个回车并为一个</span></div><div class="line"><span class="string">    With Selection.Find</span></div><div class="line"><span class="string">        .Text = "^13&#123;2,&#125;"</span></div><div class="line"><span class="string">        .Replacement.Text = "^p"</span></div><div class="line"><span class="string">        .MatchWildcards = True '</span>使用通配符</div><div class="line">        .Wrap = wdFindStop <span class="string">'把 .Wrap = wdFindAsk 改成 .Wrap = wdFindStop对应于“是否搜索其余部分”中的“否”</span></div><div class="line"><span class="string">        .Execute Replace:=wdReplaceAll</span></div><div class="line"><span class="string">    End With</span></div><div class="line"><span class="string">   </span></div><div class="line"><span class="string">    '</span>主要针对最后是两个回车的特殊情况这种特殊情况下，替换后少选择一位字符，影响后续操作</div><div class="line">    If Selection.Text Like <span class="string">"*[!。\?？\!！”：；]"</span> &amp; Chr(13) Then</div><div class="line">        Flag = 1</div><div class="line">    End If</div><div class="line">    <span class="string">'再将前面不是句号的回车删除</span></div><div class="line"><span class="string">    With Selection.Find</span></div><div class="line"><span class="string">        .Text = "([!.。\?？\!！”：；])^13"</span></div><div class="line"><span class="string">        .Replacement.Text = "\1"</span></div><div class="line"><span class="string">        .MatchWildcards = True '</span>使用通配符</div><div class="line">        .Wrap = wdFindStop <span class="string">'把 .Wrap = wdFindAsk 改成 .Wrap = wdFindStop对应于“是否搜索其余部分”中的“否”</span></div><div class="line"><span class="string">        .Execute Replace:=wdReplaceAll</span></div><div class="line"><span class="string">    End With</span></div><div class="line"><span class="string">   </span></div><div class="line"><span class="string">    If Flag Then</span></div><div class="line"><span class="string">        Selection.MoveLeft unit:=wdCharacter, Count:=-1, Extend:=wdExtend '</span>取消选定最后一个回车符</div><div class="line">    End If</div><div class="line">   </div><div class="line">    <span class="string">'清除替换的内容</span></div><div class="line"><span class="string">    Selection.Find.Replacement.Text = ""</span></div><div class="line"><span class="string">End Sub</span></div></pre></td></tr></table></figure>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>代码主要从参考1修改而来，主要修改：</p>
-<ol>
-<li>源代码第一个With Selection.Find部分导致空格删除，使得中文可以，但英文全部空格被删除，所以需要注释=掉或者删除掉</li>
-<li>第三个With Selection.Find部分需要加一个.号，主要针对英文</li>
-</ol>
-<p><img src="https://i.imgur.com/Z2LfJ65.png" alt=""></p>
-<p><img src="https://i.imgur.com/mGL1UNA.png" alt=""></p>
-<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p><img src="https://i.imgur.com/9GTjAFf.jpg" alt=""></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_51817ae50102w8id.html" target="_blank" rel="external">[源码]文本从PDF等粘贴到WORD中，智能删除多余的空格和回车</a></p>
-<p>（2）<a href="https://www.datanumen.com/blogs/how-to-remove-the-formatting-of-pasted-texts-with-macro-and-vba-in-your-word/" target="_blank" rel="external">How to Remove the Formatting of Pasted Texts with Macro and VBA in Your Word</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;从PDF或网页中复制一段文字再粘贴到WORD中，会出现很多多余的空格和回车，一个一个去删除费时费力费心。在word创建宏，并设置按钮即可。&lt;/p&gt;
-&lt;blockquote class=&quot;blockquote-center&quot;&gt;创建宏去除从pdf复制到word的回车换行&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="https:///AnJingwd.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="技术" scheme="https:///AnJingwd.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文献查询与引用技巧</title>
-    <link href="https:///AnJingwd.github.io/2017/11/25/%E6%96%87%E7%8C%AE%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%BC%95%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
-    <id>https:///AnJingwd.github.io/2017/11/25/文献查询与引用技巧/</id>
-    <published>2017-11-25T11:24:52.000Z</published>
-    <updated>2017-12-15T10:27:28.174Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">文献查询与引用技巧</blockquote>
-
-<a id="more"></a>
-<h1 id="只查询review"><a href="#只查询review" class="headerlink" title="只查询review"></a>只查询review</h1><p><img src="https://i.imgur.com/ugJKXz7.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/E9XOueN.jpg" alt=""></p>
-<h1 id="sci-hub最新地址（20171215）"><a href="#sci-hub最新地址（20171215）" class="headerlink" title="sci-hub最新地址（20171215）"></a>sci-hub最新地址（20171215）</h1><ol>
-<li><a href="https://scihub22266qpcxt.onion.link/" target="_blank" rel="external">https://scihub22266qpcxt.onion.link/</a></li>
-<li><a href="http://sci-hub.tw/" target="_blank" rel="external">http://sci-hub.tw/</a> 或者 www.sci-hub.tw</li>
-<li><a href="http://sci-hub.hk/" target="_blank" rel="external">http://sci-hub.hk/</a> 或者 www.sci-hub.hk</li>
-<li>80.82.77.83</li>
-<li>80.82.77.84</li>
-</ol>
-<h1 id="实验protocol或者数据分析protocol"><a href="#实验protocol或者数据分析protocol" class="headerlink" title="实验protocol或者数据分析protocol"></a>实验protocol或者<strong>数据分析protocol</strong></h1><p><a href="https://www.nature.com/search/advanced" target="_blank" rel="external">Nature Protocols</a>​ 或者 <a href="https://link.springer.com/" target="_blank" rel="external">springer protocol </a></p>
-<p><img src="https://i.imgur.com/uvbWpnD.jpg" alt=""></p>
-<h1 id="文献引用的下载"><a href="#文献引用的下载" class="headerlink" title="文献引用的下载"></a>文献引用的下载</h1><ul>
-<li>方法一：<a href="http://jingyan.baidu.com/article/7f766daf970aef4101e1d002.html" target="_blank" rel="external">从中国知网</a></li>
-<li>方法二：<a href="http://jingyan.baidu.com/article/f79b7cb378992f9144023ea2.html" target="_blank" rel="external">从百度学术</a></li>
-<li>方法三：<a href="https://www.howsci.com/endnote-import-pubmed.html" target="_blank" rel="external">从Pubmed</a></li>
-<li>方法四：<a href="https://apps.webofknowledge.com/UA_GeneralSearch_input.do?product=UA&amp;search_mode=GeneralSearch&amp;SID=5EmIvuZs9xgC4RP8XzA&amp;preferencesSaved=" target="_blank" rel="external">从web of science</a> &emsp;&emsp;<a href="http://jingyan.baidu.com/article/e75aca85150856142edac635.html" target="_blank" rel="external">方法</a></li>
-</ul>
-<p>快速下载一篇文献后的引文导入EndNote：<a href="http://blog.sina.com.cn/s/blog_1398ef3510102wtwi.html" target="_blank" rel="external">方法</a></p>
-<p>剩下依然找不到，或者是电子文献的类型的只有手动在EndNote中生成了：<a href="http://jingyan.baidu.com/article/fec4bce2752613f2618d8b29.html" target="_blank" rel="external">方法</a></p>
-<p>web of science文献检索技巧：</p>
-<p>首先根据一个关键词检索，然后在搜索到的结果中精炼</p>
-<p><img src="https://i.imgur.com/A0apSWt.jpg" alt=""></p>
-<h1 id="文献引用的生成"><a href="#文献引用的生成" class="headerlink" title="文献引用的生成"></a>文献引用的生成</h1><p>对于EndNote自带，或者官网有的Style可以直接下载使用</p>
-<p>（1）<a href="http://jingyan.baidu.com/article/456c463b53754d0a58314427.html" target="_blank" rel="external">Endnote期刊格式的下载和使用</a></p>
-<p>（2）<a href="http://mp.weixin.qq.com/s?__biz=MjM5ODcyMzk0Mg==&amp;mid=2651045955&amp;idx=1&amp;sn=c9b303938094d2f45ccd372c92c266ea&amp;scene=21#wechat_redirect" target="_blank" rel="external">Endnote文献引用格式全解之常规引用格式获取方法</a></p>
-<p>   &emsp;&emsp;<a href="http://endnote.com/downloads" target="_blank" rel="external">EndNote官网</a></p>
-<h1 id="修改文献引用格式"><a href="#修改文献引用格式" class="headerlink" title="修改文献引用格式"></a>修改文献引用格式</h1><p>&emsp;&emsp;硕士论文，博士论文没有完全对应的那种style，虽然EndnoteX7中已经有与GB/T7714-2005对应的两种参考文献输出格式：Chinese Std GBT7714(author-year).ens和Chinese Std GBT7714(numeric).ens，分别对应著者－出版年制和顺序编码制。但是这两个自带的style都不能完全满足国家标准的要求，还有就是不同学校的具体要求不一样，所以，需要自己在此基础上自定义。</p>
-<ol>
-<li>顺序编码制</li>
-</ol>
-<p>&emsp;&emsp;顺序编码制是指作者在论文中所引用的文献按它们在文中出现的先后顺序，用阿拉伯数字加方括号连续编码，视具体情况把序号作为上角或作为语句的组成部分进行标注，并在文后参考文献表中，各条文献按在论文中出现的文献序号顺序依次排列。</p>
-<ol>
-<li>著者-出版年制</li>
-</ol>
-<p>&emsp;&emsp;著者-出版年制”是指正文中各篇文献的标注内容由著者姓氏与出版年构成，并置于圆括号“（）”内；参考文献表按文种集中后按著者字顺和出版年排列的引用文献标注方法。</p>
-<p>网上教程比较多，就不一一列举了，汇总一些问题的可行的解决方法还是可以的，已亲测可行哦！！</p>
-<p>问题一：endnote 出入文献怎样让英文参考文献在前,中文在后？<a href="https://www.zhihu.com/question/54447786" target="_blank" rel="external">方法</a></p>
-<p>问题二：EndNote中英文混排时etal和等的3种解决方法? <a href="https://www.howsci.com/endnote-eng-cn-refer-etal.html" target="_blank" rel="external">方法</a> &emsp;&emsp;<a href="http://jingyan.baidu.com/article/8065f87f804c5c233124989e.html" target="_blank" rel="external">方法</a></p>
-<h2 id="细节问题："><a href="#细节问题：" class="headerlink" title="细节问题："></a>细节问题：</h2><p>问题一：编号后的间隙有点大，不符合标准。默认的为2个字符，但是毕设手册要求的应该是1个字符? <a href="http://yjbys.com/jiuyezhidao/fanwen/qitafanwen/1364745.html" target="_blank" rel="external">方法</a></p>
-<p>问题二：EndNoteX7一段文字如何引用多个连续文献[2-7]？<a href="http://www.cappchem.com/Article2014/1179.html" target="_blank" rel="external">方法</a></p>
-<p>问题三：在endnoteX5中怎么用分号而不是逗号把多个citation分开？<a href="https://zhidao.baidu.com/question/444890445.html" target="_blank" rel="external">方法</a></p>
-<p>问题四：搜狗输入法中文实心点怎么打?<a href="https://zhidao.baidu.com/question/333654623.html" target="_blank" rel="external">方法</a></p>
-<p>问题五：Endnote中参考文献期刊名称的全称与缩写转换?<a href="http://jingyan.baidu.com/article/fdbd4277c428cbb89e3f4827.html" target="_blank" rel="external">方法</a></p>
-<h2 id="综合性推荐"><a href="#综合性推荐" class="headerlink" title="综合性推荐"></a>综合性推荐</h2><p>（1） <a href="http://blog.sina.com.cn/s/blog_770ffb870101lzoe.html" target="_blank" rel="external">Endnote中英文混排之完美解决（转）</a></p>
-<p>（2）<a href="http://blog.csdn.net/zhengmingtoh/article/details/7383109" target="_blank" rel="external">在endnote中制作GB/T7714《文后参考文献著录规则》的输出格式</a></p>
-<p>（3）<a href="http://wenku.baidu.com/view/ae6f23960508763230121235.html" target="_blank" rel="external">endnoteX7全新教程</a></p>
-<h2 id="范例"><a href="#范例" class="headerlink" title="范例"></a>范例</h2><p>在EndNote中创建同济大学研究生学位论文参考文献格式! <a href="http://blog.sina.com.cn/s/blog_489d7be80102vktp.html" target="_blank" rel="external">网址</a></p>
-<p>徐源_毕业论文参考文献输出标准格式.ens文件下载! <a href="http://vdisk.weibo.com/s/BGPusUMycYWAk" target="_blank" rel="external">网址</a></p>
-<p>另科研动力主页有许多关于EndNote的资料，基本可以解决文献应用的你遇到的所有问题：<a href="https://www.howsci.com/" target="_blank" rel="external">网址</a></p>
-<h1 id="快速导入一篇文章引用的参考文献至EndNoted再次引用"><a href="#快速导入一篇文章引用的参考文献至EndNoted再次引用" class="headerlink" title="快速导入一篇文章引用的参考文献至EndNoted再次引用"></a>快速导入一篇文章引用的参考文献至EndNoted再次引用</h1><p>&emsp;&emsp;在使用Endnote过程中遇到这样一个情况，如果发现一篇很好的文章，其后参考文献都很好，是某一方向或领域的经典，如何将这些文章一次性导入自己的Endnote中呢？最初用笨笨的方法，那就是一条条的往里输，等几十篇文章输完，快则一两个小时，慢的话一个上午甚至一天才能搞定。网上有使用<a href="http://www.scopus.com/home.url" target="_blank" rel="external">scopus数据库</a>的，并且有<a href="http://www.docin.com/p-531060060.html" target="_blank" rel="external">教程</a>,但是scopus是需要登陆的，折腾了好久，在网上也没找到能用的账号。于是乎想想免费通用的办法罗。首先想到的是PubMed，确实可以，但是以下方法只对PubMed收录的免费的文献适用，对于全文版权在其他出版商的文献则无能为力了。</p>
-<p><img src="https://i.imgur.com/QdNvc4z.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/TLeFEAt.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/PQA1cfG.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/zkjh53W.jpg" alt=""></p>
-<p>所以想到了Web of Science，这个方法更加通用可行！！已亲测，只需7步，快速导入一篇文章引用的参考文献至EndNoted。</p>
-<p><img src="https://i.imgur.com/YBcPEBG.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/nBnnvme.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/Ty02l9W.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/bv7jwIP.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/VjWmIok.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/h4cANxZ.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/o8bviUS.jpg" alt=""></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;文献查询与引用技巧&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="https:///AnJingwd.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="技术" scheme="https:///AnJingwd.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
     
   </entry>
   

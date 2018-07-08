@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://i.imgur.com/vgCysAl.png">
 <meta property="og:image" content="https://i.imgur.com/Cu5w71N.png">
 <meta property="og:image" content="https://i.imgur.com/HlMwp7F.png">
-<meta property="og:updated_time" content="2018-04-11T10:50:23.029Z">
+<meta property="og:updated_time" content="2018-07-02T11:16:13.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IGV批量查看变异">
 <meta name="twitter:description" content="IGV批量查看变异并过滤">
@@ -398,7 +398,12 @@
 <a id="more"></a>
 <h1 id="IGV可视化准备"><a href="#IGV可视化准备" class="headerlink" title="IGV可视化准备"></a>IGV可视化准备</h1><p><a href="http://www.nature.com/nbt/journal/v29/n1/full/nbt.1754.html" target="_blank" rel="external">Nature biotechnology文献</a>：Integrative Genomics Viewer</p>
 <p><a href="http://software.broadinstitute.org/software/igv/download" target="_blank" rel="external">Downloads IGV </a>; &emsp;<a href="http://software.broadinstitute.org/software/igv/igvtools" target="_blank" rel="external">igvtools</a>为一些数据可视化预处理程序</p>
-<p>IGV可视化数据准备</p>
+<p>PS:igv 要求java 1.8 ,安装java1.8可参考<a href="https://www.cnblogs.com/xuliangxing/p/7066913.html" target="_blank" rel="external">链接</a></p>
+<pre><code>export JAVA_HOME=/home/wangdong/softwares/java1.8/jdk1.8.0_172
+export JRE_HOME=/home/wangdong/softwares/java1.8/jdk1.8.0_172/jre 
+export PATH=$PATH:/home/wangdong/softwares/java1.8/jdk1.8.0_172/bin 
+export CLASSPATH=./:/home/wangdong/softwares/java1.8/jdk1.8.0_172/lib:/home/wangdong/softwares/java1.8/jdk1.8.0_172/jre/lib
+</code></pre><p>IGV可视化数据准备</p>
 <ul>
 <li>不是什么数据都可以拿IGV看的，参考基因组必须为FASTA格式；</li>
 <li>IGV只是负责将比对结果可视化，并没有比对过程，所以不能直接载入reads；</li>
@@ -467,6 +472,16 @@
 <li>Read    pair orientation</li>
 </ul>
 <p>具体使用可查看：<a href="https://github.com/griffithlab/rnaseq_tutorial/wiki/LectureFiles/cshl/2016/IGV_Tutorial_Long_BroadInstitute.pdf" target="_blank" rel="external">IGV Lecture - Long, from Broad Institute    </a>，<strong>也包括了查看RNA-seq比对情况的操作</strong></p>
+<h2 id="vncviewer-连接上后黑屏解决"><a href="#vncviewer-连接上后黑屏解决" class="headerlink" title="vncviewer 连接上后黑屏解决"></a>vncviewer 连接上后黑屏解决</h2><p>参考：<a href="https://zhidao.baidu.com/question/269172162176272125.html" target="_blank" rel="external">vnc viewer连接黑屏</a></p>
+<p>（1）修改/home/wangdong/.vnc/xstartup文件<br>    vi /home/wangdong/.vnc/xstartup</p>
+<pre><code>##如果使用的是gnome图像界面，则需要注释掉以下两行,
+#xterm -geometry 80x24+10+10 -ls -title &quot;$VNCDESKTOP Desktop&quot; &amp;
+#twm &amp;
+##并添加以下这行：
+gnome-session &amp;
+</code></pre><p>（2）改变xstartup的权限</p>
+<pre><code>chmod 777 /home/wangdong/.vnc/xstartup
+</code></pre><p>ps: 首选在图形桌面用命令行运行igv.sh,再点击igv.sh运行</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.cnblogs.com/leezx/p/5603481.html" target="_blank" rel="external">可视化工具之 IGV 使用方法</a></p>
 <p>（2）<a href="https://gist.github.com/dfjenkins3/5c6dc1e55e78fa17b931" target="_blank" rel="external">IGV_Batch_Screenshots.md</a></p>
 <p>（3）<a href="http://blog.csdn.net/Bingorl/article/details/78289280?locationNum=8&amp;fps=1" target="_blank" rel="external">如何使用VNC Viewer连接远程CentOS服务器</a></p>
@@ -623,7 +638,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -634,7 +649,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -645,7 +660,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -876,7 +891,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IGV可视化准备"><span class="nav-number">1.</span> <span class="nav-text">IGV可视化准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IGV批量查看变异"><span class="nav-number">2.</span> <span class="nav-text">IGV批量查看变异</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成批量查看-bat文件"><span class="nav-number">2.1.</span> <span class="nav-text">生成批量查看.bat文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VNC-Viewer使用"><span class="nav-number">3.</span> <span class="nav-text">VNC Viewer使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变异的过滤"><span class="nav-number">4.</span> <span class="nav-text">变异的过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看技巧"><span class="nav-number">4.1.</span> <span class="nav-text">查看技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤标准"><span class="nav-number">4.2.</span> <span class="nav-text">过滤标准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Important-metrics-for-evaluating-the-validity-of-SNVs"><span class="nav-number">4.2.1.</span> <span class="nav-text">Important    metrics    for    evaluating    the    validity of    SNVs:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区分SNP突变和错配："><span class="nav-number">4.2.2.</span> <span class="nav-text">区分SNP突变和错配：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Important-metrics-for-evaluating-SVs"><span class="nav-number">4.2.3.</span> <span class="nav-text">Important    metrics    for    evaluating    SVs:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IGV可视化准备"><span class="nav-number">1.</span> <span class="nav-text">IGV可视化准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IGV批量查看变异"><span class="nav-number">2.</span> <span class="nav-text">IGV批量查看变异</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成批量查看-bat文件"><span class="nav-number">2.1.</span> <span class="nav-text">生成批量查看.bat文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VNC-Viewer使用"><span class="nav-number">3.</span> <span class="nav-text">VNC Viewer使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变异的过滤"><span class="nav-number">4.</span> <span class="nav-text">变异的过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看技巧"><span class="nav-number">4.1.</span> <span class="nav-text">查看技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤标准"><span class="nav-number">4.2.</span> <span class="nav-text">过滤标准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Important-metrics-for-evaluating-the-validity-of-SNVs"><span class="nav-number">4.2.1.</span> <span class="nav-text">Important    metrics    for    evaluating    the    validity of    SNVs:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区分SNP突变和错配："><span class="nav-number">4.2.2.</span> <span class="nav-text">区分SNP突变和错配：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Important-metrics-for-evaluating-SVs"><span class="nav-number">4.2.3.</span> <span class="nav-text">Important    metrics    for    evaluating    SVs:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vncviewer-连接上后黑屏解决"><span class="nav-number">4.3.</span> <span class="nav-text">vncviewer 连接上后黑屏解决</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -924,7 +939,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.9k字</span>
+  <span class="post-count">博客全站共75.2k字</span>
 </div>
 
 <div class="powered-by">

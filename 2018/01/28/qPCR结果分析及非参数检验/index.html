@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://i.imgur.com/v10u3n5.jpg">
 <meta property="og:image" content="https://i.imgur.com/3Wd6BKb.png">
 <meta property="og:image" content="https://i.imgur.com/4Lgn5iR.png">
-<meta property="og:updated_time" content="2018-01-28T11:22:47.442Z">
+<meta property="og:updated_time" content="2018-05-24T12:51:02.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="qPCR结果分析及非参数检验">
 <meta name="twitter:description" content="qPCR结果分析及非参数检验">
@@ -409,7 +409,7 @@
 <h1 id="组间差异非参数检验"><a href="#组间差异非参数检验" class="headerlink" title="组间差异非参数检验"></a>组间差异非参数检验</h1><p>原始数据处理（EXCEL）：</p>
 <p><img src="https://i.imgur.com/4Lgn5iR.png" alt=""></p>
 <p>&emsp;&emsp;如果数据无法满足t检验或ANOVA的参数假设，可以转而使用非参数方法。<strong>若两组数据独立，</strong> 可以使用Wilcoxon秩和检验（更广为人知的名字是Mann-Whitney U检验）来评估观测是否是从相同的概率分布中抽得的（即，在一个总体中获得更高得分的概率是否比另<br>一个总体要大）。调用格式为：</p>
-<pre><code>wilcox.test(y ~ x, data)
+<pre><code>wilcox.test(y ~ x, data，exact=FALSE)
 </code></pre><p>其中的y是数值型变量，而x是一个二分变量。</p>
 <p>Wilcoxon符号秩检验是<strong>非独立样本</strong>t检验的一种非参数替代方法。它适用于两组成对数据和无法保证正态性假设的情境。调用格式与Mann-Whitney U检验完全相同，不过还可以添加参数paired=TRUE。</p>
 <h2 id="绘制箱图"><a href="#绘制箱图" class="headerlink" title="绘制箱图"></a>绘制箱图</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#qPCR_barplot.R</span></div><div class="line">setwd(<span class="string">"F:/R working directory/qPCR"</span>)</div><div class="line">qPCR&lt;-read.csv(<span class="string">"miRNA_qPCR_plot.csv"</span>,header=<span class="literal">TRUE</span>,check.names = <span class="literal">FALSE</span>)</div><div class="line"><span class="keyword">library</span>(ggplot2)</div><div class="line">p&lt;-ggplot(data=qPCR, aes(x=miRNA,y=value))+geom_boxplot(aes(fill=sample))</div><div class="line"></div><div class="line">p + facet_wrap(~ miRNA, scales=<span class="string">"free"</span>)</div></pre></td></tr></table></figure>
@@ -573,7 +573,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -584,7 +584,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -595,7 +595,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -874,7 +874,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.9k字</span>
+  <span class="post-count">博客全站共75.2k字</span>
 </div>
 
 <div class="powered-by">

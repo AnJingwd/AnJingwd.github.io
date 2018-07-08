@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://i.imgur.com/Wlr5oMX.jpg">
 <meta property="og:image" content="https://i.imgur.com/IaxvSSe.jpg">
 <meta property="og:image" content="https://i.imgur.com/vE4ODha.jpg">
-<meta property="og:updated_time" content="2018-04-01T06:49:52.475Z">
+<meta property="og:updated_time" content="2018-05-27T07:25:16.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNA-seq质控">
 <meta name="twitter:description" content="RNA-seq质控：去除低质量reads，adapter以及rRNA">
@@ -430,6 +430,12 @@
 <p>使用软件：trim_galore ,该软件通过调用FastQC进行质检，调用cutadapt去接头，同时还能去除低质量的reads。附加功能还有去除RRBS(for directional, non-directional (or paired-end) sequencing)测序文件的甲基化偏好位点。</p>
 <p>其中去除低质量reads时最重要的两个参数是最小Phred score（1-30）和最小序列长度，不同文章对此观点不同，一般推荐Phred score 20 (90%置信区间)和最小50%-70%的序列长度。</p>
 <p><a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" target="_blank" rel="external">Trim Galore!官网</a>， Trim Galore is now also available from<a href="https://github.com/FelixKrueger/TrimGalore" target="_blank" rel="external"> GitHub</a>，具体参数使用参考<a href="https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md" target="_blank" rel="external">User Guide</a>。</p>
+<h2 id="4-GC"><a href="#4-GC" class="headerlink" title="4. GC"></a>4. GC</h2><p>平滑分布的锐利峰通常是特定污染物（例如适配体二聚体）的结果，这可能被过度表示的序列模块所挑选。更宽的峰可能代表不同物种的污染</p>
+<h2 id="5-常见问题"><a href="#5-常见问题" class="headerlink" title="5. 常见问题"></a>5. 常见问题</h2><p><a href="https://www.biostars.org/p/160440/" target="_blank" rel="external">Question: GC content and Kmer</a></p>
+<p>For RNAseq datasets one typically sees failures in those modules. I should point out that FastQC is really geared toward whole-genome sequencing. We use it for all types of datasets, but many of them will have failures in various modules that can be ignored.</p>
+<p><a href="https://www.biostars.org/p/159590/" target="_blank" rel="external">Many overrepresented sequences in RNA-seq data. Should them be trimmed out?</a></p>
+<p>High sequence duplication levels in RNA-seq are normal and expected. Do not remove duplicates. This would underestimate the true expression of highly expressed genes, as it would artificially downscale the counts of these genes.</p>
+<p>n RNA-Seq libraries sequences from different transcripts will be present at wildly different levels in the starting population. In order to be able to observe lowly expressed transcripts it is therefore common to greatly over sequence high expressed transcripts, and this will potentially create large set of duplicates. This will result in high overall duplication in this test, and will often produce peaks in the higher duplication bins. This duplication will come from physically connected regions, and an examination of the distribution of duplicates in a specific genomic region will allow the distinction between over-sequencing and general technical duplication, but these distinctions are not possible from raw fastq files.</p>
 <p>对于RRBS samples, 首先进行quality trimming，从3’端剪切掉低质量的reads；然后调用cutadapt程序从3’端去除接头，如果具体序列没有提供，其将使用标准的Illumina配对接头的前13bp （’AGATCGGAAGAGC’）序列来去除接头。给了控制去接头过程的严格程度，需要指定与接头序列最小的overlap数目，或者默认为1（即使与接头序列只有一个bp的overlap也会被剪切掉）。</p>
 <pre><code>agapter1=GATCGGAAGAGCACACGTCTGAACTCCAGTCACCGATGTATCTCGTATGC
 adapter2=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT
@@ -665,7 +671,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -676,7 +682,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -687,7 +693,7 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -918,7 +924,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pipline"><span class="nav-number">1.</span> <span class="nav-text">pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建库质控"><span class="nav-number">2.</span> <span class="nav-text">建库质控</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#质控"><span class="nav-number">3.</span> <span class="nav-text">质控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-去除低质量的reads"><span class="nav-number">3.1.</span> <span class="nav-text">1. 去除低质量的reads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-检查每个tile的质量"><span class="nav-number">3.2.</span> <span class="nav-text">2. 检查每个tile的质量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Adapter-Content"><span class="nav-number">3.3.</span> <span class="nav-text">3. Adapter Content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐"><span class="nav-number">3.4.</span> <span class="nav-text">做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除核糖体rRNA"><span class="nav-number">4.</span> <span class="nav-text">去除核糖体rRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建索引"><span class="nav-number">4.1.</span> <span class="nav-text">建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去除rRNA"><span class="nav-number">4.2.</span> <span class="nav-text">去除rRNA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pipline"><span class="nav-number">1.</span> <span class="nav-text">pipline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建库质控"><span class="nav-number">2.</span> <span class="nav-text">建库质控</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#质控"><span class="nav-number">3.</span> <span class="nav-text">质控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-去除低质量的reads"><span class="nav-number">3.1.</span> <span class="nav-text">1. 去除低质量的reads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-检查每个tile的质量"><span class="nav-number">3.2.</span> <span class="nav-text">2. 检查每个tile的质量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Adapter-Content"><span class="nav-number">3.3.</span> <span class="nav-text">3. Adapter Content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-GC"><span class="nav-number">3.4.</span> <span class="nav-text">4. GC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-常见问题"><span class="nav-number">3.5.</span> <span class="nav-text">5. 常见问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐"><span class="nav-number">3.6.</span> <span class="nav-text">做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除核糖体rRNA"><span class="nav-number">4.</span> <span class="nav-text">去除核糖体rRNA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建索引"><span class="nav-number">4.1.</span> <span class="nav-text">建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去除rRNA"><span class="nav-number">4.2.</span> <span class="nav-text">去除rRNA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -966,7 +972,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共71.9k字</span>
+  <span class="post-count">博客全站共75.2k字</span>
 </div>
 
 <div class="powered-by">

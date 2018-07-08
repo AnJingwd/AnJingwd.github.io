@@ -4,12 +4,52 @@
 
     
   <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/05/09/k-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0/</loc>
-    <lastmod>2018-05-09T14:15:10.652Z</lastmod>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/14/miniconda%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-07-08T02:04:11.236Z</lastmod>
     <data>
         <display>
-        <title>k_means聚类算法python实现</title>
-        <pubTime>2018-05-09T14:04:50.000Z</pubTime>
+        <title>miniconda3安装及使用</title>
+        <pubTime>2017-08-14T04:45:54.000Z</pubTime>
+        
+        <tag>软件</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E8%BD%AF%E4%BB%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/05/13/Kaggle%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2018-07-08T01:21:01.828Z</lastmod>
+    <data>
+        <display>
+        <title>Kaggle</title>
+        <pubTime>2018-05-13T10:21:08.000Z</pubTime>
+        
+        <tag>数据竞赛</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据竞赛" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/04/03/HMM%E4%B8%8Eviterbi%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2018-07-08T01:18:00.631Z</lastmod>
+    <data>
+        <display>
+        <title>HMM与viterbi算法</title>
+        <pubTime>2018-04-03T02:03:20.000Z</pubTime>
         
         <tag>算法</tag>
          
@@ -24,8 +64,138 @@
 
     
   <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/07/07/%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E8%BD%AF%E4%BB%B6%E6%B1%87%E6%80%BB/</loc>
+    <lastmod>2018-07-07T07:58:59.991Z</lastmod>
+    <data>
+        <display>
+        <title>基因差异表达软件汇总</title>
+        <pubTime>2018-07-07T07:58:59.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/02/05/RNA-seq%E9%89%B4%E5%AE%9ALncRNA%E6%A6%82%E8%BF%B0/</loc>
+    <lastmod>2018-07-07T07:25:02.471Z</lastmod>
+    <data>
+        <display>
+        <title>RNA-seq鉴定LncRNA概述</title>
+        <pubTime>2018-02-05T13:44:08.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2018-07-03T00:42:23.076Z</lastmod>
+    <data>
+        <display>
+        <title>Linux神器之grep,awk操作gtf文件</title>
+        <pubTime>2017-08-14T02:21:26.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/26/IGV%E6%89%B9%E9%87%8F%E6%9F%A5%E7%9C%8B%E5%8F%98%E5%BC%82/</loc>
+    <lastmod>2018-07-02T11:16:13.114Z</lastmod>
+    <data>
+        <display>
+        <title>IGV批量查看变异</title>
+        <pubTime>2018-01-26T03:21:34.000Z</pubTime>
+        
+        <tag>NGS</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/03/12/lncRNApipe%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-07-01T01:40:30.742Z</lastmod>
+    <data>
+        <display>
+        <title>lncRNApipe安装及使用</title>
+        <pubTime>2018-03-12T11:28:53.000Z</pubTime>
+        
+        <tag>NGS</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/25/linux%E5%91%BD%E4%BB%A4%E4%B9%8Bnohup/</loc>
+    <lastmod>2018-06-27T09:46:40.916Z</lastmod>
+    <data>
+        <display>
+        <title>linux命令之nohup</title>
+        <pubTime>2017-08-25T08:49:13.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/10/29/%E8%AE%BE%E8%AE%A1%E5%8F%8A%E6%8C%91%E9%80%89%E6%8D%95%E8%8E%B7%E6%B5%8B%E5%BA%8F%E6%8E%A2%E9%92%88%EF%BC%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E8%A6%86%E7%9B%96%E5%BA%A6/</loc>
+    <lastmod>2018-06-26T05:40:53.659Z</lastmod>
+    <data>
+        <display>
+        <title>设计及挑选捕获测序探针，并计算覆盖度</title>
+        <pubTime>2017-10-29T04:17:18.000Z</pubTime>
+        
+        <tag>NGS实验</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS实验" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS%E5%AE%9E%E9%AA%8C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    <lastmod>2018-05-09T11:25:15.042Z</lastmod>
+    <lastmod>2018-06-22T05:12:57.094Z</lastmod>
     <data>
         <display>
         <title>常用链接（持续更新）</title>
@@ -37,6 +207,123 @@
            
              
               <breadCrumb title="常用链接" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/</loc>
+    <lastmod>2018-05-28T04:00:16.528Z</lastmod>
+    <data>
+        <display>
+        <title>查看R包源码及linux下编译安装R</title>
+        <pubTime>2018-01-28T14:08:43.000Z</pubTime>
+        
+        <tag>R</tag>
+         
+         
+           
+             
+              <breadCrumb title="R" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/R/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/</loc>
+    <lastmod>2018-05-27T07:25:16.975Z</lastmod>
+    <data>
+        <display>
+        <title>RNA-seq质控</title>
+        <pubTime>2018-01-10T13:39:44.000Z</pubTime>
+        
+        <tag>NGS</tag>
+         
+         
+           
+             
+              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/28/qPCR%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E5%8F%8A%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C/</loc>
+    <lastmod>2018-05-24T12:51:02.131Z</lastmod>
+    <data>
+        <display>
+        <title>qPCR结果分析及非参数检验</title>
+        <pubTime>2018-01-28T02:33:14.000Z</pubTime>
+        
+        <tag>实验</tag>
+         
+         
+           
+             
+              <breadCrumb title="实验" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E5%AE%9E%E9%AA%8C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2018-05-12T15:40:37.656Z</lastmod>
+    <data>
+        <display>
+        <title>MySQL数据库安装及入门</title>
+        <pubTime>2017-10-21T10:06:15.000Z</pubTime>
+        
+        <tag>MySQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/02/%E4%BF%AE%E6%94%B9host%E6%96%87%E4%BB%B6-%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
+    <lastmod>2018-05-11T10:07:13.595Z</lastmod>
+    <data>
+        <display>
+        <title>修改host文件-科学上网</title>
+        <pubTime>2017-08-02T14:21:51.000Z</pubTime>
+        
+        <tag>技术</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/05/09/k-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0/</loc>
+    <lastmod>2018-05-09T14:15:10.652Z</lastmod>
+    <data>
+        <display>
+        <title>k_means聚类算法python实现</title>
+        <pubTime>2018-05-09T14:04:50.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="算法" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E7%AE%97%E6%B3%95/"/>
           
         </display>
     </data>
@@ -77,41 +364,6 @@
            
              
               <breadCrumb title="NGS软件" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS%E8%BD%AF%E4%BB%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/02/05/RNA-seq%E9%89%B4%E5%AE%9ALncRNA%E6%A6%82%E8%BF%B0/</loc>
-    <lastmod>2018-04-25T01:42:04.633Z</lastmod>
-    <data>
-        <display>
-        <title>RNA-seq鉴定LncRNA概述</title>
-        <pubTime>2018-02-05T13:44:08.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/</loc>
-    <lastmod>2018-04-19T13:04:18.807Z</lastmod>
-    <data>
-        <display>
-        <title>查看R包源码及linux下编译安装R</title>
-        <pubTime>2018-01-28T14:08:43.000Z</pubTime>
-        
-        <tag>R</tag>
-         
-         
-           
-             
-              <breadCrumb title="R" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/R/"/>
           
         </display>
     </data>
@@ -179,72 +431,12 @@
 
     
   <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/03/12/lncRNApipe%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2018-04-14T03:43:34.106Z</lastmod>
-    <data>
-        <display>
-        <title>lncRNApipe安装及使用</title>
-        <pubTime>2018-03-12T11:28:53.000Z</pubTime>
-        
-        <tag>NGS</tag>
-         
-         
-           
-             
-              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/26/IGV%E6%89%B9%E9%87%8F%E6%9F%A5%E7%9C%8B%E5%8F%98%E5%BC%82/</loc>
-    <lastmod>2018-04-11T10:50:23.029Z</lastmod>
-    <data>
-        <display>
-        <title>IGV批量查看变异</title>
-        <pubTime>2018-01-26T03:21:34.000Z</pubTime>
-        
-        <tag>NGS</tag>
-         
-         
-           
-             
-              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/12/26/GATK3.8%E5%88%86%E6%9E%90%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2018-04-01T10:10:29.537Z</lastmod>
     <data>
         <display>
         <title>GATK3.8分析环境搭建</title>
         <pubTime>2017-12-26T10:15:59.000Z</pubTime>
-        
-        <tag>NGS</tag>
-         
-         
-           
-             
-              <breadCrumb title="NGS" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/</loc>
-    <lastmod>2018-04-01T06:49:52.475Z</lastmod>
-    <data>
-        <display>
-        <title>RNA-seq质控</title>
-        <pubTime>2018-01-10T13:39:44.000Z</pubTime>
         
         <tag>NGS</tag>
          
@@ -359,26 +551,6 @@
 
     
   <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/10/29/%E8%AE%BE%E8%AE%A1%E5%8F%8A%E6%8C%91%E9%80%89%E6%8D%95%E8%8E%B7%E6%B5%8B%E5%BA%8F%E6%8E%A2%E9%92%88%EF%BC%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E8%A6%86%E7%9B%96%E5%BA%A6/</loc>
-    <lastmod>2018-03-05T01:30:46.905Z</lastmod>
-    <data>
-        <display>
-        <title>设计及挑选捕获测序探针，并计算覆盖度</title>
-        <pubTime>2017-10-29T04:17:18.000Z</pubTime>
-        
-        <tag>NGS实验</tag>
-         
-         
-           
-             
-              <breadCrumb title="NGS实验" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/NGS%E5%AE%9E%E9%AA%8C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/03/picard/</loc>
     <lastmod>2018-02-26T08:20:09.710Z</lastmod>
     <data>
@@ -419,26 +591,6 @@
 
     
   <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/28/qPCR%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E5%8F%8A%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C/</loc>
-    <lastmod>2018-01-28T11:22:47.442Z</lastmod>
-    <data>
-        <display>
-        <title>qPCR结果分析及非参数检验</title>
-        <pubTime>2018-01-28T02:33:14.000Z</pubTime>
-        
-        <tag>实验</tag>
-         
-         
-           
-             
-              <breadCrumb title="实验" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/%E5%AE%9E%E9%AA%8C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2018/01/24/%E8%AE%BE%E8%AE%A1miRNA%E7%9A%84qPCR%E5%BC%95%E7%89%A9/</loc>
     <lastmod>2018-01-25T01:04:07.551Z</lastmod>
     <data>
@@ -467,26 +619,6 @@
            
              
               <breadCrumb title="R绘图" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/R%E7%BB%98%E5%9B%BE/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/</loc>
-    <lastmod>2018-01-21T03:08:08.532Z</lastmod>
-    <data>
-        <display>
-        <title>Linux神器之grep,awk操作gtf文件</title>
-        <pubTime>2017-08-14T02:21:26.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
           
         </display>
     </data>
@@ -640,26 +772,6 @@
         <display>
         <title>mysql数据库与生信</title>
         <pubTime>2017-11-23T08:03:44.000Z</pubTime>
-        
-        <tag>MySQL</tag>
-         
-         
-           
-             
-              <breadCrumb title="MySQL" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/MySQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2017-11-23T13:46:26.321Z</lastmod>
-    <data>
-        <display>
-        <title>MySQL数据库安装及入门</title>
-        <pubTime>2017-10-21T10:06:15.000Z</pubTime>
         
         <tag>MySQL</tag>
          
@@ -854,26 +966,6 @@
 
     
   <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/25/linux%E5%91%BD%E4%BB%A4%E4%B9%8Bnohup/</loc>
-    <lastmod>2017-09-01T03:17:00.417Z</lastmod>
-    <data>
-        <display>
-        <title>linux命令之nohup</title>
-        <pubTime>2017-08-25T08:49:13.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="https:///AnJingwd.github.iohttps:///AnJingwd.github.io/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/30/%E6%89%B9%E9%87%8Ffastqc/</loc>
     <lastmod>2017-09-01T03:16:09.393Z</lastmod>
     <data>
@@ -1037,21 +1129,4 @@
     
     
     
-    
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:///AnJingwd.github.io/2017/08/02/%E4%BF%AE%E6%94%B9host%E6%96%87%E4%BB%B6-%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
-    <lastmod>2017-08-02T14:23:07.443Z</lastmod>
-    <data>
-        <display>
-        <title>修改host文件-科学上网</title>
-        <pubTime>2017-08-02T14:21:51.000Z</pubTime>
-        
-        <tag>技术</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
 </urlset>
