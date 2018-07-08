@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R绘图," />
+  <meta name="keywords" content="NGS," />
 
 
 
@@ -96,21 +96,21 @@
 
 
 
-<meta name="description" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta name="keywords" content="R绘图">
+<meta name="description" content="计算捕获效率，测序深度，覆盖度">
+<meta name="keywords" content="NGS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/index.html">
+<meta property="og:title" content="计算捕获效率，测序深度，覆盖度">
+<meta property="og:url" content="https:///AnJingwd.github.io/2017/10/12/计算捕获效率，测序深度，覆盖度/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="解决ggplot 作图x轴和y轴不重合问题">
+<meta property="og:description" content="计算捕获效率，测序深度，覆盖度">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/c0EnfOi.png">
-<meta property="og:image" content="http://i.imgur.com/2GNk480.png">
-<meta property="og:updated_time" content="2018-01-21T05:26:24.976Z">
+<meta property="og:image" content="https://i.imgur.com/kB6QZTj.jpg">
+<meta property="og:image" content="https://i.imgur.com/Jf35oNH.jpg">
+<meta property="og:updated_time" content="2018-07-08T05:51:48.113Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta name="twitter:description" content="解决ggplot 作图x轴和y轴不重合问题">
-<meta name="twitter:image" content="http://i.imgur.com/c0EnfOi.png">
+<meta name="twitter:title" content="计算捕获效率，测序深度，覆盖度">
+<meta name="twitter:description" content="计算捕获效率，测序深度，覆盖度">
+<meta name="twitter:image" content="https://i.imgur.com/kB6QZTj.jpg">
 
 
 
@@ -143,7 +143,7 @@
 
 
 
-  <title>解决ggplot 作图x轴和y轴不重合问题 | 安静-不安静的博客</title>
+  <title>计算捕获效率，测序深度，覆盖度 | 安静-不安静的博客</title>
   
 
 
@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/12/计算捕获效率，测序深度，覆盖度/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -314,7 +314,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">解决ggplot 作图x轴和y轴不重合问题</h2>
+          <h2 class="post-title" itemprop="name headline">计算捕获效率，测序深度，覆盖度</h2>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T12:43:03+08:00">
-                2017-09-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-12T21:50:31+08:00">
+                2017-10-12
               </time>
             
 
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/R绘图/" itemprop="url" rel="index">
-                    <span itemprop="name">R绘图</span>
+                  <a href="https:/AnJingwd.github.io/categories/NGS/" itemprop="url" rel="index">
+                    <span itemprop="name">NGS</span>
                   </a>
                 </span>
 
@@ -386,28 +386,54 @@
       
 
       
-        <blockquote class="blockquote-center">解决ggplot 作图x轴和y轴不重合问题</blockquote>
+        <blockquote class="blockquote-center">计算捕获效率，测序深度，覆盖度</blockquote>
 
 <a id="more"></a>
-<p>只需要在作图时加上加上一下代码，即可即可让x轴和y轴在坐标原点重合：</p>
-<pre><code>scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
-</code></pre><p>现在用测试代码看看前后变化：</p>
-<pre><code>library(ggplot2)
-df &lt;- data.frame(x = 1:5, y = 1:5)
-p1 &lt;- ggplot(df, aes(x, y)) + geom_point()
-p1 &lt;- p1 + expand_limits(x = 0, y = 0)
-p1
-</code></pre><p><img src="http://i.imgur.com/c0EnfOi.png" alt=""></p>
-<pre><code>library(ggplot2)
-df &lt;- data.frame(x = 1:5, y = 1:5)
-p2 &lt;- ggplot(df, aes(x, y)) + geom_point()
-p2 &lt;- p2 + expand_limits(x = 0, y = 0)+ scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
-p2
-</code></pre><p><img src="http://i.imgur.com/2GNk480.png" alt=""></p>
-<p>参考：</p>
-<p>（1）<a href="http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot" target="_blank" rel="external">http://stackoverflow.com/questions/36669095/y-axis-wont-start-at-0-in-ggplot</a></p>
-<p>（2）<a href="http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r" target="_blank" rel="external">http://stackoverflow.com/questions/13701347/force-the-origin-to-start-at-0-in-ggplot2-r</a></p>
-<p>（3）<a href="http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap" target="_blank" rel="external">http://stackoverflow.com/questions/29955618/starting-y-axis-at-0-using-ggplot-and-facet-wrap</a></p>
+<p>&emsp;&emsp;WGS, exome, or targeted sequencing的数据分析的时候，经常需要计算全基因组整体的平均测序深度或者 target 区域的测序深度的分布情况以考察试剂盒的捕获效率。</p>
+<p><a href="http://ngsutils.org/" target="_blank" rel="external">bamutils / stats</a></p>
+<p><a href="https://github.com/arq5x/bedtools-protocols/blob/master/bedtools.md" target="_blank" rel="external">bedtools-protocols</a></p>
+<h1 id="全外显子测序"><a href="#全外显子测序" class="headerlink" title="全外显子测序"></a>全外显子测序</h1><p>&emsp;&emsp;使用不同公司的捕获panel,对应的捕获区域也不完全相同，可以在相应公司的官网下载相应的bed文件；当然也可以自行设计相应的捕获区域。</p>
+<p>例如Agilent公司的SureSelect 已经设计好的系列kits：<a href="https://earray.chem.agilent.com/suredesign/index.htm" target="_blank" rel="external">网址（需要注册）</a></p>
+<p><img src="https://i.imgur.com/kB6QZTj.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/Jf35oNH.jpg" alt=""></p>
+<ul>
+<li>SureSelect Human All Exon V5+UTRs为75M的捕获区域</li>
+<li>SureSelect Human All Exon V5 为50M的捕获区域</li>
+<li>SureSelect Human All Exon V6 r2为60M的捕获区域</li>
+</ul>
+<p>下载文件内容的具体说明可查看：<a href="https://earray.chem.agilent.com/suredesign/help/Target_enrichment_design_files_available_for_download.htm#Files_for_custom_SureSelect_designs" target="_blank" rel="external">Target enrichment design files available for download</a></p>
+<p>其中[design ID]_Covered.bed - This BED file contains a single track of the genomic regions that are covered by one or more probes in the design. The fourth column of the file contains annotation information. You can use this file for assessing coverage metrics.</p>
+<p>即是我们想要的用于计算覆盖度的bed文件。</p>
+<p>为了提高计算速度，bed文件最好先排序：</p>
+<p>sort -k1,1 ranges-cov.bed &gt; ranges-cov-sorted.bed</p>
+<p>#测序深度计算</p>
+<pre><code>bedtools coverage -hist -abam samp.01.bam -b target_regions.bed | grep ^all &gt; samp.01.bam.hist.all.txt
+</code></pre><p>输出结果含义：</p>
+<ol>
+<li>The number of features in B that overlapped (by at least one base pair) the A interval.</li>
+<li>The number of bases in A that had non-zero coverage from features in B.</li>
+<li>The length of the entry in A.</li>
+<li><p>The fraction of bases in A that had non-zero coverage from features in B.</p>
+<p> all   0   170 300 0.5666667<br> all   1   130 300 0.4333333</p>
+</li>
+</ol>
+<p>即第2列为测序深度depth 的X数，第5列为侧得碱基相对于target.bed区间的碱基占比。</p>
+<h2 id="GATK-DepthOfCoverage"><a href="#GATK-DepthOfCoverage" class="headerlink" title="GATK DepthOfCoverage"></a>GATK DepthOfCoverage</h2><p>&emsp;&emsp;This tool processes a set of bam files to determine coverage at different levels of partitioning and aggregation. Coverage can be analyzed per locus, per interval, per gene, or in total; can be partitioned by sample, by read group, by technology, by center, or by library; and can be summarized by mean, median, quartiles, and/or percentage of bases covered to or beyond a threshold. Additionally, reads and bases can be filtered by mapping or base quality score.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">#Time:91m52</span></div><div class="line">time java -Xmx<span class="variable">$&#123;mythread&#125;</span>g -jar <span class="variable">$gatk</span> \</div><div class="line">-T DepthOfCoverage \</div><div class="line">-R <span class="variable">$ref</span> \</div><div class="line">-L <span class="variable">$capture_interval</span> \</div><div class="line">-I <span class="variable">$realign</span>/<span class="variable">$&#123;sample&#125;</span>_realignment.BQSR.bam \</div><div class="line">-o <span class="variable">$preprocess</span>/<span class="variable">$&#123;sample&#125;</span>_coverage.depth \</div><div class="line">-ct 1 -ct 5 -ct 10 -ct 15 -ct 20 -ct 25 -ct 30 -ct 40 -ct 45 -ct 50 -ct 60 -ct 70 -ct 80 -ct 90 -ct 100 \</div><div class="line">-ct 110 -ct 120 -ct 130 -ct 140 -ct 150 -ct 160 -ct 170 -ct 180 -ct 190 -ct 200</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/alizrrao/DepthOfCoveragePerInterval" target="_blank" rel="external">GATK DepthOfCoverage输出结果解释</a></p>
+<p><a href="https://github.com/alizrrao/DepthOfCoveragePerInterval" target="_blank" rel="external">DepthOfCoveragePerInterval</a></p>
+<h1 id="全基因组测序"><a href="#全基因组测序" class="headerlink" title="全基因组测序"></a>全基因组测序</h1><p>使用picard工具集合中的CollectWgsMetricsWithNonZeroCoverage即可：</p>
+<pre><code>java -jar picard.jar CollectWgsMetricsWithNonZeroCoverage \
+    I=input.bam \
+    O=collect_wgs_metrics.txt \
+    CHART=collect_wgs_metrics.pdf  \
+    R=reference_sequence.fasta 
+</code></pre><h1 id="测序覆盖度和深度可视化展示"><a href="#测序覆盖度和深度可视化展示" class="headerlink" title="测序覆盖度和深度可视化展示"></a>测序覆盖度和深度可视化展示</h1><p>参考：Question: <a href="https://www.biostars.org/p/104063/" target="_blank" rel="external">How to plot coverage and depth statistics of a bam file</a></p>
+<p><a href="http://www.gettinggeneticsdone.com/2014/03/visualize-coverage-exome-targeted-ngs-bedtools.html" target="_blank" rel="external">Visualize coverage for targeted NGS (exome) experiments</a></p>
+<h1 id="alfred安装及使用"><a href="#alfred安装及使用" class="headerlink" title="alfred安装及使用"></a>alfred安装及使用</h1><pre><code>conda install -c bioconda alfred
+</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/bTXgveXq-1m_A4uOPv5rhg" target="_blank" rel="external">bam文件急速depth计算工具</a></p>
+<p>（2）<a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_coverage_DepthOfCoverage.php" target="_blank" rel="external">GATK DepthOfCoverage</a></p>
+<p>（3）<a href="https://github.com/tobiasrausch/alfred" target="_blank" rel="external">alfred（推荐）</a></p>
 
       
     </div>
@@ -433,7 +459,7 @@ p2
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/R绘图/" rel="tag"><i class="fa fa-tag"></i> R绘图</a>
+            <a href="https:/AnJingwd.github.io/tags/NGS/" rel="tag"><i class="fa fa-tag"></i> NGS</a>
           
         </div>
       
@@ -446,8 +472,8 @@ p2
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/08/30/批量fastqc/" rel="next" title="批量fastqc">
-                <i class="fa fa-chevron-left"></i> 批量fastqc
+              <a href="https:/AnJingwd.github.io/2017/10/03/R一页多图/" rel="next" title="R一页多图">
+                <i class="fa fa-chevron-left"></i> R一页多图
               </a>
             
           </div>
@@ -456,8 +482,8 @@ p2
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/09/02/python实现excel二维表格格式化/" rel="prev" title="python实现excel二维表格格式化">
-                python实现excel二维表格格式化 <i class="fa fa-chevron-right"></i>
+              <a href="https:/AnJingwd.github.io/2017/10/21/MySQL数据库安装及入门/" rel="prev" title="MySQL数据库安装及入门">
+                MySQL数据库安装及入门 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,8 +559,17 @@ p2
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https:/AnJingwd.github.io/images/avatar.png"
@@ -792,6 +827,22 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#全外显子测序"><span class="nav-number">1.</span> <span class="nav-text">全外显子测序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GATK-DepthOfCoverage"><span class="nav-number">1.1.</span> <span class="nav-text">GATK DepthOfCoverage</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全基因组测序"><span class="nav-number">2.</span> <span class="nav-text">全基因组测序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测序覆盖度和深度可视化展示"><span class="nav-number">3.</span> <span class="nav-text">测序覆盖度和深度可视化展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#alfred安装及使用"><span class="nav-number">4.</span> <span class="nav-text">alfred安装及使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
