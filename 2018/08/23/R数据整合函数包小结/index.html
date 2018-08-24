@@ -78,7 +78,7 @@
 <link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="NGS," />
+  <meta name="keywords" content="R," />
 
 
 
@@ -96,22 +96,29 @@
 
 
 
-<meta name="description" content="分别介绍使用循环和MultiQC软件两种方式批量进行fastqc">
-<meta name="keywords" content="NGS">
+<meta name="description" content="R数据整合函数包小结">
+<meta name="keywords" content="R">
 <meta property="og:type" content="article">
-<meta property="og:title" content="批量fastqc">
-<meta property="og:url" content="https:///AnJingwd.github.io/2017/08/30/批量fastqc/index.html">
+<meta property="og:title" content="R数据整合函数包小结">
+<meta property="og:url" content="https:///AnJingwd.github.io/2018/08/23/R数据整合函数包小结/index.html">
 <meta property="og:site_name" content="安静-不安静的博客">
-<meta property="og:description" content="分别介绍使用循环和MultiQC软件两种方式批量进行fastqc">
+<meta property="og:description" content="R数据整合函数包小结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/VCs7xMz.png">
-<meta property="og:image" content="http://i.imgur.com/r6rkXjl.png">
-<meta property="og:image" content="http://i.imgur.com/LPpyikL.png">
-<meta property="og:updated_time" content="2017-09-01T03:16:09.393Z">
+<meta property="og:image" content="https://i.imgur.com/016wkfX.jpg">
+<meta property="og:image" content="https://i.imgur.com/GFLAvmZ.jpg">
+<meta property="og:image" content="https://i.imgur.com/GdWK2Wi.jpg">
+<meta property="og:image" content="https://i.imgur.com/wdhBN21.jpg">
+<meta property="og:image" content="https://i.imgur.com/9jym0Ov.jpg">
+<meta property="og:image" content="https://i.imgur.com/SoqhqZU.jpg">
+<meta property="og:image" content="https://i.imgur.com/kQTOjxN.jpg">
+<meta property="og:image" content="https://i.imgur.com/dcteRp7.jpg">
+<meta property="og:image" content="https://i.imgur.com/KY5OOlj.jpg">
+<meta property="og:image" content="https://i.imgur.com/g0nNEt5.jpg">
+<meta property="og:updated_time" content="2018-08-24T08:49:51.669Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="批量fastqc">
-<meta name="twitter:description" content="分别介绍使用循环和MultiQC软件两种方式批量进行fastqc">
-<meta name="twitter:image" content="http://i.imgur.com/VCs7xMz.png">
+<meta name="twitter:title" content="R数据整合函数包小结">
+<meta name="twitter:description" content="R数据整合函数包小结">
+<meta name="twitter:image" content="https://i.imgur.com/016wkfX.jpg">
 
 
 
@@ -144,7 +151,7 @@
 
 
 
-  <title>批量fastqc | 安静-不安静的博客</title>
+  <title>R数据整合函数包小结 | 安静-不安静的博客</title>
   
 
 
@@ -298,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/30/批量fastqc/">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/08/23/R数据整合函数包小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AJ's blog">
@@ -315,7 +322,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">批量fastqc</h2>
+          <h2 class="post-title" itemprop="name headline">R数据整合函数包小结</h2>
         
 
         <div class="post-meta">
@@ -327,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T09:26:21+08:00">
-                2017-08-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-23T16:05:12+08:00">
+                2018-08-23
               </time>
             
 
@@ -350,8 +357,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="https:/AnJingwd.github.io/categories/NGS/" itemprop="url" rel="index">
-                    <span itemprop="name">NGS</span>
+                  <a href="https:/AnJingwd.github.io/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
                   </a>
                 </span>
 
@@ -387,51 +394,158 @@
       
 
       
-        <blockquote class="blockquote-center">分别介绍使用循环和MultiQC软件两种方式批量进行fastqc</blockquote>
+        <blockquote class="blockquote-center">R数据整合函数包小结</blockquote>
 
 <a id="more"></a>
-<h1 id="方法一：循环与命令并行"><a href="#方法一：循环与命令并行" class="headerlink" title="方法一：循环与命令并行"></a>方法一：循环与命令并行</h1><p>问：</p>
-<p>我当前文件夹下面有100个fastq测序文件，我要批量对他们运行fastqc软件（软件安装目录：~/biosoft/fastqc ）来处理，所以写了脚本<br>    ls *fastq | while read id ; do ~/biosoft/fastqc $id;done</p>
-<p>但是这样有一个弊端，就是这100个fastq测序文件是一个个被运行，这样耗时太长！<br>所以我稍作修改：</p>
-<pre><code>ls *fastq | while read id ; do nohup ~/biosoft/fastqc $id &amp; ;done
-</code></pre><p>这样又一下子把100个fastqc任务提交了，我的服务器根本受不了。</p>
-<p>所以需要修改修改脚本，让它一下子并行提交10个任务，因为我服务器限制。</p>
-<p>该如何最简单的完成呢？</p>
-<p>答：加个参数-p</p>
-<pre><code>ls *fastq | xargs -n 1 -p 10 -i FQ ~/biosoft/fastqc FQ
-</code></pre><p>每次最多提交10个文件，加-p就可以并行计算啦</p>
-<h1 id="方法二：MultiQC"><a href="#方法二：MultiQC" class="headerlink" title="方法二：MultiQC"></a>方法二：MultiQC</h1><p>homepage: <a href="http://multiqc.info" target="_blank" rel="external">http://multiqc.info</a></p>
-<p>功能：把多个测序结果的qc结果整合成一个报告。支持fastqc、trimmomatic、bowtie、STAR等多种软件结果的整合。</p>
-<h2 id="Installation-安装"><a href="#Installation-安装" class="headerlink" title="Installation 安装"></a>Installation 安装</h2><pre><code>conda install -c bioconda multiqc
-</code></pre><h2 id="Run-MultiQC-运行"><a href="#Run-MultiQC-运行" class="headerlink" title="Run MultiQC 运行"></a>Run MultiQC 运行</h2><p>安装好后，进入你要分析的测序文件所在的文件夹，直接输入multiqc加要扫描的目录即可运行，如果要扫描当前文件夹，直接输入”multiqc .”即可</p>
-<pre><code>multiqc .
-multiqc /data/mydir/
-multiqc /data/*fastqc.zip
-multiqc /data/sanple_1*
-</code></pre><h2 id="相关参数"><a href="#相关参数" class="headerlink" title="相关参数"></a>相关参数</h2><h3 id="使用“–ignore”参数忽略某些文件"><a href="#使用“–ignore”参数忽略某些文件" class="headerlink" title="使用“–ignore”参数忽略某些文件"></a>使用“–ignore”参数忽略某些文件</h3><pre><code>multiqc . --ingore *_R2*
-multiqc . --ignore run_two/
-multiqc . --ignore */run_three/*/fastqc/*.zip
-</code></pre><h3 id="使用文本指定要分析的文件的路径"><a href="#使用文本指定要分析的文件的路径" class="headerlink" title="使用文本指定要分析的文件的路径"></a>使用文本指定要分析的文件的路径</h3><pre><code>multiqc --file-list_my_file_list.txt
-</code></pre><h3 id="重命名输出结果"><a href="#重命名输出结果" class="headerlink" title="重命名输出结果"></a>重命名输出结果</h3><p>分析结果默认命名为“multiqc_report.html”，相关的以tab风格的data file保存在“multiqc_data”文件夹下。可以用“-n”参数改变结果文件的名字，用“-o”改变输出文件的位置。</p>
-<h3 id="覆盖已存在的结果"><a href="#覆盖已存在的结果" class="headerlink" title="覆盖已存在的结果"></a>覆盖已存在的结果</h3><p>添加参数“-f”，输出结果时会自动覆盖同名文件。</p>
-<h3 id="更换报告模板"><a href="#更换报告模板" class="headerlink" title="更换报告模板"></a>更换报告模板</h3><p>添加参数“-t”或者“–template”可以选择不同风格的报告模板，具体内容请查看帮助文档“multiqc –help”。同时，MultiQC也支持自行创作结果文件的模板。</p>
-<h3 id="输出图片Exporting-plot"><a href="#输出图片Exporting-plot" class="headerlink" title="输出图片Exporting plot"></a>输出图片Exporting plot</h3><p>除了直接输出html文件外，Multiqc还可以直接保存图片文件。用以下参数进行保存：</p>
-<pre><code>multiqc -p/--export
-</code></pre><p>默认设置下，图片会保存在“multiqc_plots”文件夹中，以.png/.svg或者pdf格式保存。</p>
-<p>同时，也可以直接在html文件中使用“toolbox”中的Export 保存图片。</p>
-<h2 id="报告正文"><a href="#报告正文" class="headerlink" title="报告正文"></a>报告正文</h2><p>报告页面分为三部分，左边是导航页面，中间是报告正文，右边是toolbox</p>
-<p><img src="http://i.imgur.com/VCs7xMz.png" alt=""></p>
+<p><a href="https://www.analyticsvidhya.com/blog/2015/12/faster-data-manipulation-7-packages/" target="_blank" rel="external">Do Faster Data Manipulation using These 7 R Packages（推荐）</a></p>
+<p>R语言数据整合常用包列表</p>
+<ul>
+<li>dplyr</li>
+<li>data.table</li>
+<li>ggplot2</li>
+<li>reshape2</li>
+<li>readr</li>
+<li>tidyr</li>
+<li>lubridate</li>
+</ul>
+<hr>
+<h1 id="apply函数"><a href="#apply函数" class="headerlink" title="apply函数"></a>apply函数</h1><p>&emsp;&emsp;apply函数是这三个函数的精髓，lapply是它的变种，sapply是lapply的精华简洁版本。apply函数的基本命令格式是：apply(数据，向量，函数)。</p>
+<ul>
+<li>向量指的是矩阵的行或列，通俗的说，向量为1的时候横着算，向量为2的时候竖着算。</li>
+<li>函数作用对象区分多元素和单元素：例如sum函数它必须应用在多个元素（数值）上，此时可利用apply(matrix,1,sum)对矩阵列求和；又例如sqrt函数它只作用于单个数值，此时apply(matrix,1,sqrt)表示对每个元素求平方根，每一列的运算结果变成新的一行；而apply(matrix,2,sqrt)表示对每个元素求平方根，每一列的运算结果变成新的一列。</li>
+<li>使用自定义函数：apply(matrix,1,function(x),MyFunction(x)) (单个自变量x, 当这个函数应用在我们数据上的时候，就默认是对数据矩阵的每一个元素（数值）进行运算。)</li>
+<li>多自变量函数function (y) MyFunction(x,y) 从这个写法上可以看出，function定义了，在多元函数情况下，数据矩阵的自变量对应位置，此时为y</li>
+</ul>
+<p>&emsp;&emsp;lapply的特殊之处在于，它的输出形式为列表（list），并且每一个运算结果（数值）都是一个单独的列表。这就是说，如果运算结果有六个数值，lapply就会输出六个列表，每一个列表里为一个数值。(根据运算顺序(按列)将结果输出为列表。)<br>在执行lapply的时候即可以预先对结果输出形式进行设计。比如说，合并列表做个矩阵啊（matrix）或者数据框（data frame）</p>
+<ul>
+<li>合并成矩阵： do.call(rbind,lapply(matrix,sqrt)) 原始matrix为3x2的矩阵，处理后变为6行一列矩阵；do.call(cbind,lapply(matrix,sqrt))处理后变为1行6列的矩阵</li>
+<li>合并成数据框：data.frame(lapply(matrix,sqrt)) 处理后成为1行6列的数据框</li>
+</ul>
+<hr>
+<h1 id="dplyr函数包"><a href="#dplyr函数包" class="headerlink" title="dplyr函数包"></a>dplyr函数包</h1><p>首先需要安装dplyr包，install.packages(“dplyr”)。dplyr包是“方便应用”型包，主要组成不是计算类函数，而是快速加工数据的函数。dplyr包系列的命令大部分可以在一个函数内包含多个条件，各个条件之间用逗号连接；不同分类的条件可以在同一个函数中混合运用；多个函数之间可以用包内的串串函数（函数名：pipe，函数写法：%in%）连接在一起；dplyr包在处理大样本量的复杂数据时极为好用。</p>
+<p>接下来介绍dplyr包中七个基础函数的使用方法:</p>
+<p><img src="https://i.imgur.com/016wkfX.jpg" alt=""></p>
+<p>其中weight和Time为numeric类型；Chick和Diet为factor类型</p>
+<p>dplyr系列命令的通用格式：函数名称（应用数据集，条件）</p>
+<ul>
+<li>count是计数命令，专门来数某一项内容的细分组里分别有多少样本</li>
+</ul>
+<p>count(ChickWeight,Diet) 对Diet中每一组的样本量进行分组计数</p>
+<ul>
+<li>summarise是总结命令，它可以对1个或多个列进行总结（求最小值，最大值，均值等等）</li>
+</ul>
+<p>summarise(CheckWeight,mean(weight,na.rm=TRUE))  对weight列移除NA值后求均值<br>summarise(CheckWeight,mean(weight,na.rm=TRUE),min(weight))  对weight列移除NA值后求均值并求最小值</p>
+<p><strong>dplyr这个包中很重要的一个点：在一个命令中可以有多个执行条件，每个条件以逗号隔开。</strong></p>
+<ul>
+<li>group_by是分组命令，它可以把整个数据集按照某项内容分组。</li>
+</ul>
+<p>summarise(group_by(ChickWeight,Diet),mean(Time,na.rm=TRUE)) 针对Diet的分组，求Time的均值</p>
+<ul>
+<li><p>filter命令是筛选数据内容的命令</p>
+<ul>
+<li>filter(ChickWeight,weight&gt;=40)筛选特定数值</li>
+<li>filter(ChickWeight,weight &gt;=40,Time&gt;=2)两个数值筛选条件中间用,号隔开</li>
+<li>filter(ChickWeight,Diet == 1) 字符数据的是否判定用的是双等号==</li>
+<li>filter(ChickWeight,Diet %in% c(1,3)) 在筛选字符数据时，我们可以设定两项或多项条件，在这一情况下，逗号就不再适用了，我们需要连用集合c()和%in%</li>
+<li>filter(ChickWeight,Chick ==2, Diet == 1) 同时筛选两列字符数据</li>
+<li>filter(ChickWeight,weight&gt;=40,Chick == 2) 同时进行数值数据筛选和字符数筛选</li>
+</ul>
+</li>
+<li><p>select命令能够选择某一列或某几列，以及排除某一列或某几列。容易和filter混淆的select命令来啦。之前我们说，filter筛选的是内容，select选的是“列”。</p>
+<ul>
+<li>select(ChickWeight,weight,Diet)筛选出weight和Diet两列</li>
+<li>select(ChickWeight,-weight)排除weight列</li>
+<li>select(ChickWeight,-weight,-Diet)排除weight列和Diet列</li>
+<li>select(ChichWeight,Time:Diet) 从Time列到Diet列都要</li>
+</ul>
+</li>
+<li><p>处理数据的时候我们时不时会遇到需要添加一列，列的内容是行中某项数据的处理结果， mutate命令可以帮助我们很方便的进行这一操作。</p>
+</li>
+</ul>
+<p>mutate(ChickWeight,Diff=(weight-mean(weight)))在原始数据后面加一列，列名为Diff,列的内容荣是该行weight的值weight均值之差</p>
+<ul>
+<li><p>pipe，在R中的表达方式为%in%。请大家注意这两者是不同的，之前我们列举的六个函数都是名称与表达方式相同，但串串函数是个特例。串就是羊肉串的串，作用一模一样，只不过串起来的是“函数命令”，目的是将一系列函数连续使用，减少代码量，减少中间数据，直接得到最终运算结果。</p>
+<pre><code>CW_p1 &lt;- ChickWeight%&gt;%
+   filter(Chick!=c（15,18,20,17）) %&gt;%   #第一步函数
+   group_by(Diet)%&gt;%  # 第二步函数
+   summarise(mean(Time,na.rm=TRUE))  #第三步函数
+</code></pre></li>
+</ul>
+<p>每一步都是根据上一步的结果进行运算，最后的结果是对最新的数据进行Time项的总结（求均值）</p>
+<p>数据框关联的函数（类似merge()函数）</p>
+<ul>
+<li>inner_join(x, y, by = NULL, copy = FALSE, suffix = c(“.x”, “.y”), …) #内连接，merge x,y两个数据框，仅保留都匹配上的</li>
+<li>left_join(x, y, by = NULL, copy = FALSE, suffix = c(“.x”, “.y”), …)  #左连接，在x数据框上加上y数据框匹配上的</li>
+<li>right_join(x, y, by = NULL, copy = FALSE, suffix = c(“.x”, “.y”), …) #右连接，在y数据框上加上x数据框匹配上的</li>
+<li>full_join(x, y, by = NULL, copy = FALSE, suffix = c(“.x”, “.y”), …)  #全连接，跟内连接的区别在于其保留x,y数据框的所有行</li>
+<li>semi_join(x, y, by = NULL, copy = FALSE, …)  #返回x数据框中能与y数据框匹配上的行</li>
+<li>anti_join(x, y, by = NULL, copy = FALSE, …)  #返回x数据框中不能与y数据框匹配上的行</li>
+</ul>
+<hr>
+<h1 id="plyr-包"><a href="#plyr-包" class="headerlink" title="plyr 包"></a>plyr 包</h1><p>plyr包可以进行类似于数据透视表的操作，将数据分割成更小的数据，对分割后的数据进行些操作，最后把操作的结果汇总。</p>
+<hr>
+<h1 id="reshape2包"><a href="#reshape2包" class="headerlink" title="reshape2包"></a>reshape2包</h1><ul>
+<li>宽数据:每一列为一个变量，每一行为变量所对应的值</li>
+<li>长数据:一列包含了所有的变量，而另一列则是与之相关的值(长数据不一定只有两列)</li>
+</ul>
+<p>reshape2 用得比较多的是melt和cast两个函数。</p>
+<ul>
+<li>melt函数对宽数据进行处理，得到长数据</li>
+<li>cast函数对长数据进行处理，得到宽数据</li>
+</ul>
+<p>melt公式：<br>    melt(data,id.vars,measure.vars,variable.name=’variable’,…,na.rm=FALSE,value.name=’value’,factorAsStrings=TRUE)</p>
+<p><img src="https://i.imgur.com/GFLAvmZ.jpg" alt=""></p>
+<p>（1）只带有data参数的情况</p>
+<p>我们可以看到如果id.vars和measure.vars都没有设置，默认会使用所有的因子变量和字符变量作为ID变量，使用所有的非因子和非字符变量作为测量变量</p>
+<p><img src="https://i.imgur.com/GdWK2Wi.jpg" alt=""></p>
+<p>（2）使用id.vars参数的情况</p>
+<p>指定ID variables就是那些能够区分不同行数据的变量，个人感觉类似于数据库中的主键。</p>
+<p><img src="https://i.imgur.com/wdhBN21.jpg" alt=""></p>
+<p>（3）使用variable.name和value.name的情况，宽数据转长数据的同时修改列名(长数据有一列数据是变量的类型，有一列是变量的值)</p>
+<pre><code>aql &lt;- melt(airquanlity,id.vars = c(&quot;month&quot;,&quot;day&quot;)),
+    variable.name = &quot;climate_variable&quot;,
+    value.name =&quot;climate_value&quot;)
+</code></pre><p><img src="https://i.imgur.com/9jym0Ov.jpg" alt=""></p>
+<p>dcast公式:</p>
+<pre><code>dcast(data, formula, fun.aggregate = NULL, ..., margins = NULL,subset = NULL, fill = NULL, drop = TRUE,value.var = guess_value(data))
+</code></pre><p><img src="https://i.imgur.com/SoqhqZU.jpg" alt=""></p>
+<p>dcast借助于公式来描述数据的形状，左边参数表示”ID variables”，而右边的参数表示measured variables。</p>
+<p>（1）aqw &lt;- dcast(aql,month + day ~ variable)</p>
+<hr>
+<h1 id="tidyr包-reshape2包的进化版"><a href="#tidyr包-reshape2包的进化版" class="headerlink" title="tidyr包- reshape2包的进化版"></a>tidyr包- reshape2包的进化版</h1><p>Tidy data的原则：</p>
+<ul>
+<li>每一列：代表一个变量（vairable）</li>
+<li>每一行：代表一次观测（observation）</li>
+</ul>
+<p><img src="https://i.imgur.com/kQTOjxN.jpg" alt=""></p>
+<p>要实现转换结果，在Geneid一定的情况下，我们可以把每一个样品和其对应的基因表达量看做一个键-值对（key-value pair）。比如：在GeneID为gene1时，sample1对应的表达量是3，sample2对应的表达量是4。因此，我们在转换数据时，只需按照上述规则，并指定要转换的列即可。使用tidyr包中的gather函数即可实现转换。</p>
+<pre><code># gather()命令转换说明：# gather（data=数据框名，key=&quot;key名&quot;，value=&quot;value名&quot;，要转换的列1，列2，列3）
+&gt; gene_exp_tidy &lt;- gather(data = gene_exp, key = &quot;sample_name&quot;, value = &quot;expression&quot;, Sample1, Sample2, Sample3)
+# 在指定要转换的列时，也可不用列名，直接指定列的编号即可
+&gt; gene_exp_tidy &lt;- gather(data = gene_exp, key = &quot;sample_name&quot;, value = &quot;expression&quot;, 2:4)
+#  在指定要转换的列时，也可指定不需转换的列，其他列参与转换
+&gt; gene_exp_tidy &lt;- gather(data = gene_exp, key = &quot;sample_name&quot;, value = &quot;expression&quot;, -GeneId)
+</code></pre><p>使用spread()函数将Tidy格式数据还原</p>
+<pre><code>spread(data = gene_exp_tidy, key = &quot;sample_name&quot;, value = &quot;expression&quot;)
+</code></pre><p>有时，在数据处理时，我们会遇到下面这种更加复杂的情况，在GeneId一定的情况下，每一样品还对应不同的温度：</p>
+<p><img src="https://i.imgur.com/dcteRp7.jpg" alt=""></p>
+<p>处理策略：</p>
 <ol>
-<li>General Statistics</li>
+<li>先使用gather()函数，按列进行转换</li>
+<li><p>再使用spread()函数，将Sample和温度分开</p>
+<p> gene_exp3_tidy &lt;- gather(gene_exp3, key, Expression, -GeneId)</p>
+</li>
 </ol>
-<p>（Configure Conlumns）可选择需要展示的列名</p>
-<p><img src="http://i.imgur.com/r6rkXjl.png" alt=""></p>
-<p>点击列名可进行排序</p>
-<p><img src="http://i.imgur.com/LPpyikL.png" alt=""></p>
-<p>(plot)可选择任意两列进行plot</p>
-<p>Toolbox</p>
-<p>工具栏主要有Hightlight Samples、Rename Samples、Show/Hide Samples、Export Plots、Saving Setting以及帮助等功能。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA" target="_blank" rel="external">https://mp.weixin.qq.com/s/tuGWPqCAG4TvIxpGsYWIDA</a><br>（2）<a href="http://www.cnblogs.com/leezx/p/7360668.html" target="_blank" rel="external">http://www.cnblogs.com/leezx/p/7360668.html</a></p>
+<p><img src="https://i.imgur.com/KY5OOlj.jpg" alt=""></p>
+<p>3.使用seprate()函数，对key这一列进行分割</p>
+<pre><code>gene_exp3_tidy2 &lt;- separate(gene_exp3_tidy, col = key, into = c(&quot;SampleName&quot;,&quot;Temperature&quot;))
+</code></pre><p><img src="https://i.imgur.com/g0nNEt5.jpg" alt=""></p>
+<hr>
+<p><a href="http://r4ds.had.co.nz/workflow-projects.html" target="_blank" rel="external">R for Data Science(推荐)</a> </p>
+<p>该书github地址：<a href="https://github.com/hadley/r4ds" target="_blank" rel="external">hadley/r4ds</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.jianshu.com/p/bfddfe29aa39" target="_blank" rel="external">R语言的plyr包简介</a></p>
+<p>（2）<a href="http://www.jianshu.com/p/36f5268e932c" target="_blank" rel="external">利用reshape2包进行数据逆透视和数据透视</a></p>
+<p>（3）<a href="http://www.xueqing.tv/cms/article/105" target="_blank" rel="external">reshape2包的进化版—tidyr包</a></p>
 
       
     </div>
@@ -457,7 +571,7 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
       
         <div class="post-tags">
           
-            <a href="https:/AnJingwd.github.io/tags/NGS/" rel="tag"><i class="fa fa-tag"></i> NGS</a>
+            <a href="https:/AnJingwd.github.io/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
           
         </div>
       
@@ -470,8 +584,8 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/08/28/修复Chrome浏览器崩溃/" rel="next" title="修复Chrome浏览器崩溃">
-                <i class="fa fa-chevron-left"></i> 修复Chrome浏览器崩溃
+              <a href="https:/AnJingwd.github.io/2018/05/13/Kaggle入门/" rel="next" title="Kaggle">
+                <i class="fa fa-chevron-left"></i> Kaggle
               </a>
             
           </div>
@@ -479,10 +593,6 @@ multiqc . --ignore */run_three/*/fastqc/*.zip
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="https:/AnJingwd.github.io/2017/09/01/解决ggplot-作图x轴和y轴不重合问题/" rel="prev" title="解决ggplot 作图x轴和y轴不重合问题">
-                解决ggplot 作图x轴和y轴不重合问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -835,7 +945,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法一：循环与命令并行"><span class="nav-number">1.</span> <span class="nav-text">方法一：循环与命令并行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法二：MultiQC"><span class="nav-number">2.</span> <span class="nav-text">方法二：MultiQC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation-安装"><span class="nav-number">2.1.</span> <span class="nav-text">Installation 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-MultiQC-运行"><span class="nav-number">2.2.</span> <span class="nav-text">Run MultiQC 运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关参数"><span class="nav-number">2.3.</span> <span class="nav-text">相关参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用“–ignore”参数忽略某些文件"><span class="nav-number">2.3.1.</span> <span class="nav-text">使用“–ignore”参数忽略某些文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用文本指定要分析的文件的路径"><span class="nav-number">2.3.2.</span> <span class="nav-text">使用文本指定要分析的文件的路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重命名输出结果"><span class="nav-number">2.3.3.</span> <span class="nav-text">重命名输出结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖已存在的结果"><span class="nav-number">2.3.4.</span> <span class="nav-text">覆盖已存在的结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换报告模板"><span class="nav-number">2.3.5.</span> <span class="nav-text">更换报告模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出图片Exporting-plot"><span class="nav-number">2.3.6.</span> <span class="nav-text">输出图片Exporting plot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报告正文"><span class="nav-number">2.4.</span> <span class="nav-text">报告正文</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#apply函数"><span class="nav-number">1.</span> <span class="nav-text">apply函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dplyr函数包"><span class="nav-number">2.</span> <span class="nav-text">dplyr函数包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plyr-包"><span class="nav-number">3.</span> <span class="nav-text">plyr 包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reshape2包"><span class="nav-number">4.</span> <span class="nav-text">reshape2包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tidyr包-reshape2包的进化版"><span class="nav-number">5.</span> <span class="nav-text">tidyr包- reshape2包的进化版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

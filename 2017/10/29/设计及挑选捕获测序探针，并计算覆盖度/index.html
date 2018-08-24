@@ -111,7 +111,7 @@
 <meta property="og:image" content="https://i.imgur.com/pjVTs2f.jpg">
 <meta property="og:image" content="https://i.imgur.com/6C2Lk1p.jpg">
 <meta property="og:image" content="https://i.imgur.com/kAcaOMe.jpg">
-<meta property="og:updated_time" content="2018-06-26T05:40:53.659Z">
+<meta property="og:updated_time" content="2018-08-14T02:28:47.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计及挑选捕获测序探针，并计算覆盖度">
 <meta name="twitter:description" content="使用bedtools进行捕获测序引物的筛选并计算覆盖度">
@@ -445,6 +445,7 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#step1</span></div><div class="line">bedtools intersect -a target.bed -b primer20.bed -wao &gt; primer20_result.txt </div><div class="line">awk <span class="string">'$6-$5&gt;250 &#123;print $1,$2,$3&#125;'</span> primer20_result.txt &gt; target_region_of_primer20_up250.bed</div><div class="line"></div><div class="line"><span class="comment">#step2</span></div><div class="line">bedtools intersect -a target_region_of_primer20_up250.bed -b primer24.bed -wao &gt; primer24_result.txt</div><div class="line"></div><div class="line"><span class="comment">#step3</span></div><div class="line">primer20=($(cat primer20_reserved.txt));<span class="keyword">for</span> primer20 <span class="keyword">in</span> <span class="variable">$&#123;primer20[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer20&#125;</span>"</span> primer20_original.txt &gt;&gt;primer20_reserved_result.txt;<span class="keyword">done</span></div><div class="line"></div><div class="line">primer24=($(cat primer24_reserved.txt));<span class="keyword">for</span> primer24 <span class="keyword">in</span> <span class="variable">$&#123;primer24[@]&#125;</span>; <span class="keyword">do</span> grep -m 1 <span class="string">"<span class="variable">$&#123;primer24&#125;</span>"</span> primer24_original.txt &gt;&gt;primer24_reserved_result.txt;<span class="keyword">done</span></div></pre></td></tr></table></figure>
 <h1 id="根据targete-bed和primer20-bed计算覆盖度"><a href="#根据targete-bed和primer20-bed计算覆盖度" class="headerlink" title="根据targete.bed和primer20.bed计算覆盖度"></a>根据targete.bed和primer20.bed计算覆盖度</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(1)检验bed区间是否有重叠</div><div class="line"></div><div class="line">length_sum1=`awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span> target.bed |tail -n 1`</div><div class="line"></div><div class="line">length_sum2=`sort -k1,1 -k2,2n target.bed |bedtools merge -i target.bed| awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span>|tail -n 1`</div><div class="line"></div><div class="line"><span class="comment">#如果length_sum1 &gt;  length_sum2,有重叠；如果length_sum1 = length_sum2,无重叠</span></div><div class="line"></div><div class="line"><span class="comment">#所以target.bed无重叠，primer20和primer24有重叠</span></div><div class="line"></div><div class="line">(2)先用bedtools工具得到primer20的merge后的bed文件，然后与target.bed查看覆盖碱基数，并求和</div><div class="line"></div><div class="line">sort -k1,1 -k2,2n primer20.bed|bedtools merge -i &gt; primer20_merge.bed</div><div class="line">length_sum3=`bedtools intersect -a target.bed -b primer20_merge.bed -wao | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$7&#125;&#123;print x&#125;'</span> |tail -n 1`  </div><div class="line"></div><div class="line">coverage = length_sum3/length_sum1*100</div></pre></td></tr></table></figure>
 <h2 id="bedtools-merge功能图示（需要先排序，否则报错）"><a href="#bedtools-merge功能图示（需要先排序，否则报错）" class="headerlink" title="bedtools merge功能图示（需要先排序，否则报错）"></a>bedtools merge功能图示（需要先排序，否则报错）</h2><p><img src="https://i.imgur.com/kAcaOMe.jpg" alt=""></p>
+<p>对于.xlxs文件，另存为.txt，然后复制到linux的txt文件（vim）</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html" target="_blank" rel="external">染色体位置overlap的计算–bedtools应用</a></p>
 <p>（2）<a href="https://www.biostars.org/p/65558/" target="_blank" rel="external">Tool: Converting Genome Coordinates From One Genome Version To Another (Ucsc Liftover, Ncbi Remap, Ensembl Api)</a></p>
 
@@ -597,7 +598,7 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -898,7 +899,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共75.9k字</span>
+  <span class="post-count">博客全站共78.9k字</span>
 </div>
 
 <div class="powered-by">

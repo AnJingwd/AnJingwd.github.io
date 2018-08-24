@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="miniconda3安装及使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-08T02:04:11.236Z">
+<meta property="og:updated_time" content="2018-07-22T04:21:08.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="miniconda3安装及使用">
 <meta name="twitter:description" content="miniconda3安装及使用">
@@ -436,7 +436,7 @@ conda install -c  bioconda  agg
 <p><a href="https://anaconda.org/bioconda/" target="_blank" rel="external">网址</a></p>
 <ol>
 <li><p>导出已安装包信息，在新环境下批量安装</p>
-<p> conda list -e &gt; requirements.txt<br> conda install –yes –file requirements.txt</p>
+<p> conda list -e &gt; conda_requirements.txt<br> while read requirement; do conda install -c bioconda –yes $requirement; done &lt; conda_requirements.txt</p>
 </li>
 </ol>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/z2xAghI_kk4Lb9_JZAizGw" target="_blank" rel="external">https://mp.weixin.qq.com/s/z2xAghI_kk4Lb9_JZAizGw</a></p>
@@ -592,7 +592,7 @@ conda install -c  bioconda  agg
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -893,7 +893,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共75.9k字</span>
+  <span class="post-count">博客全站共78.9k字</span>
 </div>
 
 <div class="powered-by">

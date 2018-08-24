@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-07-08T01:21:01.828Z</updated>
+  <updated>2018-08-24T08:49:51.669Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,180 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>R数据整合函数包小结</title>
+    <link href="https:///AnJingwd.github.io/2018/08/23/R%E6%95%B0%E6%8D%AE%E6%95%B4%E5%90%88%E5%87%BD%E6%95%B0%E5%8C%85%E5%B0%8F%E7%BB%93/"/>
+    <id>https:///AnJingwd.github.io/2018/08/23/R数据整合函数包小结/</id>
+    <published>2018-08-23T08:05:12.000Z</published>
+    <updated>2018-08-24T08:49:51.669Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">R数据整合函数包小结</blockquote>
+
+<a id="more"></a>
+<p><a href="https://www.analyticsvidhya.com/blog/2015/12/faster-data-manipulation-7-packages/" target="_blank" rel="external">Do Faster Data Manipulation using These 7 R Packages（推荐）</a></p>
+<p>R语言数据整合常用包列表</p>
+<ul>
+<li>dplyr</li>
+<li>data.table</li>
+<li>ggplot2</li>
+<li>reshape2</li>
+<li>readr</li>
+<li>tidyr</li>
+<li>lubridate</li>
+</ul>
+<hr>
+<h1 id="apply函数"><a href="#apply函数" class="headerlink" title="apply函数"></a>apply函数</h1><p>&emsp;&emsp;apply函数是这三个函数的精髓，lapply是它的变种，sapply是lapply的精华简洁版本。apply函数的基本命令格式是：apply(数据，向量，函数)。</p>
+<ul>
+<li>向量指的是矩阵的行或列，通俗的说，向量为1的时候横着算，向量为2的时候竖着算。</li>
+<li>函数作用对象区分多元素和单元素：例如sum函数它必须应用在多个元素（数值）上，此时可利用apply(matrix,1,sum)对矩阵列求和；又例如sqrt函数它只作用于单个数值，此时apply(matrix,1,sqrt)表示对每个元素求平方根，每一列的运算结果变成新的一行；而apply(matrix,2,sqrt)表示对每个元素求平方根，每一列的运算结果变成新的一列。</li>
+<li>使用自定义函数：apply(matrix,1,function(x),MyFunction(x)) (单个自变量x, 当这个函数应用在我们数据上的时候，就默认是对数据矩阵的每一个元素（数值）进行运算。)</li>
+<li>多自变量函数function (y) MyFunction(x,y) 从这个写法上可以看出，function定义了，在多元函数情况下，数据矩阵的自变量对应位置，此时为y</li>
+</ul>
+<p>&emsp;&emsp;lapply的特殊之处在于，它的输出形式为列表（list），并且每一个运算结果（数值）都是一个单独的列表。这就是说，如果运算结果有六个数值，lapply就会输出六个列表，每一个列表里为一个数值。(根据运算顺序(按列)将结果输出为列表。)<br>在执行lapply的时候即可以预先对结果输出形式进行设计。比如说，合并列表做个矩阵啊（matrix）或者数据框（data frame）</p>
+<ul>
+<li>合并成矩阵： do.call(rbind,lapply(matrix,sqrt)) 原始matrix为3x2的矩阵，处理后变为6行一列矩阵；do.call(cbind,lapply(matrix,sqrt))处理后变为1行6列的矩阵</li>
+<li>合并成数据框：data.frame(lapply(matrix,sqrt)) 处理后成为1行6列的数据框</li>
+</ul>
+<hr>
+<h1 id="dplyr函数包"><a href="#dplyr函数包" class="headerlink" title="dplyr函数包"></a>dplyr函数包</h1><p>首先需要安装dplyr包，install.packages(“dplyr”)。dplyr包是“方便应用”型包，主要组成不是计算类函数，而是快速加工数据的函数。dplyr包系列的命令大部分可以在一个函数内包含多个条件，各个条件之间用逗号连接；不同分类的条件可以在同一个函数中混合运用；多个函数之间可以用包内的串串函数（函数名：pipe，函数写法：%in%）连接在一起；dplyr包在处理大样本量的复杂数据时极为好用。</p>
+<p>接下来介绍dplyr包中七个基础函数的使用方法:</p>
+<p><img src="https://i.imgur.com/016wkfX.jpg" alt=""></p>
+<p>其中weight和Time为numeric类型；Chick和Diet为factor类型</p>
+<p>dplyr系列命令的通用格式：函数名称（应用数据集，条件）</p>
+<ul>
+<li>count是计数命令，专门来数某一项内容的细分组里分别有多少样本</li>
+</ul>
+<p>count(ChickWeight,Diet) 对Diet中每一组的样本量进行分组计数</p>
+<ul>
+<li>summarise是总结命令，它可以对1个或多个列进行总结（求最小值，最大值，均值等等）</li>
+</ul>
+<p>summarise(CheckWeight,mean(weight,na.rm=TRUE))  对weight列移除NA值后求均值<br>summarise(CheckWeight,mean(weight,na.rm=TRUE),min(weight))  对weight列移除NA值后求均值并求最小值</p>
+<p><strong>dplyr这个包中很重要的一个点：在一个命令中可以有多个执行条件，每个条件以逗号隔开。</strong></p>
+<ul>
+<li>group_by是分组命令，它可以把整个数据集按照某项内容分组。</li>
+</ul>
+<p>summarise(group_by(ChickWeight,Diet),mean(Time,na.rm=TRUE)) 针对Diet的分组，求Time的均值</p>
+<ul>
+<li><p>filter命令是筛选数据内容的命令</p>
+<ul>
+<li>filter(ChickWeight,weight&gt;=40)筛选特定数值</li>
+<li>filter(ChickWeight,weight &gt;=40,Time&gt;=2)两个数值筛选条件中间用,号隔开</li>
+<li>filter(ChickWeight,Diet == 1) 字符数据的是否判定用的是双等号==</li>
+<li>filter(ChickWeight,Diet %in% c(1,3)) 在筛选字符数据时，我们可以设定两项或多项条件，在这一情况下，逗号就不再适用了，我们需要连用集合c()和%in%</li>
+<li>filter(ChickWeight,Chick ==2, Diet == 1) 同时筛选两列字符数据</li>
+<li>filter(ChickWeight,weight&gt;=40,Chick == 2) 同时进行数值数据筛选和字符数筛选</li>
+</ul>
+</li>
+<li><p>select命令能够选择某一列或某几列，以及排除某一列或某几列。容易和filter混淆的select命令来啦。之前我们说，filter筛选的是内容，select选的是“列”。</p>
+<ul>
+<li>select(ChickWeight,weight,Diet)筛选出weight和Diet两列</li>
+<li>select(ChickWeight,-weight)排除weight列</li>
+<li>select(ChickWeight,-weight,-Diet)排除weight列和Diet列</li>
+<li>select(ChichWeight,Time:Diet) 从Time列到Diet列都要</li>
+</ul>
+</li>
+<li><p>处理数据的时候我们时不时会遇到需要添加一列，列的内容是行中某项数据的处理结果， mutate命令可以帮助我们很方便的进行这一操作。</p>
+</li>
+</ul>
+<p>mutate(ChickWeight,Diff=(weight-mean(weight)))在原始数据后面加一列，列名为Diff,列的内容荣是该行weight的值weight均值之差</p>
+<ul>
+<li><p>pipe，在R中的表达方式为%in%。请大家注意这两者是不同的，之前我们列举的六个函数都是名称与表达方式相同，但串串函数是个特例。串就是羊肉串的串，作用一模一样，只不过串起来的是“函数命令”，目的是将一系列函数连续使用，减少代码量，减少中间数据，直接得到最终运算结果。</p>
+<pre><code>CW_p1 &lt;- ChickWeight%&gt;%
+   filter(Chick!=c（15,18,20,17）) %&gt;%   #第一步函数
+   group_by(Diet)%&gt;%  # 第二步函数
+   summarise(mean(Time,na.rm=TRUE))  #第三步函数
+</code></pre></li>
+</ul>
+<p>每一步都是根据上一步的结果进行运算，最后的结果是对最新的数据进行Time项的总结（求均值）</p>
+<p>数据框关联的函数（类似merge()函数）</p>
+<ul>
+<li>inner_join(x, y, by = NULL, copy = FALSE, suffix = c(“.x”, “.y”), …) #内连接，merge x,y两个数据框，仅保留都匹配上的</li>
+<li>left_join(x, y, by = NULL, copy = FALSE, suffix = c(“.x”, “.y”), …)  #左连接，在x数据框上加上y数据框匹配上的</li>
+<li>right_join(x, y, by = NULL, copy = FALSE, suffix = c(“.x”, “.y”), …) #右连接，在y数据框上加上x数据框匹配上的</li>
+<li>full_join(x, y, by = NULL, copy = FALSE, suffix = c(“.x”, “.y”), …)  #全连接，跟内连接的区别在于其保留x,y数据框的所有行</li>
+<li>semi_join(x, y, by = NULL, copy = FALSE, …)  #返回x数据框中能与y数据框匹配上的行</li>
+<li>anti_join(x, y, by = NULL, copy = FALSE, …)  #返回x数据框中不能与y数据框匹配上的行</li>
+</ul>
+<hr>
+<h1 id="plyr-包"><a href="#plyr-包" class="headerlink" title="plyr 包"></a>plyr 包</h1><p>plyr包可以进行类似于数据透视表的操作，将数据分割成更小的数据，对分割后的数据进行些操作，最后把操作的结果汇总。</p>
+<hr>
+<h1 id="reshape2包"><a href="#reshape2包" class="headerlink" title="reshape2包"></a>reshape2包</h1><ul>
+<li>宽数据:每一列为一个变量，每一行为变量所对应的值</li>
+<li>长数据:一列包含了所有的变量，而另一列则是与之相关的值(长数据不一定只有两列)</li>
+</ul>
+<p>reshape2 用得比较多的是melt和cast两个函数。</p>
+<ul>
+<li>melt函数对宽数据进行处理，得到长数据</li>
+<li>cast函数对长数据进行处理，得到宽数据</li>
+</ul>
+<p>melt公式：<br>    melt(data,id.vars,measure.vars,variable.name=’variable’,…,na.rm=FALSE,value.name=’value’,factorAsStrings=TRUE)</p>
+<p><img src="https://i.imgur.com/GFLAvmZ.jpg" alt=""></p>
+<p>（1）只带有data参数的情况</p>
+<p>我们可以看到如果id.vars和measure.vars都没有设置，默认会使用所有的因子变量和字符变量作为ID变量，使用所有的非因子和非字符变量作为测量变量</p>
+<p><img src="https://i.imgur.com/GdWK2Wi.jpg" alt=""></p>
+<p>（2）使用id.vars参数的情况</p>
+<p>指定ID variables就是那些能够区分不同行数据的变量，个人感觉类似于数据库中的主键。</p>
+<p><img src="https://i.imgur.com/wdhBN21.jpg" alt=""></p>
+<p>（3）使用variable.name和value.name的情况，宽数据转长数据的同时修改列名(长数据有一列数据是变量的类型，有一列是变量的值)</p>
+<pre><code>aql &lt;- melt(airquanlity,id.vars = c(&quot;month&quot;,&quot;day&quot;)),
+    variable.name = &quot;climate_variable&quot;,
+    value.name =&quot;climate_value&quot;)
+</code></pre><p><img src="https://i.imgur.com/9jym0Ov.jpg" alt=""></p>
+<p>dcast公式:</p>
+<pre><code>dcast(data, formula, fun.aggregate = NULL, ..., margins = NULL,subset = NULL, fill = NULL, drop = TRUE,value.var = guess_value(data))
+</code></pre><p><img src="https://i.imgur.com/SoqhqZU.jpg" alt=""></p>
+<p>dcast借助于公式来描述数据的形状，左边参数表示”ID variables”，而右边的参数表示measured variables。</p>
+<p>（1）aqw &lt;- dcast(aql,month + day ~ variable)</p>
+<hr>
+<h1 id="tidyr包-reshape2包的进化版"><a href="#tidyr包-reshape2包的进化版" class="headerlink" title="tidyr包- reshape2包的进化版"></a>tidyr包- reshape2包的进化版</h1><p>Tidy data的原则：</p>
+<ul>
+<li>每一列：代表一个变量（vairable）</li>
+<li>每一行：代表一次观测（observation）</li>
+</ul>
+<p><img src="https://i.imgur.com/kQTOjxN.jpg" alt=""></p>
+<p>要实现转换结果，在Geneid一定的情况下，我们可以把每一个样品和其对应的基因表达量看做一个键-值对（key-value pair）。比如：在GeneID为gene1时，sample1对应的表达量是3，sample2对应的表达量是4。因此，我们在转换数据时，只需按照上述规则，并指定要转换的列即可。使用tidyr包中的gather函数即可实现转换。</p>
+<pre><code># gather()命令转换说明：# gather（data=数据框名，key=&quot;key名&quot;，value=&quot;value名&quot;，要转换的列1，列2，列3）
+&gt; gene_exp_tidy &lt;- gather(data = gene_exp, key = &quot;sample_name&quot;, value = &quot;expression&quot;, Sample1, Sample2, Sample3)
+# 在指定要转换的列时，也可不用列名，直接指定列的编号即可
+&gt; gene_exp_tidy &lt;- gather(data = gene_exp, key = &quot;sample_name&quot;, value = &quot;expression&quot;, 2:4)
+#  在指定要转换的列时，也可指定不需转换的列，其他列参与转换
+&gt; gene_exp_tidy &lt;- gather(data = gene_exp, key = &quot;sample_name&quot;, value = &quot;expression&quot;, -GeneId)
+</code></pre><p>使用spread()函数将Tidy格式数据还原</p>
+<pre><code>spread(data = gene_exp_tidy, key = &quot;sample_name&quot;, value = &quot;expression&quot;)
+</code></pre><p>有时，在数据处理时，我们会遇到下面这种更加复杂的情况，在GeneId一定的情况下，每一样品还对应不同的温度：</p>
+<p><img src="https://i.imgur.com/dcteRp7.jpg" alt=""></p>
+<p>处理策略：</p>
+<ol>
+<li>先使用gather()函数，按列进行转换</li>
+<li><p>再使用spread()函数，将Sample和温度分开</p>
+<p> gene_exp3_tidy &lt;- gather(gene_exp3, key, Expression, -GeneId)</p>
+</li>
+</ol>
+<p><img src="https://i.imgur.com/KY5OOlj.jpg" alt=""></p>
+<p>3.使用seprate()函数，对key这一列进行分割</p>
+<pre><code>gene_exp3_tidy2 &lt;- separate(gene_exp3_tidy, col = key, into = c(&quot;SampleName&quot;,&quot;Temperature&quot;))
+</code></pre><p><img src="https://i.imgur.com/g0nNEt5.jpg" alt=""></p>
+<hr>
+<p><a href="http://r4ds.had.co.nz/workflow-projects.html" target="_blank" rel="external">R for Data Science(推荐)</a> </p>
+<p>该书github地址：<a href="https://github.com/hadley/r4ds" target="_blank" rel="external">hadley/r4ds</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.jianshu.com/p/bfddfe29aa39" target="_blank" rel="external">R语言的plyr包简介</a></p>
+<p>（2）<a href="http://www.jianshu.com/p/36f5268e932c" target="_blank" rel="external">利用reshape2包进行数据逆透视和数据透视</a></p>
+<p>（3）<a href="http://www.xueqing.tv/cms/article/105" target="_blank" rel="external">reshape2包的进化版—tidyr包</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;R数据整合函数包小结&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="R" scheme="https:///AnJingwd.github.io/categories/R/"/>
+    
+    
+      <category term="R" scheme="https:///AnJingwd.github.io/tags/R/"/>
+    
+  </entry>
   
   <entry>
     <title>Kaggle</title>
@@ -218,7 +392,7 @@
     <link href="https:///AnJingwd.github.io/2018/04/05/%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8/"/>
     <id>https:///AnJingwd.github.io/2018/04/05/任务提交系统使用/</id>
     <published>2018-04-05T02:07:10.000Z</published>
-    <updated>2018-04-18T03:03:04.441Z</updated>
+    <updated>2018-07-19T02:33:00.894Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">任务提交系统使用</blockquote>
 
@@ -280,7 +454,7 @@
 <p>&emsp;&emsp;ps: ST 表示当前状态，R是Runing的简写</p>
 <ul>
 <li><p>salloc [申请资源]</p>
-<p>  salloc -N 1 –cpus-per-task=4<br>  squeue 查看任务情况，获取分配节点，然后使用ssh 节点进行切换</p>
+<p>  salloc -N 1 –cpus-per-task=4 或者 srun -N1 -n1 hostname<br>  squeue 查看任务情况，获取分配节点，然后使用ssh 节点进行切换</p>
 </li>
 </ul>
 <h3 id="OpenLava调度程序常用命令"><a href="#OpenLava调度程序常用命令" class="headerlink" title="OpenLava调度程序常用命令"></a>OpenLava调度程序常用命令</h3><p><a href="http://docs.alces-flight.com/en/stable/openlava/openlava.html" target="_blank" rel="external">openlava manual</a> </p>
@@ -468,7 +642,7 @@
     <link href="https:///AnJingwd.github.io/2018/02/13/gcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
     <id>https:///AnJingwd.github.io/2018/02/13/gcc5.2编译安装/</id>
     <published>2018-02-13T05:14:19.000Z</published>
-    <updated>2018-04-15T02:37:40.337Z</updated>
+    <updated>2018-07-10T01:28:26.874Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">gcc5.2编译安装</blockquote>
 
@@ -497,7 +671,7 @@ source ~/.bashrc
 <li>MPFR=mpfr-2.4.2</li>
 <li>GMP=gmp-4.3.2</li>
 <li>MPC=mpc-0.8.1</li>
-<li>isl=isl-0.14<br>等依赖，并设置了软连接</li>
+<li>isl=isl-0.14<br>等依赖，并设置了软连接，如果安装过程ftp连接不上，可以自行下载这四个包，放在gcc-5.2.0目录下，注释掉./contrib/download_prerequisites脚本内的wget 行即可</li>
 </ul>
 <h1 id="多核处理器下提高make的效率"><a href="#多核处理器下提高make的效率" class="headerlink" title="多核处理器下提高make的效率"></a>多核处理器下提高make的效率</h1><p>make的-j参数可以使make进行并行编译。make该参数的帮助如下：</p>
 <p>-j [N], –jobs[=N]          Allow N jobs at once; infinite jobs with no arg<br><strong>虽然-j 可以大大缩短gcc编译时间,但注意：make -j命令并不是任何情况下都可以用的，在存在编译依赖的情况下，单核编译还是一种比较稳妥的方案。</strong></p>
@@ -793,7 +967,7 @@ echo &apos;export PKG_CONFIG_PATH=/home/wangdong/softwares/libxml2/lib/pkgconfig
     <link href="https:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/"/>
     <id>https:///AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/</id>
     <published>2018-01-28T14:08:43.000Z</published>
-    <updated>2018-05-28T04:00:16.528Z</updated>
+    <updated>2018-07-22T06:44:56.368Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R</blockquote>
 
@@ -813,7 +987,7 @@ echo &apos;export PKG_CONFIG_PATH=/home/wangdong/softwares/libxml2/lib/pkgconfig
 <p>（2）找到R CRAN的相关源码包（.tar.gz）</p>
 <p>例如：<a href="https://cran.r-project.org/web/packages/ggplot2/" target="_blank" rel="external">https://cran.r-project.org/web/packages/ggplot2/</a> 不同包只需要更改最后包名即可</p>
 <h1 id="linux下源码安装R-3-4-4"><a href="#linux下源码安装R-3-4-4" class="headerlink" title="linux下源码安装R-3.4.4"></a>linux下源码安装R-3.4.4</h1><h2 id="建议先升级gcc"><a href="#建议先升级gcc" class="headerlink" title="建议先升级gcc"></a>建议先升级gcc</h2><p>可参考<a href="https://anjingwd.github.io/AnJingwd.github.io/2018/02/13/gcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" target="_blank" rel="external">gcc5.2编译安装</a>，因为需要相应的动态链接库。</p>
-<h2 id="安装依赖的包"><a href="#安装依赖的包" class="headerlink" title="安装依赖的包"></a>安装依赖的包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#新建一个文件夹，然后把需要依赖的组件安装这个路径下</span></div><div class="line">mkdir -p <span class="variable">$HOME</span>/softwares/packages</div><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/softwares/packages</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##bzip2-1.0.6</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</div><div class="line">    untargz bzip2-1.0.6.tar.gz</div><div class="line">    <span class="built_in">cd</span> bzip2-1.0.6</div><div class="line">    </div><div class="line">    修改bzip2-1.0.6的<span class="string">"Makefile"</span>文件：</div><div class="line">    </div><div class="line">    CC=gcc -fPIC  &lt;&lt; 新增 -fPIC，默认是64位编译的；</div><div class="line">    AR=ar</div><div class="line">    RANLIB=ranlib</div><div class="line">    LDFLAGS=</div><div class="line">    BIGFILES=-D_FILE_OFFSET_BITS=64</div><div class="line">    CFLAGS=-fPIC -Wall -Winline -O2 -g  $(BIGFILES)   <span class="comment"># 这里也可以加上</span></div><div class="line"></div><div class="line">    make -f Makefile-libbz2_so</div><div class="line">    make clean &lt;------------保守建议，还是clean一下 </div><div class="line">    make</div><div class="line">    make install PREFIX=<span class="variable">$HOME</span>/softwares/packages   <span class="comment"># prefix表示的安装的路径前缀</span></div><div class="line"></div><div class="line"><span class="comment">## curl-7.59</span></div><div class="line">    wget https://curl.haxx.se/download/curl-7.59.0.zip</div><div class="line">    unzip curl-7.59.0.zip</div><div class="line">    <span class="built_in">cd</span> curl-7.59.0</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/packages   <span class="comment"># 这个是之前设置的packages路径</span></div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## pcre-8.41.tar.gz</span></div><div class="line">    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.42.tar.gz</div><div class="line">    tar –xvf pcre-8.41.tar.gz</div><div class="line">    <span class="built_in">cd</span> pcre</div><div class="line">    ./configure --<span class="built_in">enable</span>-utf8  --prefix=<span class="variable">$HOME</span>/softwares/packages  <span class="comment"># 这个是之前设置的packages路径，一定要设置enable-utf8;</span></div><div class="line">    make</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## xz-5.2.3.tar.gz</span></div><div class="line">    下载路径：https://sourceforge.net/projects/lzmautils/files/xz-5.2.3.tar.gz/download</div><div class="line">    tar xzvf xz-5.2.3.tar.gz</div><div class="line">    <span class="built_in">cd</span> xz-5.2.3</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## zlib-1.2.8.tar.gz</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//zlib.net/zlib-1.2.11.tar.gz</div><div class="line">    tar xzvf zlib-1.2.8.tar.gz</div><div class="line">    <span class="built_in">cd</span> zlib-1.2.8</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make</div><div class="line">    make install</div></pre></td></tr></table></figure>
+<h2 id="安装依赖的包"><a href="#安装依赖的包" class="headerlink" title="安装依赖的包"></a>安装依赖的包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#新建一个文件夹，然后把需要依赖的组件安装这个路径下</span></div><div class="line">mkdir -p <span class="variable">$HOME</span>/softwares/packages</div><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/softwares/packages</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##bzip2-1.0.6</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</div><div class="line">    untargz bzip2-1.0.6.tar.gz</div><div class="line">    <span class="built_in">cd</span> bzip2-1.0.6</div><div class="line">    </div><div class="line">    修改bzip2-1.0.6的<span class="string">"Makefile"</span>文件：</div><div class="line">    </div><div class="line">    CC=gcc -fPIC  &lt;&lt; 新增 -fPIC，默认是64位编译的；</div><div class="line">    AR=ar</div><div class="line">    RANLIB=ranlib</div><div class="line">    LDFLAGS=</div><div class="line">    BIGFILES=-D_FILE_OFFSET_BITS=64</div><div class="line">    CFLAGS=-fPIC -Wall -Winline -O2 -g  $(BIGFILES)   <span class="comment"># 这里也可以加上</span></div><div class="line"></div><div class="line">    make -f Makefile-libbz2_so</div><div class="line">    make clean &lt;------------保守建议，还是clean一下 </div><div class="line">    make</div><div class="line">    make install PREFIX=<span class="variable">$HOME</span>/softwares/packages   <span class="comment"># prefix表示的安装的路径前缀</span></div><div class="line"></div><div class="line"><span class="comment">## curl-7.59</span></div><div class="line">    wget https://curl.haxx.se/download/curl-7.59.0.zip</div><div class="line">    unzip curl-7.59.0.zip</div><div class="line">    <span class="built_in">cd</span> curl-7.59.0</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages   <span class="comment"># 这个是之前设置的packages路径</span></div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## pcre-8.41.tar.gz</span></div><div class="line">    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.42.tar.gz</div><div class="line">    tar –xvf pcre-8.41.tar.gz</div><div class="line">    <span class="built_in">cd</span> pcre</div><div class="line">    ./configure --<span class="built_in">enable</span>-utf8  --prefix=<span class="variable">$HOME</span>/softwares/packages  <span class="comment"># 这个是之前设置的packages路径，一定要设置enable-utf8;</span></div><div class="line">    make</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## xz-5.2.3.tar.gz</span></div><div class="line">    下载路径：https://sourceforge.net/projects/lzmautils/files/xz-5.2.3.tar.gz/download</div><div class="line">    tar xzvf xz-5.2.3.tar.gz</div><div class="line">    <span class="built_in">cd</span> xz-5.2.3</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## zlib-1.2.8.tar.gz</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//zlib.net/zlib-1.2.11.tar.gz</div><div class="line">    tar xzvf zlib-1.2.8.tar.gz</div><div class="line">    <span class="built_in">cd</span> zlib-1.2.8</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make</div><div class="line">    make install</div></pre></td></tr></table></figure>
 <h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$HOME/softwares/packages/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="built_in">echo</span> <span class="string">'export LD_LIBRARY_PATH=$HOME/softwares/packages/lib:$LD_LIBRARY_PATH'</span>&gt;&gt;~/.bashrc </div><div class="line"><span class="built_in">echo</span> <span class="string">'export CFLAGS="-I$HOME/softwares/packages/include"'</span>&gt;&gt;~/.bashrc </div><div class="line"><span class="built_in">echo</span> <span class="string">'export LDFLAGS="-L$HOME/softwares/packages/lib"'</span>&gt;&gt;~/.bashrc</div><div class="line"></div><div class="line"><span class="built_in">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
 <h2 id="安装R3-4-4"><a href="#安装R3-4-4" class="headerlink" title="安装R3.4.4"></a>安装R3.4.4</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">wget https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-<span class="number">3</span>/R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">cd R-<span class="number">3.4</span><span class="number">.4</span></div><div class="line">./configure --prefix=$HOME/softwares/packages/R  --enable-R-shlib  --with-readline=yes --with-libpng=yes --with-x=no  </div><div class="line"><span class="comment"># --enable-R-shlib一定要设置，否则安装不上Rserve;  prefix是安装路径，可以自定义；</span></div><div class="line"></div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"></div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="keyword">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
 <h1 id="安装packages"><a href="#安装packages" class="headerlink" title="安装packages"></a>安装packages</h1><h2 id="方法一：每次安装包时指定镜像"><a href="#方法一：每次安装包时指定镜像" class="headerlink" title="方法一：每次安装包时指定镜像"></a>方法一：每次安装包时指定镜像</h2><ul>
@@ -844,7 +1018,10 @@ local({r &lt;- getOption(&quot;repos&quot;)
 <h2 id="设置环境变量-1"><a href="#设置环境变量-1" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>R中用.libPaths()函数查看lib路径，如果有多个lib,install.packages()默认是安装在第一个目录下</p>
 <p>修改.bashrc文件中R lib路径的<strong>环境变量（R_LIBS）</strong>：export R_LIBS=/home/wangdong/R/lib64/R/library，就能设定自己lib的默认目录，即使使用的R是别人安装的或是集体共用的，也能拥有自己的library</p>
 <h3 id="终端直接调用R脚本"><a href="#终端直接调用R脚本" class="headerlink" title="终端直接调用R脚本"></a>终端直接调用R脚本</h3><pre><code>/home/wangdong/R/bin/Rscript 或者 Rscript test.R
-</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_605f5b4f010160su.html" target="_blank" rel="external">R中查看函数源代码</a></p>
+</code></pre><p>error while loading shared libraries: libicuuc.so.50解决：</p>
+<p>在登陆节点启动R没问题，在计算节点报上述错误，解决：</p>
+<p>ls -l /usr/lib64 | grep libicui* 找到相应文件，将其复制到自己的目录，然后设置软连接，并设置环境变量LD_LIBRARY_PATH</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_605f5b4f010160su.html" target="_blank" rel="external">R中查看函数源代码</a></p>
 <p>（2）<a href="http://blog.sina.com.cn/s/blog_605f5b4f010160su.html" target="_blank" rel="external">R中查看函数源代码</a></p>
 <p>（3）<a href="http://blog.csdn.net/high2011/article/details/52052333" target="_blank" rel="external">linux下源码安装R-3.1.2.tar.gz和RStudio开发工具</a></p>
 <p>（4）<a href="http://m.blog.itpub.net/9036/viewspace-2122686/" target="_blank" rel="external">CentOS 下 R 的安装</a></p>
@@ -930,7 +1107,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
     <link href="https:///AnJingwd.github.io/2018/01/26/IGV%E6%89%B9%E9%87%8F%E6%9F%A5%E7%9C%8B%E5%8F%98%E5%BC%82/"/>
     <id>https:///AnJingwd.github.io/2018/01/26/IGV批量查看变异/</id>
     <published>2018-01-26T03:21:34.000Z</published>
-    <updated>2018-07-02T11:16:13.114Z</updated>
+    <updated>2018-07-17T03:11:59.820Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">IGV批量查看变异并过滤</blockquote>
 
@@ -976,6 +1153,13 @@ export CLASSPATH=./:/home/wangdong/softwares/java1.8/jdk1.8.0_172/lib:/home/wang
 <li><p><strong>maxPanelHeight 设置很重要，默认800，但是igv截图不全，所以设置为10000</strong></p>
 </li>
 </ol>
+<h1 id="通过命令行自动截图"><a href="#通过命令行自动截图" class="headerlink" title="通过命令行自动截图"></a>通过命令行自动截图</h1><p>服务器上vncserver源码下载<a href="https://www.realvnc.com/en/connect/download/vnc/linux/" target="_blank" rel="external">链接</a>,选择Generic scripts x64，然后下载即可，安装可查看README文件。具体可参考（1）<a href="https://blog.csdn.net/xuyunzhang/article/details/7620019" target="_blank" rel="external">vnc 源码安装</a>； （2）<a href="http://blog.51cto.com/woyaoxuelinux/1914078" target="_blank" rel="external">linux命令：VNC服务的配置及使用</a></p>
+<ul>
+<li>开启vncserver</li>
+<li>设置环境变量DISPLAY:  export DISPLAY=:1 (你vnc开的几就写几)</li>
+<li>修改igv.sh中-Xmx4000m，增大igv分配内存</li>
+<li>igv.sh -b IGV_snapshots.bat</li>
+</ul>
 <h2 id="过滤标准"><a href="#过滤标准" class="headerlink" title="过滤标准"></a>过滤标准</h2><ol>
 <li>高质量的SNVs和SNPs要求在所有的reas中High base qualities，并且不能在reads的末端；</li>
 <li>Good mapping quality of reads, no strand bias, allele frequency consistent with heterozygous mutation</li>
@@ -1021,6 +1205,13 @@ gnome-session &amp;
 </code></pre><p>（2）改变xstartup的权限</p>
 <pre><code>chmod 777 /home/wangdong/.vnc/xstartup
 </code></pre><p>ps: 首选在图形桌面用命令行运行igv.sh,再点击igv.sh运行</p>
+<h2 id="命令行下批量运行IGV"><a href="#命令行下批量运行IGV" class="headerlink" title="命令行下批量运行IGV"></a>命令行下批量运行IGV</h2><ul>
+<li>开启Xmanager - Passive</li>
+<li>在Xshell5的Poperties—&gt;Tunneling—–&gt;Forward X11 connections to</li>
+<li>命令行下使用igv.sh -b IGV_snapshots.bat</li>
+</ul>
+<p>igv命令行参数可查看：<a href="http://software.broadinstitute.org/software/igv/startingIGV" target="_blank" rel="external">链接</a></p>
+<p>ps: windows下需要提前安装好igv</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.cnblogs.com/leezx/p/5603481.html" target="_blank" rel="external">可视化工具之 IGV 使用方法</a></p>
 <p>（2）<a href="https://gist.github.com/dfjenkins3/5c6dc1e55e78fa17b931" target="_blank" rel="external">IGV_Batch_Screenshots.md</a></p>
 <p>（3）<a href="http://blog.csdn.net/Bingorl/article/details/78289280?locationNum=8&amp;fps=1" target="_blank" rel="external">如何使用VNC Viewer连接远程CentOS服务器</a></p>
@@ -2123,132 +2314,6 @@ cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
     
     
       <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Rmarkdown生成动态报告</title>
-    <link href="https:///AnJingwd.github.io/2017/12/10/Rmarkdown%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E6%8A%A5%E5%91%8A/"/>
-    <id>https:///AnJingwd.github.io/2017/12/10/Rmarkdown生成动态报告/</id>
-    <published>2017-12-10T02:54:17.000Z</published>
-    <updated>2017-12-10T14:43:46.327Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">Rmarkdown生成动态报告</blockquote>
-
-<a id="more"></a>
-<p>&emsp;&emsp;RStudio可以当做 Markdown 编辑器来用（R Markdown），根据数据处理结果快速生成报告文档，这一功能主要通过 Package Knit 及相关组件完成。</p>
-<p>&emsp;&emsp;R Markdown 的两大特别之处，一是通过 Pandoc 将 Markdown 转化成 LaTex，再由强大的 LaTex 转换成 HTML、PDF、Word，理论上来说借助 LaTex 可以生成学术论文、期刊杂志、数据报告等规范格式的文档；另一大特点是整合了 R 语言的环境，可以在 Markdown 语法中 code block 直接执行 R 语言代码并将结果插入文档。</p>
-<p>R Markdown from Rstudio <a href="http://rmarkdown.rstudio.com/lesson-1.html" target="_blank" rel="external">帮助文档</a></p>
-<p>一个小教程:</p>
-<ul>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/02/03/writing-your-thesis-with-r-markdown-1-getting-started/" target="_blank" rel="external">Writing your thesis with R Markdown (1) – Getting started</a></p>
-</li>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/02/17/writing-your-thesis-with-rmarkdown-2-making-a-chapter/" target="_blank" rel="external">Writing your thesis with R Markdown (2) – Text, citations and equations</a></p>
-</li>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/03/18/writing-your-thesis-with-r-markdown-3-figures-r-code-and-tables/" target="_blank" rel="external">Writing your thesis with R Markdown (3) – Figures, R code and tables</a></p>
-</li>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/03/29/writing-your-thesis-with-r-markdown-4-putting-the-thesis-together/" target="_blank" rel="external">Writing your thesis with R Markdown (4) – Putting the thesis together</a></p>
-</li>
-<li><p><a href="https://rosannavanhespenresearch.wordpress.com/2016/03/30/writing-your-thesis-with-r-markdown-5-the-thesis-layout/" target="_blank" rel="external">Writing your thesis with R Markdown (5) – The thesis layout</a></p>
-</li>
-</ul>
-<h1 id="安装必要的包"><a href="#安装必要的包" class="headerlink" title="安装必要的包"></a>安装必要的包</h1><pre><code>install.packages(&quot;devtools&quot;) # 如果以前没有安装 devtools 包
-devtools::install_github(&quot;rstudio/rmarkdown&quot;)  #安装github上最新版rmarkdown
-library(rmarkdown)
-</code></pre><h1 id="如何编辑"><a href="#如何编辑" class="headerlink" title="如何编辑"></a>如何编辑</h1><ol>
-<li><p>添加的是普通的文字: 那就按照Markdown写吧，你看到过的功能R都支持。</p>
-</li>
-<li><p>添加的是代码: 那就放到代码区域里面去，和Markdown的代码标记不太一样，多了 {}。</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code</div></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>然后在 {} 里告诉 R Studio 你希望显示什么:</p>
-</li>
-</ol>
-<ul>
-<li>echo控制R代码块是否可见,设置为FALSE表示隐藏R代码，但会运行代码块并输出结果到文档。如果你只是为了显示而不需要运行一个代码块，设置eval = FALSE即可。 </li>
-<li>message参数用于设置是否显示控制台输出的信息，message = FALSE表示不显示。<ul>
-<li>只想显示代码 {r,echo = FALSE, eval = FALSE}</li>
-<li>只想显示结果 {r,echo = FALSE, eval = TRUE}</li>
-<li>想要代码+编译结果 {r,echo = TRUE，eval = FALSE}</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li><p>如果是在文中添加代码，没有{}</p>
-<pre><code>`r 2+ 2`
-</code></pre></li>
-<li><p>chunk options</p>
-</li>
-</ol>
-<p><img src="https://i.imgur.com/SeQw9LV.jpg" alt=""></p>
-<p>这个chunk放在最前面，声明以后的每一个chunk都不输出warnings和message</p>
-<ol>
-<li><p>在代码块执行完后，控制结果的输出形式。包括文本、图表和图形的输出。有四个取值（更多细节参考<a href="http://yihui.name/knitr/options/）：" target="_blank" rel="external">http://yihui.name/knitr/options/）：</a> 1.markup—标记显示 2.asis—文本显示 3.hold—末尾显示 4.hide—隐藏 </p>
-</li>
-<li><p>由graphics和ggplot2得到的图形对齐方式可通过fig.align = ‘left’/‘right’/‘center’分别设置成左对齐，右对齐，居中。下图设置图形居中（默认是左对齐）</p>
-</li>
-</ol>
-<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><pre><code>![Caption for the picture.](/path/to/image.png)
-</code></pre><h1 id="输出-html-word-pdf"><a href="#输出-html-word-pdf" class="headerlink" title="输出(html ,word, pdf)"></a>输出(html ,word, pdf)</h1><p>从Rmd格式可以导出为三种格式，用Pandoc实现:Word, HTML, PDF（额外需要LaTex支持，并且对中文的支持需要额外的设定）</p>
-<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>Windows</p>
-<p>There is a package installer at pandoc’s<a href="https://github.com/jgm/pandoc/releases/latest" target="_blank" rel="external"> download page</a>. 选择msi installer或者zip file都可以。</p>
-<p>For PDF output, you’ll also need to install LaTeX. We recommend <a href="http://miktex.org/" target="_blank" rel="external">MiKTeX</a>.</p>
-<h2 id="R-Studio的全局配置-为了支持中文pdf输出"><a href="#R-Studio的全局配置-为了支持中文pdf输出" class="headerlink" title="R Studio的全局配置(为了支持中文pdf输出)"></a>R Studio的全局配置(为了支持中文pdf输出)</h2><ul>
-<li>Tools – Global Options – Code—Saving， 设置Default text coding: UTF-8 coding</li>
-<li>Tools – Global Options – Sweave，将Typeset LaTeX into PDF using:设置为 XeLaTeX</li>
-</ul>
-<p>需要注意的就是latex_engine:xelatex 了。即使设置了默认的编译器为xeLaTeX依旧要手动再声明一遍编译器</p>
-<h2 id="设置-YAML"><a href="#设置-YAML" class="headerlink" title="设置 YAML"></a>设置 YAML</h2><p>完成对R Studio的全局配置后，对每个Rmd文件（R markdown）在最开头条线之间进行设置才是更重要的。这个部分叫做YAML <a href="https://en.wikipedia.org/wiki/YAML" target="_blank" rel="external">wiki</a></p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">author: <span class="string">"wd"</span></div><div class="line">date: <span class="string">"2017.12.10"</span></div><div class="line">output: pdf_document</div><div class="line">title: <span class="string">"MRstudy"</span></div><div class="line">outputs:</div><div class="line">  pdf_document:</div><div class="line">    includes:</div><div class="line">      in_header: header.tex</div><div class="line">    keep_tex: yes</div><div class="line">    latex_engine: xelatex</div><div class="line">---</div></pre></td></tr></table></figure>
-<p>步骤:</p>
-<ul>
-<li>在YMAL里面设置 output: pdf_document，或者word_document, html_document。</li>
-<li>设定好了之后三种导出的方法都一样，<strong>点击代码窗口上面的蓝色毛线团标记（选择输出html或者word或者pdf）。</strong>（knit英文是编织的意思，所以就是把代码织成文本吧）</li>
-</ul>
-<p><strong>注意正确的缩进和冒号</strong></p>
-<ul>
-<li>以上意思是，输出为html，word和pdf。html和word为默认设置。pdf设置包括，in_header，keep_tex和latex_engine。</li>
-<li>如果一个设置还没到具体的内容，它紧接的是冒号，换行后需要缩进两个空格在开始。</li>
-<li>如果已经指向明确的内容，结束没有冒号，换行之后不需要缩进。</li>
-</ul>
-<p><strong>header.tex需要和你的Rmd文档放到一个路径，</strong> 其中内容是：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">\usepackage&#123;xeCJK&#125;</div><div class="line">\setCJKmainfont&#123;楷体&#125;  % 字体可以更换</div><div class="line">\setmainfont&#123;Georgia&#125; % 設定英文字型</div><div class="line">\setromanfont&#123;Georgia&#125; % 字型</div><div class="line">\setmonofont&#123;Courier New&#125;</div></pre></td></tr></table></figure>
-<p>更多详细配置可以参考<a href="http://rmarkdown.rstudio.com/" target="_blank" rel="external">官方文档</a></p>
-<h1 id="编译前在viewer窗口预览文档"><a href="#编译前在viewer窗口预览文档" class="headerlink" title="编译前在viewer窗口预览文档"></a>编译前在viewer窗口预览文档</h1><p>使用方法：</p>
-<ol>
-<li><p>安装 Xaringan</p>
-<p> install.packages(“devtools”)<br> if (!requireNamespace(“xaringan”))<br> devtools::install_github(“yihui/xaringan”)</p>
-</li>
-<li>R markdown不需额外设置。</li>
-<li>编译的时候找到 Addin，点击Infinite Moon Reader</li>
-</ol>
-<p><img src="https://i.imgur.com/MfkEUSg.jpg" alt=""></p>
-<h1 id="rmarkdown转化中文字符为PDF的设置"><a href="#rmarkdown转化中文字符为PDF的设置" class="headerlink" title="rmarkdown转化中文字符为PDF的设置"></a>rmarkdown转化中文字符为PDF的设置</h1><p>rmarkdown对于输出含中文的html和word文档，在YAML设置html_document: default或者word_document: default即可，但对于输出含有中文的pdf文件需要单独设置YAML。如下：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">output:</div><div class="line">  pdf_document:</div><div class="line">    keep_tex: yes</div><div class="line">    latex_engine: xelatex</div><div class="line">    includes:</div><div class="line">      in_header: header.tex</div></pre></td></tr></table></figure>
-<h1 id="中文模板-详细说明"><a href="#中文模板-详细说明" class="headerlink" title="中文模板 详细说明"></a>中文模板 <a href="https://github.com/rstudio/rticles/pull/16" target="_blank" rel="external">详细说明</a></h1><p>安装rticles包，调用中文模板<br>    install.packages(“rticles”)</p>
-<p>安装成功之后，我们可以新建一个Rmarkdown文件。点击New-&gt;file-&gt;R markdown,其中有了一个From Template</p>
-<p><img src="https://i.imgur.com/qHiN24R.jpg" alt=""></p>
-<p>使用ctrl + shift + k的快捷键，稍等片刻会出现中文PDF</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.xueqing.tv/cms/article/96" target="_blank" rel="external">利用R-Markdown和Knitr创建动态报告（第一部分）</a></p>
-<p>（2）<a href="http://www.xueqing.tv/cms/article/101" target="_blank" rel="external">利用R-Markdown和Knitr创建动态报告（第二部分）</a></p>
-<p>（3）<a href="https://www.cnblogs.com/Xeonilian/p/7142379.html" target="_blank" rel="external">R Markdown 设置和使用</a></p>
-<p>（4）<a href="http://www.cnblogs.com/Xeonilian/p/7608290.html" target="_blank" rel="external">R Markdown + Infinite Moon Reader + 编辑实时更新</a></p>
-<p>（5）<a href="http://blog.rainy.im/2015/05/16/rmarkdown-in-rstudio/" target="_blank" rel="external">RStudio 中的 R Markdown（推荐）</a></p>
-<p>（6）<a href="http://blog.csdn.net/xmuecor/article/details/41956525" target="_blank" rel="external">Rmarkdown输出PDF的中文支持问题解决</a></p>
-<p>（7）<a href="http://www.jianshu.com/p/0bfda49f1a52" target="_blank" rel="external">rmarkdown转化中文字符为PDF的设置</a></p>
-<p>（8）<a href="http://www.jianshu.com/p/3a1d95f9965a" target="_blank" rel="external">Rmarkdown中文实现（推荐）</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;Rmarkdown生成动态报告&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="R" scheme="https:///AnJingwd.github.io/categories/R/"/>
-    
-    
-      <category term="R" scheme="https:///AnJingwd.github.io/tags/R/"/>
     
   </entry>
   

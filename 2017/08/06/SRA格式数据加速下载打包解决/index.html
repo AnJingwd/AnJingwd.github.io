@@ -110,7 +110,7 @@
 <meta property="og:image" content="http://i.imgur.com/5UijmT0.png">
 <meta property="og:image" content="http://i.imgur.com/HGizIwQ.png">
 <meta property="og:image" content="http://i.imgur.com/IMYaE6l.png">
-<meta property="og:updated_time" content="2018-04-26T12:28:04.218Z">
+<meta property="og:updated_time" content="2018-07-09T08:23:22.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SRA数据加速下载打包解决">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;NCBI维护Short Read Archive (SRA)作为大规模平行测序（NGS）项目产生的数据仓库。这些方法在单个循环中能产生数百万碱基至千兆级碱基的数据，是标准Sanger测序仪输出的数百万倍。运用这些技术，包括新基因组的测序，捕获基因组区域测序，多个个体的完整基因组测序来寻找变异，转录组测序来研究样本可变剪切变异和表达水平，环境样本和其他宏基因组，染色质DNA结">
@@ -550,7 +550,7 @@ source ~/.bashrc
 <pre><code>prefetch -c SRR390728
 </code></pre><p>这些文件区哪儿了？这些文件去哪里了？<strong>存在了你home目录下的一个默认文件夹里。</strong></p>
 <pre><code>ls ~/ncbi
-</code></pre><p><strong>从NCBI下下来的数据，双端测序数据是放在一个文件里的，所以需要把它们重新拆解为两个文件。</strong><br>我们用程序fastq-dump来把文件拆包</p>
+</code></pre><p><strong>从NCBI下下来的数据，双端测序数据是放在一个文件里的，所以需要把它们重新拆解为两个文件。注意，下载下来的这个SRA文件虽然只有一份，但是里面其实存了read1和read2的测序数据。</strong><br>我们用程序fastq-dump来把文件拆包</p>
 <pre><code>fastq-dump --split-files SRR1553610
 </code></pre><p>那么我怎么知道哪些数据是双端测序的呢？上文的网址关于NSBI的SRA数据结构的Study层次对实验方法有具体介绍：网址再贴一遍：<a href="https://www.ncbi.nlm.nih.gov/Traces/study/" target="_blank" rel="external">https://www.ncbi.nlm.nih.gov/Traces/study/</a></p>
 <p>小细节之拆包后文件的命名：</p>
@@ -645,7 +645,7 @@ source ~/.bashrc
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="https:/AnJingwd.github.io/2017/08/06/Linux多线程下载工具axel编译安装/" rel="prev" title="Linux多线程下载工具axel编译安装">
+              <a href="https:/AnJingwd.github.io/2017/08/06/Linux效率工具/" rel="prev" title="Linux多线程下载工具axel编译安装">
                 Linux多线程下载工具axel编译安装 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -747,7 +747,7 @@ source ~/.bashrc
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1048,7 +1048,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共75.9k字</span>
+  <span class="post-count">博客全站共78.9k字</span>
 </div>
 
 <div class="powered-by">
