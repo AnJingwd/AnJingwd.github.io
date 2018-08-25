@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-08-24T08:49:51.669Z</updated>
+  <updated>2018-08-25T11:15:11.400Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,119 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>R操作MySQL数据库</title>
+    <link href="https:///AnJingwd.github.io/2018/08/25/R%E6%93%8D%E4%BD%9CMySQL%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>https:///AnJingwd.github.io/2018/08/25/R操作MySQL数据库/</id>
+    <published>2018-08-25T10:07:44.000Z</published>
+    <updated>2018-08-25T11:15:11.400Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">R操作MySQL数据库</blockquote>
+
+<a id="more"></a>
+<ul>
+<li><p>连接MySQL数据库</p>
+<pre><code>conn &lt;- dbConnect(MySQL(), 
+    dbname=&quot;r_data&quot;,
+    username=&quot;root&quot;, 
+    password=&quot;root&quot;, 
+    host=&quot;127.0.0.1&quot;, 
+    port=3306)
+
+summary(conn)  
+</code></pre></li>
+<li><p>查看数据库信息</p>
+<pre><code>dbGetInfo(conn)
+</code></pre></li>
+<li><p>查看数据库表格列表</p>
+<pre><code>dbListTables(conn)
+</code></pre></li>
+<li><p>从R导出数据到数据库</p>
+</li>
+</ul>
+<p>dbWriteTable函数用来将R中的数据导入MySQL数据库，其包括创建新的表格，覆盖已有的表格，追加数据到表格。用法为dbWriteTable(MySQL连接对象名，表格名，R数据框名)</p>
+<p>(1) 创建</p>
+<pre><code>&gt; dbWriteTable(conn,&quot;test&quot;,cars)
+[1] TRUE
+&gt; dbListTables(conn)
+[1] &quot;test&quot;
+</code></pre><p>（2） 覆盖</p>
+<pre><code>dbWriteTable(conn,&quot;test&quot;,cars2,overwrite = TRUE)
+</code></pre><p>（3）追加</p>
+<pre><code>dbWriteTable(conn,&quot;test&quot;,cars3,append = TRUE)
+</code></pre><p>（4）删除表格</p>
+<pre><code>dbRemoveTable(con,&quot;test&quot;)
+</code></pre><ul>
+<li>导入数据到R数据框</li>
+</ul>
+<p>dbReadTable()函数用来从MySQL数据库提取整个表格（前提是表格数据量不是很大）。</p>
+<pre><code>dbReadTable(conn,&quot;test&quot;)
+</code></pre><ul>
+<li><p>获取表格字段列表</p>
+<pre><code>dbListFields(conn,&quot;test&quot;)
+</code></pre></li>
+<li><p>查询语句使用</p>
+</li>
+</ul>
+<p>dbGetQuery()函数用来提取表格中指定的行(使用LIMIT查看前几行)</p>
+<pre><code>dbGetQuery(conn,&quot;SELECT * FROM test LIMIT 5;&quot;)
+</code></pre><p>另一种方式是使用dbSendQuery()查询数据库，然后使用dbFetch()获取数据</p>
+<pre><code>query &lt;- dbSendQuery(conn,&quot;SELECT * FROM test;&quot;)
+data &lt;- dbFetch(query,n=5)
+</code></pre><ul>
+<li><p>dbGetInfo()函数也可以查看query对象的信息</p>
+<pre><code>dbGetInfo(query)
+</code></pre></li>
+<li><p>dbGetStatement()函数用于返回query的MySQL查询语句</p>
+<pre><code>&gt; dbGetInfo(query)
+$`statement`
+[1] &quot;SELECT * FROM test;&quot;
+</code></pre></li>
+<li><p>dbGetRowCount()函数用于返回dbFetch对象查询到的数据行数</p>
+<pre><code>&gt;dbGetRowCount(data)
+5
+</code></pre></li>
+<li><p>dbColumnInfo()函数用于查看query对象的列信息</p>
+<pre><code>&gt; dbColumnInfo(query)
+       name    Sclass      type length
+1 row_names character BLOB/TEXT  65535
+2     speed    double    DOUBLE     22
+3      dist    double    DOUBLE     22
+</code></pre></li>
+<li><p>dbClearResult()函数释放dbSendQuery()函数的数据库资源</p>
+<pre><code>dbClearResult(query)
+</code></pre></li>
+</ul>
+<ul>
+<li><p>检查数据类型</p>
+<pre><code>&gt; dbDataType(RMySQL::MySQL(),&quot;A&quot;)
+[1] &quot;text&quot;
+&gt; dbDataType(RMySQL::MySQL(),1:5)
+[1] &quot;bigint&quot;
+&gt; dbDataType(RMySQL::MySQL(),1.5)
+[1] &quot;double&quot;
+</code></pre></li>
+</ul>
+<ul>
+<li><p>断开数据库连接</p>
+<pre><code>dbDisconnect(conn)
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;R操作MySQL数据库&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="https:///AnJingwd.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https:///AnJingwd.github.io/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>R数据整合函数包小结</title>
@@ -2147,166 +2260,6 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
     <summary type="html">
     
       &lt;blockquote class=&quot;blockquote-center&quot;&gt;变异检测概述&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
-    
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GATK3.8分析环境搭建</title>
-    <link href="https:///AnJingwd.github.io/2017/12/26/GATK3.8%E5%88%86%E6%9E%90%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>https:///AnJingwd.github.io/2017/12/26/GATK3.8分析环境搭建/</id>
-    <published>2017-12-26T10:15:59.000Z</published>
-    <updated>2018-04-01T10:10:29.537Z</updated>
-    
-    <content type="html"><![CDATA[<p><blockquote class="blockquote-center">GATK3.8相关软件及文件准备</blockquote><br><a id="more"></a></p>
-<h1 id="GATK官网相关栏目"><a href="#GATK官网相关栏目" class="headerlink" title="GATK官网相关栏目"></a>GATK官网相关栏目</h1><ul>
-<li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tool Documentation</a> （包含每个工具的使用说明）</li>
-<li><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs" target="_blank" rel="external">Tutorials</a> (包含具体参数和细节)</li>
-<li><a href="https://software.broadinstitute.org/gatk/best-practices/" target="_blank" rel="external">GATK Best Practices</a> （包含两个主流的分析流程）</li>
-</ul>
-<p><strong>全外显子测序call Germline SNP &amp; Indel流程图</strong></p>
-<p><img src="https://i.imgur.com/jvbLuTm.jpg" alt=""></p>
-<p><strong>体细胞拷贝数变异分析流程!</strong></p>
-<p><a href="https://i.imgur.com/844zfg1.jpg" target="_blank" rel="external"></a></p>
-<p><strong>使用RNA-seq数据call变异</strong></p>
-<p><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=3891" target="_blank" rel="external">Calling variants in RNAseq</a></p>
-<p><img src="https://i.imgur.com/GEF1W45.jpg" alt=""></p>
-<ul>
-<li><a href="https://gatkforums.broadinstitute.org/gatk" target="_blank" rel="external">Forum</a> （提问和搜索报错解决很有用）</li>
-</ul>
-<p><img src="https://i.imgur.com/PADtsMb.jpg" alt=""></p>
-<ul>
-<li>Blog (包含历年的workshop材料，学习用得上)</li>
-</ul>
-<p><a href="https://drive.google.com/drive/folders/0B7akc6CTmxIHNGpibUFTNzVRazg?usp=sharing" target="_blank" rel="external">Presentation slides and tutorial materials - Pretoria 2017（需要翻墙才能下载）</a></p>
-<h1 id="GATK3-8下载"><a href="#GATK3-8下载" class="headerlink" title="GATK3.8下载"></a>GATK3.8下载</h1><p>GATK=GenomeAnalysisToolkit，最新稳定版为<a href="https://software.broadinstitute.org/gatk/download/" target="_blank" rel="external">GATK3.8</a> （<strong>需要注册！</strong>）</p>
-<p>&emsp;&emsp;电脑软件在投放市场前，需要有人测试一下，看看是不是有问题，在开发该软件的公司内部的由该公司内部人员测试的称为：alfa测试。alfa测试主要看有没有功能缺失或系统错误，<strong>alfa测试完后一般不会有大问题了，然后把软件拿给用户测试，称为：beta测试，主要是看用户对软件外观，使用方便等的反映。</strong> 如果beta1版用户反映有问题，拿到公司修改，改完后发布beta2版，还有不满意的地方，再改，再发布beta3版，直到用户满意，或正式版发布为止。</p>
-<p><a href="https://software.broadinstitute.org/gatk/download/beta" target="_blank" rel="external">GATK4.Beta.5</a>即为测试版</p>
-<pre><code>#解压：
-tar -jxvf GenomeAnalysisTK-3.8-0.tar.bz2
-</code></pre><h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><p>（1）java版本要求大于1.8.x</p>
-<pre><code>java -version
-</code></pre><p>（2）测试</p>
-<pre><code>java -jar /path/to/GenomeAnalysisTK.jar -h
-</code></pre><p>（3）设置别名</p>
-<pre><code>alias gatk=&quot;/home/wangdong/softwares/GATK3.8/GenomeAnalysisTK.jar&quot;
-</code></pre><p>（4）下载java1.7版本，解压即可（MuTect1.1.7需要）</p>
-<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html" target="_blank" rel="external">Java SE 7 Archive Downloads</a></p>
-<p><img src="https://i.imgur.com/3T122nP.png" alt=""></p>
-<p>（5）mutect下载安装</p>
-<ul>
-<li><a href="https://github.com/broadinstitute/mutect" target="_blank" rel="external">github上mutect源码 broadinstitute/mutect(不必下载)</a></li>
-<li><a href="https://software.broadinstitute.org/gatk/download/mutect" target="_blank" rel="external">GATK官网提供的编译好的MuTect1.1.7</a></li>
-<li><a href="http://archive.broadinstitute.org/cancer/cga/mutect_run" target="_blank" rel="external">How do I run MuTect?（参数详解及使用例子）</a></li>
-</ul>
-<p>（6） 其他软件及环境配置</p>
-<p>Software packages</p>
-<ul>
-<li>BWA</li>
-<li>SAMtools</li>
-<li>Picard</li>
-<li>IGV</li>
-<li>RStudio IDE and R libraries ggplot2 and gsalib</li>
-</ul>
-<p>参考：<a href="https://gatkforums.broadinstitute.org/gatk/discussion/2899/howto-install-all-software-packages-required-to-follow-the-gatk-best-practices" target="_blank" rel="external">(howto) Install all software packages required to follow the GATK Best Practices.</a></p>
-<h1 id="Reference-sequence和annotation下载"><a href="#Reference-sequence和annotation下载" class="headerlink" title="Reference sequence和annotation下载"></a>Reference sequence和annotation下载</h1><p><strong>（请务必使用GATK resource bundle提供的参考基因组相关文件非常重要！）</strong></p>
-<p>GATK resource bundle介绍：<br><a href="http://gatkforums.broadinstitute.org/discussion/1213/whats-in-the-resource-bundle-and-how-can-i-get-it" target="_blank" rel="external">http://gatkforums.broadinstitute.org/discussion/1213/whats-in-the-resource-bundle-and-how-can-i-get-it</a></p>
-<p>GATK resource bundle FTP地址：<br><a href="http://gatkforums.broadinstitute.org/discussion/1215/how-can-i-access-the-gsa-public-ftp-server" target="_blank" rel="external">http://gatkforums.broadinstitute.org/discussion/1215/how-can-i-access-the-gsa-public-ftp-server</a></p>
-<p>（1）使用Xftp5等FTP server登陆</p>
-<pre><code>location: ftp.broadinstitute.org/bundle
-username: gsapubftp-anonymous
-password:
-</code></pre><p>（2）使用浏览器登陆</p>
-<pre><code>ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/
-</code></pre><h2 id="Reference-sequence"><a href="#Reference-sequence" class="headerlink" title="Reference sequence"></a>Reference sequence</h2><ul>
-<li>ucsc.hg19.dict.gz</li>
-<li>ucsc.hg19.fasta.fai.gz</li>
-<li>ucsc.hg19.fasta.gz</li>
-</ul>
-<p><a href="https://software.broadinstitute.org/gatk/documentation/article?id=1601" target="_blank" rel="external">How can I prepare a FASTA file to use as reference?</a></p>
-<p> picard CreateSequenceDictionary R= hg19.fa O= hg19.dict</p>
-<h2 id="annotation"><a href="#annotation" class="headerlink" title="annotation"></a>annotation</h2><ul>
-<li>1000G_omni2.5.hg19.sites.vcf.idx</li>
-<li>1000G_omni2.5.hg19.sites.vcf.idx</li>
-<li>1000G_phase1.indels.hg19.sites.vcf</li>
-<li>1000G_phase1.indels.hg19.sites.vcf.idx</li>
-<li>hg19/1000G_phase1.snps.high_confidence.hg19.sites.vcf</li>
-<li>hg19/1000G_phase1.snps.high_confidence.hg19.sites.vcf.idx</li>
-<li>dbsnp_138.hg19.vcf</li>
-<li>dbsnp_138.hg19.vcf.idx</li>
-<li>hapmap_3.3.hg19.sites.vcf</li>
-<li>hapmap_3.3.hg19.sites.vcf.idx</li>
-<li>Mills_and_1000G_gold_standard.indels.hg19.sites.vcf</li>
-<li>Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx</li>
-</ul>
-<ol>
-<li><p>dbSNP 用于去除部分候选突变，其在其他人中已经被观察到的，最有可能是胚系突变。因为提交给dbSNP数据库的突变验证水平很低，所以我们不能确定标记为胚系突变或者体细胞突变的标签是否可信。</p>
-</li>
-<li><p>相比之下，COSMIC是一个经过更高验证的资源，所以它基本上被用作白名单来“拯救”候选突变，否则这些候选突变将会因为在正常和/或dbSNP中而被去除。 我们期望在dbSNP中被标记为somatic的任何东西都将在COSMIC中，所以我们可以依靠COSMIC来重新回收这些位点。</p>
-</li>
-<li><p>当前最好的已知indels集合将被用于局部重新比对（local realignment）（请注意，我们不再使用dbSNP）; 使用这两个文件：</p>
-<ul>
-<li>1000G_phase1.indels.b37.vcf (currently from the 1000 Genomes Phase I indel calls)</li>
-<li>Mills_and_1000G_gold_standard.indels.b37.sites.vcf</li>
-</ul>
-</li>
-<li><p>If you run any GATK tool on a vcf that doesn’t have an index, it will automatically generate one for you, so knock yourself out。 <a href="https://gatkforums.broadinstitute.org/gatk/discussion/5426/generate-an-idx-file-for-a-vcf" target="_blank" rel="external">参考：generate an idx file for a vcf 
-</a></p>
-</li>
-</ol>
-<h2 id="GATK-Prepare-Reference-Files"><a href="#GATK-Prepare-Reference-Files" class="headerlink" title="GATK: Prepare Reference Files"></a>GATK: Prepare Reference Files</h2><p>参考： <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk" target="_blank" rel="external">(howto) Prepare a reference for use with BWA and GATK</a></p>
-<p>Prerequisites</p>
-<ul>
-<li>Installed BWA</li>
-<li>Installed SAMTools</li>
-<li>Installed Picard</li>
-</ul>
-<p>Steps</p>
-<ul>
-<li><p>Generate the BWA index</p>
-<p>  bwa index -a bwtsw ucsc.hg19.fasta &emsp;&emsp;#-a bwtsw指定索引算法</p>
-</li>
-<li><p>Generate the Fasta file index</p>
-<p>  samtools faidx ucsc.hg19.fasta &emsp;&emsp;#将生成ucsc.hg19.fasta.fai 文件</p>
-</li>
-<li><p>Generate the sequence dictionary（也可直接用已下载的ucsc.hg19.dict文件）</p>
-<p>  java -jar picard.jar CreateSequenceDictionary \ </p>
-<p>  REFERENCE=reference.fa \ </p>
-<p>  OUTPUT=reference.dict </p>
-</li>
-</ul>
-<p>（更详细的可参考：<a href="http://people.duke.edu/~ccc14/duke-hts-2017/Statistics/08032017/GATK-reference.html" target="_blank" rel="external">链接</a>）</p>
-<h2 id="Cosmic-gz文件下载"><a href="#Cosmic-gz文件下载" class="headerlink" title="Cosmic*.gz文件下载"></a>Cosmic*.gz文件下载</h2><p><a href="http://cancer.sanger.ac.uk/cosmic/download" target="_blank" rel="external">COSMIC</a>需要注册</p>
-<p>下载</p>
-<ul>
-<li>CosmicCodingMuts.vcf</li>
-<li>CosmicNonCodingVariants.vcf</li>
-</ul>
-<h2 id="Cosmic-hg19-vcf文件生成"><a href="#Cosmic-hg19-vcf文件生成" class="headerlink" title="Cosmic.hg19.vcf文件生成"></a>Cosmic.hg19.vcf文件生成</h2><p><a href="https://gatkforums.broadinstitute.org/gatk/discussion/2226/cosmic-and-dbsnp-files-for-mutect" target="_blank" rel="external">COSMIC and dbSNP files for MuTect</a></p>
-<p>sortByRef.pl was part of <a href="https://github.com/amplab/smash" target="_blank" rel="external">https://github.com/amplab/smash</a></p>
-<pre><code>gunzip Cosmic*.gz
-grep &quot;^#&quot; CosmicCodingMuts.vcf &gt; VCF_Header
-grep -v &quot;^#&quot; CosmicCodingMuts.vcf &gt; Coding.clean
-grep -v &quot;^#&quot; CosmicNonCodingVariants.vcf &gt; NonCoding.clean
-cat Coding.clean NonCoding.clean | sort -gk 2,2 | awk &apos;{print &quot;chr&quot;$0}&apos; | perl sortByRef.pl --k 1 - hg19UCSC.fa.fai &gt; Cosmic.hg19
-cat VCF_Header Cosmic.hg19 &gt; Cosmic.hg19.vcf
-</code></pre><h2 id="GATK输入文件要求"><a href="#GATK输入文件要求" class="headerlink" title="GATK输入文件要求"></a>GATK输入文件要求</h2><p><a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1204" target="_blank" rel="external">参考：What input files does the GATK accept / require?</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.plob.org/article/7070.html" target="_blank" rel="external">GATK使用（推荐）</a></p>
-<p>（2）<a href="https://software.broadinstitute.org/gatk/documentation/topic?name=problems" target="_blank" rel="external">使用GATK过程常见报错及解决</a></p>
-<p>（3）<a href="http://blog.sina.com.cn/s/blog_587cc04e0101l4bs.html" target="_blank" rel="external">GATK使用 备忘录（推荐）</a></p>
-<p>（4）<a href="https://www.bits.vib.be/training/286" target="_blank" rel="external">GATK Best practices for variant discovery （BITS Courses    TRAINING AT VIB）</a></p>
-<p>（5）<a href="https://www.genedock.com/blog/2017/07/21/20170721_%E5%88%9D%E6%8E%A2GATK4_Beta/" target="_blank" rel="external">初探 GATK4 beta</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;blockquote class=&quot;blockquote-center&quot;&gt;GATK3.8相关软件及文件准备&lt;/blockquote&gt;&lt;br&gt;
     
     </summary>
     
