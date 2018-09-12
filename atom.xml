@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-08-25T11:15:11.400Z</updated>
+  <updated>2018-09-12T01:24:28.334Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -16,16 +16,60 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>IDM下载工具</title>
+    <link href="https:///AnJingwd.github.io/2018/09/05/IDM%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7/"/>
+    <id>https:///AnJingwd.github.io/2018/09/05/IDM下载工具/</id>
+    <published>2018-09-05T11:11:39.000Z</published>
+    <updated>2018-09-12T01:24:28.334Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">IDM安装及使用</blockquote>
+
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Internet Download Manager（简称“IDM”）是一种将下载速度提高5倍的工具，支持断点下载和批量下载。Internet Download Manager支持代理服务器，ftp和http协议，防火墙，重定向，Cookie，授权，MP3音频和MPEG视频内容处理。</p>
+<h2 id="安装及破解"><a href="#安装及破解" class="headerlink" title="安装及破解"></a>安装及破解</h2><p>（1）修改C:\Windows\System32\drivers\etc\host目录下的host文件，添加这几项，将IDM的认证服务器域名屏蔽了。</p>
+<p>127.0.0.1 tonec.com<br>127.0.0.1 www.tonec.com<br>127.0.0.1 registeridm.com<br>127.0.0.1 www.registeridm.com<br>127.0.0.1 secure.registeridm.com<br>127.0.0.1 internetdownloadmanager.com<br>127.0.0.1 www.internetdownloadmanager.com<br>127.0.0.1 secure.internetdownloadmanager.com<br>127.0.0.1 mirror.internetdownloadmanager.com<br>127.0.0.1 mirror2.internetdownloadmanager.com<br>127.0.0.1 mirror3.internetdownloadmanager.com</p>
+<p>（2）开始 -&gt; 运行 -&gt; 输入cmd -&gt; 在CMD窗口输入</p>
+<pre><code>ipconfig /flushdns
+</code></pre><p>刷新DNS解析缓存，使之生效。</p>
+<p>（3）打开IDM，输入序列号，断网，确定，当工具栏注册变灰色即破解成功。</p>
+<h3 id="或者使用破解插件"><a href="#或者使用破解插件" class="headerlink" title="或者使用破解插件"></a>或者使用破解插件</h3><p>链接：</p>
+<p><a href="http://www.carrotchou.blog/59.html" target="_blank" rel="external">下载神器 Internet Download Manager v6.31 Build 3 中文破解版</a></p>
+<h3 id="集成到浏览器"><a href="#集成到浏览器" class="headerlink" title="集成到浏览器"></a>集成到浏览器</h3><p>IDM 默认可以集成到 Internet Explorer, Opera, MSN Explorer, AOL, Netscape, Mozilla, Mozilla Firebird, Mozilla Firefox, MyIE2, Avant Browser, NetCaptor, GoSurf, Fast Browser, SlimBrowser, 和其它更多受欢迎的浏览器。</p>
+<p>（1）菜单栏帮助—–&gt;检测更新</p>
+<p>（2）打开chrome浏览器扩展工具，将IDM安装目录下的IDMGCExt.crx文件拖入来安装扩展</p>
+<p>具体教程参考：<a href="https://www.internetdownloadmanager.cn/idm/24798" target="_blank" rel="external">链接</a></p>
+<h1 id="使用技巧"><a href="#使用技巧" class="headerlink" title="## 使用技巧"></a>## 使用技巧</h1><p>因为IDM只能下载HTTP HTTPS FTP连接，不能下载ED2K,种子,迅雷,磁力等等其他。</p>
+<p>如果要下载以上连接，需要先用支持离线功能的网盘（(百度离线、115离线、迅雷离线、等等)，再用IDM通过网盘链接下载到本地。</p>
+<p>OS5HG-K90NH-SXOGT-7JYEZ<br>R2C1T-O0KQO-JAVU2-4MMYP<br>M2A16-47AAW-6NLYP-V1E0J<br>IZO7M-360FW-QY1XP-AWLPN<br>46YFS-S9G7H-QZFWI-QQBQB<br>TUTR2-I2NHO-GQBC6-ZECWH</p>
+<p>BFBND-FXJ4C-LW18E-WP2H3<br>YRB4C-X2GT3-WU781-UKHN5<br>06NWL-EHOER-DZ12V-9IMMC<br>4UWOB-RHE7H-6IET0-ECUOG<br>CUFNR-D4R3C-UKPH6-GD4A1  </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.cnblogs.com/lovepipi/p/4058347.html" target="_blank" rel="external">IDM破解</a></p>
+<p>（2）<a href="http://blog.sina.com.cn/s/blog_14ba2cceb0102vpot.html" target="_blank" rel="external">比迅雷好用的下载软件IDM图文教程（5.12有更新）</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;IDM安装及使用&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="软件" scheme="https:///AnJingwd.github.io/categories/%E8%BD%AF%E4%BB%B6/"/>
+    
+    
+      <category term="软件" scheme="https:///AnJingwd.github.io/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>R操作MySQL数据库</title>
     <link href="https:///AnJingwd.github.io/2018/08/25/R%E6%93%8D%E4%BD%9CMySQL%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <id>https:///AnJingwd.github.io/2018/08/25/R操作MySQL数据库/</id>
     <published>2018-08-25T10:07:44.000Z</published>
-    <updated>2018-08-25T11:15:11.400Z</updated>
+    <updated>2018-08-28T07:01:47.695Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">R操作MySQL数据库</blockquote>
 
 <a id="more"></a>
-<ul>
+<h1 id="RMySQL操作MySQL数据库"><a href="#RMySQL操作MySQL数据库" class="headerlink" title="RMySQL操作MySQL数据库"></a>RMySQL操作MySQL数据库</h1><ul>
 <li><p>连接MySQL数据库</p>
 <pre><code>conn &lt;- dbConnect(MySQL(), 
     dbname=&quot;r_data&quot;,
@@ -45,20 +89,21 @@ summary(conn)
 <li><p>从R导出数据到数据库</p>
 </li>
 </ul>
-<p>dbWriteTable函数用来将R中的数据导入MySQL数据库，其包括创建新的表格，覆盖已有的表格，追加数据到表格。用法为dbWriteTable(MySQL连接对象名，表格名，R数据框名)</p>
+<p>dbWriteTable函数用来将R中的数据导入MySQL数据库，其包括创建新的表格，覆盖已有的表格，追加数据到表格。用法为dbWriteTable(MySQL连接对象名，表格名，R数据框名)(row.names=FALSE不插入row.names字段)</p>
 <p>(1) 创建</p>
-<pre><code>&gt; dbWriteTable(conn,&quot;test&quot;,cars)
+<pre><code>&gt; dbWriteTable(conn,&quot;test&quot;,cars，row.names=FALSE)
 [1] TRUE
 &gt; dbListTables(conn)
 [1] &quot;test&quot;
 </code></pre><p>（2） 覆盖</p>
-<pre><code>dbWriteTable(conn,&quot;test&quot;,cars2,overwrite = TRUE)
+<pre><code>dbWriteTable(conn,&quot;test&quot;,cars2,row.names=FALSE,overwrite = TRUE)
 </code></pre><p>（3）追加</p>
-<pre><code>dbWriteTable(conn,&quot;test&quot;,cars3,append = TRUE)
-</code></pre><p>（4）删除表格</p>
+<pre><code>dbWriteTable(conn,&quot;test&quot;,cars3,row.names=FALSE,append = TRUE)
+</code></pre><p><strong>尽量避免使用WriteTable()函数，因为它会删除你原来定义的表结构，创建新的表结构再插入</strong></p>
+<p>（4）删除表格</p>
 <pre><code>dbRemoveTable(con,&quot;test&quot;)
 </code></pre><ul>
-<li>导入数据到R数据框</li>
+<li>导出数据到R数据框</li>
 </ul>
 <p>dbReadTable()函数用来从MySQL数据库提取整个表格（前提是表格数据量不是很大）。</p>
 <pre><code>dbReadTable(conn,&quot;test&quot;)
@@ -72,8 +117,9 @@ summary(conn)
 <p>dbGetQuery()函数用来提取表格中指定的行(使用LIMIT查看前几行)</p>
 <pre><code>dbGetQuery(conn,&quot;SELECT * FROM test LIMIT 5;&quot;)
 </code></pre><p>另一种方式是使用dbSendQuery()查询数据库，然后使用dbFetch()获取数据</p>
-<pre><code>query &lt;- dbSendQuery(conn,&quot;SELECT * FROM test;&quot;)
-data &lt;- dbFetch(query,n=5)
+<pre><code>dbSendQuery(conn,&quot;SET NAMES gbk&quot;)  ##若表格中含有中文需要先设置字符集gbk
+query &lt;- dbSendQuery(conn,&quot;SELECT * FROM test;&quot;)
+data &lt;- dbFetch(query,n=5)  ## data &lt;- dbFetch(query,n=-1)获取所有查询到的数据
 </code></pre><ul>
 <li><p>dbGetInfo()函数也可以查看query对象的信息</p>
 <pre><code>dbGetInfo(query)
@@ -133,7 +179,7 @@ $`statement`
     <link href="https:///AnJingwd.github.io/2018/08/23/R%E6%95%B0%E6%8D%AE%E6%95%B4%E5%90%88%E5%87%BD%E6%95%B0%E5%8C%85%E5%B0%8F%E7%BB%93/"/>
     <id>https:///AnJingwd.github.io/2018/08/23/R数据整合函数包小结/</id>
     <published>2018-08-23T08:05:12.000Z</published>
-    <updated>2018-08-24T08:49:51.669Z</updated>
+    <updated>2018-08-26T02:40:18.646Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">R数据整合函数包小结</blockquote>
 
@@ -150,8 +196,13 @@ $`statement`
 <li>lubridate</li>
 </ul>
 <hr>
-<h1 id="apply函数"><a href="#apply函数" class="headerlink" title="apply函数"></a>apply函数</h1><p>&emsp;&emsp;apply函数是这三个函数的精髓，lapply是它的变种，sapply是lapply的精华简洁版本。apply函数的基本命令格式是：apply(数据，向量，函数)。</p>
+<h1 id="apply函数"><a href="#apply函数" class="headerlink" title="apply函数"></a>apply函数</h1><p><img src="https://i.imgur.com/1lUFZ8r.jpg" alt=""></p>
+<p>&emsp;&emsp;在使用R时，不要用循环，效率特别低，要用向量计算代替循环计算。原因在于R的循环操作for和while，都是基于R语言本身来实现的，而向量操作是基于底层的C语言函数实现的，从性能上来看，就会有比较明显的差距了。那么如何使用C的函数来实现向量计算呢，就是要用到apply的家族函数。</p>
+<p>apply函数本身就是解决数据循环处理的问题，为了面向不同的数据类型，不同的返回值，apply函数组成了一个函数族，包括了8个功能类似的函数。</p>
+<p><img src="https://i.imgur.com/PKZVkSK.png" alt=""></p>
+<p>&emsp;&emsp;apply函数是这三个函数的精髓，lapply是它的变种，sapply是lapply的精华简洁版本。apply函数的基本命令格式是：apply(数据，向量，函数)。</p>
 <ul>
+<li>数据可以是矩阵，数据框，数组（二维或者多维）</li>
 <li>向量指的是矩阵的行或列，通俗的说，向量为1的时候横着算，向量为2的时候竖着算。</li>
 <li>函数作用对象区分多元素和单元素：例如sum函数它必须应用在多个元素（数值）上，此时可利用apply(matrix,1,sum)对矩阵列求和；又例如sqrt函数它只作用于单个数值，此时apply(matrix,1,sqrt)表示对每个元素求平方根，每一列的运算结果变成新的一行；而apply(matrix,2,sqrt)表示对每个元素求平方根，每一列的运算结果变成新的一列。</li>
 <li>使用自定义函数：apply(matrix,1,function(x),MyFunction(x)) (单个自变量x, 当这个函数应用在我们数据上的时候，就默认是对数据矩阵的每一个元素（数值）进行运算。)</li>
@@ -163,7 +214,7 @@ $`statement`
 <li>合并成数据框：data.frame(lapply(matrix,sqrt)) 处理后成为1行6列的数据框</li>
 </ul>
 <hr>
-<h1 id="dplyr函数包"><a href="#dplyr函数包" class="headerlink" title="dplyr函数包"></a>dplyr函数包</h1><p>首先需要安装dplyr包，install.packages(“dplyr”)。dplyr包是“方便应用”型包，主要组成不是计算类函数，而是快速加工数据的函数。dplyr包系列的命令大部分可以在一个函数内包含多个条件，各个条件之间用逗号连接；不同分类的条件可以在同一个函数中混合运用；多个函数之间可以用包内的串串函数（函数名：pipe，函数写法：%in%）连接在一起；dplyr包在处理大样本量的复杂数据时极为好用。</p>
+<h1 id="dplyr函数包"><a href="#dplyr函数包" class="headerlink" title="dplyr函数包"></a>dplyr函数包</h1><p>&emsp;&emsp;首先需要安装dplyr包，install.packages(“dplyr”)。dplyr包是“方便应用”型包，主要组成不是计算类函数，而是快速加工数据的函数。dplyr包系列的命令大部分可以在一个函数内包含多个条件，各个条件之间用逗号连接；不同分类的条件可以在同一个函数中混合运用；多个函数之间可以用包内的串串函数（函数名：pipe，函数写法：%in%）连接在一起；dplyr包在处理大样本量的复杂数据时极为好用。</p>
 <p>接下来介绍dplyr包中七个基础函数的使用方法:</p>
 <p><img src="https://i.imgur.com/016wkfX.jpg" alt=""></p>
 <p>其中weight和Time为numeric类型；Chick和Diet为factor类型</p>
@@ -259,7 +310,7 @@ $`statement`
 <li>每一行：代表一次观测（observation）</li>
 </ul>
 <p><img src="https://i.imgur.com/kQTOjxN.jpg" alt=""></p>
-<p>要实现转换结果，在Geneid一定的情况下，我们可以把每一个样品和其对应的基因表达量看做一个键-值对（key-value pair）。比如：在GeneID为gene1时，sample1对应的表达量是3，sample2对应的表达量是4。因此，我们在转换数据时，只需按照上述规则，并指定要转换的列即可。使用tidyr包中的gather函数即可实现转换。</p>
+<p>&emsp;&emsp;要实现转换结果，在Geneid一定的情况下，我们可以把每一个样品和其对应的基因表达量看做一个键-值对（key-value pair）。比如：在GeneID为gene1时，sample1对应的表达量是3，sample2对应的表达量是4。因此，我们在转换数据时，只需按照上述规则，并指定要转换的列即可。使用tidyr包中的gather函数即可实现转换。</p>
 <pre><code># gather()命令转换说明：# gather（data=数据框名，key=&quot;key名&quot;，value=&quot;value名&quot;，要转换的列1，列2，列3）
 &gt; gene_exp_tidy &lt;- gather(data = gene_exp, key = &quot;sample_name&quot;, value = &quot;expression&quot;, Sample1, Sample2, Sample3)
 # 在指定要转换的列时，也可不用列名，直接指定列的编号即可
@@ -282,11 +333,17 @@ $`statement`
 <pre><code>gene_exp3_tidy2 &lt;- separate(gene_exp3_tidy, col = key, into = c(&quot;SampleName&quot;,&quot;Temperature&quot;))
 </code></pre><p><img src="https://i.imgur.com/g0nNEt5.jpg" alt=""></p>
 <hr>
+<h1 id="data-table包"><a href="#data-table包" class="headerlink" title="data.table包"></a>data.table包</h1><p>&emsp;&emsp;如果你的数据量比较大，1GB，10GB，甚至有100GB，对于这种规模比较大的数据集，apply的计算方式就不太能满足计算性能的要求了。你依然可以用data.table包, bigmemory包, ff包等，或者并行计算的包加速R语言在单机上的计算的性能。</p>
+<p>&emsp;&emsp;data.table包是一个data.frame的扩展工具集，可以通过自定义keys来设置索引，实现高效的数据索引查询、快速分组、快速连接、快速赋值等数据操作。data.table主要通过二元检索法大大提高数据操作的效率，它也兼容适用于data.frame的向量检索法。同时，data.table对于大数据的快速聚合也有很好的效果，官方介绍说对于 100GB规模内存数据处理，运行效率还是很好的。</p>
+<p>&emsp;&emsp;由于data.table对用户使用上是希望和data.frame的操作尽量相似，所以适用于data.frame的查询方法基本都适用于data.table，同时data.table自己具有的一些特性，提供了自定义keys来进行高效的查询。</p>
+<hr>
 <p><a href="http://r4ds.had.co.nz/workflow-projects.html" target="_blank" rel="external">R for Data Science(推荐)</a> </p>
 <p>该书github地址：<a href="https://github.com/hadley/r4ds" target="_blank" rel="external">hadley/r4ds</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.jianshu.com/p/bfddfe29aa39" target="_blank" rel="external">R语言的plyr包简介</a></p>
-<p>（2）<a href="http://www.jianshu.com/p/36f5268e932c" target="_blank" rel="external">利用reshape2包进行数据逆透视和数据透视</a></p>
-<p>（3）<a href="http://www.xueqing.tv/cms/article/105" target="_blank" rel="external">reshape2包的进化版—tidyr包</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.fens.me/r-apply/" target="_blank" rel="external">掌握R语言中的apply函数族</a></p>
+<p>（2）<a href="http://www.jianshu.com/p/bfddfe29aa39" target="_blank" rel="external">R语言的plyr包简介</a></p>
+<p>（3）<a href="http://www.jianshu.com/p/36f5268e932c" target="_blank" rel="external">利用reshape2包进行数据逆透视和数据透视</a></p>
+<p>（4）<a href="http://www.xueqing.tv/cms/article/105" target="_blank" rel="external">reshape2包的进化版—tidyr包</a></p>
+<p>（5）<a href="http://blog.fens.me/r-data-table/" target="_blank" rel="external">超高性能数据处理包data.table</a></p>
 ]]></content>
     
     <summary type="html">
@@ -307,19 +364,30 @@ $`statement`
     <link href="https:///AnJingwd.github.io/2018/05/13/Kaggle%E5%85%A5%E9%97%A8/"/>
     <id>https:///AnJingwd.github.io/2018/05/13/Kaggle入门/</id>
     <published>2018-05-13T10:21:08.000Z</published>
-    <updated>2018-07-08T01:21:01.828Z</updated>
+    <updated>2018-09-02T05:03:40.936Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">kaggle简介及数据竞赛相关平台</blockquote>
 
 <a id="more"></a>
-<h1 id="众包平台"><a href="#众包平台" class="headerlink" title="众包平台"></a>众包平台</h1><ul>
-<li><a href="https://www.kaggle.com/" target="_blank" rel="external">Kaggle</a>：是一个流行的数据科学竞赛平台，已被谷歌收购</li>
-<li><a href="http://www.kdd.org/" target="_blank" rel="external">国际知识发现和数据挖掘竞赛</a>： 自1997年以来，KDD举办了年度预测建模竞赛，KDDCup。没有托管所有KDDCups的单个网站，但您可以查看每年的KDD网站以获取信息。</li>
-<li><a href="https://tianchi.shuju.aliyun.com/competition/index.htm?id=&amp;spm=5176.100067.1234.2.e66NSP" target="_blank" rel="external">天池</a>：一个新的中文网站，最近主办了IJCAI-16大赛，并且正在举办INFORMS比赛。</li>
-<li><p><a href="http://topcoder.com/" target="_blank" rel="external">Topcoder</a>：已经有近15年的历史，拥有主要的企业合作伙伴，并且在竞争性编程领域与Kaggle（竞争数据科学网站）最为接近。</p>
-<p>&emsp;&emsp;企业或者研究者可以将问题背景、数据、期望指标等发布到Kaggle上，以竞赛的形式向广大的数据科学家征集解决方案。而热爱数(dong)据(shou)挖(zhe)掘(teng)的小伙伴们可以下载/分析数据，使用统计/机器学习/数据挖掘等知识，建立算法模型，得出结果并提交，排名top的可能会有奖金哦！</p>
-<p>&emsp;&emsp;因为竞赛模式中的任务是公司悬赏发布的实际案例，并没有标准的答案；而练习赛不仅项目难度低，而且是有官方给出的参考方案的，大家可以用来对比改善自己的测试结果，从中进行提高。所以呢，建议感兴趣的同学先去独立做一下101和playground的训练赛，至于做多少个案例才能上道，就要看个人素质啦。这里为大家推荐几篇非常好的文章，里面手把手的教了大家入门级的三个经典练习项目，供大家学习。</p>
+<h1 id="国内外数据竞赛平台"><a href="#国内外数据竞赛平台" class="headerlink" title="国内外数据竞赛平台"></a>国内外数据竞赛平台</h1><h2 id="国际"><a href="#国际" class="headerlink" title="国际"></a>国际</h2><ul>
+<li><a href="https://www.kaggle.com/" target="_blank" rel="external">Kaggle</a>：是一个流行的数据科学竞赛平台，已被谷歌收购。与 GitHub 不同的地方在于，Kaggle 为其社区提供了一整套服务。其中最有名的是它的招聘服务以及名为 <strong>Kaggle Kernels</strong>的代码分享工具。</li>
+<li><a href="http://www.kdd.org/" target="_blank" rel="external">KDD CUP</a>： 自1997年以来，KDD举办了年度预测建模竞赛，KDDCup。SIGKDD是Data Mining领域的顶会。KDD Cup是其下的一个比赛。含金量很高。每年都会有比较有意思的题目。不过个人感觉难度还是有的，因而全世界的DM、ML大牛、小牛都可能在做这个。 </li>
+<li><a href="http://topcoder.com/" target="_blank" rel="external">Topcoder</a>：已经有近15年的历史，拥有主要的企业合作伙伴，并且在竞争性编程领域与Kaggle（竞争数据科学网站）最为接近。</li>
+</ul>
+<h2 id="国内"><a href="#国内" class="headerlink" title="国内"></a>国内</h2><ul>
+<li><p><a href="https://tianchi.shuju.aliyun.com/competition/index.htm?id=&amp;spm=5176.100067.1234.2.e66NSP" target="_blank" rel="external">天池</a>：由国内科技巨头阿里举办，应该算是国内一流的数据挖掘类型的比赛了。由于是阿里举办，所以比赛获得不错名次的可以获得阿里校招直通车的权利，题目难度的话，个人觉得不算难，与kaggle相仿。</p>
 </li>
+<li><p><a href="https://link.zhihu.com/?target=http%3A//soda.datashanghai.gov.cn/" target="_blank" rel="external">SODA上海开放数据创新应用大赛</a></p>
+</li>
+<li><a href="https://link.zhihu.com/?target=http%3A//www.pkbigdata.com/" target="_blank" rel="external">首页-DataCastle大数据竞赛平台</a></li>
+</ul>
+<h1 id="kaggle比赛类型"><a href="#kaggle比赛类型" class="headerlink" title="kaggle比赛类型"></a>kaggle比赛类型</h1><ul>
+<li><a href="https://www.kaggle.com/competitions?sortBy=deadline&amp;group=all&amp;page=1&amp;pageSize=20&amp;segment=inClass" target="_blank" rel="external">课业比赛InClass</a>: <code>课业比赛 InClass</code> 是学校教授机器学习的老师留作业的地方，这里的竞赛有些会向public开放参赛，也有些仅仅是学校内部教学使用。</li>
+<li><a href="https://www.kaggle.com/competitions?sortBy=deadline&amp;group=all&amp;page=1&amp;pageSize=20&amp;segment=gettingStarted" target="_blank" rel="external">入门比赛 Getting Started</a>: <code>入门比赛 Getting Started</code> 给萌新们一个试水的机会，没有奖金，但有非常多的前辈经验可供学习。很久以前Kaggle这个栏目名称是101的时候，比赛题目还很多，但是现在只保留了9个最经典的入门竞赛：手写数字识别、沉船事故幸存估计、脸部识别、Julia语言入门。</li>
+<li><a href="https://www.kaggle.com/competitions?sortBy=deadline&amp;group=all&amp;page=1&amp;pageSize=20&amp;segment=playground" target="_blank" rel="external">训练场 Playground</a>: <code>训练场 Playground</code>里的题目以有趣为主，比如<a href="https://github.com/apachecn/kaggle/blob/dev/competitions/playground/dogs-vs-cats" target="_blank" rel="external">猫狗照片分类</a>的问题。现在这个分类下的题目不算多，但是热度很高。</li>
+<li><a href="https://www.kaggle.com/competitions?sortBy=prize&amp;group=active&amp;page=1&amp;pageSize=20&amp;segment=research" target="_blank" rel="external">研究项目(少奖金) Research</a>: <code>研究型 Research</code> 竞赛通常是机器学习前沿技术或者公益性质的题目。竞赛奖励可能是现金，也有一部分以会议邀请、发表论文的形式奖励。</li>
+<li><a href="https://www.kaggle.com/competitions?sortBy=prize&amp;group=active&amp;page=1&amp;pageSize=20&amp;segment=recruitment" target="_blank" rel="external">人才征募 Recruitment</a>:  <code>人才征募 Recruitment</code> 竞赛是赞助企业寻求数据科学家、算法设计人才的渠道。只允许个人参赛，不接受团队报名。</li>
+<li><a href="https://www.kaggle.com/competitions?sortBy=prize&amp;group=active&amp;page=1&amp;pageSize=20&amp;segment=featured" target="_blank" rel="external">大型组织比赛(大奖金) Featured</a> : <code>推荐比赛 Featured</code> 是瞄准商业问题带有奖金的公开竞赛。如果有幸赢得比赛，不但可以获得奖金，模型也可能会被竞赛赞助商应用到商业实践中呢。</li>
 </ul>
 <h1 id="入门kaggle"><a href="#入门kaggle" class="headerlink" title="入门kaggle"></a>入门kaggle</h1><ul>
 <li><a href="https://ajourneyintodatascience.quora.com/" target="_blank" rel="external">数据科学之旅（博客）</a></li>
@@ -362,6 +430,7 @@ $`statement`
 <li><a href="http://dreamchallenges.org/publications/" target="_blank" rel="external">梦想挑战参与者出版物</a></li>
 <li><a href="http://dreamchallenges.org/tools-2/challenge-algorithms/" target="_blank" rel="external">挑战算法</a>：竞赛报告及算法源码</li>
 </ul>
+<h2 id="Kaggle历年真题解析"><a href="#Kaggle历年真题解析" class="headerlink" title="Kaggle历年真题解析"></a>Kaggle历年真题解析</h2><p>历年竞赛前3名的解决方案源代码：<a href="http://ndres.me/kaggle-past-solutions/" target="_blank" rel="external">链接</a><br>Kaggle 中文文档：<a href="https://github.com/apachecn/kaggle" target="_blank" rel="external">链接</a><br>比赛收集平台：<a href="https://github.com/iphysresearch/DataSciComp" target="_blank" rel="external">链接</a><br>Kaggle 入门操作指南：<a href="https://github.com/apachecn/kaggle/blob/dev/docs/kaggle-quickstart.md" target="_blank" rel="external">链接</a><br>GitHub 入门须知：<a href="https://github.com/apachecn/kaggle/blob/dev/docs/GitHub/README.md" target="_blank" rel="external">链接</a></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://blog.csdn.net/han_xiaoyang/article/details/49797143" target="_blank" rel="external">机器学习系列(3)_逻辑回归应用之Kaggle泰坦尼克之灾</a></p>
 <p>（2）<a href="http://trevorstephens.com/kaggle-titanic-tutorial/getting-started-with-r/" target="_blank" rel="external">Titanic: Getting Started With R</a></p>
 <p>（3）<a href="https://www.quora.com/What-Kaggle-competitions-should-a-beginner-start-with-1" target="_blank" rel="external">初学者应该参加哪些Kaggle比赛？</a></p>
@@ -1931,335 +2000,6 @@ $remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_pai
     <summary type="html">
     
       &lt;blockquote class=&quot;blockquote-center&quot;&gt;RNA-seq质控：去除低质量reads，adapter以及rRNA&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
-    
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GATK变异检测概述</title>
-    <link href="https:///AnJingwd.github.io/2017/12/26/GATK%E5%8F%98%E5%BC%82%E6%A3%80%E6%B5%8B%E6%A6%82%E8%BF%B0/"/>
-    <id>https:///AnJingwd.github.io/2017/12/26/GATK变异检测概述/</id>
-    <published>2017-12-26T12:58:54.000Z</published>
-    <updated>2018-03-11T00:49:20.278Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">变异检测概述</blockquote>
-
-<a id="more"></a>
-<h1 id="突变发现背景介绍"><a href="#突变发现背景介绍" class="headerlink" title="突变发现背景介绍"></a>突变发现背景介绍</h1><p>个体相对于参考基因组的两种突变</p>
-<ul>
-<li>Germline    (inherited)    </li>
-<li>Somatic    (cancer)    </li>
-</ul>
-<h2 id="不同的突变类型"><a href="#不同的突变类型" class="headerlink" title="不同的突变类型"></a>不同的突变类型</h2><p><img src="https://i.imgur.com/W3L0QGg.jpg" alt=""></p>
-<h2 id="实验策略"><a href="#实验策略" class="headerlink" title="实验策略"></a>实验策略</h2><ol>
-<li>全基因组测序</li>
-<li>全外显子测序，或者设计目标基因的panel进行目标区域捕获测序</li>
-</ol>
-<p><img src="https://i.imgur.com/9fKpXfy.jpg" alt=""></p>
-<p>HTS    machine    processes a    flowcell containing    lanes;each    lane cons)tutes    a read group (RG) (unless multiplexed)</p>
-<h2 id="Raw-sequence的质控"><a href="#Raw-sequence的质控" class="headerlink" title="Raw sequence的质控"></a>Raw sequence的质控</h2><p>目的：将ASCII code转换为Phred-scale Q    scores，考察测序质量（错误率）</p>
-<p><img src="https://i.imgur.com/v0ZLr2G.jpg" alt=""></p>
-<p><strong>所以phred score一般选择20即可</strong></p>
-<p><img src="https://i.imgur.com/iFODOKU.jpg" alt=""></p>
-<h1 id="胚系突变snp-amp-indel分析流程"><a href="#胚系突变snp-amp-indel分析流程" class="headerlink" title="胚系突变snp&amp;indel分析流程"></a>胚系突变snp&amp;indel分析流程</h1><ul>
-<li>Map to reference</li>
-<li>Sort, Index</li>
-<li>Mark Duplicates &amp; Sort (Picard)</li>
-<li>Indels Realigment</li>
-<li>Base Quality Score Recalibration</li>
-<li>Variant Calling (HaplotypeCaller)</li>
-<li>Variant Filtration (Hard Filter, see <a href="http://gatkforums.broadinstitute.org/gatk/discussion/2806/howto-apply-hard-filters-to-a-call-set" target="_blank" rel="external">GATK Best Practices</a>)</li>
-<li>Annotation</li>
-</ul>
-<p><img src="https://i.imgur.com/cIZbbh2.jpg" alt=""></p>
-<p>pipline:<a href="https://github.com/joergen7/variant-call-gatk" target="_blank" rel="external">variant-call-gatk</a></p>
-<p>文献：<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4243306/" target="_blank" rel="external">From FastQ data to high confidence variant calls: the Genome Analysis Toolkit best practices pipeline</a></p>
-<h2 id="（1）Map"><a href="#（1）Map" class="headerlink" title="（1）Map"></a>（1）Map</h2><ul>
-<li>BWA    for    DNA    </li>
-<li>STAR    for    RNAseq</li>
-</ul>
-<p>Sequence/Binary    Alignment    Map    (SAM/BAM)    </p>
-<p><img src="https://i.imgur.com/r3ayrha.jpg" alt=""></p>
-<h3 id="细节："><a href="#细节：" class="headerlink" title="细节："></a>细节：</h3><p>All BAM/CRAM files must satisfy the following requirements:</p>
-<ul>
-<li>It must be aligned to one of the references described here.</li>
-<li>It must be <strong>sorted in coordinate order</strong> (not by queryname and not “unsorted”).</li>
-<li>It must list the read groups with sample names in the header.</li>
-<li>Every read must belong to a <strong>read group</strong>.</li>
-<li>The BAM file must pass Picard ValidateSamFile validation.</li>
-</ul>
-<p>具体参考：<a href="https://gatkforums.broadinstitute.org/gatk/discussion/1317/collected-faqs-about-bam-files" target="_blank" rel="external">Collected FAQs about input files for sequence read data (BAM/CRAM)</a></p>
-<ul>
-<li>Add read group 对于多样本检测变异，比如mutect是必须的，否则当场一个样品处理</li>
-<li>You only need to run FixMateInformation if you are getting errors with mate information from Picard’s ValidateSamFile， <a href="https://gatkforums.broadinstitute.org/gatk/discussion/6047/necessary-to-run-fixmateinformation" target="_blank" rel="external">具体参考</a></li>
-</ul>
-<h2 id="（2）Mark-duplicates"><a href="#（2）Mark-duplicates" class="headerlink" title="（2）Mark    duplicates"></a>（2）Mark    duplicates</h2><p>测序原理是随机打断，那么理论上出现两条完全相同的read的概率是非常低的，而且建库时PCR扩增存在偏向性，因此标出完全相同的read。这一步是为了减少duplication artifacts,从而正确评估alleles。duplicates的状态通过SAM flag来标记，但并没有去除（绝大多数的GATK tools默认忽 duplicates）</p>
-<p>duplicates来源：（1）PCR duplicates ; (2) Optical duplicates</p>
-<p>以下两种情况不能 mark duplicates:</p>
-<p>Amplicon    sequencing</p>
-<ul>
-<li>all    reads    start    at    same    posi7on    by    design    </li>
-<li>UMIAwareMarkDuplicatesWithMateCigar</li>
-</ul>
-<p>RNAseq    allele-specific    expression    analysis    </p>
-<ul>
-<li>(ASEReadCounter    can    disable    DuplicateFilter)    </li>
-</ul>
-<p>Duplicates    =    non-independent    measurements of    a sequenc fragment</p>
-<p><img src="https://i.imgur.com/oWRVjhD.jpg" alt=""></p>
-<h2 id="（3）Local-realignment"><a href="#（3）Local-realignment" class="headerlink" title="（3）Local realignment"></a>（3）Local realignment</h2><p>对于indel区域进行局部的重新比对，为了纠正比对错误。</p>
-<p><img src="https://i.imgur.com/N5kPt0j.jpg" alt=""></p>
-<p>Mappers对于在reads末端的indel较难检出，因为错配的罚分为-1，而open gap的罚分为-3。咋局部的indel realignment后能减少假阳性的SNPs数量。</p>
-<p>具体过程：</p>
-<p>（1）通过RealignerTargetCreator，根据1000    Genomes    Project, dbSNP等已知位点的VCF文件获取已知indels的位置区间，输出Target    intervals    </p>
-<p><img src="https://i.imgur.com/Bzem6S3.png" alt=""></p>
-<p>（2）通过IndelRealigner进行realignment，输出Realigned BAM</p>
-<p>通过–targetIntervals realigner.intervals指定indelrealignment的区间</p>
-<p><img src="https://i.imgur.com/murEihF.jpg" alt=""></p>
-<p>realignment algorithm 的工作原理：</p>
-<p><img src="https://i.imgur.com/Zry1hvH.jpg" alt=""></p>
-<h2 id="（4）Base-Recalibration-简称BQSR"><a href="#（4）Base-Recalibration-简称BQSR" class="headerlink" title="（4）Base    Recalibration (简称BQSR)"></a>（4）Base    Recalibration (简称BQSR)</h2><p>纠正机器产生的错误，主要针对测序一产生的碱基质量分数的系统错误，BQSR纠正碱基质量分数（不是碱基本身）</p>
-<p><img src="https://i.imgur.com/w7BsDj9.jpg" alt=""></p>
-<p>Base Recalibra2on steps/tools</p>
-<ul>
-<li>Model    the    error    modes    and    compute    adjustments—–》BaseRecalibrator</li>
-<li>Apply    recalibra2on adjustments    + write    to    file —–》PrintReads</li>
-<li>Make    before/after plots  ——-》AnalyzeCovariates （可选）</li>
-</ul>
-<p><img src="https://i.imgur.com/lsEMXQk.jpg" alt=""></p>
-<p>BaseRecalibrator (1)</p>
-<pre><code>java –jar GenomeAnalysisTK.jar \
-–T BaseRecalibrator \
-–R human.fasta \
-–I realigned.bam \
-–knownSites dbsnp137.vcf \
-–knownSites gold.standard.indels.vcf \
-–o recal.table
-
-java –jar GenomeAnalysisTK.jar –T PrintReads \
-–R human.fasta \
-–I realigned.bam \
-–BQSR recal.table \
-–o recal.bam
-</code></pre><p>BaseRecalibrator (2)(可选)</p>
-<p><img src="https://i.imgur.com/ulVOTdY.jpg" alt=""></p>
-<pre><code>ava –jar GenomeAnalysisTK.jar –T BaseRecalibrator \
-–R human.fasta \
-–I realigned.bam \
-–knownSites dbsnp137.vcf \
-–knownSites gold.standard.indels.vcf \
-–BQSR recal.table \
-–o after_recal.table
-
-java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
-–R human.fasta \
-–before recal.table \
-–after after_recal.table \
-–plots recal_plots.pdf
-</code></pre><h2 id="（5）Variant-Calling"><a href="#（5）Variant-Calling" class="headerlink" title="（5）Variant Calling"></a>（5）Variant Calling</h2><p>根据变异来源和实验设计不同，选择不同的检测变异方案：</p>
-<p><img src="https://i.imgur.com/FkTZcp5.jpg" alt=""></p>
-<p>胚系突变检测是最容易的，对于肿瘤体细胞突变主要受肿瘤异质性和正常组织污染的影响，而拷贝数变异本质是计算reads覆盖的丰度</p>
-<p>单个基因组是孤立的，通常并不能得出什么变异是致病性变异。一般要求家系或者群体数据，可以发现稀有变异，de novo变异，以及种族背景信息。</p>
-<p><img src="https://i.imgur.com/CyxQF14.jpg" alt=""></p>
-<p><strong>对于多样本或者家系的突变比较分析，可以使用HaplotypeCaller 的GVCF模式，主要目的GVCF文件输出所有的记录位点，无论其是否是变异。其目的是输出每个样本的每个位点，以便接下来的多样本联合比较分析。</strong></p>
-<p><strong>但做多样本的联合分析必须注意，Similar    technical    generation是至关重要的，包括technology,    capture,    read    length,    depth</strong></p>
-<p>具体参考：</p>
-<ol>
-<li><a href="https://gatkforums.broadinstitute.org/gatk/discussion/3893/calling-variants-on-cohorts-of-samples-using-the-haplotypecaller-in-gvcf-mode" target="_blank" rel="external">Calling variants on cohorts of samples using the HaplotypeCaller in GVCF mode</a></li>
-<li><a href="https://software.broadinstitute.org/gatk/documentation/article?id=11004" target="_blank" rel="external">GVCF - Genomic Variant Call Format</a></li>
-</ol>
-<p><img src="https://i.imgur.com/BV54Ah7.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/lKHfD2r.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/vLF563q.jpg" alt=""></p>
-<p><strong>GenotypeGVCFs (i) also has an -allSites    mode and (ii) by default pre-filters    low    QUAL (&lt;30) records</strong></p>
-<h3 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h3><h4 id="变异输出模式选择，输出模式总共有3种"><a href="#变异输出模式选择，输出模式总共有3种" class="headerlink" title="变异输出模式选择，输出模式总共有3种"></a>变异输出模式选择，输出模式总共有3种</h4><p>–output_mode / -out_mode (OUTPUT_MODE with default value EMIT_VARIANTS_ONLY)</p>
-<ul>
-<li>EMIT_VARIANTS_ONLY 只输出variants位点(SNPs和INDELs)</li>
-<li>EMIT_ALL_CONFIDENT_SITES 除了variants位点以外与reference一致的可靠位点也输出</li>
-<li>EMIT_ALL_SITES 只要是能call的到的位点都输出(应该是除了没覆盖到的位点，其余位点都输出)，这个模式下会得到最多的结果</li>
-</ul>
-<h4 id="指定区间或者位点（使用-L参数）"><a href="#指定区间或者位点（使用-L参数）" class="headerlink" title="指定区间或者位点（使用-L参数）"></a>指定区间或者位点（使用-L参数）</h4><p>具体可参考：<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1319" target="_blank" rel="external">Collected FAQs about interval lists</a></p>
-<ul>
-<li>对于外显子测序，可以使用.bed文件指定call变异的区间，包含三列（<chr> <start> <end>），以tab键分隔，不需要列名，chr1-chr20,chrX,chrY，并且需要根据坐标排序</end></start></chr></li>
-<li><strong>也可以使用vcf文件指定位点call 变异，这对于几个样本的变异位点之间比较很有用</strong></li>
-</ul>
-<h4 id="Optimizing-and-tuning-the-pipeline"><a href="#Optimizing-and-tuning-the-pipeline" class="headerlink" title="# Optimizing and tuning the pipeline"></a># Optimizing and tuning the pipeline</h4><p>Manage the java heap memory</p>
-<p>You can control this by capping the maximum the heap memory can reach using the -Xmx{n} switch. For example, to cap at 8Gb add -Xmx8Gb</p>
-<h2 id="（6）Variant-Filtering"><a href="#（6）Variant-Filtering" class="headerlink" title="（6）Variant    Filtering"></a>（6）Variant    Filtering</h2><p>前面提到Base    Recalibration只是纠正碱基质量分数（不是碱基本身），在此Variant Filtering 便是基于Quality    Score    Recalibration的变异过滤。</p>
-<p>对于Raw callsets的过滤必须平衡敏感度和准确度</p>
-<ul>
-<li>Mutation calling算法设计上是宽容的</li>
-<li>原始的高敏感度的callests包含大量的假阳性</li>
-</ul>
-<p>两种过滤方法：</p>
-<ul>
-<li><p>（1）Hard-filters    using    binary    thresholds    </p>
-<ul>
-<li>Applicable    to    all    BUT    requires    exper4se    to    define    appropriately    </li>
-</ul>
-</li>
-<li><p>（2）Variant    “recalibration”    using    machine    learning</p>
-<ul>
-<li>More    powerful    BUT    requires    well-curated    known    resources</li>
-</ul>
-</li>
-</ul>
-<p>但是Hard-filtering    is    a    very    blunt    instrument,接下来主要讲述基于variant recalibration的过滤。</p>
-<p><strong>基本思想：训练已知的高置信度的位点来确定其他位点正确与否的可能性</strong></p>
-<ul>
-<li>Assume    annota4ons    tend    to    form    Gaussian    clusters    </li>
-<li>Build    a    “Gaussian    mixture    model”    from<br>annotations    of    known    variants    in    our    dataset    </li>
-<li>Score    all    variants    by    where    their    annotations    lie<br>relative    to    these    clusters    </li>
-<li>Filter    base    on    sensiOvity    to    truth    set    </li>
-</ul>
-<p><img src="https://i.imgur.com/swA19TJ.jpg" alt=""></p>
-<p>那么如何设置VQSLOD阈值呢？即设定X%    of    the    sites in    the    truth<br>set?    </p>
-<p><img src="https://i.imgur.com/P8oeuDk.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/UKTedbs.png" alt=""></p>
-<h3 id="Step-1-VariantRecalibrator"><a href="#Step-1-VariantRecalibrator" class="headerlink" title="Step 1:    VariantRecalibrator"></a>Step 1:    VariantRecalibrator</h3><p>（1）VariantRecalibrator    builds    the    Gaussian    mixture    model    </p>
-<ul>
-<li>Uses    the    variants    in    the    input    callset    that    overlap    the    training    data    </li>
-<li>Uses    the    annotations    in    our    callset,    not    the    resource    callset</li>
-</ul>
-<p><img src="https://i.imgur.com/LouIHI6.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/tCv4gpU.jpg" alt=""></p>
-<pre><code>java –jar GenomeAnalysisTK.jar –T VariantRecalibrator \
-–R human.fasta \
-–input raw.SNPs.vcf \
-–resource: {see next slide} \
-–an DP –an QD –an FS –an MQRankSum {…} \
-–mode SNP \
-–recalFile raw.SNPs.recal \
-–tranchesFile raw.SNPs.tranches \
-–rscriptFile recal.plots.R
-</code></pre><p>输出：recal    file,    tranches,    plots</p>
-<ul>
-<li>Recalibration    plots    show    aspects    of    the    model</li>
-<li>Tranche    plots    show    estimated    TP    vs    FP    tradeoff<br>(Default    target    Ti/Tv    is    for    WGS    and    must    be    adapted    for    exomes)</li>
-<li>Tranches    :    slices    of    sensitivity    threshold    values</li>
-</ul>
-<h3 id="Step-2-ApplyRecalibration"><a href="#Step-2-ApplyRecalibration" class="headerlink" title="Step 2: ApplyRecalibration"></a>Step 2: ApplyRecalibration</h3><p>ApplyRecalibration    applies    the    filtering    threshold</p>
-<ul>
-<li>Executes    the    desired    sensitivity    /    specificity    tradeoff<br>by    applying    filters    to    the    input    callset    (no    new    calculations)    </li>
-<li><p>Creates    a    new,    filtered,    analysis-worthy    VCF    file.    </p>
-<p>  java –jar GenomeAnalysisTK.jar –T ApplyRecalibration \<br>  –R human.fasta \<br>  –input raw.vcf \<br>  –mode SNP \<br>  –recalFile raw.SNPs.recal \<br>  –tranchesFile raw.SNPs.tranches \<br>  –o recal.SNPs.vcf \<br>  –ts_filter_level 99.0</p>
-</li>
-</ul>
-<p>输出变异每个突变将被注释上VQSLOD score</p>
-<h3 id="对于外显子数据跑VQSR的一些小建议"><a href="#对于外显子数据跑VQSR的一些小建议" class="headerlink" title="对于外显子数据跑VQSR的一些小建议"></a>对于外显子数据跑VQSR的一些小建议</h3><ul>
-<li>Smaller    number    of    variants    per    sample    compared    to    WGS<br>  -&gt;    typically    insufficient    to    build    a    robust    recalibraOon    model        <pre><code>if    running    on    only    a    few    samples    
-</code></pre></li>
-<li>Analyze    samples    jointly    in    cohorts    of    at    least    <strong>30    samples</strong></li>
-<li>If    necessary,    add    exomes    from    1000G    Project    or    comparable</li>
-</ul>
-<p><img src="https://i.imgur.com/EoGdjYO.jpg" alt=""></p>
-<p><strong>什么时候不推荐使用VQSR进行过滤呢？</strong></p>
-<ol>
-<li>Non-human    organisms    where    known    resources    are    unavailable    or<br>insufficiently    curated    </li>
-<li>RNAseq    data    à    see    RNAseq-specific    filtering</li>
-<li>Cohort    is    too    small(&lt;30)    and    no    other    samples    are    available    for<br>“padding”    the    cohort    </li>
-</ol>
-<p>—–&gt;  Use    manual    filtering    recommendations    instead</p>
-<p>具体参考：<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=39" target="_blank" rel="external">Variant Quality Score Recalibration (VQSR)</a></p>
-<p><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantrecalibration_VariantRecalibrator.php" target="_blank" rel="external">VariantRecalibrator</a></p>
-<h3 id="（7）-Genotype-Refinement"><a href="#（7）-Genotype-Refinement" class="headerlink" title="（7） Genotype Refinement"></a>（7） Genotype Refinement</h3><p>Using    additional    data    to    improve    genotype    calls    and    likelihoods</p>
-<h4 id="基因型校正的重要性："><a href="#基因型校正的重要性：" class="headerlink" title="基因型校正的重要性："></a>基因型校正的重要性：</h4><ol>
-<li><p>临床遗传医生需要给病人提供基因型</p>
-<ul>
-<li>是否病人具有LOF mutation的两个拷贝</li>
-<li>患病孩子的父母是否可能生出患该病更严重的孩子</li>
-</ul>
-</li>
-<li><p>群体遗传学家需要基因型数据用于关联研究</p>
-<ul>
-<li>一个allele的多少拷贝能影响表型</li>
-</ul>
-</li>
-</ol>
-<h4 id="用于基因型校正的数据："><a href="#用于基因型校正的数据：" class="headerlink" title="用于基因型校正的数据："></a>用于基因型校正的数据：</h4><ol>
-<li>使用高质量的数据（例如1000G）作为先验者</li>
-<li>使用家系数据（若可以得到）</li>
-<li>计算后验者的基因型可能性</li>
-</ol>
-<p><img src="https://i.imgur.com/PuPNxd8.jpg" alt=""></p>
-<p>基本方法：Bayes’s    Rule</p>
-<p><img src="https://i.imgur.com/3Op72W9.jpg" alt=""></p>
-<h4 id="基因型校正的工作流程"><a href="#基因型校正的工作流程" class="headerlink" title="基因型校正的工作流程"></a>基因型校正的工作流程</h4><p><img src="https://i.imgur.com/tQP2gCd.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/kSzUwtQ.jpg" alt=""></p>
-<p>CalculateGenotypePosteriors：</p>
-<pre><code>java -jar GenomeAnalysisTK.jar \
--T CalculateGenotypePosteriors \
--R reference.fasta \
--V input.vcf \
--ped family.ped \
--supporting population.vcf \
--o output.vcf
-</code></pre><p>Filter    low    confidence    GQs:</p>
-<pre><code>java -jar GenomeAnalysisTK.jar \
--T VariantFiltration \
--R reference.fasta \
--V input.vcf \
---filterExpression “GQ&lt;20” \
---filterName “lowGQ” \
--o output.vcf
-</code></pre><p>Recommended    threshold is GQ=20    –  GQ 20     is Phred-scaled    99%    confidence</p>
-<p>VariantAnnotator:</p>
-<pre><code>java -jar GenomeAnalysisTK.jar \
--T VariantAnnotator \
--R reference.fasta \
--V input.vcf \
--A PossibleDeNovo \
--o output.vcf
-</code></pre><p><img src="https://i.imgur.com/4gy1NSD.jpg" alt=""></p>
-<p>De Novo mutations的特点：</p>
-<p><img src="https://i.imgur.com/MjvZPu0.jpg" alt=""></p>
-<p>具体参考：</p>
-<p>（1）<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=4723" target="_blank" rel="external">Genotype Refinement workflow</a></p>
-<p>（2）<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=4727" target="_blank" rel="external">(howto) Run the genotype refinement workflow</a></p>
-<p>（3）<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=4726" target="_blank" rel="external">Genotype Refinement workflow: mathematical details</a></p>
-<h3 id="（8）-Variant-Evaluation"><a href="#（8）-Variant-Evaluation" class="headerlink" title="（8） Variant Evaluation"></a>（8） Variant Evaluation</h3><p>基本思想：真实变异是具有代表性的，并且是可比较的</p>
-<p>变异代表性的影响因素：</p>
-<ul>
-<li>种群（Ethnicity）:Older     popula+ons    tend    to    display    more    heterogeneity</li>
-</ul>
-<p>可以作为真实variant sets的数据来源：</p>
-<ul>
-<li>Sanger sequencing</li>
-<li>GeneChip/Microarrays</li>
-</ul>
-<p>Commonly used truth    sets</p>
-<p><img src="https://i.imgur.com/WIRa8Pq.jpg" alt=""></p>
-<h4 id="Recommended-metrics-for-callset-evalua-on"><a href="#Recommended-metrics-for-callset-evalua-on" class="headerlink" title="Recommended metrics for    callset    evalua+on"></a>Recommended metrics for    callset    evalua+on</h4><p><img src="https://i.imgur.com/p9i0C4X.jpg" alt=""></p>
-<ol>
-<li>Indels    &amp;    SNPs的数量，对于单个样本，WGS大约能检测到4.4M个;WES大约能检测到41k个。</li>
-<li>如果变异是随机的，那么期望的TiTv Ratio应该为0.5，对于人类WGS测序，TiTv Ratio （Transitions/Transversions）大约为2.0-2.1；对于WES测序，TiTv Ratio大约为3.0-3.3,低的TiTv Ratio暗示可能存在高的假阳性。</li>
-<li>Indel Ration表示insertions和deletions的比值，Common的情况Indel Ratio为1； Rare情况下为0.2-0.5。</li>
-<li>Genotype    Concordance指标则认为最准确的truth set 是对相同的样本进行genotyping chip，将自己的结果与truth相比较，没有匹配的则认为是假阳性的结果。</li>
-</ol>
-<p><img src="https://i.imgur.com/oDZl1f7.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/p69fkwu.jpg" alt=""></p>
-<p>具体参考：<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=6308" target="_blank" rel="external">Evaluating the quality of a variant callset</a></p>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>生物信息中，一旦涉及到 fastq 数据的处理，通常都要消耗大量内存、CPU 和时间。所以，在正式运行任务之前，建议先从整体数据中抽取一部分小数据进行测试。如何从 fastq 文件中随机抽取数据。使用的工具是 seqtk。</p>
-<p>安装：conda install seqtk</p>
-<p>使用：</p>
-<p>Usage:   seqtk sample [-2] [-s seed=11] <in.fq> <frac>|<number></number></frac></in.fq></p>
-<p>Options: -s INT       RNG seed [11]<br>         -2           2-pass mode: twice as slow but with much reduced memory</p>
-<p>[]中的是可选参数，&lt;&gt; 中的是必需参数。<br>[-2] 内存较小的服务器上运行时，设置此参数。<br>[-s] 随机数的种子。如果是 Pair-end 数据，需要保证 read1 和 read2 的种子一致，才能抽到相同的raeds。默认是 11。<br>[in.fq] 输入文件</p>
-<p><frac|number>可以输入要抽取的比例或 reads 条数。</frac|number></p>
-<p>seqtk sample -s100 read1.fastq.gz 10000 | gzip - &gt; sub1.fastq.gz<br>seqtk sample -s100 read2.fastq.gz 10000 | gzip - &gt; sub2.fastq.gz</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/awdjoXRYobrQAbXmAp3C0g" target="_blank" rel="external">从零开始完整学习全基因组测序数据分析：第4节 构建WGS主流程</a></p>
-<p>（2）<a href="http://www.cureffi.org/2012/09/19/exome-sequencing-pipeline-using-gatk/" target="_blank" rel="external">Exome sequencing pipeline using GATK</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;变异检测概述&lt;/blockquote&gt;
     
     </summary>
     

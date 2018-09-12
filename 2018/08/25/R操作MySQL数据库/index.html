@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="R操作MySQL数据库">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-25T11:15:11.400Z">
+<meta property="og:updated_time" content="2018-08-28T07:01:47.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R操作MySQL数据库">
 <meta name="twitter:description" content="R操作MySQL数据库">
@@ -386,7 +386,7 @@
         <blockquote class="blockquote-center">R操作MySQL数据库</blockquote>
 
 <a id="more"></a>
-<ul>
+<h1 id="RMySQL操作MySQL数据库"><a href="#RMySQL操作MySQL数据库" class="headerlink" title="RMySQL操作MySQL数据库"></a>RMySQL操作MySQL数据库</h1><ul>
 <li><p>连接MySQL数据库</p>
 <pre><code>conn &lt;- dbConnect(MySQL(), 
     dbname=&quot;r_data&quot;,
@@ -406,20 +406,21 @@ summary(conn)
 <li><p>从R导出数据到数据库</p>
 </li>
 </ul>
-<p>dbWriteTable函数用来将R中的数据导入MySQL数据库，其包括创建新的表格，覆盖已有的表格，追加数据到表格。用法为dbWriteTable(MySQL连接对象名，表格名，R数据框名)</p>
+<p>dbWriteTable函数用来将R中的数据导入MySQL数据库，其包括创建新的表格，覆盖已有的表格，追加数据到表格。用法为dbWriteTable(MySQL连接对象名，表格名，R数据框名)(row.names=FALSE不插入row.names字段)</p>
 <p>(1) 创建</p>
-<pre><code>&gt; dbWriteTable(conn,&quot;test&quot;,cars)
+<pre><code>&gt; dbWriteTable(conn,&quot;test&quot;,cars，row.names=FALSE)
 [1] TRUE
 &gt; dbListTables(conn)
 [1] &quot;test&quot;
 </code></pre><p>（2） 覆盖</p>
-<pre><code>dbWriteTable(conn,&quot;test&quot;,cars2,overwrite = TRUE)
+<pre><code>dbWriteTable(conn,&quot;test&quot;,cars2,row.names=FALSE,overwrite = TRUE)
 </code></pre><p>（3）追加</p>
-<pre><code>dbWriteTable(conn,&quot;test&quot;,cars3,append = TRUE)
-</code></pre><p>（4）删除表格</p>
+<pre><code>dbWriteTable(conn,&quot;test&quot;,cars3,row.names=FALSE,append = TRUE)
+</code></pre><p><strong>尽量避免使用WriteTable()函数，因为它会删除你原来定义的表结构，创建新的表结构再插入</strong></p>
+<p>（4）删除表格</p>
 <pre><code>dbRemoveTable(con,&quot;test&quot;)
 </code></pre><ul>
-<li>导入数据到R数据框</li>
+<li>导出数据到R数据框</li>
 </ul>
 <p>dbReadTable()函数用来从MySQL数据库提取整个表格（前提是表格数据量不是很大）。</p>
 <pre><code>dbReadTable(conn,&quot;test&quot;)
@@ -433,8 +434,9 @@ summary(conn)
 <p>dbGetQuery()函数用来提取表格中指定的行(使用LIMIT查看前几行)</p>
 <pre><code>dbGetQuery(conn,&quot;SELECT * FROM test LIMIT 5;&quot;)
 </code></pre><p>另一种方式是使用dbSendQuery()查询数据库，然后使用dbFetch()获取数据</p>
-<pre><code>query &lt;- dbSendQuery(conn,&quot;SELECT * FROM test;&quot;)
-data &lt;- dbFetch(query,n=5)
+<pre><code>dbSendQuery(conn,&quot;SET NAMES gbk&quot;)  ##若表格中含有中文需要先设置字符集gbk
+query &lt;- dbSendQuery(conn,&quot;SELECT * FROM test;&quot;)
+data &lt;- dbFetch(query,n=5)  ## data &lt;- dbFetch(query,n=-1)获取所有查询到的数据
 </code></pre><ul>
 <li><p>dbGetInfo()函数也可以查看query对象的信息</p>
 <pre><code>dbGetInfo(query)
@@ -522,6 +524,10 @@ $`statement`
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="https:/AnJingwd.github.io/2018/09/05/IDM下载工具/" rel="prev" title="IDM下载工具">
+                IDM下载工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -595,8 +601,17 @@ $`statement`
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https:/AnJingwd.github.io/images/avatar.png"
@@ -611,7 +626,7 @@ $`statement`
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -855,6 +870,22 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RMySQL操作MySQL数据库"><span class="nav-number">1.</span> <span class="nav-text">RMySQL操作MySQL数据库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -896,7 +927,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共79.3k字</span>
+  <span class="post-count">博客全站共80.9k字</span>
 </div>
 
 <div class="powered-by">

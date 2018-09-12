@@ -2,16 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/09/05/IDM%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7/</loc>
+    
+    <lastmod>2018-09-12T01:24:28.334Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2018-09-10T01:11:13.521Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
+    
+    <lastmod>2018-09-07T13:50:21.609Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/05/13/Kaggle%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2018-09-02T05:03:40.936Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/01/pandas%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2018-08-31T01:40:59.385Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/08/25/R%E6%93%8D%E4%BD%9CMySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     
-    <lastmod>2018-08-25T11:15:11.400Z</lastmod>
+    <lastmod>2018-08-28T07:01:47.695Z</lastmod>
     
   </url>
   
   <url>
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/08/23/R%E6%95%B0%E6%8D%AE%E6%95%B4%E5%90%88%E5%87%BD%E6%95%B0%E5%8C%85%E5%B0%8F%E7%BB%93/</loc>
     
-    <lastmod>2018-08-24T08:49:51.669Z</lastmod>
+    <lastmod>2018-08-26T02:40:18.646Z</lastmod>
     
   </url>
   
@@ -93,13 +128,6 @@
   </url>
   
   <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/05/13/Kaggle%E5%85%A5%E9%97%A8/</loc>
-    
-    <lastmod>2018-07-08T01:21:01.828Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/04/03/HMM%E4%B8%8Eviterbi%E7%AE%97%E6%B3%95/</loc>
     
     <lastmod>2018-07-08T01:18:00.631Z</lastmod>
@@ -128,13 +156,6 @@
   </url>
   
   <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    
-    <lastmod>2018-06-22T05:12:57.094Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/</loc>
     
     <lastmod>2018-05-27T07:25:16.975Z</lastmod>
@@ -145,13 +166,6 @@
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/qPCR%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E5%8F%8A%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C/</loc>
     
     <lastmod>2018-05-24T12:51:02.131Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/</loc>
-    
-    <lastmod>2018-05-12T15:40:37.656Z</lastmod>
     
   </url>
   
@@ -334,13 +348,6 @@
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/01/%E6%96%87%E6%9C%AC%E6%8C%96%E6%8E%98%E4%B8%8E%E5%B1%95%E7%A4%BA%E4%B9%8B%E6%96%87%E7%8C%AE%E5%85%B3%E9%94%AE%E8%AF%8D/</loc>
     
     <lastmod>2017-10-01T13:37:22.588Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/01/pandas%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/</loc>
-    
-    <lastmod>2017-10-01T08:00:29.192Z</lastmod>
     
   </url>
   

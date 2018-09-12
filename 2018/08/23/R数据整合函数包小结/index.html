@@ -104,6 +104,8 @@
 <meta property="og:site_name" content="安静-不安静的博客">
 <meta property="og:description" content="R数据整合函数包小结">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/1lUFZ8r.jpg">
+<meta property="og:image" content="https://i.imgur.com/PKZVkSK.png">
 <meta property="og:image" content="https://i.imgur.com/016wkfX.jpg">
 <meta property="og:image" content="https://i.imgur.com/GFLAvmZ.jpg">
 <meta property="og:image" content="https://i.imgur.com/GdWK2Wi.jpg">
@@ -114,11 +116,11 @@
 <meta property="og:image" content="https://i.imgur.com/dcteRp7.jpg">
 <meta property="og:image" content="https://i.imgur.com/KY5OOlj.jpg">
 <meta property="og:image" content="https://i.imgur.com/g0nNEt5.jpg">
-<meta property="og:updated_time" content="2018-08-24T08:49:51.669Z">
+<meta property="og:updated_time" content="2018-08-26T02:40:18.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R数据整合函数包小结">
 <meta name="twitter:description" content="R数据整合函数包小结">
-<meta name="twitter:image" content="https://i.imgur.com/016wkfX.jpg">
+<meta name="twitter:image" content="https://i.imgur.com/1lUFZ8r.jpg">
 
 
 
@@ -409,8 +411,13 @@
 <li>lubridate</li>
 </ul>
 <hr>
-<h1 id="apply函数"><a href="#apply函数" class="headerlink" title="apply函数"></a>apply函数</h1><p>&emsp;&emsp;apply函数是这三个函数的精髓，lapply是它的变种，sapply是lapply的精华简洁版本。apply函数的基本命令格式是：apply(数据，向量，函数)。</p>
+<h1 id="apply函数"><a href="#apply函数" class="headerlink" title="apply函数"></a>apply函数</h1><p><img src="https://i.imgur.com/1lUFZ8r.jpg" alt=""></p>
+<p>&emsp;&emsp;在使用R时，不要用循环，效率特别低，要用向量计算代替循环计算。原因在于R的循环操作for和while，都是基于R语言本身来实现的，而向量操作是基于底层的C语言函数实现的，从性能上来看，就会有比较明显的差距了。那么如何使用C的函数来实现向量计算呢，就是要用到apply的家族函数。</p>
+<p>apply函数本身就是解决数据循环处理的问题，为了面向不同的数据类型，不同的返回值，apply函数组成了一个函数族，包括了8个功能类似的函数。</p>
+<p><img src="https://i.imgur.com/PKZVkSK.png" alt=""></p>
+<p>&emsp;&emsp;apply函数是这三个函数的精髓，lapply是它的变种，sapply是lapply的精华简洁版本。apply函数的基本命令格式是：apply(数据，向量，函数)。</p>
 <ul>
+<li>数据可以是矩阵，数据框，数组（二维或者多维）</li>
 <li>向量指的是矩阵的行或列，通俗的说，向量为1的时候横着算，向量为2的时候竖着算。</li>
 <li>函数作用对象区分多元素和单元素：例如sum函数它必须应用在多个元素（数值）上，此时可利用apply(matrix,1,sum)对矩阵列求和；又例如sqrt函数它只作用于单个数值，此时apply(matrix,1,sqrt)表示对每个元素求平方根，每一列的运算结果变成新的一行；而apply(matrix,2,sqrt)表示对每个元素求平方根，每一列的运算结果变成新的一列。</li>
 <li>使用自定义函数：apply(matrix,1,function(x),MyFunction(x)) (单个自变量x, 当这个函数应用在我们数据上的时候，就默认是对数据矩阵的每一个元素（数值）进行运算。)</li>
@@ -422,7 +429,7 @@
 <li>合并成数据框：data.frame(lapply(matrix,sqrt)) 处理后成为1行6列的数据框</li>
 </ul>
 <hr>
-<h1 id="dplyr函数包"><a href="#dplyr函数包" class="headerlink" title="dplyr函数包"></a>dplyr函数包</h1><p>首先需要安装dplyr包，install.packages(“dplyr”)。dplyr包是“方便应用”型包，主要组成不是计算类函数，而是快速加工数据的函数。dplyr包系列的命令大部分可以在一个函数内包含多个条件，各个条件之间用逗号连接；不同分类的条件可以在同一个函数中混合运用；多个函数之间可以用包内的串串函数（函数名：pipe，函数写法：%in%）连接在一起；dplyr包在处理大样本量的复杂数据时极为好用。</p>
+<h1 id="dplyr函数包"><a href="#dplyr函数包" class="headerlink" title="dplyr函数包"></a>dplyr函数包</h1><p>&emsp;&emsp;首先需要安装dplyr包，install.packages(“dplyr”)。dplyr包是“方便应用”型包，主要组成不是计算类函数，而是快速加工数据的函数。dplyr包系列的命令大部分可以在一个函数内包含多个条件，各个条件之间用逗号连接；不同分类的条件可以在同一个函数中混合运用；多个函数之间可以用包内的串串函数（函数名：pipe，函数写法：%in%）连接在一起；dplyr包在处理大样本量的复杂数据时极为好用。</p>
 <p>接下来介绍dplyr包中七个基础函数的使用方法:</p>
 <p><img src="https://i.imgur.com/016wkfX.jpg" alt=""></p>
 <p>其中weight和Time为numeric类型；Chick和Diet为factor类型</p>
@@ -518,7 +525,7 @@
 <li>每一行：代表一次观测（observation）</li>
 </ul>
 <p><img src="https://i.imgur.com/kQTOjxN.jpg" alt=""></p>
-<p>要实现转换结果，在Geneid一定的情况下，我们可以把每一个样品和其对应的基因表达量看做一个键-值对（key-value pair）。比如：在GeneID为gene1时，sample1对应的表达量是3，sample2对应的表达量是4。因此，我们在转换数据时，只需按照上述规则，并指定要转换的列即可。使用tidyr包中的gather函数即可实现转换。</p>
+<p>&emsp;&emsp;要实现转换结果，在Geneid一定的情况下，我们可以把每一个样品和其对应的基因表达量看做一个键-值对（key-value pair）。比如：在GeneID为gene1时，sample1对应的表达量是3，sample2对应的表达量是4。因此，我们在转换数据时，只需按照上述规则，并指定要转换的列即可。使用tidyr包中的gather函数即可实现转换。</p>
 <pre><code># gather()命令转换说明：# gather（data=数据框名，key=&quot;key名&quot;，value=&quot;value名&quot;，要转换的列1，列2，列3）
 &gt; gene_exp_tidy &lt;- gather(data = gene_exp, key = &quot;sample_name&quot;, value = &quot;expression&quot;, Sample1, Sample2, Sample3)
 # 在指定要转换的列时，也可不用列名，直接指定列的编号即可
@@ -541,11 +548,17 @@
 <pre><code>gene_exp3_tidy2 &lt;- separate(gene_exp3_tidy, col = key, into = c(&quot;SampleName&quot;,&quot;Temperature&quot;))
 </code></pre><p><img src="https://i.imgur.com/g0nNEt5.jpg" alt=""></p>
 <hr>
+<h1 id="data-table包"><a href="#data-table包" class="headerlink" title="data.table包"></a>data.table包</h1><p>&emsp;&emsp;如果你的数据量比较大，1GB，10GB，甚至有100GB，对于这种规模比较大的数据集，apply的计算方式就不太能满足计算性能的要求了。你依然可以用data.table包, bigmemory包, ff包等，或者并行计算的包加速R语言在单机上的计算的性能。</p>
+<p>&emsp;&emsp;data.table包是一个data.frame的扩展工具集，可以通过自定义keys来设置索引，实现高效的数据索引查询、快速分组、快速连接、快速赋值等数据操作。data.table主要通过二元检索法大大提高数据操作的效率，它也兼容适用于data.frame的向量检索法。同时，data.table对于大数据的快速聚合也有很好的效果，官方介绍说对于 100GB规模内存数据处理，运行效率还是很好的。</p>
+<p>&emsp;&emsp;由于data.table对用户使用上是希望和data.frame的操作尽量相似，所以适用于data.frame的查询方法基本都适用于data.table，同时data.table自己具有的一些特性，提供了自定义keys来进行高效的查询。</p>
+<hr>
 <p><a href="http://r4ds.had.co.nz/workflow-projects.html" target="_blank" rel="external">R for Data Science(推荐)</a> </p>
 <p>该书github地址：<a href="https://github.com/hadley/r4ds" target="_blank" rel="external">hadley/r4ds</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://www.jianshu.com/p/bfddfe29aa39" target="_blank" rel="external">R语言的plyr包简介</a></p>
-<p>（2）<a href="http://www.jianshu.com/p/36f5268e932c" target="_blank" rel="external">利用reshape2包进行数据逆透视和数据透视</a></p>
-<p>（3）<a href="http://www.xueqing.tv/cms/article/105" target="_blank" rel="external">reshape2包的进化版—tidyr包</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.fens.me/r-apply/" target="_blank" rel="external">掌握R语言中的apply函数族</a></p>
+<p>（2）<a href="http://www.jianshu.com/p/bfddfe29aa39" target="_blank" rel="external">R语言的plyr包简介</a></p>
+<p>（3）<a href="http://www.jianshu.com/p/36f5268e932c" target="_blank" rel="external">利用reshape2包进行数据逆透视和数据透视</a></p>
+<p>（4）<a href="http://www.xueqing.tv/cms/article/105" target="_blank" rel="external">reshape2包的进化版—tidyr包</a></p>
+<p>（5）<a href="http://blog.fens.me/r-data-table/" target="_blank" rel="external">超高性能数据处理包data.table</a></p>
 
       
     </div>
@@ -696,7 +709,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -949,7 +962,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#apply函数"><span class="nav-number">1.</span> <span class="nav-text">apply函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dplyr函数包"><span class="nav-number">2.</span> <span class="nav-text">dplyr函数包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plyr-包"><span class="nav-number">3.</span> <span class="nav-text">plyr 包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reshape2包"><span class="nav-number">4.</span> <span class="nav-text">reshape2包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tidyr包-reshape2包的进化版"><span class="nav-number">5.</span> <span class="nav-text">tidyr包- reshape2包的进化版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#apply函数"><span class="nav-number">1.</span> <span class="nav-text">apply函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dplyr函数包"><span class="nav-number">2.</span> <span class="nav-text">dplyr函数包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plyr-包"><span class="nav-number">3.</span> <span class="nav-text">plyr 包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reshape2包"><span class="nav-number">4.</span> <span class="nav-text">reshape2包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tidyr包-reshape2包的进化版"><span class="nav-number">5.</span> <span class="nav-text">tidyr包- reshape2包的进化版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#data-table包"><span class="nav-number">6.</span> <span class="nav-text">data.table包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -997,7 +1010,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共79.3k字</span>
+  <span class="post-count">博客全站共80.9k字</span>
 </div>
 
 <div class="powered-by">
