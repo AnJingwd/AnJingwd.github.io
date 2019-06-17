@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="https:/AnJingwd.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="kaggle," />
+
+
+
+
+
+  <link rel="alternate" href="https:/AnJingwd.github.io/atom.xml" title="安静-不安静的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https:/AnJingwd.github.io/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="翻译了一篇kaggler银奖得主的赛后经验博客，技巧与干货满满">
+<meta name="keywords" content="kaggle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="来自kaggle文本分类银奖得主的参赛感悟">
+<meta property="og:url" content="https:///AnJingwd.github.io/2019/06/17/kaggler NLP第二名经验分享/index.html">
+<meta property="og:site_name" content="安静-不安静的博客">
+<meta property="og:description" content="翻译了一篇kaggler银奖得主的赛后经验博客，技巧与干货满满">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://mlwhiz.com/images/silver/CV_vs_LB.png">
+<meta property="og:image" content="https://mlwhiz.com/images/silver/read-what-the-smart-people-are-saying.png">
+<meta property="og:image" content="https://mlwhiz.com/images/silver/lb2.png">
+<meta property="og:image" content="https://mlwhiz.com/images/silver/arch_1_place.png">
+<meta property="og:updated_time" content="2019-06-17T12:14:05.930Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="来自kaggle文本分类银奖得主的参赛感悟">
+<meta name="twitter:description" content="翻译了一篇kaggler银奖得主的赛后经验博客，技巧与干货满满">
+<meta name="twitter:image" content="https://mlwhiz.com/images/silver/CV_vs_LB.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'https:///AnJingwd.github.io/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title>来自kaggle文本分类银奖得主的参赛感悟 | 安静-不安静的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="https:///AnJingwd.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安静-不安静的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https:/AnJingwd.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https:/AnJingwd.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https:/AnJingwd.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https:/AnJingwd.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https:/AnJingwd.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="https:/AnJingwd.github.io/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2019/06/17/kaggler NLP第二名经验分享/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">来自kaggle文本分类银奖得主的参赛感悟</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-17T10:57:31+08:00">
+                2019-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/kaggle/" itemprop="url" rel="index">
+                    <span itemprop="name">kaggle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center">翻译了一篇kaggler银奖得主的赛后经验博客，技巧与干货满满</blockquote>
+
+<a id="more"></a>
+<p>Kaggle是一个学习的好地方。我从最近结束的关于<strong>Quora Insincere问题分类</strong>的比赛中学到了很多东西，其中我的排名为<strong>182/4037 </strong>。在这篇文章中，我将尝试提供我尝试过的事情的摘要。我还将尝试总结我错过的想法，但这些想法是其他获奖解决方案的一部分。</p>
+<p>​     所以对于那些没有这次比赛经验的人，首先要简要介绍一下这次比赛。在本次比赛中，我们必须开发能够识别和标记虚假问题的模型。 <strong>挑战不仅仅是对性能的测试，而且还是对高效代码编写技能的测试。</strong>由于这是一个有限的外部数据选项kerner的竞争，竞争者仅限于使用竞赛组织者提供的词嵌入。这意味着我们不允许使用像BERT这样最先进的模型。我们的所有模型都应在2小时内运行完，因此我们也受到限制。所以说模型的堆叠融合是不可能的。虽然有些解决方案能够通过使代码超高效来实现这一点，稍后会详细介绍。</p>
+<hr>
+<h2 id="一些kaggle经验"><a href="#一些kaggle经验" class="headerlink" title="一些kaggle经验"></a>一些kaggle经验</h2><p>在进入我的最终解决方案之前，我想分享一些关于kaggle作为一个整体<strong>的</strong>学习内容：</p>
+<h3 id="1-一直相信你的CV-Cross-Validation-结果"><a href="#1-一直相信你的CV-Cross-Validation-结果" class="headerlink" title="1. 一直相信你的CV(Cross Validation)结果"></a>1. 一直相信你的CV(Cross Validation)结果</h3><p><img src="https://mlwhiz.com/images/silver/CV_vs_LB.png" alt="img"></p>
+<p>在这次比赛中真正令很多人感到困惑的事情之一是，良好的CV分数并不一定能很好地转化为良好的LB分数。其主要原因是第一阶段的<strong>小测试数据集</strong>（仅65k行）（约占总测试数据的15％）。</p>
+<p>讨论论坛上的一个共同主题是关注我们应该选择哪些提交作为最终提交的内容：</p>
+<ul>
+<li>拥有最佳本地CV的人？要么</li>
+<li>最好的LB？</li>
+</ul>
+<p>虽然说信任你的CV似乎很简单，但当你看到你的本地CV得分增加时，你的LB分数下降或保持不变时，常识就会折腾你。</p>
+<p>幸运的是，我最终没有犯错，不相信我的CV得分。由于在Kaggle讨论板上有很多优秀的帖子，<strong>我选择了一个内核，公共LB得分为0.697，本地CV为0.701，截至最终提交时，公共LB的排名大约为1200。它的得分为0.702，在私人LB上排名第182位。</strong></p>
+<p>虽然这似乎是一个事后直截了当的选择，但是当你拥有公共LB得分&gt; = 0.70的公共内核时，这是一个艰难的决定。</p>
+<ol>
+<li><p>Kaggle的CV策略是指使用train-validation split来复制 train-test split ，以便在你的本地CV上表现良好的模型在私人LB上也表现良好。</p>
+</li>
+<li><p>CV表示交叉验证。这是验证集中的分数。在竞赛中，LB通常仅计算20-30％的测试数据。每天你提交以获得LB的高分，即使你的CV并不好。LB.的模型其实过拟合了20-30％。对于任何竞赛，最终你需要选择最后的2个模型提交。策略总是选择一个最高的CV和一个最高的LB的</p>
+</li>
+<li><p>CV strategy取决于大数据的大小，我们决定是否实施K-fold。有了K-fold，我们需要大量时间来训练。对于一个小数据集，如<a href="https://www.kaggle.com/c/home-credit-default-risk" target="_blank" rel="external">https://www.kaggle.com/c/home-credit-default-risk</a>，人们使用K-fold。对于非常大的数据集，比如<a href="https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection" target="_blank" rel="external">https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection</a>，就不可能使用K-fold。</p>
+</li>
+</ol>
+<p>关于 CV strategy 可以查看这个讨论<a href="https://www.kaggle.com/questions-and-answers/61785" target="_blank" rel="external">link</a></p>
+<hr>
+<h3 id="2-可以使用公开kernel的代码但检查错误"><a href="#2-可以使用公开kernel的代码但检查错误" class="headerlink" title="2.可以使用公开kernel的代码但检查错误"></a>2.可以使用公开kernel的代码但检查错误</h3><p>​          <a href="https://www.kaggle.com/bminixhofer/deterministic-neural-networks-using-pytorch" target="_blank" rel="external">This</a> Benjamin Minixhofer的Pytorch内核非常棒。它成为我参加本次比赛的许多参赛作品的基础。但是这个kernel有一个错误。它没有以正确的方式实现spatial dropout。你可以在我的帖子<a href="https://mlwhiz.com/blog/2019/01/06/pytorch_keras_conversion/" target="_blank" rel="external">这里</a>或我的<a href="https://www.kaggle" target="_blank" rel="external">kernel</a>上找到正确的spatial dropout实现。以正确的方式实施spatial dropout，使本地CV增加了约0.004。</p>
+<p>尽管如此，我还是使用了这个kernel来学习pytorch，同样感谢他。</p>
+<h3 id="3-不要相信论坛上的一切"><a href="#3-不要相信论坛上的一切" class="headerlink" title="3.不要相信论坛上的一切"></a>3.不要相信论坛上的一切</h3><p><img src="https://mlwhiz.com/images/silver/read-what-the-smart-people-are-saying.png" alt="img"></p>
+<p>我将在这里讨论两件事：</p>
+<ul>
+<li><strong>随机种子调整</strong>（<strong>Seed tuning</strong>）：在比赛期间，每个人都试图在公共LB上获得最佳排名。这只是人性。很多讨论围绕着神经网络初始化的好种子和坏种子。虽然在第一次看起来似乎没什么问题，但是谈话进一步发展，<strong>人们开始在内核中调整种子作为超级参数</strong>。一些讨论甚至继续说这是一个有效的策略。而这导致公开排行榜上出现大量过拟合的现象。同样的提交只要通过改变种子就可使得分从0.699提升到0.704。这意味着只通过更改public kernel中的种子，你就能从400-500名前进到前50名。这是灾难性的。有些人这样做了。他们上了public LB，但在私有排行榜上惨败了。</li>
+<li><strong>讨论论坛上的CV得分披露</strong>：我们总是试图衡量我们对其他人的表现。在很多讨论中，人们提供了他们的CV分数和相应的public LB分数。由于不同的CV schemes，CV中没有folds，只报告Metric，过拟合, 或错误的交叉验证，所以<strong>得分分散并且没有可比性</strong>。但他们最终影响了很多初学者和新人。</li>
+</ul>
+<h3 id="4-请在讨论论坛上保持活跃并定期检查公共内核"><a href="#4-请在讨论论坛上保持活跃并定期检查公共内核" class="headerlink" title="4. 请在讨论论坛上保持活跃并定期检查公共内核"></a>4. 请在讨论论坛上保持活跃并定期检查公共内核</h3><p>​            你可以通过参与讨论论坛和学习公共内核来学习很多东西。 <a href="https://www.kaggle.com/sudalairajkumar/a-look-at-different-embeddings" target="_blank" rel="external">SRK</a>，<a href="https://www.kaggle.com/shujian/mix-of-nn-models-based-on-meta-embedding" target="_blank" rel="external">Shujian的模型</a>有很多关于嵌入的优秀公共内核。以及<a href="https://www.kaggle.com/theoviel/improve-your-score- with-text-preprocessing-v2" target="_blank" rel="external">Theo Viel</a>的预处理让每个人都有了一个开端。随着比赛的进行，讨论也在不断发展。有关加快代码，工作方法，F1阈值和其他激动人心的话题的讨论使我对新的想法和改进充满了兴趣。</p>
+<p>即使在结束之后，在阅读关于解决方案概述的讨论时，我也学到了很多东西。我会说，<strong>查看获奖解决方案非常重要</strong>。</p>
+<h3 id="5-Share-a-lot"><a href="#5-Share-a-lot" class="headerlink" title="5. Share a lot"></a>5. Share a lot</h3><p>分享是Kaggle的一切。人们在比赛期间以及比赛结束后分享了他们的代码和想法。我们可以共同进步。</p>
+<h3 id="6-Beware-of-trolls"><a href="#6-Beware-of-trolls" class="headerlink" title="6. Beware of trolls :)"></a>6. Beware of trolls :)</h3><p>​            离比赛还剩下两个星期，我们正在快乐地走向比赛的最后阶段。分数增长缓慢。顶级选手有些停滞不前。 <strong>然后Pavel和团队的公共LB得分为0.782。</strong>下一组的LB得分为0.713。如此巨大的差异。我非常确定数据中有一些漏洞，除了Pavel之外没有人抓到。我花了差不多半天时间再做EDA。</p>
+<p>最后，事实证明他们所做的是<a href="https://www.kaggle.com/c/quora-insincere-questions-classification/discussion/80665" target="_blank" rel="external">scraping</a> - 很好玩！</p>
+<p>他们还有一些非常棒的想法，包括额外的数据，这可能有效，但在本次比赛中没有尝试。</p>
+<hr>
+<h2 id="My-Final-Solution"><a href="#My-Final-Solution" class="headerlink" title="My Final Solution:"></a>My Final Solution:</h2><p><img src="https://mlwhiz.com/images/silver/lb2.png" alt="img"></p>
+<p>我主要关注<strong>元特征工程(meta-feature engineering)和增加嵌入覆盖率和质量</strong>。这意味着我在各种神经网络架构上的尝试并不多。以下是我在最终提交中包含的内容：</p>
+<ul>
+<li>我注意到Glove嵌入在本地CV中表现不错，但在LB上却没有，而meta嵌入（Glove和paragram的意思）在LB上表现不错，但在CV上表现不佳。我采取了一种混合方法，所以<strong>我的一些模型仅使用Glove嵌入进行训练，有些则采用元嵌入</strong>。</li>
+<li><strong>嵌入</strong>中还包含自己提取的四个额外的特征(features)。因此，我的嵌入是一个304维向量。<strong>四个特征分别是:  标题，大写标志，Textblob字极性，textblob字主观性（title case flag, uppercase flag, Textblob word polarity, textblob word subjectivity）</strong></li>
+<li>使用spacy从整个训练集和测试数据中找出<strong>NER tokens </strong>，并将tokens和实体(entities)保存在一个字典中。我用这个词典来创建额外的特征(features)，比如“GPE”，“PERSON”，“ORG”，“NORP”，“WORK_OF_ART”。增加了一些特征并与目标高度相关。</li>
+<li>我使用的其他功能包括<code>total_length</code>，<code>capitals</code>，<code>words_vs_unique</code>以及一些工程特征，如<code>sum_feat</code>（咒骂的总和），<code>question_start_with_why</code>，<code>question_start_with_how_or_what</code>，<code>question_start_with_do_or_are</code>。可能没有增加太多价值，但仍然保留它们。</li>
+<li>我的最终解决方案是<strong>四个模型以stacked方式进行融合 </strong>。我使用Logistic回归（具有正权重和0截距），并将权重作为最终kernel中的列表给出。</li>
+</ul>
+<p>您可以找到我最终提交的内核<a href="https://www.kaggle.com/mlwhiz/multimodel-ensemble-clean-kernel?scriptVersionId=10279838" target="_blank" rel="external">此处</a>。</p>
+<hr>
+<h2 id="其他解决方案中使用的提示和技巧："><a href="#其他解决方案中使用的提示和技巧：" class="headerlink" title="其他解决方案中使用的提示和技巧："></a>其他解决方案中使用的提示和技巧：</h2><h3 id="1-增加嵌入覆盖范围："><a href="#1-增加嵌入覆盖范围：" class="headerlink" title="1. 增加嵌入覆盖范围："></a>1. 增加嵌入覆盖范围：</h3><p>在第三名<a href="https://www.kaggle.com/wowfattie/3rd-place" target="_blank" rel="external">kaggler的解决方案</a>中，wowfattie使用词干，词形还原，首字母大写，小写，大写，以及为其词典中的每个单词，使用拼写检查器对最近的单词进行词嵌入（ uses stemming, lemmatization, capitalize, lower, uppercase, as well as embedding of the nearest word using a spell checker to get embeddings for all words in his vocab）。这么棒的主意。 <strong>我最喜欢这个解决方案，因为它可以做我想做的事情并在一个非常好的地方完成。</strong>此外，代码非常干净。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> PorterStemmer</div><div class="line">ps = PorterStemmer()</div><div class="line"><span class="keyword">from</span> nltk.stem.lancaster <span class="keyword">import</span> LancasterStemmer</div><div class="line">lc = LancasterStemmer()</div><div class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> SnowballStemmer</div><div class="line">sb = SnowballStemmer(<span class="string">"english"</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_glove</span><span class="params">(word_dict, lemma_dict)</span>:</span></div><div class="line">    EMBEDDING_FILE = <span class="string">'../input/embeddings/glove.840B.300d/glove.840B.300d.txt'</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_coefs</span><span class="params">(word,*arr)</span>:</span> <span class="keyword">return</span> word, np.asarray(arr, dtype=<span class="string">'float32'</span>)</div><div class="line">    embeddings_index = dict(get_coefs(*o.split(<span class="string">" "</span>)) <span class="keyword">for</span> o <span class="keyword">in</span> open(EMBEDDING_FILE))</div><div class="line">    embed_size = <span class="number">300</span></div><div class="line">    nb_words = len(word_dict)+<span class="number">1</span></div><div class="line">    embedding_matrix = np.zeros((nb_words, embed_size), dtype=np.float32)</div><div class="line">    unknown_vector = np.zeros((embed_size,), dtype=np.float32) - <span class="number">1.</span></div><div class="line">    print(unknown_vector[:<span class="number">5</span>])</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> tqdm(word_dict):</div><div class="line">        word = key</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = key.lower()</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = key.upper()</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = key.capitalize()</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = ps.stem(key)</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = lc.stem(key)</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = sb.stem(key)</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = lemma_dict[key]</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        <span class="keyword">if</span> len(key) &gt; <span class="number">1</span>:</div><div class="line">            word = correction(key)</div><div class="line">            embedding_vector = embeddings_index.get(word)</div><div class="line">            <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">                embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">                <span class="keyword">continue</span></div><div class="line">        embedding_matrix[word_dict[key]] = unknown_vector                    </div><div class="line">    <span class="keyword">return</span> embedding_matrix, nb_words</div></pre></td></tr></table></figure>
+<h3 id="2-Checkpoint-Ensembling"><a href="#2-Checkpoint-Ensembling" class="headerlink" title="2. Checkpoint Ensembling:"></a>2. Checkpoint Ensembling:</h3><p>​       免费获得很多模型。大多数获胜解决方案都使用了对一些模型版本的checkpoint 集成的策略。对于第三名解决方案，预测使用了第4个epoch后的预测和第5个epoch后的预测的加权平均值。我有这个想法，但忘了在我的基于kernel的 ensemble中实现并提交它。</p>
+<h3 id="3-Meta-Embeddings"><a href="#3-Meta-Embeddings" class="headerlink" title="3. Meta Embeddings:"></a>3. Meta Embeddings:</h3><p>许多获胜的解决方案最终使用了<strong>加权元嵌入(weighted meta embeddings)</strong>，它们为Glove嵌入提供了更高的权重。一些解决方案也使用了<strong>连接嵌入(concatenated embeddings)</strong>。</p>
+<h3 id="4-Model-Architecture"><a href="#4-Model-Architecture" class="headerlink" title="4. Model Architecture:"></a>4. Model Architecture:</h3><p>我看到人们做的一件令人惊讶的事情是在双向层<strong>之后使用</strong> 1Dconv层。例如，这是第一名比赛团队使用的网络<a href="https://www.kaggle.com/c/quora-insincere-questions-classification/discussion/80568" target="_blank" rel="external">架构</a>。</p>
+<p><img src="https://mlwhiz.com/images/silver/arch_1_place.png" alt="img"></p>
+<h3 id="5-Bucketing-Variable-Sequence-Length-and-increased-hidden-units"><a href="#5-Bucketing-Variable-Sequence-Length-and-increased-hidden-units" class="headerlink" title="5. Bucketing/Variable Sequence Length and increased hidden units:"></a>5. Bucketing/Variable Sequence Length and increased hidden units:</h3><p>​       我注意到的另一件事是与许多公共kernel相比，隐藏单元的数量增加了。由于时间限制，大多数公共kernel使用60个隐藏单元。我使用80个隐藏单元，但代价是少训练一个网络。由于<strong>序列长度可变或者bucketing的思想</strong>，许多高分kernel能够使用更多数量的隐藏单元。从第1名kernel开始讨论：</p>
+<blockquote>
+<ul>
+<li><p>我们不会根据整个数据将序列填充到相同的长度，而只是在批处理级别上。这意味着我们在数据生成器级别为每个批次分别进行<strong>填充和截断</strong>，这样批量中句子的长度可以在大小上变化。</p>
+</li>
+<li><p>另外，我们通过不基于批次中最长序列的长度截短，但基于序列内95％百分比的长度进一步改进了这一点。这大大改善了运行时间，并且在单个模型级别上保持了非常强大的准确性，并通过更多模型平均的方法来改进它。</p>
+</li>
+</ul>
+<p>We do not pad sequences to the same length based on the whole data, but just on a batch level. That means we conduct <strong>padding and truncation on the data generator level for each batch separately</strong>, so that length of the sentences in a batch can vary in size. Additionally, we further improved this by not truncating based on the length of the longest sequence in the batch but based on the 95% percentile of lengths within the sequence. This improved runtime heavily and kept accuracy quite robust on single model level, and improved it by being able to average more models.</p>
+</blockquote>
+<p>也来自第7位<a href="https://www.kaggle.com/c/quora-insincere-questions-classification/discussion/80561" target="_blank" rel="external">讨论</a>：</p>
+<blockquote>
+<p>Bucketing是从具有相似长度的实例(instances)组成小批量来减轻padding成本。这使得训练速度提高了3倍以上，因此我可以为each split of 5-fold运行9个epochs。</p>
+<p>Bucketing is to make a minibatch from instances that have similar lengths to alleviate the cost of padding. This makes the training speed more than 3x faster, and thus I can run 9 epochs for each split of 5-fold.</p>
+</blockquote>
+<p>因此，使用这种技术还允许一些参赛者在更短的时间跑更多 epochs，并同时尝试更多的模型。很简约！</p>
+<h3 id="6-For-those-winners-who-didn’t-use-bucketing-Maxlen-72-was-too-large"><a href="#6-For-those-winners-who-didn’t-use-bucketing-Maxlen-72-was-too-large" class="headerlink" title="6. For those winners who didn’t use bucketing, Maxlen = 72 was too large:"></a>6. For those winners who didn’t use bucketing, Maxlen = 72 was too large:</h3><p>​      我们大多数人都看到了question length的分布，并将完全覆盖最大question长度作为maxlen参数。我从来没有试过调整它，但它似乎可以调整。 <strong>其中一个技巧是使用范围从35到60的maxlen。</strong>这使得kernel运行速度更快。</p>
+<h3 id="7-Time-taking-models-complex-architectures-like-Capsule-were-mostly-not-used"><a href="#7-Time-taking-models-complex-architectures-like-Capsule-were-mostly-not-used" class="headerlink" title="7. Time taking models/complex architectures like Capsule were mostly not used:"></a>7. Time taking models/complex architectures like Capsule were mostly not used:</h3><p>​      大多数获胜解决方案都没有使用Capsule网络，因为他们需要很多时间来训练。</p>
+<h3 id="8-Backprop-errors-on-embeddings-weights-in-last-few-epochs"><a href="#8-Backprop-errors-on-embeddings-weights-in-last-few-epochs" class="headerlink" title="8. Backprop errors on embeddings weights in last few epochs:"></a>8. Backprop errors on embeddings weights in last few epochs:</h3><p>我看到的另一件事是在排名<a href="https://www.kaggle.com/kentaronakanishi/18th-place-solution" target="_blank" rel="external">第18位kernel</a>使用单一模型</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> epoch &gt;= <span class="number">3</span>:</div><div class="line">    model.embedding.embeddings.weight.requires_grad = <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion:"></a>Conclusion:</h2><p>​       这是一场长达2个月比赛，在此期间我学到了很多关于Text和NLP的知识。我想在此强调的是<strong>我最终尝试了很多在达到最终解决方案之前无效的事情</strong>。有时候有点令人沮丧，但最后，我很高兴得到了最好的数据科学实践。还要感谢Kaggle大师Kazanova和他的一些朋友一起发布了<a href="https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&amp;utm_content=2&amp;utm_medium = partners＆utm_source = linkshare＆utm_campaign = lVarvwc5BD0" target="_blank" rel="external">“如何赢得数据科学竞赛”</a>Coursera课程。我从这门课程中学到了很多东西。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>原文 <a href="https://www.kdnuggets.com/2019/05/silver-medal-text-classification-kaggle.html" target="_blank" rel="external">What my first Silver Medal taught me about Text Classification and Kaggle in general?</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="https:/AnJingwd.github.io/tags/kaggle/" rel="tag"><i class="fa fa-tag"></i> kaggle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2019/06/10/pytorch入门教程/" rel="next" title="pytorch入门教程">
+                <i class="fa fa-chevron-left"></i> pytorch入门教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https:/AnJingwd.github.io/images/avatar.png"
+               alt="AJ's blog" />
+          <p class="site-author-name" itemprop="name">AJ's blog</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="https:/AnJingwd.github.io/archives">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="https:/AnJingwd.github.io/categories/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="https:/AnJingwd.github.io/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https:/AnJingwd.github.io/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+			 <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(function() {
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+ 
+    function S() {
+        var e = document.createElement("audio");
+        e.setAttribute("class", l);
+        e.src = i;
+        e.loop = false;
+        e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h()
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+ 
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+})()'><i class="fa fa-music"></i> High</a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sina.com.cn/u/1253988497" title="种田农民的博客" target="_blank">种田农民的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.biostars.org/t/Tools/" title="Biostars" target="_blank">Biostars</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://segmentfault.com/" title="SegmentFault" target="_blank">SegmentFault</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.alloyteam.com/nav/" title="Web前端导航" target="_blank">Web前端导航</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.36zhen.com/t?id=3448" title="前端书籍资料" target="_blank">前端书籍资料</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+		
+<div id="music163player">		
+	<iframe frameborder="no" border="0" 
+	marginwidth="0" marginheight="0" width=330 height=86 
+src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
+	</iframe>
+</div>	
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些kaggle经验"><span class="nav-number">1.</span> <span class="nav-text">一些kaggle经验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-一直相信你的CV-Cross-Validation-结果"><span class="nav-number">1.1.</span> <span class="nav-text">1. 一直相信你的CV(Cross Validation)结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-可以使用公开kernel的代码但检查错误"><span class="nav-number">1.2.</span> <span class="nav-text">2.可以使用公开kernel的代码但检查错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-不要相信论坛上的一切"><span class="nav-number">1.3.</span> <span class="nav-text">3.不要相信论坛上的一切</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-请在讨论论坛上保持活跃并定期检查公共内核"><span class="nav-number">1.4.</span> <span class="nav-text">4. 请在讨论论坛上保持活跃并定期检查公共内核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Share-a-lot"><span class="nav-number">1.5.</span> <span class="nav-text">5. Share a lot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Beware-of-trolls"><span class="nav-number">1.6.</span> <span class="nav-text">6. Beware of trolls :)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#My-Final-Solution"><span class="nav-number">2.</span> <span class="nav-text">My Final Solution:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他解决方案中使用的提示和技巧："><span class="nav-number">3.</span> <span class="nav-text">其他解决方案中使用的提示和技巧：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-增加嵌入覆盖范围："><span class="nav-number">3.1.</span> <span class="nav-text">1. 增加嵌入覆盖范围：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Checkpoint-Ensembling"><span class="nav-number">3.2.</span> <span class="nav-text">2. Checkpoint Ensembling:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Meta-Embeddings"><span class="nav-number">3.3.</span> <span class="nav-text">3. Meta Embeddings:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Model-Architecture"><span class="nav-number">3.4.</span> <span class="nav-text">4. Model Architecture:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Bucketing-Variable-Sequence-Length-and-increased-hidden-units"><span class="nav-number">3.5.</span> <span class="nav-text">5. Bucketing/Variable Sequence Length and increased hidden units:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-For-those-winners-who-didn’t-use-bucketing-Maxlen-72-was-too-large"><span class="nav-number">3.6.</span> <span class="nav-text">6. For those winners who didn’t use bucketing, Maxlen = 72 was too large:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Time-taking-models-complex-architectures-like-Capsule-were-mostly-not-used"><span class="nav-number">3.7.</span> <span class="nav-text">7. Time taking models/complex architectures like Capsule were mostly not used:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Backprop-errors-on-embeddings-weights-in-last-few-epochs"><span class="nav-number">3.8.</span> <span class="nav-text">8. Backprop errors on embeddings weights in last few epochs:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AJ's blog</span>
+</div>
+
+
+<!--<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共86.6k字</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

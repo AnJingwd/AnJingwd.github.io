@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2019-06-17T07:47:28.759Z</updated>
+  <updated>2019-06-17T12:14:05.930Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,111 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>来自kaggle文本分类银奖得主的参赛感悟</title>
+    <link href="https:///AnJingwd.github.io/2019/06/17/kaggler%20NLP%E7%AC%AC%E4%BA%8C%E5%90%8D%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    <id>https:///AnJingwd.github.io/2019/06/17/kaggler NLP第二名经验分享/</id>
+    <published>2019-06-17T02:57:31.000Z</published>
+    <updated>2019-06-17T12:14:05.930Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">翻译了一篇kaggler银奖得主的赛后经验博客，技巧与干货满满</blockquote>
+
+<a id="more"></a>
+<p>Kaggle是一个学习的好地方。我从最近结束的关于<strong>Quora Insincere问题分类</strong>的比赛中学到了很多东西，其中我的排名为<strong>182/4037 </strong>。在这篇文章中，我将尝试提供我尝试过的事情的摘要。我还将尝试总结我错过的想法，但这些想法是其他获奖解决方案的一部分。</p>
+<p>​     所以对于那些没有这次比赛经验的人，首先要简要介绍一下这次比赛。在本次比赛中，我们必须开发能够识别和标记虚假问题的模型。 <strong>挑战不仅仅是对性能的测试，而且还是对高效代码编写技能的测试。</strong>由于这是一个有限的外部数据选项kerner的竞争，竞争者仅限于使用竞赛组织者提供的词嵌入。这意味着我们不允许使用像BERT这样最先进的模型。我们的所有模型都应在2小时内运行完，因此我们也受到限制。所以说模型的堆叠融合是不可能的。虽然有些解决方案能够通过使代码超高效来实现这一点，稍后会详细介绍。</p>
+<hr>
+<h2 id="一些kaggle经验"><a href="#一些kaggle经验" class="headerlink" title="一些kaggle经验"></a>一些kaggle经验</h2><p>在进入我的最终解决方案之前，我想分享一些关于kaggle作为一个整体<strong>的</strong>学习内容：</p>
+<h3 id="1-一直相信你的CV-Cross-Validation-结果"><a href="#1-一直相信你的CV-Cross-Validation-结果" class="headerlink" title="1. 一直相信你的CV(Cross Validation)结果"></a>1. 一直相信你的CV(Cross Validation)结果</h3><p><img src="https://mlwhiz.com/images/silver/CV_vs_LB.png" alt="img"></p>
+<p>在这次比赛中真正令很多人感到困惑的事情之一是，良好的CV分数并不一定能很好地转化为良好的LB分数。其主要原因是第一阶段的<strong>小测试数据集</strong>（仅65k行）（约占总测试数据的15％）。</p>
+<p>讨论论坛上的一个共同主题是关注我们应该选择哪些提交作为最终提交的内容：</p>
+<ul>
+<li>拥有最佳本地CV的人？要么</li>
+<li>最好的LB？</li>
+</ul>
+<p>虽然说信任你的CV似乎很简单，但当你看到你的本地CV得分增加时，你的LB分数下降或保持不变时，常识就会折腾你。</p>
+<p>幸运的是，我最终没有犯错，不相信我的CV得分。由于在Kaggle讨论板上有很多优秀的帖子，<strong>我选择了一个内核，公共LB得分为0.697，本地CV为0.701，截至最终提交时，公共LB的排名大约为1200。它的得分为0.702，在私人LB上排名第182位。</strong></p>
+<p>虽然这似乎是一个事后直截了当的选择，但是当你拥有公共LB得分&gt; = 0.70的公共内核时，这是一个艰难的决定。</p>
+<ol>
+<li><p>Kaggle的CV策略是指使用train-validation split来复制 train-test split ，以便在你的本地CV上表现良好的模型在私人LB上也表现良好。</p>
+</li>
+<li><p>CV表示交叉验证。这是验证集中的分数。在竞赛中，LB通常仅计算20-30％的测试数据。每天你提交以获得LB的高分，即使你的CV并不好。LB.的模型其实过拟合了20-30％。对于任何竞赛，最终你需要选择最后的2个模型提交。策略总是选择一个最高的CV和一个最高的LB的</p>
+</li>
+<li><p>CV strategy取决于大数据的大小，我们决定是否实施K-fold。有了K-fold，我们需要大量时间来训练。对于一个小数据集，如<a href="https://www.kaggle.com/c/home-credit-default-risk" target="_blank" rel="external">https://www.kaggle.com/c/home-credit-default-risk</a>，人们使用K-fold。对于非常大的数据集，比如<a href="https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection" target="_blank" rel="external">https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection</a>，就不可能使用K-fold。</p>
+</li>
+</ol>
+<p>关于 CV strategy 可以查看这个讨论<a href="https://www.kaggle.com/questions-and-answers/61785" target="_blank" rel="external">link</a></p>
+<hr>
+<h3 id="2-可以使用公开kernel的代码但检查错误"><a href="#2-可以使用公开kernel的代码但检查错误" class="headerlink" title="2.可以使用公开kernel的代码但检查错误"></a>2.可以使用公开kernel的代码但检查错误</h3><p>​          <a href="https://www.kaggle.com/bminixhofer/deterministic-neural-networks-using-pytorch" target="_blank" rel="external">This</a> Benjamin Minixhofer的Pytorch内核非常棒。它成为我参加本次比赛的许多参赛作品的基础。但是这个kernel有一个错误。它没有以正确的方式实现spatial dropout。你可以在我的帖子<a href="https://mlwhiz.com/blog/2019/01/06/pytorch_keras_conversion/" target="_blank" rel="external">这里</a>或我的<a href="https://www.kaggle" target="_blank" rel="external">kernel</a>上找到正确的spatial dropout实现。以正确的方式实施spatial dropout，使本地CV增加了约0.004。</p>
+<p>尽管如此，我还是使用了这个kernel来学习pytorch，同样感谢他。</p>
+<h3 id="3-不要相信论坛上的一切"><a href="#3-不要相信论坛上的一切" class="headerlink" title="3.不要相信论坛上的一切"></a>3.不要相信论坛上的一切</h3><p><img src="https://mlwhiz.com/images/silver/read-what-the-smart-people-are-saying.png" alt="img"></p>
+<p>我将在这里讨论两件事：</p>
+<ul>
+<li><strong>随机种子调整</strong>（<strong>Seed tuning</strong>）：在比赛期间，每个人都试图在公共LB上获得最佳排名。这只是人性。很多讨论围绕着神经网络初始化的好种子和坏种子。虽然在第一次看起来似乎没什么问题，但是谈话进一步发展，<strong>人们开始在内核中调整种子作为超级参数</strong>。一些讨论甚至继续说这是一个有效的策略。而这导致公开排行榜上出现大量过拟合的现象。同样的提交只要通过改变种子就可使得分从0.699提升到0.704。这意味着只通过更改public kernel中的种子，你就能从400-500名前进到前50名。这是灾难性的。有些人这样做了。他们上了public LB，但在私有排行榜上惨败了。</li>
+<li><strong>讨论论坛上的CV得分披露</strong>：我们总是试图衡量我们对其他人的表现。在很多讨论中，人们提供了他们的CV分数和相应的public LB分数。由于不同的CV schemes，CV中没有folds，只报告Metric，过拟合, 或错误的交叉验证，所以<strong>得分分散并且没有可比性</strong>。但他们最终影响了很多初学者和新人。</li>
+</ul>
+<h3 id="4-请在讨论论坛上保持活跃并定期检查公共内核"><a href="#4-请在讨论论坛上保持活跃并定期检查公共内核" class="headerlink" title="4. 请在讨论论坛上保持活跃并定期检查公共内核"></a>4. 请在讨论论坛上保持活跃并定期检查公共内核</h3><p>​            你可以通过参与讨论论坛和学习公共内核来学习很多东西。 <a href="https://www.kaggle.com/sudalairajkumar/a-look-at-different-embeddings" target="_blank" rel="external">SRK</a>，<a href="https://www.kaggle.com/shujian/mix-of-nn-models-based-on-meta-embedding" target="_blank" rel="external">Shujian的模型</a>有很多关于嵌入的优秀公共内核。以及<a href="https://www.kaggle.com/theoviel/improve-your-score- with-text-preprocessing-v2" target="_blank" rel="external">Theo Viel</a>的预处理让每个人都有了一个开端。随着比赛的进行，讨论也在不断发展。有关加快代码，工作方法，F1阈值和其他激动人心的话题的讨论使我对新的想法和改进充满了兴趣。</p>
+<p>即使在结束之后，在阅读关于解决方案概述的讨论时，我也学到了很多东西。我会说，<strong>查看获奖解决方案非常重要</strong>。</p>
+<h3 id="5-Share-a-lot"><a href="#5-Share-a-lot" class="headerlink" title="5. Share a lot"></a>5. Share a lot</h3><p>分享是Kaggle的一切。人们在比赛期间以及比赛结束后分享了他们的代码和想法。我们可以共同进步。</p>
+<h3 id="6-Beware-of-trolls"><a href="#6-Beware-of-trolls" class="headerlink" title="6. Beware of trolls :)"></a>6. Beware of trolls :)</h3><p>​            离比赛还剩下两个星期，我们正在快乐地走向比赛的最后阶段。分数增长缓慢。顶级选手有些停滞不前。 <strong>然后Pavel和团队的公共LB得分为0.782。</strong>下一组的LB得分为0.713。如此巨大的差异。我非常确定数据中有一些漏洞，除了Pavel之外没有人抓到。我花了差不多半天时间再做EDA。</p>
+<p>最后，事实证明他们所做的是<a href="https://www.kaggle.com/c/quora-insincere-questions-classification/discussion/80665" target="_blank" rel="external">scraping</a> - 很好玩！</p>
+<p>他们还有一些非常棒的想法，包括额外的数据，这可能有效，但在本次比赛中没有尝试。</p>
+<hr>
+<h2 id="My-Final-Solution"><a href="#My-Final-Solution" class="headerlink" title="My Final Solution:"></a>My Final Solution:</h2><p><img src="https://mlwhiz.com/images/silver/lb2.png" alt="img"></p>
+<p>我主要关注<strong>元特征工程(meta-feature engineering)和增加嵌入覆盖率和质量</strong>。这意味着我在各种神经网络架构上的尝试并不多。以下是我在最终提交中包含的内容：</p>
+<ul>
+<li>我注意到Glove嵌入在本地CV中表现不错，但在LB上却没有，而meta嵌入（Glove和paragram的意思）在LB上表现不错，但在CV上表现不佳。我采取了一种混合方法，所以<strong>我的一些模型仅使用Glove嵌入进行训练，有些则采用元嵌入</strong>。</li>
+<li><strong>嵌入</strong>中还包含自己提取的四个额外的特征(features)。因此，我的嵌入是一个304维向量。<strong>四个特征分别是:  标题，大写标志，Textblob字极性，textblob字主观性（title case flag, uppercase flag, Textblob word polarity, textblob word subjectivity）</strong></li>
+<li>使用spacy从整个训练集和测试数据中找出<strong>NER tokens </strong>，并将tokens和实体(entities)保存在一个字典中。我用这个词典来创建额外的特征(features)，比如“GPE”，“PERSON”，“ORG”，“NORP”，“WORK_OF_ART”。增加了一些特征并与目标高度相关。</li>
+<li>我使用的其他功能包括<code>total_length</code>，<code>capitals</code>，<code>words_vs_unique</code>以及一些工程特征，如<code>sum_feat</code>（咒骂的总和），<code>question_start_with_why</code>，<code>question_start_with_how_or_what</code>，<code>question_start_with_do_or_are</code>。可能没有增加太多价值，但仍然保留它们。</li>
+<li>我的最终解决方案是<strong>四个模型以stacked方式进行融合 </strong>。我使用Logistic回归（具有正权重和0截距），并将权重作为最终kernel中的列表给出。</li>
+</ul>
+<p>您可以找到我最终提交的内核<a href="https://www.kaggle.com/mlwhiz/multimodel-ensemble-clean-kernel?scriptVersionId=10279838" target="_blank" rel="external">此处</a>。</p>
+<hr>
+<h2 id="其他解决方案中使用的提示和技巧："><a href="#其他解决方案中使用的提示和技巧：" class="headerlink" title="其他解决方案中使用的提示和技巧："></a>其他解决方案中使用的提示和技巧：</h2><h3 id="1-增加嵌入覆盖范围："><a href="#1-增加嵌入覆盖范围：" class="headerlink" title="1. 增加嵌入覆盖范围："></a>1. 增加嵌入覆盖范围：</h3><p>在第三名<a href="https://www.kaggle.com/wowfattie/3rd-place" target="_blank" rel="external">kaggler的解决方案</a>中，wowfattie使用词干，词形还原，首字母大写，小写，大写，以及为其词典中的每个单词，使用拼写检查器对最近的单词进行词嵌入（ uses stemming, lemmatization, capitalize, lower, uppercase, as well as embedding of the nearest word using a spell checker to get embeddings for all words in his vocab）。这么棒的主意。 <strong>我最喜欢这个解决方案，因为它可以做我想做的事情并在一个非常好的地方完成。</strong>此外，代码非常干净。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> PorterStemmer</div><div class="line">ps = PorterStemmer()</div><div class="line"><span class="keyword">from</span> nltk.stem.lancaster <span class="keyword">import</span> LancasterStemmer</div><div class="line">lc = LancasterStemmer()</div><div class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> SnowballStemmer</div><div class="line">sb = SnowballStemmer(<span class="string">"english"</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_glove</span><span class="params">(word_dict, lemma_dict)</span>:</span></div><div class="line">    EMBEDDING_FILE = <span class="string">'../input/embeddings/glove.840B.300d/glove.840B.300d.txt'</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_coefs</span><span class="params">(word,*arr)</span>:</span> <span class="keyword">return</span> word, np.asarray(arr, dtype=<span class="string">'float32'</span>)</div><div class="line">    embeddings_index = dict(get_coefs(*o.split(<span class="string">" "</span>)) <span class="keyword">for</span> o <span class="keyword">in</span> open(EMBEDDING_FILE))</div><div class="line">    embed_size = <span class="number">300</span></div><div class="line">    nb_words = len(word_dict)+<span class="number">1</span></div><div class="line">    embedding_matrix = np.zeros((nb_words, embed_size), dtype=np.float32)</div><div class="line">    unknown_vector = np.zeros((embed_size,), dtype=np.float32) - <span class="number">1.</span></div><div class="line">    print(unknown_vector[:<span class="number">5</span>])</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> tqdm(word_dict):</div><div class="line">        word = key</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = key.lower()</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = key.upper()</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = key.capitalize()</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = ps.stem(key)</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = lc.stem(key)</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = sb.stem(key)</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        word = lemma_dict[key]</div><div class="line">        embedding_vector = embeddings_index.get(word)</div><div class="line">        <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        <span class="keyword">if</span> len(key) &gt; <span class="number">1</span>:</div><div class="line">            word = correction(key)</div><div class="line">            embedding_vector = embeddings_index.get(word)</div><div class="line">            <span class="keyword">if</span> embedding_vector <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">                embedding_matrix[word_dict[key]] = embedding_vector</div><div class="line">                <span class="keyword">continue</span></div><div class="line">        embedding_matrix[word_dict[key]] = unknown_vector                    </div><div class="line">    <span class="keyword">return</span> embedding_matrix, nb_words</div></pre></td></tr></table></figure>
+<h3 id="2-Checkpoint-Ensembling"><a href="#2-Checkpoint-Ensembling" class="headerlink" title="2. Checkpoint Ensembling:"></a>2. Checkpoint Ensembling:</h3><p>​       免费获得很多模型。大多数获胜解决方案都使用了对一些模型版本的checkpoint 集成的策略。对于第三名解决方案，预测使用了第4个epoch后的预测和第5个epoch后的预测的加权平均值。我有这个想法，但忘了在我的基于kernel的 ensemble中实现并提交它。</p>
+<h3 id="3-Meta-Embeddings"><a href="#3-Meta-Embeddings" class="headerlink" title="3. Meta Embeddings:"></a>3. Meta Embeddings:</h3><p>许多获胜的解决方案最终使用了<strong>加权元嵌入(weighted meta embeddings)</strong>，它们为Glove嵌入提供了更高的权重。一些解决方案也使用了<strong>连接嵌入(concatenated embeddings)</strong>。</p>
+<h3 id="4-Model-Architecture"><a href="#4-Model-Architecture" class="headerlink" title="4. Model Architecture:"></a>4. Model Architecture:</h3><p>我看到人们做的一件令人惊讶的事情是在双向层<strong>之后使用</strong> 1Dconv层。例如，这是第一名比赛团队使用的网络<a href="https://www.kaggle.com/c/quora-insincere-questions-classification/discussion/80568" target="_blank" rel="external">架构</a>。</p>
+<p><img src="https://mlwhiz.com/images/silver/arch_1_place.png" alt="img"></p>
+<h3 id="5-Bucketing-Variable-Sequence-Length-and-increased-hidden-units"><a href="#5-Bucketing-Variable-Sequence-Length-and-increased-hidden-units" class="headerlink" title="5. Bucketing/Variable Sequence Length and increased hidden units:"></a>5. Bucketing/Variable Sequence Length and increased hidden units:</h3><p>​       我注意到的另一件事是与许多公共kernel相比，隐藏单元的数量增加了。由于时间限制，大多数公共kernel使用60个隐藏单元。我使用80个隐藏单元，但代价是少训练一个网络。由于<strong>序列长度可变或者bucketing的思想</strong>，许多高分kernel能够使用更多数量的隐藏单元。从第1名kernel开始讨论：</p>
+<blockquote>
+<ul>
+<li><p>我们不会根据整个数据将序列填充到相同的长度，而只是在批处理级别上。这意味着我们在数据生成器级别为每个批次分别进行<strong>填充和截断</strong>，这样批量中句子的长度可以在大小上变化。</p>
+</li>
+<li><p>另外，我们通过不基于批次中最长序列的长度截短，但基于序列内95％百分比的长度进一步改进了这一点。这大大改善了运行时间，并且在单个模型级别上保持了非常强大的准确性，并通过更多模型平均的方法来改进它。</p>
+</li>
+</ul>
+<p>We do not pad sequences to the same length based on the whole data, but just on a batch level. That means we conduct <strong>padding and truncation on the data generator level for each batch separately</strong>, so that length of the sentences in a batch can vary in size. Additionally, we further improved this by not truncating based on the length of the longest sequence in the batch but based on the 95% percentile of lengths within the sequence. This improved runtime heavily and kept accuracy quite robust on single model level, and improved it by being able to average more models.</p>
+</blockquote>
+<p>也来自第7位<a href="https://www.kaggle.com/c/quora-insincere-questions-classification/discussion/80561" target="_blank" rel="external">讨论</a>：</p>
+<blockquote>
+<p>Bucketing是从具有相似长度的实例(instances)组成小批量来减轻padding成本。这使得训练速度提高了3倍以上，因此我可以为each split of 5-fold运行9个epochs。</p>
+<p>Bucketing is to make a minibatch from instances that have similar lengths to alleviate the cost of padding. This makes the training speed more than 3x faster, and thus I can run 9 epochs for each split of 5-fold.</p>
+</blockquote>
+<p>因此，使用这种技术还允许一些参赛者在更短的时间跑更多 epochs，并同时尝试更多的模型。很简约！</p>
+<h3 id="6-For-those-winners-who-didn’t-use-bucketing-Maxlen-72-was-too-large"><a href="#6-For-those-winners-who-didn’t-use-bucketing-Maxlen-72-was-too-large" class="headerlink" title="6. For those winners who didn’t use bucketing, Maxlen = 72 was too large:"></a>6. For those winners who didn’t use bucketing, Maxlen = 72 was too large:</h3><p>​      我们大多数人都看到了question length的分布，并将完全覆盖最大question长度作为maxlen参数。我从来没有试过调整它，但它似乎可以调整。 <strong>其中一个技巧是使用范围从35到60的maxlen。</strong>这使得kernel运行速度更快。</p>
+<h3 id="7-Time-taking-models-complex-architectures-like-Capsule-were-mostly-not-used"><a href="#7-Time-taking-models-complex-architectures-like-Capsule-were-mostly-not-used" class="headerlink" title="7. Time taking models/complex architectures like Capsule were mostly not used:"></a>7. Time taking models/complex architectures like Capsule were mostly not used:</h3><p>​      大多数获胜解决方案都没有使用Capsule网络，因为他们需要很多时间来训练。</p>
+<h3 id="8-Backprop-errors-on-embeddings-weights-in-last-few-epochs"><a href="#8-Backprop-errors-on-embeddings-weights-in-last-few-epochs" class="headerlink" title="8. Backprop errors on embeddings weights in last few epochs:"></a>8. Backprop errors on embeddings weights in last few epochs:</h3><p>我看到的另一件事是在排名<a href="https://www.kaggle.com/kentaronakanishi/18th-place-solution" target="_blank" rel="external">第18位kernel</a>使用单一模型</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> epoch &gt;= <span class="number">3</span>:</div><div class="line">    model.embedding.embeddings.weight.requires_grad = <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion:"></a>Conclusion:</h2><p>​       这是一场长达2个月比赛，在此期间我学到了很多关于Text和NLP的知识。我想在此强调的是<strong>我最终尝试了很多在达到最终解决方案之前无效的事情</strong>。有时候有点令人沮丧，但最后，我很高兴得到了最好的数据科学实践。还要感谢Kaggle大师Kazanova和他的一些朋友一起发布了<a href="https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&amp;utm_content=2&amp;utm_medium = partners＆utm_source = linkshare＆utm_campaign = lVarvwc5BD0" target="_blank" rel="external">“如何赢得数据科学竞赛”</a>Coursera课程。我从这门课程中学到了很多东西。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>原文 <a href="https://www.kdnuggets.com/2019/05/silver-medal-text-classification-kaggle.html" target="_blank" rel="external">What my first Silver Medal taught me about Text Classification and Kaggle in general?</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;翻译了一篇kaggler银奖得主的赛后经验博客，技巧与干货满满&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="kaggle" scheme="https:///AnJingwd.github.io/categories/kaggle/"/>
+    
+    
+      <category term="kaggle" scheme="https:///AnJingwd.github.io/tags/kaggle/"/>
+    
+  </entry>
   
   <entry>
     <title>pytorch入门教程</title>
@@ -1684,349 +1789,6 @@ gnome-session &amp;
     
     
       <category term="技术" scheme="https:///AnJingwd.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ANNOVAR进行突变注释</title>
-    <link href="https:///AnJingwd.github.io/2018/01/20/ANNOVAR%E8%BF%9B%E8%A1%8C%E7%AA%81%E5%8F%98%E6%B3%A8%E9%87%8A/"/>
-    <id>https:///AnJingwd.github.io/2018/01/20/ANNOVAR进行突变注释/</id>
-    <published>2018-01-20T13:50:21.000Z</published>
-    <updated>2019-01-03T06:42:43.688Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">ANNOVAR进行突变注释</blockquote>
-
-<a id="more"></a>
-<h1 id="ANNOVAR简介"><a href="#ANNOVAR简介" class="headerlink" title="ANNOVAR简介"></a>ANNOVAR简介</h1><p><a href="http://annovar.openbioinformatics.org/en/latest/" target="_blank" rel="external">ANNOVAR Documentation</a>  &emsp;&emsp; ANNOVAR其网页版<a href="http://wannovar.wglab.org/" target="_blank" rel="external">wANNOVAR</a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4718734/bin/NIHMS751006-supplement-Supplementary_Text_and_Figures.pdf" target="_blank" rel="external">Comparison between ANNOVAR and other command line tools for variant annotation</a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4718734/bin/NIHMS751006-supplement-Supplementary_Text_and_Figures.pdf" target="_blank" rel="external">Comparison between ANNOVAR and other command line tools for variant annotation</a></p>
-<p>&emsp;&emsp;例如对于人的外显子组测序，可以获得4百万个SNVs(单核苷酸突变)和50万个indels(insertion or deletions)突变。对于基因间区的突变，我们对其侧翼基因感兴趣，并想知道两者之间距离；对于外显子区域的变异，我们关系其对于氨基酸的改变。</p>
-<p>&emsp;&emsp;ANNOVAR是一个perl编写的命令行工具，能对<strong>根据hg18,hg19,hg38不同版本基因组call 出来的遗传变异</strong>进行功能注释。允许多种输入文件格式，包括最常被使用的VCF格式，只需要给出chromosome, start position, end position, reference nucleotide and observed nucleotides这6个字段。输出文件也有多种格式，包括注释过的VCF文件、用tab或者逗号分隔的text文件。</p>
-<p>&emsp;&emsp;ANNOVAR支持三种不同形式的注释： gene-based, region-based 和filter-based. 这三种注释分别针对于每一个variant的不同方面：</p>
-<p><img src="https://i.imgur.com/UGMNkMZ.jpg" alt=""></p>
-<ul>
-<li>基于基因的注释（gene-based annotation）：SNPs或者CNV变异是否造成编码蛋白氨基酸的改变或者影响；</li>
-<li>基于区域的注释（region-based annotation）揭示variant 与不同基因组特定区域的关系，例如：它是否与以下区域有overlap: conserved genomic elements，cytogenetic bands, microRNA target sites和Encyclopedia of DNA Elements (ENCODE)-annotated regions等</li>
-<li>基于过滤的注释（ filter-based annotation ）则给出这个variant的一系列信息，例如是否该变异在dbSNP数据库报道过，该变异在1000genome项目，外显子组项目中的频率等，以及不同的计算机算法对变异注释的结果（SIFT/PolyPhen/LRT/MutationTaster/MutationAssessor/FATHMM/MetaSVM/MetaLR scores）等</li>
-</ul>
-<h1 id="下载（无需安转，但需要安装perl环境）"><a href="#下载（无需安转，但需要安装perl环境）" class="headerlink" title="下载（无需安转，但需要安装perl环境）"></a>下载（无需安转，但需要安装perl环境）</h1><p>最新版官网：<a href="http://annovar.openbioinformatics.org/en/latest/" target="_blank" rel="external">网址</a></p>
-<pre><code>untargz annovar.latest.tar.gz
-echo &apos;export PATH=/home/wangdong/softwares/annovar/annovar_latest&apos;&gt;&gt;~/.bashrc
-</code></pre><p>使用ANNOVAR进行突变注释时，gene definition files(例如GTF文件) 和transcript FASTA files（FASTA文件）版本需要同步对应，否则可能会出现mis-annotated variants (such as annotating SNVs as<br>indels)</p>
-<h1 id="常用注释数据库下载"><a href="#常用注释数据库下载" class="headerlink" title="常用注释数据库下载"></a>常用注释数据库下载</h1><ol>
-<li><p>注释文件在ANNOVER分For gene-based annotation和For filter-based annotation以列表的形式详细介绍，<a href="http://annovar.openbioinformatics.org/en/latest/user-guide/download/" target="_blank" rel="external">链接</a></p>
-<p> perl annotate_variation.pl –downdb –webfrom annovar –buildver hg19 refGene humandb/<br> perl annotate_variation.pl –downdb –webfrom annovar –buildver hg19 1000g2015aug humandb/<br> perl annotate_variation.pl –downdb –webfrom annovar –buildver hg19 exac03 humandb/<br> perl annotate_variation.pl –downdb –webfrom annovar –buildver hg19 clinvar_20170905 humandb/<br> perl annotate_variation.pl –downdb –webfrom annovar –buildver hg19 avsnp150 humandb/<br> perl annotate_variation.pl –downdb –webfrom annovar –buildver hg19 cosmic70 humandb/<br> perl annotate_variation.pl –downdb –webfrom annovar –buildver hg19 icgc21 humandb/<br> perl annotate_variation.pl –downdb –webfrom annovar –buildver hg19 nci60 humandb/</p>
-</li>
-</ol>
-<p>这里下载的是几个通常用到的数据库的最新版：</p>
-<table>
-<thead>
-<tr>
-<th>Build</th>
-<th>Table  Name</th>
-<th>Explanation</th>
-<th>Date</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hg19</td>
-<td>refGene</td>
-<td>FASTA sequences for all annotated transcripts in RefSeq Gene</td>
-<td>20170601</td>
-</tr>
-<tr>
-<td>hg19</td>
-<td>1000g2015aug (6 data sets)</td>
-<td>The 1000G team fixed a bug in chrX frequency calculation. Based on 201508 collection v5b (based on 201305 alignment)</td>
-<td>20150824</td>
-</tr>
-<tr>
-<td>hg19</td>
-<td>exac03</td>
-<td>ExAC 65000 exome allele frequency data for ALL, AFR (African), AMR (Admixed American), EAS (East Asian), FIN (Finnish), NFE (Non-finnish European), OTH (other), SAS (South Asian)). version 0.3. Left normalization done.</td>
-<td>20151129</td>
-</tr>
-<tr>
-<td>hg19</td>
-<td>clinvar_20170905</td>
-<td>Clinvar version 20170905 with separate columns (CLINSIG CLNDBN CLNACC CLNDSDB CLNDSDBID)</td>
-<td>20171003</td>
-</tr>
-<tr>
-<td>hg19</td>
-<td>avsnp150</td>
-<td>dbSNP150 with allelic splitting and left-normalization</td>
-<td>20170929</td>
-</tr>
-<tr>
-<td>hg19</td>
-<td>cosmic70</td>
-<td>COSMIC database version 70</td>
-<td>20140911</td>
-</tr>
-<tr>
-<td>hg19</td>
-<td>icgc21</td>
-<td>International Cancer Genome Consortium version 21</td>
-<td>20160622</td>
-</tr>
-<tr>
-<td>hg19</td>
-<td>nci60</td>
-<td>NCI-60 human tumor cell line panel exome sequencing allele frequency data</td>
-<td>20130724</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>‘1000g2015aug’(version  August 2015), 是2015年版，包含6个 data sets，提供千人基因组项目的替换等位基因频率等信息。</li>
-<li>‘exac03’(version 0.3),是0.3版外显子Exome Aggregation Consortium中报道过的variants。</li>
-<li>‘clinvar_20140929’ for the variants reported in the ClinVar database (version 20140929)，ClinVar数据库整合了十多个不同类型数据库、通过标准的命名法来描述疾病，同时支持科研人员将数据下载到本地中，开展更为个性化的研究。<strong>ClinVar数据库的目的在于整合这些分散的数据、将变异、临床表型、实证数据以及功能注解与分析等四个方面的信息，通过专家评审，逐步形成一个标准的、可信的、稳定的遗传变异-临床表型相关的数据库。</strong></li>
-</ul>
-<ol>
-<li>基于保守基因组元件注释数据文件，每一个在ANNOVAR说明文档都有详细介绍，<a href="http://annovar.openbioinformatics.org/en/latest/user-guide/region/#overview" target="_blank" rel="external">链接地址</a>，这里我们也只下载常用的即可。</li>
-</ol>
-<pre><code>perl annotate_variation.pl --downdb --buildver hg19 cytoBand humandb/ 
-perl annotate_variation.pl -build hg19 -downdb gwasCatalog humandb/
-</code></pre><ul>
-<li>‘cytoBand’ 是每个细胞间band（cytogenetic band）的染色体坐标信息 ,</li>
-</ul>
-<p>注意：</p>
-<p>1、第一个命令中不包含 ‘–webfrom annovar’ 选项, 因此是从the UCSC Genome Browser annotation database下载文件的； </p>
-<p>2、 ‘–buildver hg19’ 选项是针对hg19这一版的基因组的；</p>
-<p>3、运行上面命令后，在 ‘humandb/’ 目录下会多几个以 ‘hg19’为前缀的文件。 </p>
-<h1 id="变异注释"><a href="#变异注释" class="headerlink" title="变异注释"></a>变异注释</h1><h2 id="ANNOVER-input-file"><a href="#ANNOVER-input-file" class="headerlink" title="ANNOVER input file"></a>ANNOVER input file</h2><p>ANNOVER的输入文件要求VCF 4.0及以上，这一要求对于绝大多数call 变异的软件，如GATK何SAMtools都是满足的。<a href="http://vcftools.sourceforge.net/specs.html" target="_blank" rel="external">VCF (Variant Call Format) specifications （包括 VCF4.0，4.1，4.2，以及BCF v2.1）
-</a></p>
-<h2 id="对于ANNOVAR新手，最方便使用table-annovar-pl程序"><a href="#对于ANNOVAR新手，最方便使用table-annovar-pl程序" class="headerlink" title="对于ANNOVAR新手，最方便使用table_annovar.pl程序"></a>对于ANNOVAR新手，最方便使用table_annovar.pl程序</h2><pre><code>table_annovar.pl example/ex1.avinput humandb/ -buildver hg19 -out myanno -remove -protocol refGene,cytoBand,exac03,avsnp147,dbnsfp30a -operation gx,r,f,f,f -nastring . -csvout -polish -xref example/gene_xref.txt
-</code></pre><h3 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h3><ul>
-<li>-buildver hg19 ANNOVAR默认注释是根据hg18的，所以这里需要指定hg19。</li>
-<li>-out myanno 输出注释结果文件myanno.hg19_multianno.txt</li>
-<li>-operation g表示gene-based；-operation gx 表示 gene-based with cross-reference annotation (from -xref argument)；-operation r 表示region-based； -operation f 表示 filter-based。如果不提供xref文件就只能指定-operation g。</li>
-<li>-csvout使用逗号输出，如果喜欢使用tab键输出，则只需要去除 -csvout</li>
-</ul>
-<h2 id="annotate-variation-pl是-ANNOVAR的核心程序"><a href="#annotate-variation-pl是-ANNOVAR的核心程序" class="headerlink" title="annotate_variation.pl是 ANNOVAR的核心程序"></a>annotate_variation.pl是 ANNOVAR的核心程序</h2><p>使用例子：</p>
-<pre><code>annotate_variation.pl -geneanno -dbtyep refGene -out ex1 -buildver hg19 example/ex1.avinput humandb/
-annotate_variation.pl -regionanno -dbtype cytoBand -buildver hg19 example/ex1.avinput humandb/ 
-annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput humandb/
-</code></pre><h3 id="参数解释及技术问题"><a href="#参数解释及技术问题" class="headerlink" title="参数解释及技术问题"></a>参数解释及技术问题</h3><ul>
-<li><p>–geneanno -dbtype refGene是默认的，可以省略</p>
-</li>
-<li><p><strong>ncRNA above refers to RNA without coding annotation. It does not mean that this is a RNA that will never be translated.</strong> For example, BC039000 is regarded as ncRNA by ANNOVAR when using UCSC Known Gene annotation, but it is regarded as a protein-coding gene by ANNOVAR when using ENSEMBL annotation</p>
-</li>
-<li>By default, the gene name is printed in the second column in the variant_function file. Sometimes, a user may want to see <strong>transcript name instead. The –transcript_function argument can be used to specify this behavior</strong>. Note that it is very likely that multiple transcript names will be printed in the output separated by comma, as each gene name typically corresponds to several transcript names</li>
-</ul>
-<h1 id="注释结果解释"><a href="#注释结果解释" class="headerlink" title="注释结果解释"></a>注释结果解释</h1><h2 id="表头含义"><a href="#表头含义" class="headerlink" title="表头含义"></a>表头含义</h2><p><img src="https://i.imgur.com/mjzONDT.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/rISPcMC.jpg" alt=""></p>
-<h2 id="各列内容及含义"><a href="#各列内容及含义" class="headerlink" title="各列内容及含义"></a>各列内容及含义</h2><ul>
-<li>Func.refGene, Gene.refGene, GeneDetail.refGene, ExonicFunc.refGene, AAChange.refGene列包含变异对基因结构的影响。其中如果Func.refGene给出注释显示该变异位于exonic/intronic/ncRNA，那么Gene.refGene列给出相应的基因名（如果是多个基因，中间用逗号分割）；如果不是，则给出该变异侧翼两个基因及与其距离。</li>
-<li>ExAC* 等列表示在外显子组项目（Exome Aggregation Consortium）数据集中所有样本，包括亚人种中的等位基因频率。</li>
-<li>avsnp138 列该变异在dbSNP（version 138）数据集中的SNP 的ID号</li>
-<li>其他列包含使用多个变异功能预测软件得到的预测分数，包括SIFT scores, PolyPhen2 HDIV scores, PolyPhen2 HVAR scores, LRT scores, MutationTaster scores, MutationAssessor score, FATHMM scores, GERP++ scores, CADD scores, DANN scores, PhyloP scores and SiPhy scores等。</li>
-</ul>
-<h2 id="Func-refGene列具体含义"><a href="#Func-refGene列具体含义" class="headerlink" title="Func.refGene列具体含义"></a>Func.refGene列具体含义</h2><table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Default precedence</th>
-<th>Explanation</th>
-<th>Sequence Ontology</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>exonic</td>
-<td>1</td>
-<td>variant overlaps a coding</td>
-<td>exon_variant (SO:0001791)</td>
-</tr>
-<tr>
-<td>splicing</td>
-<td>1</td>
-<td>variant is within 2-bp of a splicing junction (use -splicing_threshold to change this)</td>
-<td>splicing_variant (SO:0001568)</td>
-</tr>
-<tr>
-<td>ncRNA</td>
-<td>2</td>
-<td>variant overlaps a transcript without coding annotation in the gene definition (see Notes below for more explanation)</td>
-<td>non_coding_transcript_variant (SO:0001619)</td>
-</tr>
-<tr>
-<td>UTR5</td>
-<td>3</td>
-<td>variant overlaps a 5’ untranslated region</td>
-<td>5_prime_UTR_variant (SO:0001623)</td>
-</tr>
-<tr>
-<td>UTR3</td>
-<td>3</td>
-<td>variant overlaps a 3’ untranslated region</td>
-<td>3_prime_UTR_variant (SO:0001624)</td>
-</tr>
-<tr>
-<td>intronic</td>
-<td>4</td>
-<td>variant overlaps an intron</td>
-<td>intron_variant (SO:0001627)</td>
-</tr>
-<tr>
-<td>upstream</td>
-<td>5</td>
-<td><strong>variant overlaps 1-kb region upstream of transcription start site</strong></td>
-<td>upstream_gene_variant (SO:0001631)</td>
-</tr>
-<tr>
-<td>downstream</td>
-<td>5</td>
-<td><strong>variant overlaps 1-kb region downtream of transcription end site (use -neargene to change this)</strong></td>
-<td>downstream_gene_variant (SO:0001632)</td>
-</tr>
-<tr>
-<td>intergenic</td>
-<td>6</td>
-<td>variant is in intergenic region</td>
-<td>intergenic_variant (SO:0001628)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>The precedence defined above is used to decide what function to print out when a variant fit multiple functional categories</strong></p>
-<h2 id="ExonicFunc-refGene列具体含义"><a href="#ExonicFunc-refGene列具体含义" class="headerlink" title="ExonicFunc.refGene列具体含义"></a>ExonicFunc.refGene列具体含义</h2><table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Default precedence</th>
-<th>Explanation</th>
-<th>Sequence Ontology</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>frameshift insertion</td>
-<td>1</td>
-<td>an insertion of one or more nucleotides that cause frameshift changes in protein coding sequence</td>
-<td>frameshift_elongation (SO:0001909)</td>
-</tr>
-<tr>
-<td>frameshift deletion</td>
-<td>2</td>
-<td>a deletion of one or more nucleotides that cause frameshift changes in protein coding sequence</td>
-<td>frameshift_truncation (SO:0001910)</td>
-</tr>
-<tr>
-<td>frameshift block substitution</td>
-<td>3</td>
-<td>a block substitution of one or more nucleotides that cause frameshift changes in protein coding sequence</td>
-<td>frameshift_variant (SO:0001589)</td>
-</tr>
-<tr>
-<td>stopgain</td>
-<td>4</td>
-<td>a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate creation of stop codon at the variant site. For frameshift mutations, the creation of stop codon downstream of the variant will not be counted as “stopgain”!</td>
-<td>stop_gained (SO:0001587)</td>
-</tr>
-<tr>
-<td>stoploss</td>
-<td>5</td>
-<td>a nonsynonymous SNV, frameshift insertion/deletion, nonframeshift insertion/deletion or block substitution that lead to the immediate elimination of stop codon at the variant site</td>
-<td>stop_lost (SO:0001578)</td>
-</tr>
-<tr>
-<td>nonframeshift insertion</td>
-<td>6</td>
-<td>an insertion of 3 or multiples of 3 nucleotides that do not cause frameshift changes in protein coding sequence</td>
-<td>inframe_insertion (SO:0001821)</td>
-</tr>
-<tr>
-<td>nonframeshift deletion</td>
-<td>7</td>
-<td>a deletion of 3 or mutliples of 3 nucleotides that do not cause frameshift changes in protein coding sequence</td>
-<td>inframe_deletion (SO:0001822)</td>
-</tr>
-<tr>
-<td>nonframeshift block substitution</td>
-<td>8</td>
-<td>a block substitution of one or more nucleotides that do not cause frameshift changes in protein</td>
-<td>coding sequence    inframe_variant (SO:0001650)</td>
-</tr>
-<tr>
-<td>nonsynonymous SNV</td>
-<td>9</td>
-<td>a single nucleotide change that cause an amino acid change</td>
-<td>missense_variant (SO:0001583)</td>
-</tr>
-<tr>
-<td>synonymous SNV</td>
-<td>10</td>
-<td>a single nucleotide change that does not cause an amino acid change</td>
-<td>synonymous_variant (SO:0001819)</td>
-</tr>
-<tr>
-<td>unknown</td>
-<td>11</td>
-<td>unknown function (due to various errors in the gene structure definition in the database file)</td>
-<td>sequence_variant (SO:0001060)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="A-unified-annotation-format"><a href="#A-unified-annotation-format" class="headerlink" title="A unified annotation format"></a>A unified annotation format</h2><p>不同的注释软件对突变注释的表示方式不统一，不利于交流，为此，多个注释软件的作者协定了一份统一的注释格式，<a href="http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf" target="_blank" rel="external">文档链接</a></p>
-<h1 id="突变有害性注释结果选择建议（ANNOVER作者）"><a href="#突变有害性注释结果选择建议（ANNOVER作者）" class="headerlink" title="突变有害性注释结果选择建议（ANNOVER作者）"></a>突变有害性注释结果选择建议（ANNOVER作者）</h1><ul>
-<li>一般而言，建议使用one popular prediction score (such as SIFT) 和 one meta-score (such as metaSVM)预测来判断突变是否是有害的</li>
-<li>对于 noncoding variants的有害性预测推荐使用one popular prediction score (such as PhyloP) 和 one meta-score (such as CADD)</li>
-</ul>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>vcf文件经过Annovar注释后突变个数应该相同，但对于原vcf文件类似如下情况，Annovar则会分别注释成两行</p>
-<p><img src="https://i.imgur.com/vzD3s1M.jpg" alt=""></p>
-<p>在Annovar官网的FAQ已经给出解释：</p>
-<p><img src="https://i.imgur.com/NTrEEp8.png" alt=""></p>
-<p>这里需要重新了解下vcf文件格式，（<a href="http://annovar.openbioinformatics.org/en/latest/articles/VCF/" target="_blank" rel="external">Annovar VCF Processing Guide</a>）：</p>
-<ol>
-<li>GT：样品的基因型（genotype）。两个数字中间用’/‘分 开，这两个数字表示双倍体的sample的基因型。0 表示样品中有ref的allele； 1 表示样品中variant的allele； <strong>2表示有第二个variant的allele</strong></li>
-<li>VCF文件是描述位点的格式文件。尽管称作变异检出格式，但并不是为了描述变异或者基因型检出。其可以作为包含基因型检出（甚至变异）的一种选择，并且对于很多肺二倍体物种或者喝多情况（例如线粒体或者人的肿瘤），其有时候甚至不能说是包含基因型检出。但是，很多变异检出软件的目的是为了产生基因型检出；它们使用VCF作为输出文件，但是这并不意味着VCF文件是未存储变异检出而专门设计的。</li>
-<li>因为VCF是一个位点描述文件，具有很多的结果。首先，并不是一行对应着一个变异。因为多个变异能在相同的位点，VCF文件的一行原则上可以描述多个突变（包含野生型非突变allele），和多种类型的基因型检出。例如，看下面这来自VCF文件的一行、其有8个tab键分割的列。在ALT列，具有数个逗号分割的改变的alleles。因此在单行上，数个插入和删除，以及一个单核苷酸（SNV）突变同时存在。</li>
-</ol>
-<p>1 112240038 . CTTT CTTTT,CTTTTT,CTTA,CTT,CT,C . PASS AC=986,3,1249,3,127,3;AF=0.196885,0.000599042,0.249401,0.000599042,0.0253594,0.000599042</p>
-<p>很多Annovar使用者喜欢保留VCF文件中的突变注释信息（通过INFO列）。因此对于上述这种情况，我们需要在相同行的INFO列加注释信息到所有的6个allels，并且确保使用者知道相应的注释对应相应的allele</p>
-<ol>
-<li>VCF可以hijack你的变异，使得SNVs变为多核苷酸突变，并且使得简单的indels变的复杂。这将对注释造成困难，举上述的 CTTT-&gt;CTTA 改变作为例子，其应该是简单的T&gt;A （SNV），但是因为deletion/insertion hijack the locus，其被写为CTTT-&gt;CTTA 而不是T-&gt;A 。考虑到单个allele频率数据库（例如千人基因组项目频率数据库）将只具有 T-&gt;A 但没有 CTTT-&gt;CTTA，然后这个变异通过注释软件注释后将被遗漏，甚至其确实在1000G中被观察到过。</li>
-</ol>
-<p>同样的，CTTT-&gt;CTTTT 变异可能在数据库中没有记录，因为C&gt;CT可能是更合适的记录这个变异的方式。</p>
-<ol>
-<li>目前为止还没有描述indel的普遍认同的特定方式。很多使用者偏好做left-normalization（变异开始的位置应该尽可能向左，直至不能再左，这样数目越少越好）。但是HGVS明确指明了left-normalization将被用在cDNA（mRNA）的坐标上,这意味着 right-normalization被要求使用在人的基因组一半的基因上。</li>
-<li>在阅读了这些事实后，现在的问题时我们应该如何注释VCF文件来确保最准确的结果呢？</li>
-</ol>
-<p>因为left-normalization变得越来越流行，我的建议是是就使用left-normalization。我的第二个建议是各个VCF行仅描述一个变异，以便indel不能隐藏SNPs，以此确保1对1的和数据库匹配。</p>
-<p>我作为ANNOVAR开发者决定去预处理所有的1000G文件，ESP6500si文件和dbSNP文件，以便一行包含一个变异，使得每个变异都采取 left-normalized。已经更新的数据再2014年的12月可以获得了。</p>
-<p>作为使用者我们应该这样做：（1）分割VCF文件确保每一行只包含一个变异；（2）left-normalize所有的VCF文件； （3）使用ANNOVAR注释</p>
-<p>所以使用命令：</p>
-<p>bcftools norm -m-both -o ex1.step1.vcf ex1.vcf.gz</p>
-<p>bcftools norm -f human_g1k_v37.fasta -o ex1.step2.vcf ex1.step1.vcf</p>
-<p>第一个命令分割多allels变异检出为单独的行，第二个命令运行真正的 left-normalization。（有时候第一个命令可能出现没有变异能被分解，尽管在文件中存在这些变异，这种情况下，你可以使用<a href="http://genome.sph.umich.edu/wiki/Vt" target="_blank" rel="external">vt program</a> 代替）</p>
-<ol>
-<li>目前使用left-normalized的数据集包括：avsnp138，avsnp142，clinvar_20150330<br> ，1000g2014oct，exac03，esp6500siv2</li>
-</ol>
-<p>PS:更新（2018年12月25）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">perl annotate_variation.pl -downdb -buildver hg19 -webfrom annovar dbscsnv11 humandb_new/  </div><div class="line">##剪切位点预测（splicing impact by Ada Boost and Random Forest）</div><div class="line"></div><div class="line"></div><div class="line">perl annotate_variation.pl -downdb -buildver hg19 -webfrom annovar cg46 humandb_new/</div><div class="line">##  在一个全基因组测序项目(包含46个无血缘关系的样本)中的等位基因频率</div></pre></td></tr></table></figure>
-<p>创新：</p>
-<ul>
-<li>公布答案：如何根据HGVS快速定位hg19基因组位置：<a href="https://mp.weixin.qq.com/s?__biz=MzA4MDQ0NzM1MQ==&amp;mid=400407283&amp;idx=1&amp;sn=335fe7d1cada0e5cb03bd77425e90d59&amp;scene=21#wechat_redirect" target="_blank" rel="external">链接</a></li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.ncbi.nlm.nih.gov/pubmed/26379229" target="_blank" rel="external">Genomic variant annotation and prioritization with ANNOVAR and wANNOVAR</a></p>
-<p>（2）<a href="http://blog.sina.com.cn/s/blog_670445240101j0pa.html" target="_blank" rel="external">每日一生信–基于保守性和规则性的预测方法SIFT和PolyPhen</a></p>
-<p>（3）<a href="http://blog.csdn.net/g863402758/article/details/75304391" target="_blank" rel="external">annovar对人类基因组和非人类基因组variants注释流程</a></p>
-<p>（4）<a href="http://ishare.iask.sina.com.cn/f/63732396.html" target="_blank" rel="external">ANNOVAR注释上机（推荐）</a></p>
-<p>（5）<a href="http://www.omicsclass.com/article/464" target="_blank" rel="external">ANNOVAR人类各个数据库变异注释结果表格说明</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;ANNOVAR进行突变注释&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
-    
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
     
   </entry>
   
