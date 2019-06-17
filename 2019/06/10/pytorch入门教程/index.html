@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="https:/AnJingwd.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="https:/AnJingwd.github.io/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="pytorch," />
+
+
+
+
+
+  <link rel="alternate" href="https:/AnJingwd.github.io/atom.xml" title="安静-不安静的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https:/AnJingwd.github.io/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;写摘要 与numpy对比，较少pytorch的基本操作，然后搭建一个简单堆叠式的人工神经网络">
+<meta name="keywords" content="pytorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch入门教程">
+<meta property="og:url" content="https:///AnJingwd.github.io/2019/06/10/pytorch入门教程/index.html">
+<meta property="og:site_name" content="安静-不安静的博客">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;写摘要 与numpy对比，较少pytorch的基本操作，然后搭建一个简单堆叠式的人工神经网络">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-08e0530dfd6879ff2bee56cfc5cc5073_hd.jpg">
+<meta property="og:updated_time" content="2019-06-17T07:38:49.561Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pytorch入门教程">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;写摘要 与numpy对比，较少pytorch的基本操作，然后搭建一个简单堆叠式的人工神经网络">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-08e0530dfd6879ff2bee56cfc5cc5073_hd.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'https:///AnJingwd.github.io/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title>pytorch入门教程 | 安静-不安静的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="https:///AnJingwd.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安静-不安静的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https:/AnJingwd.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https:/AnJingwd.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https:/AnJingwd.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https:/AnJingwd.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https:/AnJingwd.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="https:/AnJingwd.github.io/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2019/06/10/pytorch入门教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AJ's blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https:/AnJingwd.github.io/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安静-不安静的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">pytorch入门教程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-10T10:57:31+08:00">
+                2019-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="https:/AnJingwd.github.io/categories/pytorch/" itemprop="url" rel="index">
+                    <span itemprop="name">pytorch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;写摘要</p>
+<blockquote class="blockquote-center">与numpy对比，较少pytorch的基本操作，然后搭建一个简单堆叠式的人工神经网络</blockquote>
+
+<a id="more"></a>
+<p>##　１.数据表示及运算</p>
+<h3 id="1-0-Numpy与pytorch比较"><a href="#1-0-Numpy与pytorch比较" class="headerlink" title="1.0 Numpy与pytorch比较"></a>1.0 Numpy与pytorch比较</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Numpy</th>
+<th>Pytorch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>导入模块</td>
+<td>import numpy as np</td>
+<td>import torch</td>
+</tr>
+<tr>
+<td>创建数据</td>
+<td>np.numpy()</td>
+<td>tensor = torch.Tensor(array)</td>
+</tr>
+<tr>
+<td>查看数据维度</td>
+<td>np.shape()</td>
+<td>tensor.shape</td>
+</tr>
+<tr>
+<td>查看数据类型</td>
+<td>type()</td>
+<td>tensor.type</td>
+</tr>
+<tr>
+<td>产生随机数</td>
+<td>np.random.rand(2,3))</td>
+<td>np.ones((2,3))</td>
+</tr>
+<tr>
+<td>产生全1矩阵/张量</td>
+<td>np.ones()</td>
+<td>torch.ones()</td>
+</tr>
+</tbody>
+</table>
+<p><strong>１.１Numpy数组与torch.Tensor相互转换</strong></p>
+<ul>
+<li>torch.from_numpy():     from numpy to tensor</li>
+<li>numpy():     from tensor to numpy</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># random numpy array</span></div><div class="line">array = np.random.rand(<span class="number">2</span>,<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="comment"># from numpy to tensor</span></div><div class="line">from_numpy_to_tensor = torch.from_numpy(array)</div><div class="line"></div><div class="line"><span class="comment"># from tensor to numpy</span></div><div class="line">tensor = from_numpy_to_tensor</div><div class="line">from_tensor_to_numpy = tensor.numpy()</div></pre></td></tr></table></figure>
+<p>注意Torch的Tensor和numpy的array会共享他们的存储空间，修改一个会导致另外的一个也被修改。</p>
+<h3 id="1-3-基础数学运算"><a href="#1-3-基础数学运算" class="headerlink" title="1.3 基础数学运算"></a>1.3 基础数学运算</h3><p>a和b都是tensor</p>
+<table>
+<thead>
+<tr>
+<th>运算</th>
+<th>表达式/函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Resize</td>
+<td>view()</td>
+</tr>
+<tr>
+<td>加法</td>
+<td>torch.add(a,b) = a + b</td>
+</tr>
+<tr>
+<td>减法</td>
+<td>a.sub(b) = a - b</td>
+</tr>
+<tr>
+<td>元素对应相乘</td>
+<td>torch.mul(a,b) = a * b</td>
+</tr>
+<tr>
+<td>元素对应相除</td>
+<td>torch.div(a,b) = a / b</td>
+</tr>
+<tr>
+<td>均值</td>
+<td>a.mean()</td>
+</tr>
+<tr>
+<td>标准差（std）</td>
+<td>a.std()</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-4-Variables"><a href="#1-4-Variables" class="headerlink" title="1.4 Variables"></a>1.4 Variables</h3><ul>
+<li>变量和张量之间的差异是变量可以累积梯度</li>
+<li>我们也可以用变量进行数学运算</li>
+<li>为了进行反向传播，我们需要变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># import variable from pytorch library</div><div class="line">from torch.autograd import Variable</div><div class="line"></div><div class="line"># define variable</div><div class="line">var = Variable(torch.ones(3), requires_grad = True)</div></pre></td></tr></table></figure>
+<p>假设我们有等式y = x^2，现在要计算在点y=10处的梯度，pytorch实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">array = [2,4]</div><div class="line">tensor = torch.Tensor(array)</div><div class="line">x = Variable(tensor, requires_grad = True)</div><div class="line">y = x**2</div><div class="line"></div><div class="line">o = (1/2)*sum(y) #理解为一个点</div><div class="line"></div><div class="line"># backward</div><div class="line">o.backward() # calculates gradients</div></pre></td></tr></table></figure>
+<h3 id="1-5-使用gpu运算"><a href="#1-5-使用gpu运算" class="headerlink" title="1.5 使用gpu运算"></a>1.5 使用gpu运算</h3><p>当我们使用.cuda()的时候，就可以把tensor移动到GPU上去</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> torch.cuda.is_available():</div><div class="line">    x = x.cuda()</div><div class="line">    y = y.cuda()</div><div class="line">    x + y</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-数据来源"><a href="#2-数据来源" class="headerlink" title="2.数据来源"></a>2.数据来源</h2><p>通常来讲，当你处理图像，声音，文本，视频时需要使用python中其他独立的包来将他们转换为numpy中的数组，之后再转换为<strong>torch.Tensor</strong></p>
+<ul>
+<li>图像的话，可以用Pillow, OpenCV</li>
+<li>声音处理可以用scipy和librosa</li>
+<li>文本的处理使用原生Python或者Cython以及NLTK和SpaCy都可以</li>
+</ul>
+<p>特别的对于图像，我们有torchvision这个包可用,其中包含了一些现成的数据集如：Imagenet, CIFAR10, MNIST等等。同时还有一些转换图像用的工具。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">import torch</div><div class="line">import torch.nn as nn  ## 搭建神经网络</div><div class="line">import torchvision.transforms as transforms   ## 下载数据</div><div class="line">from torch.autograd import Variable   ## 更新梯度</div><div class="line">import pandas as pd</div><div class="line">from sklearn.model_selection import train_test_split</div><div class="line"></div><div class="line"></div><div class="line">##########   准备数据，基本的numpy操作   ###############</div><div class="line">train = pd.read_csv(r&quot;../input/train.csv&quot;,dtype = np.float32)</div><div class="line"></div><div class="line"># 将数据拆分为特征(pixels) 和标签(numbers from 0 to 9)</div><div class="line">targets_numpy = train.label.values</div><div class="line">features_numpy = train.loc[:,train.columns != &quot;label&quot;].values/255 # normalization</div><div class="line"></div><div class="line">#划分训练集与验证集：80%：20% </div><div class="line">features_train, features_test, targets_train, targets_test = train_test_split(features_numpy,targets_numpy,test_size = 0.2,random_state = 42) </div><div class="line"></div><div class="line">###########  将numpy转为tensor,从而创建训练集和测试集   #########</div><div class="line">featuresTrain = torch.from_numpy(features_train)</div><div class="line">targetsTrain = torch.from_numpy(targets_train).type(torch.LongTensor) # 数据类型为long</div><div class="line"></div><div class="line">featuresTest = torch.from_numpy(features_test)</div><div class="line">targetsTest = torch.from_numpy(targets_test).type(torch.LongTensor) #数据类型为long</div><div class="line"></div><div class="line"># class torch.utils.data.TensorDataset:封装成tensor的数据集，每一个样本都通过索引张量来获得</div><div class="line">train = torch.utils.data.TensorDataset(featuresTrain,targetsTrain)</div><div class="line">test = torch.utils.data.TensorDataset(featuresTest,targetsTest)</div><div class="line"></div><div class="line"># class torch.utils.data.DataLoader 数据加载器。组合了一个数据集和采样器，并提供关于数据的迭代器</div><div class="line">train_loader = torch.utils.data.DataLoader(train, batch_size = batch_size, shuffle = False)</div><div class="line">test_loader = torch.utils.data.DataLoader(test, batch_size = batch_size, shuffle = False)</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="3-构建神经网络"><a href="#3-构建神经网络" class="headerlink" title="3.构建神经网络"></a>3.构建神经网络</h2><p>先看一个简单的例子：</p>
+<p>###　３.１　ANN网络</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Create 人工神经网络(ANN) Model</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ANNModel</span><span class="params">(nn.Module)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_dim, hidden_dim, output_dim)</span>:</span></div><div class="line">        super(ANNModel, self).__init__()    <span class="comment">## 继承nn.Module类</span></div><div class="line">        self.fc1 = nn.Linear(input_dim, hidden_dim)  <span class="comment"># Linear function 1: 784 --&gt; 100</span></div><div class="line">        self.relu1 = nn.ReLU()     <span class="comment"># Non-linearity 1 </span></div><div class="line">        self.fc2 = nn.Linear(hidden_dim, hidden_dim) <span class="comment"># Linear function 2: 100 --&gt; 100</span></div><div class="line">        self.tanh2 = nn.Tanh()   <span class="comment"># Non-linearity 2</span></div><div class="line">        <span class="comment"># Linear function 3: 100 --&gt; 100</span></div><div class="line">        self.fc3 = nn.Linear(hidden_dim, hidden_dim)  <span class="comment"># Linear function 3: 100 --&gt; 100</span></div><div class="line">       self.elu3 = nn.ELU()  <span class="comment"># Non-linearity 3</span></div><div class="line">        self.fc4 = nn.Linear(hidden_dim, output_dim)  <span class="comment"># Linear function 4 (readout): 100 --&gt; 10</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span>  </div><div class="line">        out = self.fc1(x) <span class="comment"># Linear function 1</span></div><div class="line">        out = self.relu1(out) <span class="comment"># Non-linearity 1</span></div><div class="line">        out = self.fc2(out)  <span class="comment"># Linear function 2</span></div><div class="line">        out = self.tanh2(out)  <span class="comment"># Non-linearity 2</span></div><div class="line">        out = self.fc3(out)   <span class="comment"># Linear function 2</span></div><div class="line">        out = self.elu3(out)  <span class="comment"># Non-linearity 2</span></div><div class="line">        out = self.fc4(out)  <span class="comment"># Linear function 4 (readout)</span></div><div class="line">        <span class="keyword">return</span> out</div><div class="line"></div><div class="line">print(ANNModel)   <span class="comment"># 打印网络结构</span></div><div class="line"></div><div class="line"><span class="comment"># 模型中可学习的参数会由ANNModel.parameters()返回</span></div><div class="line">params = list(ANNModel.parameters())</div><div class="line"><span class="keyword">print</span> (len(params))</div><div class="line"><span class="keyword">print</span> (params[<span class="number">0</span>].size())</div><div class="line">    </div><div class="line"><span class="comment"># 实例化人工神经网络</span></div><div class="line">input_dim = <span class="number">28</span>*<span class="number">28</span></div><div class="line">hidden_dim = <span class="number">150</span> </div><div class="line">output_dim = <span class="number">10</span></div><div class="line"></div><div class="line"><span class="comment"># 创建ANN模型</span></div><div class="line">model = ANNModel(input_dim, hidden_dim, output_dim)</div><div class="line"></div><div class="line"><span class="comment"># Cross Entropy Loss </span></div><div class="line"><span class="comment">## loss function采用了(output,target)作为函数的输入</span></div><div class="line">error = nn.CrossEntropyLoss()</div><div class="line"></div><div class="line"><span class="comment"># SGD Optimizer</span></div><div class="line">learning_rate = <span class="number">0.02</span></div><div class="line">optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  <span class="comment"># torch.optim包含SGD, Nesterov-SGD, Adam, RMSProp, etc</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># ANN model training</span></div><div class="line">count = <span class="number">0</span></div><div class="line">loss_list = []</div><div class="line">iteration_list = []</div><div class="line">accuracy_list = []</div><div class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</div><div class="line">    <span class="keyword">for</span> i, (images, labels) <span class="keyword">in</span> enumerate(train_loader):</div><div class="line">        train = Variable(images.view(<span class="number">-1</span>, <span class="number">28</span>*<span class="number">28</span>))</div><div class="line">        labels = Variable(labels)  </div><div class="line">        <span class="comment"># 清除梯度：在每次进行backward之前，必须要清空先前存在的梯度</span></div><div class="line">        optimizer.zero_grad()</div><div class="line">        outputs = model(train)   <span class="comment"># 前向传播，创建网络</span></div><div class="line">        loss = error(outputs, labels) <span class="comment"># 计算softmax 和ross entropy loss</span></div><div class="line">        loss.backward()  <span class="comment"># 计算梯度</span></div><div class="line">        optimizer.step()  <span class="comment"># 更新参数</span></div><div class="line">        </div><div class="line">        count += <span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> count % <span class="number">50</span> == <span class="number">0</span>:</div><div class="line">            <span class="comment"># 计算正确率         </span></div><div class="line">            correct = <span class="number">0</span></div><div class="line">            total = <span class="number">0</span></div><div class="line">            <span class="comment"># 预测测试集数据</span></div><div class="line">            <span class="keyword">for</span> images, labels <span class="keyword">in</span> test_loader:</div><div class="line">                test = Variable(images.view(<span class="number">-1</span>, <span class="number">28</span>*<span class="number">28</span>))         </div><div class="line">                <span class="comment"># Forward propagation</span></div><div class="line">                outputs = model(test)</div><div class="line">                </div><div class="line">                <span class="comment"># Get predictions from the maximum value</span></div><div class="line">                predicted = torch.max(outputs.data, <span class="number">1</span>)[<span class="number">1</span>]</div><div class="line">                </div><div class="line">                <span class="comment"># Total number of labels</span></div><div class="line">                total += len(labels)</div><div class="line"></div><div class="line">                <span class="comment"># Total correct predictions</span></div><div class="line">                correct += (predicted == labels).sum()</div><div class="line">            </div><div class="line">            accuracy = <span class="number">100</span> * correct / float(total)</div><div class="line">            </div><div class="line">            <span class="comment"># store loss and iteration</span></div><div class="line">            loss_list.append(loss.data)</div><div class="line">            iteration_list.append(count)</div><div class="line">            accuracy_list.append(accuracy)</div><div class="line">            <span class="keyword">if</span> count % <span class="number">500</span> == <span class="number">0</span>:</div><div class="line">                <span class="comment"># Print Loss</span></div><div class="line">                print(<span class="string">'Iteration: &#123;&#125;  Loss: &#123;&#125;  Accuracy: &#123;&#125; %'</span>.format(count, loss.data[<span class="number">0</span>], accuracy))</div></pre></td></tr></table></figure>
+<ul>
+<li><p>使用 torch.nn 包可以进行神经网络的构建，而nn建立在autograd的基础上来进行模型的定义和微分。</p>
+</li>
+<li><p>nn.Module中包含着神经网络的层，同时forward(input)方法能够将output进行返回。</p>
+</li>
+</ul>
+<ul>
+<li><p>autograd 包提供Tensor所有操作的自动求导方法。</p>
+</li>
+<li><p>autograd.Variable 这是这个包中最核心的类。 它包装了一个Tensor，并且几乎支持所有的定义在其上的操作。一旦完成了你的运算，你可以调用 .backward()来自动计算出所有的梯度。</p>
+</li>
+<li><p>你可以通过属性 .data 来访问原始的tensor，而关于这一Variable的梯度则集中于 .grad 属性中。</p>
+</li>
+<li><p>还有一个在自动求导中非常重要的类 Function，Variable 和 Function 二者相互联系并且构建了一个描述整个运算过程的无环图。每个Variable拥有一个 .creator 属性，其引用了一个创建Variable的 Function。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-08e0530dfd6879ff2bee56cfc5cc5073_hd.jpg" alt="1"></p>
+</li>
+</ul>
+<p><strong>注意: torch.nn 只接受小批量的数据</strong><br>整个torch.nn包只接受那种小批量样本的数据，而非单个样本。 例如，nn.Conv2d能够结构一个四维的TensornSamples x nChannels x Height x Width。<br><strong>如果你拿的是单个样本，使用input.unsqueeze(0)来加一个假维度就可以了。</strong></p>
+<h3 id="3-2使用gpu训练模型"><a href="#3-2使用gpu训练模型" class="headerlink" title="3.2使用gpu训练模型"></a>3.2使用gpu训练模型</h3><p>就像你把Tensor传递给GPU进行运算一样，你也可以将神经网络传递给GPU。这一过程将逐级进行操作，直到所有组件全部都传递到GPU上。</p>
+<p><strong>记住，每一步都需要把输入和目标传给GPU。</strong></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/25572330?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=833404081191137280" target="_blank" rel="external">PyTorch深度学习：60分钟入门(Translation)</a> <a href="https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html" target="_blank" rel="external">原文</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="https:/AnJingwd.github.io/tags/pytorch/" rel="tag"><i class="fa fa-tag"></i> pytorch</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="https:/AnJingwd.github.io/2018/09/05/IDM下载工具/" rel="next" title="IDM下载工具">
+                <i class="fa fa-chevron-left"></i> IDM下载工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https:/AnJingwd.github.io/images/avatar.png"
+               alt="AJ's blog" />
+          <p class="site-author-name" itemprop="name">AJ's blog</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="https:/AnJingwd.github.io/archives">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="https:/AnJingwd.github.io/categories/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="https:/AnJingwd.github.io/tags/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https:/AnJingwd.github.io/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+			 <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(function() {
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+ 
+    function S() {
+        var e = document.createElement("audio");
+        e.setAttribute("class", l);
+        e.src = i;
+        e.loop = false;
+        e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h()
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+ 
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+    var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+})()'><i class="fa fa-music"></i> High</a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sina.com.cn/u/1253988497" title="种田农民的博客" target="_blank">种田农民的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.biostars.org/t/Tools/" title="Biostars" target="_blank">Biostars</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://segmentfault.com/" title="SegmentFault" target="_blank">SegmentFault</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.alloyteam.com/nav/" title="Web前端导航" target="_blank">Web前端导航</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.36zhen.com/t?id=3448" title="前端书籍资料" target="_blank">前端书籍资料</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+		
+<div id="music163player">		
+	<iframe frameborder="no" border="0" 
+	marginwidth="0" marginheight="0" width=330 height=86 
+src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
+	</iframe>
+</div>	
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-0-Numpy与pytorch比较"><span class="nav-number">1.</span> <span class="nav-text">1.0 Numpy与pytorch比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-基础数学运算"><span class="nav-number">2.</span> <span class="nav-text">1.3 基础数学运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Variables"><span class="nav-number">3.</span> <span class="nav-text">1.4 Variables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-使用gpu运算"><span class="nav-number">4.</span> <span class="nav-text">1.5 使用gpu运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数据来源"><span class="nav-number"></span> <span class="nav-text">2.数据来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-构建神经网络"><span class="nav-number"></span> <span class="nav-text">3.构建神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2使用gpu训练模型"><span class="nav-number">1.</span> <span class="nav-text">3.2使用gpu训练模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number"></span> <span class="nav-text">参考</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AJ's blog</span>
+</div>
+
+
+<!--<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共83.0k字</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="https:/AnJingwd.github.io/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="https:/AnJingwd.github.io/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

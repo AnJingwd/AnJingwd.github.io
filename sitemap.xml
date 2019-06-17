@@ -2,23 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/09/05/IDM%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2019/06/10/pytorch%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</loc>
     
-    <lastmod>2018-09-12T01:24:28.334Z</lastmod>
+    <lastmod>2019-06-17T07:38:49.561Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/</loc>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/</loc>
     
-    <lastmod>2018-09-10T01:11:13.521Z</lastmod>
+    <lastmod>2019-06-13T14:32:02.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/19/bedtools%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E8%AF%A6%E8%A7%A3/</loc>
+    
+    <lastmod>2019-04-14T13:10:45.511Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/</loc>
+    
+    <lastmod>2019-03-28T04:25:25.433Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/20/ANNOVAR%E8%BF%9B%E8%A1%8C%E7%AA%81%E5%8F%98%E6%B3%A8%E9%87%8A/</loc>
+    
+    <lastmod>2019-01-03T06:42:43.688Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/12/%E8%AE%BE%E8%AE%A1sanger%E6%B5%8B%E5%BA%8F%E5%BC%95%E7%89%A9%EF%BC%8C%E9%AA%8C%E8%AF%81%E7%AA%81%E5%8F%98%E4%BD%8D%E7%82%B9/</loc>
+    
+    <lastmod>2018-12-26T08:44:38.445Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/12/26/GATK%E5%8F%98%E5%BC%82%E6%A3%80%E6%B5%8B%E6%A6%82%E8%BF%B0/</loc>
+    
+    <lastmod>2018-12-26T08:36:33.019Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/12/%E8%AE%A1%E7%AE%97%E6%8D%95%E8%8E%B7%E6%95%88%E7%8E%87%EF%BC%8C%E6%B5%8B%E5%BA%8F%E6%B7%B1%E5%BA%A6%EF%BC%8C%E8%A6%86%E7%9B%96%E5%BA%A6/</loc>
+    
+    <lastmod>2018-12-26T08:10:33.752Z</lastmod>
     
   </url>
   
   <url>
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/19/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
     
-    <lastmod>2018-09-07T13:50:21.609Z</lastmod>
+    <lastmod>2018-12-16T01:17:10.550Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/29/%E8%AE%BE%E8%AE%A1%E5%8F%8A%E6%8C%91%E9%80%89%E6%8D%95%E8%8E%B7%E6%B5%8B%E5%BA%8F%E6%8E%A2%E9%92%88%EF%BC%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E8%A6%86%E7%9B%96%E5%BA%A6/</loc>
+    
+    <lastmod>2018-12-13T02:32:23.715Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/04/05/%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2018-11-19T06:41:39.362Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/21/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2018-11-12T12:03:12.594Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/qPCR%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E5%8F%8A%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C/</loc>
+    
+    <lastmod>2018-10-18T01:29:37.585Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/12/%E5%8F%82%E8%80%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/</loc>
+    
+    <lastmod>2018-09-20T04:19:49.922Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/09/05/IDM%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7/</loc>
+    
+    <lastmod>2018-09-12T01:24:28.334Z</lastmod>
     
   </url>
   
@@ -58,13 +142,6 @@
   </url>
   
   <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/29/%E8%AE%BE%E8%AE%A1%E5%8F%8A%E6%8C%91%E9%80%89%E6%8D%95%E8%8E%B7%E6%B5%8B%E5%BA%8F%E6%8E%A2%E9%92%88%EF%BC%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E8%A6%86%E7%9B%96%E5%BA%A6/</loc>
-    
-    <lastmod>2018-08-14T02:28:47.903Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/03/python%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
     
     <lastmod>2018-08-10T05:51:39.987Z</lastmod>
@@ -72,23 +149,9 @@
   </url>
   
   <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/</loc>
-    
-    <lastmod>2018-07-22T06:44:56.368Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/14/miniconda%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2018-07-22T04:21:08.263Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/04/05/%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8/</loc>
-    
-    <lastmod>2018-07-19T02:33:00.894Z</lastmod>
     
   </url>
   
@@ -110,20 +173,6 @@
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/06/SRA%E6%A0%BC%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%8A%A0%E9%80%9F%E4%B8%8B%E8%BD%BD%E6%89%93%E5%8C%85%E8%A7%A3%E5%86%B3/</loc>
     
     <lastmod>2018-07-09T08:23:22.399Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/14/Linux%E7%A5%9E%E5%99%A8%E4%B9%8Bgrep,awk%E6%93%8D%E4%BD%9Cgtf%E6%96%87%E4%BB%B6/</loc>
-    
-    <lastmod>2018-07-08T11:27:28.629Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/10/12/%E8%AE%A1%E7%AE%97%E6%8D%95%E8%8E%B7%E6%95%88%E7%8E%87%EF%BC%8C%E6%B5%8B%E5%BA%8F%E6%B7%B1%E5%BA%A6%EF%BC%8C%E8%A6%86%E7%9B%96%E5%BA%A6/</loc>
-    
-    <lastmod>2018-07-08T05:51:48.113Z</lastmod>
     
   </url>
   
@@ -159,13 +208,6 @@
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/</loc>
     
     <lastmod>2018-05-27T07:25:16.975Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/28/qPCR%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E5%8F%8A%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C/</loc>
-    
-    <lastmod>2018-05-24T12:51:02.131Z</lastmod>
     
   </url>
   
@@ -212,30 +254,9 @@
   </url>
   
   <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/12/%E5%8F%82%E8%80%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/</loc>
-    
-    <lastmod>2018-03-17T02:23:04.857Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/12/26/GATK%E5%8F%98%E5%BC%82%E6%A3%80%E6%B5%8B%E6%A6%82%E8%BF%B0/</loc>
-    
-    <lastmod>2018-03-11T00:49:20.278Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/21/%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E4%B8%8E%E6%8F%90%E4%BA%A4shell%E8%84%9A%E6%9C%AC/</loc>
     
     <lastmod>2018-03-10T13:41:02.833Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2018/01/20/ANNOVAR%E8%BF%9B%E8%A1%8C%E7%AA%81%E5%8F%98%E6%B3%A8%E9%87%8A/</loc>
-    
-    <lastmod>2018-03-06T12:43:23.643Z</lastmod>
     
   </url>
   
@@ -264,13 +285,6 @@
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/09/01/%E8%A7%A3%E5%86%B3ggplot-%E4%BD%9C%E5%9B%BEx%E8%BD%B4%E5%92%8Cy%E8%BD%B4%E4%B8%8D%E9%87%8D%E5%90%88%E9%97%AE%E9%A2%98/</loc>
     
     <lastmod>2018-01-21T05:26:24.976Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/19/bedtools%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E8%AF%A6%E8%A7%A3/</loc>
-    
-    <lastmod>2018-01-09T15:04:53.853Z</lastmod>
     
   </url>
   
@@ -411,13 +425,6 @@
     <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/19/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%94%9F%E6%88%90python%E5%B5%8C%E5%A5%97%E5%AD%97%E5%85%B8/</loc>
     
     <lastmod>2017-08-19T10:56:56.020Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https:///AnJingwd.github.iohttps:/AnJingwd.github.io/2017/08/12/%E8%AE%BE%E8%AE%A1sanger%E6%B5%8B%E5%BA%8F%E5%BC%95%E7%89%A9%EF%BC%8C%E9%AA%8C%E8%AF%81%E7%AA%81%E5%8F%98%E4%BD%8D%E7%82%B9/</loc>
-    
-    <lastmod>2017-08-13T02:10:26.002Z</lastmod>
     
   </url>
   

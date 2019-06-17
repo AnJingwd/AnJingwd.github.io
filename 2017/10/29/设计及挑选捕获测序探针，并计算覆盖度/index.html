@@ -111,7 +111,9 @@
 <meta property="og:image" content="https://i.imgur.com/pjVTs2f.jpg">
 <meta property="og:image" content="https://i.imgur.com/6C2Lk1p.jpg">
 <meta property="og:image" content="https://i.imgur.com/kAcaOMe.jpg">
-<meta property="og:updated_time" content="2018-08-14T02:28:47.903Z">
+<meta property="og:image" content="https://i.imgur.com/eLOM5DR.png">
+<meta property="og:image" content="https://i.imgur.com/JumkVMR.png">
+<meta property="og:updated_time" content="2018-12-13T02:32:23.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计及挑选捕获测序探针，并计算覆盖度">
 <meta name="twitter:description" content="使用bedtools进行捕获测序引物的筛选并计算覆盖度">
@@ -446,6 +448,8 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
 <h1 id="根据targete-bed和primer20-bed计算覆盖度"><a href="#根据targete-bed和primer20-bed计算覆盖度" class="headerlink" title="根据targete.bed和primer20.bed计算覆盖度"></a>根据targete.bed和primer20.bed计算覆盖度</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">(1)检验bed区间是否有重叠</div><div class="line"></div><div class="line">length_sum1=`awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span> target.bed |tail -n 1`</div><div class="line"></div><div class="line">length_sum2=`sort -k1,1 -k2,2n target.bed |bedtools merge -i target.bed| awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$3-$2+1&#125;&#123;print x&#125;'</span>|tail -n 1`</div><div class="line"></div><div class="line"><span class="comment">#如果length_sum1 &gt;  length_sum2,有重叠；如果length_sum1 = length_sum2,无重叠</span></div><div class="line"></div><div class="line"><span class="comment">#所以target.bed无重叠，primer20和primer24有重叠</span></div><div class="line"></div><div class="line">(2)先用bedtools工具得到primer20的merge后的bed文件，然后与target.bed查看覆盖碱基数，并求和</div><div class="line"></div><div class="line">sort -k1,1 -k2,2n primer20.bed|bedtools merge -i &gt; primer20_merge.bed</div><div class="line">length_sum3=`bedtools intersect -a target.bed -b primer20_merge.bed -wao | awk <span class="string">'BEGIN &#123;x=0&#125;&#123;x=x+$7&#125;&#123;print x&#125;'</span> |tail -n 1`  </div><div class="line"></div><div class="line">coverage = length_sum3/length_sum1*100</div></pre></td></tr></table></figure>
 <h2 id="bedtools-merge功能图示（需要先排序，否则报错）"><a href="#bedtools-merge功能图示（需要先排序，否则报错）" class="headerlink" title="bedtools merge功能图示（需要先排序，否则报错）"></a>bedtools merge功能图示（需要先排序，否则报错）</h2><p><img src="https://i.imgur.com/kAcaOMe.jpg" alt=""></p>
 <p>对于.xlxs文件，另存为.txt，然后复制到linux的txt文件（vim）</p>
+<h2 id="补充-1"><a href="#补充-1" class="headerlink" title="补充"></a>补充</h2><p><img src="https://i.imgur.com/eLOM5DR.png" alt=""></p>
+<p><img src="https://i.imgur.com/JumkVMR.png" alt=""></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_5d5f892a0102v665.html" target="_blank" rel="external">染色体位置overlap的计算–bedtools应用</a></p>
 <p>（2）<a href="https://www.biostars.org/p/65558/" target="_blank" rel="external">Tool: Converting Genome Coordinates From One Genome Version To Another (Ucsc Liftover, Ncbi Remap, Ensembl Api)</a></p>
 
@@ -598,7 +602,7 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">61</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -609,7 +613,7 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -620,7 +624,7 @@ gene=($(cat gene.txt));for gene in ${gene[@]}; do grep -m 1 &quot;${gene}&quot; 
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -851,7 +855,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基因CDS区域捕获测序，引物设计"><span class="nav-number">1.</span> <span class="nav-text">基因CDS区域捕获测序，引物设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#确定目标基因的某一转录本的CDS区域坐标，整理成bed文件"><span class="nav-number">1.1.</span> <span class="nav-text">确定目标基因的某一转录本的CDS区域坐标，整理成bed文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">1.2.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引物筛选"><span class="nav-number">2.</span> <span class="nav-text">引物筛选</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据targete-bed和primer20-bed计算覆盖度"><span class="nav-number">3.</span> <span class="nav-text">根据targete.bed和primer20.bed计算覆盖度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bedtools-merge功能图示（需要先排序，否则报错）"><span class="nav-number">3.1.</span> <span class="nav-text">bedtools merge功能图示（需要先排序，否则报错）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基因CDS区域捕获测序，引物设计"><span class="nav-number">1.</span> <span class="nav-text">基因CDS区域捕获测序，引物设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#确定目标基因的某一转录本的CDS区域坐标，整理成bed文件"><span class="nav-number">1.1.</span> <span class="nav-text">确定目标基因的某一转录本的CDS区域坐标，整理成bed文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">1.2.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引物筛选"><span class="nav-number">2.</span> <span class="nav-text">引物筛选</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据targete-bed和primer20-bed计算覆盖度"><span class="nav-number">3.</span> <span class="nav-text">根据targete.bed和primer20.bed计算覆盖度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bedtools-merge功能图示（需要先排序，否则报错）"><span class="nav-number">3.1.</span> <span class="nav-text">bedtools merge功能图示（需要先排序，否则报错）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充-1"><span class="nav-number">3.2.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -876,7 +880,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 <div class="copyright" >
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -899,7 +903,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共80.9k字</span>
+  <span class="post-count">博客全站共83.0k字</span>
 </div>
 
 <div class="powered-by">

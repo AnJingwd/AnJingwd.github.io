@@ -5,7 +5,7 @@
   <link href="https:///AnJingwd.github.io/atom.xml" rel="self"/>
   
   <link href="https:///AnJingwd.github.io/"/>
-  <updated>2018-09-12T01:24:28.334Z</updated>
+  <updated>2019-06-17T07:38:49.561Z</updated>
   <id>https:///AnJingwd.github.io/</id>
   
   <author>
@@ -14,6 +14,168 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pytorch入门教程</title>
+    <link href="https:///AnJingwd.github.io/2019/06/10/pytorch%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/"/>
+    <id>https:///AnJingwd.github.io/2019/06/10/pytorch入门教程/</id>
+    <published>2019-06-10T02:57:31.000Z</published>
+    <updated>2019-06-17T07:38:49.561Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;写摘要</p>
+<blockquote class="blockquote-center">与numpy对比，较少pytorch的基本操作，然后搭建一个简单堆叠式的人工神经网络</blockquote>
+
+<a id="more"></a>
+<p>##　１.数据表示及运算</p>
+<h3 id="1-0-Numpy与pytorch比较"><a href="#1-0-Numpy与pytorch比较" class="headerlink" title="1.0 Numpy与pytorch比较"></a>1.0 Numpy与pytorch比较</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Numpy</th>
+<th>Pytorch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>导入模块</td>
+<td>import numpy as np</td>
+<td>import torch</td>
+</tr>
+<tr>
+<td>创建数据</td>
+<td>np.numpy()</td>
+<td>tensor = torch.Tensor(array)</td>
+</tr>
+<tr>
+<td>查看数据维度</td>
+<td>np.shape()</td>
+<td>tensor.shape</td>
+</tr>
+<tr>
+<td>查看数据类型</td>
+<td>type()</td>
+<td>tensor.type</td>
+</tr>
+<tr>
+<td>产生随机数</td>
+<td>np.random.rand(2,3))</td>
+<td>np.ones((2,3))</td>
+</tr>
+<tr>
+<td>产生全1矩阵/张量</td>
+<td>np.ones()</td>
+<td>torch.ones()</td>
+</tr>
+</tbody>
+</table>
+<p><strong>１.１Numpy数组与torch.Tensor相互转换</strong></p>
+<ul>
+<li>torch.from_numpy():     from numpy to tensor</li>
+<li>numpy():     from tensor to numpy</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># random numpy array</span></div><div class="line">array = np.random.rand(<span class="number">2</span>,<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="comment"># from numpy to tensor</span></div><div class="line">from_numpy_to_tensor = torch.from_numpy(array)</div><div class="line"></div><div class="line"><span class="comment"># from tensor to numpy</span></div><div class="line">tensor = from_numpy_to_tensor</div><div class="line">from_tensor_to_numpy = tensor.numpy()</div></pre></td></tr></table></figure>
+<p>注意Torch的Tensor和numpy的array会共享他们的存储空间，修改一个会导致另外的一个也被修改。</p>
+<h3 id="1-3-基础数学运算"><a href="#1-3-基础数学运算" class="headerlink" title="1.3 基础数学运算"></a>1.3 基础数学运算</h3><p>a和b都是tensor</p>
+<table>
+<thead>
+<tr>
+<th>运算</th>
+<th>表达式/函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Resize</td>
+<td>view()</td>
+</tr>
+<tr>
+<td>加法</td>
+<td>torch.add(a,b) = a + b</td>
+</tr>
+<tr>
+<td>减法</td>
+<td>a.sub(b) = a - b</td>
+</tr>
+<tr>
+<td>元素对应相乘</td>
+<td>torch.mul(a,b) = a * b</td>
+</tr>
+<tr>
+<td>元素对应相除</td>
+<td>torch.div(a,b) = a / b</td>
+</tr>
+<tr>
+<td>均值</td>
+<td>a.mean()</td>
+</tr>
+<tr>
+<td>标准差（std）</td>
+<td>a.std()</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-4-Variables"><a href="#1-4-Variables" class="headerlink" title="1.4 Variables"></a>1.4 Variables</h3><ul>
+<li>变量和张量之间的差异是变量可以累积梯度</li>
+<li>我们也可以用变量进行数学运算</li>
+<li>为了进行反向传播，我们需要变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># import variable from pytorch library</div><div class="line">from torch.autograd import Variable</div><div class="line"></div><div class="line"># define variable</div><div class="line">var = Variable(torch.ones(3), requires_grad = True)</div></pre></td></tr></table></figure>
+<p>假设我们有等式y = x^2，现在要计算在点y=10处的梯度，pytorch实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">array = [2,4]</div><div class="line">tensor = torch.Tensor(array)</div><div class="line">x = Variable(tensor, requires_grad = True)</div><div class="line">y = x**2</div><div class="line"></div><div class="line">o = (1/2)*sum(y) #理解为一个点</div><div class="line"></div><div class="line"># backward</div><div class="line">o.backward() # calculates gradients</div></pre></td></tr></table></figure>
+<h3 id="1-5-使用gpu运算"><a href="#1-5-使用gpu运算" class="headerlink" title="1.5 使用gpu运算"></a>1.5 使用gpu运算</h3><p>当我们使用.cuda()的时候，就可以把tensor移动到GPU上去</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> torch.cuda.is_available():</div><div class="line">    x = x.cuda()</div><div class="line">    y = y.cuda()</div><div class="line">    x + y</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-数据来源"><a href="#2-数据来源" class="headerlink" title="2.数据来源"></a>2.数据来源</h2><p>通常来讲，当你处理图像，声音，文本，视频时需要使用python中其他独立的包来将他们转换为numpy中的数组，之后再转换为<strong>torch.Tensor</strong></p>
+<ul>
+<li>图像的话，可以用Pillow, OpenCV</li>
+<li>声音处理可以用scipy和librosa</li>
+<li>文本的处理使用原生Python或者Cython以及NLTK和SpaCy都可以</li>
+</ul>
+<p>特别的对于图像，我们有torchvision这个包可用,其中包含了一些现成的数据集如：Imagenet, CIFAR10, MNIST等等。同时还有一些转换图像用的工具。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">import torch</div><div class="line">import torch.nn as nn  ## 搭建神经网络</div><div class="line">import torchvision.transforms as transforms   ## 下载数据</div><div class="line">from torch.autograd import Variable   ## 更新梯度</div><div class="line">import pandas as pd</div><div class="line">from sklearn.model_selection import train_test_split</div><div class="line"></div><div class="line"></div><div class="line">##########   准备数据，基本的numpy操作   ###############</div><div class="line">train = pd.read_csv(r&quot;../input/train.csv&quot;,dtype = np.float32)</div><div class="line"></div><div class="line"># 将数据拆分为特征(pixels) 和标签(numbers from 0 to 9)</div><div class="line">targets_numpy = train.label.values</div><div class="line">features_numpy = train.loc[:,train.columns != &quot;label&quot;].values/255 # normalization</div><div class="line"></div><div class="line">#划分训练集与验证集：80%：20% </div><div class="line">features_train, features_test, targets_train, targets_test = train_test_split(features_numpy,targets_numpy,test_size = 0.2,random_state = 42) </div><div class="line"></div><div class="line">###########  将numpy转为tensor,从而创建训练集和测试集   #########</div><div class="line">featuresTrain = torch.from_numpy(features_train)</div><div class="line">targetsTrain = torch.from_numpy(targets_train).type(torch.LongTensor) # 数据类型为long</div><div class="line"></div><div class="line">featuresTest = torch.from_numpy(features_test)</div><div class="line">targetsTest = torch.from_numpy(targets_test).type(torch.LongTensor) #数据类型为long</div><div class="line"></div><div class="line"># class torch.utils.data.TensorDataset:封装成tensor的数据集，每一个样本都通过索引张量来获得</div><div class="line">train = torch.utils.data.TensorDataset(featuresTrain,targetsTrain)</div><div class="line">test = torch.utils.data.TensorDataset(featuresTest,targetsTest)</div><div class="line"></div><div class="line"># class torch.utils.data.DataLoader 数据加载器。组合了一个数据集和采样器，并提供关于数据的迭代器</div><div class="line">train_loader = torch.utils.data.DataLoader(train, batch_size = batch_size, shuffle = False)</div><div class="line">test_loader = torch.utils.data.DataLoader(test, batch_size = batch_size, shuffle = False)</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="3-构建神经网络"><a href="#3-构建神经网络" class="headerlink" title="3.构建神经网络"></a>3.构建神经网络</h2><p>先看一个简单的例子：</p>
+<p>###　３.１　ANN网络</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Create 人工神经网络(ANN) Model</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ANNModel</span><span class="params">(nn.Module)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_dim, hidden_dim, output_dim)</span>:</span></div><div class="line">        super(ANNModel, self).__init__()    <span class="comment">## 继承nn.Module类</span></div><div class="line">        self.fc1 = nn.Linear(input_dim, hidden_dim)  <span class="comment"># Linear function 1: 784 --&gt; 100</span></div><div class="line">        self.relu1 = nn.ReLU()     <span class="comment"># Non-linearity 1 </span></div><div class="line">        self.fc2 = nn.Linear(hidden_dim, hidden_dim) <span class="comment"># Linear function 2: 100 --&gt; 100</span></div><div class="line">        self.tanh2 = nn.Tanh()   <span class="comment"># Non-linearity 2</span></div><div class="line">        <span class="comment"># Linear function 3: 100 --&gt; 100</span></div><div class="line">        self.fc3 = nn.Linear(hidden_dim, hidden_dim)  <span class="comment"># Linear function 3: 100 --&gt; 100</span></div><div class="line">       self.elu3 = nn.ELU()  <span class="comment"># Non-linearity 3</span></div><div class="line">        self.fc4 = nn.Linear(hidden_dim, output_dim)  <span class="comment"># Linear function 4 (readout): 100 --&gt; 10</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span>  </div><div class="line">        out = self.fc1(x) <span class="comment"># Linear function 1</span></div><div class="line">        out = self.relu1(out) <span class="comment"># Non-linearity 1</span></div><div class="line">        out = self.fc2(out)  <span class="comment"># Linear function 2</span></div><div class="line">        out = self.tanh2(out)  <span class="comment"># Non-linearity 2</span></div><div class="line">        out = self.fc3(out)   <span class="comment"># Linear function 2</span></div><div class="line">        out = self.elu3(out)  <span class="comment"># Non-linearity 2</span></div><div class="line">        out = self.fc4(out)  <span class="comment"># Linear function 4 (readout)</span></div><div class="line">        <span class="keyword">return</span> out</div><div class="line"></div><div class="line">print(ANNModel)   <span class="comment"># 打印网络结构</span></div><div class="line"></div><div class="line"><span class="comment"># 模型中可学习的参数会由ANNModel.parameters()返回</span></div><div class="line">params = list(ANNModel.parameters())</div><div class="line"><span class="keyword">print</span> (len(params))</div><div class="line"><span class="keyword">print</span> (params[<span class="number">0</span>].size())</div><div class="line">    </div><div class="line"><span class="comment"># 实例化人工神经网络</span></div><div class="line">input_dim = <span class="number">28</span>*<span class="number">28</span></div><div class="line">hidden_dim = <span class="number">150</span> </div><div class="line">output_dim = <span class="number">10</span></div><div class="line"></div><div class="line"><span class="comment"># 创建ANN模型</span></div><div class="line">model = ANNModel(input_dim, hidden_dim, output_dim)</div><div class="line"></div><div class="line"><span class="comment"># Cross Entropy Loss </span></div><div class="line"><span class="comment">## loss function采用了(output,target)作为函数的输入</span></div><div class="line">error = nn.CrossEntropyLoss()</div><div class="line"></div><div class="line"><span class="comment"># SGD Optimizer</span></div><div class="line">learning_rate = <span class="number">0.02</span></div><div class="line">optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  <span class="comment"># torch.optim包含SGD, Nesterov-SGD, Adam, RMSProp, etc</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># ANN model training</span></div><div class="line">count = <span class="number">0</span></div><div class="line">loss_list = []</div><div class="line">iteration_list = []</div><div class="line">accuracy_list = []</div><div class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</div><div class="line">    <span class="keyword">for</span> i, (images, labels) <span class="keyword">in</span> enumerate(train_loader):</div><div class="line">        train = Variable(images.view(<span class="number">-1</span>, <span class="number">28</span>*<span class="number">28</span>))</div><div class="line">        labels = Variable(labels)  </div><div class="line">        <span class="comment"># 清除梯度：在每次进行backward之前，必须要清空先前存在的梯度</span></div><div class="line">        optimizer.zero_grad()</div><div class="line">        outputs = model(train)   <span class="comment"># 前向传播，创建网络</span></div><div class="line">        loss = error(outputs, labels) <span class="comment"># 计算softmax 和ross entropy loss</span></div><div class="line">        loss.backward()  <span class="comment"># 计算梯度</span></div><div class="line">        optimizer.step()  <span class="comment"># 更新参数</span></div><div class="line">        </div><div class="line">        count += <span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> count % <span class="number">50</span> == <span class="number">0</span>:</div><div class="line">            <span class="comment"># 计算正确率         </span></div><div class="line">            correct = <span class="number">0</span></div><div class="line">            total = <span class="number">0</span></div><div class="line">            <span class="comment"># 预测测试集数据</span></div><div class="line">            <span class="keyword">for</span> images, labels <span class="keyword">in</span> test_loader:</div><div class="line">                test = Variable(images.view(<span class="number">-1</span>, <span class="number">28</span>*<span class="number">28</span>))         </div><div class="line">                <span class="comment"># Forward propagation</span></div><div class="line">                outputs = model(test)</div><div class="line">                </div><div class="line">                <span class="comment"># Get predictions from the maximum value</span></div><div class="line">                predicted = torch.max(outputs.data, <span class="number">1</span>)[<span class="number">1</span>]</div><div class="line">                </div><div class="line">                <span class="comment"># Total number of labels</span></div><div class="line">                total += len(labels)</div><div class="line"></div><div class="line">                <span class="comment"># Total correct predictions</span></div><div class="line">                correct += (predicted == labels).sum()</div><div class="line">            </div><div class="line">            accuracy = <span class="number">100</span> * correct / float(total)</div><div class="line">            </div><div class="line">            <span class="comment"># store loss and iteration</span></div><div class="line">            loss_list.append(loss.data)</div><div class="line">            iteration_list.append(count)</div><div class="line">            accuracy_list.append(accuracy)</div><div class="line">            <span class="keyword">if</span> count % <span class="number">500</span> == <span class="number">0</span>:</div><div class="line">                <span class="comment"># Print Loss</span></div><div class="line">                print(<span class="string">'Iteration: &#123;&#125;  Loss: &#123;&#125;  Accuracy: &#123;&#125; %'</span>.format(count, loss.data[<span class="number">0</span>], accuracy))</div></pre></td></tr></table></figure>
+<ul>
+<li><p>使用 torch.nn 包可以进行神经网络的构建，而nn建立在autograd的基础上来进行模型的定义和微分。</p>
+</li>
+<li><p>nn.Module中包含着神经网络的层，同时forward(input)方法能够将output进行返回。</p>
+</li>
+</ul>
+<ul>
+<li><p>autograd 包提供Tensor所有操作的自动求导方法。</p>
+</li>
+<li><p>autograd.Variable 这是这个包中最核心的类。 它包装了一个Tensor，并且几乎支持所有的定义在其上的操作。一旦完成了你的运算，你可以调用 .backward()来自动计算出所有的梯度。</p>
+</li>
+<li><p>你可以通过属性 .data 来访问原始的tensor，而关于这一Variable的梯度则集中于 .grad 属性中。</p>
+</li>
+<li><p>还有一个在自动求导中非常重要的类 Function，Variable 和 Function 二者相互联系并且构建了一个描述整个运算过程的无环图。每个Variable拥有一个 .creator 属性，其引用了一个创建Variable的 Function。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-08e0530dfd6879ff2bee56cfc5cc5073_hd.jpg" alt="1"></p>
+</li>
+</ul>
+<p><strong>注意: torch.nn 只接受小批量的数据</strong><br>整个torch.nn包只接受那种小批量样本的数据，而非单个样本。 例如，nn.Conv2d能够结构一个四维的TensornSamples x nChannels x Height x Width。<br><strong>如果你拿的是单个样本，使用input.unsqueeze(0)来加一个假维度就可以了。</strong></p>
+<h3 id="3-2使用gpu训练模型"><a href="#3-2使用gpu训练模型" class="headerlink" title="3.2使用gpu训练模型"></a>3.2使用gpu训练模型</h3><p>就像你把Tensor传递给GPU进行运算一样，你也可以将神经网络传递给GPU。这一过程将逐级进行操作，直到所有组件全部都传递到GPU上。</p>
+<p><strong>记住，每一步都需要把输入和目标传给GPU。</strong></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/25572330?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=833404081191137280" target="_blank" rel="external">PyTorch深度学习：60分钟入门(Translation)</a> <a href="https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html" target="_blank" rel="external">原文</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;写摘要&lt;/p&gt;
+&lt;blockquote class=&quot;blockquote-center&quot;&gt;与numpy对比，较少pytorch的基本操作，然后搭建一个简单堆叠式的人工神经网络&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="pytorch" scheme="https:///AnJingwd.github.io/categories/pytorch/"/>
+    
+    
+      <category term="pytorch" scheme="https:///AnJingwd.github.io/tags/pytorch/"/>
+    
+  </entry>
   
   <entry>
     <title>IDM下载工具</title>
@@ -574,7 +736,7 @@ $`statement`
     <link href="https:///AnJingwd.github.io/2018/04/05/%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8/"/>
     <id>https:///AnJingwd.github.io/2018/04/05/任务提交系统使用/</id>
     <published>2018-04-05T02:07:10.000Z</published>
-    <updated>2018-07-19T02:33:00.894Z</updated>
+    <updated>2018-11-19T06:41:39.362Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">任务提交系统使用</blockquote>
 
@@ -671,10 +833,11 @@ $`statement`
 </ul>
 <p>&emsp;&emsp;ps: 之前都是ssh node命令切换到计算节点再跑流程，有了集群作业调度程序就可以在登陆节点提交任务，其将自动分配计算节点资源，不包括登陆节点。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="http://blog.sina.com.cn/s/blog_62db9b190101eptz.html" target="_blank" rel="external">bsub更多使用例子</a></p>
-<p>（2）<a href="http://docplayer.net/35369468-Openlava-installation-procedure.html" target="_blank" rel="external">OpenLava Installation Procedure</a></p>
+<p>（2）[OpenLava Installation Procedure](<a href="http://docplayer.net/35369468-Openlava-installation-procedure.html" target="_blank" rel="external">http://docplayer.net/35369468-Openlava-installation-procedure.html</a></p>
 <p>（3）<a href="http://bicmr.pku.edu.cn/~wenzw/pages/batch.html" target="_blank" rel="external">工作站使用指南（推荐）</a></p>
 <p>（4）<a href="https://pi.sjtu.edu.cn/doc/slurm/" target="_blank" rel="external">SLURM作业调度系统（推荐）</a></p>
 <p>（5）<a href="https://hpc.sjtu.edu.cn/info/1013/1539.htm" target="_blank" rel="external">交大高性能计算中心</a></p>
+<p>（6）<a href="https://www.jianshu.com/p/2f6c799ca147" target="_blank" rel="external">PBS 作业管理系统</a></p>
 ]]></content>
     
     <summary type="html">
@@ -1149,7 +1312,7 @@ echo &apos;export PKG_CONFIG_PATH=/home/wangdong/softwares/libxml2/lib/pkgconfig
     <link href="https:///AnJingwd.github.io/2018/01/28/%E6%9F%A5%E7%9C%8BR%E5%8C%85%E6%BA%90%E7%A0%81%E5%8F%8Alinux%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85R/"/>
     <id>https:///AnJingwd.github.io/2018/01/28/查看R包源码及linux下编译安装R/</id>
     <published>2018-01-28T14:08:43.000Z</published>
-    <updated>2018-07-22T06:44:56.368Z</updated>
+    <updated>2019-03-28T04:25:25.433Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">查看R包源码，毕竟看优秀的源代码才能学得更快，为开发自己的R包打基础；同时由于R会将数据一次性读入内存的特性，实际分析数据时，选择linux集群将更合适，所以有必要在linux环境下编译安装R</blockquote>
 
@@ -1169,9 +1332,10 @@ echo &apos;export PKG_CONFIG_PATH=/home/wangdong/softwares/libxml2/lib/pkgconfig
 <p>（2）找到R CRAN的相关源码包（.tar.gz）</p>
 <p>例如：<a href="https://cran.r-project.org/web/packages/ggplot2/" target="_blank" rel="external">https://cran.r-project.org/web/packages/ggplot2/</a> 不同包只需要更改最后包名即可</p>
 <h1 id="linux下源码安装R-3-4-4"><a href="#linux下源码安装R-3-4-4" class="headerlink" title="linux下源码安装R-3.4.4"></a>linux下源码安装R-3.4.4</h1><h2 id="建议先升级gcc"><a href="#建议先升级gcc" class="headerlink" title="建议先升级gcc"></a>建议先升级gcc</h2><p>可参考<a href="https://anjingwd.github.io/AnJingwd.github.io/2018/02/13/gcc5.2%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" target="_blank" rel="external">gcc5.2编译安装</a>，因为需要相应的动态链接库。</p>
-<h2 id="安装依赖的包"><a href="#安装依赖的包" class="headerlink" title="安装依赖的包"></a>安装依赖的包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#新建一个文件夹，然后把需要依赖的组件安装这个路径下</span></div><div class="line">mkdir -p <span class="variable">$HOME</span>/softwares/packages</div><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/softwares/packages</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##bzip2-1.0.6</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</div><div class="line">    untargz bzip2-1.0.6.tar.gz</div><div class="line">    <span class="built_in">cd</span> bzip2-1.0.6</div><div class="line">    </div><div class="line">    修改bzip2-1.0.6的<span class="string">"Makefile"</span>文件：</div><div class="line">    </div><div class="line">    CC=gcc -fPIC  &lt;&lt; 新增 -fPIC，默认是64位编译的；</div><div class="line">    AR=ar</div><div class="line">    RANLIB=ranlib</div><div class="line">    LDFLAGS=</div><div class="line">    BIGFILES=-D_FILE_OFFSET_BITS=64</div><div class="line">    CFLAGS=-fPIC -Wall -Winline -O2 -g  $(BIGFILES)   <span class="comment"># 这里也可以加上</span></div><div class="line"></div><div class="line">    make -f Makefile-libbz2_so</div><div class="line">    make clean &lt;------------保守建议，还是clean一下 </div><div class="line">    make</div><div class="line">    make install PREFIX=<span class="variable">$HOME</span>/softwares/packages   <span class="comment"># prefix表示的安装的路径前缀</span></div><div class="line"></div><div class="line"><span class="comment">## curl-7.59</span></div><div class="line">    wget https://curl.haxx.se/download/curl-7.59.0.zip</div><div class="line">    unzip curl-7.59.0.zip</div><div class="line">    <span class="built_in">cd</span> curl-7.59.0</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages   <span class="comment"># 这个是之前设置的packages路径</span></div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## pcre-8.41.tar.gz</span></div><div class="line">    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.42.tar.gz</div><div class="line">    tar –xvf pcre-8.41.tar.gz</div><div class="line">    <span class="built_in">cd</span> pcre</div><div class="line">    ./configure --<span class="built_in">enable</span>-utf8  --prefix=<span class="variable">$HOME</span>/softwares/packages  <span class="comment"># 这个是之前设置的packages路径，一定要设置enable-utf8;</span></div><div class="line">    make</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## xz-5.2.3.tar.gz</span></div><div class="line">    下载路径：https://sourceforge.net/projects/lzmautils/files/xz-5.2.3.tar.gz/download</div><div class="line">    tar xzvf xz-5.2.3.tar.gz</div><div class="line">    <span class="built_in">cd</span> xz-5.2.3</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make -j3</div><div class="line">    make install</div><div class="line"></div><div class="line"><span class="comment">## zlib-1.2.8.tar.gz</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A//zlib.net/zlib-1.2.11.tar.gz</div><div class="line">    tar xzvf zlib-1.2.8.tar.gz</div><div class="line">    <span class="built_in">cd</span> zlib-1.2.8</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make</div><div class="line">    make install</div></pre></td></tr></table></figure>
+<h2 id="安装依赖的包"><a href="#安装依赖的包" class="headerlink" title="安装依赖的包"></a>安装依赖的包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#新建一个文件夹，然后把需要依赖的组件安装这个路径下</span></div><div class="line">mkdir -p <span class="variable">$HOME</span>/softwares/packages</div><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/softwares/packages</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##bzip2-1.0.6</span></div><div class="line">    wget https://link.zhihu.com/?target=http%3A/www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</div><div class="line">    untargz bzip2-1.0.6.tar.gz</div><div class="line">    <span class="built_in">cd</span> bzip2-1.0.6</div><div class="line">    </div><div class="line">    修改bzip2-1.0.6的<span class="string">"Makefile"</span>文件：</div><div class="line">    </div><div class="line">    CC=gcc -fPIC  &lt;&lt; 新增 -fPIC，默认是64位编译的；</div><div class="line">    AR=ar</div><div class="line">    RANLIB=ranlib</div><div class="line">    LDFLAGS=</div><div class="line">    BIGFILES=-D_FILE_OFFSET_BITS=64</div><div class="line">    CFLAGS=-fPIC -Wall -Winline -O2 -g  $(BIGFILES)   <span class="comment"># 这里也可以加上</span></div><div class="line"></div><div class="line">    make -f Makefile-libbz2_so</div><div class="line">    make clean &lt;------------保守建议，还是clean一下 </div><div class="line">    make</div><div class="line">    make install PREFIX=<span class="variable">$HOME</span>/softwares/packages   <span class="comment"># prefix表示的安装的路径前缀</span></div><div class="line"></div><div class="line"><span class="comment">## curl-7.59</span></div><div class="line">    wget https://curl.haxx.se/download/curl-7.59.0.zip</div><div class="line">    unzip curl-7.59.0.zip</div><div class="line">    <span class="built_in">cd</span> curl-7.59.0</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages   <span class="comment"># 这个是之前设置的packages路径</span></div><div class="line">    make -j3 &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">## pcre-8.41.tar.gz</span></div><div class="line">    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.42.tar.gz</div><div class="line">    tar -xvf pcre-8.41.tar.gz</div><div class="line">    <span class="built_in">cd</span> pcre-8.42</div><div class="line">    ./configure --<span class="built_in">enable</span>-utf8  --prefix=<span class="variable">$HOME</span>/softwares/packages  <span class="comment"># 这个是之前设置的packages路径，一定要设置enable-utf8;</span></div><div class="line">    make &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">## xz-5.2.3.tar.gz</span></div><div class="line">    下载路径：https://sourceforge.net/projects/lzmautils/files/xz-5.2.3.tar.gz/download</div><div class="line">    tar xzvf xz-5.2.3.tar.gz</div><div class="line">    <span class="built_in">cd</span> xz-5.2.3</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make -j3 &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">## zlib-1.2.8.tar.gz</span></div><div class="line">    wget https://www.zlib.net/fossils/zlib-1.2.8.tar.gz --no-check-certificate</div><div class="line">    tar xzvf zlib-1.2.8.tar.gz</div><div class="line">    <span class="built_in">cd</span> zlib-1.2.8</div><div class="line">    ./configure --prefix=<span class="variable">$HOME</span>/softwares/packages</div><div class="line">    make &amp;&amp; make install</div></pre></td></tr></table></figure>
 <h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$HOME/softwares/packages/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="built_in">echo</span> <span class="string">'export LD_LIBRARY_PATH=$HOME/softwares/packages/lib:$LD_LIBRARY_PATH'</span>&gt;&gt;~/.bashrc </div><div class="line"><span class="built_in">echo</span> <span class="string">'export CFLAGS="-I$HOME/softwares/packages/include"'</span>&gt;&gt;~/.bashrc </div><div class="line"><span class="built_in">echo</span> <span class="string">'export LDFLAGS="-L$HOME/softwares/packages/lib"'</span>&gt;&gt;~/.bashrc</div><div class="line"></div><div class="line"><span class="built_in">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
-<h2 id="安装R3-4-4"><a href="#安装R3-4-4" class="headerlink" title="安装R3.4.4"></a>安装R3.4.4</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">wget https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-<span class="number">3</span>/R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">cd R-<span class="number">3.4</span><span class="number">.4</span></div><div class="line">./configure --prefix=$HOME/softwares/packages/R  --enable-R-shlib  --with-readline=yes --with-libpng=yes --with-x=no  </div><div class="line"><span class="comment"># --enable-R-shlib一定要设置，否则安装不上Rserve;  prefix是安装路径，可以自定义；</span></div><div class="line"></div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"></div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line"><span class="keyword">source</span> ~/.bashrc</div></pre></td></tr></table></figure>
+<h2 id="安装R3-4-4"><a href="#安装R3-4-4" class="headerlink" title="安装R3.4.4"></a>安装R3.4.4</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">wget https://mirrors.tuna.tsinghua.edu.cn/CRAN/src/base/R-<span class="number">3</span>/R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">untargz R-<span class="number">3.4</span><span class="number">.4</span>.tar.gz</div><div class="line">cd R-<span class="number">3.4</span><span class="number">.4</span></div><div class="line">./configure --prefix=$HOME/softwares/packages/R  --enable-R-shlib  --with-readline=yes --with-libpng=yes --with-x=no  </div><div class="line"><span class="comment"># --enable-R-shlib一定要设置，否则安装不上Rserve;  prefix是安装路径，可以自定义；</span></div><div class="line"></div><div class="line"><span class="comment">#当前解压目录下编译、安装</span></div><div class="line">make &amp;&amp; make install</div><div class="line"></div><div class="line"><span class="comment">#离开解压目录，进入安装成功目录，进行检查是否成功</span></div><div class="line">cd /home/wangdong/R/bin</div><div class="line">./R</div><div class="line"></div><div class="line"><span class="comment">#添加环境变量</span></div><div class="line">echo <span class="string">'export PATH=/home/wangdong/R/bin:$PATH'</span>&gt;&gt;~/.bashrc</div><div class="line">export R_LIBS=/home/wangdong/R/lib64/R/<span class="keyword">library</span>  <span class="comment">#设置R包安装路径</span></div><div class="line"><span class="keyword">source</span> ~/.bashrc</div><div class="line"></div><div class="line"><span class="comment">## R3.5.0的安装   参考链接：https://www.jianshu.com/p/10a662678cdb</span></div><div class="line"></div><div class="line">依赖如上，但在安装R时注意：</div><div class="line">./configure --with-cairo=yes --with-libpng=yes --with-libtiff=yes --with-jpeglib=yes --enable-R-shlib --with-readline=yes --with-x=no --prefix=/lustre/home/bioxsyy/software/R-<span class="number">3.5</span>/R</div></pre></td></tr></table></figure>
+<h2 id="使用Anaconda-安装R-与Rstudio-server"><a href="#使用Anaconda-安装R-与Rstudio-server" class="headerlink" title="使用Anaconda 安装R 与Rstudio server"></a>使用Anaconda 安装R 与Rstudio server</h2><p>安装Rstudio server <a href="https://cyverse-ez-quickstart.readthedocs-hosted.com/en/latest/rstudio.html" target="_blank" rel="external">链接</a> <a href="https://stackoverflow.com/questions/52381661/how-can-i-use-anaconda-environments-with-rstudio-server" target="_blank" rel="external">使用</a></p>
 <h1 id="安装packages"><a href="#安装packages" class="headerlink" title="安装packages"></a>安装packages</h1><h2 id="方法一：每次安装包时指定镜像"><a href="#方法一：每次安装包时指定镜像" class="headerlink" title="方法一：每次安装包时指定镜像"></a>方法一：每次安装包时指定镜像</h2><ul>
 <li>查看所有镜像：chooseCRANmirror()</li>
 <li>选择镜像：chooseCRANmirror(ind=36)</li>
@@ -1232,7 +1396,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
     <link href="https:///AnJingwd.github.io/2018/01/28/qPCR%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%E5%8F%8A%E9%9D%9E%E5%8F%82%E6%95%B0%E6%A3%80%E9%AA%8C/"/>
     <id>https:///AnJingwd.github.io/2018/01/28/qPCR结果分析及非参数检验/</id>
     <published>2018-01-28T02:33:14.000Z</published>
-    <updated>2018-05-24T12:51:02.131Z</updated>
+    <updated>2018-10-18T01:29:37.585Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">qPCR结果分析及非参数检验</blockquote>
 
@@ -1269,6 +1433,7 @@ local({r &lt;- getOption(&quot;repos&quot;)
 <p>（8）<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=4&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjVxeX1x_DXAhXMxrwKHVvOAnwQFgg4MAM&amp;url=http%3A%2F%2Fblog.csdn.net%2Ftimothyzh%2Farticle%2Fdetails%2F7657470&amp;usg=AOvVaw3SpJzBCWcgBwfbkJn65CFP" target="_blank" rel="external">Wilcoxon-Mann-Whitney秩和检验/rank sum test（或test U）</a></p>
 <p>（9）<a href="https://wenku.baidu.com/view/d09fcc7033687e21ae45a902.html" target="_blank" rel="external">荧光定量PCR应用指南{推荐}</a></p>
 <p>（10） <a href="http://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_nonparametric/BS704_Nonparametric4.html" target="_blank" rel="external">Mann Whitney U Test (Wilcoxon Rank Sum Test)</a></p>
+<p>（11）<a href="http://www.omicsclass.com/article/446" target="_blank" rel="external">推荐：qRT-PCR相对定量计算详解</a></p>
 ]]></content>
     
     <summary type="html">
@@ -1529,7 +1694,7 @@ gnome-session &amp;
     <link href="https:///AnJingwd.github.io/2018/01/20/ANNOVAR%E8%BF%9B%E8%A1%8C%E7%AA%81%E5%8F%98%E6%B3%A8%E9%87%8A/"/>
     <id>https:///AnJingwd.github.io/2018/01/20/ANNOVAR进行突变注释/</id>
     <published>2018-01-20T13:50:21.000Z</published>
-    <updated>2018-03-06T12:43:23.643Z</updated>
+    <updated>2019-01-03T06:42:43.688Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center">ANNOVAR进行突变注释</blockquote>
 
@@ -1839,167 +2004,24 @@ annotate_variation.pl -filter -dbtype exac03 -buildver hg19 example/ex1.avinput 
 <p>bcftools norm -f human_g1k_v37.fasta -o ex1.step2.vcf ex1.step1.vcf</p>
 <p>第一个命令分割多allels变异检出为单独的行，第二个命令运行真正的 left-normalization。（有时候第一个命令可能出现没有变异能被分解，尽管在文件中存在这些变异，这种情况下，你可以使用<a href="http://genome.sph.umich.edu/wiki/Vt" target="_blank" rel="external">vt program</a> 代替）</p>
 <ol>
-<li>目前使用left-normalized的数据集包括：avsnp138，avsnp142，clinvar_20150330<br>，1000g2014oct，exac03，esp6500siv2</li>
+<li>目前使用left-normalized的数据集包括：avsnp138，avsnp142，clinvar_20150330<br> ，1000g2014oct，exac03，esp6500siv2</li>
 </ol>
+<p>PS:更新（2018年12月25）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">perl annotate_variation.pl -downdb -buildver hg19 -webfrom annovar dbscsnv11 humandb_new/  </div><div class="line">##剪切位点预测（splicing impact by Ada Boost and Random Forest）</div><div class="line"></div><div class="line"></div><div class="line">perl annotate_variation.pl -downdb -buildver hg19 -webfrom annovar cg46 humandb_new/</div><div class="line">##  在一个全基因组测序项目(包含46个无血缘关系的样本)中的等位基因频率</div></pre></td></tr></table></figure>
+<p>创新：</p>
+<ul>
+<li>公布答案：如何根据HGVS快速定位hg19基因组位置：<a href="https://mp.weixin.qq.com/s?__biz=MzA4MDQ0NzM1MQ==&amp;mid=400407283&amp;idx=1&amp;sn=335fe7d1cada0e5cb03bd77425e90d59&amp;scene=21#wechat_redirect" target="_blank" rel="external">链接</a></li>
+</ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://www.ncbi.nlm.nih.gov/pubmed/26379229" target="_blank" rel="external">Genomic variant annotation and prioritization with ANNOVAR and wANNOVAR</a></p>
 <p>（2）<a href="http://blog.sina.com.cn/s/blog_670445240101j0pa.html" target="_blank" rel="external">每日一生信–基于保守性和规则性的预测方法SIFT和PolyPhen</a></p>
 <p>（3）<a href="http://blog.csdn.net/g863402758/article/details/75304391" target="_blank" rel="external">annovar对人类基因组和非人类基因组variants注释流程</a></p>
 <p>（4）<a href="http://ishare.iask.sina.com.cn/f/63732396.html" target="_blank" rel="external">ANNOVAR注释上机（推荐）</a></p>
+<p>（5）<a href="http://www.omicsclass.com/article/464" target="_blank" rel="external">ANNOVAR人类各个数据库变异注释结果表格说明</a></p>
 ]]></content>
     
     <summary type="html">
     
       &lt;blockquote class=&quot;blockquote-center&quot;&gt;ANNOVAR进行突变注释&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/categories/NGS/"/>
-    
-    
-      <category term="NGS" scheme="https:///AnJingwd.github.io/tags/NGS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RNA-seq质控</title>
-    <link href="https:///AnJingwd.github.io/2018/01/10/RNA-seq%E8%B4%A8%E6%8E%A7/"/>
-    <id>https:///AnJingwd.github.io/2018/01/10/RNA-seq质控/</id>
-    <published>2018-01-10T13:39:44.000Z</published>
-    <updated>2018-05-27T07:25:16.975Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">RNA-seq质控：去除低质量reads，adapter以及rRNA</blockquote>
-
-<a id="more"></a>
-<h1 id="pipline"><a href="#pipline" class="headerlink" title="pipline"></a>pipline</h1><p>比较值得关注的RNA-seq分析中的重要的步骤包括：实验设计，质控，read比对，表达定量，可视化，差异表达，识别可变剪切，功能注释，融合基因检测，eQTL定位等</p>
-<h1 id="建库质控"><a href="#建库质控" class="headerlink" title="建库质控"></a>建库质控</h1><p>使用Agilent 2100 Bioanalyzer，以下将简介其原理和结果如何解读</p>
-<p><img src="https://i.imgur.com/f80qQqm.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/p8BGXgl.jpg" alt=""></p>
-<p>横坐标为片段长度，纵坐标为FU：arbitrary fluorescent unit</p>
-<p>左边的峰为ladder，右边的峰为marker, ladder孔和样品孔中的marker起到对其和丁范围的校准作用。中间为样品峰。面积表示浓度。</p>
-<h1 id="质控"><a href="#质控" class="headerlink" title="质控"></a>质控</h1><p>（1）人类的Per sequence GC content峰值在48左右，否则就是有污染或者建库不均匀</p>
-<p>（2）Per base N content越低越好（未识别的碱基，一般为0）</p>
-<p>（3）Illumina 下机测序长度是一定的，如果reads小于定长，就会测到Adapter，使用cutadapt去接头</p>
-<p>（4）一般流程只保留paired-reads用于下一步比对</p>
-<p>（去除低质量reads过程中，可能导致原来paired的reads长度不一致，当长度小于阈值时，整条reads将被去除，所以只剩下另一条reads，一般为了接下来定量分析的方便，另一条reads不用于比对）</p>
-<p>结果分为绿色的”PASS”，黄色的”WARN”和红色的”FAIL”，其中，红色部分是我们质控的关键，以下将对红色的”FAIL”部分进行解释及用相应软件进行相对应的质控。</p>
-<p><img src="https://i.imgur.com/knNm3I5.jpg" alt=""></p>
-<h2 id="1-去除低质量的reads"><a href="#1-去除低质量的reads" class="headerlink" title="1. 去除低质量的reads"></a>1. 去除低质量的reads</h2><p><img src="https://i.imgur.com/Pjm5pW6.jpg" alt=""></p>
-<p>横轴代表位置，纵轴quality。红色水平线表示中位数，黄色柱子是25%-75%区间，触须是10%-90%区间，蓝线是平均数。</p>
-<p>若任一位置的下四分位数低于10或中位数低于25，报”WARN”；若任一位置的下四分位数低于5或中位数低于20，报”FAIL”.</p>
-<h2 id="2-检查每个tile的质量"><a href="#2-检查每个tile的质量" class="headerlink" title="2. 检查每个tile的质量"></a>2. 检查每个tile的质量</h2><p>Illumina flowcells被分成一个个的tiles。为了检查低质量是否与flowcell的某些区域相关联，FASTQC对每个tile计算reads在所有位置的平均质量分数。</p>
-<p><img src="https://i.imgur.com/uasS1me.jpg" alt=""></p>
-<p>图中y轴表示tile的编号，x轴表示reads中的位置。</p>
-<p>在此图中看到警告或失败的原因可能是短暂的问题，例如通过flowcell的气泡，或者可能是更持久的问题，例如在flowcell中出现的斑点或碎片，或者在tile中高密度的聚集。在这个模块中，最常见的警告原因是flowcell 被 overloaded。</p>
-<p>建议忽略那些轻微影响一小部分tile,仅为1或2个cycles的warnings 或者 failures，并且只追求更大的影响，这些影响在分数中表现出很高的偏差，或者持续数个cycles。</p>
-<h2 id="3-Adapter-Content"><a href="#3-Adapter-Content" class="headerlink" title="3. Adapter Content"></a>3. Adapter Content</h2><p>对于R1：</p>
-<p><img src="https://i.imgur.com/GP3ZyEM.jpg" alt=""></p>
-<p>对于R2</p>
-<p><img src="https://i.imgur.com/Wlr5oMX.jpg" alt=""></p>
-<p>所以需要去接头</p>
-<p>Per base sequence content 图的Failures 一般是由于文库污染造成的。如果一条特定的reads占了文库中的很大比例，那么这条reads将扭曲Per base sequence content图（在每个位置的碱基百分比将这条reads严重影响）</p>
-<p>你可以使用Overrepresented sequences模块检查序列的污染情况，其列出了所有组成超过0.1%的序列，并列出其最佳匹配。上图中发现一个污染，被鉴定为Illumina的接头序列。</p>
-<p><strong>不去除接头污染将影响比对过程中的比对百分率</strong></p>
-<p>常用trimming tools的功能：</p>
-<p><img src="https://i.imgur.com/IaxvSSe.jpg" alt=""></p>
-<p>使用软件：trim_galore ,该软件通过调用FastQC进行质检，调用cutadapt去接头，同时还能去除低质量的reads。附加功能还有去除RRBS(for directional, non-directional (or paired-end) sequencing)测序文件的甲基化偏好位点。</p>
-<p>其中去除低质量reads时最重要的两个参数是最小Phred score（1-30）和最小序列长度，不同文章对此观点不同，一般推荐Phred score 20 (90%置信区间)和最小50%-70%的序列长度。</p>
-<p><a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/" target="_blank" rel="external">Trim Galore!官网</a>， Trim Galore is now also available from<a href="https://github.com/FelixKrueger/TrimGalore" target="_blank" rel="external"> GitHub</a>，具体参数使用参考<a href="https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md" target="_blank" rel="external">User Guide</a>。</p>
-<h2 id="4-GC"><a href="#4-GC" class="headerlink" title="4. GC"></a>4. GC</h2><p>平滑分布的锐利峰通常是特定污染物（例如适配体二聚体）的结果，这可能被过度表示的序列模块所挑选。更宽的峰可能代表不同物种的污染</p>
-<h2 id="5-常见问题"><a href="#5-常见问题" class="headerlink" title="5. 常见问题"></a>5. 常见问题</h2><p><a href="https://www.biostars.org/p/160440/" target="_blank" rel="external">Question: GC content and Kmer</a></p>
-<p>For RNAseq datasets one typically sees failures in those modules. I should point out that FastQC is really geared toward whole-genome sequencing. We use it for all types of datasets, but many of them will have failures in various modules that can be ignored.</p>
-<p><a href="https://www.biostars.org/p/159590/" target="_blank" rel="external">Many overrepresented sequences in RNA-seq data. Should them be trimmed out?</a></p>
-<p>High sequence duplication levels in RNA-seq are normal and expected. Do not remove duplicates. This would underestimate the true expression of highly expressed genes, as it would artificially downscale the counts of these genes.</p>
-<p>n RNA-Seq libraries sequences from different transcripts will be present at wildly different levels in the starting population. In order to be able to observe lowly expressed transcripts it is therefore common to greatly over sequence high expressed transcripts, and this will potentially create large set of duplicates. This will result in high overall duplication in this test, and will often produce peaks in the higher duplication bins. This duplication will come from physically connected regions, and an examination of the distribution of duplicates in a specific genomic region will allow the distinction between over-sequencing and general technical duplication, but these distinctions are not possible from raw fastq files.</p>
-<p>对于RRBS samples, 首先进行quality trimming，从3’端剪切掉低质量的reads；然后调用cutadapt程序从3’端去除接头，如果具体序列没有提供，其将使用标准的Illumina配对接头的前13bp （’AGATCGGAAGAGC’）序列来去除接头。给了控制去接头过程的严格程度，需要指定与接头序列最小的overlap数目，或者默认为1（即使与接头序列只有一个bp的overlap也会被剪切掉）。</p>
-<pre><code>agapter1=GATCGGAAGAGCACACGTCTGAACTCCAGTCACCGATGTATCTCGTATGC
-adapter2=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT
-
-time $trim_galore \
---quality 20 \
---stringency 5 \
---dont_gzip \
---fastqc \
---retain_unpaired \
--r1 31 -r2 31 \
---length 30 \
---output_dir $trim \
---paired \
---phred33 \
---adapter ${adapter1} \
---adapter2 ${adapter2} \
-$sample_r1 $sample_r2
-</code></pre><p><strong>注：如果No overrepresented sequences，但Adapter Content未黄色警告，可以对于adapter和adapter2两个参数都可以用 –illumina 代替，表示 first 13bp of the Illumina universal adapter AGATCGGAAGAGC</strong></p>
-<p>使用参考：<a href="http://overviewdifferentialexpression.blogspot.com/2014/02/quality-control-using-trim-galore.html" target="_blank" rel="external">Quality Control using Trim Galore: How to run trim galore?</a></p>
-<p>如果使用Trimmomatic可以参考以下命令：</p>
-<pre><code>time java -Xmx${mythread}g -jar $Trimmomatic \
-PE -phred33 \
--threads $mythread \
-$sample_r1 $sample_r2 \
-$trim/${sample}_paired.r1.fq.gz $trim/${sample}_unpaired.r1.fq.gz $trim/${sample}_paired.r2.fq.gz $trim/${sample}_unpaired.r2.fq.gz \
-ILLUMINACLIP: $Trimmomatic/adapters/TruSeq3-PE-2.fa:2:30:10 \
-LEADING:5 TRAILING:5 SLIDINGWINDOW:4:5 MINLEN:25 \
-2&gt; $trim/Trimmed.log
-</code></pre><p><strong>在Trimmomatic安装目录下有个adapter目录，其中TruSeq2适用于旧款测序仪的adapter序列的去除，而TruSeq3适用于Miseq,Hiseq等新款测序仪adapter序列的去除</strong></p>
-<h2 id="做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐"><a href="#做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐" class="headerlink" title="做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐"></a>做完质控后，可以使用Multiqc出报告，方便比较前后变化，特别是对于一批样本同时分析，强烈推荐</h2><p>MultiQC: summarize analysis results for multiple tools and samples in a single report</p>
-<p><a href="https://github.com/ewels/MultiQC" target="_blank" rel="external">ewels/MultiQC</a></p>
-<p><a href="http://www.multiqc.info/docs/#coding-with-multiqc" target="_blank" rel="external">Using MultiQC manual</a></p>
-<h1 id="去除核糖体rRNA"><a href="#去除核糖体rRNA" class="headerlink" title="去除核糖体rRNA"></a>去除核糖体rRNA</h1><p>对于总RNA建库测序的RNA-seq实验设计，rRNA将占总数据量的95%左右，如果不去除，将严重影响比对率及下游分析。</p>
-<p><a href="http://bioinfo.lifl.fr/sortmerna/sortmerna.php" target="_blank" rel="external">SortMeRNA官网</a>；<a href="http://bioinfo.lifl.fr/RNA/sortmerna/code/SortMeRNA-user-manual-v2.1.pdf" target="_blank" rel="external">SortMeRNA User Manual v2.1.pdf</a></p>
-<h2 id="建索引"><a href="#建索引" class="headerlink" title="建索引"></a>建索引</h2><pre><code>sortmerna_REF=/home/wangdong/miniconda3/sortmerna_db/rRNA_databases
-sortmerna_index=/home/wangdong/miniconda3/sortmerna_db/index
-
-indexdb_rna --ref $sortmerna_REF/silva-arc-16s-id95.fasta,$sortmerna_index/silva-arc-16s-id95
-indexdb_rna --ref $sortmerna_REF/silva-arc-23s-id98.fasta,$sortmerna_index/silva-arc-23s-id98
-indexdb_rna --ref $sortmerna_REF/silva-bac-16s-id90.fasta,$sortmerna_index/silva-bac-16s-id95
-indexdb_rna --ref $sortmerna_REF/silva-bac-23s-id98.fasta,$sortmerna_index/silva-bac-23s-id98
-indexdb_rna --ref $sortmerna_REF/silva-euk-18s-id95.fasta,$sortmerna_index/silva-euk-18s-id95
-indexdb_rna --ref $sortmerna_REF/silva-euk-28s-id98.fasta,$sortmerna_index/silva-euk-28s-id98
-indexdb_rna --ref $sortmerna_REF/rfam-5.8s-database-id98.fasta,$sortmerna_index/rfam-5.8s-db
-indexdb_rna --ref $sortmerna_REF/rfam-5s-database-id98.fasta,$sortmerna_index/rfam-5s-db
-</code></pre><h2 id="去除rRNA"><a href="#去除rRNA" class="headerlink" title="去除rRNA"></a>去除rRNA</h2><p><strong>SortMeRNA只接受一个reads输入文件，对于paired-end reads需要使用merge-paired-reads.sh脚本合并之后用于分析。</strong></p>
-<p><img src="https://i.imgur.com/vE4ODha.jpg" alt=""></p>
-<p><code>which merge-paired-reads.sh</code> ${trim}/${sample}_paired_r1.fq ${trim}/${sample}_paired_r2.fq ${remove_rrna}/${sample}_paired_merge.fq</p>
-<p>SortMeRNA去除rRNA后，对于paired-end reads的过滤时，如果一条reads比对上rRNA，而另一条reads没有比对上rRNA，但又想保证输出到fastq文件的都是paired-end reads，则需要考虑以下两个参数：</p>
-<ol>
-<li>–paired-in will put both reads into the file specified by –aligned</li>
-<li>–paired-out will put both reads into the file specified by –other</li>
-</ol>
-<p>第一个参数–paired-in表示所有在–other file中的reads都为non-rRNA;第二个参数–paired-out表示只有rRNA reads被输出到–aligned file。如果两个参数都不设置，则会导致输出结果的reads不配对，不利于后续分析。</p>
-<pre><code>time $sortmerna \
---ref $sortmerna_REF/silva-arc-16s-id95.fasta,$sortmerna_index/silva-arc-16s-id95:\
-$sortmerna_REF/silva-arc-23s-id98.fasta,$sortmerna_index/silva-arc-23s-id98:\
-$sortmerna_REF/silva-bac-16s-id90.fasta,$sortmerna_index/silva-bac-16s-id95:\
-$sortmerna_REF/silva-bac-23s-id98.fasta,$sortmerna_index/silva-bac-23s-id98:\
-$sortmerna_REF/silva-euk-18s-id95.fasta,$sortmerna_index/silva-euk-18s-id95:\
-$sortmerna_REF/silva-euk-28s-id98.fasta,$sortmerna_index/silva-euk-28s-id98:\
-$sortmerna_REF/rfam-5.8s-database-id98.fasta,$sortmerna_index/rfam-5.8s-db:\
-$sortmerna_REF/rfam-5s-database-id98.fasta,$sortmerna_index/rfam-5s-db \
---reads ${remove_rrna}/${sample}_paired_merge.fq \
---aligned $remove_rrna/${sample}_paired_aligned_rRNA \
---other $remove_rrna/${sample}_paired_filtered_non_rRNA \
---fastx \
---sam --num_alignments 1 \
---paired_in \
---log \
--a 5 -v
-</code></pre><p>接着将$remove_rrna/${sample}_paired_filtered_non_rRNA.fq文件拆分为forward reads和reserve reads两个文件，用于下游的paried-reads的比对</p>
-<pre><code>`which unmerge-paired-reads.sh` $remove_rrna/${sample}_paired_filtered_non_rRNA.fq \
-$remove_rrna/${sample}_non_rrna_paired_r1.fq $remove_rrna/${sample}_non_rrna_paired_r2.fq
-</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>参考：</p>
-<p>（1） <a href="http://blog.sciencenet.cn/blog-303373-724110.html" target="_blank" rel="external">fastqc解释</a></p>
-<p>（2） <a href="https://wiki.bits.vib.be/index.php/Quality_control_of_NGS_data" target="_blank" rel="external">Quality control of NGS data（推荐）</a></p>
-<p>（3）<a href="https://sequencing.qcfail.com/page/2/" target="_blank" rel="external">qcfail.com：Articles about common next-generation sequencing problems（强烈推荐）</a></p>
-<p>（4）<a href="https://github.com/twbattaglia/RNAseq-workflow" target="_blank" rel="external">twbattaglia/RNAseq-workflow（推荐）</a></p>
-<p>（5）<a href="https://www.bits.vib.be/training/328" target="_blank" rel="external">RNA-Seq analysis for differential expression in GenePattern</a> <a href="http://data.bits.vib.be/pub/trainingen/GenePattern/genepattern.pdf" target="_blank" rel="external">Slides（推荐）</a></p>
-<p>（6）<a href="https://woaielf.github.io/2016/11/16/RNA-seq/" target="_blank" rel="external">RNA-seq分析流程思维导图</a></p>
-<p>（7）<a href="http://www.bio-info-trainee.com/2275.html" target="_blank" rel="external">一个RNA-seq的反思</a></p>
-<p>（8）<a href="https://mp.weixin.qq.com/s/lq3X3U03ozdkZGfcGNzNMg" target="_blank" rel="external">从零开始完整学习全基因组测序数据分析：第3节 数据质控</a></p>
-<p>（9）<a href="https://www.jianshu.com/p/48eb5f00dd1c" target="_blank" rel="external"> 数据过滤软件合集</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote class=&quot;blockquote-center&quot;&gt;RNA-seq质控：去除低质量reads，adapter以及rRNA&lt;/blockquote&gt;
     
     </summary>
     

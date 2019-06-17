@@ -139,7 +139,7 @@
 <meta property="og:image" content="https://i.imgur.com/p9i0C4X.jpg">
 <meta property="og:image" content="https://i.imgur.com/oDZl1f7.jpg">
 <meta property="og:image" content="https://i.imgur.com/p69fkwu.jpg">
-<meta property="og:updated_time" content="2018-03-11T00:49:20.278Z">
+<meta property="og:updated_time" content="2018-12-26T08:36:33.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GATK变异检测概述">
 <meta name="twitter:description" content="变异检测概述">
@@ -473,7 +473,7 @@
 <h2 id="（2）Mark-duplicates"><a href="#（2）Mark-duplicates" class="headerlink" title="（2）Mark    duplicates"></a>（2）Mark    duplicates</h2><p>测序原理是随机打断，那么理论上出现两条完全相同的read的概率是非常低的，而且建库时PCR扩增存在偏向性，因此标出完全相同的read。这一步是为了减少duplication artifacts,从而正确评估alleles。duplicates的状态通过SAM flag来标记，但并没有去除（绝大多数的GATK tools默认忽 duplicates）</p>
 <p>duplicates来源：（1）PCR duplicates ; (2) Optical duplicates</p>
 <p>以下两种情况不能 mark duplicates:</p>
-<p>Amplicon    sequencing</p>
+<p>Amplicon    sequencing<br>​        </p>
 <ul>
 <li>all    reads    start    at    same    posi7on    by    design    </li>
 <li>UMIAwareMarkDuplicatesWithMateCigar</li>
@@ -575,8 +575,7 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
 <li>Applicable    to    all    BUT    requires    exper4se    to    define    appropriately    </li>
 </ul>
 </li>
-<li><p>（2）Variant    “recalibration”    using    machine    learning</p>
-<ul>
+<li>（2）Variant    “recalibration”    using    machine    learning<br>  ​    <ul>
 <li>More    powerful    BUT    requires    well-curated    known    resources</li>
 </ul>
 </li>
@@ -585,8 +584,8 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
 <p><strong>基本思想：训练已知的高置信度的位点来确定其他位点正确与否的可能性</strong></p>
 <ul>
 <li>Assume    annota4ons    tend    to    form    Gaussian    clusters    </li>
-<li>Build    a    “Gaussian    mixture    model”    from<br>annotations    of    known    variants    in    our    dataset    </li>
-<li>Score    all    variants    by    where    their    annotations    lie<br>relative    to    these    clusters    </li>
+<li>Build    a    “Gaussian    mixture    model”    from<br>  annotations    of    known    variants    in    our    dataset    </li>
+<li>Score    all    variants    by    where    their    annotations    lie<br>  relative    to    these    clusters    </li>
 <li>Filter    base    on    sensiOvity    to    truth    set    </li>
 </ul>
 <p><img src="https://i.imgur.com/swA19TJ.jpg" alt=""></p>
@@ -612,29 +611,28 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
 </code></pre><p>输出：recal    file,    tranches,    plots</p>
 <ul>
 <li>Recalibration    plots    show    aspects    of    the    model</li>
-<li>Tranche    plots    show    estimated    TP    vs    FP    tradeoff<br>(Default    target    Ti/Tv    is    for    WGS    and    must    be    adapted    for    exomes)</li>
+<li>Tranche    plots    show    estimated    TP    vs    FP    tradeoff<br>  (Default    target    Ti/Tv    is    for    WGS    and    must    be    adapted    for    exomes)</li>
 <li>Tranches    :    slices    of    sensitivity    threshold    values</li>
 </ul>
 <h3 id="Step-2-ApplyRecalibration"><a href="#Step-2-ApplyRecalibration" class="headerlink" title="Step 2: ApplyRecalibration"></a>Step 2: ApplyRecalibration</h3><p>ApplyRecalibration    applies    the    filtering    threshold</p>
 <ul>
-<li>Executes    the    desired    sensitivity    /    specificity    tradeoff<br>by    applying    filters    to    the    input    callset    (no    new    calculations)    </li>
+<li>Executes    the    desired    sensitivity    /    specificity    tradeoff<br>  by    applying    filters    to    the    input    callset    (no    new    calculations)    </li>
 <li><p>Creates    a    new,    filtered,    analysis-worthy    VCF    file.    </p>
 <p>  java –jar GenomeAnalysisTK.jar –T ApplyRecalibration \<br>  –R human.fasta \<br>  –input raw.vcf \<br>  –mode SNP \<br>  –recalFile raw.SNPs.recal \<br>  –tranchesFile raw.SNPs.tranches \<br>  –o recal.SNPs.vcf \<br>  –ts_filter_level 99.0</p>
 </li>
 </ul>
 <p>输出变异每个突变将被注释上VQSLOD score</p>
 <h3 id="对于外显子数据跑VQSR的一些小建议"><a href="#对于外显子数据跑VQSR的一些小建议" class="headerlink" title="对于外显子数据跑VQSR的一些小建议"></a>对于外显子数据跑VQSR的一些小建议</h3><ul>
-<li>Smaller    number    of    variants    per    sample    compared    to    WGS<br>  -&gt;    typically    insufficient    to    build    a    robust    recalibraOon    model        <pre><code>if    running    on    only    a    few    samples    
-</code></pre></li>
+<li>Smaller    number    of    variants    per    sample    compared    to    WGS<br>  -&gt;    typically    insufficient    to    build    a    robust    recalibraOon    model<br>  ​    if    running    on    only    a    few    samples    </li>
 <li>Analyze    samples    jointly    in    cohorts    of    at    least    <strong>30    samples</strong></li>
 <li>If    necessary,    add    exomes    from    1000G    Project    or    comparable</li>
 </ul>
 <p><img src="https://i.imgur.com/EoGdjYO.jpg" alt=""></p>
 <p><strong>什么时候不推荐使用VQSR进行过滤呢？</strong></p>
 <ol>
-<li>Non-human    organisms    where    known    resources    are    unavailable    or<br>insufficiently    curated    </li>
+<li>Non-human    organisms    where    known    resources    are    unavailable    or<br> insufficiently    curated    </li>
 <li>RNAseq    data    à    see    RNAseq-specific    filtering</li>
-<li>Cohort    is    too    small(&lt;30)    and    no    other    samples    are    available    for<br>“padding”    the    cohort    </li>
+<li>Cohort    is    too    small(&lt;30)    and    no    other    samples    are    available    for<br> “padding”    the    cohort    </li>
 </ol>
 <p>—–&gt;  Use    manual    filtering    recommendations    instead</p>
 <p>具体参考：<a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=39" target="_blank" rel="external">Variant Quality Score Recalibration (VQSR)</a></p>
@@ -720,12 +718,13 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
 <p>安装：conda install seqtk</p>
 <p>使用：</p>
 <p>Usage:   seqtk sample [-2] [-s seed=11] <in.fq> <frac>|<number></number></frac></in.fq></p>
-<p>Options: -s INT       RNG seed [11]<br>         -2           2-pass mode: twice as slow but with much reduced memory</p>
+<p>Options: -s INT       RNG seed [11]<br>​         -2           2-pass mode: twice as slow but with much reduced memory</p>
 <p>[]中的是可选参数，&lt;&gt; 中的是必需参数。<br>[-2] 内存较小的服务器上运行时，设置此参数。<br>[-s] 随机数的种子。如果是 Pair-end 数据，需要保证 read1 和 read2 的种子一致，才能抽到相同的raeds。默认是 11。<br>[in.fq] 输入文件</p>
 <p><frac|number>可以输入要抽取的比例或 reads 条数。</frac|number></p>
 <p>seqtk sample -s100 read1.fastq.gz 10000 | gzip - &gt; sub1.fastq.gz<br>seqtk sample -s100 read2.fastq.gz 10000 | gzip - &gt; sub2.fastq.gz</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>（1）<a href="https://mp.weixin.qq.com/s/awdjoXRYobrQAbXmAp3C0g" target="_blank" rel="external">从零开始完整学习全基因组测序数据分析：第4节 构建WGS主流程</a></p>
 <p>（2）<a href="http://www.cureffi.org/2012/09/19/exome-sequencing-pipeline-using-gatk/" target="_blank" rel="external">Exome sequencing pipeline using GATK</a></p>
+<p>（3）一起学NGS数据分析之检测突变：<a href="https://mp.weixin.qq.com/s?__biz=MzA4MDQ0NzM1MQ==&amp;mid=401427931&amp;idx=1&amp;sn=8c2d17a68de9d010305f227533fbf8c4&amp;mpshare=1&amp;scene=1&amp;srcid=1226uv6dEFq8mkKRmeojICNx#rd" target="_blank" rel="external">链接</a></p>
 
       
     </div>
@@ -876,7 +875,7 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
           
             <div class="site-state-item site-state-posts">
               <a href="https:/AnJingwd.github.io/archives">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">61</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -887,7 +886,7 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
             
             <div class="site-state-item site-state-categories">
               <a href="https:/AnJingwd.github.io/categories/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -898,7 +897,7 @@ java –jar GenomeAnalysisTK.jar –T AnalyzeCovariates \
             
             <div class="site-state-item site-state-tags">
               <a href="https:/AnJingwd.github.io/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1154,7 +1153,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 <div class="copyright" >
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1177,7 +1176,7 @@ src="//music.163.com/outchain/player?type=2&id=471682981&auto=1&height=66">
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共80.9k字</span>
+  <span class="post-count">博客全站共83.0k字</span>
 </div>
 
 <div class="powered-by">
